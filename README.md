@@ -33,6 +33,7 @@ Visual Studio를 기본으로 사용한다.
 ## 사용 에셋
 
 - [Corgi Engine - 2D + 2.5D Platformer](https://assetstore.unity.com/packages/templates/systems/corgi-engine-2d-2-5d-platformer-26617)
+  - dev-corgi 에서 테스트 후 dev 에 사용될지 결정
 - DoTween
 - ConsolePro3
 - Odin Inspector
