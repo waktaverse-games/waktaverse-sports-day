@@ -2,50 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundScroller : MonoBehaviour
+namespace GameHeaven.PassGame
 {
-    public GameObject tilePrefab = null;
-    private List<SpriteRenderer> tiles = new List<SpriteRenderer>();
-    public float groundSpeed = -1.0f;
-
-    private SpriteRenderer lastTile;
-    private const float deadLine = -11.5f;
-    private const float tileSize = 1.0f;
-    void Start()
+    public class GroundScroller : MonoBehaviour
     {
-        if (tilePrefab)
-        {
-            for (int i = 0; i < 23; i++)
-            {
-                SpriteRenderer addTile = Instantiate(tilePrefab.GetComponent<SpriteRenderer>(), 
-                    new Vector2(-11f + i * tileSize, -0.5f), Quaternion.identity);
-                tiles.Add(addTile);
-            }
-        
-            lastTile = tiles[tiles.Count - 1];
-        }
-        
-    }
+        public GameObject TilePrefab = null;
+        private List<SpriteRenderer> _tiles = new List<SpriteRenderer>();
+        public float GroundSpeed = -1.0f;
 
-    void Update()
-    {
-        if (tilePrefab is null)
+        private SpriteRenderer _lastTile;
+        private const float _deadLine = -11.5f;
+        private const float _tileSize = 1.0f;
+
+        void Start()
         {
-            return;
-        }
-        
-        for (int i = 0; i < tiles.Count; i++)
-        {
-            if (deadLine >= tiles[i].transform.position.x)
+            if (TilePrefab)
             {
-                tiles[i].transform.position = new Vector2(lastTile.transform.position.x + tileSize, -0.5f);
-                lastTile = tiles[i];
+                for (int i = 0; i < 23; i++)
+                {
+                    SpriteRenderer addTile = Instantiate(TilePrefab.GetComponent<SpriteRenderer>(),
+                        new Vector3(-11f + i * _tileSize, -0.5f, 1f), Quaternion.identity);
+                    
+                    addTile.transform.SetParent(this.transform);
+                    _tiles.Add(addTile);
+                }
+
+                _lastTile = _tiles[_tiles.Count - 1];
             }
+
         }
-        
-        for (int i = 0; i < tiles.Count; i++)
+
+        void Update()
         {
-            tiles[i].transform.Translate(new Vector2(groundSpeed, 0) * Time.deltaTime);
+            if (TilePrefab is null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < _tiles.Count; i++)
+            {
+                if (_deadLine >= _tiles[i].transform.position.x)
+                {
+                    _tiles[i].transform.position = new Vector3(_lastTile.transform.position.x + _tileSize, -0.5f, 1f);
+                    _lastTile = _tiles[i];
+                }
+            }
+
+            for (int i = 0; i < _tiles.Count; i++)
+            {
+                _tiles[i].transform.Translate(new Vector2(GroundSpeed, 0) * Time.deltaTime);
+            }
         }
     }
 }
