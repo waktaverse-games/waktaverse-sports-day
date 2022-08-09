@@ -11,8 +11,8 @@ namespace GameHeaven.PassGame
         public float GroundSpeed = -1.0f;
 
         private SpriteRenderer _lastTile;
-        private const float _deadLine = -11.5f;
-        private const float _tileSize = 1.0f;
+        private const float DeadLine = -11.5f;
+        private const float TileSize = 1.0f;
 
         void Start()
         {
@@ -21,7 +21,7 @@ namespace GameHeaven.PassGame
                 for (int i = 0; i < 23; i++)
                 {
                     SpriteRenderer addTile = Instantiate(TilePrefab.GetComponent<SpriteRenderer>(),
-                        new Vector3(-11f + i * _tileSize, -0.5f, 1f), Quaternion.identity);
+                        new Vector3(-11f + i * DeadLine, -0.5f, 1f), Quaternion.identity);
                     
                     addTile.transform.SetParent(this.transform);
                     _tiles.Add(addTile);
@@ -34,16 +34,19 @@ namespace GameHeaven.PassGame
 
         void Update()
         {
-            if (TilePrefab is null)
+            if (TilePrefab)
             {
-                return;
+                UpdateTiles();
             }
+        }
 
+        void UpdateTiles()
+        {
             for (int i = 0; i < _tiles.Count; i++)
             {
-                if (_deadLine >= _tiles[i].transform.position.x)
+                if (DeadLine >= _tiles[i].transform.position.x)
                 {
-                    _tiles[i].transform.position = new Vector3(_lastTile.transform.position.x + _tileSize, -0.5f, 1f);
+                    _tiles[i].transform.position = new Vector3(_lastTile.transform.position.x + TileSize, -0.5f, 1f);
                     _lastTile = _tiles[i];
                 }
             }
