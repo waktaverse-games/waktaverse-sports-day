@@ -9,10 +9,10 @@ namespace GameHeaven.PassGame
         // reference
         // https://www.youtube.com/watch?v=7Vgb8MoWIq8
     
-        bool isJump = false;
-        bool isTop = false;
-        public float jumpHeight = 0;
-        public float jumpSpeed = 0;
+        bool _isJump = false;
+        bool _isTop = false;
+        public float JumpHeight = 0;
+        public float JumpSpeed = 0;
 
         private Vector2 startPosition;
         void Start()
@@ -24,30 +24,30 @@ namespace GameHeaven.PassGame
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                isJump = true;
+                _isJump = true;
             }
             else if (transform.position.y <= startPosition.y)
             {
-                isJump = false;
-                isTop = false;
+                _isJump = false;
+                _isTop = false;
                 transform.position = startPosition;
             }
 
-            if (isJump)
+            if (_isJump)
             {
-                if (transform.position.y <= jumpHeight - 0.1f && !isTop)
+                if (transform.position.y <= JumpHeight - 0.1f && !_isTop)
                 {
                     transform.position = Vector2.Lerp(transform.position,
-                        new Vector2(transform.position.x, jumpHeight), jumpSpeed * Time.deltaTime);
+                        new Vector2(transform.position.x, JumpHeight), JumpSpeed * Time.deltaTime);
                 }
                 else
                 {
-                    isTop = true;
+                    _isTop = true;
                 }
 
-                if (transform.position.y > startPosition.y && isTop)
+                if (transform.position.y > startPosition.y && _isTop)
                 {
-                    transform.position = Vector2.MoveTowards(transform.position, startPosition, jumpSpeed * Time.deltaTime);
+                    transform.position = Vector2.MoveTowards(transform.position, startPosition, JumpSpeed * Time.deltaTime);
                 }
             }
         }
