@@ -7,6 +7,7 @@ TagManager:
   - Runner
   - Other
   - Outline
+  - Border
   layers:
   - Default
   - TransparentFX
