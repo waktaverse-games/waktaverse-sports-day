@@ -8,6 +8,7 @@ TagManager:
   - Other
   - Outline
   - Border
+  - Pole
   layers:
   - Default
   - TransparentFX
