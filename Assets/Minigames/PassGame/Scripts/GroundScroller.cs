@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameHeaven.PassGame
-{
+{ 
     public class GroundScroller : MonoBehaviour
     {
         public GameObject TilePrefab = null;
