@@ -8,7 +8,7 @@ namespace GameHeaven.CrashGame
     {
         const float Radian = 180f;
 
-        private Rigidbody2D rigidBody;
+        public Rigidbody2D rigidBody;
         [SerializeField]
         private float speed;
 
@@ -16,29 +16,35 @@ namespace GameHeaven.CrashGame
         private Vector2 bounceDirection;
         private Vector3 force;
 
-        bool isComing;
-
         // Start is called before the first frame update
         void Awake()
         {
             rigidBody = GetComponent<Rigidbody2D>();
-            force = new Vector3(speed, speed, 0);
+            
         }
 
         private void Start()
         {
-            //Vector3 tmp = transform.eulerAngles;
-            //tmp.z += 30;
-            //transform.eulerAngles = tmp;
-            rigidBody.AddForce(force);
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        private void FixedUpdate()
         {
+            if (GameManager.Instance.CurrentGameState == Define.GameState.Over)
+            {
+                StopBall();
+                
+            }
+        }
 
-            //position = rigidBody.position;
-            //rigidBody.MovePosition(position + (Vector2)transform.up * speed * Time.deltaTime);
+        public void StopBall()
+        {
+            rigidBody.velocity = Vector2.zero;
+        }
+
+        public void Fire(Vector3 force)
+        {
+            rigidBody.AddForce(force);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -46,21 +52,14 @@ namespace GameHeaven.CrashGame
             if (collision.collider.CompareTag("Platform"))
             {
                 Debug.Log($"Current Ball Speed: {rigidBody.velocity.magnitude}");
-                //isComing = false;
-                //bounceDirection = rigidBody.velocity;
-                //rigidBody.velocity = Vector2.zero;
-
-                //bounceDirection = (new Vector2(bounceDirection.x, -bounceDirection.y)).normalized * speed;
-                //Debug.Log("Bounced");
-                //rigidBody.AddForce(bounceDirection);
             }
             else if (collision.collider.CompareTag("Brick"))
             {
                 collision.gameObject.GetComponent<Brick>().BallCollide();
             }
-            else
+            else if (collision.collider.CompareTag("Bottom"))
             {
-
+                GameManager.Instance.GameOver();
             }
         }
     }
