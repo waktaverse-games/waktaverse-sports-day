@@ -11,17 +11,38 @@ public class Move : MonoBehaviour
 
     [SerializeField] private List<Transform> backRunners; // 현재까지 associate한 backRunner들
     public bool isPlayer, isAssociated;
+    public float cumulativeCoin;
+    private Rigidbody2D rigid;
+    private SpriteRenderer spriteRenderer;
+    private Animator anim;
 
     private void Awake()
     {
+        rigid = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+
         curAxis = Vector2.zero;
         dir = 1;
 
         backRunners = new List<Transform>();
+
+        if (isPlayer) anim.SetBool("Walk", true);
     }
 
     private void Update()
     {
+        if (transform.position.y > curAxis.y)
+        {
+            if (dir > 0) spriteRenderer.flipX = false;
+            else spriteRenderer.flipX = true;
+        }
+        else
+        {
+            if (dir > 0) spriteRenderer.flipX = true;
+            else spriteRenderer.flipX = false;
+        }
+
         if (isAssociated)
         {
             transform.RotateAround(curAxis, dir * Vector3.forward, Time.deltaTime * rotateSpeed);
@@ -48,7 +69,7 @@ public class Move : MonoBehaviour
             {
                 if (collider.GetComponent<Move>().isAssociated)
                 {
-                    print("GameOver");
+                    print("RunnerGameOver");
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
                 else
@@ -58,8 +79,23 @@ public class Move : MonoBehaviour
             }
             else if (collider.CompareTag("Outline"))
             {
-                print("GameOver");
+                print("BorderGameOver");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            else if (collider.CompareTag("Coin"))
+            {
+                Destroy(collider.gameObject);
+                cumulativeCoin += 1;
+            }
+            else if (collider.CompareTag("CutItem"))
+            {
+                Destroy(collider.gameObject);
+                if (backRunners.Count > 0)
+                {
+                    GameObject del = backRunners[backRunners.Count - 1].gameObject;
+                    backRunners.RemoveAt(backRunners.Count - 1);
+                    Destroy(del);
+                }
             }
         }
     }
@@ -106,6 +142,7 @@ public class Move : MonoBehaviour
             collider.transform.RotateAround(lastRunner.curAxis, lastRunner.dir * Vector3.forward, -60); // 30도만큼 이전에 위치
         }
 
+        moveCS.anim.SetBool("Walk", true);
         backRunners.Add(collider.transform);
     }
 }
