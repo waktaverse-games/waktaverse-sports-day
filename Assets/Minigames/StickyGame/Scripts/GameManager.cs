@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace GameHeaven.StickyGame
 {
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        Screen.SetResolution(640, 360, false);
+        private void Awake()
+        {
+            Screen.SetResolution(640, 360, false);
+        }
     }
 }
