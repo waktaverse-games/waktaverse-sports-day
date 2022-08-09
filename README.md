@@ -32,10 +32,10 @@ Visual Studio를 기본으로 사용한다.
 
 ## 사용 에셋
 
-- [Corgi Engine - 2D + 2.5D Platformer](https://assetstore.unity.com/packages/templates/systems/corgi-engine-2d-2-5d-platformer-26617) : 2D Game Tool
-- [DoTween Pro](https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416?locale=ko-KR&gclid=CjwKCAjw6MKXBhA5EiwANWLODAocPltUyBh5e_0twe92GmEBIy_OOJwPKhNz2QDL6QX6G_dwwEe0-hoCJjkQAvD_BwE&gclsrc=aw.ds) : Path 연결 에셋
+- [Corgi Engine - 2D + 2.5D Platformer](https://assetstore.unity.com/packages/templates/systems/corgi-engine-2d-2-5d-platformer-26617)
+- DoTween
 - ConsolePro3
-- [Odin - Inspector and Serializer](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) : 에디터 기능 추가
+- Odin Inspector
 
 ## 유니티
 
