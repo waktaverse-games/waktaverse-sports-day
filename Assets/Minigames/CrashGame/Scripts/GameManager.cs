@@ -19,25 +19,10 @@ namespace GameHeaven.CrashGame
             } 
         }
 
-        private void Awake() => InstanceInit();
-
-        private static void InstanceInit()
-        {
-            // Singleton 초기화
-            if (instance == null)
-            {
-                GameObject go = GameObject.Find("GameManager");
-                if (go == null)
-                {
-                    go = new GameObject { name = "GameManager" };
-                    go.AddComponent<GameManager>();
-                }
-                instance = go.GetComponent<GameManager>();
-            }
-        }
-
+        private UIManager uiManager;
         private GameState currentGameState;
         private int score;
+        private int highscore;
 
         [SerializeField]
         private PlayerPlatform platform;
@@ -54,10 +39,37 @@ namespace GameHeaven.CrashGame
             private set { score = value; }
         }
 
+        private void Awake()
+        {
+            InstanceInit();
+            uiManager = GetComponent<UIManager>();
+            score = 0;
+            highscore = 0;
+            uiManager.SetScoreText(Score);
+            uiManager.SetHighScoreText(Score);
+        }
+
+        private static void InstanceInit()
+        {
+            // Singleton 초기화
+            if (instance == null)
+            {
+                GameObject go = GameObject.Find("GameManager");
+                if (go == null)
+                {
+                    go = new GameObject { name = "GameManager" };
+                    go.AddComponent<GameManager>();
+                }
+                instance = go.GetComponent<GameManager>();
+            }
+        }
+
+
+
         // Update is called once per frame
         void Update()
         {
-
+            uiManager.SetScoreText(Score);
         }
 
         public void AddScore(int score)
@@ -68,9 +80,20 @@ namespace GameHeaven.CrashGame
         public void GameOver()
         {
             // 게임 오버 시
-            CurrentGameState = GameState.Over;
             //TODO 게임 오버 UI 띄우기.
+            CurrentGameState = GameState.Over;
+            if (Score > highscore)
+            {
+                highscore = Score;
+                uiManager.SetHighScoreText(Score);
+            }
             // 임시로 즉시 재시작
+            GameStart();
+        }
+
+        public void GameStart()
+        {
+            Score = 0;
             CurrentGameState = GameState.Start;
             platform.BallInit();
         }

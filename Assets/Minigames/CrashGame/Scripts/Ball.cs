@@ -6,15 +6,10 @@ namespace GameHeaven.CrashGame
 {
     public class Ball : MonoBehaviour
     {
-        const float Radian = 180f;
-
         public Rigidbody2D rigidBody;
         [SerializeField]
         private float speed;
 
-        private Vector2 position;
-        private Vector2 bounceDirection;
-        private Vector3 force;
 
         // Start is called before the first frame update
         void Awake()
