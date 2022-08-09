@@ -9,6 +9,10 @@ TagManager:
   - Outline
   - Coin
   - CutItem
+  - Pole
+  - Brick
+  - Enemy
+  - Attack
   layers:
   - Default
   - TransparentFX
