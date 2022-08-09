@@ -7,6 +7,10 @@ namespace GameHeaven.CrashGame
 {
     public class Brick : MonoBehaviour
     {
+        [SerializeField]
+        protected Sprite brickSprite;
+        protected static int scoreAdd = 5;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -19,9 +23,15 @@ namespace GameHeaven.CrashGame
 
         }
 
-        public void BallCollide()
+        private void DestroySelf()
         {
+            GameManager.Instance.AddScore(scoreAdd);
             Destroy(gameObject);
+        }
+
+        public virtual void BallCollide()
+        {
+            DestroySelf();
         }
     }
 }
