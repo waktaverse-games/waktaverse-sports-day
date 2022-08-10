@@ -7,96 +7,74 @@ namespace GameHeaven.PassGame
 {
     public class PlayerController : MonoBehaviour
     {
-        // reference
-        // https://www.youtube.com/watch?v=7Vgb8MoWIq8
+        // reference : https://www.youtube.com/watch?v=RmqWuoFHD5g
     
-        bool _isJump = false;
-        bool _isTop = false;
-        public float AddJumpHeight = 2;
-        public float JumpSpeed = 7;
+        public float JumpForce = 6.0f;
 
-        private Vector2 _startPosition;
+        private LayerMask _groundLayer;
+        private LayerMask _MonsterLayer;
+        private Rigidbody2D _rb2d;
+        private BoxCollider2D _boxCollider2D;
         private int _jumpCount = 0;
-        private float _maxJumpHeight = 0;
+        private Vector2 _footPosistion;
         private bool _isSpaceUp = true;
         
         private const int MaxJumpCount = 2;
-
-        void Start()
+        private void Start()
         {
-            _startPosition = transform.position;
+            _rb2d = GetComponent<Rigidbody2D>();
+            _boxCollider2D = GetComponent<BoxCollider2D>();
+            _groundLayer = LayerMask.GetMask("Ground");
+            _MonsterLayer = LayerMask.GetMask("Monster");
         }
 
-        void Update()
+        private void Update()
         {
             UpdateJumpState();
-
-            if (_isJump)
-            {
-                if (_isTop)
-                {
-                    UpdateFallDown();
-                }
-                else
-                {
-                    UpdateJump();
-                }
-            }
+            UpdatePlayerFootState();
         }
-
+        
+        // ���� ���� üũ
         void UpdateJumpState()
         {
             if (_isSpaceUp && Input.GetKeyDown(KeyCode.Space) && _jumpCount < MaxJumpCount)
             {
-                _jumpCount++;
                 _isSpaceUp = false;
-                
+                _jumpCount++;
                 SetJump();
             }
-            else if (transform.position.y <= _startPosition.y)
-            {
-                InitJump();
-            }
-
-            if (!_isSpaceUp && Input.GetKeyUp(KeyCode.Space))
+            else if (!_isSpaceUp && Input.GetKeyUp(KeyCode.Space))
             {
                 _isSpaceUp = true;
             }
         }
 
-        void SetJump()
+        // Player�� �߹ٴ� üũ
+        void UpdatePlayerFootState()
         {
-            _isJump = true;
-            _isTop = false;
-            _maxJumpHeight = transform.position.y + AddJumpHeight;
+            Bounds bounds = _boxCollider2D.bounds;
+            _footPosistion = new Vector2(bounds.center.x, bounds.min.y);
+            if (_isSpaceUp && Physics2D.OverlapCircle(_footPosistion, 0.01f, _groundLayer))
+            {
+                _jumpCount = 0;
+            }
+            else if (_isSpaceUp && Physics2D.OverlapCircle(_footPosistion, 0.01f, _MonsterLayer))
+            {
+                SetJump();
+            }
         }
 
-        void InitJump()
+        // Unity Editor ���� �׸���
+        private void OnDrawGizmos()
         {
-            _isJump = false;
-            _isTop = false;
-            _jumpCount = 0;
-            transform.position = _startPosition;
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawSphere(_footPosistion, 0.01f);
         }
-        void UpdateJump()
+
+        // �����ϱ�
+        void SetJump()
         {
-            if (transform.position.y <= _maxJumpHeight - 0.1f)
-            {
-                transform.position = Vector2.Lerp(transform.position,
-                    new Vector2(transform.position.x, _maxJumpHeight), JumpSpeed * Time.deltaTime);
-            }
-            else
-            {
-                _isTop = true;
-            }
-        }
-        
-        void UpdateFallDown()
-        {
-            if (transform.position.y > _startPosition.y)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, _startPosition, JumpSpeed * Time.deltaTime);
-            }
+            _rb2d.velocity = Vector2.up * JumpForce;
         }
     }
 }

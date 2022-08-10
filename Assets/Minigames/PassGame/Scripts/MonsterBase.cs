@@ -15,7 +15,6 @@ namespace GameHeaven.PassGame
             transform.position = StartPosition;
         }
 
-        // Update is called once per frame
         void Update()
         {
             transform.Translate(Vector2.left * Time.deltaTime * MoveSpeed);
