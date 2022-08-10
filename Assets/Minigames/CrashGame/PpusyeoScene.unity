@@ -912,8 +912,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1637493228}
   - component: {fileID: 1637493227}
-  - component: {fileID: 1637493225}
   - component: {fileID: 1637493229}
+  - component: {fileID: 1637493225}
   - component: {fileID: 1637493230}
   m_Layer: 6
   m_Name: Ball
@@ -1025,7 +1025,7 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   speed: 200
   platform: {fileID: 2006224491}
-  isReturning: 0
+  randomBounce: 1
 --- !u!58 &1637493230
 CircleCollider2D:
   m_ObjectHideFlags: 0

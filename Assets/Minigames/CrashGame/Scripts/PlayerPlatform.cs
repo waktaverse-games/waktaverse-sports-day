@@ -39,7 +39,7 @@ namespace GameHeaven.CrashGame
             clampLeft = wallLeft.transform.position.x + 1;
             clampRight = wallRight.transform.position.x - 1;
             ballStartPosition = transform.GetChild(0);
-            force = new Vector3(1, 1, 0).normalized * ball.BallSpeed;
+            force = new Vector3(1, 1, 0).normalized * ball.InitialSpeed;
         }
 
         private void Start()
@@ -49,7 +49,7 @@ namespace GameHeaven.CrashGame
 
         private void Update()
         {
-            if (GameManager.Instance.CurrentGameState == Define.GameState.Start)
+            if (GameManager.Instance.CurrentGameState == Utils.GameState.Start)
             {
                 if (!isFired)
                 {
@@ -72,7 +72,7 @@ namespace GameHeaven.CrashGame
 
         private void FixedUpdate()
         {
-            if (GameManager.Instance.CurrentGameState == Define.GameState.Start)
+            if (GameManager.Instance.CurrentGameState == Utils.GameState.Start)
             {
                 // A, D키를 사용해 좌우 이동
                 horizontal = Input.GetAxis("Horizontal");
