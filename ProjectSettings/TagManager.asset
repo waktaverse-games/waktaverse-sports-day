@@ -13,6 +13,9 @@ TagManager:
   - Brick
   - Enemy
   - Attack
+  - Border
+  - PassArea
+  - GameOverArea
   layers:
   - Default
   - TransparentFX
