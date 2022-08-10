@@ -15,9 +15,9 @@ namespace GameHeaven.CrashGame
         [SerializeField]
         private float speed = 3f;           // 플랫폼 속도
         [SerializeField]
-        private float ballSpeed = 200f;     // 공 속도
+        private float jumpAmount = 100f;
 
-        private Vector3 force;
+        public Vector3 force;
         private Vector2 direction, position;
 
         [SerializeField]
@@ -25,6 +25,7 @@ namespace GameHeaven.CrashGame
         private float clampLeft, clampRight;
 
         private bool isFired;               // 공이 발사되었는지 여부
+        private bool isJumping;             // 점프중?
 
         public float Speed
         {
@@ -38,7 +39,7 @@ namespace GameHeaven.CrashGame
             clampLeft = wallLeft.transform.position.x + 1;
             clampRight = wallRight.transform.position.x - 1;
             ballStartPosition = transform.GetChild(0);
-            force = new Vector3(ballSpeed, ballSpeed, 0);
+            force = new Vector3(1, 1, 0).normalized * ball.BallSpeed;
         }
 
         private void Start()
@@ -59,6 +60,13 @@ namespace GameHeaven.CrashGame
                         ball.Fire(force);
                     }
                 }
+                else
+                {
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        Jump();
+                    }
+                }
             }
         }
 
@@ -68,15 +76,20 @@ namespace GameHeaven.CrashGame
             {
                 // A, D키를 사용해 좌우 이동
                 horizontal = Input.GetAxis("Horizontal");
-                direction = new Vector2(horizontal, 0);
-                position = new Vector2(Math.Clamp(rigidBody.position.x, clampLeft, clampRight), rigidBody.position.y);
-                rigidBody.MovePosition(position + direction * speed * Time.deltaTime);
+                rigidBody.velocity = new Vector2(horizontal * speed, rigidBody.velocity.y);
             }
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-
+            if (collision.collider.CompareTag("Bottom"))
+            {
+                Land();
+            }
+            //else if (collision.collider.CompareTag("Ball"))
+            //{
+                
+            //}
         }
 
         public void BallInit()
@@ -84,6 +97,22 @@ namespace GameHeaven.CrashGame
             ball.StopBall();
             ball.transform.position = ballStartPosition.position;
             isFired = false;
+        }
+
+        private void Jump()
+        {
+            if (!isJumping)
+            {
+                rigidBody.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+                isJumping = true;
+            }
+        }
+
+        private void Land() { isJumping = false; }
+
+        public void Stop()
+        {
+            rigidBody.velocity = Vector2.zero;
         }
     }
 }
