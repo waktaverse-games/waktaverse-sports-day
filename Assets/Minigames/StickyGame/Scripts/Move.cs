@@ -18,11 +18,15 @@ namespace GameHeaven.StickyGame
         private SpriteRenderer spriteRenderer;
         private Animator anim;
 
+        private Statistics statistics;
+
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             anim = GetComponent<Animator>();
+
+            statistics = FindObjectOfType<Statistics>();
 
             curAxis = Vector2.zero;
             dir = 1;
@@ -76,6 +80,8 @@ namespace GameHeaven.StickyGame
                     }
                     else
                     {
+                        statistics.cumulRunner++;
+                        statistics.curRunner++;
                         Associate(collider);
                     }
                 }
@@ -86,11 +92,15 @@ namespace GameHeaven.StickyGame
                 }
                 else if (collider.CompareTag("Coin"))
                 {
+                    if (collider.name[0] == 'G') statistics.goldCoin++;
+                    else if (collider.name[0] == 'S') statistics.silverCoin++;
+                    else if (collider.name[0] == 'B') statistics.bronzeCoin++;
+
                     Destroy(collider.gameObject);
-                    cumulativeCoin += 1;
                 }
                 else if (collider.CompareTag("CutItem"))
                 {
+                    if (statistics.curRunner != 0) statistics.curRunner--;
                     Destroy(collider.gameObject);
                     if (backRunners.Count > 0)
                     {
@@ -124,7 +134,7 @@ namespace GameHeaven.StickyGame
         private void Associate(Collider2D collider) // 충돌시 뒤 주자로 Associate
         {
             Move moveCS = collider.GetComponent<Move>();
-
+            
             if (backRunners.Count == 0)
             {
                 collider.transform.position = transform.position;
@@ -143,6 +153,8 @@ namespace GameHeaven.StickyGame
                 moveCS.dir = lastRunner.dir;
                 collider.transform.RotateAround(lastRunner.curAxis, lastRunner.dir * Vector3.forward, -60); // 30도만큼 이전에 위치
             }
+
+            moveCS.spriteRenderer.sortingOrder = -statistics.cumulRunner;
 
             moveCS.anim.SetBool("Walk", true);
             backRunners.Add(collider.transform);
