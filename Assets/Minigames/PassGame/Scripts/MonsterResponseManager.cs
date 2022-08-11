@@ -39,6 +39,7 @@ namespace GameHeaven.PassGame
             }
         }
 
+        // 몬스터 복제
         GameObject InitMonster(GameObject obj, Transform parent)
         {
             GameObject copy = Instantiate(obj);

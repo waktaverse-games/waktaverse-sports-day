@@ -28,10 +28,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Ball
-  - NoCollideBall
-  - 
-  - 
+  - Ground
+  - MonsterHead
+  - MonsterBody
+  - Player
   - 
   - 
   - 

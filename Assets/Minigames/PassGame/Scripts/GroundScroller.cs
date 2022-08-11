@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,51 +7,51 @@ namespace GameHeaven.PassGame
 { 
     public class GroundScroller : MonoBehaviour
     {
-        public GameObject TilePrefab = null;
-        private List<SpriteRenderer> _tiles = new List<SpriteRenderer>();
         public float GroundSpeed = -1.0f;
 
+        public List<SpriteRenderer> Tiles = new List<SpriteRenderer>();
+        
         private SpriteRenderer _lastTile;
-        private const float _deadLine = -11.5f;
-        private const float _tileSize = 1.0f;
+        private const float DeadLine = -11.5f;
+        private const float TileSize = 3.0f;
 
         void Start()
         {
-            if (TilePrefab)
-            {
-                for (int i = 0; i < 23; i++)
-                {
-                    SpriteRenderer addTile = Instantiate(TilePrefab.GetComponent<SpriteRenderer>(),
-                        new Vector3(-11f + i * _tileSize, -0.5f, 1f), Quaternion.identity);
-                    
-                    addTile.transform.SetParent(this.transform);
-                    _tiles.Add(addTile);
-                }
-
-                _lastTile = _tiles[_tiles.Count - 1];
-            }
-
+            FindLastTile();
         }
 
+        void FindLastTile()
+        {
+            float x = Tiles[0].transform.position.x;
+            for (int i = 1; i < Tiles.Count; i++)
+            {
+                if (Tiles[i].transform.position.x > x)
+                {
+                    _lastTile = Tiles[i];
+                }
+            }
+        }
         void Update()
         {
-            if (TilePrefab is null)
+            UpdateTiles();
+        }
+        
+        // Ÿ�� �̵�
+        void UpdateTiles()
+        {
+            for (int i = 0; i < Tiles.Count; i++)
             {
-                return;
-            }
-
-            for (int i = 0; i < _tiles.Count; i++)
-            {
-                if (_deadLine >= _tiles[i].transform.position.x)
+                // �� ������ ���� �ڷ� �̵��ҰԿ�
+                if (DeadLine >= Tiles[i].transform.position.x)
                 {
-                    _tiles[i].transform.position = new Vector3(_lastTile.transform.position.x + _tileSize, -0.5f, 1f);
-                    _lastTile = _tiles[i];
+                    Tiles[i].transform.position = new Vector3(_lastTile.transform.position.x + TileSize, -0.5f, 1f);
+                    _lastTile = Tiles[i];
                 }
             }
 
-            for (int i = 0; i < _tiles.Count; i++)
+            for (int i = 0; i < Tiles.Count; i++)
             {
-                _tiles[i].transform.Translate(new Vector2(GroundSpeed, 0) * Time.deltaTime);
+                Tiles[i].transform.Translate(new Vector2(GroundSpeed, 0) * Time.deltaTime);
             }
         }
     }
