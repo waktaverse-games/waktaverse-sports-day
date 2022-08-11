@@ -3,7 +3,24 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Runner
+  - Other
+  - Outline
+  - Coin
+  - CutItem
+  - Pole
+  - Brick
+  - Enemy
+  - Attack
+  - Border
+  - PassArea
+  - GameOverArea
+  - TopWall
+  - SideWall
+  - Bottom
+  - Ball
+  - Platform
   layers:
   - Default
   - TransparentFX
