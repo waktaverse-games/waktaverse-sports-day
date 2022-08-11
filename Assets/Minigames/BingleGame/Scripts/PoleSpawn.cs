@@ -2,48 +2,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoleSpawn : MonoBehaviour
+namespace GameHeaven.BingleGame
 {
-    public GameObject[] leftSpawnPoints;
-    public GameObject[] rightSpawnPoints;
-    public GameObject pole;
-
-    public float maxSpawnDelay;
-
-    public float maxGap;
-    public float minGap;
-
-    [SerializeField] float curTime;
-    [SerializeField] bool isLeft;
-    
-    private void Update()
+    public class PoleSpawn : MonoBehaviour
     {
-        curTime += Time.deltaTime;
+        public GameObject[] checkPoints;
 
-        if(curTime > maxSpawnDelay)
-        {
-            SpawnPoles();
-        }
-    }
+        public float maxSpawnDelay;
 
-    private void SpawnPoles()
-    {
-        if (isLeft) // 좌측에 막대 생성
+        public float maxGap;
+        public float minGap;
+
+        [SerializeField] float curTime;
+        [SerializeField] bool isLeft;
+
+        private void Update()
         {
-            isLeft = false;
-            float leftSpawnXCoord = Random.Range(leftSpawnPoints[0].transform.position.x, leftSpawnPoints[1].transform.position.x);
-            float rightSpwanXCoord = leftSpawnXCoord + Random.Range(minGap, maxGap);
-            Instantiate(pole, new Vector3(leftSpawnXCoord, transform.position.y, 0), transform.rotation);
-            Instantiate(pole, new Vector3(rightSpwanXCoord, transform.position.y, 0), transform.rotation);
+            curTime += Time.deltaTime;
+
+            if (curTime > maxSpawnDelay)
+            {
+                SpawnPoles();
+            }
         }
-        else //우측에 막대 생성
+
+        private void SpawnPoles()
         {
-            isLeft = true;
-            float rightSpawnXCoord = Random.Range(rightSpawnPoints[0].transform.position.x, rightSpawnPoints[1].transform.position.x);
-            float leftSpawnXCoord = rightSpawnXCoord - Random.Range(minGap, maxGap);
-            Instantiate(pole, new Vector3(leftSpawnXCoord, transform.position.y, 0), transform.rotation);
-            Instantiate(pole, new Vector3(rightSpawnXCoord, transform.position.y, 0), transform.rotation);
+            int randGap = Random.Range(0, checkPoints.Length);      // 랜덤 갭 범위
+            float xPos = 0;
+            if (isLeft) // 좌측에 막대 생성
+            {
+                isLeft = false;
+                switch (randGap)
+                {
+                    case 0:
+                        xPos = Random.Range(-2f, 0);
+                        break;
+                    case 1:
+                        xPos = Random.Range(-2f, -0.5f);
+                        break;
+                    case 2:
+                        xPos = Random.Range(-1f, 0);
+                        break;
+                }
+            }
+            else //우측에 막대 생성
+            {
+                isLeft = true;
+                switch (randGap)
+                {
+                    case 0:
+                        xPos = Random.Range(0, 2f);
+                        break;
+                    case 1:
+                        xPos = Random.Range(-0.5f, 1f);
+                        break;
+                    case 2:
+                        xPos = Random.Range(0, 1f);
+                        break;
+                }
+            }
+            Instantiate(checkPoints[randGap], new Vector3(xPos, transform.position.y, transform.position.z), transform.rotation);
+            curTime = 0;
         }
-        curTime = 0;
     }
 }
