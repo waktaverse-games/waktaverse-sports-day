@@ -16,6 +16,11 @@ TagManager:
   - Border
   - PassArea
   - GameOverArea
+  - TopWall
+  - SideWall
+  - Bottom
+  - Ball
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -23,8 +28,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Ball
+  - NoCollideBall
   - 
   - 
   - 
