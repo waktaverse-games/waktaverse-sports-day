@@ -20,6 +20,7 @@ namespace GameHeaven.CrashGame
         }
 
         private UIManager uiManager;
+        private BrickManager brickManager;
         private GameState currentGameState;
         private int score;
         private int highscore;
@@ -43,6 +44,7 @@ namespace GameHeaven.CrashGame
         {
             InstanceInit();
             uiManager = GetComponent<UIManager>();
+            brickManager = GetComponent<BrickManager>();
             score = 0;
             highscore = 0;
             uiManager.SetScoreText(Score);
@@ -95,6 +97,7 @@ namespace GameHeaven.CrashGame
         {
             Score = 0;
             CurrentGameState = GameState.Start;
+            brickManager.ResetBricks();
             platform.BallInit();
         }
     }

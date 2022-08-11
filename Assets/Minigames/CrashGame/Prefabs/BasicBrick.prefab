@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1159025143436406090}
   - component: {fileID: 5438628490516406663}
-  - component: {fileID: 9154532441143494211}
   - component: {fileID: 5342022141927881558}
+  - component: {fileID: 8044390811165477848}
   m_Layer: 0
-  m_Name: Brick
+  m_Name: BasicBrick
   m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,18 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9154532441143494211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3420911464079828955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3207dcf74e65d3943b629ea7cf1350e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &5342022141927881558
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -124,3 +112,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8044390811165477848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3420911464079828955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 051b720250378df4e9b613fd42d5887c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

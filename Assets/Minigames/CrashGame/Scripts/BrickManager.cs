@@ -6,10 +6,12 @@ namespace GameHeaven.CrashGame
 {
     public class BrickManager : MonoBehaviour
     {
-        public GameObject basicBrickPrefab;
         public Transform brickParent;
 
-        public List<Brick> bricks;
+        public GameObject basicBrickPrefab;
+        public GameObject hardBrickPrefab;
+
+        public List<Brick> mapBricks;
 
         private Vector2 currentBrickPosition;
 
@@ -19,21 +21,31 @@ namespace GameHeaven.CrashGame
 
         private void Awake()
         {
-            InitializeBricks();
+            ResetBricks();
         }
 
-        public void InitializeBricks()
+        public void ResetBricks()
         {
+            // Å×½ºÆ®
             currentBrickPosition = new Vector2(BrickStartXPosition, 5.5f);
             for (int i = 0; i < 40; i++)
             {
-                AddBrick(basicBrickPrefab);
+                switch (Random.Range(0, 4))
+                {
+                    case 0:
+                        AddBrick(hardBrickPrefab);
+                        break;
+                    default:
+                        AddBrick(basicBrickPrefab);
+                        break;
+                }
+                
             }
         }
 
         public void AddBrick(GameObject brick)
         {
-            if (bricks.Count % 8 != 0)
+            if (mapBricks.Count % 8 != 0)
             {
                 currentBrickPosition = new Vector3(currentBrickPosition.x + BrickWidth, currentBrickPosition.y, 0);
             }
@@ -43,7 +55,7 @@ namespace GameHeaven.CrashGame
             }
             GameObject newBrick = GameObject.Instantiate(brick, brickParent);
             newBrick.transform.position = currentBrickPosition;
-            bricks.Add(brick.GetComponent<Brick>());
+            mapBricks.Add(brick.GetComponent<Brick>());
 
         }
 
