@@ -9,7 +9,7 @@ namespace GameHeaven.SpreadGame
     {
         [SerializeField] float speed;
 
-        [SerializeField] GameObject projectile;
+        [SerializeField] GameObject[] projectile;
 
         Rigidbody2D rigid;
 
@@ -17,14 +17,16 @@ namespace GameHeaven.SpreadGame
         {
             rigid = GetComponent<Rigidbody2D>();
 
-            StartCoroutine(Project(projectile));
+            StartCoroutine(Project(projectile[0]));
+            StartCoroutine(Project(projectile[1]));
+            StartCoroutine(Project(projectile[2]));
         }
 
         private void Update()
         {
             if (rigid.velocity.sqrMagnitude > speed * speed) rigid.velocity = rigid.velocity.normalized * speed;
 
-            transform.position = new Vector2(Mathf.Clamp(transform.position.x, -7.5f, 7.5f), Mathf.Clamp(transform.position.y, -4.5f, 4.5f));
+            transform.position = new Vector2(Mathf.Clamp(transform.position.x, -7, 7), Mathf.Clamp(transform.position.y, -4, 4));
         }
         private void FixedUpdate()
         {
@@ -62,10 +64,47 @@ namespace GameHeaven.SpreadGame
         {
             ProjectileInfo projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
 
-            projectileInfo.GetComponent<Rigidbody2D>().velocity = Vector2.right * projectileInfo.speed;
+            if (projectileInfo.type == ProjectileInfo.Type.Sector)
+            {
+                projectileInfo.rigid.velocity = new Vector2(0.866f, -0.5f) * projectileInfo.speed; // -30도
 
-            yield return new WaitForSeconds(projectileInfo.attackSpeed);
-            StartCoroutine(Project(projectile));
+                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
+                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
+                projectileInfo.rigid.velocity = new Vector2(0.9659f, -0.2588f) * projectileInfo.speed; // -15도
+
+                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
+                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
+                projectileInfo.rigid.velocity = Vector2.right * projectileInfo.speed; // 0도
+
+                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
+                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
+                projectileInfo.rigid.velocity = new Vector2(0.9659f, 0.2588f) * projectileInfo.speed; // 15도
+
+                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
+                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
+                projectileInfo.rigid.velocity = new Vector2(0.866f, 0.5f) * projectileInfo.speed; // 30도
+
+                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
+                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
+                projectileInfo.rigid.velocity = new Vector2(0.9659f, 0.2588f) * projectileInfo.speed; // 15도
+
+                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
+                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
+                projectileInfo.rigid.velocity = Vector2.right * projectileInfo.speed; // 0도
+
+                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
+                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
+                projectileInfo.rigid.velocity = new Vector2(0.9659f, -0.2588f) * projectileInfo.speed; // -15도
+
+                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
+                StartCoroutine(Project(projectile));
+            }
+            else
+            {
+                yield return new WaitForSeconds(projectileInfo.attackSpeed);
+                if (projectileInfo.type == ProjectileInfo.Type.Guided) yield return new WaitUntil(() => FindObjectOfType<EnemyMove>() != null);
+                StartCoroutine(Project(projectile));
+            }
         }
     }
 }
