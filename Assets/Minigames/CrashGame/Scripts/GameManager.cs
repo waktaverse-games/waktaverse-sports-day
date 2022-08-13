@@ -25,8 +25,28 @@ namespace GameHeaven.CrashGame
         private int score;
         private int highscore;
 
-        [SerializeField]
-        private PlayerPlatform platform;
+        public Ball ballPrefab;
+        //public GameObject testBallPrefab;
+
+        public PlayerPlatform platform;
+
+        public UIManager UI
+        {
+            get 
+            {
+                if (uiManager == null) uiManager = gameObject.AddComponent<UIManager>();
+                return uiManager; 
+            }
+        }
+
+        public BrickManager Brick
+        {
+            get
+            {
+                if (brickManager == null) brickManager = gameObject.AddComponent<BrickManager>();
+                return brickManager;
+            }
+        }
 
         public GameState CurrentGameState
         {
@@ -61,6 +81,8 @@ namespace GameHeaven.CrashGame
                 {
                     go = new GameObject { name = "GameManager" };
                     go.AddComponent<GameManager>();
+                    go.AddComponent<BrickManager>();
+                    go.AddComponent<UIManager>();
                 }
                 instance = go.GetComponent<GameManager>();
             }

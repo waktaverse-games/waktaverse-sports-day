@@ -7,7 +7,7 @@ namespace GameHeaven.CrashGame
 {
     public class PlayerPlatform : MonoBehaviour
     {
-        public Ball ball;
+        private Ball ball;
 
         private Transform ballStartPosition;
         private Rigidbody2D rigidBody;
@@ -39,7 +39,7 @@ namespace GameHeaven.CrashGame
             clampLeft = wallLeft.transform.position.x + 1;
             clampRight = wallRight.transform.position.x - 1;
             ballStartPosition = transform.GetChild(0);
-            force = new Vector3(1, 1, 0).normalized * ball.InitialSpeed;
+            //force = new Vector3(1, 1, 0).normalized * ball.InitialSpeed;
         }
 
         private void Start()
@@ -57,7 +57,7 @@ namespace GameHeaven.CrashGame
                     if (Input.GetKey(KeyCode.Space))
                     {
                         isFired = true;
-                        ball.Fire(force);
+                        ball.Fire();
                     }
                 }
                 else
@@ -94,8 +94,13 @@ namespace GameHeaven.CrashGame
 
         public void BallInit()
         {
+            ball = Ball.SpawnBall(ballStartPosition.position);
+            BallInit(ball);
+        }
+
+        public void BallInit(Ball ball)
+        {
             ball.StopBall();
-            ball.transform.position = ballStartPosition.position;
             isFired = false;
         }
 
