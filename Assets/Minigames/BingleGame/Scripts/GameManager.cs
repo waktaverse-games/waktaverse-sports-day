@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using TMPro;
 namespace GameHeaven.BingleGame
 {
     public class GameManager : MonoBehaviour
@@ -15,7 +15,6 @@ namespace GameHeaven.BingleGame
             if (instance == null)
             {
                 instance = this; 
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -27,6 +26,7 @@ namespace GameHeaven.BingleGame
 
         private int score = 0;
         public Text scoreText;
+        public bool isGameOver = false;
 
         void Update()
         {

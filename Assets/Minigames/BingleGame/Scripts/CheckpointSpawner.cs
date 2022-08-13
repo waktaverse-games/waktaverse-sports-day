@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameHeaven.BingleGame
 {
-    public class PoleSpawn : MonoBehaviour
+    public class CheckpointSpawner : MonoBehaviour
     {
         public GameObject[] checkPoints;
 

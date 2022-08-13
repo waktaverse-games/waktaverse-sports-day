@@ -6,14 +6,21 @@ namespace GameHeaven.BingleGame
 {
     public class CheckPointManager : MonoBehaviour
     {
-        public float speed;
+        [SerializeField] float speed;
         public GameObject[] children;
+
+        private void Awake()
+        {
+            speed = GameSpeedController.instance.speed;
+        }
         void Update()
         {
+            speed = GameSpeedController.instance.speed;
             Vector3 curPos = transform.position;
             Vector3 nextPos = Vector3.up * speed * Time.deltaTime;
             transform.position = curPos + nextPos;
         }
+
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -30,10 +37,6 @@ namespace GameHeaven.BingleGame
                 if (obj.GetComponent<BoxCollider2D>())
                 {
                     obj.GetComponent<BoxCollider2D>().enabled = false;
-                }
-                else
-                {
-                    obj.GetComponent<CapsuleCollider2D>().enabled = false;
                 }
             }
         }
