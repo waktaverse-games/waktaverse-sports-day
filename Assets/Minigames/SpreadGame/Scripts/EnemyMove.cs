@@ -27,9 +27,9 @@ namespace GameHeaven.SpreadGame
 
         private void Update()
         {
-            if (HP < 0) Die();
+            if (HP <= 0) Die();
 
-            transform.position = new Vector2(transform.position.x, Mathf.Clamp(transform.position.y, -4.5f, 4.5f));
+            transform.position = new Vector2(transform.position.x, Mathf.Clamp(transform.position.y, -4, 4));
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -38,6 +38,7 @@ namespace GameHeaven.SpreadGame
             {
                 anim.SetTrigger("Hit");
                 HP -= collider.GetComponent<ProjectileInfo>().damage;
+                Destroy(collider.gameObject);
             }
         }
 

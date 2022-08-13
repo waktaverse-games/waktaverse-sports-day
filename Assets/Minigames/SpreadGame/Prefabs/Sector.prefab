@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1527100226396663394}
   - component: {fileID: 5253744885416062074}
   m_Layer: 0
-  m_Name: PlayerAttack
+  m_Name: Sector
   m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -136,6 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46682765f7bb47544b56e1ae5610ee82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  attackSpeed: 0.3
-  damage: 10
+  type: 2
+  speed: 7
+  attackSpeed: 0.5
+  damage: 1
+  rigid: {fileID: 0}
+  target: {fileID: 0}
