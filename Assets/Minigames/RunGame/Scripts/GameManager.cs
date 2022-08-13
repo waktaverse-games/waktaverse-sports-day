@@ -6,16 +6,27 @@ namespace GameHaven.RunGame
 { 
     public class GameManager : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        public GameObject wall;
+        public Transform spawnPoints;
+
+        public float maxSpawnDelay;
+        public float curSpawnDelay;
 
         // Update is called once per frame
         void Update()
         {
-        
+            curSpawnDelay += Time.deltaTime;
+
+            if (curSpawnDelay > maxSpawnDelay)
+            {
+                SpawnWall();
+                curSpawnDelay = 0;
+            }
+        }
+
+        void SpawnWall()
+        {
+            Instantiate(wall, spawnPoints.position, spawnPoints.rotation);
         }
     }
 }
