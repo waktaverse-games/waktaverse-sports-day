@@ -10,10 +10,12 @@ namespace GameHeaven.CrashGame
         private static float speedGrowth = 0.05f;
         private static float speedCap;
 
+        private static int ballNumber = 0;
+
         public Rigidbody2D rigidBody;
         [SerializeField]
         private float speed;
-        [SerializeField]
+
         private PlayerPlatform platform;
         private Vector2 velocity;
 
@@ -21,10 +23,19 @@ namespace GameHeaven.CrashGame
         private bool randomBounce;
         private bool isReturning;
 
-
         public float InitialSpeed
         {
             get { return speed; }
+        }
+
+        private static int BallNumber
+        {
+            get { return ballNumber; }
+            set 
+            {
+                ballNumber = value;
+                Debug.Log($"ballNumber = {ballNumber}");
+            }
         }
 
         // Start is called before the first frame update
@@ -32,6 +43,7 @@ namespace GameHeaven.CrashGame
         {
             rigidBody = GetComponent<Rigidbody2D>();
             isReturning = false;
+            platform = GameManager.Instance.platform;
         }
 
         private void Start()
@@ -56,7 +68,7 @@ namespace GameHeaven.CrashGame
             }
             else if (collision.collider.CompareTag("Bottom"))
             {
-                GameManager.Instance.GameOver();
+                DestroyBall();
             }
             isReturning = true;
         }
@@ -91,15 +103,42 @@ namespace GameHeaven.CrashGame
             }
         }
 
+        public static Ball SpawnBall(Vector2 position)
+        {
+            BallNumber++;
+            return Instantiate(GameManager.Instance.ballPrefab, position, Quaternion.identity);
+        }
+
+        public void DestroyBall()
+        {
+            Debug.Log("DestroyBall called");
+            BallNumber--;
+            if (BallNumber <= 0) GameManager.Instance.GameOver();
+            Destroy(gameObject);
+        }
+
         public void StopBall()
         {
             rigidBody.velocity = Vector2.zero;
         }
 
-        public void Fire(Vector3 force)
+        public void Fire(Vector2 force)
         {
             isReturning = false;
             rigidBody.AddForce(force);
+        }
+
+        public void Fire()
+        {
+            isReturning = false;
+            rigidBody.AddForce(new Vector2(1, 1).normalized * InitialSpeed);
+        }
+
+        public void BlockFire()
+        {
+            Vector2 fireForce = new Vector2((Random.Range(0, 2) - 0.5f) * 2, -1).normalized * InitialSpeed;
+            Fire(fireForce);
+            isReturning = true;
         }
 
         private void AddSpeed(float growth)
