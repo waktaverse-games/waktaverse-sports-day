@@ -12,6 +12,8 @@ namespace GameHeaven.PassGame
 
         private List<GameObject> _monsterPool = new List<GameObject>();
         private int _createCount = 0;
+        private int _nextCount = 0;
+
         private void Awake()
         {
             if (MonsterPrefab)
@@ -27,7 +29,7 @@ namespace GameHeaven.PassGame
         {
             StartCoroutine(CreateMonster());
         }
-        
+
         // Coroutine
         IEnumerator CreateMonster()
         {
@@ -39,13 +41,18 @@ namespace GameHeaven.PassGame
             }
         }
 
-        // ╦С╫╨ем ╨╧а╕
+        // О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
         GameObject InitMonster(GameObject obj, Transform parent)
         {
             GameObject copy = Instantiate(obj);
             copy.transform.SetParent(parent);
             copy.SetActive(false);
             return copy;
+        }
+        
+        public GameObject GetNextMonster()
+        {
+            return _monsterPool[_nextCount++ % _monsterPool.Count];
         }
     }
 }
