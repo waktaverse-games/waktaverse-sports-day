@@ -8,6 +8,7 @@ namespace GameHeaven.SpreadGame
     {
         [SerializeField] GameObject testObj;
         [SerializeField] float SpawnCool;
+        [SerializeField] float[] mapSize;
 
         private void Awake()
         {
@@ -16,7 +17,7 @@ namespace GameHeaven.SpreadGame
 
         IEnumerator SpawnRepeatedly(float sec)
         {
-            Instantiate(testObj, new Vector2(9, Random.Range(-4, 5)), testObj.transform.rotation);
+            Instantiate(testObj, new Vector2(mapSize[0] / 2 + 1, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), testObj.transform.rotation);
 
             yield return new WaitForSeconds(sec);
             StartCoroutine(SpawnRepeatedly(sec));

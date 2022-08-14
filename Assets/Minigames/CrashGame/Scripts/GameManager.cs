@@ -20,12 +20,33 @@ namespace GameHeaven.CrashGame
         }
 
         private UIManager uiManager;
+        private BrickManager brickManager;
         private GameState currentGameState;
         private int score;
         private int highscore;
 
-        [SerializeField]
-        private PlayerPlatform platform;
+        public Ball ballPrefab;
+        //public GameObject testBallPrefab;
+
+        public PlayerPlatform platform;
+
+        public UIManager UI
+        {
+            get 
+            {
+                if (uiManager == null) uiManager = gameObject.AddComponent<UIManager>();
+                return uiManager; 
+            }
+        }
+
+        public BrickManager Brick
+        {
+            get
+            {
+                if (brickManager == null) brickManager = gameObject.AddComponent<BrickManager>();
+                return brickManager;
+            }
+        }
 
         public GameState CurrentGameState
         {
@@ -43,10 +64,16 @@ namespace GameHeaven.CrashGame
         {
             InstanceInit();
             uiManager = GetComponent<UIManager>();
+            brickManager = GetComponent<BrickManager>();
             score = 0;
             highscore = 0;
             uiManager.SetScoreText(Score);
             uiManager.SetHighScoreText(Score);
+        }
+
+        private void Start()
+        {
+            GameStart();
         }
 
         private static void InstanceInit()
@@ -59,6 +86,8 @@ namespace GameHeaven.CrashGame
                 {
                     go = new GameObject { name = "GameManager" };
                     go.AddComponent<GameManager>();
+                    go.AddComponent<BrickManager>();
+                    go.AddComponent<UIManager>();
                 }
                 instance = go.GetComponent<GameManager>();
             }
@@ -93,8 +122,10 @@ namespace GameHeaven.CrashGame
 
         public void GameStart()
         {
+            Ball.BallNumber = 0;
             Score = 0;
             CurrentGameState = GameState.Start;
+            brickManager.ResetBricks();
             platform.BallInit();
         }
     }

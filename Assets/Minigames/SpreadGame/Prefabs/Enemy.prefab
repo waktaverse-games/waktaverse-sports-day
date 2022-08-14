@@ -141,7 +141,7 @@ MonoBehaviour:
   thinkingSpeed: 2
   attackSpeed: 5
   projectileSpeed: 5
-  HP: 30
+  HP: 10
   projectile: {fileID: 2360940325928755872, guid: f28df7927a52fad448c7d0c670cd937d, type: 3}
 --- !u!95 &8088288893017774908
 Animator:
