@@ -71,6 +71,11 @@ namespace GameHeaven.CrashGame
             uiManager.SetHighScoreText(Score);
         }
 
+        private void Start()
+        {
+            GameStart();
+        }
+
         private static void InstanceInit()
         {
             // Singleton √ ±‚»≠
@@ -117,6 +122,7 @@ namespace GameHeaven.CrashGame
 
         public void GameStart()
         {
+            Ball.BallNumber = 0;
             Score = 0;
             CurrentGameState = GameState.Start;
             brickManager.ResetBricks();

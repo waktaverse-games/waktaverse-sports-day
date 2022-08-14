@@ -44,7 +44,6 @@ namespace GameHeaven.CrashGame
 
         private void Start()
         {
-            BallInit();
         }
 
         private void Update()

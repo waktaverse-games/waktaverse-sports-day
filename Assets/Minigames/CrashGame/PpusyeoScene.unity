@@ -936,7 +936,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 1069602127132607227, guid: 6f6b5b82d17d92b438442beae4051006, type: 3}
-  testBallPrefab: {fileID: 1069602127132607230, guid: 1a5d4eeb141f35141ac3fbe64d3e740f, type: 3}
   platform: {fileID: 2006224491}
 --- !u!114 &1679308195
 MonoBehaviour:
@@ -954,7 +953,6 @@ MonoBehaviour:
   basicBrickPrefab: {fileID: 8044390811165477848, guid: d3c58af7b156bb0419a5e94fe4db1f41, type: 3}
   hardBrickPrefab: {fileID: 584175413749039415, guid: e4cd92014e5c3ce4aa4ac97e65297055, type: 3}
   ballBrickPrefab: {fileID: 4573843509715205751, guid: 67ba4bbaaf43e9744b82d8dd888c75b1, type: 3}
-  mapBricks: []
   coinPrefabList: []
   itemPrefabList: []
 --- !u!114 &1679308196
@@ -1352,7 +1350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fccd86e7851474aa96b7f49511cb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 10
   jumpAmount: 20
   force: {x: 0, y: 0, z: 0}
   wallLeft: {fileID: 155887874}
