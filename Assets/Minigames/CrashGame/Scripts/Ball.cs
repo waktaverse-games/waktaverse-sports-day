@@ -14,7 +14,9 @@ namespace GameHeaven.CrashGame
 
         public Rigidbody2D rigidBody;
         [SerializeField]
-        private float speed;
+        private float initialForce = 300;
+        [SerializeField]
+        private float maxSpeed = 8f;
 
         private PlayerPlatform platform;
         private Vector2 velocity;
@@ -23,12 +25,12 @@ namespace GameHeaven.CrashGame
         private bool randomBounce;
         private bool isReturning;
 
-        public float InitialSpeed
+        public float InitialForce
         {
-            get { return speed; }
+            get { return initialForce; }
         }
 
-        private static int BallNumber
+        public static int BallNumber
         {
             get { return ballNumber; }
             set 
@@ -64,7 +66,7 @@ namespace GameHeaven.CrashGame
             if (collision.collider.CompareTag("Brick"))
             {
                 collision.gameObject.GetComponent<Brick>().BallCollide();
-                AddSpeed(speedGrowth);
+                if (rigidBody.velocity.sqrMagnitude < (maxSpeed * maxSpeed)) AddSpeed(speedGrowth);
             }
             else if (collision.collider.CompareTag("Bottom"))
             {
@@ -75,6 +77,7 @@ namespace GameHeaven.CrashGame
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            velocity = rigidBody.velocity;
             if (collision.CompareTag("Platform"))
             {
                 // 플랫폼의 운동상태에 상관없이, 플랫폼에 닿으면 일정 각도로 반사
@@ -82,10 +85,17 @@ namespace GameHeaven.CrashGame
                 if (isReturning)
                 {
                     // 점프 도중 플랫폼과 공의 충돌 시 공이 아래로 튕기는 것을 방지. 공은 무조건 위로 튕김
-                    velocity = rigidBody.velocity;
                     if (randomBounce)
                     {
                         velocity = Utils.RotateVector(velocity, (Random.value - 0.5f) * 30f);
+                    }
+                    else
+                    {
+                        Vector2 platformVelocity = collision.GetComponent<Rigidbody2D>().velocity;
+                        Debug.Log($"Platform Velocity: {platformVelocity.x}, {platformVelocity.y}");
+
+                        float delta = Mathf.Sign(velocity.y) * ((-platformVelocity.x * 2f) + (platformVelocity.y * Mathf.Sign(velocity.x) * 1.3f));
+                        velocity = Utils.RotateVector(velocity, delta);
                     }
                     if (Mathf.Abs(velocity.y) < 0.05f)
                     {
@@ -94,13 +104,13 @@ namespace GameHeaven.CrashGame
                     }
                     if (rigidBody.velocity.y < 0) velocity = new Vector2(velocity.x, -velocity.y);
                     Debug.Log(Vector2.Angle(velocity, Vector2.right));
-                    rigidBody.velocity = velocity;
                     isReturning = false;
 
                     // 공에 닿을 시 점프 중단.
                     platform.Stop();
                 }
             }
+            rigidBody.velocity = velocity;
         }
 
         public static Ball SpawnBall(Vector2 position)
@@ -131,12 +141,12 @@ namespace GameHeaven.CrashGame
         public void Fire()
         {
             isReturning = false;
-            rigidBody.AddForce(new Vector2(1, 1).normalized * InitialSpeed);
+            rigidBody.AddForce(new Vector2(1, 1).normalized * InitialForce);
         }
 
         public void BlockFire()
         {
-            Vector2 fireForce = new Vector2((Random.Range(0, 2) - 0.5f) * 2, -1).normalized * InitialSpeed;
+            Vector2 fireForce = new Vector2((Random.Range(0, 2) - 0.5f) * 2, -1).normalized * InitialForce;
             Fire(fireForce);
             isReturning = true;
         }
@@ -144,7 +154,7 @@ namespace GameHeaven.CrashGame
         private void AddSpeed(float growth)
         {
             rigidBody.velocity *= (1 + growth);
-            Debug.Log(rigidBody.velocity.magnitude);
+            Debug.Log($"Ball Speed: {rigidBody.velocity.magnitude}");
         }
     }
 

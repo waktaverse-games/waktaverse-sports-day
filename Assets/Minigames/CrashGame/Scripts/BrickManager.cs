@@ -13,10 +13,7 @@ namespace GameHeaven.CrashGame
         public Brick hardBrickPrefab;
         public Brick ballBrickPrefab;
 
-        [System.Obsolete]
-        public List<Brick> mapBricks;
-
-        public Queue<List<Brick>> brickMap;
+        private Queue<List<Brick>> brickMap;
 
         public List<Coin> coinPrefabList;
         public List<Item> itemPrefabList;
@@ -36,36 +33,11 @@ namespace GameHeaven.CrashGame
 
         private void Start()
         {
-            ResetBricks();
-        }
-
-        [System.Obsolete]
-        public void OldResetBricks()
-        {
-            // 테스트
-            foreach(Brick brick in mapBricks)
-            {
-                Destroy(brick.gameObject);
-            }
-            mapBricks = new List<Brick>();
-            currentBrickPosition = new Vector2(BrickStartXPosition, 5.5f);
-            for (int i = 0; i < 40; i++)
-            {
-                switch (Random.Range(0, 4))
-                {
-                    case 0:
-                        OldAddBrick(hardBrickPrefab.gameObject);
-                        break;
-                    default:
-                        OldAddBrick(basicBrickPrefab.gameObject);
-                        break;
-                }
-                
-            }
         }
 
         public void CheckOuterLineDestroyed()
         {
+            // 맨 아래 행 블럭이 전부 파괴되었는지 체크
             bool allBrickOff = true;
             if (brickMap.Count == 0) return;
             foreach (Brick brick in brickMap.Peek())
@@ -82,6 +54,7 @@ namespace GameHeaven.CrashGame
                 }
 
                 AddBrickLineInMap();
+                CheckOuterLineDestroyed(); // 그다음 행도 블럭이 전부 파괴되어있었는지 체크
             }
         }
 
@@ -153,23 +126,6 @@ namespace GameHeaven.CrashGame
             return newBrick;
         }
 
-        [System.Obsolete]
-        public void OldAddBrick(GameObject brick)
-        {
-            // Deprecated
-            if (mapBricks.Count % 8 != 0)
-            {
-                currentBrickPosition = new Vector3(currentBrickPosition.x + BrickWidth, currentBrickPosition.y, 0);
-            }
-            else
-            {
-                currentBrickPosition = new Vector3(BrickStartXPosition, currentBrickPosition.y - BrickHeight, 0);
-            }
-            GameObject newBrick = Instantiate(brick, brickParent);
-            newBrick.transform.position = currentBrickPosition;
-            mapBricks.Add(brick.GetComponent<Brick>());
-
-        }
 
     }
 

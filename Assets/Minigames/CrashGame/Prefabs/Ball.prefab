@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 0}
-  speed: 200
-  platform: {fileID: 0}
-  randomBounce: 1
+  initialForce: 200
+  maxSpeed: 7
+  randomBounce: 0
 --- !u!50 &1069602127132607231
 Rigidbody2D:
   serializedVersion: 4
