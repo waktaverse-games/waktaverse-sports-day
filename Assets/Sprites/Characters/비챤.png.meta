@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bichan_0
+      name: "\uBE44\uCC64_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f610f9e0ac2f1da46aa84729561c3d1f
-      internalID: -1025883214
+      spriteID: 8a093b61d14240447afccc9cf1e765c5
+      internalID: -2039944159
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_1
+      name: "\uBE44\uCC64_1"
       rect:
         serializedVersion: 2
         x: 1024
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6bd045aef0b21e43adc34d98644f21c
-      internalID: 920998624
+      spriteID: a36bc0084e1b85b47b8c721b0b0f617d
+      internalID: 1734020773
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_2
+      name: "\uBE44\uCC64_2"
       rect:
         serializedVersion: 2
         x: 2048
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 421232d15b24ad546a33e9327274b3f2
-      internalID: -123387160
+      spriteID: 5c8a87cd7a673464ab67ecbdd31d2b53
+      internalID: -1566900103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_3
+      name: "\uBE44\uCC64_3"
       rect:
         serializedVersion: 2
         x: 3072
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 743da1fd8c622804381ea197a3e29007
-      internalID: 1716712478
+      spriteID: 7cb3e65bf05300e4a928630a0a3d5a05
+      internalID: 154007590
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_4
+      name: "\uBE44\uCC64_4"
       rect:
         serializedVersion: 2
         x: 0
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b92b8649756f8640a6f886f8c1675c7
-      internalID: -770579059
+      spriteID: 4200eee7ed8efe744a7e1434bd4ce1d1
+      internalID: -1398522059
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_5
+      name: "\uBE44\uCC64_5"
       rect:
         serializedVersion: 2
         x: 1024
@@ -223,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 022ecac09c86eac40a78ea70de654309
-      internalID: 671202716
+      spriteID: 465cb9f976b4d5643863c1f515b5250e
+      internalID: 556739733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_6
+      name: "\uBE44\uCC64_6"
       rect:
         serializedVersion: 2
         x: 2048
@@ -244,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e535af9d9ef5dd44b69554e81e017da
-      internalID: 983727660
+      spriteID: d3b3cd2009fd48e4587ff68542f9ab73
+      internalID: 813605524
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_7
+      name: "\uBE44\uCC64_7"
       rect:
         serializedVersion: 2
         x: 3072
@@ -265,14 +265,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99149edb0ef7bfa44837d28b9de5594c
-      internalID: -1128911496
+      spriteID: e8463a1d83044974182c51dd7d4c8376
+      internalID: 893269148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_8
+      name: "\uBE44\uCC64_8"
       rect:
         serializedVersion: 2
         x: 0
@@ -286,14 +286,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9504b96de02f1ca408e130db11379754
-      internalID: 152869842
+      spriteID: fc826cac47ec09a48bb6ad6a2fea4cb0
+      internalID: 831769061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_9
+      name: "\uBE44\uCC64_9"
       rect:
         serializedVersion: 2
         x: 1024
@@ -307,14 +307,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3c626bf081d9ef4ebbbdc19dc643fff
-      internalID: -58756828
+      spriteID: f00f2ba471ef33e4ab182e84604682b3
+      internalID: -1377807392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_10
+      name: "\uBE44\uCC64_10"
       rect:
         serializedVersion: 2
         x: 2048
@@ -328,14 +328,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e555d0b773a7cd24782d62e9892ce0e9
-      internalID: -876048790
+      spriteID: 7a7cc9fdec527674e987a6cab126d610
+      internalID: 201251704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_11
+      name: "\uBE44\uCC64_11"
       rect:
         serializedVersion: 2
         x: 3072
@@ -349,14 +349,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1583e13c6763bb94da705ae35d68aadd
-      internalID: -751954417
+      spriteID: ded0d288eee43ae4e9c6c83e75cb2b4f
+      internalID: -274912714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_12
+      name: "\uBE44\uCC64_12"
       rect:
         serializedVersion: 2
         x: 0
@@ -370,14 +370,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9cffb28d5f69db547a5770c95915f775
-      internalID: -837097042
+      spriteID: c67f1285a57a1864e987e0d8ceccab13
+      internalID: 954959964
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_13
+      name: "\uBE44\uCC64_13"
       rect:
         serializedVersion: 2
         x: 1024
@@ -391,14 +391,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38f066a3eefa0c947ab588e2123fe1e8
-      internalID: -1384727093
+      spriteID: 03b81a0835eca204b9426294ba49516e
+      internalID: 2131772039
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_14
+      name: "\uBE44\uCC64_14"
       rect:
         serializedVersion: 2
         x: 2048
@@ -412,14 +412,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6e0f8b5dd18a2944a37606ca4d9852a
-      internalID: 1887378972
+      spriteID: 9e26b27af9d303d4591bbcf8c71a42d2
+      internalID: -1312562665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bichan_15
+      name: "\uBE44\uCC64_15"
       rect:
         serializedVersion: 2
         x: 3072
@@ -433,8 +433,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdc9fa84b7fbb2342b699589162530c7
-      internalID: -1536775277
+      spriteID: da0c837aa770adf4abd4801a9b6e4880
+      internalID: 1568941552
       vertices: []
       indices: 
       edges: []
@@ -450,22 +450,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bichan_4: -770579059
-      Bichan_10: -876048790
-      Bichan_14: 1887378972
-      Bichan_1: 920998624
-      Bichan_7: -1128911496
-      Bichan_0: -1025883214
-      Bichan_5: 671202716
-      Bichan_2: -123387160
-      Bichan_6: 983727660
-      Bichan_9: -58756828
-      Bichan_3: 1716712478
-      Bichan_12: -837097042
-      Bichan_8: 152869842
-      Bichan_13: -1384727093
-      Bichan_11: -751954417
-      Bichan_15: -1536775277
+      "\uBE44\uCC64_14": -1312562665
+      "\uBE44\uCC64_8": 831769061
+      "\uBE44\uCC64_9": -1377807392
+      "\uBE44\uCC64_7": 893269148
+      "\uBE44\uCC64_15": 1568941552
+      "\uBE44\uCC64_3": 154007590
+      "\uBE44\uCC64_11": -274912714
+      "\uBE44\uCC64_5": 556739733
+      "\uBE44\uCC64_1": 1734020773
+      "\uBE44\uCC64_6": 813605524
+      "\uBE44\uCC64_12": 954959964
+      "\uBE44\uCC64_2": -1566900103
+      "\uBE44\uCC64_10": 201251704
+      "\uBE44\uCC64_13": 2131772039
+      "\uBE44\uCC64_4": -1398522059
+      "\uBE44\uCC64_0": -2039944159
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

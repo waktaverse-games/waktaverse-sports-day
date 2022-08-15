@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4909897591556442724}
   - component: {fileID: 6493721502798332612}
   m_Layer: 0
-  m_Name: Wak
+  m_Name: Jururu
   m_TagString: Runner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4516913605218833961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0.292, y: -0.406, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 633763255, guid: 6e7cdf48bec350d4da8ea74197613768, type: 3}
+  m_Sprite: {fileID: -298970691, guid: 17954fc24b9949b489f828da53f8b4f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -154,7 +154,7 @@ Animator:
   m_GameObject: {fileID: 4516913605218833961}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 19c4bd248863d3d46bc48dc1a21d914b, type: 2}
+  m_Controller: {fileID: 9100000, guid: f7c15245349bc1b458fa22a24c032730, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
