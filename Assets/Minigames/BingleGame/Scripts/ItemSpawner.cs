@@ -13,10 +13,6 @@ namespace GameHeaven.BingleGame
         public Transform spawnPointRight;
 
         public GameObject[] items;
-        private void Awake()
-        {
-            maxSpawnDelay = GameSpeedController.instance.cpSpawnSpeed * 2f;
-        }
 
         void Update()
         {

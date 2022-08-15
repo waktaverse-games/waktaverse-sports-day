@@ -28,9 +28,14 @@ namespace GameHeaven.BingleGame
         public Text scoreText;
         public bool isGameOver = false;
 
+        public GameObject retryButton;
         void Update()
         {
             scoreText.text = string.Format("{0:n0}", score);
+            if(isGameOver)
+            {
+                GameOver();
+            }
         }
         public void IncreaseScore(int num)
         {
@@ -39,6 +44,14 @@ namespace GameHeaven.BingleGame
 
         public void GameOver()
         {
+            Time.timeScale = 0;
+            retryButton.SetActive(true);
+        }
+
+        public void Retry()
+        {
+            Time.timeScale = 1;
+            isGameOver = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
