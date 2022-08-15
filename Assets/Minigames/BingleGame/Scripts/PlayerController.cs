@@ -35,17 +35,18 @@ namespace GameHeaven.BingleGame
 
         private void ChangeDirection()
         {
-            if (Input.GetKeyDown(KeyCode.A) && !movingLeft)
+            if(Input.GetKeyDown(KeyCode.Space))
             {
-                movingLeft = true;
+                movingLeft = !movingLeft;
                 rb.velocity = dir * slowDownSpeed;
-                dir = Vector2.left;
-            }
-            if (Input.GetKeyDown(KeyCode.D) && movingLeft)
-            {
-                movingLeft = false;
-                rb.velocity = dir * slowDownSpeed;
-                dir = Vector2.right;
+                if(movingLeft)
+                {
+                    dir = Vector2.left;
+                }
+                else
+                {
+                    dir = Vector2.right;
+                }
             }
         }
         private void FlipSprite()

@@ -738,7 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0d79231145ab54387671cdd9fbb5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.25
+  speed: 0.15
   slowDownSpeed: 3
 --- !u!50 &453711549
 Rigidbody2D:
@@ -1227,7 +1227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpawnDelay: 0
-  curTime: 1.2
+  curTime: 1.8
   spawnPointLeft: {fileID: 1839721142}
   spawnPointRight: {fileID: 295655823}
   items:
@@ -1331,11 +1331,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4a0a236f25a8944b30d10a1c9a4373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
-  increasingSpeedTime: 1
-  increasingSpeedAmount: 0.1
-  cpSpawnSpeed: 0.8
-  cpSpawnSpeedAmount: 0.01
+  speed: 4
+  increasingSpeedTime: 5
+  increasingSpeedAmount: 0.05
+  cpSpawnSpeed: 1.2
+  cpSpawnSpeedAmount: 0.001
   cpSpawnSpeedMin: 0.5
 --- !u!4 &1030131206
 Transform:
