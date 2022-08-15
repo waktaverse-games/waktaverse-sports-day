@@ -64,7 +64,7 @@ namespace GameHeaven.BingleGame
         {
             if(collision.gameObject.tag == "GameOverArea")
             {
-                GameManager.instance.GameOver();
+                GameManager.instance.isGameOver = true;
             }
         }
     }

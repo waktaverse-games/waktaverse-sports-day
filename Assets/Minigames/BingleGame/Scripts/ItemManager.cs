@@ -4,15 +4,16 @@ using UnityEngine;
 
 namespace GameHeaven.BingleGame
 {
-    public class CheckPointManager : MonoBehaviour
+    public class ItemManager : MonoBehaviour
     {
         [SerializeField] float speed;
-        public GameObject[] children;
 
-        private void Awake()
+
+        void Awake()
         {
             speed = GameSpeedController.instance.speed;
         }
+
         void Update()
         {
             speed = GameSpeedController.instance.speed;
@@ -21,23 +22,17 @@ namespace GameHeaven.BingleGame
             transform.position = curPos + nextPos;
         }
 
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.tag == "Border")
             {
                 Destroy(gameObject);
             }
-        }
 
-        public void DisableOtherCollider()
-        {
-            foreach(var obj in children)
+            if (collision.gameObject.tag == "Player")
             {
-                if (obj.GetComponent<BoxCollider2D>())
-                {
-                    obj.GetComponent<BoxCollider2D>().enabled = false;
-                }
+                // 특별한 이펙트? 같은거 넣어야하나...
+                Destroy(gameObject);
             }
         }
     }

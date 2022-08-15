@@ -4,25 +4,30 @@ using UnityEngine;
 
 namespace GameHeaven.BingleGame
 {
-    public class PoleSpawn : MonoBehaviour
+    public class CheckpointSpawner : MonoBehaviour
     {
         public GameObject[] checkPoints;
 
-        public float maxSpawnDelay;
-
-        public float maxGap;
-        public float minGap;
+        [SerializeField] float maxSpawnDelay;
 
         [SerializeField] float curTime;
         [SerializeField] bool isLeft;
 
+        private void Awake()
+        {
+            maxSpawnDelay = GameSpeedController.instance.cpSpawnSpeed;
+        }
+
         private void Update()
         {
+            maxSpawnDelay = GameSpeedController.instance.cpSpawnSpeed;
+
             curTime += Time.deltaTime;
 
             if (curTime > maxSpawnDelay)
             {
                 SpawnPoles();
+                curTime = 0;
             }
         }
 
@@ -63,7 +68,6 @@ namespace GameHeaven.BingleGame
                 }
             }
             Instantiate(checkPoints[randGap], new Vector3(xPos, transform.position.y, transform.position.z), transform.rotation);
-            curTime = 0;
         }
     }
 }

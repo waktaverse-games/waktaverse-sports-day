@@ -6,7 +6,7 @@ namespace GameHeaven.BingleGame
 {
     public class BackgroundScrolling : MonoBehaviour
     {
-        public float speed;
+        [SerializeField] float speed;
         int startIndex = 0;
         int endIndex = 2;
         public Transform[] sprites;
@@ -19,6 +19,8 @@ namespace GameHeaven.BingleGame
         }
         void Update()
         {
+            speed = GameSpeedController.instance.speed;
+
             Vector3 curPos = transform.position;
             Vector3 nextPos = Vector3.up * speed * Time.deltaTime;
             transform.position = curPos + nextPos;
