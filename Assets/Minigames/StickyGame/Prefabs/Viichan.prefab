@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4909897591556442724}
   - component: {fileID: 6493721502798332612}
   m_Layer: 0
-  m_Name: Bichan
+  m_Name: Viichan
   m_TagString: Runner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
