@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle_Bichan
+  m_Name: Jump_Viichan
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -123387160, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
+      value: {fileID: 671202716, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
     - time: 0.1
-      value: {fileID: 1716712478, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
+      value: {fileID: 983727660, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
     - time: 0.2
-      value: {fileID: -770579059, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
+      value: {fileID: -1128911496, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
     - time: 0.3
-      value: {fileID: 1716712478, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
+      value: {fileID: 152869842, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,10 +46,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -123387160, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
-    - {fileID: 1716712478, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
-    - {fileID: -770579059, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
-    - {fileID: 1716712478, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
+    - {fileID: 671202716, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
+    - {fileID: 983727660, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
+    - {fileID: -1128911496, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
+    - {fileID: 152869842, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

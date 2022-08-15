@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wak_0
+      name: "\uC6B0\uC641\uAD73_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26f4df41c72be0240b9d2a743a0fb555
-      internalID: 450234821
+      spriteID: ba1bbfdd700ddc24f97f6d4dc8297b80
+      internalID: 2091600807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_1
+      name: "\uC6B0\uC641\uAD73_1"
       rect:
         serializedVersion: 2
         x: 1024
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2eee5e0a113221b4eb87e618db458c57
-      internalID: 852627744
+      spriteID: a3ab52ec346ebd748ba084918e659390
+      internalID: -1431562135
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_2
+      name: "\uC6B0\uC641\uAD73_2"
       rect:
         serializedVersion: 2
         x: 2048
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 824307b3966c3d94a993652d3308e6d4
-      internalID: -2138458568
+      spriteID: acd9739c7eaac464da4ecb77b69d25d8
+      internalID: 633763255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_3
+      name: "\uC6B0\uC641\uAD73_3"
       rect:
         serializedVersion: 2
         x: 3072
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 293bc6b0f9fb33b43b870ba8af67782f
-      internalID: -1449896544
+      spriteID: a9541750e7bb45d498f17e356f13a150
+      internalID: 1495260871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_4
+      name: "\uC6B0\uC641\uAD73_4"
       rect:
         serializedVersion: 2
         x: 0
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47ad138c5b0fb9444a383f93b5723825
-      internalID: 82052670
+      spriteID: 4438c99900403494296dbb574fe32c30
+      internalID: -120021750
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_5
+      name: "\uC6B0\uC641\uAD73_5"
       rect:
         serializedVersion: 2
         x: 1024
@@ -223,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b329c202917b934b8b01b44ec1b8f31
-      internalID: 1537287826
+      spriteID: 0c10d2e2c94f56e4dab94e5e253d5504
+      internalID: -2113958945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_6
+      name: "\uC6B0\uC641\uAD73_6"
       rect:
         serializedVersion: 2
         x: 2048
@@ -244,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1ae2e41d1b1921469235eecab3fea62
-      internalID: -1970679025
+      spriteID: e638f69bf7fd58e41a3b75edd5f56945
+      internalID: 759130425
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_7
+      name: "\uC6B0\uC641\uAD73_7"
       rect:
         serializedVersion: 2
         x: 3072
@@ -265,14 +265,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b596bdcfd576a674fbd3037d11719be7
-      internalID: -110058960
+      spriteID: 20c1ce80eb207cc4dad3f3b1f2d3cc41
+      internalID: -1757394678
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_8
+      name: "\uC6B0\uC641\uAD73_8"
       rect:
         serializedVersion: 2
         x: 0
@@ -286,14 +286,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c72208a297314c4fa6e65c8c4a19882
-      internalID: 854369525
+      spriteID: 3042d3a6dc3dd3a40bb9cd7aff127ca9
+      internalID: -804623275
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_9
+      name: "\uC6B0\uC641\uAD73_9"
       rect:
         serializedVersion: 2
         x: 1024
@@ -307,14 +307,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c96fa53db1b5dcb4c8215e4959c23d59
-      internalID: 850518734
+      spriteID: 5bcda2a51ae101f489c83954a2b3ccb0
+      internalID: 1874290306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_10
+      name: "\uC6B0\uC641\uAD73_10"
       rect:
         serializedVersion: 2
         x: 2048
@@ -328,14 +328,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c26f0ca2d8010945b52415ef64e7866
-      internalID: 33789108
+      spriteID: d5780845685540a4cb0557e35139d7c8
+      internalID: 1927508182
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_11
+      name: "\uC6B0\uC641\uAD73_11"
       rect:
         serializedVersion: 2
         x: 3072
@@ -349,14 +349,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfea35852f7327a48b339c067a82076a
-      internalID: -655927494
+      spriteID: 6919d3961ae85b14d933a9c11aaddb63
+      internalID: 1894364407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_12
+      name: "\uC6B0\uC641\uAD73_12"
       rect:
         serializedVersion: 2
         x: 0
@@ -370,14 +370,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c4c6e4a9f9bf614fb9c843ee29aa9a8
-      internalID: 980295337
+      spriteID: 711c4d5194ef7fe4d8617e2dc9608be5
+      internalID: -827514985
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_13
+      name: "\uC6B0\uC641\uAD73_13"
       rect:
         serializedVersion: 2
         x: 1024
@@ -391,14 +391,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4497a2ff4a6b8ef4eb99b608586d4d99
-      internalID: 186333395
+      spriteID: bc265ed2d94799546bff8f3ae7488ff4
+      internalID: 1215739282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wak_14
+      name: "\uC6B0\uC641\uAD73_14"
       rect:
         serializedVersion: 2
         x: 2048
@@ -412,8 +412,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d44310feda1e3a840858522b6e121214
-      internalID: -1567431166
+      spriteID: d249c695b74050b4c88d5831ba678807
+      internalID: 573392485
       vertices: []
       indices: 
       edges: []
@@ -429,21 +429,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wak_9: 850518734
-      Wak_5: 1537287826
-      Wak_2: -2138458568
-      Wak_6: -1970679025
-      Wak_10: 33789108
-      Wak_4: 82052670
-      Wak_14: -1567431166
-      Wak_8: 854369525
-      Wak_12: 980295337
-      Wak_7: -110058960
-      Wak_13: 186333395
-      Wak_3: -1449896544
-      Wak_11: -655927494
-      Wak_1: 852627744
-      Wak_0: 450234821
+      "\uC6B0\uC641\uAD73_12": -827514985
+      "\uC6B0\uC641\uAD73_7": -1757394678
+      "\uC6B0\uC641\uAD73_4": -120021750
+      "\uC6B0\uC641\uAD73_6": 759130425
+      "\uC6B0\uC641\uAD73_9": 1874290306
+      "\uC6B0\uC641\uAD73_5": -2113958945
+      "\uC6B0\uC641\uAD73_0": 2091600807
+      "\uC6B0\uC641\uAD73_10": 1927508182
+      "\uC6B0\uC641\uAD73_1": -1431562135
+      "\uC6B0\uC641\uAD73_3": 1495260871
+      "\uC6B0\uC641\uAD73_13": 1215739282
+      "\uC6B0\uC641\uAD73_8": -804623275
+      "\uC6B0\uC641\uAD73_11": 1894364407
+      "\uC6B0\uC641\uAD73_2": 633763255
+      "\uC6B0\uC641\uAD73_14": 573392485
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

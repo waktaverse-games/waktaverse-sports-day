@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gosegu_0
+      name: "\uACE0\uC138\uAD6C_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 668122576027bcb4a84a75c5cb00342f
-      internalID: 342263590
+      spriteID: a526baaf54f3c76469ab3d13dbda437c
+      internalID: 651486436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_1
+      name: "\uACE0\uC138\uAD6C_1"
       rect:
         serializedVersion: 2
         x: 1024
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12920a9e22ea5f148ae33da6f959d4ae
-      internalID: -1325744400
+      spriteID: 759112b85a33a7c478b393812594e672
+      internalID: 1240504175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_2
+      name: "\uACE0\uC138\uAD6C_2"
       rect:
         serializedVersion: 2
         x: 2048
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 704841baf861d2e4592f5fc6987fa2c8
-      internalID: -1483068524
+      spriteID: c86499526a8e7c24db7e554bec495a49
+      internalID: 1123869133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_3
+      name: "\uACE0\uC138\uAD6C_3"
       rect:
         serializedVersion: 2
         x: 3072
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f220f8caf53b39d40ae4a1a165314d53
-      internalID: -60429974
+      spriteID: fbbb1c9aa3c96c945918008f6e421071
+      internalID: 1136269574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_4
+      name: "\uACE0\uC138\uAD6C_4"
       rect:
         serializedVersion: 2
         x: 0
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26c6aac4ee6740a498a091ec69c750d0
-      internalID: -389259201
+      spriteID: e72ac73dc49cf3643949e330514c3817
+      internalID: 2089651048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_5
+      name: "\uACE0\uC138\uAD6C_5"
       rect:
         serializedVersion: 2
         x: 1024
@@ -223,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f33f6a4c1ee5cc84d9db86e0149b51eb
-      internalID: -898674038
+      spriteID: cff7046779b104e4fa4fc2cad023af6c
+      internalID: 399463933
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_6
+      name: "\uACE0\uC138\uAD6C_6"
       rect:
         serializedVersion: 2
         x: 2048
@@ -244,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49876b714a406b840a456d5682460c49
-      internalID: 253328936
+      spriteID: 8845ac982e03c6449808ec694e50955a
+      internalID: -1952976917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_7
+      name: "\uACE0\uC138\uAD6C_7"
       rect:
         serializedVersion: 2
         x: 3072
@@ -265,14 +265,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdb5d6eada040714f86dfc4979740303
-      internalID: -1775447210
+      spriteID: e5d16e08c01fdaf48a76d2aea0667588
+      internalID: -200238104
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_8
+      name: "\uACE0\uC138\uAD6C_8"
       rect:
         serializedVersion: 2
         x: 0
@@ -286,14 +286,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 679a7a9920d1a3b42a235ccee2f67acd
-      internalID: 1021077432
+      spriteID: 542079299b151dc43a3f58263bf3a138
+      internalID: 1167609996
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_9
+      name: "\uACE0\uC138\uAD6C_9"
       rect:
         serializedVersion: 2
         x: 1024
@@ -307,14 +307,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6f1ea1b50f7b4e4dbdb7808bb81e276
-      internalID: -1401162776
+      spriteID: f8efb4e94f9ca6140b5213dcbd59f5ea
+      internalID: -2080613660
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_10
+      name: "\uACE0\uC138\uAD6C_10"
       rect:
         serializedVersion: 2
         x: 2048
@@ -328,14 +328,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d40866755735d5147840005969b57a30
-      internalID: -1819250439
+      spriteID: dc8d7f403f55f6b4bb53a22205d3681c
+      internalID: 173096709
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_11
+      name: "\uACE0\uC138\uAD6C_11"
       rect:
         serializedVersion: 2
         x: 3072
@@ -349,14 +349,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffdea8745afb94e42a8e3e2a2ccd66c0
-      internalID: -1466894706
+      spriteID: 832f748879c26ba4b915e10c95c4f048
+      internalID: 1472498785
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_12
+      name: "\uACE0\uC138\uAD6C_12"
       rect:
         serializedVersion: 2
         x: 0
@@ -370,14 +370,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 303f5fb442953964baeb7f86a80ab008
-      internalID: 1860753558
+      spriteID: 9c02d79f375c84e48b3f349833a41d76
+      internalID: -1269007859
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_13
+      name: "\uACE0\uC138\uAD6C_13"
       rect:
         serializedVersion: 2
         x: 1024
@@ -391,14 +391,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c55e95906e7a7ab4f9372453bcb17e81
-      internalID: -1048002830
+      spriteID: f6fd4acd4102ff94babccc8a6f895d8d
+      internalID: -810321258
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_14
+      name: "\uACE0\uC138\uAD6C_14"
       rect:
         serializedVersion: 2
         x: 2048
@@ -412,14 +412,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ddcb4f6f9123ea4e935b7893edd601f
-      internalID: -1403666304
+      spriteID: 0d414d565c9f4ba41bc6d7db5ac37e8b
+      internalID: 699701829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gosegu_15
+      name: "\uACE0\uC138\uAD6C_15"
       rect:
         serializedVersion: 2
         x: 3072
@@ -433,8 +433,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68a7afe42ad4457428a943ec4df945d1
-      internalID: -874852046
+      spriteID: 4270a2a7a5f4cc547b599a5a830b3c24
+      internalID: -1225656267
       vertices: []
       indices: 
       edges: []
@@ -450,22 +450,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Gosegu_5: -898674038
-      Gosegu_10: -1819250439
-      Gosegu_14: -1403666304
-      Gosegu_9: -1401162776
-      Gosegu_7: -1775447210
-      Gosegu_1: -1325744400
-      Gosegu_12: 1860753558
-      Gosegu_8: 1021077432
-      Gosegu_13: -1048002830
-      Gosegu_0: 342263590
-      Gosegu_15: -874852046
-      Gosegu_4: -389259201
-      Gosegu_6: 253328936
-      Gosegu_11: -1466894706
-      Gosegu_3: -60429974
-      Gosegu_2: -1483068524
+      "\uACE0\uC138\uAD6C_9": -2080613660
+      "\uACE0\uC138\uAD6C_2": 1123869133
+      "\uACE0\uC138\uAD6C_3": 1136269574
+      "\uACE0\uC138\uAD6C_13": -810321258
+      "\uACE0\uC138\uAD6C_10": 173096709
+      "\uACE0\uC138\uAD6C_11": 1472498785
+      "\uACE0\uC138\uAD6C_4": 2089651048
+      "\uACE0\uC138\uAD6C_5": 399463933
+      "\uACE0\uC138\uAD6C_6": -1952976917
+      "\uACE0\uC138\uAD6C_7": -200238104
+      "\uACE0\uC138\uAD6C_12": -1269007859
+      "\uACE0\uC138\uAD6C_15": -1225656267
+      "\uACE0\uC138\uAD6C_14": 699701829
+      "\uACE0\uC138\uAD6C_0": 651486436
+      "\uACE0\uC138\uAD6C_8": 1167609996
+      "\uACE0\uC138\uAD6C_1": 1240504175
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
