@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testObj: {fileID: 6104123555868368802, guid: 7f1099df29615704dae0d8e7cf3bbbfe, type: 3}
-  SpawnCool: 1.1
+  SpawnCool: 0.6
   mapSize:
   - 14
   - 8
@@ -263,6 +263,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7654275226774115358, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654275226774115358, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654275226774115358, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654275226774115358, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7654275226774115359, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
       propertyPath: m_Name
       value: Player
@@ -321,7 +337,11 @@ PrefabInstance:
       objectReference: {fileID: 2360940325928755872, guid: 963c122ac097dce49bb8df32abe1ebd4, type: 3}
     - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
       propertyPath: projectile.Array.size
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
+      propertyPath: projectiles.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
       propertyPath: projectile.Array.data[0]
@@ -330,10 +350,14 @@ PrefabInstance:
     - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
       propertyPath: projectile.Array.data[1]
       value: 
-      objectReference: {fileID: 2360940325928755872, guid: 7d0d4ebaafd90fd41bc57433a783f594, type: 3}
+      objectReference: {fileID: 2360940325928755872, guid: 4f8dc1c2c554dac489b5d4d6cc671ace, type: 3}
     - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
       propertyPath: projectile.Array.data[2]
       value: 
-      objectReference: {fileID: 2360940325928755872, guid: 963c122ac097dce49bb8df32abe1ebd4, type: 3}
+      objectReference: {fileID: 2360940325928755872, guid: 4f8dc1c2c554dac489b5d4d6cc671ace, type: 3}
+    - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
+      propertyPath: projectiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 2360940325928755872, guid: 4f8dc1c2c554dac489b5d4d6cc671ace, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74f469430edcdde44acf5910669bbe24, type: 3}

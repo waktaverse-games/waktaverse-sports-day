@@ -6,6 +6,7 @@ namespace GameHeaven.SpreadGame
 {
     public class EnemyMove : MonoBehaviour
     {
+        public enum Type { Panzee, Pigeon, Bat, Dog, Germ, Elk, Fox }
         [SerializeField] float speed, thinkingSpeed, attackSpeed, projectileSpeed;
         [SerializeField] int HP;
         [SerializeField] GameObject projectile;
@@ -38,7 +39,7 @@ namespace GameHeaven.SpreadGame
             {
                 anim.SetTrigger("Hit");
                 HP -= collider.GetComponent<ProjectileInfo>().damage;
-                Destroy(collider.gameObject);
+                if(collider.GetComponent<ProjectileInfo>().type != ProjectileInfo.Type.Slash)Destroy(collider.gameObject);
             }
         }
 

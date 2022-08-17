@@ -6,7 +6,7 @@ namespace GameHeaven.SpreadGame
 {
     public class ProjectileInfo : MonoBehaviour
     {
-        public enum Type { Straight, Guided, Sector }
+        public enum Type { Straight, Guided, Sector, Slash }
 
         public Type type;
         public float speed, attackSpeed;
@@ -19,7 +19,7 @@ namespace GameHeaven.SpreadGame
         {
             rigid = GetComponent<Rigidbody2D>();
 
-            if (type == Type.Straight) rigid.velocity = Vector2.right * speed;
+            if (type == Type.Straight || type == Type.Slash) rigid.velocity = Vector2.right * speed;
         }
 
         private void FixedUpdate()

@@ -11,7 +11,7 @@ namespace GameHeaven.StickyGame
 
         private void Awake()
         {
-            StartCoroutine(RandomSpawnRepeatedly(4.0f));
+            StartCoroutine(RandomSpawnRepeatedly(4.1f));
         }
 
         IEnumerator RandomSpawnRepeatedly(float sec) // NPC를 매 sec초마다 랜덤한 위치에 랜덤아이템 생성

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Statistics : MonoBehaviour
 {
-    public int curRunner, cumulRunner, goldCoin, silverCoin, bronzeCoin;
+    public int curRunner, cumulRunner, goldCoin, silverCoin, bronzeCoin, score;
     private Text text;
 
     private void Awake()
@@ -15,7 +15,8 @@ public class Statistics : MonoBehaviour
 
     private void Update()
     {
-        text.text = "Runner(Current) : " + curRunner + 
+        text.text = "Score : " + score +
+            "\nRunner(Current) : " + curRunner + 
             "\nRunner(Cumulative) : " + cumulRunner +
             "\nGold Coin : " + goldCoin +
             "\nSilver Coin : " + silverCoin +
