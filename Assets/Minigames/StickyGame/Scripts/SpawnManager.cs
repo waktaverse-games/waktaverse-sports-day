@@ -17,6 +17,8 @@ namespace GameHeaven.StickyGame
 
         IEnumerator RandomSpawnRepeatedly(float sec) // NPC를 매 sec초마다 랜덤한 위치에 랜덤아이템 생성
         {
+            WaitForSeconds wait = new WaitForSeconds(sec);
+
             while (true)
             {
                 int random = Random.Range(0, 11);
@@ -34,7 +36,7 @@ namespace GameHeaven.StickyGame
                     moveCS.GetComponent<Collider2D>().isTrigger = true;
                 }
 
-                yield return new WaitForSeconds(sec);
+                yield return wait;
             }
         }
     }

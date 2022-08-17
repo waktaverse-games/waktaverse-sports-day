@@ -139,6 +139,8 @@ namespace GameHeaven.StickyGame
         }
         IEnumerator RandomMove(float sec)
         {
+            WaitForSeconds wait = new WaitForSeconds(sec);
+
             while (!isAssociated)
             {
                 if (Random.Range(0, 2) == 0) randomDir = Vector2.zero;
@@ -147,11 +149,13 @@ namespace GameHeaven.StickyGame
                 if (randomDir.x > 0) spriteRenderer.flipX = true;
                 else spriteRenderer.flipX = false;
 
-                yield return new WaitForSeconds(sec);
+                yield return wait;
             }
         }
         IEnumerator changeDirOfBackRunners() // backRunners의 방향을 차례대로 바꿔주는 함수
         {
+            WaitForSeconds wait = new WaitForSeconds(60 / rotateSpeed);
+
             for (int idx = 0; idx < backRunners.Count; idx++)
             {
                 Vector3 prevAxis = curAxis, prevPos = transform.position;
@@ -164,7 +168,7 @@ namespace GameHeaven.StickyGame
                     prevDir = backRunners[idx - 1].GetComponent<Move>().dir;
                 }
 
-                yield return new WaitForSeconds(60 / rotateSpeed);
+                yield return wait;
 
                 Move curRunner = backRunners[idx].GetComponent<Move>();
 
