@@ -8,10 +8,11 @@ namespace GameHeaven.StickyGame
     {
         [SerializeField] GameObject[] NPC, coin;
         [SerializeField] GameObject cutItem;
+        [SerializeField] float spawnCool;
 
         private void Awake()
         {
-            StartCoroutine(RandomSpawnRepeatedly(4.1f));
+            StartCoroutine(RandomSpawnRepeatedly(spawnCool));
         }
 
         IEnumerator RandomSpawnRepeatedly(float sec) // NPC를 매 sec초마다 랜덤한 위치에 랜덤아이템 생성

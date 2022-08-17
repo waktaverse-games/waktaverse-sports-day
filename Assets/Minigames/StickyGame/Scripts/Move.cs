@@ -155,11 +155,13 @@ namespace GameHeaven.StickyGame
             for (int idx = 0; idx < backRunners.Count; idx++)
             {
                 Vector3 prevAxis = curAxis, prevPos = transform.position;
+                int prevDir = dir;
 
                 if (idx > 0)
                 {
                     prevAxis = backRunners[idx - 1].GetComponent<Move>().curAxis;
                     prevPos = backRunners[idx - 1].position;
+                    prevDir = backRunners[idx - 1].GetComponent<Move>().dir;
                 }
 
                 yield return new WaitForSeconds(60 / rotateSpeed);
@@ -170,7 +172,7 @@ namespace GameHeaven.StickyGame
 
                 // 방향 변경
                 curRunner.curAxis = prevAxis;
-                curRunner.dir *= -1;  // 축 방향 변경
+                curRunner.dir = prevDir;  // 축 방향 변경
             }
         }
         private void Associate(Collider2D collider) // 충돌시 뒤 주자로 Associate

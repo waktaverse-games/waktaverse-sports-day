@@ -706,7 +706,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1403959049
 MonoBehaviour:
@@ -730,6 +730,7 @@ MonoBehaviour:
   - {fileID: 4421849469660899113, guid: 787b202084ed46746a9cf832d5553858, type: 3}
   - {fileID: 5954169712361996919, guid: 47ec27464be618c4aad05f7f7d9f1fe7, type: 3}
   cutItem: {fileID: 7575775015054077711, guid: b36e7debada117448b4a61b746cb53fb, type: 3}
+  spawnCool: 1.1
 --- !u!1 &1502723015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,7 +1267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4516913605218833964, guid: 635affe0b9719734f81930c7cbc48d08, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4516913605218833964, guid: 635affe0b9719734f81930c7cbc48d08, type: 3}
       propertyPath: m_LocalScale.x
