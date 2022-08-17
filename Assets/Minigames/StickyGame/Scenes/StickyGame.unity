@@ -730,7 +730,7 @@ MonoBehaviour:
   - {fileID: 4421849469660899113, guid: 787b202084ed46746a9cf832d5553858, type: 3}
   - {fileID: 5954169712361996919, guid: 47ec27464be618c4aad05f7f7d9f1fe7, type: 3}
   cutItem: {fileID: 7575775015054077711, guid: b36e7debada117448b4a61b746cb53fb, type: 3}
-  spawnCool: 1.1
+  spawnCool: 4.1
 --- !u!1 &1502723015
 GameObject:
   m_ObjectHideFlags: 0
