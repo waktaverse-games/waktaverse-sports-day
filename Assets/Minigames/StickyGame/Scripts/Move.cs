@@ -75,7 +75,7 @@ namespace GameHeaven.StickyGame
 
                 if (backRunners.Count > 0)
                 {
-                    StartCoroutine(changeDirOfBackRunners(0));
+                    StartCoroutine(changeDirOfBackRunners());
                 }
             }
         }
@@ -139,41 +139,38 @@ namespace GameHeaven.StickyGame
         }
         IEnumerator RandomMove(float sec)
         {
-            if (Random.Range(0, 2) == 0) randomDir = Vector2.zero;
-            else randomDir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 0.0002f * statistics.curRunner; // 점수 비례 증가
-
-            if (randomDir.x > 0) spriteRenderer.flipX = true;
-            else spriteRenderer.flipX = false;
-
-            yield return new WaitForSeconds(sec);
-            if (!isAssociated)
+            while (!isAssociated)
             {
-                StartCoroutine(RandomMove(sec));
+                if (Random.Range(0, 2) == 0) randomDir = Vector2.zero;
+                else randomDir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 0.0002f * statistics.curRunner; // 점수 비례 증가
+
+                if (randomDir.x > 0) spriteRenderer.flipX = true;
+                else spriteRenderer.flipX = false;
+
+                yield return new WaitForSeconds(sec);
             }
         }
-        IEnumerator changeDirOfBackRunners(int idx) // backRunners의 방향을 차례대로 바꿔주는 함수
+        IEnumerator changeDirOfBackRunners() // backRunners의 방향을 차례대로 바꿔주는 함수
         {
-            Vector3 prevAxis = curAxis, prevPos = transform.position;
-
-            if (idx > 0)
+            for (int idx = 0; idx < backRunners.Count; idx++)
             {
-                prevAxis = backRunners[idx - 1].GetComponent<Move>().curAxis;
-                prevPos = backRunners[idx - 1].position;
-            }
+                Vector3 prevAxis = curAxis, prevPos = transform.position;
 
-            yield return new WaitForSeconds(60 / rotateSpeed);
+                if (idx > 0)
+                {
+                    prevAxis = backRunners[idx - 1].GetComponent<Move>().curAxis;
+                    prevPos = backRunners[idx - 1].position;
+                }
 
-            Move curRunner = backRunners[idx].GetComponent<Move>();
+                yield return new WaitForSeconds(60 / rotateSpeed);
 
-            curRunner.transform.position = prevPos; // 오차 정정
+                Move curRunner = backRunners[idx].GetComponent<Move>();
 
-            // 방향 변경
-            curRunner.curAxis = prevAxis;
-            curRunner.dir *= -1;  // 축 방향 변경
+                curRunner.transform.position = prevPos; // 오차 정정
 
-            if (++idx < backRunners.Count) // 마지막 주자가 아닐 때까지 코루틴 반복
-            {
-                StartCoroutine(changeDirOfBackRunners(idx));
+                // 방향 변경
+                curRunner.curAxis = prevAxis;
+                curRunner.dir *= -1;  // 축 방향 변경
             }
         }
         private void Associate(Collider2D collider) // 충돌시 뒤 주자로 Associate
