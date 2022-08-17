@@ -153,13 +153,19 @@ namespace GameHeaven.StickyGame
         }
         IEnumerator changeDirOfBackRunners(int idx) // backRunners의 방향을 차례대로 바꿔주는 함수
         {
-            Vector3 prevAxis = curAxis;
+            Vector3 prevAxis = curAxis, prevPos = transform.position;
 
-            if (idx > 0) prevAxis = backRunners[idx - 1].GetComponent<Move>().curAxis;
+            if (idx > 0)
+            {
+                prevAxis = backRunners[idx - 1].GetComponent<Move>().curAxis;
+                prevPos = backRunners[idx - 1].position;
+            }
 
             yield return new WaitForSeconds(60 / rotateSpeed);
 
             Move curRunner = backRunners[idx].GetComponent<Move>();
+
+            curRunner.transform.position = prevPos; // 오차 정정
 
             // 방향 변경
             curRunner.curAxis = prevAxis;
