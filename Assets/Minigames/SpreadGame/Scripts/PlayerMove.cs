@@ -9,7 +9,7 @@ namespace GameHeaven.SpreadGame
     {
         [SerializeField] float speed;
 
-        [SerializeField] GameObject[] projectile;
+        [SerializeField] GameObject[] projectiles;
 
         Rigidbody2D rigid;
 
@@ -17,9 +17,10 @@ namespace GameHeaven.SpreadGame
         {
             rigid = GetComponent<Rigidbody2D>();
 
-            StartCoroutine(Project(projectile[0]));
-            StartCoroutine(Project(projectile[1]));
-            StartCoroutine(Project(projectile[2]));
+            foreach (GameObject projectile in projectiles)
+            {
+                StartCoroutine(Project(projectile));
+            }
         }
 
         private void Update()
@@ -62,7 +63,7 @@ namespace GameHeaven.SpreadGame
 
         IEnumerator Project(GameObject projectile)
         {
-            ProjectileInfo projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
+            ProjectileInfo projectileInfo = Instantiate(projectile, transform.position, projectile.transform.rotation).GetComponent<ProjectileInfo>();
 
             if (projectileInfo.type == ProjectileInfo.Type.Sector)
             {

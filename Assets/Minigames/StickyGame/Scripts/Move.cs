@@ -14,17 +14,16 @@ namespace GameHeaven.StickyGame
         [SerializeField] private List<Transform> backRunners; // 현재까지 associate한 backRunner들
         public bool isPlayer, isAssociated;
         public float cumulativeCoin;
-        private Rigidbody2D rigid;
         private SpriteRenderer spriteRenderer;
-        private Animator anim;
+        [SerializeField] private Vector2 randomDir;
+        [SerializeField] private int score;
+        [SerializeField] private bool isDeath;
 
         private Statistics statistics;
 
         private void Awake()
         {
-            rigid = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
-            anim = GetComponent<Animator>();
 
             statistics = FindObjectOfType<Statistics>();
 
@@ -33,26 +32,40 @@ namespace GameHeaven.StickyGame
 
             backRunners = new List<Transform>();
 
-            if (isPlayer) anim.SetBool("Walk", true);
+            if (!isAssociated)
+            {
+                StartCoroutine(RandomMove(0.5f));
+            }
         }
 
         private void Update()
         {
-            if (transform.position.y > curAxis.y)
+            if (isDeath && Input.anyKeyDown)
             {
-                if (dir > 0) spriteRenderer.flipX = false;
-                else spriteRenderer.flipX = true;
-            }
-            else
-            {
-                if (dir > 0) spriteRenderer.flipX = true;
-                else spriteRenderer.flipX = false;
+                Time.timeScale = 1;
+                isDeath = false;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
 
             if (isAssociated)
             {
+                if (transform.position.y > curAxis.y)
+                {
+                    if (dir > 0) spriteRenderer.flipX = false;
+                    else spriteRenderer.flipX = true;
+                }
+                else
+                {
+                    if (dir > 0) spriteRenderer.flipX = true;
+                    else spriteRenderer.flipX = false;
+                }
                 transform.RotateAround(curAxis, dir * Vector3.forward, Time.deltaTime * rotateSpeed);
                 transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                transform.position = new Vector2(Mathf.Clamp(transform.position.x + randomDir.x, -3.5f, 3.5f), 
+                    Mathf.Clamp(transform.position.y + randomDir.y, -4f, 4f));
             }
 
             if (isPlayer && Input.GetButtonDown("Jump")) // Space Bar 입력시 방향 전환
@@ -62,7 +75,7 @@ namespace GameHeaven.StickyGame
 
                 if (backRunners.Count > 0)
                 {
-                    StartCoroutine(changeDirOfBackRunners(0));
+                    StartCoroutine(changeDirOfBackRunners());
                 }
             }
         }
@@ -73,25 +86,29 @@ namespace GameHeaven.StickyGame
             {
                 if (collider.CompareTag("Runner"))
                 {
-                    if (collider.GetComponent<Move>().isAssociated)
+                    if (collider.GetComponent<Move>().isAssociated) // 게임 오버
                     {
-                        print("RunnerGameOver");
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        Time.timeScale = 0;
+                        isDeath = true;
+                        GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
                     }
                     else
                     {
+                        statistics.score += 70 + 20 * statistics.curRunner;
                         statistics.cumulRunner++;
                         statistics.curRunner++;
                         Associate(collider);
                     }
                 }
-                else if (collider.CompareTag("Outline"))
+                else if (collider.CompareTag("Outline")) // 게임 오버
                 {
-                    print("BorderGameOver");
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    Time.timeScale = 0;
+                    isDeath = true;
+                    GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
                 }
                 else if (collider.CompareTag("Coin"))
                 {
+                    statistics.score += 70;
                     if (collider.name[0] == 'G') statistics.goldCoin++;
                     else if (collider.name[0] == 'S') statistics.silverCoin++;
                     else if (collider.name[0] == 'B') statistics.bronzeCoin++;
@@ -100,6 +117,7 @@ namespace GameHeaven.StickyGame
                 }
                 else if (collider.CompareTag("CutItem"))
                 {
+                    statistics.score += 70;
                     if (statistics.curRunner != 0) statistics.curRunner--;
                     Destroy(collider.gameObject);
                     if (backRunners.Count > 0)
@@ -112,23 +130,53 @@ namespace GameHeaven.StickyGame
             }
         }
 
-        IEnumerator changeDirOfBackRunners(int idx) // backRunners의 방향을 차례대로 바꿔주는 함수
+        IEnumerator Pause()
         {
-            Vector3 prevAxis = curAxis;
+            Time.timeScale = 0;
 
-            if (idx > 0) prevAxis = backRunners[idx - 1].GetComponent<Move>().curAxis;
+            yield return new WaitUntil(() => Input.anyKeyDown);
+            Time.timeScale = 1;
+        }
+        IEnumerator RandomMove(float sec)
+        {
+            WaitForSeconds wait = new WaitForSeconds(sec);
 
-            yield return new WaitForSeconds(60 / rotateSpeed);
-
-            Move curRunner = backRunners[idx].GetComponent<Move>();
-
-            // 방향 변경
-            curRunner.curAxis = prevAxis;
-            curRunner.dir *= -1;  // 축 방향 변경
-
-            if (++idx < backRunners.Count) // 마지막 주자가 아닐 때까지 코루틴 반복
+            while (!isAssociated)
             {
-                StartCoroutine(changeDirOfBackRunners(idx));
+                if (Random.Range(0, 2) == 0) randomDir = Vector2.zero;
+                else randomDir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 0.0002f * statistics.curRunner; // 점수 비례 증가
+
+                if (randomDir.x > 0) spriteRenderer.flipX = true;
+                else spriteRenderer.flipX = false;
+
+                yield return wait;
+            }
+        }
+        IEnumerator changeDirOfBackRunners() // backRunners의 방향을 차례대로 바꿔주는 함수
+        {
+            WaitForSeconds wait = new WaitForSeconds(60 / rotateSpeed);
+
+            for (int idx = 0; idx < backRunners.Count; idx++)
+            {
+                Vector3 prevAxis = curAxis, prevPos = transform.position;
+                int prevDir = dir;
+
+                if (idx > 0)
+                {
+                    prevAxis = backRunners[idx - 1].GetComponent<Move>().curAxis;
+                    prevPos = backRunners[idx - 1].position;
+                    prevDir = backRunners[idx - 1].GetComponent<Move>().dir;
+                }
+
+                yield return wait;
+
+                Move curRunner = backRunners[idx].GetComponent<Move>();
+
+                curRunner.transform.position = prevPos; // 오차 정정
+
+                // 방향 변경
+                curRunner.curAxis = prevAxis;
+                curRunner.dir = prevDir;  // 축 방향 변경
             }
         }
         private void Associate(Collider2D collider) // 충돌시 뒤 주자로 Associate
@@ -156,7 +204,8 @@ namespace GameHeaven.StickyGame
 
             moveCS.spriteRenderer.sortingOrder = -statistics.cumulRunner;
 
-            moveCS.anim.SetBool("Walk", true);
+            StopCoroutine("RandomMove");
+            moveCS.GetComponentsInChildren<SpriteRenderer>()[1].enabled = false;
             backRunners.Add(collider.transform);
         }
     }
