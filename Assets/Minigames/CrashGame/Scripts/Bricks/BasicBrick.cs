@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameHeaven.CrashGame
 {
-    public class BasicBrick : Brick
+    public class BasicBrick : CoinDropBrick
     {
         private static int scoreAdd = 5;
         private Color brickColor;

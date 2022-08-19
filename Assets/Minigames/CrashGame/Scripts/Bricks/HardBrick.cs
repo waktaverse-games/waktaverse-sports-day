@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace GameHeaven.CrashGame
 {
-    public class HardBrick : Brick
+    public class HardBrick : CoinDropBrick
     {
         // 3번 치면 부서지는 벽돌
         private static int scoreAdd = 20;
