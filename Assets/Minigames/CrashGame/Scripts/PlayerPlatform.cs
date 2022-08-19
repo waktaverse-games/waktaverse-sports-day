@@ -85,10 +85,11 @@ namespace GameHeaven.CrashGame
             {
                 Land();
             }
-            //else if (collision.collider.CompareTag("Ball"))
-            //{
-                
-            //}
+            if (collision.collider.CompareTag("Coin"))
+            {
+                GameManager.Instance.Money += collision.collider.GetComponent<Coin>().CoinValue;
+                Destroy(collision.gameObject);
+            }
         }
 
         public void BallInit()

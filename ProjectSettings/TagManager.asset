@@ -34,8 +34,8 @@ TagManager:
   - Player
   - Ball
   - NoCollideWithBall
-  - 
-  - 
+  - Item_CrashGame
+  - Brick_CrashGame
   - 
   - 
   - 

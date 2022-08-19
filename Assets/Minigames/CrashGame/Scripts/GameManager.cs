@@ -24,6 +24,13 @@ namespace GameHeaven.CrashGame
         private GameState currentGameState;
         private int score;
         private int highscore;
+        private int money;
+
+        public int Money
+        {
+            get { return money; }
+            set { money = value; }
+        }
 
         public Ball ballPrefab;
         //public GameObject testBallPrefab;
