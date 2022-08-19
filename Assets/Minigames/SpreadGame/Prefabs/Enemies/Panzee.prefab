@@ -119,7 +119,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -141,8 +141,9 @@ MonoBehaviour:
   thinkingSpeed: 2
   attackSpeed: 5
   projectileSpeed: 5
-  HP: 10
+  HP: 5
   projectile: {fileID: 2360940325928755872, guid: f28df7927a52fad448c7d0c670cd937d, type: 3}
+  type: 4
 --- !u!95 &8088288893017774908
 Animator:
   serializedVersion: 4
