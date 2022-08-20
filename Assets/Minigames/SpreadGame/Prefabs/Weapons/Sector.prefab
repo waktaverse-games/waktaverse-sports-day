@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   speed: 7
-  attackSpeed: 2
+  attackSpeed: 1
   damage: 1
   rigid: {fileID: 0}
   target: {fileID: 0}
