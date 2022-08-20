@@ -24,7 +24,7 @@ namespace GameHeaven.SpreadGame
 
         private void FixedUpdate()
         {
-            if (transform.position.x > 10) Destroy(gameObject);
+            if (transform.position.x > 7) Destroy(gameObject);
 
             if (type == Type.Guided)
             {
