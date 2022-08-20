@@ -27,16 +27,25 @@ namespace GameHeaven.SpreadGame
             if (type != Type.BakZwi) StartCoroutine(RandomMove(thinkingSpeed));
             else rigid.velocity = Vector2.left * 10;
 
-            if (type == Type.PanZee) StartCoroutine(Project(projectile));
+            if (type == Type.PanZee || type == Type.DdongGae) StartCoroutine(Project(projectile));
         }
 
         private void Update()
         {
-            if (HP <= 0) Die();
+            if (HP <= 0 || transform.position.x < -7.5f) Die();
 
-            if (transform.position.y < -4 || transform.position.y > 4)
+            if (transform.position.y < -4)
             {
-                rigid.velocity = new Vector2(rigid.velocity.x, -rigid.velocity.y);
+                rigid.velocity = new Vector2(rigid.velocity.x, (rigid.velocity.y > 0) ? rigid.velocity.y : -rigid.velocity.y);
+            }
+            else if (transform.position.y > 4)
+            {
+                rigid.velocity = new Vector2(rigid.velocity.x, (rigid.velocity.y > 0) ? -rigid.velocity.y : rigid.velocity.y);
+            }
+
+            if (type == Type.DdongGae)
+            {
+                transform.Rotate(Vector3.forward, 5);
             }
         }
 
@@ -80,11 +89,14 @@ namespace GameHeaven.SpreadGame
 
         IEnumerator Project(GameObject projectile)
         {
+            WaitForSeconds wait = new WaitForSeconds(attackSpeed);
+
+            yield return new WaitForSeconds(0.5f);
             while (true)
             {
                 GameObject obj = Instantiate(projectile, transform.position, transform.rotation);
                 obj.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * projectileSpeed;
-                yield return new WaitForSeconds(attackSpeed);
+                yield return wait;
             }
         }
 

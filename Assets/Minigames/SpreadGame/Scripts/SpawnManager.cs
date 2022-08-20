@@ -22,14 +22,12 @@ namespace GameHeaven.SpreadGame
                 int idx = Random.Range(0, 100);
 
                 if (idx < 5) idx = 0;
-                else if (idx < 15) idx = 4;
-                else if (idx < 30) idx = 2;
-                else if (idx < 45) idx = 4;
-                else if (idx < 60) idx = 4;
-                else if (idx < 80) idx = 5;
+                else if (idx < 20) idx = 1;
+                else if (idx < 35) idx = 2;
+                else if (idx < 50) idx = 3;
+                else if (idx < 75) idx = 4;
+                else if (idx < 90) idx = 5;
                 else if (idx < 100) idx = 6;
-
-                while (idx == 1 || idx == 3) idx = Random.Range(0, mobPrefabs.Length); // ÀÓ½Ã
 
                 if (idx == 0) // ¹ÚÁã´Ü
                 {
@@ -39,9 +37,9 @@ namespace GameHeaven.SpreadGame
                     Instantiate(mobPrefabs[idx], spawnPos + new Vector2(0, 1), mobPrefabs[idx].transform.rotation);
                     Instantiate(mobPrefabs[idx], spawnPos, mobPrefabs[idx].transform.rotation);
                     Instantiate(mobPrefabs[idx], spawnPos + new Vector2(0, -1), mobPrefabs[idx].transform.rotation);
-                    Instantiate(mobPrefabs[idx], spawnPos + new Vector2(-1, 1), mobPrefabs[idx].transform.rotation);
-                    Instantiate(mobPrefabs[idx], spawnPos + new Vector2(-1, 0), mobPrefabs[idx].transform.rotation);
-                    Instantiate(mobPrefabs[idx], spawnPos + new Vector2(-1, -1), mobPrefabs[idx].transform.rotation);
+                    Instantiate(mobPrefabs[idx], spawnPos + new Vector2(1, 1), mobPrefabs[idx].transform.rotation);
+                    Instantiate(mobPrefabs[idx], spawnPos + new Vector2(1, 0), mobPrefabs[idx].transform.rotation);
+                    Instantiate(mobPrefabs[idx], spawnPos + new Vector2(1, -1), mobPrefabs[idx].transform.rotation);
                     Instantiate(mobPrefabs[idx], spawnPos + new Vector2(2, 0.5f), mobPrefabs[idx].transform.rotation);
                     Instantiate(mobPrefabs[idx], spawnPos + new Vector2(2, -0.5f), mobPrefabs[idx].transform.rotation);
                 }
@@ -63,8 +61,8 @@ namespace GameHeaven.SpreadGame
             while (obj != null)
             {
                 obj.GetComponent<SpriteRenderer>().material.color = Color.green;
-                obj.GetComponent<Rigidbody2D>().velocity += Vector2.left * 2f;
-                obj.GetComponent<EnemyMove>().speed += 2f;
+                obj.GetComponent<Rigidbody2D>().velocity -= Vector2.left * 0.5f;
+                obj.GetComponent<EnemyMove>().speed -= 0.5f;
                 obj = Instantiate(mobPrefabs[6], obj.transform.position, mobPrefabs[6].transform.rotation);
                 yield return wait;
             }
