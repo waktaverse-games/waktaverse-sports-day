@@ -33,8 +33,22 @@ namespace GameHeaven.BingleGame
             float xCord = Random.Range(spawnPointLeft.position.x, spawnPointRight.position.x);
             Vector3 spawnPoint = new Vector3(xCord, transform.position.y, transform.position.z);
 
-            int itemIndex = Random.Range(0, items.Length);
-
+            int itemIndex;
+            int itemProb = Random.Range(1, 101);
+            int[] probList = GameSpeedController.instance.itemProb;
+            Debug.Log($"Item Prob = {itemProb}");
+            if(itemProb <= probList[2])
+            {
+                itemIndex = 2;
+            }
+            else if(itemProb <= probList[1])
+            {
+                itemIndex = 1;
+            }
+            else
+            {
+                itemIndex = 0;
+            }
             Instantiate(items[itemIndex], spawnPoint, transform.rotation);
         }
     }

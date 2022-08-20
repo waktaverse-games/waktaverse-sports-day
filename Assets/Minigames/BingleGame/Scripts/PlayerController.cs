@@ -6,21 +6,25 @@ namespace GameHeaven.BingleGame
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField]
-        float speed;
-        [SerializeField]
-        float slowDownSpeed;
+        [SerializeField] float speed;
+        [SerializeField] float slowDownSpeed;
+        [SerializeField] float controlCoolDown;
+        [SerializeField] bool ableToMove;
 
+        private float curTime = 0;
         private bool movingLeft;
 
         Rigidbody2D rb;
         SpriteRenderer sprite;
 
         private Vector2 dir = Vector2.right;
+
+
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             sprite = GetComponent<SpriteRenderer>();
+            ableToMove = true;
         }
 
         void Update()
@@ -35,10 +39,13 @@ namespace GameHeaven.BingleGame
 
         private void ChangeDirection()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            CheckCoolTime();
+            if(Input.GetKeyDown(KeyCode.Space) && ableToMove)
             {
+                ableToMove = false;
+                curTime = 0;
                 movingLeft = !movingLeft;
-                rb.velocity = dir * slowDownSpeed;
+                rb.velocity = dir * Mathf.Abs(rb.velocity.x * 0.8f);
                 if(movingLeft)
                 {
                     dir = Vector2.left;
@@ -49,6 +56,15 @@ namespace GameHeaven.BingleGame
                 }
             }
         }
+        private void CheckCoolTime()
+        {
+            curTime += Time.deltaTime;
+            if(curTime >= controlCoolDown)
+            {
+                ableToMove = true;
+            }
+        }
+
         private void FlipSprite()
         {
             if(rb.velocity.x >= 0)
