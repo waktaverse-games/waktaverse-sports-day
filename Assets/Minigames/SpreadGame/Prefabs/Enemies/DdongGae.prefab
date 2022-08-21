@@ -141,9 +141,10 @@ MonoBehaviour:
   thinkingSpeed: 2
   attackSpeed: 5
   projectileSpeed: 3
-  HP: 5
+  HP: 1
   projectile: {fileID: 2360940325928755872, guid: c514db62167482842b3cf5e6d0c54d68, type: 3}
   type: 1
+  dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
 --- !u!95 &8088288893017774908
 Animator:
   serializedVersion: 4
