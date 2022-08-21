@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,10 @@ using UnityEngine;
 public class EnemyCollision : MonoBehaviour
 {
     public GameManager gameManager;
-    private void OnCollisionEnter2D(Collision2D col)
+
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
+        if (col.CompareTag("Enemy"))
         {
             gameManager.GameOver();
         }
