@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private Animator _anim;
     
     public float jumpPower = 30.0f;
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Awake()
     {
@@ -32,13 +33,18 @@ public class Player : MonoBehaviour
             _isGrounded = false;
         }
     }
-    
+
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Bottom"))
         {
             _isGrounded = true;
             _anim.SetBool("isJump", false);
+        }
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            _isGrounded = true;
+            gameManager.AddScore(15);
         }
     }
 }
