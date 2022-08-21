@@ -8,13 +8,11 @@ public class EnemyDefaultMove : MonoBehaviour
     public float speed = 5.0f;
     public GameObject player;
     public GameManager gameManager;
-    public GameObject spawn;
-    public GameObject delete;
-    
+
     private Rigidbody2D _rigidbody;
     private bool _passed = false;
     // Start is called before the first frame update
-    void Awake()
+    void OnEnable()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.velocity = new Vector2(-speed, 0);
@@ -34,10 +32,5 @@ public class EnemyDefaultMove : MonoBehaviour
             _passed = true;
             gameManager.AddScore(10);
         }
-    }
-
-    void CheckPosition()
-    {
-        
     }
 }

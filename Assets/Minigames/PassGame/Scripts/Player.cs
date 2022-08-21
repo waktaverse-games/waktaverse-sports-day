@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private bool _isGrounded = false;
     private Animator _anim;
     
-    public float jumpPower = 30.0f;
+    public float jumpPower = 3.0f;
     public GameManager gameManager;
     // Start is called before the first frame update
     void Awake()
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && _isGrounded)
         {
-            _rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            _rigid.velocity = Vector2.up * jumpPower;
             _anim.SetBool("isJump", true);
             _isGrounded = false;
         }
@@ -41,9 +41,13 @@ public class Player : MonoBehaviour
             _isGrounded = true;
             _anim.SetBool("isJump", false);
         }
-        if (col.gameObject.CompareTag("Enemy"))
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Enemy"))
         {
-            _isGrounded = true;
+            _rigid.velocity = Vector2.up * jumpPower;
             gameManager.AddScore(15);
         }
     }
