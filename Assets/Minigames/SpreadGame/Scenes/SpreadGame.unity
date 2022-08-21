@@ -160,7 +160,7 @@ MonoBehaviour:
   - {fileID: 6104123555868368802, guid: 7f1099df29615704dae0d8e7cf3bbbfe, type: 3}
   - {fileID: 6104123555868368802, guid: 44ef9d0ff1c5dcf438f10129b51646f3, type: 3}
   - {fileID: 6104123555868368802, guid: bf7df5104ea53ba4db3b87e5fc026d87, type: 3}
-  SpawnCool: 1.1
+  SpawnCool: 2.1
   mapSize:
   - 14
   - 8
@@ -462,14 +462,14 @@ PrefabInstance:
     - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
       propertyPath: projectiles.Array.data[0]
       value: 
-      objectReference: {fileID: 2360940325928755872, guid: eb0dc2b6daa7f6e41b8e491a4e1120be, type: 3}
+      objectReference: {fileID: 2360940325928755872, guid: 963c122ac097dce49bb8df32abe1ebd4, type: 3}
     - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
       propertyPath: projectiles.Array.data[1]
       value: 
-      objectReference: {fileID: 2360940325928755872, guid: 963c122ac097dce49bb8df32abe1ebd4, type: 3}
+      objectReference: {fileID: 2360940325928755872, guid: 7d0d4ebaafd90fd41bc57433a783f594, type: 3}
     - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
       propertyPath: projectiles.Array.data[2]
       value: 
-      objectReference: {fileID: 2360940325928755872, guid: 963c122ac097dce49bb8df32abe1ebd4, type: 3}
+      objectReference: {fileID: 2360940325928755872, guid: 7d0d4ebaafd90fd41bc57433a783f594, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
