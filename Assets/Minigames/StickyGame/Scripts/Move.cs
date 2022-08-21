@@ -18,6 +18,7 @@ namespace GameHeaven.StickyGame
         [SerializeField] private Vector2 randomDir;
         [SerializeField] private int score;
         [SerializeField] private bool isDeath;
+        [SerializeField] private GameObject acquireEffect;
 
         private Statistics statistics;
 
@@ -108,6 +109,8 @@ namespace GameHeaven.StickyGame
                 }
                 else if (collider.CompareTag("Coin"))
                 {
+                    Instantiate(acquireEffect, collider.transform.position, acquireEffect.transform.rotation); // »πµÊ ¿Ã∆Â∆Æ
+                    collider.gameObject.GetComponent<Animator>().SetTrigger("Acquire");
                     statistics.score += 70;
                     if (collider.name[0] == 'G') statistics.goldCoin++;
                     else if (collider.name[0] == 'S') statistics.silverCoin++;

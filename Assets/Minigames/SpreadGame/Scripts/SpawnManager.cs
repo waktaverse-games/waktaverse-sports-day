@@ -31,7 +31,7 @@ namespace GameHeaven.SpreadGame
 
                 if (idx == 0) // ¹ÚÁã´Ü
                 {
-                    Vector2 spawnPos = new Vector2(mapSize[0] / 2 + 1, Random.Range(-mapSize[1] / 2, mapSize[1] / 2));
+                    Vector2 spawnPos = new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2));
                     Instantiate(mobPrefabs[idx], spawnPos + new Vector2(-1, 0.5f), mobPrefabs[idx].transform.rotation);
                     Instantiate(mobPrefabs[idx], spawnPos + new Vector2(-1, -0.5f), mobPrefabs[idx].transform.rotation);
                     Instantiate(mobPrefabs[idx], spawnPos + new Vector2(0, 1), mobPrefabs[idx].transform.rotation);
@@ -48,7 +48,6 @@ namespace GameHeaven.SpreadGame
                     StartCoroutine(Division(Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2 + 1, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation))); //ºÐ¿­
                 }
                 else Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2 + 1, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation);
-
                 yield return new WaitForSeconds(sec);
             }
         }

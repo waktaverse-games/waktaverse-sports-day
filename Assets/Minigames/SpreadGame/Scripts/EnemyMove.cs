@@ -12,7 +12,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] private int HP;
         [SerializeField] private GameObject projectile;
         [SerializeField] private Type type;
-
+        [SerializeField] private GameObject dieEffect;
         GameObject player;
 
         Rigidbody2D rigid;
@@ -102,7 +102,7 @@ namespace GameHeaven.SpreadGame
 
         void Die()
         {
-            // Animation
+            Instantiate(dieEffect, transform.position, dieEffect.transform.rotation);
             Destroy(gameObject);
         }
     }
