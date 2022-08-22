@@ -9,13 +9,15 @@ namespace GameHeaven.SpreadGame
         public enum Type { BakZwi, DdongGae, DdulGi, Fox, PanZee, RaNi, SeGyun }
         public float speed;
         [SerializeField] private float thinkingSpeed, attackSpeed, projectileSpeed;
-        [SerializeField] private int HP;
+        public int HP;
         [SerializeField] private GameObject projectile;
+        [SerializeField] private GameObject[] coins, upgradeItems;
         [SerializeField] private Type type;
         [SerializeField] private GameObject dieEffect;
         GameObject player;
+        public bool isElite;
 
-        Rigidbody2D rigid;
+        public Rigidbody2D rigid;
         Animator anim;
 
         private void Awake()
@@ -32,7 +34,8 @@ namespace GameHeaven.SpreadGame
 
         private void Update()
         {
-            if (HP <= 0 || transform.position.x < -7.5f) Die();
+            if (HP <= 0) Die();
+            if (transform.position.x < -7) Destroy(gameObject);
 
             if (transform.position.y < -4)
             {
@@ -102,6 +105,19 @@ namespace GameHeaven.SpreadGame
 
         void Die()
         {
+            GameObject obj = null;
+
+            if (Random.Range(0, 3) == 0) Instantiate(coins[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
+
+            if (isElite)
+            {
+                obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
+                obj.transform.localScale = new Vector3(0.5f, 0.5f);
+                obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
+                obj.GetComponent<ItemMove>().dir = new Vector3(0, -0.05f, 0);
+                obj.transform.localScale = new Vector3(0.5f, 0.5f);
+            }
+
             Instantiate(dieEffect, transform.position, dieEffect.transform.rotation);
             Destroy(gameObject);
         }
