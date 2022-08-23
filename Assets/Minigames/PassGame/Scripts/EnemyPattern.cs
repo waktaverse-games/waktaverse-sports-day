@@ -7,9 +7,12 @@ using DG.Tweening;
 public class EnemyPattern : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
+    private float _count = 1;
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -22,6 +25,15 @@ public class EnemyPattern : MonoBehaviour
                 break;
             case "gorani":
                 StartCoroutine(Gorani(1.5f));
+                break;
+            case "fox":
+                StartCoroutine(Fox(1.5f));
+                break;
+            case "ddulgi":
+                StartCoroutine(Ddulgi());
+                break;
+            case "dog":
+                StartCoroutine(Dog());
                 break;
         }
     }
@@ -63,10 +75,40 @@ public class EnemyPattern : MonoBehaviour
         StartCoroutine(Gorani(1.3f));
     }
 
-    IEnumerator Test()
+    IEnumerator Fox(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Invoke("FoxGo", 2.2f);
+        Invoke("FoxStop", 0.7f);
+        transform.DOLocalMoveX(-3.7f * _count, 1);
+        _count++;
+        StartCoroutine(Fox(2.5f));
+    }
+
+    void FoxStop()
+    {
+        _animator.SetBool("isPause", true);
+    }
+
+    void FoxGo()
+    {
+        _animator.SetBool("isPause", false);
+    }
+
+    IEnumerator Ddulgi()
+    {
+        yield return new WaitForSeconds(3f);
+        _animator.SetBool("isFly", true);
+        Invoke("DdulgiMove", 0.3f);
+    }
+
+    void DdulgiMove()
+    {
+        transform.DOLocalMoveX(-10f, 4);
+    }
+
+    IEnumerator Dog()
     {
         yield return new WaitForSeconds(1);
-        Debug.Log(transform.parent.position);
-        Debug.Log(transform.position);
     }
 }
