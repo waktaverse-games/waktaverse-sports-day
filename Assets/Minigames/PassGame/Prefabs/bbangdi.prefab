@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6409503126734005039}
   - component: {fileID: 1106076271441073450}
   - component: {fileID: 1996947977}
+  - component: {fileID: 7850698235034644388}
   m_Layer: 0
   m_Name: panchi
   m_TagString: Enemy
@@ -110,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.45, y: 0.75}
+  m_Size: {x: 0.4, y: 0.6}
   m_EdgeRadius: 0
 --- !u!114 &1996947977
 MonoBehaviour:
@@ -124,6 +125,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5532b3d3cf5be744dbf7dbc29334bdff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &7850698235034644388
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502479539562979746}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6534401216339306517
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,3 +215,4 @@ MonoBehaviour:
   speed: 3
   player: {fileID: 0}
   gameManager: {fileID: 0}
+  deletePosX: 0

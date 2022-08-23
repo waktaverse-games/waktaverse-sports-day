@@ -8,6 +8,7 @@ public class EnemyDefaultMove : MonoBehaviour
     public float speed = 5.0f;
     public GameObject player;
     public GameManager gameManager;
+    public float deletePosX;
 
     private Rigidbody2D _rigidbody;
     private bool _passed = false;
@@ -16,6 +17,11 @@ public class EnemyDefaultMove : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.velocity = new Vector2(-speed, 0);
+    }
+
+    private void OnDisable()
+    {
+        _passed = false;
     }
 
     // Update is called once per frame
@@ -31,6 +37,11 @@ public class EnemyDefaultMove : MonoBehaviour
         {
             _passed = true;
             gameManager.AddScore(10);
+        }
+
+        if (transform.position.x < deletePosX)
+        {
+            gameObject.SetActive(false);
         }
     }
 }

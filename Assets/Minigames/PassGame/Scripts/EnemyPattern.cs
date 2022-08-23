@@ -18,8 +18,6 @@ public class EnemyPattern : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        _animator.SetBool("isPause", false);
-        _animator.SetBool("isFly", false);
         _count = 1;
         switch (gameObject.name)
         {
@@ -30,9 +28,11 @@ public class EnemyPattern : MonoBehaviour
                 StartCoroutine(Gorani(1.5f));
                 break;
             case "fox":
+                _animator.SetBool("isPause", false);
                 StartCoroutine(Fox(1.5f));
                 break;
             case "ddulgi":
+                _animator.SetBool("isFly", false);
                 StartCoroutine(Ddulgi());
                 break;
             case "dog":
@@ -43,6 +43,7 @@ public class EnemyPattern : MonoBehaviour
 
     private void OnDisable()
     {
+        StopAllCoroutines();
         transform.position = transform.parent.position;
         _spriteRenderer.flipX = false;
     }
