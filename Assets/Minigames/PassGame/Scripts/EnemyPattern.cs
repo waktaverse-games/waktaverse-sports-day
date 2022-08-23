@@ -18,6 +18,9 @@ public class EnemyPattern : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
+        _animator.SetBool("isPause", false);
+        _animator.SetBool("isFly", false);
+        _count = 1;
         switch (gameObject.name)
         {
             case "segyun":
@@ -38,10 +41,10 @@ public class EnemyPattern : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-
+        transform.position = transform.parent.position;
+        _spriteRenderer.flipX = false;
     }
 
     IEnumerator Panchi()
