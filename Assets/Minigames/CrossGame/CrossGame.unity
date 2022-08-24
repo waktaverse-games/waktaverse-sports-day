@@ -156,8 +156,10 @@ MonoBehaviour:
   PlatformPrefab: {fileID: 1579333753043053066, guid: fc75f7f43b0afc349b0d9eced42b46f6, type: 3}
   Player: {fileID: 392218292}
   StarPrefab: {fileID: 2792241445067652169, guid: 2656b6c4caa32e64cbe1102ba18ff1f1, type: 3}
+  ObjectGroup: {fileID: 0}
   MovementSpeed: 3
   JumpSpeed: 2
+  Stars: []
   ChangedMovementSpeed: 3
   PlatformSpace: 2
   TrapProbability: 0.2
@@ -189,9 +191,10 @@ GameObject:
   - component: {fileID: 392218291}
   - component: {fileID: 392218292}
   - component: {fileID: 392218293}
+  - component: {fileID: 392218294}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,7 +240,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1916521040, guid: e959d2353763ed64391df1a3af196660, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c3a2cb17ef538a44aada87844c8d6962, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -257,7 +260,7 @@ Transform:
   m_GameObject: {fileID: 392218286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.9, y: -1.7, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -296,6 +299,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9451eba46b52b744d9adc31d85144f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Charactor: 1
+  Animators:
+  - {fileID: 9100000, guid: d6dc6f46129371b4bb165e6669b82629, type: 2}
+  - {fileID: 9100000, guid: c7203f99bcf52224b9b216f1b134a1ac, type: 2}
+  - {fileID: 9100000, guid: 3be9022a78593724aa544260c55fe57f, type: 2}
+  - {fileID: 9100000, guid: 185ec4c180b371340a66c78f8fccb8d2, type: 2}
+  CntAnimator: {fileID: 0}
   OnBottom: 0
 --- !u!61 &392218293
 BoxCollider2D:
@@ -310,19 +320,39 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1455099, y: -0.2393874}
+  m_Offset: {x: -0.041154563, y: -0.015811086}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4814814, y: 2.1296296}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.8, y: 1.15}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1904618, y: 1.9137118}
+  m_Size: {x: 0.5931356, y: 0.9438987}
   m_EdgeRadius: 0
+--- !u!95 &392218294
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392218286}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &574708683
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,8 +383,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreUI: {fileID: 1910411686}
-  StarUI: {fileID: 0}
+  StarUI: {fileID: 1674237076}
   GameOverTextUI: {fileID: 946000580}
+  ObjectController: {fileID: 293950586}
+  IsOver: 0
 --- !u!4 &574708685
 Transform:
   m_ObjectHideFlags: 0
