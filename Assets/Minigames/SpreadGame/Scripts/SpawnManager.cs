@@ -7,16 +7,19 @@ namespace GameHeaven.SpreadGame
     public class SpawnManager : MonoBehaviour
     {
         [SerializeField] GameObject[] mobPrefabs;
-        [SerializeField] float SpawnCool;
+        [SerializeField] float normalMonsterSpawnCool, eliteMonsterSpawnCool;
         [SerializeField] float[] mapSize;
 
         private void Awake()
         {
-            StartCoroutine(SpawnRepeatedly(SpawnCool));
+            StartCoroutine(SpawnRepeatedly(normalMonsterSpawnCool, false));
+            StartCoroutine(SpawnRepeatedly(eliteMonsterSpawnCool, true));
         }
 
-        IEnumerator SpawnRepeatedly(float sec)
+        IEnumerator SpawnRepeatedly(float sec, bool isElite) 
         {
+            GameObject obj = null;
+
             while (true)
             {
                 int idx = Random.Range(0, 100);
@@ -29,6 +32,12 @@ namespace GameHeaven.SpreadGame
                 else if (idx < 90) idx = 5;
                 else if (idx < 100) idx = 6;
 
+                if (isElite)
+                {
+                    if (idx == 0) continue;
+
+                    yield return new WaitForSeconds(sec);
+                }
                 if (idx == 0) // ¹ÚÁã´Ü
                 {
                     Vector2 spawnPos = new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2));
@@ -45,9 +54,22 @@ namespace GameHeaven.SpreadGame
                 }
                 else if (idx == 6) // ¼¼±Õ
                 {
-                    StartCoroutine(Division(Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2 + 1, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation))); //ºÐ¿­
+                    obj = Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation);
+                    StartCoroutine(Division(obj)); //ºÐ¿­
                 }
-                else Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2 + 1, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation);
+                else obj = Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation);
+
+                if (isElite)
+                {
+                    EnemyMove enemy = obj.GetComponent<EnemyMove>();
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * 1.5f, obj.transform.localScale.y * 1.5f, obj.transform.localScale.z);
+                    obj.GetComponent<SpriteRenderer>().material.color = Color.yellow;
+                    enemy.speed /= 5;
+                    enemy.rigid.velocity = new Vector3(-enemy.speed, enemy.rigid.velocity.y);
+                    enemy.HP += 20;
+                    enemy.isElite = true;
+                }
+
                 yield return new WaitForSeconds(sec);
             }
         }
@@ -60,8 +82,8 @@ namespace GameHeaven.SpreadGame
             while (obj != null)
             {
                 obj.GetComponent<SpriteRenderer>().material.color = Color.green;
-                obj.GetComponent<Rigidbody2D>().velocity -= Vector2.left * 0.5f;
-                obj.GetComponent<EnemyMove>().speed -= 0.5f;
+                obj.GetComponent<Rigidbody2D>().velocity *= 0.8f;
+                obj.GetComponent<EnemyMove>().speed *= 0.8f;
                 obj = Instantiate(mobPrefabs[6], obj.transform.position, mobPrefabs[6].transform.rotation);
                 yield return wait;
             }

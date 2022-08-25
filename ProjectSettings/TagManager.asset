@@ -21,6 +21,7 @@ TagManager:
   - Bottom
   - Ball
   - Platform
+  - UpgradeItem
   - CrashGame_Item
   layers:
   - Default
