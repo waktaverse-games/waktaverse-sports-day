@@ -708,7 +708,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &453711547
@@ -739,7 +739,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.15
-  slowDownSpeed: 3
+  slowDownSpeed: 4
+  controlCoolDown: 0.5
+  ableToMove: 0
 --- !u!50 &453711549
 Rigidbody2D:
   serializedVersion: 4
@@ -1333,7 +1335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   increasingSpeedTime: 5
-  increasingSpeedAmount: 0.05
+  increasingSpeedAmount: 0.1
   cpSpawnSpeed: 1.2
   cpSpawnSpeedAmount: 0.001
   cpSpawnSpeedMin: 0.5

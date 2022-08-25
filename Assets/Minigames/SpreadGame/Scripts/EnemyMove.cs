@@ -6,11 +6,13 @@ namespace GameHeaven.SpreadGame
 {
     public class EnemyMove : MonoBehaviour
     {
-        public enum Type { Panzee, Pigeon, Bat, Dog, Germ, Elk, Fox }
-        [SerializeField] float speed, thinkingSpeed, attackSpeed, projectileSpeed;
-        [SerializeField] int HP;
-        [SerializeField] GameObject projectile;
-
+        public enum Type { BakZwi, DdongGae, DdulGi, Fox, PanZee, RaNi, SeGyun }
+        public float speed;
+        [SerializeField] private float thinkingSpeed, attackSpeed, projectileSpeed;
+        [SerializeField] private int HP;
+        [SerializeField] private GameObject projectile;
+        [SerializeField] private Type type;
+        [SerializeField] private GameObject dieEffect;
         GameObject player;
 
         Rigidbody2D rigid;
@@ -22,15 +24,29 @@ namespace GameHeaven.SpreadGame
             player = GameObject.FindGameObjectWithTag("Player");
             anim = GetComponent<Animator>();
 
-            StartCoroutine(RandomMove(thinkingSpeed));
-            StartCoroutine(Project(projectile));
+            if (type != Type.BakZwi) StartCoroutine(RandomMove(thinkingSpeed));
+            else rigid.velocity = Vector2.left * 10;
+
+            if (type == Type.PanZee || type == Type.DdongGae) StartCoroutine(Project(projectile));
         }
 
         private void Update()
         {
-            if (HP <= 0) Die();
+            if (HP <= 0 || transform.position.x < -7.5f) Die();
 
-            transform.position = new Vector2(transform.position.x, Mathf.Clamp(transform.position.y, -4, 4));
+            if (transform.position.y < -4)
+            {
+                rigid.velocity = new Vector2(rigid.velocity.x, (rigid.velocity.y > 0) ? rigid.velocity.y : -rigid.velocity.y);
+            }
+            else if (transform.position.y > 4)
+            {
+                rigid.velocity = new Vector2(rigid.velocity.x, (rigid.velocity.y > 0) ? -rigid.velocity.y : rigid.velocity.y);
+            }
+
+            if (type == Type.DdongGae)
+            {
+                transform.Rotate(Vector3.forward, 5);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -45,25 +61,48 @@ namespace GameHeaven.SpreadGame
 
         IEnumerator RandomMove(float sec)
         {
-            rigid.velocity = new Vector2(-1, Random.Range(-1, 2)).normalized * speed;
+            while (true)
+            {
+                if (type == Type.DdulGi && Vector2.Distance(player.transform.position, transform.position) < 5
+                    && player.transform.position.x < transform.position.x)
+                {
+                    anim.SetTrigger("Rush");
+                    rigid.velocity = Vector2.zero;
+                    Invoke("Rush", 0.5f);
+                }
+                else if (type == Type.RaNi)
+                {
+                    rigid.velocity = new Vector2(-speed, Random.Range(-1, 2) * 3);
+                }
+                else
+                {
+                    rigid.velocity = new Vector2(-speed, Random.Range(-1, 2));
+                }
+                yield return new WaitForSeconds(sec);
+            }
+        }
 
-            yield return new WaitForSeconds(sec);
-            StartCoroutine(RandomMove(sec));
+        void Rush()
+        {
+            rigid.velocity = (player.transform.position - transform.position).normalized * 5;
         }
 
         IEnumerator Project(GameObject projectile)
         {
-            GameObject obj = Instantiate(projectile, transform.position, transform.rotation);
+            WaitForSeconds wait = new WaitForSeconds(attackSpeed);
 
-            obj.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * projectileSpeed;
-
-            yield return new WaitForSeconds(attackSpeed);
-            StartCoroutine(Project(projectile));
+            yield return new WaitForSeconds(0.5f);
+            while (true)
+            {
+                GameObject obj = Instantiate(projectile, transform.position, transform.rotation);
+                obj.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * projectileSpeed;
+                yield return wait;
+            }
         }
 
         void Die()
         {
-            // Animation
+            Instantiate(dieEffect, transform.position, dieEffect.transform.rotation);
             Destroy(gameObject);
         }
     }
