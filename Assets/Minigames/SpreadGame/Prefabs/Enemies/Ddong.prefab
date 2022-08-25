@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4857549849096971510}
   - component: {fileID: -8480602467344076912}
   - component: {fileID: -8167225743937319374}
+  - component: {fileID: -5448119709348350631}
   m_Layer: 0
   m_Name: Ddong
   m_TagString: Enemy
@@ -123,3 +124,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-5448119709348350631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2360940325928755872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17cbf2af11df6514daa3d1d80cc684d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cool: -1

@@ -141,10 +141,21 @@ MonoBehaviour:
   thinkingSpeed: 2
   attackSpeed: 5
   projectileSpeed: 5
-  HP: 1
+  HP: 10
   projectile: {fileID: 2360940325928755872, guid: f28df7927a52fad448c7d0c670cd937d, type: 3}
+  coins:
+  - {fileID: 5954169712361996919, guid: 3b52fda8b80729844bc70d9fbfebc2be, type: 3}
+  - {fileID: 4421849469660899113, guid: 3ad909b87098f5941a3bac48eb3b921b, type: 3}
+  - {fileID: 666940237586698477, guid: d8bdfd4265ecc5045adb7f9517cbaa39, type: 3}
+  upgradeItems:
+  - {fileID: 7333060228594184106, guid: 2ce9e23c62512be4cb05383e50fa7249, type: 3}
+  - {fileID: 7333060228594184106, guid: 2a0592e808a329844a227eec57cbf9f5, type: 3}
+  - {fileID: 7333060228594184106, guid: 711350b49978c2d4ab6c465a6686ef9e, type: 3}
+  - {fileID: 7333060228594184106, guid: 570bdb888e952ae4d9731d715459eb6b, type: 3}
   type: 2
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
+  isElite: 0
+  rigid: {fileID: 0}
 --- !u!95 &8088288893017774908
 Animator:
   serializedVersion: 4

@@ -21,6 +21,7 @@ TagManager:
   - Bottom
   - Ball
   - Platform
+  - UpgradeItem
   layers:
   - Default
   - TransparentFX

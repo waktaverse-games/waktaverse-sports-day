@@ -10,17 +10,20 @@ namespace GameHeaven.SpreadGame
         [SerializeField] float speed;
 
         [SerializeField] GameObject[] projectiles;
+        [SerializeField] int[] projectilesLV;
+        [SerializeField] GameObject coinAcquireEffect;
 
         Rigidbody2D rigid;
+
 
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
 
-            foreach (GameObject projectile in projectiles)
-            {
-                StartCoroutine(Project(projectile));
-            }
+            projectilesLV[0] = projectilesLV[1] = projectilesLV[2] = 0;
+            projectilesLV[3] = 1;
+
+            StartCoroutine(Project(projectiles[3])); // �⺻ źȯ
         }
 
         private void Update()
@@ -58,6 +61,38 @@ namespace GameHeaven.SpreadGame
             {
                 print("GameOver");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            else if (collider.CompareTag("Coin"))
+            {
+                // coin count up
+                Instantiate(coinAcquireEffect, collider.transform.position, coinAcquireEffect.transform.rotation);
+                Destroy(collider.gameObject);
+            }
+            else if (collider.CompareTag("UpgradeItem"))
+            {
+                print(collider.name[0] + "/" + collider.name[9]);
+                switch (collider.name[9])
+                {
+                    case 'u': // G'u'ided
+                        if (projectilesLV[0] == 0) StartCoroutine(Project(projectiles[0]));
+                        if (projectilesLV[0] < 6) projectilesLV[0]++;
+                        break;
+                    case 'e': // S'e'ctor
+                        if (projectilesLV[1] == 0) StartCoroutine(Project(projectiles[1]));
+                        if (projectilesLV[1] < 6) projectilesLV[1]++;
+                        break;
+                    case 'l': // S'l'ash
+                        if (projectilesLV[2] == 0) StartCoroutine(Project(projectiles[2]));
+                        if (projectilesLV[2] < 6) projectilesLV[2]++;
+                        break;
+                    case 't': // S't'raight
+                        if (projectilesLV[3] < 6) projectilesLV[3]++;
+                        break;
+                }
+                foreach (GameObject del in GameObject.FindGameObjectsWithTag("UpgradeItem"))
+                {
+                    Destroy(del);
+                }
             }
         }
 
