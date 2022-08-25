@@ -12,6 +12,7 @@ namespace GameHeaven.CrashGame
         public Brick basicBrickPrefab;
         public Brick hardBrickPrefab;
         public Brick ballBrickPrefab;
+        public Brick itemTestBrickPrefab;
 
         private Queue<List<Brick>> brickMap;
 
@@ -26,9 +27,13 @@ namespace GameHeaven.CrashGame
         public const float BrickWidth = .9375f;
         public const float BrickHeight = .5f;
 
+        // BasicBrick 계열 블럭 색깔
+        public Color[] brickColorArray;
+
         private void Awake()
         {
             brickTranslateDown = new Vector3(0, -BrickHeight, 0);
+            brickColorArray = new Color[] { new Color32(138, 43, 226, 255), new Color32(240, 169, 87, 255), new Color32(0, 0, 128, 255), new Color32(128, 0, 128, 255), new Color32(70, 126, 198, 255), new Color32(133, 172, 32, 255) };
         }
 
         private void Start()
@@ -94,13 +99,16 @@ namespace GameHeaven.CrashGame
             for (int i = 0; i < 8; i++)
             {
                 
-                switch (Random.Range(0, 8))
+                switch (Random.Range(0, 10))
                 {
                     case 0:
                         brickLine.Add(AddBrick(hardBrickPrefab, currentBrickPosition));
                         break;
                     case 1:
                         brickLine.Add(AddBrick(ballBrickPrefab, currentBrickPosition));
+                        break;
+                    case 2:
+                        brickLine.Add(AddBrick(itemTestBrickPrefab, currentBrickPosition));
                         break;
                     default:
                         brickLine.Add(AddBrick(basicBrickPrefab, currentBrickPosition));

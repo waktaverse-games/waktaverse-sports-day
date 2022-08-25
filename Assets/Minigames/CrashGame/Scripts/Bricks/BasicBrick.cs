@@ -19,13 +19,14 @@ namespace GameHeaven.CrashGame
             }
         }
 
-        private static Color[] colorArray = {Color.red, Color.green, Color.blue, Color.yellow, Color.magenta, Color.cyan};
+        // 이세돌 퍼스널 컬러
+        //private static Color[] colorArray = {new Color(138, 43, 226), new Color(240, 169, 87), new Color(0, 0, 128), new Color(128, 0, 128), new Color(70, 126, 198), new Color(133, 172, 32)};
 
         // Start is called before the first frame update
 
         private void Start()
         {
-            BrickColor = colorArray[Random.Range(0, 6)];
+            BrickColor = GameManager.Instance.Brick.brickColorArray[Random.Range(0, 6)];
         }
 
         // Update is called once per frame

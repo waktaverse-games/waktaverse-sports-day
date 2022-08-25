@@ -9,7 +9,7 @@ namespace GameHeaven.CrashGame
     {
         protected Vector2 centerPosition;
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             centerPosition = new Vector2(BrickManager.BrickWidth / 2, -BrickManager.BrickHeight / 2);
         }
