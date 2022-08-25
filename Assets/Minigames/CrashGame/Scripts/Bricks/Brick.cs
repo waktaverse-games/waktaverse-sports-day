@@ -9,19 +9,14 @@ namespace GameHeaven.CrashGame
     {
         protected Vector2 centerPosition;
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             centerPosition = new Vector2(BrickManager.BrickWidth / 2, -BrickManager.BrickHeight / 2);
         }
 
-        // ¸ðµç BrickÀÇ Parent Class
-        protected virtual void DropCoin()
-        {
-
-        }
-
         protected virtual void DestroySelf(int score)
         {
+            
             GameManager.Instance.AddScore(score);
             gameObject.SetActive(false);
             GameManager.Instance.Brick.CheckOuterLineDestroyed();

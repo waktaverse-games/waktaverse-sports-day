@@ -953,8 +953,13 @@ MonoBehaviour:
   basicBrickPrefab: {fileID: 8044390811165477848, guid: d3c58af7b156bb0419a5e94fe4db1f41, type: 3}
   hardBrickPrefab: {fileID: 584175413749039415, guid: e4cd92014e5c3ce4aa4ac97e65297055, type: 3}
   ballBrickPrefab: {fileID: 4573843509715205751, guid: 67ba4bbaaf43e9744b82d8dd888c75b1, type: 3}
-  coinPrefabList: []
+  itemTestBrickPrefab: {fileID: 8519621108427718317, guid: 04d8dd6f6d2f1864686e35b03f55cdf7, type: 3}
+  coinPrefabList:
+  - {fileID: -2594539022855350978, guid: b7a993b3abfa43a4db199622d5f9fa72, type: 3}
+  - {fileID: -1703709480209237364, guid: 7d12441e6d07cb64cac0a1d7cb6ac8a5, type: 3}
+  - {fileID: -4699233732418604870, guid: d8402e8f8c8970f44b3a94e103ab519a, type: 3}
   itemPrefabList: []
+  brickColorArray: []
 --- !u!114 &1679308196
 MonoBehaviour:
   m_ObjectHideFlags: 0

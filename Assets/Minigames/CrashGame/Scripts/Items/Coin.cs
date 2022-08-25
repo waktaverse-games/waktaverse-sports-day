@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private int coinValue;
+
+    private Rigidbody2D rigidBody;
+
+    public int CoinValue
     {
-        
+        get { return coinValue; }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        rigidBody = GetComponent<Rigidbody2D>();
     }
+
 }
