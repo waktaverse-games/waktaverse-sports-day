@@ -9,7 +9,7 @@ namespace GameHeaven.CrashGame
     public class ItemBrick : ItemDropBrick
     {
         private static int scoreAdd = 5;
-
+        private ItemManager itemManager;
         private Color brickColor;
 
         public Color BrickColor
@@ -22,6 +22,12 @@ namespace GameHeaven.CrashGame
             }
         }
 
+        protected override void Awake()
+        {
+            base.Awake();
+            itemManager = GameManager.Instance.Item;
+        }
+
         private void Start()
         {
             BrickColor = GameManager.Instance.Brick.brickColorArray[Random.Range(0, 6)];
@@ -29,7 +35,8 @@ namespace GameHeaven.CrashGame
 
         private void DropItem()
         {
-            Instantiate(itemPrefab, (Vector2)transform.position + centerPosition, Quaternion.identity);
+            Item itemObject = Instantiate(itemPrefab, (Vector2)transform.position + centerPosition, Quaternion.identity);
+            itemObject.transform.SetParent(itemManager.ItemParent, true);
         }
 
         public override void BallCollide()
