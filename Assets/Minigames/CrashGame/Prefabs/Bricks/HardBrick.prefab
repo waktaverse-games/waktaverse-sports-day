@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5438628490516406663}
   - component: {fileID: 5342022141927881558}
   - component: {fileID: 584175413749039415}
+  - component: {fileID: -2445821106622157701}
   m_Layer: 13
   m_Name: HardBrick
   m_TagString: Brick
@@ -128,3 +129,24 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 47ec167db49b8274b8cd74985e239ff4, type: 3}
   - {fileID: 21300000, guid: dfffc41a0f7ec7a4e89eb6739766610b, type: 3}
   - {fileID: 21300000, guid: 53807643e6fb65d498be1f413c6d261f, type: 3}
+--- !u!50 &-2445821106622157701
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3420911464079828955}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

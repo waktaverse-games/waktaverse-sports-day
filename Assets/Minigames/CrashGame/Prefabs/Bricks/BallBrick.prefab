@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5438628490516406663}
   - component: {fileID: 5342022141927881558}
   - component: {fileID: 4573843509715205751}
+  - component: {fileID: -1600209740802433073}
   m_Layer: 13
   m_Name: BallBrick
   m_TagString: Brick
@@ -126,3 +127,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 0}
   itemSprite: {fileID: 0}
+--- !u!50 &-1600209740802433073
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3420911464079828955}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

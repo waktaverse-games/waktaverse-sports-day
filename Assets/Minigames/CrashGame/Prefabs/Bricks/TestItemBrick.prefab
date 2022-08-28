@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5438628490516406663}
   - component: {fileID: 5342022141927881558}
   - component: {fileID: 8519621108427718317}
+  - component: {fileID: 5681239719299889726}
   m_Layer: 13
   m_Name: TestItemBrick
   m_TagString: Brick
@@ -127,6 +128,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 4717378323275935408, guid: cf2d0c35514313f4e80e48fcaa96b3ba, type: 3}
   itemSprite: {fileID: 21300000, guid: 7a6deea302075fc4581482668c56a9d6, type: 3}
+--- !u!50 &5681239719299889726
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3420911464079828955}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8229733571548235479
 GameObject:
   m_ObjectHideFlags: 0
