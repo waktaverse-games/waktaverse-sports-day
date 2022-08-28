@@ -26,6 +26,7 @@ namespace GameHeaven.CrashGame
         {
             base.Awake();
             itemManager = GameManager.Instance.Item;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = itemSprite;
         }
 
         private void Start()
@@ -35,7 +36,7 @@ namespace GameHeaven.CrashGame
 
         private void DropItem()
         {
-            Item itemObject = Instantiate(itemPrefab, (Vector2)transform.position + centerPosition, Quaternion.identity);
+            Item itemObject = Instantiate(itemPrefab, (Vector2)transform.position, Quaternion.identity);
             itemObject.transform.SetParent(itemManager.ItemParent, true);
         }
 

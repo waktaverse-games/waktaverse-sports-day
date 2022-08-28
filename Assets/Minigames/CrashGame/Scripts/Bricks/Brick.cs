@@ -7,6 +7,7 @@ namespace GameHeaven.CrashGame
 {
     public abstract class Brick : MonoBehaviour
     {
+        [Obsolete]
         protected Vector2 centerPosition;
 
         protected virtual void Awake()
@@ -19,7 +20,7 @@ namespace GameHeaven.CrashGame
             
             GameManager.Instance.AddScore(score);
             gameObject.SetActive(false);
-            GameManager.Instance.Brick.CheckOuterLineDestroyed();
+            GameManager.Instance.Brick.CheckOuterLineDestroyed(false);
         }
 
         public abstract void BallCollide();

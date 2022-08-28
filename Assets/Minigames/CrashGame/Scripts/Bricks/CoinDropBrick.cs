@@ -40,7 +40,7 @@ namespace GameHeaven.CrashGame
         // ¸ðµç BrickÀÇ Parent Class
         protected virtual void DropCoin(Coin coin)
         {
-            Coin coinObject = Instantiate(coin, (Vector2)transform.position + centerPosition, Quaternion.identity);
+            Coin coinObject = Instantiate(coin, (Vector2)transform.position, Quaternion.identity);
             coinObject.transform.SetParent(itemManager.ItemParent, true);
         }
 

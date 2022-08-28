@@ -17,7 +17,6 @@ namespace GameHeaven.CrashGame
         protected override void Awake()
         {
             base.Awake();
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = itemSprite;
         }
 
 

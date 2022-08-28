@@ -27,6 +27,11 @@ namespace GameHeaven.CrashGame
         private int highscore;
         private int money;
 
+        private Coroutine brickAddCoroutineLoop = null;
+
+        [SerializeField]
+        private float brickAddInterval = 10f;
+
         public int Money
         {
             get { return money; }
@@ -128,6 +133,7 @@ namespace GameHeaven.CrashGame
             // 게임 오버 시
             //TODO 게임 오버 UI 띄우기.
             CurrentGameState = GameState.Over;
+            StopCoroutine(brickAddCoroutineLoop);
             Item.DeleteAll();       // 드랍 코인 및 아이템 전체 삭제
             if (Score > highscore)
             {
@@ -145,6 +151,15 @@ namespace GameHeaven.CrashGame
             CurrentGameState = GameState.Start;
             brickManager.ResetBricks();
             platform.BallInit();
+        }
+
+        public void BallFire()
+        {
+            if (brickAddCoroutineLoop != null)
+            {
+                StopCoroutine(brickAddCoroutineLoop);
+            }
+            brickAddCoroutineLoop = StartCoroutine(Brick.BlockLineAddLoop(brickAddInterval, brickAddInterval));
         }
     }
 }

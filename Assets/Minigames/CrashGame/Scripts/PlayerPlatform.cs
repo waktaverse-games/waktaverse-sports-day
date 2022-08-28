@@ -56,6 +56,7 @@ namespace GameHeaven.CrashGame
                     if (Input.GetKey(KeyCode.Space))
                     {
                         isFired = true;
+                        GameManager.Instance.BallFire();
                         ball.Fire();
                     }
                 }
