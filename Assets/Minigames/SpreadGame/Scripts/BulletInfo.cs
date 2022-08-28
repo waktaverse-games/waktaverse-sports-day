@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace GameHeaven.SpreadGame
 {
-    public class ProjectileInfo : MonoBehaviour
+    public class BulletInfo : MonoBehaviour
     {
         public enum Type { Straight, Guided, Sector, Slash }
 
         public Type type;
-        public float speed, attackSpeed;
+        public float speed, curShotDelay, maxShotDelay;
         public int damage;
 
         public Rigidbody2D rigid;
@@ -18,14 +18,10 @@ namespace GameHeaven.SpreadGame
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
-
-            if (type == Type.Straight || type == Type.Slash) rigid.velocity = Vector2.right * speed;
         }
 
         private void FixedUpdate()
         {
-            if (transform.position.x > 7) Destroy(gameObject);
-
             if (type == Type.Guided)
             {
                 float minDistance = 100;

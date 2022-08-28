@@ -7,13 +7,15 @@ namespace GameHeaven.SpreadGame
     public class SpawnManager : MonoBehaviour
     {
         [SerializeField] GameObject[] mobPrefabs;
-        [SerializeField] float normalMonsterSpawnCool, eliteMonsterSpawnCool;
+        [SerializeField] GameObject[] bossPrefabs;
+        [SerializeField] float normalMonsterSpawnCool, eliteMonsterSpawnCool, bossSpawnCool;
         [SerializeField] float[] mapSize;
 
         private void Awake()
         {
             StartCoroutine(SpawnRepeatedly(normalMonsterSpawnCool, false));
             StartCoroutine(SpawnRepeatedly(eliteMonsterSpawnCool, true));
+            StartCoroutine(SpawnBossRepeatedly(bossSpawnCool));
         }
 
         IEnumerator SpawnRepeatedly(float sec, bool isElite) 
@@ -71,6 +73,19 @@ namespace GameHeaven.SpreadGame
                 }
 
                 yield return new WaitForSeconds(sec);
+            }
+        }
+
+        IEnumerator SpawnBossRepeatedly(float sec)
+        {
+            WaitForSeconds wait = new WaitForSeconds(sec);
+            GameObject obj;
+
+            while (true)
+            {
+                obj = Instantiate(bossPrefabs[0], new Vector3(8, 0, 0), bossPrefabs[0].transform.rotation);
+
+                yield return wait;
             }
         }
 

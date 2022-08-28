@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7380379378026435764
 Transform:
   m_ObjectHideFlags: 0
@@ -149,7 +149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   speed: 5
-  attackSpeed: 1
+  curShotDelay: 1
+  maxShotDelay: 1
   damage: 5
   rigid: {fileID: 0}
   target: {fileID: 0}

@@ -20,11 +20,15 @@ namespace GameHeaven.SpreadGame
         public Rigidbody2D rigid;
         Animator anim;
 
+        PoolManager pool;
+
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
             player = GameObject.FindGameObjectWithTag("Player");
             anim = GetComponent<Animator>();
+
+            pool = FindObjectOfType<PoolManager>();
 
             if (type != Type.BakZwi) StartCoroutine(RandomMove(thinkingSpeed));
             else rigid.velocity = Vector2.left * 10;
@@ -57,8 +61,8 @@ namespace GameHeaven.SpreadGame
             if (collider.CompareTag("Attack"))
             {
                 anim.SetTrigger("Hit");
-                HP -= collider.GetComponent<ProjectileInfo>().damage;
-                if(collider.GetComponent<ProjectileInfo>().type != ProjectileInfo.Type.Slash)Destroy(collider.gameObject);
+                HP -= collider.GetComponent<BulletInfo>().damage;
+                if (collider.GetComponent<BulletInfo>().type != BulletInfo.Type.Slash) collider.gameObject.SetActive(false);
             }
         }
 

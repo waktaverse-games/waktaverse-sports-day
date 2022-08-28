@@ -15,7 +15,8 @@ namespace GameHeaven.SpreadGame
 
         private void Update()
         {
-            if (transform.position.x < -7) Destroy(gameObject);
+            if (transform.position.x < -7 || transform.position.x > 7
+                || transform.position.y <-4 || transform.position.y > 4) Destroy(gameObject);
         }
 
         void MyDestroyFunc()

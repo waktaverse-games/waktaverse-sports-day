@@ -9,50 +9,38 @@ namespace GameHeaven.SpreadGame
     {
         [SerializeField] float speed;
 
-        [SerializeField] GameObject[] projectiles;
-        [SerializeField] int[] projectilesLV;
+        [SerializeField] GameObject[] bulletPrefabs;
+        [SerializeField] int[] bulletLVs;
         [SerializeField] GameObject coinAcquireEffect;
 
-        Rigidbody2D rigid;
+        [SerializeField] private int curSectorIdx, curSectorDir;
 
+        PoolManager pool;
+
+        Rigidbody2D rigid;
 
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
+            pool = FindObjectOfType<PoolManager>();
 
-            projectilesLV[0] = projectilesLV[1] = projectilesLV[2] = 0;
-            projectilesLV[3] = 1;
+            bulletLVs[0] = bulletLVs[1] = bulletLVs[2] = 0;
+            bulletLVs[3] = 1;
 
-            StartCoroutine(Project(projectiles[3])); // 기본 탄환
+            curSectorDir = 1;
         }
 
         private void Update()
         {
-            if (rigid.velocity.sqrMagnitude > speed * speed) rigid.velocity = rigid.velocity.normalized * speed;
+            Move();
 
-            transform.position = new Vector2(Mathf.Clamp(transform.position.x, -7, 7), Mathf.Clamp(transform.position.y, -4, 4));
-        }
-        private void FixedUpdate()
-        {
-            if (Input.GetAxisRaw("Horizontal") == 1)
+            for (int i = 0; i < 4; i++) // 탄환 총 4개
             {
-                rigid.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                if (bulletLVs[i] > 0)
+                {
+                    Fire(i);
+                }
             }
-            else if (Input.GetAxisRaw("Horizontal") == -1)
-            {
-                rigid.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
-            }
-
-            if (Input.GetAxisRaw("Vertical") == 1)
-            {
-                rigid.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
-            }
-            else if (Input.GetAxisRaw("Vertical") == -1)
-            {
-                rigid.AddForce(Vector2.down * speed, ForceMode2D.Impulse);
-            }
-
-            rigid.velocity *= 0.8f;
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -73,6 +61,7 @@ namespace GameHeaven.SpreadGame
                 print(collider.name[0] + "/" + collider.name[9]);
                 switch (collider.name[9])
                 {
+                    /*
                     case 'u': // G'u'ided
                         if (projectilesLV[0] == 0) StartCoroutine(Project(projectiles[0]));
                         if (projectilesLV[0] < 6) projectilesLV[0]++;
@@ -88,6 +77,7 @@ namespace GameHeaven.SpreadGame
                     case 't': // S't'raight
                         if (projectilesLV[3] < 6) projectilesLV[3]++;
                         break;
+                    */
                 }
                 foreach (GameObject del in GameObject.FindGameObjectsWithTag("UpgradeItem"))
                 {
@@ -96,51 +86,62 @@ namespace GameHeaven.SpreadGame
             }
         }
 
-        IEnumerator Project(GameObject projectile)
+        void Move()
         {
-            ProjectileInfo projectileInfo = Instantiate(projectile, transform.position, projectile.transform.rotation).GetComponent<ProjectileInfo>();
-
-            if (projectileInfo.type == ProjectileInfo.Type.Sector)
+            if (rigid.velocity.sqrMagnitude > speed * speed)
             {
-                projectileInfo.rigid.velocity = new Vector2(0.866f, -0.5f) * projectileInfo.speed; // -30도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = new Vector2(0.9659f, -0.2588f) * projectileInfo.speed; // -15도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = Vector2.right * projectileInfo.speed; // 0도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = new Vector2(0.9659f, 0.2588f) * projectileInfo.speed; // 15도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = new Vector2(0.866f, 0.5f) * projectileInfo.speed; // 30도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = new Vector2(0.9659f, 0.2588f) * projectileInfo.speed; // 15도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = Vector2.right * projectileInfo.speed; // 0도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = new Vector2(0.9659f, -0.2588f) * projectileInfo.speed; // -15도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                StartCoroutine(Project(projectile));
+                rigid.velocity = rigid.velocity.normalized * speed;
             }
             else
             {
-                yield return new WaitForSeconds(projectileInfo.attackSpeed);
-                if (projectileInfo.type == ProjectileInfo.Type.Guided) yield return new WaitUntil(() => FindObjectOfType<EnemyMove>() != null);
-                StartCoroutine(Project(projectile));
+                rigid.velocity *= 0.8f;
             }
+
+            if (Input.GetAxisRaw("Horizontal") == 1)
+            {
+                rigid.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+            }
+            else if (Input.GetAxisRaw("Horizontal") == -1)
+            {
+                rigid.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+            }
+
+            if (Input.GetAxisRaw("Vertical") == 1)
+            {
+                rigid.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+            }
+            else if (Input.GetAxisRaw("Vertical") == -1)
+            {
+                rigid.AddForce(Vector2.down * speed, ForceMode2D.Impulse);
+            }
+        }
+
+        void Fire(int idx)
+        {
+            BulletInfo bullet = bulletPrefabs[idx].GetComponent<BulletInfo>();
+
+            bullet.curShotDelay += Time.deltaTime; // 장전 시간
+
+            if (bullet.curShotDelay < bullet.maxShotDelay)
+            {
+                return;
+            }
+
+            if (idx == 1) // Sector
+            {
+                pool.MyInstantiate(idx, transform.position).GetComponent<Rigidbody2D>()
+                    .velocity = Quaternion.AngleAxis(-15 * curSectorIdx, Vector3.forward) 
+                                * new Vector2(0.866f, 0.5f) * bullet.speed;
+
+                curSectorIdx += curSectorDir;
+                if (curSectorIdx >= 4 || curSectorIdx <= 0) curSectorDir *= -1;
+            }
+            else
+            {
+                pool.MyInstantiate(idx, transform.position).GetComponent<Rigidbody2D>().AddForce(new Vector2(bullet.speed, 0),ForceMode2D.Impulse);
+            }
+
+            bullet.curShotDelay = 0;
         }
     }
 }
