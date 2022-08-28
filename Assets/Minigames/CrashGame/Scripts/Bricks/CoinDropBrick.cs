@@ -7,6 +7,13 @@ namespace GameHeaven.CrashGame
     public class CoinDropBrick : Brick
     {
         private static int coinNetPercentage = 10;
+        private ItemManager itemManager;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            itemManager = GameManager.Instance.Item;
+        }
 
         protected virtual void DropCoinByPercentage(int net)
         {
@@ -33,7 +40,8 @@ namespace GameHeaven.CrashGame
         // ¸ðµç BrickÀÇ Parent Class
         protected virtual void DropCoin(Coin coin)
         {
-            Instantiate(coin, (Vector2)transform.position + centerPosition, Quaternion.identity);
+            Coin coinObject = Instantiate(coin, (Vector2)transform.position, Quaternion.identity);
+            coinObject.transform.SetParent(itemManager.ItemParent, true);
         }
 
         protected override void DestroySelf(int score)

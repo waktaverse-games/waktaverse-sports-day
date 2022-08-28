@@ -21,10 +21,16 @@ namespace GameHeaven.CrashGame
 
         private UIManager uiManager;
         private BrickManager brickManager;
+        private ItemManager itemManager;
         private GameState currentGameState;
         private int score;
         private int highscore;
         private int money;
+
+        private Coroutine brickAddCoroutineLoop = null;
+
+        [SerializeField]
+        private float brickAddInterval = 10f;
 
         public int Money
         {
@@ -55,6 +61,14 @@ namespace GameHeaven.CrashGame
             }
         }
 
+        public ItemManager Item
+        {
+            get
+            {
+                if (itemManager == null) itemManager = gameObject.AddComponent<ItemManager>();
+                return itemManager;
+            }
+        }
         public GameState CurrentGameState
         {
             get { return currentGameState; }
@@ -72,6 +86,7 @@ namespace GameHeaven.CrashGame
             InstanceInit();
             uiManager = GetComponent<UIManager>();
             brickManager = GetComponent<BrickManager>();
+            itemManager = GetComponent<ItemManager>();
             score = 0;
             highscore = 0;
             uiManager.SetScoreText(Score);
@@ -118,6 +133,8 @@ namespace GameHeaven.CrashGame
             // 게임 오버 시
             //TODO 게임 오버 UI 띄우기.
             CurrentGameState = GameState.Over;
+            StopCoroutine(brickAddCoroutineLoop);
+            Item.DeleteAll();       // 드랍 코인 및 아이템 전체 삭제
             if (Score > highscore)
             {
                 highscore = Score;
@@ -134,6 +151,15 @@ namespace GameHeaven.CrashGame
             CurrentGameState = GameState.Start;
             brickManager.ResetBricks();
             platform.BallInit();
+        }
+
+        public void BallFire()
+        {
+            if (brickAddCoroutineLoop != null)
+            {
+                StopCoroutine(brickAddCoroutineLoop);
+            }
+            brickAddCoroutineLoop = StartCoroutine(Brick.BlockLineAddLoop(brickAddInterval, brickAddInterval));
         }
     }
 }

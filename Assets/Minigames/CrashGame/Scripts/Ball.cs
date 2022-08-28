@@ -116,7 +116,9 @@ namespace GameHeaven.CrashGame
         public static Ball SpawnBall(Vector2 position)
         {
             BallNumber++;
-            return Instantiate(GameManager.Instance.ballPrefab, position, Quaternion.identity);
+            Ball ball = Instantiate(GameManager.Instance.ballPrefab, position, Quaternion.identity);
+            ball.transform.SetParent(GameManager.Instance.Item.ItemParent, true);
+            return ball;
         }
 
         public void DestroyBall()
