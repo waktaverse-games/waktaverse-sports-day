@@ -1141,7 +1141,7 @@ MonoBehaviour:
   basicBrickPrefab: {fileID: 8044390811165477848, guid: d3c58af7b156bb0419a5e94fe4db1f41, type: 3}
   hardBrickPrefab: {fileID: 584175413749039415, guid: e4cd92014e5c3ce4aa4ac97e65297055, type: 3}
   ballBrickPrefab: {fileID: 4573843509715205751, guid: 67ba4bbaaf43e9744b82d8dd888c75b1, type: 3}
-  itemBrickPrefab: {fileID: 0}
+  itemBrickPrefab: {fileID: 8519621108427718317, guid: 1de47616999b8864caf41f8253df7a51, type: 3}
   coinPrefabList:
   - {fileID: -2594539022855350978, guid: b7a993b3abfa43a4db199622d5f9fa72, type: 3}
   - {fileID: -1703709480209237364, guid: 7d12441e6d07cb64cac0a1d7cb6ac8a5, type: 3}
