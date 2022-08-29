@@ -524,7 +524,7 @@ RectTransform:
   - {fileID: 1992138483}
   - {fileID: 626628545}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1030,7 +1030,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1281037772
 MonoBehaviour:
@@ -1044,6 +1044,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79270195fb02462449a38cc3f12ae870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1590558415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1590558416}
+  m_Layer: 0
+  m_Name: BallParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1590558416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590558415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5592444, y: 0.37532187, z: -0.024345152}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1679308192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,12 +1141,13 @@ MonoBehaviour:
   basicBrickPrefab: {fileID: 8044390811165477848, guid: d3c58af7b156bb0419a5e94fe4db1f41, type: 3}
   hardBrickPrefab: {fileID: 584175413749039415, guid: e4cd92014e5c3ce4aa4ac97e65297055, type: 3}
   ballBrickPrefab: {fileID: 4573843509715205751, guid: 67ba4bbaaf43e9744b82d8dd888c75b1, type: 3}
-  itemTestBrickPrefab: {fileID: 8519621108427718317, guid: 04d8dd6f6d2f1864686e35b03f55cdf7, type: 3}
+  itemBrickPrefab: {fileID: 0}
   coinPrefabList:
   - {fileID: -2594539022855350978, guid: b7a993b3abfa43a4db199622d5f9fa72, type: 3}
   - {fileID: -1703709480209237364, guid: 7d12441e6d07cb64cac0a1d7cb6ac8a5, type: 3}
   - {fileID: -4699233732418604870, guid: d8402e8f8c8970f44b3a94e103ab519a, type: 3}
-  itemPrefabList: []
+  itemPrefabList:
+  - {fileID: -4419884499778429057, guid: a39981f40e35d2647a3e3584c90239c3, type: 3}
   brickColorArray: []
 --- !u!114 &1679308196
 MonoBehaviour:
@@ -1144,6 +1176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemParent: {fileID: 646232393}
+  ballParent: {fileID: 1590558416}
 --- !u!1 &1824706774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,7 +1354,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1992138482
 GameObject:

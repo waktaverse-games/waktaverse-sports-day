@@ -12,7 +12,7 @@ namespace GameHeaven.CrashGame
         public Brick basicBrickPrefab;
         public Brick hardBrickPrefab;
         public Brick ballBrickPrefab;
-        public Brick itemTestBrickPrefab;
+        public Brick itemBrickPrefab;
 
         private Queue<List<Brick>> brickMap;
 
@@ -126,16 +126,26 @@ namespace GameHeaven.CrashGame
             for (int i = 0; i < 8; i++)
             {
                 
-                switch (Random.Range(0, 10))
+                switch (Random.Range(0, 24))
                 {
                     case 0:
+                    case 1:
+                    case 2:
                         brickLine.Add(AddBrick(hardBrickPrefab, currentBrickPosition + brickCenterPosition));
                         break;
-                    case 1:
+                    case 3:
+                    case 4:
                         brickLine.Add(AddBrick(ballBrickPrefab, currentBrickPosition + brickCenterPosition));
                         break;
-                    case 2:
-                        brickLine.Add(AddBrick(itemTestBrickPrefab, currentBrickPosition + brickCenterPosition));
+                    case 5:
+                        ItemBrick newItemBrick = (ItemBrick)AddBrick(itemBrickPrefab, currentBrickPosition + brickCenterPosition);
+                        switch (Random.Range(0, itemPrefabList.Count))
+                        {
+                            case 0:
+                                newItemBrick.ItemPrefab = itemPrefabList[0];
+                                break;
+                        }
+                        brickLine.Add(newItemBrick);
                         break;
                     default:
                         brickLine.Add(AddBrick(basicBrickPrefab, currentBrickPosition + brickCenterPosition));
