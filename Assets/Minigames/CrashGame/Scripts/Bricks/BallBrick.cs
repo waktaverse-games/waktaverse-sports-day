@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace GameHeaven.CrashGame
 {
-    public class BallBrick : Brick
+    public class BallBrick : ItemDropBrick
     {
+        // 파괴 시 공을 생성하는 프리팹.
         private static int scoreAdd = 10;
         private Ball ball;
 

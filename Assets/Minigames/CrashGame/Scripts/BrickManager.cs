@@ -12,6 +12,7 @@ namespace GameHeaven.CrashGame
         public Brick basicBrickPrefab;
         public Brick hardBrickPrefab;
         public Brick ballBrickPrefab;
+        public Brick itemTestBrickPrefab;
 
         private Queue<List<Brick>> brickMap;
 
@@ -20,22 +21,53 @@ namespace GameHeaven.CrashGame
 
         private Vector2 currentBrickPosition;
         private Vector3 brickTranslateDown;
+        private Vector2 brickCenterPosition;
 
         public const float BrickStartXPosition = -3.75f;
         public const float BrickStartYPosition = 5f;
         public const float BrickWidth = .9375f;
         public const float BrickHeight = .5f;
 
+        // BasicBrick 계열 블럭 색깔
+        public Color[] brickColorArray;
+
         private void Awake()
         {
             brickTranslateDown = new Vector3(0, -BrickHeight, 0);
+            brickCenterPosition = new Vector2(BrickWidth / 2, -BrickHeight / 2);
+            brickColorArray = new Color[] { new Color32(138, 43, 226, 255), new Color32(240, 169, 87, 255), new Color32(0, 0, 128, 255), new Color32(128, 0, 128, 255), new Color32(70, 126, 198, 255), new Color32(133, 172, 32, 255) };
         }
 
         private void Start()
         {
+            
         }
 
-        public void CheckOuterLineDestroyed()
+        public IEnumerator BlockLineAddLoop(float initialInterval, float finalInterval)
+        {
+            float interval = initialInterval;
+            while (true)
+            {
+                yield return new WaitForSeconds(interval / 2);
+                Debug.Log($"{interval / 2} seconds passed!");
+                yield return new WaitForSeconds(interval / 2);
+                Debug.Log($"{interval} seconds passed!");
+                AddBrickLineInMap();
+                if (interval > finalInterval) interval *= 0.9f;
+                else interval = finalInterval;
+            }
+        }
+
+        private IEnumerator BlockLineAddCoroutine(float seconds)
+        {
+            yield return new WaitForSeconds(seconds / 2);
+            Debug.Log($"{seconds / 2} seconds passed!");
+            yield return new WaitForSeconds(seconds / 2);
+            Debug.Log($"{seconds} seconds passed!");
+            AddBrickLineInMap();
+        }
+
+        public void CheckOuterLineDestroyed(bool addNewLine)
         {
             // 맨 아래 행 블럭이 전부 파괴되었는지 체크
             bool allBrickOff = true;
@@ -53,8 +85,8 @@ namespace GameHeaven.CrashGame
                     Destroy(brick.gameObject);
                 }
 
-                AddBrickLineInMap();
-                CheckOuterLineDestroyed(); // 그다음 행도 블럭이 전부 파괴되어있었는지 체크
+                if (addNewLine) AddBrickLineInMap();
+                CheckOuterLineDestroyed(addNewLine); // 그다음 행도 블럭이 전부 파괴되어있었는지 체크
             }
         }
 
@@ -94,16 +126,19 @@ namespace GameHeaven.CrashGame
             for (int i = 0; i < 8; i++)
             {
                 
-                switch (Random.Range(0, 8))
+                switch (Random.Range(0, 10))
                 {
                     case 0:
-                        brickLine.Add(AddBrick(hardBrickPrefab, currentBrickPosition));
+                        brickLine.Add(AddBrick(hardBrickPrefab, currentBrickPosition + brickCenterPosition));
                         break;
                     case 1:
-                        brickLine.Add(AddBrick(ballBrickPrefab, currentBrickPosition));
+                        brickLine.Add(AddBrick(ballBrickPrefab, currentBrickPosition + brickCenterPosition));
+                        break;
+                    case 2:
+                        brickLine.Add(AddBrick(itemTestBrickPrefab, currentBrickPosition + brickCenterPosition));
                         break;
                     default:
-                        brickLine.Add(AddBrick(basicBrickPrefab, currentBrickPosition));
+                        brickLine.Add(AddBrick(basicBrickPrefab, currentBrickPosition + brickCenterPosition));
                         break;
                 }
                 currentBrickPosition.x += BrickWidth;

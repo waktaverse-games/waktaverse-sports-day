@@ -56,6 +56,7 @@ namespace GameHeaven.CrashGame
                     if (Input.GetKey(KeyCode.Space))
                     {
                         isFired = true;
+                        GameManager.Instance.BallFire();
                         ball.Fire();
                     }
                 }
@@ -85,10 +86,17 @@ namespace GameHeaven.CrashGame
             {
                 Land();
             }
-            //else if (collision.collider.CompareTag("Ball"))
-            //{
-                
-            //}
+            if (collision.collider.CompareTag("Coin"))
+            {
+                GameManager.Instance.Money += collision.collider.GetComponent<Coin>().CoinValue;
+                Destroy(collision.gameObject);
+            }
+            if (collision.collider.CompareTag("CrashGame_Item"))
+            {
+                // 아이템 즉발 사용
+                collision.collider.GetComponent<Item>().ActivateItem();
+                Destroy(collision.gameObject);
+            }
         }
 
         public void BallInit()
