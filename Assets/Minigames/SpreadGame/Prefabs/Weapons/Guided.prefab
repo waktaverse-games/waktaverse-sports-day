@@ -13,14 +13,15 @@ GameObject:
   - component: {fileID: -8480602467344076912}
   - component: {fileID: 4229098592238403546}
   - component: {fileID: 5253744885416062074}
-  - component: {fileID: -8608516197172718280}
+  - component: {fileID: -8420892921255241092}
+  - component: {fileID: -7002028162915669063}
   m_Layer: 0
   m_Name: Guided
   m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7380379378026435764
 Transform:
   m_ObjectHideFlags: 0
@@ -149,27 +150,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   speed: 5
-  attackSpeed: 1
-  damage: 5
-  rigid: {fileID: 0}
-  target: {fileID: 0}
---- !u!95 &-8608516197172718280
-Animator:
-  serializedVersion: 4
+  curShotDelay: 0.42321438
+  maxShotDelay: 3.5
+  damage: 3
+--- !u!114 &-8420892921255241092
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2360940325928755872}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59892c1b6655f74084b2ba2413e6cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7002028162915669063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2360940325928755872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 843427468655b91428b7fb460fbbedf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
+  target: {fileID: 0}
+  speed: 5

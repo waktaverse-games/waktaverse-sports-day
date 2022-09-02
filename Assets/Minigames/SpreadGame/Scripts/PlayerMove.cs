@@ -7,52 +7,49 @@ namespace GameHeaven.SpreadGame
 {
     public class PlayerMove : MonoBehaviour
     {
-        [SerializeField] float speed;
+        [SerializeField] float speed; // 이동속도
 
-        [SerializeField] GameObject[] projectiles;
-        [SerializeField] int[] projectilesLV;
+        public int[] bulletLVs; // 현재 보유중인 무기
+
         [SerializeField] GameObject coinAcquireEffect;
 
-        Rigidbody2D rigid;
+        [SerializeField] private int curSectorIdx, curSectorDir;
 
+        PoolManager pool;
+        Rigidbody2D rigid;
 
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
+            pool = FindObjectOfType<PoolManager>();
 
-            projectilesLV[0] = projectilesLV[1] = projectilesLV[2] = 0;
-            projectilesLV[3] = 1;
+            bulletLVs[0] = bulletLVs[1] = bulletLVs[2] = 0;
+            bulletLVs[3] = 1;
 
-            StartCoroutine(Project(projectiles[3])); // 기본 탄환
+            // bullet 초기화
+            BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
+            bullet.damage = 3; bullet.maxShotDelay = 3.5f;
+            bullet = pool.bulletPrefabs[1].GetComponent<BulletInfo>();
+            bullet.damage = 1; bullet.maxShotDelay = 0.25f;
+            bullet = pool.bulletPrefabs[2].GetComponent<BulletInfo>();
+            bullet.damage = 1; bullet.maxShotDelay = 3.0f;
+            bullet = pool.bulletPrefabs[3].GetComponent<BulletInfo>();
+            bullet.damage = 1; bullet.maxShotDelay = 0.3f;
+
+            curSectorDir = 1;
         }
 
         private void Update()
         {
-            if (rigid.velocity.sqrMagnitude > speed * speed) rigid.velocity = rigid.velocity.normalized * speed;
+            Move();
 
-            transform.position = new Vector2(Mathf.Clamp(transform.position.x, -7, 7), Mathf.Clamp(transform.position.y, -4, 4));
-        }
-        private void FixedUpdate()
-        {
-            if (Input.GetAxisRaw("Horizontal") == 1)
+            for (int i = 0; i < 4; i++) // 탄환 총 4개
             {
-                rigid.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                if (bulletLVs[i] > 0)
+                {
+                    Fire(i);
+                }
             }
-            else if (Input.GetAxisRaw("Horizontal") == -1)
-            {
-                rigid.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
-            }
-
-            if (Input.GetAxisRaw("Vertical") == 1)
-            {
-                rigid.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
-            }
-            else if (Input.GetAxisRaw("Vertical") == -1)
-            {
-                rigid.AddForce(Vector2.down * speed, ForceMode2D.Impulse);
-            }
-
-            rigid.velocity *= 0.8f;
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -74,20 +71,80 @@ namespace GameHeaven.SpreadGame
                 switch (collider.name[9])
                 {
                     case 'u': // G'u'ided
-                        if (projectilesLV[0] == 0) StartCoroutine(Project(projectiles[0]));
-                        if (projectilesLV[0] < 6) projectilesLV[0]++;
-                        break;
+                        {
+                            int cnt = 0;
+                            for (int i = 0; i < bulletLVs.Length; i++)
+                            {
+                                if (i == 0) continue;
+                                if (bulletLVs[i] > 0) cnt++;
+                            }
+
+                            if (cnt < 3 && bulletLVs[0] < 6)
+                            {
+                                bulletLVs[0]++;
+
+                                BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
+                                if (bulletLVs[0] == 3 || bulletLVs[0] == 6) bullet.damage++;
+                                bullet.maxShotDelay -= 0.5f;
+                            }
+                            break;
+                        }
                     case 'e': // S'e'ctor
-                        if (projectilesLV[1] == 0) StartCoroutine(Project(projectiles[1]));
-                        if (projectilesLV[1] < 6) projectilesLV[1]++;
-                        break;
+                        {
+                            int cnt = 0;
+                            for (int i = 0; i < bulletLVs.Length; i++)
+                            {
+                                if (i == 1) continue;
+                                if (bulletLVs[i] > 0) cnt++;
+                            }
+                            if (cnt < 3 && bulletLVs[1] < 6)
+                            {
+                                bulletLVs[1]++;
+
+                                BulletInfo bullet = pool.bulletPrefabs[1].GetComponent<BulletInfo>();
+                                if (bulletLVs[1] == 6) bullet.damage++;
+                                bullet.maxShotDelay -= 0.04f;
+                            }
+                            break;
+                        }
                     case 'l': // S'l'ash
-                        if (projectilesLV[2] == 0) StartCoroutine(Project(projectiles[2]));
-                        if (projectilesLV[2] < 6) projectilesLV[2]++;
-                        break;
+                        {
+                            int cnt = 0;
+                            for (int i = 0; i < bulletLVs.Length; i++)
+                            {
+                                if (i == 2) continue;
+                                if (bulletLVs[i] > 0) cnt++;
+                            }
+
+                            if (cnt < 3 && bulletLVs[2] < 6)
+                            {
+                                bulletLVs[2]++;
+
+                                BulletInfo bullet = pool.bulletPrefabs[2].GetComponent<BulletInfo>();
+                                if (bulletLVs[2] == 3 || bulletLVs[2] == 6) bullet.damage++;
+                                bullet.maxShotDelay -= 0.4f;
+                            }
+                            break;
+                        }
                     case 't': // S't'raight
-                        if (projectilesLV[3] < 6) projectilesLV[3]++;
-                        break;
+                        {
+                            int cnt  = 0;
+                            for (int i = 0; i < bulletLVs.Length; i++)
+                            {
+                                if (i == 3) continue;
+                                if (bulletLVs[i] > 0) cnt++;
+                            }
+
+                            if (cnt < 3 && bulletLVs[3] < 6)
+                            {
+                                bulletLVs[3]++;
+
+                                BulletInfo bullet = pool.bulletPrefabs[3].GetComponent<BulletInfo>();
+                                if (bulletLVs[3] == 3 || bulletLVs[3] == 6) bullet.damage++;
+                                bullet.maxShotDelay -= 0.04f;
+                            }
+                            break;
+                        }
                 }
                 foreach (GameObject del in GameObject.FindGameObjectsWithTag("UpgradeItem"))
                 {
@@ -96,51 +153,62 @@ namespace GameHeaven.SpreadGame
             }
         }
 
-        IEnumerator Project(GameObject projectile)
+        void Move()
         {
-            ProjectileInfo projectileInfo = Instantiate(projectile, transform.position, projectile.transform.rotation).GetComponent<ProjectileInfo>();
-
-            if (projectileInfo.type == ProjectileInfo.Type.Sector)
+            if (rigid.velocity.sqrMagnitude > speed * speed)
             {
-                projectileInfo.rigid.velocity = new Vector2(0.866f, -0.5f) * projectileInfo.speed; // -30도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = new Vector2(0.9659f, -0.2588f) * projectileInfo.speed; // -15도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = Vector2.right * projectileInfo.speed; // 0도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = new Vector2(0.9659f, 0.2588f) * projectileInfo.speed; // 15도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = new Vector2(0.866f, 0.5f) * projectileInfo.speed; // 30도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = new Vector2(0.9659f, 0.2588f) * projectileInfo.speed; // 15도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = Vector2.right * projectileInfo.speed; // 0도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                projectileInfo = Instantiate(projectile, transform.position, transform.rotation).GetComponent<ProjectileInfo>();
-                projectileInfo.rigid.velocity = new Vector2(0.9659f, -0.2588f) * projectileInfo.speed; // -15도
-
-                yield return new WaitForSeconds(projectileInfo.attackSpeed / 8);
-                StartCoroutine(Project(projectile));
+                rigid.velocity = rigid.velocity.normalized * speed;
             }
             else
             {
-                yield return new WaitForSeconds(projectileInfo.attackSpeed);
-                if (projectileInfo.type == ProjectileInfo.Type.Guided) yield return new WaitUntil(() => FindObjectOfType<EnemyMove>() != null);
-                StartCoroutine(Project(projectile));
+                rigid.velocity *= 0.8f;
             }
+
+            if (Input.GetAxisRaw("Horizontal") == 1)
+            {
+                rigid.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+            }
+            else if (Input.GetAxisRaw("Horizontal") == -1)
+            {
+                rigid.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+            }
+
+            if (Input.GetAxisRaw("Vertical") == 1)
+            {
+                rigid.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+            }
+            else if (Input.GetAxisRaw("Vertical") == -1)
+            {
+                rigid.AddForce(Vector2.down * speed, ForceMode2D.Impulse);
+            }
+        }
+
+        void Fire(int idx)
+        {
+            BulletInfo bullet = pool.bulletPrefabs[idx].GetComponent<BulletInfo>();
+
+            bullet.curShotDelay += Time.deltaTime; // 장전 시간
+
+            if (bullet.curShotDelay < bullet.maxShotDelay)
+            {
+                return;
+            }
+
+            if (idx == 1) // Sector
+            {
+                pool.MyInstantiate(idx, transform.position).GetComponent<Rigidbody2D>()
+                    .velocity = Quaternion.AngleAxis(-15 * curSectorIdx, Vector3.forward) 
+                                * new Vector2(0.866f, 0.5f) * bullet.speed;
+
+                curSectorIdx += curSectorDir;
+                if (curSectorIdx >= 4 || curSectorIdx <= 0) curSectorDir *= -1;
+            }
+            else
+            {
+                pool.MyInstantiate(idx, transform.position).GetComponent<Rigidbody2D>().AddForce(new Vector2(bullet.speed, 0),ForceMode2D.Impulse);
+            }
+
+            bullet.curShotDelay = 0;
         }
     }
 }

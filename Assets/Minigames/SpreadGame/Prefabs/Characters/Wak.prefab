@@ -158,4 +158,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  projectiles: []
+  bulletPrefabs:
+  - {fileID: 2360940325928755872, guid: 963c122ac097dce49bb8df32abe1ebd4, type: 3}
+  - {fileID: 2360940325928755872, guid: 7d0d4ebaafd90fd41bc57433a783f594, type: 3}
+  - {fileID: 2360940325928755872, guid: 4f8dc1c2c554dac489b5d4d6cc671ace, type: 3}
+  - {fileID: 2360940325928755872, guid: eb0dc2b6daa7f6e41b8e491a4e1120be, type: 3}
+  bulletLVs: 
+  coinAcquireEffect: {fileID: 0}

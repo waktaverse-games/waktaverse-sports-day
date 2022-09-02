@@ -11,7 +11,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] private float thinkingSpeed, attackSpeed, projectileSpeed;
         public int HP;
         [SerializeField] private GameObject projectile;
-        [SerializeField] private GameObject[] coins, upgradeItems;
+        [SerializeField] private GameObject[] coins, upgradeItems, otherItems;
         [SerializeField] private Type type;
         [SerializeField] private GameObject dieEffect;
         GameObject player;
@@ -20,16 +20,20 @@ namespace GameHeaven.SpreadGame
         public Rigidbody2D rigid;
         Animator anim;
 
+        PoolManager pool;
+
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
             player = GameObject.FindGameObjectWithTag("Player");
             anim = GetComponent<Animator>();
 
+            pool = FindObjectOfType<PoolManager>();
+
             if (type != Type.BakZwi) StartCoroutine(RandomMove(thinkingSpeed));
             else rigid.velocity = Vector2.left * 10;
 
-            if (type == Type.PanZee || type == Type.DdongGae) StartCoroutine(Project(projectile));
+            if (type == Type.PanZee || type == Type.DdongGae) StartCoroutine(Fire(projectile));
         }
 
         private void Update()
@@ -57,8 +61,8 @@ namespace GameHeaven.SpreadGame
             if (collider.CompareTag("Attack"))
             {
                 anim.SetTrigger("Hit");
-                HP -= collider.GetComponent<ProjectileInfo>().damage;
-                if(collider.GetComponent<ProjectileInfo>().type != ProjectileInfo.Type.Slash)Destroy(collider.gameObject);
+                HP -= collider.GetComponent<BulletInfo>().damage;
+                if (collider.GetComponent<BulletInfo>().type != BulletInfo.Type.Slash) collider.gameObject.SetActive(false);
             }
         }
 
@@ -90,16 +94,16 @@ namespace GameHeaven.SpreadGame
             rigid.velocity = (player.transform.position - transform.position).normalized * 5;
         }
 
-        IEnumerator Project(GameObject projectile)
+        IEnumerator Fire(GameObject projectile)
         {
             WaitForSeconds wait = new WaitForSeconds(attackSpeed);
 
-            yield return new WaitForSeconds(0.5f);
             while (true)
             {
+                yield return wait;
+
                 GameObject obj = Instantiate(projectile, transform.position, transform.rotation);
                 obj.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * projectileSpeed;
-                yield return wait;
             }
         }
 
@@ -111,10 +115,19 @@ namespace GameHeaven.SpreadGame
 
             if (isElite)
             {
+                int[] bulletLVs = player.GetComponent<PlayerMove>().bulletLVs;
+
+                int cnt = 0;
+                for (int i = 0; i < bulletLVs.Length; i++)
+                {
+                    if (bulletLVs[i] > 0) cnt++;
+                }
+
                 obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
                 obj.transform.localScale = new Vector3(0.5f, 0.5f);
-                obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
-                obj.GetComponent<ItemMove>().dir = new Vector3(0, -0.05f, 0);
+
+                obj = Instantiate(otherItems[Random.Range(0, 2)], transform.position, Quaternion.Euler(Vector3.zero));
+                obj.GetComponent<UpDownMove>().dir = new Vector3(0, -0.05f, 0);
                 obj.transform.localScale = new Vector3(0.5f, 0.5f);
             }
 

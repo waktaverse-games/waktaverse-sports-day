@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: -8480602467344076912}
   - component: {fileID: 7715688422113509052}
   - component: {fileID: 5253744885416062074}
+  - component: {fileID: -9193505824379735034}
   m_Layer: 0
   m_Name: Slash
   m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7380379378026435764
 Transform:
   m_ObjectHideFlags: 0
@@ -216,7 +217,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   speed: 10
-  attackSpeed: 1
-  damage: 5
-  rigid: {fileID: 0}
-  target: {fileID: 0}
+  curShotDelay: 0
+  maxShotDelay: 1
+  damage: 2
+--- !u!114 &-9193505824379735034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2360940325928755872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6dd8d544e8fb074cb25e4d51515b5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 7
