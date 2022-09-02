@@ -61,6 +61,21 @@ namespace GameHeaven.PunctureGame.Utils
 #endif
         }
 
+        public static void DrawWireCube(Vector3 center, Vector3 size)
+        {
+#if UNITY_EDITOR
+            DrawWireCube(center, size, Color.white);
+#endif
+        }
+        public static void DrawWireCube(Vector3 center, Vector3 size, Color color)
+        {
+#if UNITY_EDITOR
+            Gizmos.color = color;
+            Gizmos.DrawWireCube(center, size);
+            ResetGizmoColor();
+#endif
+        }
+
         public static void DrawWireSphere(Vector3 center, float radius)
         {
 #if UNITY_EDITOR

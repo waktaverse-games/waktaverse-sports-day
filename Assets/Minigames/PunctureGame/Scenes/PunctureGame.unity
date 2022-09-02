@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201886214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -286,12 +286,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3cb37f7c1a2fc14aa0ed3acab1d8e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blocks:
-  - {fileID: 1145400582836667413, guid: 82f816b29e2f7654d92967f1d78abff4, type: 3}
-  enemies: []
-  verticalBlockDist: 3
-  floorHorizontalLength: 12
-  floorVerticalLength: 6
+  player: {fileID: 348386250}
+  blockMats: []
+  platformObj: {fileID: 1538900701553909091, guid: 38690969d0de2c34a9376115a74cc7e8, type: 3}
+  platformPlaceCount: {x: 3, y: 6}
+  blockVertGap: 1.2
+  leftEnds: []
+  rightEnds: []
+  bottomEnds: []
+  leftEnd: {fileID: 0}
+  rightEnd: {fileID: 0}
+  bottomEnd: {fileID: 0}
+  horzCreateDist: 10
+  vertCreateDist: 10
 --- !u!1 &223164306
 GameObject:
   m_ObjectHideFlags: 3
@@ -407,7 +414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348386247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -427,15 +434,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077903d1abb8e1343909047e8c45697e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 3
   isFacingLeft: 1
+  groundDetectDistance: 0.1
   blockDetectDistance: 1
-  blockDetectGap: 0.1
+  blockDetectBoxSize: {x: 1.6, y: 0.4}
+  blockDetectGap: -0.2
   playerRigid: {fileID: 348386251}
-  detectedBlock: {fileID: 0}
-  brickLayerMask:
+  blockLayerMask:
     serializedVersion: 2
     m_Bits: 65536
+  platformLayerMask:
+    serializedVersion: 2
+    m_Bits: 131072
 --- !u!50 &348386251
 Rigidbody2D:
   serializedVersion: 4
@@ -448,12 +459,12 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 4
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 2
+  m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -567,7 +578,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1232348179}
   - component: {fileID: 1232348178}
-  - component: {fileID: 1232348180}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -594,7 +604,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 348386249}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -621,7 +631,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232348177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -629,15 +639,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1232348180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1232348177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
