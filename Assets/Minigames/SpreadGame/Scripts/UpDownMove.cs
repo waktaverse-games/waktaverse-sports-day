@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameHeaven.SpreadGame
 {
-    public class ItemMove : MonoBehaviour
+    public class UpDownMove : MonoBehaviour
     {
         Rigidbody2D rigid;
         public Vector3 dir;

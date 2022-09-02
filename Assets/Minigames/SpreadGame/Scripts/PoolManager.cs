@@ -6,30 +6,33 @@ namespace GameHeaven.SpreadGame
 {
     public class PoolManager : MonoBehaviour
     {
-        public GameObject[] BulletPrefabs;
+        public GameObject[] bulletPrefabs;
+        private int[] bulletBuffers;
 
-        public GameObject[] GuidedBullets;
-        int GuidedBulletIdx;
-        public GameObject[] SectorBullets;
-        int SectorBulletIdx;
-        public GameObject[] SlashBullets;
-        int SlashBulletIdx;
-        public GameObject[] StraightBullets;
-        int StraightBulletIdx;
+        public GameObject[] guidedBullets; // 0
+        public GameObject[] sectorBullets; // 1
+        public GameObject[] slashBullets; // 2
+        public GameObject[] straightBullets; // 3
+        public GameObject[] bananaBullets; // 4
 
         private void Awake()
         {
-            GuidedBullets = new GameObject[20];
-            for (int i = 0; i < GuidedBullets.Length; i++) GuidedBullets[i] = Instantiate(BulletPrefabs[0]);
+            bulletBuffers = new int[bulletPrefabs.Length];
 
-            SectorBullets = new GameObject[20];
-            for (int i = 0; i < GuidedBullets.Length; i++) SectorBullets[i] = Instantiate(BulletPrefabs[1]);
+            guidedBullets = new GameObject[20];
+            for (int i = 0; i < guidedBullets.Length; i++) guidedBullets[i] = Instantiate(bulletPrefabs[0]);
 
-            SlashBullets = new GameObject[20];
-            for (int i = 0; i < GuidedBullets.Length; i++) SlashBullets[i] = Instantiate(BulletPrefabs[2]);
+            sectorBullets = new GameObject[100];
+            for (int i = 0; i < sectorBullets.Length; i++) sectorBullets[i] = Instantiate(bulletPrefabs[1]);
 
-            StraightBullets = new GameObject[20];
-            for (int i = 0; i < GuidedBullets.Length; i++) StraightBullets[i] = Instantiate(BulletPrefabs[3]);
+            slashBullets = new GameObject[20];
+            for (int i = 0; i < slashBullets.Length; i++) slashBullets[i] = Instantiate(bulletPrefabs[2]);
+
+            straightBullets = new GameObject[100];
+            for (int i = 0; i < straightBullets.Length; i++) straightBullets[i] = Instantiate(bulletPrefabs[3]);
+
+            bananaBullets = new GameObject[20];
+            for (int i = 0; i < bananaBullets.Length; i++) bananaBullets[i] = Instantiate(bulletPrefabs[4]);
         }
 
         public GameObject MyInstantiate(int idx, Vector2 pos)
@@ -39,26 +42,28 @@ namespace GameHeaven.SpreadGame
             switch (idx)
             {
                 case 0:
-                    targetPool = GuidedBullets;
+                    targetPool = guidedBullets;
                     break;
                 case 1:
-                    targetPool = SectorBullets;
+                    targetPool = sectorBullets;
                     break;
                 case 2:
-                    targetPool = SlashBullets;
+                    targetPool = slashBullets;
                     break;
                 case 3:
-                    targetPool = StraightBullets;
+                    targetPool = straightBullets;
                     break;
             }
 
-            for (int i = 0; i < targetPool.Length; i++)
+            if (bulletBuffers[idx] >= targetPool.Length) bulletBuffers[idx] = 0;
+
+            for (; bulletBuffers[idx] < targetPool.Length; bulletBuffers[idx]++)
             {
-                if (!targetPool[i].activeSelf)
+                if (!targetPool[bulletBuffers[idx]].activeSelf)
                 {
-                    targetPool[i].SetActive(true);
-                    targetPool[i].transform.position = pos;
-                    return targetPool[i];
+                    targetPool[bulletBuffers[idx]].SetActive(true);
+                    targetPool[bulletBuffers[idx]].transform.position = pos;
+                    return targetPool[bulletBuffers[idx]++];
                 }
             }
 

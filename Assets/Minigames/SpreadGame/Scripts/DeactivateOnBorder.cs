@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameHeaven.SpreadGame
 {
-    public class DestroyOnBorder : MonoBehaviour
+    public class DeactivateOnBorder : MonoBehaviour
     {
         PoolManager pool;
 

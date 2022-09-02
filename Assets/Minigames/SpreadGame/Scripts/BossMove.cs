@@ -29,7 +29,6 @@ namespace GameHeaven.SpreadGame
         {
 
         }
-
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.CompareTag("Attack"))
@@ -94,7 +93,7 @@ namespace GameHeaven.SpreadGame
             {
                 for (int j = 0; j < num; j++)
                 {
-                    Instantiate(projectile, transform.position, projectile.transform.rotation).GetComponent<Rigidbody2D>().
+                    pool.MyInstantiate(4, transform.position).GetComponent<Rigidbody2D>().
                         velocity = Quaternion.AngleAxis(j * (360 / num), Vector3.forward) * new Vector2(-speed, 0);
                 }
                 yield return wait;

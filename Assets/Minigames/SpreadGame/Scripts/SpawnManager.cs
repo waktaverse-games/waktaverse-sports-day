@@ -40,6 +40,7 @@ namespace GameHeaven.SpreadGame
 
                     yield return new WaitForSeconds(sec);
                 }
+
                 if (idx == 0) // ¹ÚÁã´Ü
                 {
                     Vector2 spawnPos = new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2));
@@ -83,9 +84,9 @@ namespace GameHeaven.SpreadGame
 
             while (true)
             {
-                obj = Instantiate(bossPrefabs[0], new Vector3(8, 0, 0), bossPrefabs[0].transform.rotation);
-
                 yield return wait;
+
+                obj = Instantiate(bossPrefabs[0], new Vector3(8, 0, 0), bossPrefabs[0].transform.rotation);
             }
         }
 

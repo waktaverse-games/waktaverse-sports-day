@@ -222,10 +222,8 @@ MonoBehaviour:
   type: 0
   speed: 12
   curShotDelay: 0
-  maxShotDelay: 0.05
-  damage: 1
-  rigid: {fileID: 0}
-  target: {fileID: 0}
+  maxShotDelay: 0.3
+  damage: 3
 --- !u!114 &1085682623025203213
 MonoBehaviour:
   m_ObjectHideFlags: 0
