@@ -11,20 +11,26 @@ namespace GameHeaven.SpreadGame
 
         public int[] bulletLVs; // 현재 보유중인 무기
 
-        [SerializeField] GameObject coinAcquireEffect;
+        [SerializeField] GameObject coinAcquireEffect, bombImageUI;
 
-        [SerializeField] private int curSectorIdx, curSectorDir;
+        [SerializeField] private int curSectorIdx, curSectorDir, bombCnt;
+        [SerializeField] private bool hasShield;
 
         PoolManager pool;
         Rigidbody2D rigid;
+        Animator anim;
 
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
             pool = FindObjectOfType<PoolManager>();
+            anim = GetComponent<Animator>();
 
             bulletLVs[0] = bulletLVs[1] = bulletLVs[2] = 0;
             bulletLVs[3] = 1;
+
+            bombCnt = 3;
+            hasShield = false;
 
             // bullet 초기화
             BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
@@ -42,6 +48,7 @@ namespace GameHeaven.SpreadGame
         private void Update()
         {
             Move();
+            Bomb();
 
             for (int i = 0; i < 4; i++) // 탄환 총 4개
             {
@@ -56,8 +63,15 @@ namespace GameHeaven.SpreadGame
         {
             if (collider.CompareTag("Enemy"))
             {
-                print("GameOver");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                if (hasShield)
+                {
+                    StartCoroutine(ShieldBreak());
+                }
+                else
+                {
+                    print("GameOver");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
             }
             else if (collider.CompareTag("Coin"))
             {
@@ -67,8 +81,7 @@ namespace GameHeaven.SpreadGame
             }
             else if (collider.CompareTag("UpgradeItem"))
             {
-                print(collider.name[0] + "/" + collider.name[9]);
-                switch (collider.name[9])
+                switch (collider.name[1])
                 {
                     case 'u': // G'u'ided
                         {
@@ -145,11 +158,31 @@ namespace GameHeaven.SpreadGame
                             }
                             break;
                         }
+
+                    case 'o': // B'o'mb
+                        {
+                            if (bombCnt < 5)
+                            {
+                                GameObject.Find("Canvas").transform.GetChild(0).GetChild(bombCnt).gameObject.SetActive(true);
+                                bombCnt++;
+                            }
+                            break;
+                        }
+                    case 'h': // S'h'ield
+                        {
+                            hasShield = true;
+                            transform.GetChild(0).gameObject.SetActive(true);
+                            break;
+                        }
                 }
+                Instantiate(coinAcquireEffect, collider.transform.position, coinAcquireEffect.transform.rotation);
+                Destroy(collider.gameObject);
+                /* 나머지 아이템 삭제
                 foreach (GameObject del in GameObject.FindGameObjectsWithTag("UpgradeItem"))
                 {
                     Destroy(del);
                 }
+                */
             }
         }
 
@@ -209,6 +242,36 @@ namespace GameHeaven.SpreadGame
             }
 
             bullet.curShotDelay = 0;
+        }
+
+        void Bomb()
+        {
+            if (!Input.GetKeyDown(KeyCode.Space) || bombCnt <= 0) return;
+
+            foreach (EnemyMove enemy in FindObjectsOfType<EnemyMove>())
+            {
+                enemy.HP -= 30;
+            }
+
+            CameraShake();
+            
+            GameObject.Find("Canvas").transform.GetChild(0).GetChild(bombCnt - 1).gameObject.SetActive(false);
+            bombCnt--;
+        }
+
+        void CameraShake()
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>()
+                .SetTrigger("Shake");
+        }
+
+        IEnumerator ShieldBreak()
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            anim.SetTrigger("Hit");
+
+            yield return new WaitForSeconds(1);
+            hasShield = false;
         }
     }
 }
