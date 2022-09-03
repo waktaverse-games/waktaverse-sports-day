@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6980961704242490582}
   - component: {fileID: -7304019260524916170}
   m_Layer: 0
-  m_Name: Upgrade(Straight)
+  m_Name: Sector
   m_TagString: UpgradeItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d40c496017e318349870d6047370a12b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1335d76a756a8648806c44cd4adb1f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

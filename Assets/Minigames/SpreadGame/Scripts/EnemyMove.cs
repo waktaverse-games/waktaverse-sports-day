@@ -102,7 +102,7 @@ namespace GameHeaven.SpreadGame
             {
                 yield return wait;
 
-                GameObject obj = Instantiate(projectile, transform.position, transform.rotation);
+                GameObject obj = pool.MyInstantiate(4, transform.position);
                 obj.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * projectileSpeed;
             }
         }
