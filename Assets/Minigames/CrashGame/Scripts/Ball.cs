@@ -84,13 +84,13 @@ namespace GameHeaven.CrashGame
                 // 공이 여러번 플랫폼에 튕기는 행위 방지
                 if (isReturning)
                 {
-                    // 점프 도중 플랫폼과 공의 충돌 시 공이 아래로 튕기는 것을 방지. 공은 무조건 위로 튕김
                     if (randomBounce)
                     {
                         velocity = Utils.RotateVector(velocity, (Random.value - 0.5f) * 30f);
                     }
                     else
                     {
+                        // 플랫폼 운동방향에 따라 반사 각도 변화
                         Vector2 platformVelocity = collision.GetComponent<Rigidbody2D>().velocity;
                         Debug.Log($"Platform Velocity: {platformVelocity.x}, {platformVelocity.y}");
 
@@ -102,6 +102,7 @@ namespace GameHeaven.CrashGame
                         // 튕겨나가는 각도가 너무 작을 때 보정
                         velocity = Utils.RotateVector(velocity, 10f);
                     }
+                    // 점프 도중 플랫폼과 공의 충돌 시 공이 아래로 튕기는 것을 방지. 공은 무조건 위로 튕김
                     if (rigidBody.velocity.y < 0) velocity = new Vector2(velocity.x, -velocity.y);
                     Debug.Log(Vector2.Angle(velocity, Vector2.right));
                     isReturning = false;
@@ -117,7 +118,7 @@ namespace GameHeaven.CrashGame
         {
             BallNumber++;
             Ball ball = Instantiate(GameManager.Instance.ballPrefab, position, Quaternion.identity);
-            ball.transform.SetParent(GameManager.Instance.Item.ItemParent, true);
+            ball.transform.SetParent(GameManager.Instance.Item.BallParent, true);
             return ball;
         }
 
@@ -132,6 +133,14 @@ namespace GameHeaven.CrashGame
         public void StopBall()
         {
             rigidBody.velocity = Vector2.zero;
+        }
+
+        public void ResetBallSpeed()
+        {
+            // 공의 속도를 최초 속도로 초기화
+            Vector2 tempVelocity = rigidBody.velocity;
+            rigidBody.velocity = Vector2.zero;
+            rigidBody.AddForce(tempVelocity.normalized * InitialForce);
         }
 
         public void Fire(Vector2 force)

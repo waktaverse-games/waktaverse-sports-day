@@ -12,7 +12,7 @@ namespace GameHeaven.CrashGame
         public Brick basicBrickPrefab;
         public Brick hardBrickPrefab;
         public Brick ballBrickPrefab;
-        public Brick itemTestBrickPrefab;
+        public Brick itemBrickPrefab;
 
         private Queue<List<Brick>> brickMap;
 
@@ -27,6 +27,12 @@ namespace GameHeaven.CrashGame
         public const float BrickStartYPosition = 5f;
         public const float BrickWidth = .9375f;
         public const float BrickHeight = .5f;
+
+        public Queue<List<Brick>> BrickMap
+        {
+            get { return brickMap; }
+            private set { brickMap = value; }
+        }
 
         // BasicBrick 계열 블럭 색깔
         public Color[] brickColorArray;
@@ -58,20 +64,11 @@ namespace GameHeaven.CrashGame
             }
         }
 
-        private IEnumerator BlockLineAddCoroutine(float seconds)
-        {
-            yield return new WaitForSeconds(seconds / 2);
-            Debug.Log($"{seconds / 2} seconds passed!");
-            yield return new WaitForSeconds(seconds / 2);
-            Debug.Log($"{seconds} seconds passed!");
-            AddBrickLineInMap();
-        }
-
-        public void CheckOuterLineDestroyed(bool addNewLine)
+        public bool CheckOuterLineDestroyed(bool addNewLine)
         {
             // 맨 아래 행 블럭이 전부 파괴되었는지 체크
             bool allBrickOff = true;
-            if (brickMap.Count == 0) return;
+            if (brickMap.Count == 0) return true;
             foreach (Brick brick in brickMap.Peek())
             {
                 if (brick.gameObject.activeSelf) allBrickOff = false;
@@ -88,6 +85,8 @@ namespace GameHeaven.CrashGame
                 if (addNewLine) AddBrickLineInMap();
                 CheckOuterLineDestroyed(addNewLine); // 그다음 행도 블럭이 전부 파괴되어있었는지 체크
             }
+
+            return allBrickOff;
         }
 
         public void ResetBricks()
@@ -126,16 +125,25 @@ namespace GameHeaven.CrashGame
             for (int i = 0; i < 8; i++)
             {
                 
-                switch (Random.Range(0, 10))
+                switch (Random.Range(0, 24))
                 {
                     case 0:
+                    case 1:
+                    case 2:
+                        // 단단한 벽돌
                         brickLine.Add(AddBrick(hardBrickPrefab, currentBrickPosition + brickCenterPosition));
                         break;
-                    case 1:
+                    case 3:
+                    case 4:
+                        // 공 추가 벽돌
                         brickLine.Add(AddBrick(ballBrickPrefab, currentBrickPosition + brickCenterPosition));
                         break;
-                    case 2:
-                        brickLine.Add(AddBrick(itemTestBrickPrefab, currentBrickPosition + brickCenterPosition));
+                    case 5:
+                        // 아이템 벽돌
+                        ItemBrick newItemBrick = (ItemBrick)AddBrick(itemBrickPrefab, currentBrickPosition + brickCenterPosition);
+                        int itemIndex = Random.Range(0, itemPrefabList.Count);
+                        newItemBrick.ItemPrefab = itemPrefabList[itemIndex];
+                        brickLine.Add(newItemBrick);
                         break;
                     default:
                         brickLine.Add(AddBrick(basicBrickPrefab, currentBrickPosition + brickCenterPosition));
