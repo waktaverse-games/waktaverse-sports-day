@@ -564,10 +564,10 @@ RectTransform:
   m_Father: {fileID: 596041587}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 944.4502, y: 316}
-  m_SizeDelta: {x: 507.363, y: 279.0004}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -335.5498, y: -404}
+  m_SizeDelta: {x: 507.36304, y: 279.00037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &626628546
 MonoBehaviour:
@@ -1148,6 +1148,7 @@ MonoBehaviour:
   - {fileID: -4699233732418604870, guid: d8402e8f8c8970f44b3a94e103ab519a, type: 3}
   itemPrefabList:
   - {fileID: -4419884499778429057, guid: a39981f40e35d2647a3e3584c90239c3, type: 3}
+  - {fileID: 2588984476685509855, guid: 5e6e506fb5969564a94b3f916e3eda56, type: 3}
   brickColorArray: []
 --- !u!114 &1679308196
 MonoBehaviour:
@@ -1389,10 +1390,10 @@ RectTransform:
   m_Father: {fileID: 596041587}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 944.4502, y: 473.49976}
-  m_SizeDelta: {x: 407.0998, y: 279.0004}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -335.5498, y: -246.50024}
+  m_SizeDelta: {x: 407.09985, y: 279.00037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1992138484
 MonoBehaviour:
