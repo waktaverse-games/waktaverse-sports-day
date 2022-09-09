@@ -6,7 +6,7 @@ namespace GameHeaven.AttackGame
 {
     public class Projectile : MonoBehaviour
     {
-        // Start is called before the first frame update
+        public GameManager gameManager;
         void Start()
         {
 

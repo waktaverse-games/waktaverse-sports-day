@@ -3330,6 +3330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1196543240}
+  - component: {fileID: 1196543241}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3352,6 +3353,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1196543241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196543239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6cdeca2a08a5084ea50c332385f6837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1214094089
 GameObject:
   m_ObjectHideFlags: 0
@@ -3741,6 +3754,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1438783289}
+  - component: {fileID: 1438783290}
   m_Layer: 0
   m_Name: ObjectManager
   m_TagString: Untagged
@@ -3763,6 +3777,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1438783290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438783288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c8ea145c1145c8b8fb14b905fbce6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 126251208}
+  gameManager: {fileID: 1196543241}
+  monkeyPrefab: {fileID: 0}
+  pigeonPrefab: {fileID: 0}
+  batPrefab: {fileID: 0}
+  dogPrefab: {fileID: 0}
+  catPrefab: {fileID: 0}
+  goraniPrefab: {fileID: 0}
+  foxPrefab: {fileID: 0}
+  arrowPrefab: {fileID: 0}
+  pyochangPrefab: {fileID: 0}
 --- !u!1 &1505321825
 GameObject:
   m_ObjectHideFlags: 0

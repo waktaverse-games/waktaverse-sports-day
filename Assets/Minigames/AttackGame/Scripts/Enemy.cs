@@ -6,6 +6,8 @@ namespace GameHeaven.AttackGame
 {
     public class Enemy : MonoBehaviour
     {
+        public GameObject player;
+        public GameManager gameManager;
         // Start is called before the first frame update
         void Start()
         {
