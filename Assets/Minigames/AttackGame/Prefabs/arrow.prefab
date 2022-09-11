@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6244474330403210750}
   m_Layer: 0
   m_Name: arrow
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4364d53e42b641f08108e4f02e61ebc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!61 &6244474330403210750
 BoxCollider2D:
   m_ObjectHideFlags: 0
