@@ -20,7 +20,7 @@ namespace GameHeaven.SpreadGame
             if (target == null)
             {
                 float minDistance = 100;
-                foreach (EnemyMove enemy in FindObjectsOfType<EnemyMove>())
+                foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
                 {
                     if (Vector2.Distance(transform.position, enemy.transform.position) < minDistance)
                     {
