@@ -17,6 +17,14 @@ namespace GameHeaven.AttackGame
         public GameObject foxPrefab;
         public GameObject arrowPrefab;
         public GameObject pyochangPrefab;
+        public GameObject poopPrefab;
+        public GameObject lmonkeyPrefab;
+        public GameObject lpigeonPrefab;
+        public GameObject lbatPrefab;
+        public GameObject ldogPrefab;
+        public GameObject lcatPrefab;
+        public GameObject lgoraniPrefab;
+        public GameObject lfoxPrefab;
 
         private GameObject[] _monkey;
         private GameObject[] _pigeon;
@@ -25,8 +33,16 @@ namespace GameHeaven.AttackGame
         private GameObject[] _cat;
         private GameObject[] _gorani;
         private GameObject[] _fox;
+        private GameObject _lmonkey;
+        private GameObject _lpigeon;
+        private GameObject _lbat;
+        private GameObject _ldog;
+        private GameObject _lcat;
+        private GameObject _lgorani;
+        private GameObject _lfox;
         private GameObject[] _pyochang;
         private GameObject[] _arrow;
+        private GameObject[] _poop;
         private GameObject[] _targetPool;
         private GameObject _emptyObject;
         
@@ -41,6 +57,7 @@ namespace GameHeaven.AttackGame
             _fox = new GameObject[50];
             _arrow = new GameObject[50];
             _pyochang = new GameObject[50];
+            _poop = new GameObject[50];
             Generate();
         }
         
@@ -53,6 +70,10 @@ namespace GameHeaven.AttackGame
                 _monkey[i].GetComponent<Enemy>().gameManager = gameManager;
                 _monkey[i].SetActive(false);
             }
+            _lmonkey = Instantiate(lmonkeyPrefab);
+            _lmonkey.GetComponent<Boss>().player = player;
+            _lmonkey.GetComponent<Boss>().gameManager = gameManager;
+            _lmonkey.SetActive(false);
             for (int i = 0; i < _pigeon.Length; i++)
             {
                 _pigeon[i] = Instantiate(pigeonPrefab);
@@ -60,6 +81,10 @@ namespace GameHeaven.AttackGame
                 _pigeon[i].GetComponent<Enemy>().gameManager = gameManager;
                 _pigeon[i].SetActive(false);
             }
+            _lpigeon = Instantiate(lpigeonPrefab);
+            _lpigeon.GetComponent<Boss>().player = player;
+            _lpigeon.GetComponent<Boss>().gameManager = gameManager;
+            _lpigeon.SetActive(false);
             for (int i = 0; i < _bat.Length; i++)
             {
                 _bat[i] = Instantiate(batPrefab);
@@ -67,6 +92,10 @@ namespace GameHeaven.AttackGame
                 _bat[i].GetComponent<Enemy>().gameManager = gameManager;
                 _bat[i].SetActive(false);
             }
+            _lbat = Instantiate(lbatPrefab);
+            _lbat.GetComponent<Boss>().player = player;
+            _lbat.GetComponent<Boss>().gameManager = gameManager;
+            _lbat.SetActive(false);
             for (int i = 0; i < _dog.Length; i++)
             {
                 _dog[i] = Instantiate(dogPrefab);
@@ -74,6 +103,10 @@ namespace GameHeaven.AttackGame
                 _dog[i].GetComponent<Enemy>().gameManager = gameManager;
                 _dog[i].SetActive(false);
             }
+            _ldog = Instantiate(ldogPrefab);
+            _ldog.GetComponent<Boss>().player = player;
+            _ldog.GetComponent<Boss>().gameManager = gameManager;
+            _ldog.SetActive(false);
             for (int i = 0; i < _cat.Length; i++)
             {
                 _cat[i] = Instantiate(catPrefab);
@@ -81,6 +114,10 @@ namespace GameHeaven.AttackGame
                 _cat[i].GetComponent<Enemy>().gameManager = gameManager;
                 _cat[i].SetActive(false);
             }
+            _lcat = Instantiate(lcatPrefab);
+            _lcat.GetComponent<Boss>().player = player;
+            _lcat.GetComponent<Boss>().gameManager = gameManager;
+            _lcat.SetActive(false);
             for (int i = 0; i < _gorani.Length; i++)
             {
                 _gorani[i] = Instantiate(goraniPrefab);
@@ -88,6 +125,10 @@ namespace GameHeaven.AttackGame
                 _gorani[i].GetComponent<Enemy>().gameManager = gameManager;
                 _gorani[i].SetActive(false);
             }
+            _lgorani = Instantiate(lgoraniPrefab);
+            _lgorani.GetComponent<Boss>().player = player;
+            _lgorani.GetComponent<Boss>().gameManager = gameManager;
+            _lgorani.SetActive(false);
             for (int i = 0; i < _fox.Length; i++)
             {
                 _fox[i] = Instantiate(foxPrefab);
@@ -95,17 +136,27 @@ namespace GameHeaven.AttackGame
                 _fox[i].GetComponent<Enemy>().gameManager = gameManager;
                 _fox[i].SetActive(false);
             }
+            _lfox = Instantiate(lfoxPrefab);
+            _lfox.GetComponent<Boss>().player = player;
+            _lfox.GetComponent<Boss>().gameManager = gameManager;
+            _lfox.SetActive(false);
             for (int i = 0; i < _arrow.Length; i++)
             {
                 _arrow[i] = Instantiate(arrowPrefab);
-                _arrow[i].GetComponent<Enemy>().gameManager = gameManager;
+                _arrow[i].GetComponent<Projectile>().gameManager = gameManager;
                 _arrow[i].SetActive(false);
             }
             for (int i = 0; i < _pyochang.Length; i++)
             {
                 _pyochang[i] = Instantiate(pyochangPrefab);
-                _pyochang[i].GetComponent<Enemy>().gameManager = gameManager;
+                _pyochang[i].GetComponent<Projectile>().gameManager = gameManager;
                 _pyochang[i].SetActive(false);
+            }
+            for (int i = 0; i < _poop.Length; i++)
+            {
+                _poop[i] = Instantiate(poopPrefab);
+                _poop[i].GetComponent<Projectile>().gameManager = gameManager;
+                _poop[i].SetActive(false);
             }
         }
         
@@ -134,11 +185,42 @@ namespace GameHeaven.AttackGame
                 case "fox":
                     _targetPool = _fox;
                     break;
+                case "lmonkey":
+                    _lmonkey.SetActive(true);
+                    _lmonkey.transform.position = pos;
+                    return _lmonkey;
+                case "lpigeon":
+                    _lpigeon.SetActive(true);
+                    _lpigeon.transform.position = pos;
+                    return _lpigeon;
+                case "lbat":
+                    _lbat.SetActive(true);
+                    _lbat.transform.position = pos;
+                    return _lbat;
+                case "ldog":
+                    _ldog.SetActive(true);
+                    _ldog.transform.position = pos;
+                    return _ldog;
+                case "lcat":
+                    _lcat.SetActive(true);
+                    _lcat.transform.position = pos;
+                    return _lcat;
+                case "lgorani":
+                    _lgorani.SetActive(true);
+                    _lgorani.transform.position = pos;
+                    return _lgorani;
+                case "lfox":
+                    _lfox.SetActive(true);
+                    _lfox.transform.position = pos;
+                    return _lfox;
                 case "arrow":
                     _targetPool = _fox;
                     break;
                 case "pyochang":
                     _targetPool = _pyochang;
+                    break;
+                case "poop":
+                    _targetPool = _poop;
                     break;
             }
 
@@ -192,6 +274,17 @@ namespace GameHeaven.AttackGame
             {
                 _pyochang[i].SetActive(false);
             }
+            for (int i = 0; i < _poop.Length; i++)
+            {
+                _poop[i].SetActive(false);
+            }
+            _lmonkey.SetActive(false);
+            _lbat.SetActive(false);
+            _lcat.SetActive(false);
+            _ldog.SetActive(false);
+            _lfox.SetActive(false);
+            _lgorani.SetActive(false);
+            _lpigeon.SetActive(false);
         }
     }
 }
