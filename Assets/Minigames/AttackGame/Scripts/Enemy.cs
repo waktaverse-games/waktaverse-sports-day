@@ -17,12 +17,7 @@ namespace GameHeaven.AttackGame
         void OnEnable()
         {
             hpBar.fillAmount = 0.5f;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            currentHp = totalHp;
         }
 
         public void HitByProjectile()
