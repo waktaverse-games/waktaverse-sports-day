@@ -11,6 +11,8 @@ namespace GameHeaven.CrashGame
         private Text gameScore;
         [SerializeField]
         private Text highScore;
+        [SerializeField]
+        private Text coin;
         
         public void SetScoreText(int score)
         {
@@ -20,6 +22,11 @@ namespace GameHeaven.CrashGame
         public void SetHighScoreText(int score)
         {
             highScore.text = $"최고기록: {score}";
+        }
+
+        public void SetCoinText(int coin)
+        {
+            this.coin.text = $"코인: {coin}";
         }
     }
 }
