@@ -15,7 +15,12 @@ namespace GameHeaven.AttackGame
                 Physics2D.IgnoreCollision(obj.GetComponent<BoxCollider2D>(), GetComponent<BoxCollider2D>());
             }
         }
-        
+
+        private void Start()
+        {
+            if (GetComponent<Renderer>().isVisible) Debug.Log("true");
+            else Debug.Log("false");
+        }
     }
 }
 
