@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,16 +14,33 @@ namespace GameHeaven.AttackGame
         public int totalHp;
 
         private int currentHp;
-        // Start is called before the first frame update
+        private string _name;
+
+        private void Start()
+        {
+            _name = gameObject.name;
+        }
+
         void OnEnable()
         {
-            hpBar.fillAmount = 0.5f;
+            hpBar.fillAmount = 1f;
             currentHp = totalHp;
         }
 
-        public void HitByProjectile()
+        public void HitByProjectile(int damage)
         {
+            currentHp -= damage;
             hpBar.fillAmount = (float)currentHp / totalHp;
+        }
+
+        public void DisableObject()
+        {
+            
+        }
+
+        public void ActivateMovement()
+        {
+            
         }
     }
 }
