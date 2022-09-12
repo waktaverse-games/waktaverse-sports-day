@@ -34,13 +34,13 @@ namespace GameHeaven.AttackGame
         
         void Awake()
         {
-            _monkey = new GameObject[50];
-            _pigeon = new GameObject[50];
-            _bat = new GameObject[50];
-            _dog = new GameObject[50];
-            _fox = new GameObject[50];
-            _gorani = new GameObject[50];
-            _fox = new GameObject[50];
+            _monkey = new GameObject[25];
+            _pigeon = new GameObject[25];
+            _bat = new GameObject[25];
+            _dog = new GameObject[25];
+            _cat = new GameObject[25];
+            _gorani = new GameObject[25];
+            _fox = new GameObject[25];
             _arrow = new GameObject[50];
             _pyochang = new GameObject[50];
             _poop = new GameObject[50];

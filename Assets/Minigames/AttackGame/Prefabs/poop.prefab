@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3891653898472215789}
   - component: {fileID: 3891653898472215790}
   - component: {fileID: 3891653898472215791}
+  - component: {fileID: -8723584762119721058}
   m_Layer: 0
   m_Name: poop
   m_TagString: Enemy
@@ -182,3 +183,17 @@ PolygonCollider2D:
       - {x: 1.35, y: -1.4499999}
       - {x: 1.49, y: -1.3199999}
       - {x: 1.52, y: -1.17}
+--- !u!114 &-8723584762119721058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891653898472215784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4364d53e42b641f08108e4f02e61ebc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  damage: 0
