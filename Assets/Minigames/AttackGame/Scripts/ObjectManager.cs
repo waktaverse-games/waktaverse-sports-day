@@ -31,6 +31,7 @@ namespace GameHeaven.AttackGame
         private GameObject[] _poop;
         private GameObject[] _targetPool;
         private GameObject _emptyObject;
+        private ObjectManager _objectManager;
         
         void Awake()
         {
@@ -44,6 +45,7 @@ namespace GameHeaven.AttackGame
             _arrow = new GameObject[50];
             _pyochang = new GameObject[50];
             _poop = new GameObject[50];
+            _objectManager = GetComponent<ObjectManager>();
             Generate();
         }
         
@@ -54,6 +56,7 @@ namespace GameHeaven.AttackGame
                 _monkey[i] = Instantiate(monkeyPrefab);
                 _monkey[i].GetComponent<Enemy>().player = player;
                 _monkey[i].GetComponent<Enemy>().gameManager = gameManager;
+                _monkey[i].GetComponent<Enemy>().objectManager = _objectManager;
                 _monkey[i].SetActive(false);
             }
             for (int i = 0; i < _pigeon.Length; i++)
@@ -61,6 +64,7 @@ namespace GameHeaven.AttackGame
                 _pigeon[i] = Instantiate(pigeonPrefab);
                 _pigeon[i].GetComponent<Enemy>().player = player;
                 _pigeon[i].GetComponent<Enemy>().gameManager = gameManager;
+                _pigeon[i].GetComponent<Enemy>().objectManager = _objectManager;
                 _pigeon[i].SetActive(false);
             }
             for (int i = 0; i < _bat.Length; i++)
@@ -68,6 +72,7 @@ namespace GameHeaven.AttackGame
                 _bat[i] = Instantiate(batPrefab);
                 _bat[i].GetComponent<Enemy>().player = player;
                 _bat[i].GetComponent<Enemy>().gameManager = gameManager;
+                _bat[i].GetComponent<Enemy>().objectManager = _objectManager;
                 _bat[i].SetActive(false);
             }
             for (int i = 0; i < _dog.Length; i++)
@@ -75,6 +80,7 @@ namespace GameHeaven.AttackGame
                 _dog[i] = Instantiate(dogPrefab);
                 _dog[i].GetComponent<Enemy>().player = player;
                 _dog[i].GetComponent<Enemy>().gameManager = gameManager;
+                _dog[i].GetComponent<Enemy>().objectManager = _objectManager;
                 _dog[i].SetActive(false);
             }
             for (int i = 0; i < _cat.Length; i++)
@@ -82,6 +88,7 @@ namespace GameHeaven.AttackGame
                 _cat[i] = Instantiate(catPrefab);
                 _cat[i].GetComponent<Enemy>().player = player;
                 _cat[i].GetComponent<Enemy>().gameManager = gameManager;
+                _cat[i].GetComponent<Enemy>().objectManager = _objectManager;
                 _cat[i].SetActive(false);
             }
             for (int i = 0; i < _gorani.Length; i++)
@@ -89,6 +96,7 @@ namespace GameHeaven.AttackGame
                 _gorani[i] = Instantiate(goraniPrefab);
                 _gorani[i].GetComponent<Enemy>().player = player;
                 _gorani[i].GetComponent<Enemy>().gameManager = gameManager;
+                _gorani[i].GetComponent<Enemy>().objectManager = _objectManager;
                 _gorani[i].SetActive(false);
             }
             for (int i = 0; i < _fox.Length; i++)
@@ -96,8 +104,10 @@ namespace GameHeaven.AttackGame
                 _fox[i] = Instantiate(foxPrefab);
                 _fox[i].GetComponent<Enemy>().player = player;
                 _fox[i].GetComponent<Enemy>().gameManager = gameManager;
+                _fox[i].GetComponent<Enemy>().objectManager = _objectManager;
                 _fox[i].SetActive(false);
             }
+            
             for (int i = 0; i < _arrow.Length; i++)
             {
                 _arrow[i] = Instantiate(arrowPrefab);
@@ -116,6 +126,11 @@ namespace GameHeaven.AttackGame
                 _poop[i].GetComponent<Projectile>().gameManager = gameManager;
                 _poop[i].SetActive(false);
             }
+        }
+
+        void Test()
+        {
+            Debug.Log("VAR");
         }
         
         public GameObject MakeObject(string type, Vector3 pos)
@@ -153,7 +168,6 @@ namespace GameHeaven.AttackGame
                     _targetPool = _poop;
                     break;
             }
-
             for (int i = 0; i < _targetPool.Length; i++)
             {
                 if (!_targetPool[i].activeSelf)

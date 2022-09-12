@@ -12,6 +12,7 @@ namespace GameHeaven.AttackGame
     {
         public GameObject player;
         public GameManager gameManager;
+        public ObjectManager objectManager;
         public Image hpBar;
         public int totalHp;
 
@@ -54,22 +55,25 @@ namespace GameHeaven.AttackGame
         {
             switch (_name)
             {
-                case "monkey":
+                case "monkey(Clone)":
                     return;
-                case "fox":
+                case "fox(Clone)":
                     StartCoroutine(FoxMove());
                     break;
-                case "gorani":
+                case "gorani(Clone)":
                     StartCoroutine(GoraniToLeft());
                     break;
-                case "pigeon":
+                case "pigeon(Clone)":
                     StartCoroutine(PigeonMove());
                     break;
-                case "cat":
+                case "cat(Clone)":
                     StartCoroutine(CatJump());
                     break;
-                case "bat":
+                case "bat(Clone)":
                     StartCoroutine(BatMove());
+                    break;
+                case "dog(Clone)":
+                    StartCoroutine(DogThrow());
                     break;
             }
         }
@@ -155,6 +159,15 @@ namespace GameHeaven.AttackGame
             transform.DOMove(newPos, 2);
             yield return new WaitForSeconds(0.9f);
             StartCoroutine(BatMove());
+            
+        }
+
+        IEnumerator DogThrow()
+        {
+            yield return new WaitForSeconds(2);
+            GameObject poop = objectManager.MakeObject("poop", transform.position);
+            poop.GetComponent<Projectile>().PoopThrow();
+            StartCoroutine(DogThrow());
         }
     }
 }
