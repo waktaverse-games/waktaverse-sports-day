@@ -7,9 +7,10 @@ namespace GameHeaven.AttackGame
 {
     public class Player : MonoBehaviour
     {
+        public ObjectManager objectManager;
         public float speed = 1.0f;
         public float arrowSpeed = 5.0f;
-        public int currentWeapon = 1;
+        public int currentWeapon = 2;
         public bool[] weaponsPossible;
         public int[] weaponsPower;
         public GameObject[] squareUIs;
@@ -23,7 +24,7 @@ namespace GameHeaven.AttackGame
         private int _combo;
         private void Start()
         {
-            currentWeapon = 1;
+            currentWeapon = 2;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             weaponsPossible = new bool[3] { true, false, false };
             weaponsPower = new int[3] { 10, 9, 8 };
@@ -117,6 +118,7 @@ namespace GameHeaven.AttackGame
                     ShootWhip();
                     break;
                 case 2:
+                    StartCoroutine(Shoot(1f));
                     ShootArrow();
                     break;
                 case 3:
@@ -134,6 +136,7 @@ namespace GameHeaven.AttackGame
                     rightWhip[1].SetActive(true);
                     rightWhip[1].GetComponent<Projectile>().damage = weaponsPower[0] * 3;
                     StartCoroutine(StopWhip(rightWhip[1]));
+                    _combo = 0;
                 }
                 else
                 {
@@ -149,6 +152,7 @@ namespace GameHeaven.AttackGame
                     leftWhip[1].SetActive(true);
                     leftWhip[1].GetComponent<Projectile>().damage = weaponsPower[0] * 3;
                     StartCoroutine(StopWhip(leftWhip[1]));
+                    _combo = 0;
                 }
                 else
                 {
@@ -167,7 +171,31 @@ namespace GameHeaven.AttackGame
 
         void ShootArrow()
         {
-            
+            Vector3 pos = transform.position;
+            if (_combo == 4)
+            {
+                float tempFloat = -0.1f;
+                for (int i = 0; i < 3; i++)
+                {
+                    GameObject arr = objectManager.MakeObject("arrow", new Vector3(pos.x + tempFloat, 
+                        pos.y + tempFloat, pos.z));
+                    Projectile proj = arr.GetComponent<Projectile>();
+                    proj.SetState(_isHeadingRight);
+                    proj.damage = weaponsPower[1];
+                    proj.ShootArrow(_isHeadingRight, arrowSpeed);
+                    tempFloat += 0.1f;
+                }
+
+                _combo = 0;
+            }
+            else
+            {
+                GameObject arr = objectManager.MakeObject("arrow", pos);
+                Projectile proj = arr.GetComponent<Projectile>();
+                proj.SetState(_isHeadingRight);
+                proj.damage = weaponsPower[1];
+                proj.ShootArrow(_isHeadingRight, arrowSpeed);
+            }
         }
 
         void ShootPyochang()

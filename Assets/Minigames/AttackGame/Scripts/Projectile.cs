@@ -15,6 +15,7 @@ namespace GameHeaven.AttackGame
         private float _rotateDir;
         private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rigidbody;
+        private Tween _tween;
         void OnEnable()
         {
             _name = gameObject.name;
@@ -46,6 +47,19 @@ namespace GameHeaven.AttackGame
 
             if (transform.position.y <= 0f)
             {
+                StopAllCoroutines();
+                _tween.Kill();
+                gameObject.SetActive(false);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            Debug.Log(col.gameObject.tag);
+            if (col.CompareTag("Outline"))
+            {
+                StopAllCoroutines();
+                _tween.Kill();
                 gameObject.SetActive(false);
             }
         }
@@ -54,14 +68,15 @@ namespace GameHeaven.AttackGame
         {
             Vector3 currentPos = transform.position;
             Vector3 newPos = new Vector3(currentPos.x - 3, 0f, currentPos.z);
-            _rigidbody.DOJump(newPos, 2, 1, 1);
+            _tween = _rigidbody.DOJump(newPos, 2, 1, 1);
         }
 
         public void ShootArrow(bool isTowardRight, float speed)
         {
-            if (!isTowardRight) speed *= -1;
+            float tempDir = 1f;
+            if (!isTowardRight) tempDir = -1;
             Vector3 currentPos = transform.position;
-            Vector3 newPos = new Vector3(currentPos.x + speed, 0f, currentPos.z);
+            _tween = transform.DOMoveX(currentPos.x + 20 * tempDir, 10-speed);
         }
     }
 }

@@ -159,7 +159,7 @@ namespace GameHeaven.AttackGame
                     _targetPool = _fox;
                     break;
                 case "arrow":
-                    _targetPool = _fox;
+                    _targetPool = _arrow;
                     break;
                 case "pyochang":
                     _targetPool = _pyochang;
