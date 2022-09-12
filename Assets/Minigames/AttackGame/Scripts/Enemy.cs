@@ -55,6 +55,12 @@ namespace GameHeaven.AttackGame
                 case "gorani":
                     StartCoroutine(GoraniToLeft());
                     break;
+                case "pigeon":
+                    StartCoroutine(PigeonMove());
+                    break;
+                case "cat":
+                    StartCoroutine(CatJump());
+                    break;
             }
         }
 
@@ -89,7 +95,37 @@ namespace GameHeaven.AttackGame
             transform.DOLocalMoveX(transform.position.x + 1.5f, 1f);
             StartCoroutine(GoraniToLeft());
         }
-        
+
+        IEnumerator PigeonMove()
+        {
+            _animator.SetBool("isMove", true);
+            yield return new WaitForSeconds(1f);
+            Vector3 pos = player.transform.position;
+            transform.DOMove(new Vector3(pos.x + 3, pos.y + 2, pos.z), 2);
+            StartCoroutine(PigeonStop());
+        }
+
+        IEnumerator PigeonStop()
+        {
+            yield return new WaitForSeconds(2f);
+            _animator.SetBool("isMove", false);
+        }
+
+        IEnumerator CatJump()
+        {
+            yield return new WaitForSeconds(1f);
+            _animator.SetBool("isMove", true);
+            Vector3 pos = player.transform.position;
+            StartCoroutine(CatStop());
+            transform.DOMoveY(2.5f, 1);
+        }
+
+        IEnumerator CatStop()
+        {
+            yield return new WaitForSeconds(0.9f);
+            _animator.SetBool("isMove", false);
+            StartCoroutine(CatJump());
+        }
     }
 }
 
