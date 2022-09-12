@@ -27,10 +27,15 @@ namespace GameHeaven.AttackGame
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        void OnEnable()
+        public void SetState(bool isBoss, int hp)
         {
+            totalHp = hp;
             hpBar.fillAmount = 1f;
             currentHp = totalHp;
+            if (isBoss)
+            {
+                Vector3 temp = transform.localScale;
+            }
         }
 
         public void HitByProjectile(int damage)
