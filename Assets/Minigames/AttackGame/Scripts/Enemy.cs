@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Random = UnityEngine.Random;
 
 namespace GameHeaven.AttackGame
 {
@@ -40,7 +41,8 @@ namespace GameHeaven.AttackGame
 
         public void DisableObject()
         {
-            
+            StopAllCoroutines();
+            gameObject.SetActive(false);
         }
 
         public void ActivateMovement()
@@ -60,6 +62,9 @@ namespace GameHeaven.AttackGame
                     break;
                 case "cat":
                     StartCoroutine(CatJump());
+                    break;
+                case "bat":
+                    StartCoroutine(BatMove());
                     break;
             }
         }
@@ -125,6 +130,26 @@ namespace GameHeaven.AttackGame
             yield return new WaitForSeconds(0.9f);
             _animator.SetBool("isMove", false);
             StartCoroutine(CatJump());
+        }
+
+        IEnumerator BatMove()
+        {
+            yield return new WaitForSeconds(1f);
+            Vector3 pos = player.transform.position;
+            Vector3 newPos = new Vector3(Random.Range(pos.x - 3.5f, pos.x + 3.5f), Random.Range(pos.y - 0.2f, pos.y + 1.2f),
+                pos.z);
+            if (newPos.x > transform.position.x)
+            {
+                _spriteRenderer.flipX = true;
+            }
+            else
+            {
+                _spriteRenderer.flipX = false;
+            }
+
+            transform.DOMove(newPos, 2);
+            yield return new WaitForSeconds(0.9f);
+            StartCoroutine(BatMove());
         }
     }
 }
