@@ -13,15 +13,21 @@ namespace GameHeaven.AttackGame
         public bool[] weaponsPossible;
         public int[] weaponsPower;
         public GameObject[] squareUIs;
+        public GameObject[] leftWhip;
+        public GameObject[] rightWhip;
         
-        private bool _isRight = true;
+        private bool _isHeadingRight = true;
+        private bool _stopAction = false;
         private SpriteRenderer _spriteRenderer;
         private Vector2 _screenBoundaries;
+        private int _combo;
         private void Start()
         {
+            currentWeapon = 1;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             weaponsPossible = new bool[3] { true, false, false };
-            weaponsPower = new int[3] { 9, 10, 8 };
+            weaponsPower = new int[3] { 10, 9, 8 };
+            StartShooting(2f);
         }
 
         // Update is called once per frame
@@ -36,15 +42,15 @@ namespace GameHeaven.AttackGame
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (_isRight)
+                if (_isHeadingRight)
                 {
                     _spriteRenderer.flipX = false;
-                    _isRight = false;
+                    _isHeadingRight = false;
                 }
                 else
                 {
                     _spriteRenderer.flipX = true;
-                    _isRight = true;
+                    _isHeadingRight = true;
                 }
                 speed *= -1;
             }
@@ -68,7 +74,7 @@ namespace GameHeaven.AttackGame
                 transform.Translate(speed * Time.deltaTime, 0, 0);
             }
         }
-
+        
         void PressWeaponKey()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -91,14 +97,23 @@ namespace GameHeaven.AttackGame
             squareUIs[currentWeapon - 1].GetComponent<Animator>().SetBool("isSelected", false);
             squareUIs[newNum - 1].GetComponent<Animator>().SetBool("isSelected", true);
             currentWeapon = newNum;
+            _combo = 0;
+        }
+
+        void StartShooting(float time)
+        {
+            StartCoroutine(Shoot(time));
         }
 
         IEnumerator Shoot(float time)
         {
             yield return new WaitForSeconds(time);
+            _combo++;
+            if (_stopAction) yield break;
             switch (currentWeapon)
             {
                 case 1:
+                    StartCoroutine(Shoot(0.8f));
                     ShootWhip();
                     break;
                 case 2:
@@ -112,7 +127,42 @@ namespace GameHeaven.AttackGame
 
         void ShootWhip()
         {
-            
+            if (_isHeadingRight)
+            {
+                if (_combo == 4)
+                {
+                    rightWhip[1].SetActive(true);
+                    rightWhip[1].GetComponent<Projectile>().damage = weaponsPower[0] * 3;
+                    StartCoroutine(StopWhip(rightWhip[1]));
+                }
+                else
+                {
+                    rightWhip[0].SetActive(true);
+                    rightWhip[0].GetComponent<Projectile>().damage = weaponsPower[0];
+                    StartCoroutine(StopWhip(rightWhip[0]));
+                }
+            }
+            else
+            {
+                if (_combo == 4)
+                {
+                    leftWhip[1].SetActive(true);
+                    leftWhip[1].GetComponent<Projectile>().damage = weaponsPower[0] * 3;
+                    StartCoroutine(StopWhip(leftWhip[1]));
+                }
+                else
+                {
+                    leftWhip[0].SetActive(true);
+                    leftWhip[0].GetComponent<Projectile>().damage = weaponsPower[0];
+                    StartCoroutine(StopWhip(leftWhip[0]));
+                }
+            }
+        }
+
+        IEnumerator StopWhip(GameObject whipObj)
+        {
+            yield return new WaitForSeconds(0.3f);
+            whipObj.SetActive(false);
         }
 
         void ShootArrow()

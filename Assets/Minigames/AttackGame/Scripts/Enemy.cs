@@ -42,6 +42,11 @@ namespace GameHeaven.AttackGame
         public void HitByProjectile(int damage)
         {
             currentHp -= damage;
+            if (currentHp < 0)
+            {
+                currentHp = 0;
+                Invoke("DisableObject", 0.2f);
+            }
             hpBar.fillAmount = (float)currentHp / totalHp;
         }
 

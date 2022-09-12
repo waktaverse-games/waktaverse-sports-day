@@ -44,7 +44,7 @@ namespace GameHeaven.AttackGame
                 transform.Rotate(0, 0, 180 * Time.deltaTime * _rotateDir);
             }
 
-            if (transform.position.y <= -0f)
+            if (transform.position.y <= 0f)
             {
                 gameObject.SetActive(false);
             }
