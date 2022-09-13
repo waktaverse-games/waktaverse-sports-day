@@ -21,7 +21,7 @@ namespace GameHeaven.AttackGame
         public GameObject[] rightWhip;
         public int totalHp = 100;
         public int currentHp;
-        
+
         private bool _isHeadingRight = true;
         private bool _stopAction = false;
         private SpriteRenderer _spriteRenderer;

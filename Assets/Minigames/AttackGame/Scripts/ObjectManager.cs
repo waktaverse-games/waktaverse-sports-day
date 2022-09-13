@@ -57,6 +57,7 @@ namespace GameHeaven.AttackGame
                 _monkey[i].GetComponent<Enemy>().player = player;
                 _monkey[i].GetComponent<Enemy>().gameManager = gameManager;
                 _monkey[i].GetComponent<Enemy>().objectManager = _objectManager;
+                _monkey[i].GetComponent<Enemy>().tweenId = i;
                 _monkey[i].SetActive(false);
             }
             for (int i = 0; i < _pigeon.Length; i++)
@@ -65,6 +66,7 @@ namespace GameHeaven.AttackGame
                 _pigeon[i].GetComponent<Enemy>().player = player;
                 _pigeon[i].GetComponent<Enemy>().gameManager = gameManager;
                 _pigeon[i].GetComponent<Enemy>().objectManager = _objectManager;
+                _pigeon[i].GetComponent<Enemy>().tweenId = i;
                 _pigeon[i].SetActive(false);
             }
             for (int i = 0; i < _bat.Length; i++)
@@ -73,6 +75,7 @@ namespace GameHeaven.AttackGame
                 _bat[i].GetComponent<Enemy>().player = player;
                 _bat[i].GetComponent<Enemy>().gameManager = gameManager;
                 _bat[i].GetComponent<Enemy>().objectManager = _objectManager;
+                _bat[i].GetComponent<Enemy>().tweenId = i;
                 _bat[i].SetActive(false);
             }
             for (int i = 0; i < _dog.Length; i++)
@@ -81,6 +84,7 @@ namespace GameHeaven.AttackGame
                 _dog[i].GetComponent<Enemy>().player = player;
                 _dog[i].GetComponent<Enemy>().gameManager = gameManager;
                 _dog[i].GetComponent<Enemy>().objectManager = _objectManager;
+                _dog[i].GetComponent<Enemy>().tweenId = i;
                 _dog[i].SetActive(false);
             }
             for (int i = 0; i < _cat.Length; i++)
@@ -89,6 +93,7 @@ namespace GameHeaven.AttackGame
                 _cat[i].GetComponent<Enemy>().player = player;
                 _cat[i].GetComponent<Enemy>().gameManager = gameManager;
                 _cat[i].GetComponent<Enemy>().objectManager = _objectManager;
+                _cat[i].GetComponent<Enemy>().tweenId = i;
                 _cat[i].SetActive(false);
             }
             for (int i = 0; i < _gorani.Length; i++)
@@ -97,6 +102,7 @@ namespace GameHeaven.AttackGame
                 _gorani[i].GetComponent<Enemy>().player = player;
                 _gorani[i].GetComponent<Enemy>().gameManager = gameManager;
                 _gorani[i].GetComponent<Enemy>().objectManager = _objectManager;
+                _gorani[i].GetComponent<Enemy>().tweenId = i;
                 _gorani[i].SetActive(false);
             }
             for (int i = 0; i < _fox.Length; i++)
@@ -105,6 +111,7 @@ namespace GameHeaven.AttackGame
                 _fox[i].GetComponent<Enemy>().player = player;
                 _fox[i].GetComponent<Enemy>().gameManager = gameManager;
                 _fox[i].GetComponent<Enemy>().objectManager = _objectManager;
+                _fox[i].GetComponent<Enemy>().tweenId = i;
                 _fox[i].SetActive(false);
             }
             
@@ -112,18 +119,21 @@ namespace GameHeaven.AttackGame
             {
                 _arrow[i] = Instantiate(arrowPrefab);
                 _arrow[i].GetComponent<Projectile>().gameManager = gameManager;
+                _arrow[i].GetComponent<Projectile>().tweenId = i;
                 _arrow[i].SetActive(false);
             }
             for (int i = 0; i < _pyochang.Length; i++)
             {
                 _pyochang[i] = Instantiate(pyochangPrefab);
                 _pyochang[i].GetComponent<Projectile>().gameManager = gameManager;
+                _pyochang[i].GetComponent<Projectile>().tweenId = i;
                 _pyochang[i].SetActive(false);
             }
             for (int i = 0; i < _poop.Length; i++)
             {
                 _poop[i] = Instantiate(poopPrefab);
                 _poop[i].GetComponent<Projectile>().gameManager = gameManager;
+                _poop[i].GetComponent<Projectile>().tweenId = i;
                 _poop[i].SetActive(false);
             }
         }

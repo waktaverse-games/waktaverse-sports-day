@@ -10,6 +10,7 @@ namespace GameHeaven.AttackGame
     {
         public GameManager gameManager;
         public int damage;
+        public int tweenId;
 
         private string _name;
         private float _rotateDir;
@@ -57,17 +58,22 @@ namespace GameHeaven.AttackGame
         {
             if (col.CompareTag("Outline"))
             {
-                StopAllCoroutines();
-                _tween.Kill();
                 gameObject.SetActive(false);
             }
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+            _tween.Kill();
+            DOTween.Kill(tweenId);
         }
 
         public void PoopThrow(float distance)
         {
             Vector3 currentPos = transform.position;
             Vector3 newPos = new Vector3(currentPos.x - distance, 0f, currentPos.z);
-            _tween = _rigidbody.DOJump(newPos, 2, 1, 1);
+            _tween = _rigidbody.DOJump(newPos, 2, 1, 1).SetId(tweenId);
         }
 
         public void ShootArrow(bool isTowardRight, float speed)
@@ -75,7 +81,7 @@ namespace GameHeaven.AttackGame
             float tempDir = 1f;
             if (!isTowardRight) tempDir = -1;
             Vector3 currentPos = transform.position;
-            _tween = transform.DOMoveX(currentPos.x + 20 * tempDir, 10-speed);
+            _tween = transform.DOMoveX(currentPos.x + 20 * tempDir, 10-speed).SetId(tweenId);
         }
 
         public void ShootPyochang(bool isTowardRight, float speed, float distance)
@@ -84,7 +90,7 @@ namespace GameHeaven.AttackGame
             if (!isTowardRight) tempDir = -1;
             Vector3 currentPos = transform.position;
             _tween = transform.DOJump(new Vector3(currentPos.x + distance * tempDir, 0f, currentPos.z), 
-                1.5f, 1, speed);
+                1.5f, 1, speed).SetId(tweenId);
         }
     }
 }
