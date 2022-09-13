@@ -42,7 +42,7 @@ namespace GameHeaven.AttackGame
         {
             if (_name == "pyochang(Clone)")
             {
-                transform.Rotate(0, 0, 180 * Time.deltaTime * _rotateDir);
+                transform.Rotate(0, 0, 20 * Time.deltaTime * _rotateDir);
             }
 
             if (transform.position.y <= 0f)
@@ -55,7 +55,6 @@ namespace GameHeaven.AttackGame
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log(col.gameObject.tag);
             if (col.CompareTag("Outline"))
             {
                 StopAllCoroutines();
@@ -64,10 +63,10 @@ namespace GameHeaven.AttackGame
             }
         }
 
-        public void PoopThrow()
+        public void PoopThrow(float distance)
         {
             Vector3 currentPos = transform.position;
-            Vector3 newPos = new Vector3(currentPos.x - 3, 0f, currentPos.z);
+            Vector3 newPos = new Vector3(currentPos.x - distance, 0f, currentPos.z);
             _tween = _rigidbody.DOJump(newPos, 2, 1, 1);
         }
 
@@ -77,6 +76,15 @@ namespace GameHeaven.AttackGame
             if (!isTowardRight) tempDir = -1;
             Vector3 currentPos = transform.position;
             _tween = transform.DOMoveX(currentPos.x + 20 * tempDir, 10-speed);
+        }
+
+        public void ShootPyochang(bool isTowardRight, float speed, float distance)
+        {
+            float tempDir = 1f;
+            if (!isTowardRight) tempDir = -1;
+            Vector3 currentPos = transform.position;
+            _tween = transform.DOJump(new Vector3(currentPos.x + distance * tempDir, 0f, currentPos.z), 
+                1.5f, 1, speed);
         }
     }
 }

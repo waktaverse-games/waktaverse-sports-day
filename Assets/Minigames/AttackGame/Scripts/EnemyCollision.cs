@@ -9,11 +9,10 @@ namespace GameHeaven.AttackGame
     {
         private bool _isActivated = false;
         private Enemy _enemy;
-        private bool _isBoss = false;
         private void OnEnable()
         {
             _enemy = GetComponentInParent<Enemy>();
-            if (transform.position.x < 9.8f || _isBoss)
+            if (transform.position.x < 9.8f)
             {
                 _enemy.ActivateMovement();
                 _isActivated = true;
@@ -28,13 +27,16 @@ namespace GameHeaven.AttackGame
                 _enemy.HitByProjectile(gameObj.GetComponent<Projectile>().damage);
             }
 
-            if (gameObj.name == "right" && !_isActivated)
+            if (gameObj.name == "right" && _isActivated)
             {
                 _isActivated = true;
-                _enemy.ActivateMovement();
+                if (!_enemy.isBossMonster)
+                {
+                    _enemy.ActivateMovement();
+                }
             }
 
-            if (gameObj.name == "left" && _isActivated)
+            if (gameObj.name == "left" && (_isActivated || _enemy.isBossMonster))
             {
                 _isActivated = false;
                 _enemy.DisableObject();

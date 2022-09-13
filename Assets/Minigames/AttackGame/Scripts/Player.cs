@@ -10,6 +10,7 @@ namespace GameHeaven.AttackGame
         public ObjectManager objectManager;
         public float speed = 1.0f;
         public float arrowSpeed = 5.0f;
+        public float pyochangTime = 0.75f;
         public int currentWeapon = 2;
         public bool[] weaponsPossible;
         public int[] weaponsPower;
@@ -24,7 +25,7 @@ namespace GameHeaven.AttackGame
         private int _combo;
         private void Start()
         {
-            currentWeapon = 2;
+            currentWeapon = 1;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             weaponsPossible = new bool[3] { true, false, false };
             weaponsPower = new int[3] { 10, 9, 8 };
@@ -122,6 +123,7 @@ namespace GameHeaven.AttackGame
                     ShootArrow();
                     break;
                 case 3:
+                    StartCoroutine(Shoot(0.75f));
                     ShootPyochang();
                     break;
             }
@@ -200,7 +202,30 @@ namespace GameHeaven.AttackGame
 
         void ShootPyochang()
         {
-            
+            Vector3 pos = transform.position;
+            if (_combo == 4)
+            {
+                float tempFloat = 2f;
+                for (int i = 0; i < 3; i++)
+                {
+                    GameObject arr = objectManager.MakeObject("pyochang", pos);
+                    Projectile proj = arr.GetComponent<Projectile>();
+                    proj.SetState(_isHeadingRight);
+                    proj.damage = weaponsPower[2];
+                    proj.ShootPyochang(_isHeadingRight, pyochangTime, tempFloat);
+                    tempFloat += 0.5f;
+                }
+
+                _combo = 0;
+            }
+            else
+            {
+                GameObject arr = objectManager.MakeObject("pyochang", pos);
+                Projectile proj = arr.GetComponent<Projectile>();
+                proj.SetState(_isHeadingRight);
+                proj.damage = weaponsPower[2];
+                proj.ShootPyochang(_isHeadingRight, pyochangTime, 2.5f);
+            }
         }
     }
 }
