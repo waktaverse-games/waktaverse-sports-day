@@ -19,6 +19,11 @@ namespace GameHeaven.AttackGame
             }
         }
 
+        public int Damage()
+        {
+            return _enemy.damage;
+        }
+
         private void OnTriggerEnter2D(Collider2D col)
         {
             GameObject gameObj = col.gameObject;

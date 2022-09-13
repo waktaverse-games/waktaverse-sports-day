@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameHeaven.AttackGame
 {
@@ -12,11 +13,14 @@ namespace GameHeaven.AttackGame
         public float arrowSpeed = 5.0f;
         public float pyochangTime = 0.75f;
         public int currentWeapon = 2;
+        public Image hpBar;
         public bool[] weaponsPossible;
         public int[] weaponsPower;
         public GameObject[] squareUIs;
         public GameObject[] leftWhip;
         public GameObject[] rightWhip;
+        public int totalHp = 100;
+        public int currentHp;
         
         private bool _isHeadingRight = true;
         private bool _stopAction = false;
@@ -25,10 +29,11 @@ namespace GameHeaven.AttackGame
         private int _combo;
         private void Start()
         {
-            currentWeapon = 1;
+            currentWeapon = 2;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             weaponsPossible = new bool[3] { true, false, false };
             weaponsPower = new int[3] { 10, 9, 8 };
+            currentHp = totalHp;
             StartShooting(2f);
         }
 
@@ -38,6 +43,13 @@ namespace GameHeaven.AttackGame
             ChangeDirection();
             MovePlayer();
             PressWeaponKey();
+        }
+
+        public void HitByEnemy(int damage)
+        {
+            currentHp -= damage;
+            if (currentHp < 0) currentHp = 0;
+            hpBar.fillAmount = (float)currentHp / totalHp;
         }
 
         private void ChangeDirection()
@@ -100,6 +112,12 @@ namespace GameHeaven.AttackGame
             squareUIs[newNum - 1].GetComponent<Animator>().SetBool("isSelected", true);
             currentWeapon = newNum;
             _combo = 0;
+        }
+
+        void WeaponFree(int num)
+        {
+            squareUIs[num - 1].SetActive(true);
+            weaponsPossible[num - 1] = true;
         }
 
         void StartShooting(float time)

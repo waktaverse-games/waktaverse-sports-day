@@ -16,6 +16,7 @@ namespace GameHeaven.AttackGame
         public Image hpBar;
         public int totalHp;
         public bool isBossMonster = false;
+        public int damage = 20;
 
         private int currentHp;
         private string _name;
@@ -29,7 +30,7 @@ namespace GameHeaven.AttackGame
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             isBossMonster = false;
-            SetBoss();
+            damage = 10;
         }
 
         private void OnDisable()
@@ -37,11 +38,12 @@ namespace GameHeaven.AttackGame
             DisableObject();
         }
 
-        public void SetState(bool isBoss, int hp)
+        public void SetState(bool isBoss, int hp, int enemyDamage)
         {
             totalHp = hp;
             hpBar.fillAmount = 1f;
             currentHp = totalHp;
+            damage = enemyDamage;
             if (isBoss)
             {
                 SetBoss();
