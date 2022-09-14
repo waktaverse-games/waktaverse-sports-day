@@ -19,6 +19,7 @@ namespace GameHeaven.AttackGame
         public GameObject[] squareUIs;
         public GameObject[] leftWhip;
         public GameObject[] rightWhip;
+        public GameObject rabbit;
         public int totalHp = 100;
         public int currentHp;
 
@@ -27,14 +28,23 @@ namespace GameHeaven.AttackGame
         private SpriteRenderer _spriteRenderer;
         private Vector2 _screenBoundaries;
         private int _combo;
+        private int _rabbit;
         private void Start()
+        {
+            StartGame();
+        }
+
+        void StartGame()
         {
             currentWeapon = 2;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             weaponsPossible = new bool[3] { true, false, false };
             weaponsPower = new int[3] { 10, 9, 8 };
             currentHp = totalHp;
+            _rabbit = 0;
+            rabbit.SetActive(false);
             StartShooting(2f);
+            
         }
 
         // Update is called once per frame
@@ -43,6 +53,19 @@ namespace GameHeaven.AttackGame
             ChangeDirection();
             MovePlayer();
             PressWeaponKey();
+            ActivateRabbit();
+        }
+
+        public void ActivateRabbit()
+        {
+            if (Input.GetKeyDown(KeyCode.S) && _rabbit < 2)
+            {
+                _rabbit += 1;
+                if (_rabbit == 2)
+                {
+                    rabbit.SetActive(true);
+                }
+            }
         }
 
         public void HitByEnemy(int damage)
