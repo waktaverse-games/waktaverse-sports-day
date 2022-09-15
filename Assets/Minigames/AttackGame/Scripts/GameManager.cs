@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace GameHeaven.AttackGame
 {
@@ -61,7 +63,7 @@ namespace GameHeaven.AttackGame
             _stageNum = 1;
             _playerLevelNum = 1;
             _allLevelNum = 1;
-            _defaultHp = 100;
+            _defaultHp = 90;
             _defaultPlayerXpSum = 280;
             _allXpSum = 280;
             _enemyDamage = 10;
@@ -83,10 +85,10 @@ namespace GameHeaven.AttackGame
             _stageNum++;
             for (int i = 0; i < 7; i++)
             {
-                _enemyHps[i] = (int)(_enemyHps[i] * 1.1f);
+                _enemyHps[i] = (int)Math.Truncate(_enemyHps[i] * 1.1f);
             }
-            _enemyDamage = (int)(_enemyDamage * 1.1f);
-            _enemyXp = (int)(_enemyXp * 1.1f);
+            _enemyDamage = (int)Math.Truncate(_enemyDamage * 1.1f);
+            _enemyXp = (int)Math.Truncate(_enemyXp * 1.1f);
             StartCoroutine(SpawnMonsters(0.6f));
         }
 
@@ -121,6 +123,32 @@ namespace GameHeaven.AttackGame
                     new Vector3(Random.Range(11f, 62f), 2, 0));
                 temp.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
             }
+        }
+
+        IEnumerator SpawnBoss(float time)
+        {
+            int bossNum, enemyNum;
+            if (_stageNum < 8)
+            {
+                bossNum = _stageNum - 1;
+                enemyNum = 0;
+            }
+            else
+            {
+                bossNum = Random.Range(0, 7);
+                enemyNum = (int)Math.Truncate((float)(_stageNum - 5) / 3f);
+            }
+            _currentMonsterNum = 1 + enemyNum;
+            yield return new WaitForSeconds(time)
+            for (int i = 0; i < enemyNum; i++)
+            {
+                int enemyCode = Random.Range(0, 7);
+                GameObject tempEnemy = objectManager.MakeObject(_enemyTypes[enemyCode],
+                    new Vector3(Random.Range(50f, 64f), 2, 0));
+                tempEnemy.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
+            }
+            GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(63, 6, 0));
+            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 3, _enemyDamage * 3);
         }
 
         // Update is called once per frame
