@@ -8,101 +8,128 @@ namespace GameHeaven.SpreadGame
     {
         public enum Type { RaNi }
         public int HP;
-        public Type type;
+
+        [SerializeField] Type type;
 
         private Animator anim;
-        [SerializeField] int elapsedFrames;
-        [SerializeField] GameObject projectile;
+
+        [SerializeField] int numOfPatterns;
+
+        [SerializeField] float curPatternDelay, maxPatternDelay;
+        [SerializeField] float curStraightFireDelay, maxStraightFireDelay, straightFireSpeed;
+        [SerializeField] float curCircleFireDelay, maxCircleFireDelay, circleFireSpeed;
+        [SerializeField] Vector2 straightFireDir;
+        [SerializeField] int circleFireNum;
+
+        [SerializeField] private GameObject[] coins, upgradeItems, otherItems;
+        [SerializeField] private GameObject dieEffect;
+        [SerializeField] bool isDeath;
 
         PoolManager pool;
 
         private void Awake()
         {
-            anim = GetComponent<Animator>();
+            anim = transform.parent.gameObject.GetComponent<Animator>();
             pool = FindObjectOfType<PoolManager>();
-
-            StartCoroutine(Think(4));
-            StartCoroutine(Attack(24, 60000000, 100000000, 5));
         }
 
         private void Update()
         {
-
+            if (isDeath) return;
+            Move();
+            Fire();
+            CircleFire();
         }
+
         private void OnTriggerEnter2D(Collider2D collider)
         {
+            if (isDeath) return;
+
             if (collider.CompareTag("Attack"))
             {
                 anim.SetTrigger("Hit");
                 HP -= collider.GetComponent<BulletInfo>().damage;
                 if (collider.GetComponent<BulletInfo>().type != BulletInfo.Type.Slash) collider.gameObject.SetActive(false);
 
-                if (HP <= 0) Die();
+                if (HP <= 0) StartCoroutine(Die());
             }
         }
 
-        IEnumerator Think(float sec)
+        void Move()
         {
-            WaitForSeconds wait = new WaitForSeconds(sec);
+            curPatternDelay += Time.deltaTime;
 
-            while (true)
+            if (curPatternDelay < maxPatternDelay) return;
+
+            int random = Random.Range(0, numOfPatterns);
+
+            anim.SetTrigger("Pattern" + random.ToString());
+
+            curPatternDelay = 0;
+        }
+        void Fire()
+        {
+            curStraightFireDelay += Time.deltaTime;
+
+            if (curStraightFireDelay < maxStraightFireDelay) return;
+
+            pool.MyInstantiate(4, transform.position).GetComponent<Rigidbody2D>().velocity = straightFireDir * straightFireSpeed;
+
+            curStraightFireDelay = 0;
+        }
+        void CircleFire()
+        {
+            curCircleFireDelay += Time.deltaTime;
+
+            if (curCircleFireDelay < maxCircleFireDelay) return;
+
+            for (int i = 0; i < circleFireNum; i++)
             {
-                print(Time.time + " // " + Time.fixedDeltaTime + " // " + Time.deltaTime);
-                yield return wait;
-                switch (Random.Range(0, 2))
-                {
-                    case 0: // Pattern0
-                        anim.SetTrigger("Pattern0");
-                        if (type == Type.RaNi)
-                        {
-                            yield return new WaitForSeconds(0.1f);
-                            StartCoroutine(Attack(1, 12, 0.8f, 7));
-                            yield return new WaitForSeconds(1.9f);
-                            StartCoroutine(Attack(1, 12, 0.8f, 7));
-                            wait = new WaitForSeconds(2.0f);
-                        }
-                        else
-                        {
-                            StartCoroutine(Attack(1, 100, sec, 5));
-                        }
-                        break;
-                    case 1: // Pattern 1
-                        switch (Random.Range(0, 3))
-                        {
-                            case 0:
-                                anim.SetTrigger("Pattern1_Top");
-                                break;
-                            case 1:
-                                anim.SetTrigger("Pattern1_Middle");
-                                break;
-                            case 2:
-                                anim.SetTrigger("Pattern1_Bottom");
-                                break;
-                        }
-                        wait = new WaitForSeconds(4.0f);
-                        break;
-                }
+                pool.MyInstantiate(4, transform.position).GetComponent<Rigidbody2D>().velocity
+                    = Quaternion.AngleAxis(360 / circleFireNum * i, Vector3.forward) * Vector2.right * circleFireSpeed;
             }
+
+            curCircleFireDelay = 0;
         }
 
-        IEnumerator Attack(int num, int times, float sec, float speed) // sec초 안에, 360도 방향으로, num 개수를 times 번 
+        IEnumerator Die()
         {
-            WaitForSeconds wait = new WaitForSeconds(sec / times);
+            isDeath = true;
 
-            for (int i = 0; i < times; i++)
+            GameObject obj = null;
+
+            int[] bulletLVs = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>().bulletLVs;
+
+            int cnt = 0;
+            for (int i = 0; i < bulletLVs.Length; i++)
             {
-                for (int j = 0; j < num; j++)
-                {
-                    pool.MyInstantiate(4, transform.position).GetComponent<Rigidbody2D>().
-                        velocity = Quaternion.AngleAxis(j * (360 / num), Vector3.forward) * new Vector2(-speed, 0);
-                }
+                if (bulletLVs[i] > 0) cnt++;
+            }
+
+            WaitForSeconds wait = new WaitForSeconds(0.2f);
+
+            for (int i = 0; i < 20; i++)
+            {
+                Instantiate(dieEffect, transform.position + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f)),
+                    dieEffect.transform.rotation).transform.localScale = new Vector3(1.0f, 1.0f);
+
+                Instantiate(coins[Random.Range(0, 3)], new Vector3(9, Random.Range(-4.0f, 4.0f), 0), Quaternion.Euler(Vector3.zero));
+
                 yield return wait;
             }
-        }
 
-        void Die()
-        {
-            Destroy(gameObject);
+            obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
+            obj.transform.localScale = new Vector3(0.5f, 0.5f);
+
+            obj = Instantiate(otherItems[Random.Range(0, 2)], transform.position, Quaternion.Euler(Vector3.zero));
+            obj.GetComponent<UpDownMove>().dir = new Vector3(0, -0.05f, 0);
+            obj.transform.localScale = new Vector3(0.5f, 0.5f);
+
+            Instantiate(dieEffect, transform.position, dieEffect.transform.rotation);
+
+            Destroy(transform.parent.gameObject);
+            SpawnManager spawnManager = FindObjectOfType<SpawnManager>();
+            spawnManager.isBossTime = false;
         }
     }
 }
