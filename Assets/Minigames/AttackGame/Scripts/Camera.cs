@@ -8,7 +8,7 @@ namespace GameHeaven.AttackGame
     {
         public GameObject player;
 
-        private bool _isStageChanging = false;
+        public bool isStageChanging = false;
         // Start is called before the first frame update
         void Start()
         {
@@ -20,8 +20,8 @@ namespace GameHeaven.AttackGame
         {
             float playerX = player.transform.position.x;
             Vector3 currentPos = transform.position;
-            if ((playerX > currentPos.x && currentPos.x < 57.6f && !_isStageChanging) || 
-                (playerX > currentPos.x && _isStageChanging))
+            if ((playerX > currentPos.x && currentPos.x < 57.6f && !isStageChanging) || 
+                (playerX > currentPos.x && isStageChanging))
             {
                 Vector3 newVec = new Vector3(playerX, currentPos.y, currentPos.z);
                 transform.position = newVec;
