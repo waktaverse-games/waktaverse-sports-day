@@ -168,13 +168,30 @@ namespace GameHeaven.AttackGame
                 _allXpNum -= _allXpSum;
                 _defaultHp = (int)Math.Truncate((float)(_defaultHp) * 1.05f);
                 _allXpSum = (int)Math.Truncate((float)(_allXpSum) * 1.1f);
+                _hpNum = _defaultHp;
                 hpText.text = _hpNum + " / " + _defaultHp;
                 hpBar.fillAmount = (float)_hpNum / (float)_defaultHp;
             }
             allXpBar.fillAmount = (float)_allXpNum / (float)_allXpSum;
         }
 
-        private void 
+        private void ControlPlayerXp(int newScore)
+        {
+            _playerXpNum += newScore;
+            if (_playerXpNum >= _defaultPlayerXpSum)
+            {
+                _playerLevelNum++;
+                playerLevelText.text = "Lv." + _playerLevelNum;
+                _playerXpNum -= _defaultPlayerXpSum;
+                _hpNum = _defaultHp;
+                hpText.text = _hpNum + " / " + _defaultHp;
+                hpBar.fillAmount = 1f;
+                _defaultPlayerXpSum = (int)Math.Truncate((float)(_defaultPlayerXpSum) * 1.1f);
+                _enemyDamage = (int)Math.Truncate((float)(_enemyDamage) * 1.1f);
+            }
+            playerXpBar.fillAmount = (float)_playerXpNum / (float)_defaultPlayerXpSum;
+            playerXpText.text = _playerXpNum + " / " + _defaultPlayerXpSum;
+        }
     }
 }
 
