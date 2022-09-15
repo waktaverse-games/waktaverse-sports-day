@@ -25,11 +25,13 @@ namespace GameHeaven.AttackGame
             if (gameObj.CompareTag("Ball"))
             {
                 _player.HitByEnemy(gameObj.GetComponent<Projectile>().damage);
+                gameObj.SetActive(false);
             }
 
             if (gameObj.CompareTag("Coin"))
             {
                 _player.HitByCoin();
+                gameObj.SetActive(false);
             }
         }
     }

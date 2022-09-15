@@ -24,7 +24,7 @@ namespace GameHeaven.AttackGame
         public GameObject weapon1;
         public GameObject weapon2;
 
-        private bool _isHeadingRight = true;
+        public bool isHeadingRight = true;
         private bool _stopAction = false;
         private SpriteRenderer _spriteRenderer;
         private Vector2 _screenBoundaries;
@@ -46,10 +46,10 @@ namespace GameHeaven.AttackGame
 
         private void OnDisable()
         {
-            if (!_isHeadingRight)
+            if (!isHeadingRight)
             {
                 _spriteRenderer.flipX = true;
-                _isHeadingRight = true;
+                isHeadingRight = true;
                 speed *= -1;
             }
             squareUIs[1].SetActive(false);
@@ -90,19 +90,19 @@ namespace GameHeaven.AttackGame
             gameManager.GetCoin();
         }
 
-        private void ChangeDirection()
+        public void ChangeDirection()
         {
             if (Input.GetKeyDown(KeyCode.Space) || !isGamePlaying)
             {
-                if (_isHeadingRight)
+                if (isHeadingRight)
                 {
                     _spriteRenderer.flipX = false;
-                    _isHeadingRight = false;
+                    isHeadingRight = false;
                 }
                 else
                 {
                     _spriteRenderer.flipX = true;
-                    _isHeadingRight = true;
+                    isHeadingRight = true;
                 }
                 speed *= -1;
             }
@@ -180,15 +180,15 @@ namespace GameHeaven.AttackGame
             switch (currentWeapon)
             {
                 case 1:
-                    StartCoroutine(Shoot(0.8f));
+                    StartCoroutine(Shoot(0.6f));
                     ShootWhip();
                     break;
                 case 2:
-                    StartCoroutine(Shoot(1f));
+                    StartCoroutine(Shoot(0.8f));
                     ShootArrow();
                     break;
                 case 3:
-                    StartCoroutine(Shoot(0.75f));
+                    StartCoroutine(Shoot(0.7f));
                     ShootPyochang();
                     break;
             }
@@ -196,7 +196,7 @@ namespace GameHeaven.AttackGame
 
         void ShootWhip()
         {
-            if (_isHeadingRight)
+            if (isHeadingRight)
             {
                 if (_combo == 4)
                 {
@@ -247,9 +247,9 @@ namespace GameHeaven.AttackGame
                     GameObject arr = objectManager.MakeObject("arrow", new Vector3(pos.x + tempFloat, 
                         pos.y + tempFloat, pos.z));
                     Projectile proj = arr.GetComponent<Projectile>();
-                    proj.SetState(_isHeadingRight);
+                    proj.SetState(isHeadingRight);
                     proj.damage = weaponsPower[1];
-                    proj.ShootArrow(_isHeadingRight, arrowSpeed);
+                    proj.ShootArrow(isHeadingRight, arrowSpeed);
                     tempFloat += 0.1f;
                 }
 
@@ -259,9 +259,9 @@ namespace GameHeaven.AttackGame
             {
                 GameObject arr = objectManager.MakeObject("arrow", pos);
                 Projectile proj = arr.GetComponent<Projectile>();
-                proj.SetState(_isHeadingRight);
+                proj.SetState(isHeadingRight);
                 proj.damage = weaponsPower[1];
-                proj.ShootArrow(_isHeadingRight, arrowSpeed);
+                proj.ShootArrow(isHeadingRight, arrowSpeed);
             }
         }
 
@@ -275,9 +275,9 @@ namespace GameHeaven.AttackGame
                 {
                     GameObject arr = objectManager.MakeObject("pyochang", pos);
                     Projectile proj = arr.GetComponent<Projectile>();
-                    proj.SetState(_isHeadingRight);
+                    proj.SetState(isHeadingRight);
                     proj.damage = weaponsPower[2];
-                    proj.ShootPyochang(_isHeadingRight, pyochangTime, tempFloat);
+                    proj.ShootPyochang(isHeadingRight, pyochangTime, tempFloat);
                     tempFloat += 0.5f;
                 }
 
@@ -287,9 +287,9 @@ namespace GameHeaven.AttackGame
             {
                 GameObject arr = objectManager.MakeObject("pyochang", pos);
                 Projectile proj = arr.GetComponent<Projectile>();
-                proj.SetState(_isHeadingRight);
+                proj.SetState(isHeadingRight);
                 proj.damage = weaponsPower[2];
-                proj.ShootPyochang(_isHeadingRight, pyochangTime, 2.5f);
+                proj.ShootPyochang(isHeadingRight, pyochangTime, 2.5f);
             }
         }
     }

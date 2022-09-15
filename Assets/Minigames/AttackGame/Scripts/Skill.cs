@@ -28,7 +28,7 @@ namespace GameHeaven.AttackGame
         private void OnTriggerEnter2D(Collider2D col)
         {
             GameObject gameObj = col.gameObject;
-            if (gameObj.CompareTag("Enemy"))
+            if (gameObj.CompareTag("Player"))
             {
                 if (isArrow)
                 {

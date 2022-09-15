@@ -30,9 +30,10 @@ namespace GameHeaven.AttackGame
             if (gameObj.CompareTag("Attack"))
             {
                 _enemy.HitByProjectile(gameObj.GetComponent<Projectile>().damage);
+                gameObj.SetActive(false);
             }
 
-            if (gameObj.name == "right" && _isActivated)
+            if (gameObj.name == "right" && !_isActivated)
             {
                 _isActivated = true;
                 if (!_enemy.isBossMonster)

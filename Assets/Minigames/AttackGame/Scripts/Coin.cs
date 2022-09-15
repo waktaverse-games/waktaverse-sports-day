@@ -18,6 +18,7 @@ namespace GameHeaven.AttackGame
 
         private void OnDisable()
         {
+            gameManager.DeleteCoin();
             isFalling = false;
         }
 
@@ -37,13 +38,12 @@ namespace GameHeaven.AttackGame
             if (isFalling)
             {
                 Vector3 currPos = transform.position;
-                Vector3 pos = new Vector3(currPos.x, (float)(currPos.y - 1.4 * Time.deltaTime), currPos.z);
+                Vector3 pos = new Vector3(0, -1.4f * Time.deltaTime, 0);
                 transform.Translate(pos);
             }
 
             if (transform.position.y < 0f)
             {
-                gameManager.DeleteCoin();
                 gameObject.SetActive(false);
             }
         }

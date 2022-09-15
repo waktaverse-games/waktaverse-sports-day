@@ -24,6 +24,7 @@ namespace GameHeaven.AttackGame
         private Animator _animator;
         private SpriteRenderer _spriteRenderer;
         private Tween _tween;
+        private bool _isAlive;
 
         private void Start()
         {
@@ -40,6 +41,7 @@ namespace GameHeaven.AttackGame
             hpBar.fillAmount = 1f;
             currentHp = totalHp;
             damage = enemyDamage;
+            _isAlive = true;
             if (isBoss)
             {
                 SetBoss();
@@ -64,10 +66,11 @@ namespace GameHeaven.AttackGame
         {
             currentHp -= damageProj;
             gameManager.EnemyGetHit();
-            if (currentHp <= 0)
+            if (currentHp <= 0 && _isAlive)
             {
                 currentHp = 0;
                 gameManager.GetEnemyXp(isBossMonster);
+                _isAlive = false;
                 Invoke("DisableObject", 0.2f);
             }
             hpBar.fillAmount = (float)currentHp / totalHp;

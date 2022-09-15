@@ -67,6 +67,7 @@ namespace GameHeaven.AttackGame
 
         public void NewGame()
         {
+            _tempCoinNum = 15;
             _isGameEnd = false;
             mainCamera.transform.position.Set(0, 0, -10);
             playerObject.transform.position.Set(0, 1, 0);
@@ -94,6 +95,8 @@ namespace GameHeaven.AttackGame
             playerXpBar.fillAmount = 0;
             retryObject.SetActive(false);
             coinText.text = "x " + _coinNum;
+            player.transform.position = new Vector3(0, 1, 0);
+            mainCamera.transform.position = new Vector3(0, 0, -10);
             StartCoroutine(StartGame());
         }
 
@@ -129,6 +132,13 @@ namespace GameHeaven.AttackGame
             yield return new WaitForSeconds(time);
             player.isGamePlaying = false;
             mainCameraScript.isStageChanging = true;
+            // mainCameraScript.isGamePlaying = true;
+            if (!player.isHeadingRight)
+            {
+                player.ChangeDirection();
+            }
+
+            Debug.Log(_tempCoinNum);
             player.transform.DOMoveX(76.8f, 3);
             yield return new WaitForSeconds(3.1f);
             for (int i = 0; i < currMap.Length; i++)
@@ -141,17 +151,21 @@ namespace GameHeaven.AttackGame
             mainCamera.transform.position = new Vector3(0, 0, -10);
             yield return new WaitForSeconds(0.1f);
             player.isGamePlaying = true;
+            mainCameraScript.isGamePlaying = true;
             StartCoroutine(NewStage(1));
         }
 
         IEnumerator NewStage(float time)
         {
+            _tempCoinNum = 15;
             _isBossStage = false;
             ++_stageNum;
             stageStartText.text = "STAGE " + _stageNum;
             stageStartAnim.enabled = true;
+            stageStart.SetActive(true);
             stageStartAnim.Play("StageNumMove", -1, 0f);
             yield return new WaitForSeconds(1.1f);
+            stageStart.SetActive(false);
             stageStartAnim.enabled = false;
             player.isGamePlaying = true;
             stageText.text = "STAGE " + _stageNum;
@@ -164,7 +178,6 @@ namespace GameHeaven.AttackGame
             StartCoroutine(SpawnMonsters(0.6f));
             yield return new WaitForSeconds(2f);
             nextMap.sprite = mapSprites[_stageNum % mapSprites.Length];
-            _tempCoinNum = 15;
         }
 
         IEnumerator SpawnMonsters(float time)
