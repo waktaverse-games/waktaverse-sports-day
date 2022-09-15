@@ -26,6 +26,11 @@ namespace GameHeaven.AttackGame
             {
                 _player.HitByEnemy(gameObj.GetComponent<Projectile>().damage);
             }
+
+            if (gameObj.CompareTag("Coin"))
+            {
+                _player.HitByCoin();
+            }
         }
     }
 }

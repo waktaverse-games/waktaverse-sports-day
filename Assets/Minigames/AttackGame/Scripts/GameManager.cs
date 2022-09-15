@@ -30,6 +30,7 @@ namespace GameHeaven.AttackGame
         public TextMeshProUGUI playerXpText;
         public TextMeshProUGUI stageText;
         public TextMeshProUGUI stageStartText;
+        public TextMeshProUGUI coinText;
 
         private int _scoreNum;
         private int _hpNum;
@@ -47,6 +48,7 @@ namespace GameHeaven.AttackGame
         private string[] _enemyTypes;
         private int[] _enemyHps;
         private Animator stageStartAnim;
+        private int _coinNum;
         // Start is called before the first frame update
         void Start()
         {
@@ -83,6 +85,7 @@ namespace GameHeaven.AttackGame
             allXpBar.fillAmount = 0;
             playerXpBar.fillAmount = 0;
             retryObject.SetActive(false);
+            coinText.text = "x " + _coinNum;
             StartCoroutine(StartGame());
         }
 
@@ -182,6 +185,13 @@ namespace GameHeaven.AttackGame
             }
             GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(63, 6, 0));
             tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 3, _enemyDamage * 3);
+        }
+
+        public void GetCoin()
+        {
+            _coinNum++;
+            coinText.text = "x " + _coinNum;
+            ControlScore(10);
         }
 
         public void PlayerGetHit(int damage)

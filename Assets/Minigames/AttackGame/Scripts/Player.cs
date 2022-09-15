@@ -50,6 +50,8 @@ namespace GameHeaven.AttackGame
                 _isHeadingRight = true;
                 speed *= -1;
             }
+            squareUIs[1].SetActive(false);
+            squareUIs[2].SetActive(false);
         }
 
         // Update is called once per frame
@@ -79,6 +81,11 @@ namespace GameHeaven.AttackGame
         public void HitByEnemy(int damage)
         {
             gameManager.PlayerGetHit(damage);
+        }
+
+        public void HitByCoin()
+        {
+            gameManager.GetCoin();
         }
 
         private void ChangeDirection()
