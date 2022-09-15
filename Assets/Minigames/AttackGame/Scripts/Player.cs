@@ -21,6 +21,8 @@ namespace GameHeaven.AttackGame
         public GameObject rabbit;
         public bool isGamePlaying;
         public GameManager gameManager;
+        public GameObject weapon1;
+        public GameObject weapon2;
 
         private bool _isHeadingRight = true;
         private bool _stopAction = false;
@@ -150,10 +152,18 @@ namespace GameHeaven.AttackGame
             _combo = 0;
         }
 
-        void WeaponFree(int num)
+        public void WeaponDrop()
+        {
+            weapon1.SetActive(true);
+            weapon2.SetActive(true);
+        }
+
+        public void WeaponFree(int num)
         {
             squareUIs[num - 1].SetActive(true);
             weaponsPossible[num - 1] = true;
+            weapon1.SetActive(false);
+            weapon2.SetActive(false);
         }
 
         void StartShooting(float time)
