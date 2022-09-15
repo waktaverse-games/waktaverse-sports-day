@@ -145,6 +145,7 @@ namespace GameHeaven.AttackGame
             {
                 _coin[i] = Instantiate(coinPrefab);
                 _coin[i].GetComponent<Coin>().tweenId = i + 600;
+                _coin[i].GetComponent<Coin>().gameManager = gameManager;
                 _coin[i].SetActive(false);
             }
         }
@@ -187,6 +188,9 @@ namespace GameHeaven.AttackGame
                     break;
                 case "poop":
                     _targetPool = _poop;
+                    break;
+                case "coin":
+                    _targetPool = _coin;
                     break;
             }
             for (int i = 0; i < _targetPool.Length; i++)

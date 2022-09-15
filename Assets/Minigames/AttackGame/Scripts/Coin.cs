@@ -8,12 +8,11 @@ namespace GameHeaven.AttackGame
     public class Coin : MonoBehaviour
     {
         public int tweenId;
+        public GameManager gameManager;
 
         private bool isFalling = false;
         private void OnEnable()
-        {
-            transform.position = new Vector3(UnityEngine.Random.Range(50.6f, 64.6f),
-                UnityEngine.Random.Range(2.5f, 4.5f), 0);
+        { 
             isFalling = false;
         }
 
@@ -22,7 +21,7 @@ namespace GameHeaven.AttackGame
             isFalling = false;
         }
 
-        public void StartFallCount(float time)
+        public void StartFall(float time)
         {
             StartCoroutine(Fall(time));
         }
@@ -44,6 +43,7 @@ namespace GameHeaven.AttackGame
 
             if (transform.position.y < 0f)
             {
+                gameManager.DeleteCoin();
                 gameObject.SetActive(false);
             }
         }

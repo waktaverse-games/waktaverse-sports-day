@@ -34,11 +34,6 @@ namespace GameHeaven.AttackGame
             damage = 10;
         }
 
-        private void OnDisable()
-        {
-            DisableObject();
-        }
-
         public void SetState(bool isBoss, int hp, int enemyDamage)
         {
             totalHp = hp;
@@ -82,7 +77,7 @@ namespace GameHeaven.AttackGame
         {
             StopAllCoroutines();
             _tween.Kill();
-            DOTween.Kill("enemy");
+            DOTween.Kill(tweenId);
             gameManager.EnemyDead();
             if (isBossMonster)
             {
@@ -91,6 +86,19 @@ namespace GameHeaven.AttackGame
                 transform.localScale = new Vector3(scale.x / 1.6f, scale.y / 1.6f, scale.z);
             }
             gameObject.SetActive(false);
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+            _tween.Kill();
+            DOTween.Kill(tweenId);
+            if (isBossMonster)
+            {
+                isBossMonster = false;
+                Vector3 scale = transform.localScale;
+                transform.localScale = new Vector3(scale.x / 1.6f, scale.y / 1.6f, scale.z);
+            }
         }
 
         public void ActivateMovement()

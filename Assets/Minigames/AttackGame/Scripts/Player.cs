@@ -164,6 +164,7 @@ namespace GameHeaven.AttackGame
             weaponsPossible[num - 1] = true;
             weapon1.SetActive(false);
             weapon2.SetActive(false);
+            StartCoroutine(gameManager.CoinDrop());
         }
 
         void StartShooting(float time)

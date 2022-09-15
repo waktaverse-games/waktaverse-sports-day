@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,7 +37,7 @@ namespace GameHeaven.AttackGame
         public TextMeshProUGUI coinText;
 
         private int _scoreNum;
-        private int _hpNum;
+        public int _hpNum;
         private int _playerXpNum;
         private int _allXpNum;
         private int _stageNum;
@@ -52,6 +53,9 @@ namespace GameHeaven.AttackGame
         private int[] _enemyHps;
         private Animator stageStartAnim;
         private int _coinNum;
+        private int _tempCoinNum;
+        private bool _isBossStage;
+        private bool _isGameEnd;
         // Start is called before the first frame update
         void Start()
         {
@@ -63,6 +67,7 @@ namespace GameHeaven.AttackGame
 
         public void NewGame()
         {
+            _isGameEnd = false;
             mainCamera.transform.position.Set(0, 0, -10);
             playerObject.transform.position.Set(0, 1, 0);
             _enemyHps = new int[7] { 15, 15, 10, 10, 10, 10, 12 };
@@ -94,10 +99,15 @@ namespace GameHeaven.AttackGame
 
         IEnumerator StartGame()
         {
-            stageStartAnim.Play("StageNumMove", -1, 0f);
-            yield return new WaitForSeconds(1f);
+            startGameText.SetActive(true);
+            _isBossStage = false;
+            startGameText.GetComponent<Animator>().Play("StartGame", -1, 0f);
+            yield return new WaitForSeconds(1.1f);
+            startGameText.SetActive(false);
+            yield return new WaitForSeconds(0.7f);
             playerObject.SetActive(true);
             yield return new WaitForSeconds(0.1f);
+            StartCoroutine(SpawnMonsters(0.3f));
             stageStart.SetActive(false);
             player.isGamePlaying = true;
             mainCameraScript.isGamePlaying = true;
@@ -106,20 +116,43 @@ namespace GameHeaven.AttackGame
         private IEnumerator GameEnd()
         {
             mainCameraScript.isGamePlaying = false;
+            _isGameEnd = true;
             objectManager.FailGame();
             yield return new WaitForSeconds(0.2f);
             retryObject.SetActive(true);
             playerObject.SetActive(false);
             retryAnim.Play("EndGame", -1, 0f);
         }
-        
-        IEnumerator NewStage()
+
+        IEnumerator MoveToNextStage(float time)
         {
+            yield return new WaitForSeconds(time);
+            player.isGamePlaying = false;
+            mainCameraScript.isStageChanging = true;
+            player.transform.DOMoveX(76.8f, 3);
+            yield return new WaitForSeconds(3.1f);
+            for (int i = 0; i < currMap.Length; i++)
+            {
+                currMap[i].sprite = mapSprites[_stageNum % mapSprites.Length];
+            }
+            yield return new WaitForSeconds(0.1f);
+            mainCameraScript.isStageChanging = false;
+            player.transform.position = new Vector3(0, 1, 0);
+            mainCamera.transform.position = new Vector3(0, 0, -10);
+            yield return new WaitForSeconds(0.1f);
+            player.isGamePlaying = true;
+            StartCoroutine(NewStage(1));
+        }
+
+        IEnumerator NewStage(float time)
+        {
+            _isBossStage = false;
             ++_stageNum;
             stageStartText.text = "STAGE " + _stageNum;
             stageStartAnim.enabled = true;
-            // stageStartAnim.Play("StageNumMove", -1, 0f);
+            stageStartAnim.Play("StageNumMove", -1, 0f);
             yield return new WaitForSeconds(1.1f);
+            stageStartAnim.enabled = false;
             player.isGamePlaying = true;
             stageText.text = "STAGE " + _stageNum;
             for (int i = 0; i < 7; i++)
@@ -129,12 +162,16 @@ namespace GameHeaven.AttackGame
             _enemyDamage = (int)Math.Truncate(_enemyDamage * 1.1f);
             _enemyXp = (int)Math.Truncate(_enemyXp * 1.1f);
             StartCoroutine(SpawnMonsters(0.6f));
+            yield return new WaitForSeconds(2f);
+            nextMap.sprite = mapSprites[_stageNum % mapSprites.Length];
+            _tempCoinNum = 15;
         }
 
         IEnumerator SpawnMonsters(float time)
         {
             int enemyType;
             _currentMonsterNum = 25;
+            _isGameEnd = false;
             switch (_stageNum)
             {
                 case 1:
@@ -197,6 +234,15 @@ namespace GameHeaven.AttackGame
             ControlScore(10);
         }
 
+        public void DeleteCoin()
+        {
+            _tempCoinNum--;
+            if (_tempCoinNum == 0)
+            {
+                StartCoroutine(MoveToNextStage(2f));
+            }
+        }
+
         public void PlayerGetHit(int damage)
         {
             ControlPlayerHp(damage);
@@ -210,6 +256,41 @@ namespace GameHeaven.AttackGame
         public void EnemyDead()
         {
             _currentMonsterNum--;
+            if (!_isBossStage && _currentMonsterNum == 0 && !_isGameEnd)
+            {
+                _isBossStage = true;
+                StartCoroutine(SpawnBoss(2));
+            }
+            else if (_isBossStage && _currentMonsterNum == 0 && !_isGameEnd)
+            {
+                _isBossStage = false;
+                _isGameEnd = true;
+                if (_stageNum == 1)
+                {
+                    StartCoroutine(StageOneSelection());
+                }
+                else
+                {
+                    StartCoroutine(CoinDrop());
+                }
+            }
+        }
+
+        IEnumerator StageOneSelection()
+        {
+            yield return new WaitForSeconds(1f);
+            player.WeaponDrop();
+        }
+
+        public IEnumerator CoinDrop()
+        {
+            yield return new WaitForSeconds(1f);
+            for (int i = 0; i < 15; i++)
+            {
+                Vector3 newPos = new Vector3(Random.Range(50.6f, 64.6f), Random.Range(2.5f, 4.5f), 0);
+                GameObject coin = objectManager.MakeObject("coin", newPos);
+                coin.GetComponent<Coin>().StartFall(2f);
+            }
         }
 
         public void GetEnemyXp(bool isBoss)
@@ -244,7 +325,6 @@ namespace GameHeaven.AttackGame
                 _allXpNum -= _allXpSum;
                 _defaultHp = (int)Math.Truncate((float)(_defaultHp) * 1.05f);
                 _allXpSum = (int)Math.Truncate((float)(_allXpSum) * 1.1f);
-                _hpNum = _defaultHp;
                 hpText.text = _hpNum + " / " + _defaultHp;
                 hpBar.fillAmount = (float)_hpNum / (float)_defaultHp;
             }
