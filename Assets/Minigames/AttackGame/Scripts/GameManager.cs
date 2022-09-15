@@ -22,6 +22,9 @@ namespace GameHeaven.AttackGame
         public GameObject retryObject;
         public Animator retryAnim;
         public GameObject playerObject;
+        public SpriteRenderer[] currMap;
+        public SpriteRenderer nextMap;
+        public Sprite[] mapSprites;
         
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI playerLevelText;
