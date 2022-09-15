@@ -83,6 +83,7 @@ namespace GameHeaven.AttackGame
         void NewStage()
         {
             _stageNum++;
+            stageText.text = "STAGE " + _stageNum;
             for (int i = 0; i < 7; i++)
             {
                 _enemyHps[i] = (int)Math.Truncate(_enemyHps[i] * 1.1f);
@@ -139,7 +140,7 @@ namespace GameHeaven.AttackGame
                 enemyNum = (int)Math.Truncate((float)(_stageNum - 5) / 3f);
             }
             _currentMonsterNum = 1 + enemyNum;
-            yield return new WaitForSeconds(time)
+            yield return new WaitForSeconds(time);
             for (int i = 0; i < enemyNum; i++)
             {
                 int enemyCode = Random.Range(0, 7);
@@ -151,11 +152,29 @@ namespace GameHeaven.AttackGame
             tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 3, _enemyDamage * 3);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void ControlScore(int newScore)
         {
-
+            _scoreNum += newScore;
+            scoreText.text = _scoreNum.ToString();
         }
+
+        private void ControlAllXp(int newScore)
+        {
+            _allXpNum += newScore;
+            if (_allXpNum >= _allXpSum)
+            {
+                _allLevelNum++;
+                allLevelText.text = "Lv " + _allLevelNum;
+                _allXpNum -= _allXpSum;
+                _defaultHp = (int)Math.Truncate((float)(_defaultHp) * 1.05f);
+                _allXpSum = (int)Math.Truncate((float)(_allXpSum) * 1.1f);
+                hpText.text = _hpNum + " / " + _defaultHp;
+                hpBar.fillAmount = (float)_hpNum / (float)_defaultHp;
+            }
+            allXpBar.fillAmount = (float)_allXpNum / (float)_allXpSum;
+        }
+
+        private void 
     }
 }
 
