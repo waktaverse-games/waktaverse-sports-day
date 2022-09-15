@@ -13,9 +13,10 @@ namespace GameHeaven.SpreadGame
 
         [SerializeField] GameObject coinAcquireEffect, bombImageUI;
 
-        [SerializeField] private int curSectorIdx, curSectorDir, bombCnt;
+        [SerializeField] private int bombCnt;
         [SerializeField] private bool hasShield;
 
+        private int curSectorIdx, curSectorDir;
         PoolManager pool;
         Rigidbody2D rigid;
         Animator anim;
@@ -25,12 +26,6 @@ namespace GameHeaven.SpreadGame
             rigid = GetComponent<Rigidbody2D>();
             pool = FindObjectOfType<PoolManager>();
             anim = GetComponent<Animator>();
-
-            bulletLVs[0] = bulletLVs[1] = bulletLVs[2] = 0;
-            bulletLVs[3] = 1;
-
-            bombCnt = 3;
-            hasShield = false;
 
             // bullet √ ±‚»≠
             BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
@@ -61,7 +56,7 @@ namespace GameHeaven.SpreadGame
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.CompareTag("Enemy"))
+            if (collider.CompareTag("Enemy") || collider.CompareTag("Ball"))
             {
                 if (hasShield)
                 {
