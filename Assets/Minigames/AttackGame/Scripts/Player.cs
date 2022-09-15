@@ -13,15 +13,14 @@ namespace GameHeaven.AttackGame
         public float arrowSpeed = 5.0f;
         public float pyochangTime = 0.75f;
         public int currentWeapon = 2;
-        public Image hpBar;
         public bool[] weaponsPossible;
         public int[] weaponsPower;
         public GameObject[] squareUIs;
         public GameObject[] leftWhip;
         public GameObject[] rightWhip;
         public GameObject rabbit;
-        public int totalHp = 100;
-        public int currentHp;
+        public bool isGamePlaying;
+        public GameManager gameManager;
 
         private bool _isHeadingRight = true;
         private bool _stopAction = false;
@@ -29,31 +28,40 @@ namespace GameHeaven.AttackGame
         private Vector2 _screenBoundaries;
         private int _combo;
         private int _rabbit;
-        private void Start()
-        {
-            StartGame();
-        }
 
-        void StartGame()
+        void OnEnable()
         {
-            currentWeapon = 2;
+            currentWeapon = 1;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             weaponsPossible = new bool[3] { true, false, false };
             weaponsPower = new int[3] { 10, 9, 8 };
-            currentHp = totalHp;
             _rabbit = 0;
             rabbit.SetActive(false);
             StartShooting(2f);
-            
+            isGamePlaying = true;
+
+        }
+
+        private void OnDisable()
+        {
+            if (!_isHeadingRight)
+            {
+                _spriteRenderer.flipX = true;
+                _isHeadingRight = true;
+                speed *= -1;
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
-            ChangeDirection();
-            MovePlayer();
-            PressWeaponKey();
-            ActivateRabbit();
+            if (isGamePlaying)
+            {
+                ChangeDirection();
+                MovePlayer();
+                PressWeaponKey();
+                ActivateRabbit();
+            }
         }
 
         public void ActivateRabbit()
@@ -70,14 +78,12 @@ namespace GameHeaven.AttackGame
 
         public void HitByEnemy(int damage)
         {
-            currentHp -= damage;
-            if (currentHp < 0) currentHp = 0;
-            hpBar.fillAmount = (float)currentHp / totalHp;
+            gameManager.PlayerGetHit(damage);
         }
 
         private void ChangeDirection()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || !isGamePlaying)
             {
                 if (_isHeadingRight)
                 {

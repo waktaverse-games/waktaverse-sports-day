@@ -18,6 +18,10 @@ namespace GameHeaven.AttackGame
         public Image playerXpBar;
         public Image allXpBar;
         public GameObject stageStart;
+        public GameObject startGameText;
+        public GameObject retryObject;
+        public Animator retryAnim;
+        public GameObject playerObject;
         
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI playerLevelText;
@@ -48,14 +52,13 @@ namespace GameHeaven.AttackGame
         {
             _enemyTypes = new string[7] {"monkey", "gorani", "fox", "cat", "pigeon", "bat", "dog"};
             stageStartAnim = stageStart.GetComponent<Animator>();
-            // stageStartAnim.Play("StageNumMove", -1, 0f);
             NewGame();
         }
 
         void NewGame()
         {
             mainCamera.transform.position.Set(0, 0, -10);
-            player.transform.position.Set(0, 1, 0);
+            playerObject.transform.position.Set(0, 1, 0);
             _enemyHps = new int[7] { 15, 15, 10, 10, 10, 10, 12 };
             _scoreNum = 0;
             _playerXpNum = 0;
@@ -65,7 +68,7 @@ namespace GameHeaven.AttackGame
             _allLevelNum = 1;
             _defaultHp = 90;
             _defaultPlayerXpSum = 280;
-            _allXpSum = 280;
+            _allXpSum = 300;
             _enemyDamage = 10;
             _enemyXp = 10;
             _hpNum = _defaultHp;
@@ -78,6 +81,29 @@ namespace GameHeaven.AttackGame
             hpBar.fillAmount = 1;
             allXpBar.fillAmount = 0;
             playerXpBar.fillAmount = 0;
+            retryObject.SetActive(false);
+            StartCoroutine(StartGame());
+        }
+
+        IEnumerator StartGame()
+        {
+            stageStartAnim.Play("StageNumMove", -1, 0f);
+            yield return new WaitForSeconds(1f);
+            playerObject.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            stageStart.SetActive(false);
+            player.isGamePlaying = true;
+            mainCameraScript.isGamePlaying = true;
+        }
+        
+        private IEnumerator GameEnd()
+        {
+            mainCameraScript.isGamePlaying = false;
+            objectManager.FailGame();
+            yield return new WaitForSeconds(0.2f);
+            retryObject.SetActive(true);
+            playerObject.SetActive(false);
+            retryAnim.Play("EndGame", -1, 0f);
         }
         
         void NewStage()
@@ -152,6 +178,37 @@ namespace GameHeaven.AttackGame
             tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 3, _enemyDamage * 3);
         }
 
+        public void PlayerGetHit(int damage)
+        {
+            ControlPlayerHp(damage);
+        }
+
+        public void EnemyGetHit()
+        {
+            ControlAllXp((int)(_enemyXp * 0.3));
+        }
+
+        public void EnemyDead()
+        {
+            _currentMonsterNum--;
+        }
+
+        public void GetEnemyXp(bool isBoss)
+        {
+            if (isBoss)
+            {
+                ControlAllXp(_enemyXp * 2);
+                ControlPlayerXp(_enemyXp * 2);
+                ControlScore(50);
+            }
+            else
+            {
+                ControlAllXp(_enemyXp);
+                ControlPlayerXp(_enemyXp);
+                ControlScore(20);
+            }
+        }
+
         private void ControlScore(int newScore)
         {
             _scoreNum += newScore;
@@ -192,6 +249,19 @@ namespace GameHeaven.AttackGame
             playerXpBar.fillAmount = (float)_playerXpNum / (float)_defaultPlayerXpSum;
             playerXpText.text = _playerXpNum + " / " + _defaultPlayerXpSum;
         }
+
+        private void ControlPlayerHp(int hp)
+        {
+            _hpNum -= hp;
+            if (_hpNum <= 0)
+            {
+                _hpNum = 0;
+                StartCoroutine(GameEnd());
+            }
+            hpText.text = _hpNum + " / " + _defaultHp;
+            hpBar.fillAmount = (float)_hpNum / (float)_defaultHp;
+        }
+        
     }
 }
 

@@ -51,7 +51,7 @@ namespace GameHeaven.AttackGame
             }
         }
 
-        public void SetBoss()
+        private void SetBoss()
         {
             isBossMonster = true;
             Vector3 scale = transform.localScale;
@@ -68,9 +68,11 @@ namespace GameHeaven.AttackGame
         public void HitByProjectile(int damageProj)
         {
             currentHp -= damageProj;
-            if (currentHp < 0)
+            gameManager.EnemyGetHit();
+            if (currentHp <= 0)
             {
                 currentHp = 0;
+                gameManager.GetEnemyXp(isBossMonster);
                 Invoke("DisableObject", 0.2f);
             }
             hpBar.fillAmount = (float)currentHp / totalHp;
@@ -81,6 +83,7 @@ namespace GameHeaven.AttackGame
             StopAllCoroutines();
             _tween.Kill();
             DOTween.Kill("enemy");
+            gameManager.EnemyDead();
             if (isBossMonster)
             {
                 isBossMonster = false;
@@ -230,7 +233,9 @@ namespace GameHeaven.AttackGame
             }
 
             GameObject poop = objectManager.MakeObject("poop", transform.position);
-            poop.GetComponent<Projectile>().PoopThrow(distance);
+            Projectile proj = poop.GetComponent<Projectile>();
+            proj.PoopThrow(distance);
+            proj.damage = (int)(damage / 2);
             StartCoroutine(DogThrow());
         }
     }

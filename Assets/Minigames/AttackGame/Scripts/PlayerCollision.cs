@@ -21,7 +21,11 @@ namespace GameHeaven.AttackGame
             {
                 _player.HitByEnemy(gameObj.GetComponent<EnemyCollision>().Damage());
             }
-            
+
+            if (gameObj.CompareTag("Ball"))
+            {
+                _player.HitByEnemy(gameObj.GetComponent<Projectile>().damage);
+            }
         }
     }
 }
