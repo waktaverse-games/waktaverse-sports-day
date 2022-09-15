@@ -52,10 +52,11 @@ namespace GameHeaven.AttackGame
         {
             _enemyTypes = new string[7] {"monkey", "gorani", "fox", "cat", "pigeon", "bat", "dog"};
             stageStartAnim = stageStart.GetComponent<Animator>();
+            stageStartAnim.enabled = false;
             NewGame();
         }
 
-        void NewGame()
+        public void NewGame()
         {
             mainCamera.transform.position.Set(0, 0, -10);
             playerObject.transform.position.Set(0, 1, 0);
@@ -106,9 +107,14 @@ namespace GameHeaven.AttackGame
             retryAnim.Play("EndGame", -1, 0f);
         }
         
-        void NewStage()
+        IEnumerator NewStage()
         {
-            _stageNum++;
+            ++_stageNum;
+            stageStartText.text = "STAGE " + _stageNum;
+            stageStartAnim.enabled = true;
+            // stageStartAnim.Play("StageNumMove", -1, 0f);
+            yield return new WaitForSeconds(1.1f);
+            player.isGamePlaying = true;
             stageText.text = "STAGE " + _stageNum;
             for (int i = 0; i < 7; i++)
             {
