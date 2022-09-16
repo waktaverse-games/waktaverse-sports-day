@@ -13,7 +13,8 @@ namespace GameHeaven.CrashGame
         private Rigidbody2D rigidBody;
         private float horizontal;
         [SerializeField]
-        private float speed = 3f;           // ÇÃ·§Æû ¼Óµµ
+        private float initialSpeed = 3f;
+        private float speed;                // ÇÃ·§Æû ¼Óµµ
         [SerializeField]
         private float jumpAmount = 100f;
 
@@ -31,6 +32,11 @@ namespace GameHeaven.CrashGame
         {
             get { return speed; }
             set { speed = value; }
+        }
+
+        public float InitialSpeed
+        {
+            get { return initialSpeed; }
         }
 
         private void Awake()
@@ -99,13 +105,19 @@ namespace GameHeaven.CrashGame
             }
         }
 
-        public void BallInit()
+        public void PlatformInit()
+        {
+            Speed = initialSpeed;
+            BallInit();
+        }
+
+        private void BallInit()
         {
             ball = Ball.SpawnBall(ballStartPosition.position);
             BallInit(ball);
         }
 
-        public void BallInit(Ball ball)
+        private void BallInit(Ball ball)
         {
             ball.StopBall();
             isFired = false;

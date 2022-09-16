@@ -1230,6 +1230,8 @@ MonoBehaviour:
   itemPrefabList:
   - {fileID: -4419884499778429057, guid: a39981f40e35d2647a3e3584c90239c3, type: 3}
   - {fileID: 2588984476685509855, guid: 5e6e506fb5969564a94b3f916e3eda56, type: 3}
+  - {fileID: -7308788374544424442, guid: 5f786013f819ebf4ab808f828c21fbec, type: 3}
+  - {fileID: 2588984476685509855, guid: 5e6e506fb5969564a94b3f916e3eda56, type: 3}
   brickColorArray: []
 --- !u!114 &1679308196
 MonoBehaviour:
@@ -1641,7 +1643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fccd86e7851474aa96b7f49511cb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  initialSpeed: 8
   jumpAmount: 20
   force: {x: 0, y: 0, z: 0}
   wallLeft: {fileID: 155887874}
