@@ -17,6 +17,8 @@ namespace GameHeaven.AttackGame
                 _enemy.ActivateMovement();
                 _isActivated = true;
             }
+
+            _isActivated = false;
         }
 
         public int Damage()

@@ -79,8 +79,7 @@ namespace GameHeaven.AttackGame
         public void DisableObject()
         {
             StopAllCoroutines();
-            _tween.Kill();
-            DOTween.Kill(tweenId);
+            DOTween.Kill(this);
             gameManager.EnemyDead();
             if (isBossMonster)
             {
@@ -94,8 +93,7 @@ namespace GameHeaven.AttackGame
         private void OnDisable()
         {
             StopAllCoroutines();
-            _tween.Kill();
-            DOTween.Kill(tweenId);
+            DOTween.Kill(this);
             if (isBossMonster)
             {
                 isBossMonster = false;
