@@ -237,7 +237,7 @@ namespace GameHeaven.AttackGame
                 tempEnemy.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
             }
             GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(63, 6, 0));
-            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 3, _enemyDamage * 3);
+            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 6, _enemyDamage * 3);
         }
 
         public void GetCoin()

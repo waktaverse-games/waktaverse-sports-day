@@ -184,11 +184,11 @@ namespace GameHeaven.AttackGame
                     ShootWhip();
                     break;
                 case 2:
-                    StartCoroutine(Shoot(0.8f));
+                    StartCoroutine(Shoot(1.2f));
                     ShootArrow();
                     break;
                 case 3:
-                    StartCoroutine(Shoot(0.7f));
+                    StartCoroutine(Shoot(0.9f));
                     ShootPyochang();
                     break;
             }

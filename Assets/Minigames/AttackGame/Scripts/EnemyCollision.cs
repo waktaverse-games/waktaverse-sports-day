@@ -27,9 +27,11 @@ namespace GameHeaven.AttackGame
         private void OnTriggerEnter2D(Collider2D col)
         {
             GameObject gameObj = col.gameObject;
-            if (gameObj.CompareTag("Attack"))
+            if (gameObj.CompareTag("Attack") && !gameObj.GetComponent<Projectile>().isHit)
             {
+                if (gameObj.name != "pyochang(Clone)") gameObj.GetComponent<Projectile>().isHit = true;
                 _enemy.HitByProjectile(gameObj.GetComponent<Projectile>().damage);
+                // Debug.Log(gameObj.GetComponent<Projectile>().damage);
                 gameObj.SetActive(false);
             }
 

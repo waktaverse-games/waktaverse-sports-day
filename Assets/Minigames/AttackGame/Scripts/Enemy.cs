@@ -213,7 +213,7 @@ namespace GameHeaven.AttackGame
         {
             yield return new WaitForSeconds(1f);
             Vector3 pos = player.transform.position;
-            Vector3 newPos = new Vector3(Random.Range(pos.x - 3.5f, pos.x + 3.5f), Random.Range(pos.y - 0.2f, pos.y + 1.2f),
+            Vector3 newPos = new Vector3(Random.Range(pos.x - 3.5f, pos.x + 3.5f), Random.Range(pos.y - 0.2f, pos.y + 0.7f),
                 pos.z);
             if (newPos.x > transform.position.x)
             {
@@ -225,7 +225,7 @@ namespace GameHeaven.AttackGame
             }
 
             _tween = transform.DOMove(newPos, 2).SetId(tweenId);
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(1.9f);
             StartCoroutine(BatMove());
             
         }

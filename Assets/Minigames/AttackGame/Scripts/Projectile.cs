@@ -11,6 +11,7 @@ namespace GameHeaven.AttackGame
         public GameManager gameManager;
         public int damage;
         public int tweenId;
+        public bool isHit;
 
         private string _name;
         private float _rotateDir;
@@ -22,6 +23,7 @@ namespace GameHeaven.AttackGame
             _name = gameObject.name;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rigidbody = GetComponent<Rigidbody2D>();
+            isHit = false;
         }
 
         public void SetState(bool toRight)
