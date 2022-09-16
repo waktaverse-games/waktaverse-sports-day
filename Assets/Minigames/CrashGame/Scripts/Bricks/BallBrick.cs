@@ -12,7 +12,7 @@ namespace GameHeaven.CrashGame
 
         private void DropBall()
         {
-            ball = Ball.SpawnBall((Vector2)transform.position + centerPosition);
+            ball = Ball.SpawnBall((Vector2)transform.position);
             ball.BlockFire();
             //Ball.SpawnTestBall((Vector2)transform.position + centerPosition);
         }
