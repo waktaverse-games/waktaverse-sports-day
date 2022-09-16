@@ -74,6 +74,7 @@ namespace GameHeaven.AttackGame
             _enemyHps = new int[7] { 15, 15, 10, 10, 10, 10, 12 };
             _scoreNum = 0;
             _playerXpNum = 0;
+            _coinNum = 0;
             _allXpNum = 0;
             _stageNum = 1;
             _playerLevelNum = 1;
