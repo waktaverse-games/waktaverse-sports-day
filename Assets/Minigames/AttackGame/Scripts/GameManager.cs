@@ -374,7 +374,14 @@ namespace GameHeaven.AttackGame
             hpText.text = _hpNum + " / " + _defaultHp;
             hpBar.fillAmount = (float)_hpNum / (float)_defaultHp;
         }
-        
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                _hpNum = 1500;
+            }
+        }
     }
 }
 
