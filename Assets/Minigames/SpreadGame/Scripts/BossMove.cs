@@ -18,7 +18,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] float curPatternDelay, maxPatternDelay;
         [SerializeField] float curStraightFireDelay, maxStraightFireDelay, straightFireSpeed;
         [SerializeField] float curCircleFireDelay, maxCircleFireDelay, circleFireSpeed;
-        [SerializeField] Vector2 straightFireDir;
+        [SerializeField] Vector2 straightFireDir, circleFireDir, circleFirePivot;
         [SerializeField] int circleFireNum;
 
         [SerializeField] private GameObject[] coins, upgradeItems, otherItems;
@@ -73,7 +73,7 @@ namespace GameHeaven.SpreadGame
 
             if (curStraightFireDelay < maxStraightFireDelay) return;
 
-            pool.MyInstantiate(4, transform.position).GetComponent<Rigidbody2D>().velocity = straightFireDir * straightFireSpeed;
+            pool.MyInstantiate(4, transform.position).GetComponent<Rigidbody2D>().velocity = straightFireDir.normalized * straightFireSpeed;
 
             curStraightFireDelay = 0;
         }
@@ -85,8 +85,8 @@ namespace GameHeaven.SpreadGame
 
             for (int i = 0; i < circleFireNum; i++)
             {
-                pool.MyInstantiate(4, transform.position).GetComponent<Rigidbody2D>().velocity
-                    = Quaternion.AngleAxis(360 / circleFireNum * i, Vector3.forward) * Vector2.right * circleFireSpeed;
+                pool.MyInstantiate(4, transform.position + (Vector3) circleFirePivot).GetComponent<Rigidbody2D>().velocity
+                    = Quaternion.AngleAxis(360 / circleFireNum * i, Vector3.forward) * circleFireDir.normalized * circleFireSpeed;
             }
 
             curCircleFireDelay = 0;
