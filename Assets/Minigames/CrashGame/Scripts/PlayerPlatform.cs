@@ -9,11 +9,12 @@ namespace GameHeaven.CrashGame
     {
         private Ball ball;
 
-        private Transform ballStartPosition;
         private Rigidbody2D rigidBody;
         private float horizontal;
         [SerializeField]
-        private float initialSpeed = 3f;
+        private float initialSpeed = 8f;
+        [SerializeField]
+        private float initialPlatformXScale = 1.5f;
         private float speed;                // 플랫폼 속도
         [SerializeField]
         private float jumpAmount = 100f;
@@ -28,16 +29,22 @@ namespace GameHeaven.CrashGame
         private bool isFired;               // 공이 발사되었는지 여부
         private bool isJumping;             // 점프중?
 
+        private Transform ballStartPosition;
+        private Transform platform;
+        private Transform playerCharacter;
+
+        public Transform BallStartPosition { get { return ballStartPosition; } }
+        public Transform Platform { get { return platform; } }
+        public Transform PlayerCharacter { get { return playerCharacter; } }
+
         public float Speed
         {
             get { return speed; }
             set { speed = value; }
         }
 
-        public float InitialSpeed
-        {
-            get { return initialSpeed; }
-        }
+        public float InitialPlatformXScale { get { return initialPlatformXScale; } }
+        public float InitialSpeed { get { return initialSpeed; } }
 
         private void Awake()
         {
@@ -45,6 +52,8 @@ namespace GameHeaven.CrashGame
             clampLeft = wallLeft.transform.position.x + 1;
             clampRight = wallRight.transform.position.x - 1;
             ballStartPosition = transform.GetChild(0);
+            playerCharacter = transform.GetChild(1);
+            platform = transform.GetChild(2);
             //force = new Vector3(1, 1, 0).normalized * ball.InitialSpeed;
         }
 
@@ -107,6 +116,7 @@ namespace GameHeaven.CrashGame
 
         public void PlatformInit()
         {
+            platform.localScale = new Vector3(initialPlatformXScale, 2, 1);
             Speed = initialSpeed;
             BallInit();
         }
