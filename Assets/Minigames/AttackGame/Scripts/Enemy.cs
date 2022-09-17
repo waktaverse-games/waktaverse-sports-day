@@ -14,6 +14,7 @@ namespace GameHeaven.AttackGame
         public GameManager gameManager;
         public ObjectManager objectManager;
         public Image hpBar;
+        public SFXManager sfxManager;
         public int totalHp;
         public bool isBossMonster = false;
         public int damage = 20;
@@ -246,6 +247,22 @@ namespace GameHeaven.AttackGame
             proj.PoopThrow(distance);
             proj.damage = (int)(damage / 2);
             StartCoroutine(DogThrow());
+        }
+
+        public void PlaySound(string objectName)
+        {
+            if (objectName == "arrow(Clone)")
+            {
+                sfxManager.PlaySfx(2);
+            }
+            else if (objectName == "pyochang(Clone)")
+            {
+                sfxManager.PlaySfx(3);
+            }
+            else
+            {
+                sfxManager.PlaySfx(1);
+            }
         }
     }
 }

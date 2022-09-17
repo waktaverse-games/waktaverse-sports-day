@@ -62,6 +62,7 @@ namespace GameHeaven.AttackGame
             {
                 gameObject.SetActive(false);
             }
+            
         }
 
         private void OnDisable()

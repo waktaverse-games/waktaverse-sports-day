@@ -7,6 +7,8 @@ namespace GameHeaven.AttackGame
 {
     public class PlayerCollision : MonoBehaviour
     {
+        public SFXManager _sfxManager;
+        
         private Player _player;
 
         private void OnEnable()
@@ -17,6 +19,7 @@ namespace GameHeaven.AttackGame
         private void OnTriggerEnter2D(Collider2D col)
         {
             GameObject gameObj = col.gameObject;
+            string objectName = gameObj.name;
             if (gameObj.CompareTag("Enemy"))
             {
                 _player.HitByEnemy(gameObj.GetComponent<EnemyCollision>().Damage());
@@ -32,6 +35,7 @@ namespace GameHeaven.AttackGame
             {
                 _player.HitByCoin();
                 gameObj.SetActive(false);
+                _sfxManager.PlaySfx(0);
             }
         }
     }

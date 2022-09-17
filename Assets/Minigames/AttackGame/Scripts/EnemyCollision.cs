@@ -31,6 +31,7 @@ namespace GameHeaven.AttackGame
             GameObject gameObj = col.gameObject;
             if (gameObj.CompareTag("Attack") && !gameObj.GetComponent<Projectile>().isHit)
             {
+                _enemy.PlaySound(gameObj.name);
                 if (gameObj.name != "pyochang(Clone)") gameObj.GetComponent<Projectile>().isHit = true;
                 _enemy.HitByProjectile(gameObj.GetComponent<Projectile>().damage);
                 // Debug.Log(gameObj.GetComponent<Projectile>().damage);
