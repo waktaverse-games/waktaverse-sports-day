@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 282913350}
   m_Layer: 0
   m_Name: Border
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1339,6 +1339,7 @@ MonoBehaviour:
   cpSpawnSpeed: 1.2
   cpSpawnSpeedAmount: 0.001
   cpSpawnSpeedMin: 0.5
+  itemProb: 
 --- !u!4 &1030131206
 Transform:
   m_ObjectHideFlags: 0
