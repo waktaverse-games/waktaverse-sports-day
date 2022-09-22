@@ -6,7 +6,7 @@ namespace GameHeaven.SpreadGame
 {
     public class BossMove : MonoBehaviour
     {
-        public enum Type { RaNi }
+        public enum Type { RaNi, DdulGi }
         public int HP;
 
         [SerializeField] Type type;
@@ -18,12 +18,17 @@ namespace GameHeaven.SpreadGame
         [SerializeField] float curPatternDelay, maxPatternDelay;
         [SerializeField] float curStraightFireDelay, maxStraightFireDelay, straightFireSpeed;
         [SerializeField] float curCircleFireDelay, maxCircleFireDelay, circleFireSpeed;
-        [SerializeField] Vector2 straightFireDir, circleFireDir, circleFirePivot;
+        [SerializeField] Vector2 straightFireDir;
+        [SerializeField] float randomDirY;
+        [SerializeField] bool isRandomDir;
+        [SerializeField] Vector2 circleFireDir, circleFirePivot;
         [SerializeField] int circleFireNum;
 
         [SerializeField] private GameObject[] coins, upgradeItems, otherItems;
         [SerializeField] private GameObject dieEffect;
         [SerializeField] bool isDeath;
+
+        private float curCageFireDelay;
 
         PoolManager pool;
 
@@ -39,6 +44,11 @@ namespace GameHeaven.SpreadGame
             Move();
             Fire();
             CircleFire();
+
+            if (type == Type.DdulGi)
+            {
+                FireCage();
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -73,7 +83,8 @@ namespace GameHeaven.SpreadGame
 
             if (curStraightFireDelay < maxStraightFireDelay) return;
 
-            pool.MyInstantiate(4, transform.position).GetComponent<Rigidbody2D>().velocity = straightFireDir.normalized * straightFireSpeed;
+            pool.MyInstantiate(4, transform.position).GetComponent<Rigidbody2D>().velocity =
+                (isRandomDir ? new Vector2(Random.Range(0, -1f), randomDirY).normalized : straightFireDir.normalized) * straightFireSpeed;
 
             curStraightFireDelay = 0;
         }
@@ -90,6 +101,17 @@ namespace GameHeaven.SpreadGame
             }
 
             curCircleFireDelay = 0;
+        }
+        void FireCage()
+        {
+            curCageFireDelay += Time.deltaTime;
+
+            if (curCageFireDelay < 2.1f) return;
+
+            pool.MyInstantiate(6, new Vector3(6.6f, Random.Range(-3.5f, 3.5f), 0)).GetComponent<Rigidbody2D>().velocity
+                = new Vector2(-8, 0);
+
+            curCageFireDelay = 0;
         }
 
         IEnumerator Die()

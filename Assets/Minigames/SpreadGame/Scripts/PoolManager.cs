@@ -15,6 +15,7 @@ namespace GameHeaven.SpreadGame
         public GameObject[] straightBullets; // 3
         public GameObject[] bananaBullets; // 4
         public GameObject[] poopBullets; // 5
+        public GameObject[] cageBullets; // 6
 
         private void Awake()
         {
@@ -37,6 +38,9 @@ namespace GameHeaven.SpreadGame
 
             poopBullets = new GameObject[20];
             for (int i = 0; i < poopBullets.Length; i++) poopBullets[i] = Instantiate(bulletPrefabs[5]);
+
+            cageBullets = new GameObject[3];
+            for (int i = 0; i < cageBullets.Length; i++) cageBullets[i] = Instantiate(bulletPrefabs[6]);
         }
 
         public GameObject MyInstantiate(int idx, Vector2 pos)
@@ -62,6 +66,9 @@ namespace GameHeaven.SpreadGame
                     break;
                 case 5:
                     targetPool = poopBullets;
+                    break;
+                case 6:
+                    targetPool = cageBullets;
                     break;
             }
 

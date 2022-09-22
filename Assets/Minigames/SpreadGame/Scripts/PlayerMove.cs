@@ -14,7 +14,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] GameObject coinAcquireEffect, bombImageUI;
 
         [SerializeField] private int bombCnt;
-        [SerializeField] private bool hasShield;
+        [SerializeField] private bool hasShield, isStun;
 
         private int curSectorIdx, curSectorDir;
         PoolManager pool;
@@ -136,7 +136,7 @@ namespace GameHeaven.SpreadGame
                         }
                     case 't': // S't'raight
                         {
-                            int cnt  = 0;
+                            int cnt = 0;
                             for (int i = 0; i < bulletLVs.Length; i++)
                             {
                                 if (i == 3) continue;
@@ -179,10 +179,28 @@ namespace GameHeaven.SpreadGame
                 }
                 */
             }
+            else if (collider.CompareTag("Brick")) // ¶Ô±â »õÀå
+            {
+                StartCoroutine(Stun(0.5f, collider));
+            }
         }
 
+        IEnumerator Stun(float sec, Collider2D col)
+        {
+            isStun = true;
+            rigid.velocity = Vector2.zero;
+            col.transform.position = transform.position;
+            col.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+            yield return new WaitForSeconds(sec);
+
+            isStun = false;
+            col.gameObject.SetActive(false);
+        }
         void Move()
         {
+            if (isStun) return;
+
             if (rigid.velocity.sqrMagnitude > speed * speed)
             {
                 rigid.velocity = rigid.velocity.normalized * speed;
