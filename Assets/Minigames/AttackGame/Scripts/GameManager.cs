@@ -74,6 +74,7 @@ namespace GameHeaven.AttackGame
             _enemyHps = new int[7] { 15, 15, 10, 10, 10, 10, 12 };
             _scoreNum = 0;
             _playerXpNum = 0;
+            _coinNum = 0;
             _allXpNum = 0;
             _stageNum = 1;
             _playerLevelNum = 1;
@@ -237,7 +238,7 @@ namespace GameHeaven.AttackGame
                 tempEnemy.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
             }
             GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(63, 6, 0));
-            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 3, _enemyDamage * 3);
+            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 6, _enemyDamage * 3);
         }
 
         public void GetCoin()
@@ -373,7 +374,14 @@ namespace GameHeaven.AttackGame
             hpText.text = _hpNum + " / " + _defaultHp;
             hpBar.fillAmount = (float)_hpNum / (float)_defaultHp;
         }
-        
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                _hpNum = 1500;
+            }
+        }
     }
 }
 

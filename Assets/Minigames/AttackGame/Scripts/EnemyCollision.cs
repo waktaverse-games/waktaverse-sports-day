@@ -17,6 +17,8 @@ namespace GameHeaven.AttackGame
                 _enemy.ActivateMovement();
                 _isActivated = true;
             }
+
+            _isActivated = false;
         }
 
         public int Damage()
@@ -27,9 +29,12 @@ namespace GameHeaven.AttackGame
         private void OnTriggerEnter2D(Collider2D col)
         {
             GameObject gameObj = col.gameObject;
-            if (gameObj.CompareTag("Attack"))
+            if (gameObj.CompareTag("Attack") && !gameObj.GetComponent<Projectile>().isHit)
             {
+                _enemy.PlaySound(gameObj.name);
+                if (gameObj.name != "pyochang(Clone)") gameObj.GetComponent<Projectile>().isHit = true;
                 _enemy.HitByProjectile(gameObj.GetComponent<Projectile>().damage);
+                // Debug.Log(gameObj.GetComponent<Projectile>().damage);
                 gameObj.SetActive(false);
             }
 

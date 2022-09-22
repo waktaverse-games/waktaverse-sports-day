@@ -14,6 +14,7 @@ namespace GameHeaven.AttackGame
         public GameManager gameManager;
         public ObjectManager objectManager;
         public Image hpBar;
+        public SFXManager sfxManager;
         public int totalHp;
         public bool isBossMonster = false;
         public int damage = 20;
@@ -79,8 +80,7 @@ namespace GameHeaven.AttackGame
         public void DisableObject()
         {
             StopAllCoroutines();
-            _tween.Kill();
-            DOTween.Kill(tweenId);
+            DOTween.Kill(this);
             gameManager.EnemyDead();
             if (isBossMonster)
             {
@@ -94,8 +94,7 @@ namespace GameHeaven.AttackGame
         private void OnDisable()
         {
             StopAllCoroutines();
-            _tween.Kill();
-            DOTween.Kill(tweenId);
+            DOTween.Kill(this);
             if (isBossMonster)
             {
                 isBossMonster = false;
@@ -213,7 +212,7 @@ namespace GameHeaven.AttackGame
         {
             yield return new WaitForSeconds(1f);
             Vector3 pos = player.transform.position;
-            Vector3 newPos = new Vector3(Random.Range(pos.x - 3.5f, pos.x + 3.5f), Random.Range(pos.y - 0.2f, pos.y + 1.2f),
+            Vector3 newPos = new Vector3(Random.Range(pos.x - 3.5f, pos.x + 3.5f), Random.Range(pos.y - 0.2f, pos.y + 0.7f),
                 pos.z);
             if (newPos.x > transform.position.x)
             {
@@ -225,7 +224,7 @@ namespace GameHeaven.AttackGame
             }
 
             _tween = transform.DOMove(newPos, 2).SetId(tweenId);
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(1.9f);
             StartCoroutine(BatMove());
             
         }
@@ -248,6 +247,22 @@ namespace GameHeaven.AttackGame
             proj.PoopThrow(distance);
             proj.damage = (int)(damage / 2);
             StartCoroutine(DogThrow());
+        }
+
+        public void PlaySound(string objectName)
+        {
+            if (objectName == "arrow(Clone)")
+            {
+                sfxManager.PlaySfx(2);
+            }
+            else if (objectName == "pyochang(Clone)")
+            {
+                sfxManager.PlaySfx(3);
+            }
+            else
+            {
+                sfxManager.PlaySfx(1);
+            }
         }
     }
 }
