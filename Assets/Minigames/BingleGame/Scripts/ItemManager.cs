@@ -28,12 +28,6 @@ namespace GameHeaven.BingleGame
             {
                 Destroy(gameObject);
             }
-
-            if (collision.gameObject.tag == "Player")
-            {
-                // 특별한 이펙트? 같은거 넣어야하나...
-                Destroy(gameObject);
-            }
         }
     }
 }
