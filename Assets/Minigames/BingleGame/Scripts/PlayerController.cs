@@ -19,7 +19,8 @@ namespace GameHeaven.BingleGame
 
         private Vector2 dir = Vector2.right;
 
-
+        [SerializeField] AudioSource turnSFX;
+        [SerializeField] AudioSource itemSFX;
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -42,6 +43,8 @@ namespace GameHeaven.BingleGame
             CheckCoolTime();
             if(Input.GetKeyDown(KeyCode.Space) && ableToMove)
             {
+                turnSFX.Play();
+
                 ableToMove = false;
                 curTime = 0;
                 movingLeft = !movingLeft;
@@ -83,6 +86,12 @@ namespace GameHeaven.BingleGame
             {
                 GameManager.instance.isGameOver = true;
             }
+            else if(collision.gameObject.tag == "Coin")
+            {
+                itemSFX.Play();
+                Destroy(collision.gameObject);  // 코인 파괴
+                // 이후 코인 스코어 관리 코드...
+            }    
         }
     }
 }

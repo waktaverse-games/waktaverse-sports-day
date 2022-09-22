@@ -26,6 +26,14 @@ namespace GameHeaven.BingleGame
                 transform.Translate(Vector3.left * movingSpeed * Time.deltaTime + Vector3.up * GameSpeedController.instance.speed * Time.deltaTime);
             }
         }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == "Border")
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
 
