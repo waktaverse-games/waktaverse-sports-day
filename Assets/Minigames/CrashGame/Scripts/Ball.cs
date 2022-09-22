@@ -91,7 +91,7 @@ namespace GameHeaven.CrashGame
                     else
                     {
                         // 플랫폼 운동방향에 따라 반사 각도 변화
-                        Vector2 platformVelocity = collision.GetComponent<Rigidbody2D>().velocity;
+                        Vector2 platformVelocity = collision.GetComponentInParent<Rigidbody2D>().velocity;
                         Debug.Log($"Platform Velocity: {platformVelocity.x}, {platformVelocity.y}");
 
                         float delta = Mathf.Sign(velocity.y) * ((-platformVelocity.x * 2f) + (platformVelocity.y * Mathf.Sign(velocity.x) * 1.3f));

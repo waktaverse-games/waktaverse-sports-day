@@ -20,6 +20,8 @@ namespace GameHeaven.SpreadGame
             SpawnRepeatedly(true);
             SpawnBossRepeatedly();
         }
+
+
         void SpawnRepeatedly(bool isElite)
         {
             if (isBossTime)
