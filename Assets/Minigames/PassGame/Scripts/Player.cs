@@ -12,7 +12,7 @@ namespace GameHeaven.PassGame
         private Animator _anim;
 
         public float jumpPower = 3.0f;
-
+        public bool reachedJump = false;
         public GameManager gameManager;
 
         // Start is called before the first frame update
@@ -43,8 +43,10 @@ namespace GameHeaven.PassGame
             if (col.gameObject.CompareTag("Bottom"))
             {
                 _isGrounded = true;
+                reachedJump = false;
                 _anim.SetBool("isJump", false);
             }
+            
         }
 
         private void OnTriggerEnter2D(Collider2D col)

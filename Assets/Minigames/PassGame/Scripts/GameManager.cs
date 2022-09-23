@@ -48,6 +48,7 @@ namespace GameHeaven.PassGame
             endText.SetActive(false);
             button.SetActive(false);
             startText.SetActive(true);
+            playerScript.reachedJump = false;
             _score = 0;
             _stage = 1;
             Time.timeScale = 1;
@@ -96,7 +97,7 @@ namespace GameHeaven.PassGame
             yield return new WaitForSeconds(time);
             int rnd = Random.Range(0, _stageStrings[_stage].Count);
             objectManager.MakeObject(_stageStrings[_stage][rnd], _spawnPos);
-            StartCoroutine(StageSpawn(6f));
+            StartCoroutine(StageSpawn(4.5f));
         }
     }
 }
