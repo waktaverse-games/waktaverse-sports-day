@@ -17,6 +17,7 @@ namespace GameHeaven.PassGame
         public GameObject bugPrefab;
         public GameObject goraniPrefab;
         public GameObject jupokPrefab;
+        public GameObject coinPrefab;
 
         private GameObject[] _egi;
         private GameObject[] _bidul;
@@ -25,6 +26,7 @@ namespace GameHeaven.PassGame
         private GameObject[] _bug;
         private GameObject[] _gorani;
         private GameObject[] _jupok;
+        private GameObject[] _coin;
         private GameObject[] _targetPool;
 
         // Start is called before the first frame update
@@ -37,6 +39,7 @@ namespace GameHeaven.PassGame
             _bug = new GameObject[10];
             _gorani = new GameObject[10];
             _jupok = new GameObject[10];
+            _coin = new GameObject[10];
             Generate();
         }
 
@@ -105,6 +108,12 @@ namespace GameHeaven.PassGame
                 _jupok[i].GetComponent<EnemyDefaultMove>().deletePosX = posX;
                 _jupok[i].SetActive(false);
             }
+            for (int i = 0; i < _coin.Length; i++)
+            {
+                _coin[i] = Instantiate(coinPrefab);
+                _coin[i].GetComponent<Coin>().deletePosX = posX;
+                _coin[i].SetActive(false);
+            }
         }
 
         public void MakeObject(string type, Vector3 pos)
@@ -131,6 +140,9 @@ namespace GameHeaven.PassGame
                     break;
                 case "jupok":
                     _targetPool = _jupok;
+                    break;
+                case "coin":
+                    _targetPool = _coin;
                     break;
             }
 
