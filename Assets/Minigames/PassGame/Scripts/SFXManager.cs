@@ -18,5 +18,10 @@ namespace GameHeaven.PassGame
         {
             _audioSource.PlayOneShot(sounds[num]);
         }
+
+        public void StopSfx()
+        {
+            _audioSource.Stop();
+        }
     }
 }

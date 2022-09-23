@@ -39,7 +39,7 @@ namespace GameHeaven.PassGame
             _bug = new GameObject[10];
             _gorani = new GameObject[10];
             _jupok = new GameObject[10];
-            _coin = new GameObject[10];
+            _coin = new GameObject[5];
             Generate();
         }
 
@@ -194,6 +194,11 @@ namespace GameHeaven.PassGame
             for (int i = 0; i < _jupok.Length; i++)
             {
                 _jupok[i].SetActive(false);
+            }
+
+            for (int i = 0; i < _coin.Length; i++)
+            {
+                _coin[i].SetActive(false);
             }
         }
     }

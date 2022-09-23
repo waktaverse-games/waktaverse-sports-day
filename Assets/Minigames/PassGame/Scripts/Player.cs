@@ -40,6 +40,13 @@ namespace GameHeaven.PassGame
             }
         }
 
+        public void ResetGame()
+        {
+            _anim.SetBool("isJump", false);
+            _isGrounded = true;
+            _rigid.velocity = Vector2.zero;
+        }
+
         private void OnCollisionEnter2D(Collision2D col)
         {
             if (col.gameObject.CompareTag("Bottom"))

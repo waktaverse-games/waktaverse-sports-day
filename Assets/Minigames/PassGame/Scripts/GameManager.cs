@@ -18,6 +18,7 @@ namespace GameHeaven.PassGame
         public GameObject startText;
         public GameObject endText;
         public GameObject button;
+        public GameObject toMain;
         public TextMeshProUGUI coinText;
         public SFXManager SfxManager;
         public float jumpPower;
@@ -53,6 +54,7 @@ namespace GameHeaven.PassGame
         public void GameSet()
         {
             endText.SetActive(false);
+            toMain.SetActive(false);
             button.SetActive(false);
             startText.SetActive(true);
             playerScript.reachedJump = false;
@@ -62,6 +64,7 @@ namespace GameHeaven.PassGame
             _stageText.SetText("Lv 1");
             _scoreText.SetText(_score.ToString());
             coinText.SetText(_coins.ToString());
+            playerScript.ResetGame();
             Invoke("GameStart", 2f);
         }
 
@@ -80,6 +83,7 @@ namespace GameHeaven.PassGame
             objectManager.FailGame();
             endText.SetActive(true);
             button.SetActive(true);
+            toMain.SetActive(true);
         }
 
         public void AddScore(int addScore)
@@ -121,6 +125,11 @@ namespace GameHeaven.PassGame
             _coins++;
             SfxManager.PlaySfx(2);
             coinText.SetText(_coins.ToString());
+        }
+
+        public void EndGame()
+        {
+            Debug.Log("return coin and move to main");
         }
     }
 }
