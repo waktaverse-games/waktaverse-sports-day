@@ -7,13 +7,14 @@ namespace GameHeaven.PassGame
 {
     public class Player : MonoBehaviour
     {
-        private Rigidbody2D _rigid;
-        private bool _isGrounded = false;
-        private Animator _anim;
-
         public float jumpPower = 3.0f;
         public bool reachedJump = false;
         public GameManager gameManager;
+        public SFXManager SfxManager;
+        
+        private Rigidbody2D _rigid;
+        private bool _isGrounded = false;
+        private Animator _anim;
 
         // Start is called before the first frame update
         void Awake()
@@ -33,6 +34,7 @@ namespace GameHeaven.PassGame
             if (Input.GetKey(KeyCode.Space) && _isGrounded)
             {
                 _rigid.velocity = Vector2.up * jumpPower;
+                SfxManager.PlaySfx(0);
                 _anim.SetBool("isJump", true);
                 _isGrounded = false;
             }
@@ -54,6 +56,7 @@ namespace GameHeaven.PassGame
             if (col.CompareTag("Enemy"))
             {
                 _rigid.velocity = Vector2.up * jumpPower;
+                SfxManager.PlaySfx(1);
                 gameManager.AddScore(15);
             }
         }
