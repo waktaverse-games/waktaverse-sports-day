@@ -91,6 +91,7 @@ namespace GameHeaven.CrashGame
             highscore = 0;
             uiManager.SetScoreText(Score);
             uiManager.SetHighScoreText(Score);
+            uiManager.SetCoinText(Money);
         }
 
         private void Start()
@@ -121,6 +122,7 @@ namespace GameHeaven.CrashGame
         void Update()
         {
             uiManager.SetScoreText(Score);
+            uiManager.SetCoinText(Money);
         }
 
         public void AddScore(int score)
@@ -150,7 +152,7 @@ namespace GameHeaven.CrashGame
             Score = 0;
             CurrentGameState = GameState.Start;
             brickManager.ResetBricks();
-            platform.BallInit();
+            platform.PlatformInit();
         }
 
         public void BallFire()

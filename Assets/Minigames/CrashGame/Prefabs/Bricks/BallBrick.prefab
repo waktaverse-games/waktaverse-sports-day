@@ -111,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 0.53}
+  m_Size: {x: 1, y: 0.5335}
   m_EdgeRadius: 0
 --- !u!114 &4573843509715205751
 MonoBehaviour:
@@ -126,7 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 0}
-  itemSprite: {fileID: 0}
 --- !u!50 &-1600209740802433073
 Rigidbody2D:
   serializedVersion: 4

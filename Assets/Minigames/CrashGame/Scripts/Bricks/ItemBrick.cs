@@ -22,11 +22,21 @@ namespace GameHeaven.CrashGame
             }
         }
 
+        public Item ItemPrefab
+        {
+            get { return itemPrefab; }
+            set 
+            {
+                itemPrefab = value;
+                itemSprite = itemPrefab.GetComponent<SpriteRenderer>().sprite;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = itemSprite;
+            }
+        }
+
         protected override void Awake()
         {
             base.Awake();
             itemManager = GameManager.Instance.Item;
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = itemSprite;
         }
 
         private void Start()

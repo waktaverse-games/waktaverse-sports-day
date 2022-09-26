@@ -11,10 +11,17 @@ namespace GameHeaven.CrashGame
     {
         [SerializeField]
         private Transform itemParent;
+        [SerializeField]
+        private Transform ballParent;
 
         public Transform ItemParent
         {
             get { return itemParent; }
+        }
+
+        public Transform BallParent
+        {
+            get { return ballParent; }
         }
 
         public void DeleteAll()

@@ -3,15 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCollision : MonoBehaviour
+namespace GameHeaven.PassGame
 {
-    public GameManager gameManager;
-
-    private void OnTriggerEnter2D(Collider2D col)
+    public class EnemyCollision : MonoBehaviour
     {
-        if (col.CompareTag("Enemy"))
+        public GameManager gameManager;
+
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            gameManager.GameOver();
+            if (col.CompareTag("Enemy"))
+            {
+                gameManager.GameOver();
+            }
         }
     }
 }
