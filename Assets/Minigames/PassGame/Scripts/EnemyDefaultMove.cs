@@ -7,7 +7,7 @@ namespace GameHeaven.PassGame
 {
     public class EnemyDefaultMove : MonoBehaviour
     {
-        public float speed = 5.0f;
+        public float speed = 3.0f;
         public GameObject player;
         public GameManager gameManager;
         public float deletePosX;
@@ -31,7 +31,16 @@ namespace GameHeaven.PassGame
         // Update is called once per frame
         void Update()
         {
+            CheckDisablePosition();
             CheckScore();
+        }
+
+        void CheckDisablePosition()
+        {
+            if (transform.position.x < deletePosX)
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         void CheckScore()
@@ -41,11 +50,6 @@ namespace GameHeaven.PassGame
             {
                 _passed = true;
                 gameManager.AddScore(10);
-            }
-
-            if (transform.position.x < deletePosX)
-            {
-                gameObject.SetActive(false);
             }
         }
     }

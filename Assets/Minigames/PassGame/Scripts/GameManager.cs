@@ -12,16 +12,22 @@ namespace GameHeaven.PassGame
         public Player playerScript;
         public ObjectManager objectManager;
         public GameObject spawnPoint;
+        public GameObject coinSpawnPoint;
         public GameObject scoreT;
         public GameObject stageT;
         public GameObject startText;
         public GameObject endText;
         public GameObject button;
+        public GameObject toMain;
+        public TextMeshProUGUI coinText;
+        public SFXManager SfxManager;
         public float jumpPower;
 
         private int _score = 0;
         private int _stage = 0;
+        private int _coins = 0;
         private Vector3 _spawnPos;
+        private Vector3 _coinSpawnPos;
         private TextMeshProUGUI _scoreText;
         private TextMeshProUGUI _stageText;
         private List<string>[] _stageStrings = new List<string>[4];
@@ -30,6 +36,8 @@ namespace GameHeaven.PassGame
         void Start()
         {
             _spawnPos = spawnPoint.transform.position;
+            _coinSpawnPos = coinSpawnPoint.transform.position;
+            _coins = 0;
             playerScript.jumpPower = jumpPower;
             _scoreText = scoreT.GetComponent<TextMeshProUGUI>();
             _stageText = stageT.GetComponent<TextMeshProUGUI>();
@@ -46,13 +54,17 @@ namespace GameHeaven.PassGame
         public void GameSet()
         {
             endText.SetActive(false);
+            toMain.SetActive(false);
             button.SetActive(false);
             startText.SetActive(true);
+            playerScript.reachedJump = false;
             _score = 0;
             _stage = 1;
             Time.timeScale = 1;
             _stageText.SetText("Lv 1");
             _scoreText.SetText(_score.ToString());
+            coinText.SetText(_coins.ToString());
+            playerScript.ResetGame();
             Invoke("GameStart", 2f);
         }
 
@@ -61,6 +73,7 @@ namespace GameHeaven.PassGame
             startText.SetActive(false);
             StartCoroutine(UpgradeStage(45));
             StartCoroutine(StageSpawn(0.1f));
+            StartCoroutine(CoinSpawn(0.7f));
         }
 
         public void GameOver()
@@ -70,6 +83,7 @@ namespace GameHeaven.PassGame
             objectManager.FailGame();
             endText.SetActive(true);
             button.SetActive(true);
+            toMain.SetActive(true);
         }
 
         public void AddScore(int addScore)
@@ -96,7 +110,26 @@ namespace GameHeaven.PassGame
             yield return new WaitForSeconds(time);
             int rnd = Random.Range(0, _stageStrings[_stage].Count);
             objectManager.MakeObject(_stageStrings[_stage][rnd], _spawnPos);
-            StartCoroutine(StageSpawn(6f));
+            StartCoroutine(StageSpawn(4.5f));
+        }
+
+        IEnumerator CoinSpawn(float time)
+        {
+            yield return new WaitForSeconds(time);
+            objectManager.MakeObject("coin", _coinSpawnPos);
+            StartCoroutine(CoinSpawn(6.1f));
+        }
+
+        public void AddCoin()
+        {
+            _coins++;
+            SfxManager.PlaySfx(2);
+            coinText.SetText(_coins.ToString());
+        }
+
+        public void EndGame()
+        {
+            Debug.Log("return coin and move to main");
         }
     }
 }

@@ -15,6 +15,12 @@ namespace GameHeaven.PassGame
             {
                 gameManager.GameOver();
             }
+
+            if (col.CompareTag("Coin"))
+            {
+                col.gameObject.SetActive(false);
+                gameManager.AddCoin();
+            }
         }
     }
 }
