@@ -3820,7 +3820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8daf1a167da4dc74a9eff13ee7b73ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
+  HP: 400
   type: 0
   numOfPatterns: 5
   curPatternDelay: 0
@@ -3832,6 +3832,8 @@ MonoBehaviour:
   maxCircleFireDelay: 4
   circleFireSpeed: 5
   straightFireDir: {x: -1, y: 0}
+  randomDirY: 0
+  isRandomDir: 0
   circleFireDir: {x: 1, y: 1}
   circleFirePivot: {x: 0, y: 0}
   circleFireNum: 8

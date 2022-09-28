@@ -7,7 +7,7 @@ namespace GameHeaven.SpreadGame
     public class SpawnManager : MonoBehaviour
     {
         [SerializeField] GameObject[] mobPrefabs;
-        [SerializeField] GameObject[] bossPrefabs;
+        [SerializeField] List<GameObject> bossPrefabs;
         public float curNormalMonsterSpawnDelay, maxNormalMonsterSpawnDelay;
         [SerializeField] float curEliteMonsterSpawnDelay, maxEliteMonsterSpawnDelay;
         [SerializeField] float curBossSpawnDelay, maxBossSpawnDelay;
@@ -45,11 +45,11 @@ namespace GameHeaven.SpreadGame
 
             GameObject obj = null;
 
-            int idx = Random.Range(0, 100);
-
+            int idx = Random.Range(0, bossIdx + 1);
+            /*
             while (true)
             {
-                if (idx < 5) idx = 0;
+                if (idx < ) idx = 0;
                 else if (idx < 20) idx = 1;
                 else if (idx < 35) idx = 2;
                 else if (idx < 50) idx = 3;
@@ -58,9 +58,9 @@ namespace GameHeaven.SpreadGame
                 else if (idx < 100) idx = 6;
 
                 if (!isElite || idx != 0) break;
-            }
+            }*/
 
-            if (idx == 0) // ¹ÚÁã´Ü
+            if (idx == 4) // ¹ÚÁã´Ü
             {
                 Vector2 spawnPos = new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2));
                 Instantiate(mobPrefabs[idx], spawnPos + new Vector2(-1, 0.5f), mobPrefabs[idx].transform.rotation);
@@ -73,7 +73,7 @@ namespace GameHeaven.SpreadGame
                 Instantiate(mobPrefabs[idx], spawnPos + new Vector2(1, -1), mobPrefabs[idx].transform.rotation);
                 Instantiate(mobPrefabs[idx], spawnPos + new Vector2(2, 0.5f), mobPrefabs[idx].transform.rotation);
                 Instantiate(mobPrefabs[idx], spawnPos + new Vector2(2, -0.5f), mobPrefabs[idx].transform.rotation);
-            }
+            } // ¹ÚÁã
             else if (idx == 6) // ¼¼±Õ
             {
                 obj = Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation);
@@ -93,6 +93,7 @@ namespace GameHeaven.SpreadGame
             }
         }
 
+        [SerializeField] int bossIdx = 0;
         void SpawnBossRepeatedly()
         {
             if (isBossTime)
@@ -108,9 +109,11 @@ namespace GameHeaven.SpreadGame
             if (isBossTime) return;
 
             GameObject obj;
-
-            obj = Instantiate(bossPrefabs[0], Vector2.zero, bossPrefabs[0].transform.rotation);
+            
+            obj = Instantiate(bossPrefabs[bossIdx++ % 4], Vector2.zero, bossPrefabs[0].transform.rotation);
             isBossTime = true;
+            maxNormalMonsterSpawnDelay -= 0.3f;
+            if (maxNormalMonsterSpawnDelay < 2) maxNormalMonsterSpawnDelay = 2;
         }
 
         IEnumerator Division(GameObject obj)
