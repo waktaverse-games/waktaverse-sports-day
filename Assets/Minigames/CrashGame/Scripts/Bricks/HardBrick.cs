@@ -20,6 +20,7 @@ namespace GameHeaven.CrashGame
 
         protected override void Awake()
         {
+            base.Awake();
             spriteRenderer = GetComponent<SpriteRenderer>();
             spriteIndex = 0;
             SetHardBrickSprite(spriteIndex);
@@ -27,12 +28,12 @@ namespace GameHeaven.CrashGame
 
         public override void BallCollide()
         {
-            brickHealth--;
-            if (brickHealth <= 0)
+            if (--brickHealth <= 0)
             {
                 DestroySelf(scoreAdd);
             }
             else if (spriteIndex < 2) SetHardBrickSprite(++spriteIndex);
+            Debug.Log($"brick health: {brickHealth}");
         }
 
         private void SetHardBrickSprite(int index)

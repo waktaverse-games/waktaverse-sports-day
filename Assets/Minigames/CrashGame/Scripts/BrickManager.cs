@@ -124,7 +124,8 @@ namespace GameHeaven.CrashGame
             currentBrickPosition = new Vector2(BrickStartXPosition, BrickStartYPosition);
             for (int i = 0; i < 8; i++)
             {
-                
+                //// Test
+                //brickLine.Add(AddBrick(hardBrickPrefab, currentBrickPosition + brickCenterPosition));
                 switch (Random.Range(0, 24))
                 {
                     case 0:

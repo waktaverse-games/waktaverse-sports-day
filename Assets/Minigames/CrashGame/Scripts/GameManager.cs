@@ -22,6 +22,7 @@ namespace GameHeaven.CrashGame
         private UIManager uiManager;
         private BrickManager brickManager;
         private ItemManager itemManager;
+        private SoundManager soundManager;
         private GameState currentGameState;
         private int score;
         private int highscore;
@@ -69,6 +70,16 @@ namespace GameHeaven.CrashGame
                 return itemManager;
             }
         }
+
+        public SoundManager Sound
+        {
+            get
+            {
+                if (soundManager == null) soundManager = gameObject.AddComponent<SoundManager>();
+                return soundManager;
+            }
+        }
+
         public GameState CurrentGameState
         {
             get { return currentGameState; }
@@ -87,6 +98,7 @@ namespace GameHeaven.CrashGame
             uiManager = GetComponent<UIManager>();
             brickManager = GetComponent<BrickManager>();
             itemManager = GetComponent<ItemManager>();
+            soundManager = GetComponent<SoundManager>();
             score = 0;
             highscore = 0;
             uiManager.SetScoreText(Score);

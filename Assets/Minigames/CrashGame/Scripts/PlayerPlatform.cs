@@ -103,11 +103,13 @@ namespace GameHeaven.CrashGame
             }
             if (collision.collider.CompareTag("Coin"))
             {
+                GameManager.Instance.Sound.PlayEffect("coin_01");
                 GameManager.Instance.Money += collision.collider.GetComponent<Coin>().CoinValue;
                 Destroy(collision.gameObject);
             }
             if (collision.collider.CompareTag("CrashGame_Item"))
             {
+                GameManager.Instance.Sound.PlayEffect("coin_02");
                 // 아이템 즉발 사용
                 collision.collider.GetComponent<Item>().ActivateItem();
                 Destroy(collision.gameObject);
