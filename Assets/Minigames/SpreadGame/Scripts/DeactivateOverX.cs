@@ -10,7 +10,7 @@ namespace GameHeaven.SpreadGame
 
         private void Update()
         {
-            if (transform.position.x > x || transform.position.x < x) gameObject.SetActive(false);
+            if (transform.position.x > x || transform.position.x < -x) gameObject.SetActive(false);
         }
     }
 }
