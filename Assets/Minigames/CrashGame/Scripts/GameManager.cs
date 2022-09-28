@@ -142,8 +142,8 @@ namespace GameHeaven.CrashGame
                 highscore = Score;
                 uiManager.SetHighScoreText(Score);
             }
-            // 임시로 즉시 재시작
-            GameStart();
+            // Gameover UI Active
+            uiManager.GameOver();
         }
 
         public void GameStart()

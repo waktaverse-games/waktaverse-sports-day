@@ -13,7 +13,10 @@ namespace GameHeaven.CrashGame
         private Text highScore;
         [SerializeField]
         private Text coin;
-        
+
+        [SerializeField]
+        private GameObject GameOverUI;
+
         public void SetScoreText(int score)
         {
             gameScore.text = $"점수: {score}";
@@ -27,6 +30,17 @@ namespace GameHeaven.CrashGame
         public void SetCoinText(int coin)
         {
             this.coin.text = $"코인: {coin}";
+        }
+
+        public void GameOver()
+        {
+            GameOverUI.SetActive(true);
+        }
+
+        public void RestartGame()
+        {
+            GameManager.Instance.GameStart();
+            GameOverUI.SetActive(false);
         }
     }
 }
