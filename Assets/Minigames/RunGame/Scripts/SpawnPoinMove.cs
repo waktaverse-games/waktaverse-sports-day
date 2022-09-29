@@ -18,7 +18,7 @@ namespace GameHaven.RunGame
         void Start()
         {
             Speed = 0;
-            del = 3;
+            del = 1;
             timer = 0;
         }
 
@@ -27,33 +27,88 @@ namespace GameHaven.RunGame
         {
             timer += Time.deltaTime;
 
-            if (timer > del)
+            if (GameHaven.RunGame.GameManager.gameTime < 20)
             {
-                Speed = Random.Range(2f, 4.5f);
-                if (Dirleft == true)
+                if (timer > del)
                 {
-                    Dirleft = false;
-                    dir = Vector2.right;
-                }
-                else
-                {
-                    Dirleft = true;
-                    dir = Vector2.left;
-                }
+                    Speed = Random.Range(2f, 4.5f);
+                    if (Dirleft == true)
+                    {
+                        Dirleft = false;
+                        dir = Vector2.right;
+                    }
+                    else
+                    {
+                        Dirleft = true;
+                        dir = Vector2.left;
+                    }
 
-                SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
-                timer = 0;
-                del = Random.Range(0, 1f);
+                    SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
+                    timer = 0;
+                    del = Random.Range(0, 1.5f);
+                }
             }
+
+            else if (GameHaven.RunGame.GameManager.gameTime >= 20 && GameHaven.RunGame.GameManager.gameTime < 40)
+            {
+                if (timer > del)
+                {
+                    Speed = Random.Range(4f, 9f);
+                    if (Dirleft == true)
+                    {
+                        Dirleft = false;
+                        dir = Vector2.right;
+                    }
+                    else
+                    {
+                        Dirleft = true;
+                        dir = Vector2.left;
+                    }
+
+                    SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
+                    timer = 0;
+                    del = Random.Range(0, 1.1f);
+                }
+            }
+
+            else if (GameHaven.RunGame.GameManager.gameTime >= 40)
+            {
+                if (timer > del)
+                {
+                    Speed = Random.Range(7f, 10f);
+                    if (Dirleft == true)
+                    {
+                        Dirleft = false;
+                        dir = Vector2.right;
+                    }
+                    else
+                    {
+                        Dirleft = true;
+                        dir = Vector2.left;
+                    }
+
+                    SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
+                    timer = 0;
+                    del = Random.Range(0, 0.3f);
+                }
+            }
+
+
+            if (SpawnPoint.transform.position.x < -5 || SpawnPoint.transform.position.x > 5)
+            {
+                SpawnPoint.GetComponent<Rigidbody2D>().velocity = -(dir) * Speed;
+            }
+
+
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+ /*       void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.name == "SpawnWall")
             {
                 SpawnPoint.GetComponent<Rigidbody2D>().velocity = -(dir)*Speed;
             }
-        }
+        }*/
     }
 }
 
