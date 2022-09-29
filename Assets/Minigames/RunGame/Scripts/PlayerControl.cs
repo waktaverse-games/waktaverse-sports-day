@@ -14,15 +14,21 @@ namespace GameHaven.RunGame
         [SerializeField]
         float ChangeSpeed;
 
+        int CoinCount = 0;
+
         Vector2 dir = Vector2.left;
         bool Dirleft = true;
 
+        public Animator Gold;
+        public Animator Silver;
+        public Animator Bronz;
 
-        
+
+
         // Start is called before the first frame update
         void Start()
         {
-            
+
         }
 
         // Update is called once per frame
@@ -53,6 +59,31 @@ namespace GameHaven.RunGame
         {
             if (other.gameObject.tag == "Enemy")
                 Destroy(gameObject);
+            else if (other.gameObject.tag == "Coin")
+            {
+                GetCoin(other.gameObject.name);
+                Destroy(other.gameObject);
+                Debug.Log(CoinCount);
+            }
+        }
+
+        void GetCoin(string coinName)
+        {
+            if (coinName.Contains("GoldCoin"))
+            {
+                Gold.SetBool("Get", true);
+                CoinCount += 5;
+            }
+            else if (coinName.Contains("SilverCoin"))
+            {
+                Silver.SetBool("Get", true);
+                CoinCount += 3;
+            }
+            else if (coinName.Contains("BronzCoin"))
+            {
+                Bronz.SetBool("Get", true);
+                CoinCount += 1;
+            }
         }
     }
 }

@@ -6,19 +6,31 @@ namespace GameHaven.RunGame
 {
     public class WallControl : MonoBehaviour
     {
-        public float speed;
 
         Rigidbody2D rig;
 
         void Awake()
         {
             rig = GetComponent<Rigidbody2D>();
-            rig.velocity = Vector2.down * speed;
+            rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
+            Debug.Log(GameHaven.RunGame.GameManager.wallSpeed);
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (GameHaven.RunGame.GameManager.gameTime < 20)
+            {
+                GameHaven.RunGame.GameManager.wallSpeed += 0.06f * Time.deltaTime;
+                rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
+            }
+            else if(GameHaven.RunGame.GameManager.gameTime >= 20 && GameHaven.RunGame.GameManager.wallSpeed <20)
+            {
+                GameHaven.RunGame.GameManager.wallSpeed += 0.03f * Time.deltaTime;
+                rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
+            }
+            else
+                rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
 
         }
 
