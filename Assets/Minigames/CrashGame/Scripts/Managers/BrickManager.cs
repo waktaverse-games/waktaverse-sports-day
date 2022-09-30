@@ -35,6 +35,7 @@ namespace GameHeaven.CrashGame
         }
 
         // BasicBrick 계열 블럭 색깔
+        [HideInInspector]
         public Color[] brickColorArray;
 
         private void Awake()
@@ -68,7 +69,10 @@ namespace GameHeaven.CrashGame
         {
             // 맨 아래 행 블럭이 전부 파괴되었는지 체크
             bool allBrickOff = true;
-            if (brickMap.Count == 0) return true;
+            if (brickMap.Count == 0) 
+            {
+                PerfectBonus();
+            } 
             foreach (Brick brick in brickMap.Peek())
             {
                 if (brick.gameObject.activeSelf) allBrickOff = false;
@@ -89,6 +93,23 @@ namespace GameHeaven.CrashGame
             return allBrickOff;
         }
 
+        private void PerfectBonus()
+        {
+            //TODO Effect
+            StartCoroutine(GameManager.Instance.UI.PerfectBonus());
+            GameManager.Instance.AddScore(500);
+            ResetBricks();
+        }
+
+        private IEnumerator AddLineLoop(int loopNumber)
+        {
+            for (int i = 0; i < loopNumber; i++)
+            {
+                yield return new WaitForSeconds(.1f);
+                AddBrickLineInMap();
+            }
+        }
+
         public void ResetBricks()
         {
             if (brickMap != null)
@@ -101,12 +122,8 @@ namespace GameHeaven.CrashGame
                     }
                 }
             }
-
             brickMap = new Queue<List<Brick>>();
-            for (int i = 0; i < 5; i++)
-            {
-                AddBrickLineInMap();
-            }
+            StartCoroutine(AddLineLoop(5));
         }
 
         public void AddBrickLineInMap()

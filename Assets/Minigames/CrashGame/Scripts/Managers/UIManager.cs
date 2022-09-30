@@ -16,6 +16,8 @@ namespace GameHeaven.CrashGame
 
         [SerializeField]
         private GameObject GameOverUI;
+        [SerializeField]
+        private GameObject PerfectBonusUI;
 
         public void SetScoreText(int score)
         {
@@ -35,6 +37,13 @@ namespace GameHeaven.CrashGame
         public void GameOver()
         {
             GameOverUI.SetActive(true);
+        }
+
+        public IEnumerator PerfectBonus()
+        {
+            PerfectBonusUI.SetActive(true);
+            yield return new WaitForSeconds(1.5f);
+            PerfectBonusUI.SetActive(false);
         }
 
         public void RestartGame()
