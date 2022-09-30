@@ -13,8 +13,9 @@ namespace GameHeaven.CrashGame
         [SerializeField]
         private SmallBullet bulletPrefab;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             brickManager = GameManager.Instance.Brick;
         }
 
@@ -34,7 +35,7 @@ namespace GameHeaven.CrashGame
             Vector2 spawnPosition = (Vector2)GameManager.Instance.platform.transform.GetChild(0).position;
             Vector2 bulletFireDirection = new Vector2(0f, 1f);
             bulletFireDirection = Utils.RotateVector(bulletFireDirection, -20);
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++) 
             {
                 SmallBullet newBullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
                 newBullet.transform.SetParent(GameManager.Instance.Item.ItemParent);

@@ -11,9 +11,10 @@ namespace GameHeaven.CrashGame
 
         public abstract void ActivateItem();        // æ∆¿Ã≈€ »πµÊ Ω√ ¡Ôπﬂ
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             destroyEffect = transform.GetChild(0).gameObject;
+            Debug.Log($"{this}.{destroyEffect}");
         }
 
         public void DestroyItem()
