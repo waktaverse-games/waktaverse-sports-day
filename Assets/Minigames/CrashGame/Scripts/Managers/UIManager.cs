@@ -39,6 +39,11 @@ namespace GameHeaven.CrashGame
             GameOverUI.SetActive(true);
         }
 
+        public void GameRestart()
+        {
+            GameOverUI.SetActive(false);
+        }
+
         public IEnumerator PerfectBonus()
         {
             PerfectBonusUI.SetActive(true);

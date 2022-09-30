@@ -165,6 +165,7 @@ namespace GameHeaven.CrashGame
             CurrentGameState = GameState.Start;
             brickManager.ResetBricks();
             platform.PlatformInit();
+            uiManager.GameRestart();
         }
 
         public void BallFire()
