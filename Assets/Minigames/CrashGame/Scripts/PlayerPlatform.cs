@@ -112,7 +112,7 @@ namespace GameHeaven.CrashGame
                 GameManager.Instance.Sound.PlayEffect("coin_02");
                 // 아이템 즉발 사용
                 collision.collider.GetComponent<Item>().ActivateItem();
-                Destroy(collision.gameObject);
+                collision.collider.GetComponent<Item>().DestroyItem();
             }
         }
 

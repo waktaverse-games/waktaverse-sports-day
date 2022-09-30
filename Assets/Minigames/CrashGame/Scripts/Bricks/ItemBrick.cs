@@ -29,7 +29,7 @@ namespace GameHeaven.CrashGame
             {
                 itemPrefab = value;
                 itemSprite = itemPrefab.GetComponent<SpriteRenderer>().sprite;
-                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = itemSprite;
+                transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = itemSprite;
             }
         }
 
@@ -48,6 +48,12 @@ namespace GameHeaven.CrashGame
         {
             Item itemObject = Instantiate(itemPrefab, (Vector2)transform.position, Quaternion.identity);
             itemObject.transform.SetParent(itemManager.ItemParent, true);
+        }
+
+        protected override void DestroySelf(int score)
+        {
+            transform.GetChild(1).gameObject.SetActive(false);
+            base.DestroySelf(score);
         }
 
         public override void BallCollide()
