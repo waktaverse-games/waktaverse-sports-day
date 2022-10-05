@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+namespace GameHeaven.CrashGame
 {
-    [SerializeField]
-    private int coinValue;
-
-    private Rigidbody2D rigidBody;
-
-    public int CoinValue
+    public class Coin : MonoBehaviour
     {
-        get { return coinValue; }
-    }
+        [SerializeField]
+        private int coinValue;
 
-    private void Awake()
-    {
-        rigidBody = GetComponent<Rigidbody2D>();
-    }
+        private Rigidbody2D rigidBody;
 
+        public int CoinValue
+        {
+            get { return coinValue; }
+        }
+
+        private void Awake()
+        {
+            rigidBody = GetComponent<Rigidbody2D>();
+        }
+
+    }
 }

@@ -13,7 +13,12 @@ namespace GameHeaven.CrashGame
         private Text highScore;
         [SerializeField]
         private Text coin;
-        
+
+        [SerializeField]
+        private GameObject GameOverUI;
+        [SerializeField]
+        private GameObject PerfectBonusUI;
+
         public void SetScoreText(int score)
         {
             gameScore.text = $"점수: {score}";
@@ -27,6 +32,29 @@ namespace GameHeaven.CrashGame
         public void SetCoinText(int coin)
         {
             this.coin.text = $"코인: {coin}";
+        }
+
+        public void GameOver()
+        {
+            GameOverUI.SetActive(true);
+        }
+
+        public void GameRestart()
+        {
+            GameOverUI.SetActive(false);
+        }
+
+        public IEnumerator PerfectBonus()
+        {
+            PerfectBonusUI.SetActive(true);
+            yield return new WaitForSeconds(1.5f);
+            PerfectBonusUI.SetActive(false);
+        }
+
+        public void RestartGame()
+        {
+            GameManager.Instance.GameStart();
+            GameOverUI.SetActive(false);
         }
     }
 }
