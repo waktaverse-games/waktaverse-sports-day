@@ -110,7 +110,7 @@ namespace GameHeaven.PassGame
             yield return new WaitForSeconds(time);
             int rnd = Random.Range(0, _stageStrings[_stage].Count);
             objectManager.MakeObject(_stageStrings[_stage][rnd], _spawnPos);
-            StartCoroutine(StageSpawn(4.5f));
+            StartCoroutine(StageSpawn(3f));
         }
 
         IEnumerator CoinSpawn(float time)
