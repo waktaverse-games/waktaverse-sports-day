@@ -13,7 +13,6 @@ namespace GameHaven.RunGame
         {
             rig = GetComponent<Rigidbody2D>();
             rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
-            Debug.Log(GameHaven.RunGame.GameManager.wallSpeed);
         }
 
         // Update is called once per frame

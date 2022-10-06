@@ -9,6 +9,8 @@ namespace GameHaven.RunGame
         public GameObject wall;
         [SerializeField] GameObject[] coin;
         public Transform spawnPoints;
+        public GameObject dust;
+        public Transform dustPoints;
 
         public float wallSpawnDelay;
         public float curSpawnDelay;
@@ -37,6 +39,7 @@ namespace GameHaven.RunGame
             if (curSpawnDelay > wallSpawnDelay)
             {
                 SpawnWall();
+                SpawnDust();
                 curSpawnDelay = 0;
                 wallSpawnDelay = 2 / wallSpeed;
             }
@@ -57,6 +60,11 @@ namespace GameHaven.RunGame
         void SpawnCoin()
         {
             Instantiate(coin[Random.Range(0, coin.Length)], spawnPoints.position + new Vector3(Random.Range(-3f, 3f),0, 0), spawnPoints.rotation);
+        }
+
+        void SpawnDust()
+        {
+            Instantiate(dust, dustPoints.position + new Vector3(Random.Range(-0.5f, 0.5f), -1, 0), dustPoints.rotation);
         }
     }
 }
