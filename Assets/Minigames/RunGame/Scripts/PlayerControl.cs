@@ -58,7 +58,9 @@ namespace GameHaven.RunGame
         void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.tag == "Enemy")
-                Destroy(gameObject);
+            {//Destroy(gameObject);
+                Debug.Log("die");
+            }
             else if (other.gameObject.tag == "Coin")
             {
                 GetCoin(other.gameObject.name);
