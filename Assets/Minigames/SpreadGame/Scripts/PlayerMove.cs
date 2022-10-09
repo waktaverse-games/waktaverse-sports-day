@@ -16,6 +16,9 @@ namespace GameHeaven.SpreadGame
         [SerializeField] private int bombCnt;
         [SerializeField] private bool hasShield, isStun;
 
+        [SerializeField] AudioClip[] bulletSounds, acquireSounds;
+        [SerializeField] AudioClip bombSound;
+
         private int curSectorIdx, curSectorDir;
         PoolManager pool;
         Rigidbody2D rigid;
@@ -38,8 +41,14 @@ namespace GameHeaven.SpreadGame
             bullet.damage = 1; bullet.maxShotDelay = 0.3f;
 
             curSectorDir = 1;
+            Invoke("BulletSound", 0);
         }
 
+        void BulletSound()
+        {
+            AudioSource.PlayClipAtPoint(bulletSounds[0], Vector3.zero);
+            Invoke("BulletSound", 0.2f);
+        }
         private void Update()
         {
             Move();
@@ -70,12 +79,14 @@ namespace GameHeaven.SpreadGame
             }
             else if (collider.CompareTag("Coin"))
             {
+                AudioSource.PlayClipAtPoint(acquireSounds[0], Vector3.zero);
                 // coin count up
                 Instantiate(coinAcquireEffect, collider.transform.position, coinAcquireEffect.transform.rotation);
                 Destroy(collider.gameObject);
             }
             else if (collider.CompareTag("UpgradeItem"))
             {
+                AudioSource.PlayClipAtPoint(acquireSounds[1], Vector3.zero);
                 switch (collider.name[1])
                 {
                     case 'u': // G'u'ided
@@ -240,6 +251,11 @@ namespace GameHeaven.SpreadGame
                 return;
             }
 
+            if (idx == 2) // slash sound
+            {
+                AudioSource.PlayClipAtPoint(bulletSounds[1], Vector3.zero);
+            }
+
             if (idx == 1) // Sector
             {
                 pool.MyInstantiate(idx, transform.position).GetComponent<Rigidbody2D>()
@@ -260,6 +276,8 @@ namespace GameHeaven.SpreadGame
         void Bomb()
         {
             if (!Input.GetKeyDown(KeyCode.Space) || bombCnt <= 0) return;
+
+            AudioSource.PlayClipAtPoint(bombSound, Vector3.zero);
 
             foreach (EnemyMove enemy in FindObjectsOfType<EnemyMove>())
             {

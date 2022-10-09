@@ -17,6 +17,8 @@ namespace GameHeaven.SpreadGame
         GameObject player;
         public bool isElite;
 
+        [SerializeField] private AudioClip dieSound;
+
         public Rigidbody2D rigid;
         Animator anim;
 
@@ -109,6 +111,7 @@ namespace GameHeaven.SpreadGame
 
         void Die()
         {
+            AudioSource.PlayClipAtPoint(dieSound, Vector3.zero);
             GameObject obj = null;
 
             if (Random.Range(0, 3) == 0) Instantiate(coins[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));

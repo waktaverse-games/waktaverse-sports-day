@@ -150,7 +150,7 @@ namespace GameHeaven.SpreadGame
             Instantiate(dieEffect, transform.position, dieEffect.transform.rotation);
 
             Destroy(transform.parent.gameObject);
-            SpawnManager spawnManager = FindObjectOfType<SpawnManager>();
+            GameManager spawnManager = FindObjectOfType<GameManager>();
             spawnManager.isBossTime = false;
         }
     }

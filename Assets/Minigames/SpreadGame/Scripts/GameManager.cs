@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameHeaven.SpreadGame
 {
-    public class SpawnManager : MonoBehaviour
+    public class GameManager : MonoBehaviour
     {
         [SerializeField] GameObject[] mobPrefabs;
         [SerializeField] List<GameObject> bossPrefabs;
@@ -14,13 +14,19 @@ namespace GameHeaven.SpreadGame
         [SerializeField] float[] mapSize;
         public bool isBossTime = false;
 
+        [SerializeField] AudioClip bulletSound;
+
+        private void Awake()
+        {
+            Screen.SetResolution(960, 540, false);
+        }
+
         private void Update()
         {
             SpawnRepeatedly(false);
             SpawnRepeatedly(true);
             SpawnBossRepeatedly();
         }
-
 
         void SpawnRepeatedly(bool isElite)
         {
