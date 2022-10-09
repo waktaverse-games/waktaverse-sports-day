@@ -8,6 +8,7 @@ namespace GameHaven.RunGame
     {
 
         public GameObject Caracter;
+        public GameObject Cam;
 
         [SerializeField]
         float Speed;
@@ -19,11 +20,9 @@ namespace GameHaven.RunGame
         Vector2 dir = Vector2.left;
         bool Dirleft = true;
 
-        public Animator Gold;
-        public Animator Silver;
-        public Animator Bronz;
+        Animator coin;
 
-
+        AudioSource audio;
 
         // Start is called before the first frame update
         void Start()
@@ -36,11 +35,18 @@ namespace GameHaven.RunGame
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (Dirleft)
+                if (Dirleft) //왼쪽을 보고 있으면
                 {
-                    Dirleft = false;
-                    dir = Vector2.right;
-                    Caracter.GetComponent<SpriteRenderer>().flipX = true;
+                    Dirleft = false; //왼쪽X
+                    dir = Vector2.right; //오른쪽으로 이동
+                    if (Cam.GetComponent<Transform>().rotation.z <= -55 && Cam.GetComponent<Transform>().rotation.z > -140 )
+                    {
+                        Caracter.GetComponent<SpriteRenderer>().flipX = false; //캐릭터 좌측
+                    }
+                    else
+                    {
+                        Caracter.GetComponent<SpriteRenderer>().flipX = true; // 캐릭터 우측
+                    }
                 }
                 else
                 {
@@ -63,8 +69,14 @@ namespace GameHaven.RunGame
             }
             else if (other.gameObject.tag == "Coin")
             {
+                audio = other.GetComponent<AudioSource>();
+                coin = other.GetComponent<Animator>();
+
                 GetCoin(other.gameObject.name);
-                Destroy(other.gameObject);
+                audio.Play();
+                coin.SetBool("Get", true);
+
+                Destroy(other.gameObject,3);
                 Debug.Log(CoinCount);
             }
         }
@@ -73,17 +85,14 @@ namespace GameHaven.RunGame
         {
             if (coinName.Contains("GoldCoin"))
             {
-                Gold.SetBool("Get", true);
                 CoinCount += 5;
             }
             else if (coinName.Contains("SilverCoin"))
             {
-                Silver.SetBool("Get", true);
                 CoinCount += 3;
             }
             else if (coinName.Contains("BronzCoin"))
             {
-                Bronz.SetBool("Get", true);
                 CoinCount += 1;
             }
         }
