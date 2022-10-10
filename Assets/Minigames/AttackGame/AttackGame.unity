@@ -4724,7 +4724,7 @@ MonoBehaviour:
   groundSprites:
   - {fileID: 21300000, guid: bb48efba6e2b69d4093ff13bf9f22a6f, type: 3}
   - {fileID: 21300000, guid: 1844050d3ade56d40a1e67f842691744, type: 3}
-  - {fileID: 21300000, guid: 0fa103b6301d76540bbaafb6289dc7dc, type: 3}
+  - {fileID: 21300000, guid: 08a72bed8b10595488c6a718e54742fd, type: 3}
   - {fileID: 21300000, guid: ad851a1f3078b2243a158d393bf0b9d5, type: 3}
   - {fileID: 21300000, guid: 459366a6da241ed459b7b1ba96d9521a, type: 3}
   - {fileID: 21300000, guid: eb1005d246dfec448b04a0e037297477, type: 3}
