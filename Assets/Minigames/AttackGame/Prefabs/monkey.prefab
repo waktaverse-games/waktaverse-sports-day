@@ -451,8 +451,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   gameManager: {fileID: 0}
+  objectManager: {fileID: 0}
   hpBar: {fileID: 4160421677585346993}
+  sfxManager: {fileID: 0}
   totalHp: 100
+  isBossMonster: 0
+  damage: 20
+  tweenId: 0
 --- !u!1 &4160421679200335352
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +517,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &4160421679200335351
 MonoBehaviour:

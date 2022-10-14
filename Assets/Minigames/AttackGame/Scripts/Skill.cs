@@ -44,7 +44,7 @@ namespace GameHeaven.AttackGame
         IEnumerator FallDown()
         {
             yield return new WaitForSeconds(3f);
-            _tween = transform.DOMoveY(1f, 1);
+            _tween = transform.DOMoveY(0.3f, 1);
         }
     }
 }

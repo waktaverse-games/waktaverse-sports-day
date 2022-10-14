@@ -92,7 +92,7 @@ namespace GameHeaven.AttackGame
             float tempDir = 1f;
             if (!isTowardRight) tempDir = -1;
             Vector3 currentPos = transform.position;
-            _tween = transform.DOJump(new Vector3(currentPos.x + distance * tempDir, 0f, currentPos.z), 
+            _tween = transform.DOJump(new Vector3(currentPos.x + distance * tempDir, -1f, currentPos.z), 
                 1.5f, 1, speed).SetId(tweenId);
         }
     }
