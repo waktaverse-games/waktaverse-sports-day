@@ -240,8 +240,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   gameManager: {fileID: 0}
+  objectManager: {fileID: 0}
   hpBar: {fileID: 158963326107675512}
+  sfxManager: {fileID: 0}
   totalHp: 100
+  isBossMonster: 0
+  damage: 20
+  tweenId: 0
 --- !u!95 &158963326296147325
 Animator:
   serializedVersion: 4
@@ -398,7 +403,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &158963327410761807
 MonoBehaviour:

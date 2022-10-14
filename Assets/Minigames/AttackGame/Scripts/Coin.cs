@@ -42,7 +42,7 @@ namespace GameHeaven.AttackGame
                 transform.Translate(pos);
             }
 
-            if (transform.position.y < 0f)
+            if (transform.position.y < -1f)
             {
                 gameObject.SetActive(false);
             }
