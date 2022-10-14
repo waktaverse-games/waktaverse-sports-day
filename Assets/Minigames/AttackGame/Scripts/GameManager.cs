@@ -24,8 +24,11 @@ namespace GameHeaven.AttackGame
         public Animator retryAnim;
         public GameObject playerObject;
         public SpriteRenderer[] currMap;
+        public SpriteRenderer[] currGrounds;
         public SpriteRenderer nextMap;
+        public SpriteRenderer nextGroundMap;
         public Sprite[] mapSprites;
+        public Sprite[] groundSprites;
         
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI playerLevelText;
@@ -145,10 +148,11 @@ namespace GameHeaven.AttackGame
             for (int i = 0; i < currMap.Length; i++)
             {
                 currMap[i].sprite = mapSprites[_stageNum % mapSprites.Length];
+                currGrounds[i].sprite = groundSprites[_stageNum % mapSprites.Length];
             }
             yield return new WaitForSeconds(0.1f);
             mainCameraScript.isStageChanging = false;
-            player.transform.position = new Vector3(0, 1, 0);
+            player.transform.position = new Vector3(0, 0.09499994f, 0);
             mainCamera.transform.position = new Vector3(0, 0, -10);
             yield return new WaitForSeconds(0.1f);
             player.isGamePlaying = true;
@@ -179,6 +183,7 @@ namespace GameHeaven.AttackGame
             StartCoroutine(SpawnMonsters(0.6f));
             yield return new WaitForSeconds(2f);
             nextMap.sprite = mapSprites[_stageNum % mapSprites.Length];
+            nextGroundMap.sprite = groundSprites[_stageNum % mapSprites.Length];
         }
 
         IEnumerator SpawnMonsters(float time)

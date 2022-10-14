@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameHaven.PunctureGame
+namespace SharedLibs
 {
     /// <summary>
     /// Inherit from this base class to create a singleton.
