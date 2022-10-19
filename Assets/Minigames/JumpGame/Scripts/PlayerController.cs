@@ -12,6 +12,8 @@ namespace GameHeaven.JumpGame
         SpriteRenderer sprite;
         Animator animator;
 
+        [SerializeField] AudioSource audio;
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -21,19 +23,8 @@ namespace GameHeaven.JumpGame
 
         private void Update()
         {
-            if(Input.GetButtonUp("Horizontal"))
-            {
-                rb.velocity = new Vector2(rb.velocity.normalized.x * 0.5f, rb.velocity.y);
-            }
-            if(Input.GetButtonDown("Jump") && !animator.GetBool("isJumping"))
-            {
-                rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                animator.SetBool("isJumping", true);
-            }
-            if(rb.velocity.y == 0)
-            {
-                animator.SetBool("isJumping", false);
-            }
+            PlayerBrake();
+            PlayerJump();
             UpdateFace();
         }
         private void FixedUpdate()
@@ -41,7 +32,26 @@ namespace GameHeaven.JumpGame
             PlayerMovement();
             PlayerLanding();
         }
-
+        void PlayerBrake()
+        {
+            if (Input.GetButtonUp("Horizontal"))
+            {
+                rb.velocity = new Vector2(rb.velocity.normalized.x * 0.5f, rb.velocity.y);
+            }
+        }
+        void PlayerJump()
+        {
+            if (Input.GetButtonDown("Jump") && !animator.GetBool("isJumping") && rb.velocity.y <= 0.2f)
+            {
+                rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                animator.SetBool("isJumping", true);
+                audio.Play();
+            }
+            if (rb.velocity.y == 0)
+            {
+                animator.SetBool("isJumping", false);
+            }
+        }
         void UpdateFace()
         {
             if(Input.GetKeyDown(KeyCode.A))
@@ -62,10 +72,8 @@ namespace GameHeaven.JumpGame
             if (rb.velocity.x > maxSpeed) { rb.velocity = new Vector2(maxSpeed, rb.velocity.y); }
             else if (rb.velocity.x < -maxSpeed) { rb.velocity = new Vector2(-maxSpeed, rb.velocity.y); }
 
-            if (rb.velocity.normalized.x != 0)
-                animator.SetBool("isRunning", true);
-            else
-                animator.SetBool("isRunning", false);
+            if (rb.velocity.normalized.x != 0) { animator.SetBool("isRunning", true); }
+            else { animator.SetBool("isRunning", false); }
         }
 
         void PlayerLanding()
@@ -81,6 +89,14 @@ namespace GameHeaven.JumpGame
                         animator.SetBool("isJumping", false);
                     }
                 }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.name.Equals("Rope Collider"))
+            {
+                GameManager.Instance.GameOver();
             }
         }
     }
