@@ -36,7 +36,7 @@ namespace GameHeaven.CrossGame
         int PlatformCurosr = 0;
         float MoveCount;
         bool CurrentFlatformIsActive;
-        
+
         //플레이어 이동 관련
         float JumpTime;
         int JumpCount = 0;
@@ -57,6 +57,10 @@ namespace GameHeaven.CrossGame
 
         private void Update()
         {
+            if (Manager.IsOver)
+            {
+                return;
+            }
             //플레이어 점프
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -138,6 +142,8 @@ namespace GameHeaven.CrossGame
         public void PlayerJump()
         {
             JumpCount++;
+            Player.CntAnimator.SetFloat("JumpSpeed", 0.4f * JumpSpeed);
+            Player.CntAnimator.SetTrigger("Jump");
             float Time = 1f / JumpSpeed;
             LandPos = Player.transform.position + Vector3.right * (2 - Time * ChangedMovementSpeed);
             JumpSequence = Player.transform.DOJump(LandPos, 3f, 1, Time);
@@ -175,7 +181,7 @@ namespace GameHeaven.CrossGame
             });
         }
 
-        
+
 
         void JumpCallBack()
         {
@@ -205,9 +211,9 @@ namespace GameHeaven.CrossGame
                 Platforms[PlatformCurosr].gameObject.SetActive(false);
                 CurrentFlatformIsActive = false;
             }
-            
+
             Platforms[PlatformCurosr++].transform.position += Vector3.right * PlatformSpace * 11;
-            
+
             if (Platforms.Count <= PlatformCurosr) PlatformCurosr = 0;
         }
 
@@ -215,6 +221,20 @@ namespace GameHeaven.CrossGame
         {
             GameObject InstanceStar = Instantiate(StarPrefab, new Vector3(11, -2), Quaternion.identity, ObjectGroup);
             Star InstanceScript = InstanceStar.GetComponent<Star>();
+            float num = Random.Range(0f, 1f);
+            if (num < 0.5f)
+            {
+                InstanceScript.code = CoinCode.Bronze;
+            }
+            else if (num < 0.75f)
+            {
+                InstanceScript.code = CoinCode.Silver;
+            }
+            else
+            {
+                InstanceScript.code = CoinCode.Gold;
+            }
+            InstanceScript.SetAnim();
             InstanceScript.Move();
             InstanceScript.Manager = Manager;
             Stars.Add(InstanceStar);

@@ -9,18 +9,22 @@ namespace GameHeaven.CrossGame
         Vector3 LandPos;
 
         BoxCollider2D Collider;
+        public CharacterCode Charactor;
+        public List<RuntimeAnimatorController> Animators = new List<RuntimeAnimatorController>();
+        [HideInInspector] public Animator CntAnimator;
 
         public bool OnBottom;
 
         private void Awake()
         {
             Collider = GetComponent<BoxCollider2D>();
+            CntAnimator = GetComponent<Animator>();
+            CntAnimator.runtimeAnimatorController = Animators[(int)Charactor];
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            //전역 설정인 레이어나 태그를 쓰면 안 될 것 같아서 임시
-            if (collision.gameObject.GetComponent<Platform>() as Platform)
+            if (collision.tag == "Bottom")
             {
                 OnBottom = true;
             }
@@ -28,7 +32,7 @@ namespace GameHeaven.CrossGame
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.gameObject.GetComponent<Platform>() as Platform)
+            if (collision.tag == "Bottom")
             {
                 OnBottom = true;
             }
