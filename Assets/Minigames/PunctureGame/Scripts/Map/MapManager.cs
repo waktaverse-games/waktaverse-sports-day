@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameHaven.PunctureGame
+namespace GameHeaven.PunctureGame
 {
     public class MapManager : MonoBehaviour
     {

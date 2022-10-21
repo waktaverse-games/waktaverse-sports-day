@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameHaven.PunctureGame
+namespace GameHeaven.PunctureGame
 {
     public class Enemy : MonoBehaviour
     {
