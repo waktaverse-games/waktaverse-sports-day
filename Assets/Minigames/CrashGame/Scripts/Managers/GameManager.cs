@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static GameHeaven.CrashGame.Utils;
+using SharedLibs;
+using SharedLibs.Score;
 
 namespace GameHeaven.CrashGame
 {
@@ -149,6 +151,8 @@ namespace GameHeaven.CrashGame
             CurrentGameState = GameState.Over;
             StopCoroutine(brickAddCoroutineLoop);
             Item.DeleteAll();       // 드랍 코인 및 아이템 전체 삭제
+
+            ScoreManager.Instance.AddGameRoundScore(MinigameType.CrashGame, Score);
             if (Score > highscore)
             {
                 highscore = Score;

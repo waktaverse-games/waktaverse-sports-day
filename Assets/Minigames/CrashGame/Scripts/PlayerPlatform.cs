@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SharedLibs;
+using SharedLibs.Character;
 
 namespace GameHeaven.CrashGame
 {
@@ -32,6 +34,8 @@ namespace GameHeaven.CrashGame
         private Transform ballStartPosition;
         private Transform platform;
         private Transform playerCharacter;
+
+        private CharacterType myCharacter;
 
         public Transform BallStartPosition { get { return ballStartPosition; } }
         public Transform Platform { get { return platform; } }
@@ -149,6 +153,12 @@ namespace GameHeaven.CrashGame
         public void Stop()
         {
             rigidBody.velocity = Vector2.zero;
+        }
+
+        public void GetCharacterType()
+        {
+            this.myCharacter = CharacterManager.Instance.CurrentCharacter;
+            // Set Character
         }
     }
 }
