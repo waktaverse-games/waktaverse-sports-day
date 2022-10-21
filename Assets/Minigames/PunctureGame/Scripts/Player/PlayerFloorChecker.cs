@@ -2,13 +2,13 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace GameHaven.PunctureGame
+namespace GameHeaven.PunctureGame
 {
     public class PlayerFloorChecker : MonoBehaviour
     {
         [SerializeField] private PlayerController player;
 
-        [ReadOnly] private int currentFloor = 0;
+        [SerializeField, ReadOnly] private int currentFloor = 0;
         public int CurrentFloor
         {
             get => currentFloor;

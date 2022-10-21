@@ -3,7 +3,7 @@ using SharedLibs;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace GameHaven.PunctureGame
+namespace GameHeaven.PunctureGame
 {
     public enum EnemyType
     {
