@@ -157,10 +157,10 @@ MonoBehaviour:
   Player: {fileID: 392218292}
   StarPrefab: {fileID: 2792241445067652169, guid: 2656b6c4caa32e64cbe1102ba18ff1f1, type: 3}
   ObjectGroup: {fileID: 0}
-  MovementSpeed: 3
-  JumpSpeed: 2
+  MovementSpeed: 2.5
+  JumpSpeed: 1.5
   Stars: []
-  ChangedMovementSpeed: 3
+  DefaultMovementSpeed: 3
   PlatformSpace: 2
   TrapProbability: 0.2
 --- !u!4 &293950587
@@ -299,12 +299,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9451eba46b52b744d9adc31d85144f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Manager: {fileID: 574708684}
   Charactor: 1
   Animators:
-  - {fileID: 9100000, guid: d6dc6f46129371b4bb165e6669b82629, type: 2}
-  - {fileID: 9100000, guid: c7203f99bcf52224b9b216f1b134a1ac, type: 2}
-  - {fileID: 9100000, guid: 3be9022a78593724aa544260c55fe57f, type: 2}
-  - {fileID: 9100000, guid: 185ec4c180b371340a66c78f8fccb8d2, type: 2}
+    keyData: 01000000020000000300000000000000
+    valueData:
+    - {fileID: 9100000, guid: d6dc6f46129371b4bb165e6669b82629, type: 2}
+    - {fileID: 9100000, guid: c7203f99bcf52224b9b216f1b134a1ac, type: 2}
+    - {fileID: 9100000, guid: 3be9022a78593724aa544260c55fe57f, type: 2}
+    - {fileID: 9100000, guid: 185ec4c180b371340a66c78f8fccb8d2, type: 2}
   CntAnimator: {fileID: 0}
   OnBottom: 0
 --- !u!61 &392218293
@@ -518,7 +521,7 @@ GameObject:
   - component: {fileID: 759263770}
   m_Layer: 0
   m_Name: Remover
-  m_TagString: Untagged
+  m_TagString: Outline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759263767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.48, y: 0.15, z: 0}
+  m_LocalPosition: {x: -10.99, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
