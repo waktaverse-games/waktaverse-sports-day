@@ -148,14 +148,15 @@ namespace GameHeaven.CrossGame
             Player.CntAnimator.SetTrigger("Jump");
             float Time = 1f / JumpSpeed;
             LandPos = Player.transform.position + Vector3.right * (2 - Time * MovementSpeed);
-            JumpSequence = Player.transform.DOJump(LandPos, 2f, 1, Time);
-            JumpSequence.AppendCallback(() => {
+            //JumpSequence = Player.transform.DOJump(LandPos, 2f, 1, Time);
+            Sequence UpDownSequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2, Time / 2)).Append(Player.transform.DOMoveY(LandPos.y, Time / 2)).AppendCallback(() => {
                 if (JumpCount == 1)
                 {
                     JumpCallBack();
                     Manager.AddScore(10);
                 }
             });
+            JumpSequence = DOTween.Sequence().Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownSequence);
         }
 
         public void UpdateLandPoint(float OldSpeed, float NewSpeed)
@@ -173,9 +174,12 @@ namespace GameHeaven.CrossGame
         {
             JumpCount++;
             float Time = (1f / JumpSpeed) - JumpTime;
+            float UpTime = Time - (1f / JumpSpeed) / 2;
+            float DownTime = (1f / JumpSpeed) / 2;
             LandPos = LandPos + Vector3.right * 2;
+            Sequence UpDownsequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2.3f, UpTime)).Append(Player.transform.DOMoveY(LandPos.y, DownTime));
             Sequence sequence = DOTween.Sequence();
-            sequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() =>
+            sequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownsequence).AppendCallback(() =>
             {
                 JumpSequence.Kill();
                 JumpCallBack();
@@ -217,6 +221,8 @@ namespace GameHeaven.CrossGame
             Platforms[PlatformCurosr++].transform.position += Vector3.right * PlatformSpace * 11;
 
             if (Platforms.Count <= PlatformCurosr) PlatformCurosr = 0;
+
+            if (Random.Range(0f, 1f) < 0.1f) MakeStar();
         }
 
         public void MakeStar()

@@ -22,7 +22,6 @@ namespace GameHeaven.CrossGame
         public Text ScoreUI;
         public Text StarUI;
         public Text GameOverTextUI;
-        public int a => Score == 3 ? 1 : 2;
 
         public ObjectController ObjectController;
 
@@ -59,8 +58,14 @@ namespace GameHeaven.CrossGame
 
         void Balanceing()
         {
-            ObjectController.MovementSpeed *= 1.01f;
-            ObjectController.JumpSpeed += 0.001f;
+            if (ObjectController.MovementSpeed < 7.5f)
+            {
+                ObjectController.MovementSpeed += 0.05f;
+            }
+            else if(ObjectController.MovementSpeed < 9)
+            {
+                ObjectController.MovementSpeed += 0.005f;
+            }
         }
     }
 }
