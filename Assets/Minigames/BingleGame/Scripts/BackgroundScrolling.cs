@@ -15,7 +15,7 @@ namespace GameHeaven.BingleGame
 
         private void Awake()
         {
-            viewHeight = Camera.main.orthographicSize * 2;
+            viewHeight = 10; // Camera.main.orthographicSize * 2;
         }
         void Update()
         {
@@ -25,7 +25,7 @@ namespace GameHeaven.BingleGame
             Vector3 nextPos = Vector3.up * speed * Time.deltaTime;
             transform.position = curPos + nextPos;
 
-            if (sprites[endIndex].position.y > viewHeight)
+            if (sprites[endIndex].position.y >= viewHeight)
             {
                 Vector3 backSpritePos = sprites[startIndex].localPosition;
 
