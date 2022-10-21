@@ -6,6 +6,19 @@ using TMPro;
 
 namespace GameHeaven.CrossGame
 {
+    public enum CharacterCode
+    {
+        Viichan,
+        Gosegu,
+        Jururu,
+        Wakgood
+    }
+    public enum CoinCode
+    {
+        Bronze,
+        Silver,
+        Gold
+    }
     public class CrossGameManager : MonoBehaviour
     {
         int Score;
@@ -16,22 +29,25 @@ namespace GameHeaven.CrossGame
 
         public ObjectController ObjectController;
 
+        [HideInInspector] public bool IsOver;
+
         public void AddScore(int Point)
         {
             Score += Point;
             ScoreUI.text = "점수 : " + Score.ToString();
         }
 
-        public void AddStar() 
+        public void AddGold(int num)
         {
-            CollectStar++;
-            StarUI.text = "모은 별: " + CollectStar.ToString();
+            CollectStar += num;
+            StarUI.text = "골드: " + CollectStar.ToString();
         }
 
         public void GameOver()
         {
-            Time.timeScale = 0;
             GameOverTextUI.gameObject.SetActive(true);
+            IsOver = true;
+            ObjectController.Player.CntAnimator.SetBool("GameOver", true);
         }
     }
 }
