@@ -18,14 +18,15 @@ namespace GameHeaven.CrossGame
 
         [Header("Setting")]
 
-        [Range(1f, 10f)]
+        [Range(1f, 20f)]
         public float MovementSpeed;
         [Range(1f, 10f)]
         public float JumpSpeed;
         List<Platform> Platforms = new List<Platform>();
         [HideInInspector]
         public List<GameObject> Stars = new List<GameObject>();
-        public float ChangedMovementSpeed;
+
+        public float DefaultMovementSpeed;
 
 
         //플랫폼 이동 관련
@@ -68,7 +69,7 @@ namespace GameHeaven.CrossGame
                 {
                     PlayerJump();
                 }
-                else if (JumpCount == 1 && JumpTime * JumpSpeed < 0.75f)
+                else if (JumpCount == 1 && JumpTime * JumpSpeed < 0.5f)
                 {
                     PlayerDoubleJump();
                 }
@@ -85,15 +86,16 @@ namespace GameHeaven.CrossGame
                 //오른쪽 벽에 가까워졌을 때 포지션 제한
                 if (Player.transform.position.x > 4 && !PlayerPositionIsLimited)
                 {
-                    ChangedMovementSpeed = MovementSpeed * 0.5f + JumpSpeed * 4;
-                    UpdateLandPoint(MovementSpeed, ChangedMovementSpeed);
+                    DefaultMovementSpeed = MovementSpeed;
+                    MovementSpeed = DefaultMovementSpeed * 0.5f + JumpSpeed * 4;
+                    UpdateLandPoint(DefaultMovementSpeed, MovementSpeed);
                     PlayerPositionIsLimited = true;
                 }
                 //포지션 제한 해제
                 else if (Player.transform.position.x <= 4 && PlayerPositionIsLimited)
                 {
-                    UpdateLandPoint(ChangedMovementSpeed, MovementSpeed);
-                    ChangedMovementSpeed = MovementSpeed;
+                    UpdateLandPoint(MovementSpeed, DefaultMovementSpeed);
+                    MovementSpeed = DefaultMovementSpeed;
                     PlayerPositionIsLimited = false;
                 }
                 //점프가 지속된 시간 체크
@@ -104,7 +106,7 @@ namespace GameHeaven.CrossGame
                 //포지션 제한 해제
                 if (Player.transform.position.x <= 4 && PlayerPositionIsLimited)
                 {
-                    ChangedMovementSpeed = MovementSpeed;
+                    MovementSpeed = DefaultMovementSpeed;
                     PlayerPositionIsLimited = false;
                 }
                 //점프가 지속된 시간 초기화
@@ -112,7 +114,7 @@ namespace GameHeaven.CrossGame
             }
 
             //플레이어 이동
-            float DeltaDistance = ChangedMovementSpeed * Time.deltaTime;
+            float DeltaDistance = MovementSpeed * Time.deltaTime;
             MoveCount += DeltaDistance;
             Player.transform.position += Vector3.left * DeltaDistance;
 
@@ -145,15 +147,16 @@ namespace GameHeaven.CrossGame
             Player.CntAnimator.SetFloat("JumpSpeed", 0.4f * JumpSpeed);
             Player.CntAnimator.SetTrigger("Jump");
             float Time = 1f / JumpSpeed;
-            LandPos = Player.transform.position + Vector3.right * (2 - Time * ChangedMovementSpeed);
-            JumpSequence = Player.transform.DOJump(LandPos, 3f, 1, Time);
-            JumpSequence.AppendCallback(() => {
+            LandPos = Player.transform.position + Vector3.right * (2 - Time * MovementSpeed);
+            //JumpSequence = Player.transform.DOJump(LandPos, 2f, 1, Time);
+            Sequence UpDownSequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2, Time / 2)).Append(Player.transform.DOMoveY(LandPos.y, Time / 2)).AppendCallback(() => {
                 if (JumpCount == 1)
                 {
                     JumpCallBack();
                     Manager.AddScore(10);
                 }
             });
+            JumpSequence = DOTween.Sequence().Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownSequence);
         }
 
         public void UpdateLandPoint(float OldSpeed, float NewSpeed)
@@ -171,9 +174,12 @@ namespace GameHeaven.CrossGame
         {
             JumpCount++;
             float Time = (1f / JumpSpeed) - JumpTime;
+            float UpTime = Time - (1f / JumpSpeed) / 2;
+            float DownTime = (1f / JumpSpeed) / 2;
             LandPos = LandPos + Vector3.right * 2;
+            Sequence UpDownsequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2.3f, UpTime)).Append(Player.transform.DOMoveY(LandPos.y, DownTime));
             Sequence sequence = DOTween.Sequence();
-            sequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() =>
+            sequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownsequence).AppendCallback(() =>
             {
                 JumpSequence.Kill();
                 JumpCallBack();
@@ -215,6 +221,8 @@ namespace GameHeaven.CrossGame
             Platforms[PlatformCurosr++].transform.position += Vector3.right * PlatformSpace * 11;
 
             if (Platforms.Count <= PlatformCurosr) PlatformCurosr = 0;
+
+            if (Random.Range(0f, 1f) < 0.1f) MakeStar();
         }
 
         public void MakeStar()
