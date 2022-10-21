@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace GameHaven.PunctureGame
+namespace GameHeaven.PunctureGame
 {
     public class PlayerController : MonoBehaviour
     {

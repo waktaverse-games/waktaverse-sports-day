@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace GameHaven.PunctureGame
+namespace GameHeaven.PunctureGame
 {
     public class EnemyManager : MonoBehaviour
     {
