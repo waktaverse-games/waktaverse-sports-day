@@ -8,7 +8,7 @@ namespace GameHaven.PunctureGame
     {
         [SerializeField] private PlayerController player;
 
-        [ReadOnly] private int currentFloor = 0;
+        [SerializeField, ReadOnly] private int currentFloor = 0;
         public int CurrentFloor
         {
             get => currentFloor;

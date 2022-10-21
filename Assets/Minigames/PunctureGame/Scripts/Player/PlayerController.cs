@@ -73,7 +73,7 @@ namespace GameHaven.PunctureGame
             }
             
             Move();
-            DetectFloor();
+            FloorDetect();
         }
 
         private void Move()
@@ -81,9 +81,15 @@ namespace GameHaven.PunctureGame
             transform.position += MoveVec;
         }
 
-        private void DetectFloor()
+        private void FloorDetect()
         {
             var hit = Physics2D.Raycast(transform.position, Vector2.down * groundCheckRad, 0.0f, blockLayer);
+            if (hit && !isGrounded)
+            {
+                var position = transform.position;
+                position = new Vector3(position.x, Mathf.RoundToInt(position.y), position.z);
+                transform.position = position;
+            }
             isGrounded = hit;
         }
 
