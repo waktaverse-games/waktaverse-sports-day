@@ -9,21 +9,28 @@ namespace GameHaven.PunctureGame
     {
         [SerializeField] private EnemyFactory factory;
         
-        [SerializeField, DisableInPlayMode] private Transform[] enemySpawnPoints;
+        private Queue<Enemy> enemyPool;
+        [SerializeField] private int poolSize;
         
-        [SerializeField, DisableInPlayMode] private Queue<Enemy> enemyPool;
         [SerializeField, DisableInPlayMode] private List<Enemy> enemies;
 
-        [SerializeField] private float horzSpawnRange = 8.0f;
+        [SerializeField] private PlayerFloorChecker floorChecker;
 
         private void Awake()
         {
             enemyPool = new Queue<Enemy>();
-            for (var i = 0; i < enemySpawnPoints.Length; i++)
+            for (var i = 0; i < poolSize; i++)
             {
                 var enemy = factory.CreateRandom();
                 enemyPool.Enqueue(enemy);
             }
+            
+            floorChecker.onFloorChanged += OnPlayerFloorChanged;
+        }
+
+        private void OnPlayerFloorChanged(int floor)
+        {
+            Debug.Log("Player entered on " + floor + " floor");
         }
 
         private void Start()
