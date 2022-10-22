@@ -19,11 +19,11 @@ namespace GameHeaven.BingleGame
         {
             if(renderer.flipX)
             {
-                transform.Translate(Vector3.right * movingSpeed * Time.deltaTime + Vector3.up * GameSpeedController.instance.speed * Time.deltaTime);
+                transform.Translate(Vector3.right * movingSpeed * Time.deltaTime);
             }
             else
             {
-                transform.Translate(Vector3.left * movingSpeed * Time.deltaTime + Vector3.up * GameSpeedController.instance.speed * Time.deltaTime);
+                transform.Translate(Vector3.left * movingSpeed * Time.deltaTime);
             }
         }
 
