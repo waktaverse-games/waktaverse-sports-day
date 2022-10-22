@@ -8,12 +8,13 @@ namespace GameHeaven.BingleGame
     {
         [SerializeField] int id;
 
+        [SerializeField] CheckpointSpawner checkpointSpawner;
         [SerializeField] BackgroundGenerator backgroundGenerator;
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.tag == "Player")
             {
-                backgroundGenerator.MoveBG(id, transform.position.y);
+                backgroundGenerator.UpdateBG(id, transform.position.y);
             }
         }
     }

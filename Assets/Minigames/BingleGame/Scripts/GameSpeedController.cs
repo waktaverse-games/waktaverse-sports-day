@@ -27,11 +27,6 @@ namespace GameHeaven.BingleGame
         public float increasingSpeedTime;
         public float increasingSpeedAmount;
 
-        // Checkpoint Spawn Speed
-        public float cpSpawnSpeed;
-        public float cpSpawnSpeedAmount;
-        public float cpSpawnSpeedMin;
-
         // Item Spawn Probability
         public int[] itemProb;
 
@@ -47,14 +42,6 @@ namespace GameHeaven.BingleGame
             yield return new WaitForSeconds(delayTime);
             speed += increasingSpeedAmount;
 
-            if (cpSpawnSpeed > cpSpawnSpeedMin)
-            {
-                cpSpawnSpeed -= cpSpawnSpeedAmount;
-            }
-            else
-            {
-                cpSpawnSpeed = cpSpawnSpeedMin;
-            }
             timeCount++;
             AdjustItemProb();
 

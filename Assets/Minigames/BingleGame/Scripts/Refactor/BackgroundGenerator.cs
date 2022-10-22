@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundGenerator : MonoBehaviour
+namespace GameHeaven.BingleGame
 {
-    [SerializeField] Transform[] sprites;
-    int startIndex = 0;
-    int endIndex = 2;
-    float camHeight;
-    private void Awake()
+    public class BackgroundGenerator : MonoBehaviour
     {
-        camHeight = Camera.main.orthographicSize * 2;
-    }
-    public void MoveBG(int id, float yVal)
-    {
-        sprites[(id + 1) % 3].position = new Vector3(0, yVal - camHeight * 2, 0);
+        [SerializeField] Transform[] sprites;
+        int startIndex = 0;
+        int endIndex = 2;
+        float camHeight;
+        private void Awake()
+        {
+            camHeight = Camera.main.orthographicSize * 2;
+        }
+        public void UpdateBG(int id, float yVal)
+        {
+            int index = (id + 1) % 3;
+            sprites[index].position = new Vector3(0, yVal - camHeight * 2, 0);
+            sprites[index].gameObject.GetComponentInChildren<CheckpointSpawner>().SpawnCheckpoint();
+            sprites[index].gameObject.GetComponentInChildren<ItemSpawner>().SpawnItem();
+        }
     }
 }

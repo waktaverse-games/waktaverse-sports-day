@@ -21,8 +21,6 @@ namespace GameHeaven.BingleGame
 
         private Vector2 dir = new Vector2(-1,-1);
 
-        [SerializeField] AudioSource turnSFX;
-        [SerializeField] AudioSource itemSFX;
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -33,6 +31,7 @@ namespace GameHeaven.BingleGame
 
         void Update()
         {
+            speed = GameSpeedController.instance.speed;
             ChangeDirection();
             FlipSprite();
         }
@@ -46,8 +45,7 @@ namespace GameHeaven.BingleGame
             CheckCoolTime();
             if (Input.GetKeyDown(KeyCode.Space) && ableToMove)
             {
-                turnSFX.Play();
-
+                SoundManager.instance.PlayTurnSound();
                 ableToMove = false;
                 curTime = 0;
                 movingLeft = !movingLeft;
@@ -75,11 +73,6 @@ namespace GameHeaven.BingleGame
             if (collision.gameObject.tag == "GameOverArea" || collision.gameObject.tag == "Border")
             {
                 GameManager.instance.GameOver();
-            }
-            else if (collision.gameObject.tag == "Coin")
-            {
-                itemSFX.Play();
-                Destroy(collision.gameObject);
             }
         }
     }

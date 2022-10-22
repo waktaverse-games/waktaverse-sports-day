@@ -1,33 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameHeaven.BingleGame.Enums;
 
 namespace GameHeaven.BingleGame
 {
     public class CheckPointManager : MonoBehaviour
     {
-        [SerializeField] float speed;
         public GameObject[] children;
 
-        private void Awake()
-        {
-            speed = GameSpeedController.instance.speed;
-        }
-        void Update()
-        {
-            speed = GameSpeedController.instance.speed;
-            Vector3 curPos = transform.position;
-            Vector3 nextPos = Vector3.up * speed * Time.deltaTime;
-            transform.position = curPos + nextPos;
-        }
+        [SerializeField] TreeManager leftTree, rightTree;
 
-
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void Start()
         {
-            if (collision.gameObject.tag == "Border")
-            {
-                Destroy(gameObject);
-            }
+            leftTree = children[0].GetComponent<TreeManager>();
+            rightTree = children[1].GetComponent<TreeManager>();
         }
 
         public void DisableOtherCollider()
@@ -40,5 +27,33 @@ namespace GameHeaven.BingleGame
                 }
             }
         }
+        public void ResetCheckpoint()
+        {
+            EnableColliders();
+            ResetTree();
+        }
+
+        void EnableColliders()
+        {
+            foreach(var obj in children)
+            {
+                obj.GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }
+
+        void ChooseTreeType()
+        {
+            int type = Random.Range(0, System.Enum.GetValues(typeof(TreeType)).Length);
+            leftTree.SetTreeType(type);
+            rightTree.SetTreeType(type);
+        }
+
+        void ResetTree()
+        {
+            leftTree.ResetTree();
+            rightTree.ResetTree();
+            ChooseTreeType();
+        }
+
     }
 }
