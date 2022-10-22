@@ -8,7 +8,7 @@ namespace SharedLibs.Score
         private class ScoreDictionary : UnitySerializedDictionary<MinigameType, int> {}
         
         [SerializeField]
-        private ScoreDictionary scoreDic;
+        private ScoreDictionary scoreDic = new ScoreDictionary() {};
         
         public int AllScore { get; private set; }
 
@@ -21,6 +21,11 @@ namespace SharedLibs.Score
         {
             AllScore += score;
             scoreDic[type] += score;
+        }
+
+        public void SetGameHighScore(MinigameType type, int score)
+        {
+            scoreDic[type] = score;
         }
 
         public int GetGameScore(MinigameType type)
