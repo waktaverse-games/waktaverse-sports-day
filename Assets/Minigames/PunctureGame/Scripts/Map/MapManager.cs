@@ -31,7 +31,7 @@ namespace GameHeaven.PunctureGame
 
         private void Update()
         {
-            if (playerController.IsFacingLeft)
+            if (playerController.isFacingLeft)
             {
                 if ((playerController.currentPos - leftTargetPos).x < -allowDist)
                 {
