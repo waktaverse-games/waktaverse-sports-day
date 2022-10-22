@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using SharedLibs;
+
 namespace GameHeaven.BingleGame
 {
     public class GameManager : MonoBehaviour
@@ -32,10 +34,6 @@ namespace GameHeaven.BingleGame
         void Update()
         {
             scoreText.text = string.Format("{0:n0}", score);
-            if(isGameOver)
-            {
-                GameOver();
-            }
         }
         public void IncreaseScore(int num)
         {
@@ -44,6 +42,7 @@ namespace GameHeaven.BingleGame
 
         public void GameOver()
         {
+            //SharedLibs.Score.ScoreManager.Instance.AddGameRoundScore(MinigameType.BingleGame, score);
             Time.timeScale = 0;
             retryButton.SetActive(true);
         }
@@ -51,7 +50,6 @@ namespace GameHeaven.BingleGame
         public void Retry()
         {
             Time.timeScale = 1;
-            isGameOver = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
