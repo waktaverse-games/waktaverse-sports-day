@@ -6,11 +6,13 @@ namespace GameHeaven.BingleGame
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] GameObject skiEquip;
+
         [SerializeField] float speed;
         [SerializeField] float slowDownSpeed;
         [SerializeField] float controlCoolDown;
         [SerializeField] bool ableToMove;
-
+        
         private float curTime = 0;
         private bool movingLeft;
 
@@ -49,14 +51,7 @@ namespace GameHeaven.BingleGame
                 curTime = 0;
                 movingLeft = !movingLeft;
                 rb.velocity = dir * Mathf.Abs(rb.velocity.x * 0.8f);
-                if(movingLeft)
-                {
-                    dir = Vector2.left;
-                }
-                else
-                {
-                    dir = Vector2.right;
-                }
+                dir = movingLeft ? Vector2.left : Vector2.right;
             }
         }
         private void CheckCoolTime()
@@ -70,28 +65,21 @@ namespace GameHeaven.BingleGame
 
         private void FlipSprite()
         {
-            if(rb.velocity.x >= 0)
-            {
-                sprite.flipX = true;
-            }
-            else
-            {
-                sprite.flipX = false;
-            }
+            sprite.flipX = rb.velocity.x >= 0 ? true : false;
+            skiEquip.transform.localScale = rb.velocity.x >= 0 ? new Vector3(-1,1,1) : Vector3.one;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.gameObject.tag == "GameOverArea")
+            if(collision.gameObject.tag == "GameOverArea" || collision.gameObject.tag == "Border")
             {
-                GameManager.instance.isGameOver = true;
+                GameManager.instance.GameOver();
             }
             else if(collision.gameObject.tag == "Coin")
             {
                 itemSFX.Play();
-                Destroy(collision.gameObject);  // 코인 파괴
-                // 이후 코인 스코어 관리 코드...
-            }    
+                Destroy(collision.gameObject);
+            }
         }
     }
 }

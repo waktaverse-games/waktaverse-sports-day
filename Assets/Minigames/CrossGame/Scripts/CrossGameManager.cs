@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using SharedLibs;
+using SharedLibs.Score;
+using SharedLibs.Character;
 
 namespace GameHeaven.CrossGame
 {
-    public enum CharacterCode
-    {
-        Viichan,
-        Gosegu,
-        Jururu,
-        Wakgood
-    }
     public enum CoinCode
     {
         Bronze,
@@ -35,6 +31,15 @@ namespace GameHeaven.CrossGame
         {
             Score += Point;
             ScoreUI.text = "Á¡¼ö : " + Score.ToString();
+            if (Point == 10)
+            {
+                Balanceing();
+            }
+            else if (Point == 20)
+            {
+                Balanceing();
+                Balanceing();
+            }
         }
 
         public void AddGold(int num)
@@ -48,6 +53,19 @@ namespace GameHeaven.CrossGame
             GameOverTextUI.gameObject.SetActive(true);
             IsOver = true;
             ObjectController.Player.CntAnimator.SetBool("GameOver", true);
+            ScoreManager.Instance.AddGameRoundScore(MinigameType.CrossGame, Score);
+        }
+
+        void Balanceing()
+        {
+            if (ObjectController.MovementSpeed < 7.5f)
+            {
+                ObjectController.MovementSpeed += 0.05f;
+            }
+            else if(ObjectController.MovementSpeed < 9)
+            {
+                ObjectController.MovementSpeed += 0.005f;
+            }
         }
     }
 }

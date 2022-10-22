@@ -6,37 +6,30 @@ namespace GameHeaven.BingleGame
 {
     public class ItemSpawner : MonoBehaviour
     {
-        [SerializeField] float maxSpawnDelay;
-        [SerializeField] float curTime;
+        [SerializeField] Transform spawnPoint;
+        public GameObject[] PF_items;
+        public List<GameObject> itemPool;
 
-        public Transform spawnPointLeft;
-        public Transform spawnPointRight;
-
-        public GameObject[] items;
-
-        void Update()
+        private void Start()
         {
-            maxSpawnDelay = GameSpeedController.instance.cpSpawnSpeed * 2f;
-
-            curTime += Time.deltaTime;
-
-            if (curTime > maxSpawnDelay)
+            for(int i=0;i<PF_items.Length;i++)
             {
-                SpawnItem();
-                curTime = 0;
+                var item = Instantiate(PF_items[i]);
+                item.transform.SetParent(spawnPoint);
+                item.transform.localPosition = spawnPoint.localPosition;
+                item.SetActive(false);
+                itemPool.Add(item);
             }
-
         }
-
-        private void SpawnItem()
+        public void SpawnItem()
         {
-            float xCord = Random.Range(spawnPointLeft.position.x, spawnPointRight.position.x);
-            Vector3 spawnPoint = new Vector3(xCord, transform.position.y, transform.position.z);
+            ResetItem();
+            float xOffset = Random.Range(-3.5f, 3.5f);
 
             int itemIndex;
             int itemProb = Random.Range(1, 101);
             int[] probList = GameSpeedController.instance.itemProb;
-            Debug.Log($"Item Prob = {itemProb}");
+
             if(itemProb <= probList[2])
             {
                 itemIndex = 2;
@@ -49,7 +42,16 @@ namespace GameHeaven.BingleGame
             {
                 itemIndex = 0;
             }
-            Instantiate(items[itemIndex], spawnPoint, transform.rotation);
+            itemPool[itemIndex].transform.localPosition = new Vector3(xOffset, spawnPoint.localPosition.y, spawnPoint.localPosition.z);
+            itemPool[itemIndex].SetActive(true);
+        }
+
+        public void ResetItem()
+        {
+            foreach(var item in itemPool)
+            {
+                item.SetActive(false);
+            }
         }
     }
 }
