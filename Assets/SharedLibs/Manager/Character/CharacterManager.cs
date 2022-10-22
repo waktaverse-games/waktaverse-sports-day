@@ -7,7 +7,7 @@ namespace SharedLibs.Character
         [System.Serializable]
         private class CharacterDictionary : UnitySerializedDictionary<CharacterType, CharacterData> {}
         
-        [SerializeField] private CharacterDictionary characterDic;
+        [SerializeField] private CharacterDictionary characterDic = new CharacterDictionary() {};
         
         public CharacterType CurrentCharacter { get; set; }
         public CharacterData CurrentCharacterData => characterDic[CurrentCharacter] == null ? null : characterDic[CurrentCharacter];
