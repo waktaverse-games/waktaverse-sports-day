@@ -29,6 +29,7 @@ namespace GameHeaven.CrashGame
         private int score;
         private int highscore;
         private int money;
+        private int backgroundState;
 
         private Coroutine brickAddCoroutineLoop = null;
 
@@ -46,6 +47,7 @@ namespace GameHeaven.CrashGame
 
         public PlayerPlatform platform;
         public Transform playerSpawnPosition;
+        public Transform background;
 
         public UIManager UI
         {
@@ -172,6 +174,7 @@ namespace GameHeaven.CrashGame
             brickManager.ResetBricks();
             platform.PlatformInit();
             uiManager.GameRestart();
+            RandomBackgroundSelect();
         }
 
         public void BallFire()
@@ -181,6 +184,13 @@ namespace GameHeaven.CrashGame
                 StopCoroutine(brickAddCoroutineLoop);
             }
             brickAddCoroutineLoop = StartCoroutine(Brick.BlockLineAddLoop(brickAddInterval, brickAddInterval));
+        }
+
+        private void RandomBackgroundSelect()
+        {
+            backgroundState = UnityEngine.Random.Range(0, 2);
+            background.GetChild(backgroundState + 1).gameObject.SetActive(true);
+            background.GetChild(2 - backgroundState).gameObject.SetActive(false);
         }
     }
 }

@@ -37,6 +37,9 @@ namespace GameHeaven.CrashGame
 
         private CharacterType myCharacter;
 
+        [SerializeField]
+        private List<Sprite> platformSprite;
+
         public Transform BallStartPosition { get { return ballStartPosition; } }
         public Transform Platform { get { return platform; } }
         public Transform PlayerCharacter { get { return playerCharacter; } }
@@ -130,6 +133,7 @@ namespace GameHeaven.CrashGame
             platform.localScale = new Vector3(initialPlatformXScale, 2, 1);
             Speed = initialSpeed;
             rigidBody.position = GameManager.Instance.playerSpawnPosition.position;
+            platform.GetComponent<SpriteRenderer>().sprite = platformSprite[UnityEngine.Random.Range(0, platformSprite.Count)];
             BallInit();
         }
 

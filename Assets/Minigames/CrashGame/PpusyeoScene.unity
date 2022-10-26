@@ -641,6 +641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 389607893}
   - component: {fileID: 389607894}
+  - component: {fileID: 389607895}
   m_Layer: 0
   m_Name: Stars
   m_TagString: Untagged
@@ -715,6 +716,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &389607895
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389607892}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7c2d428979da3fd46958a90e2b4d3e6c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &512285861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,7 +1422,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1330533930}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &779367874
 GameObject:
@@ -1910,8 +1931,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2062961020}
   - {fileID: 766092975}
+  - {fileID: 2062961020}
   - {fileID: 836277211}
   m_Father: {fileID: 0}
   m_RootOrder: 12
@@ -2533,6 +2554,7 @@ MonoBehaviour:
   ballPrefab: {fileID: 1069602127132607227, guid: 6f6b5b82d17d92b438442beae4051006, type: 3}
   platform: {fileID: 646728301}
   playerSpawnPosition: {fileID: 683537454}
+  background: {fileID: 1330533930}
 --- !u!1 &1719768014
 GameObject:
   m_ObjectHideFlags: 0
@@ -3097,7 +3119,7 @@ Transform:
   m_Children:
   - {fileID: 211449047}
   m_Father: {fileID: 1330533930}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2085674630
 GameObject:
