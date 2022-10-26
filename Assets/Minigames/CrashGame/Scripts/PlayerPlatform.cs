@@ -120,10 +120,16 @@ namespace GameHeaven.CrashGame
             }
         }
 
+        public void OnGameOver()
+        {
+            rigidBody.velocity = Vector2.zero;
+        }
+
         public void PlatformInit()
         {
             platform.localScale = new Vector3(initialPlatformXScale, 2, 1);
             Speed = initialSpeed;
+            rigidBody.position = GameManager.Instance.playerSpawnPosition.position;
             BallInit();
         }
 

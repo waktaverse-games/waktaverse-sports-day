@@ -45,6 +45,7 @@ namespace GameHeaven.CrashGame
         //public GameObject testBallPrefab;
 
         public PlayerPlatform platform;
+        public Transform playerSpawnPosition;
 
         public UIManager UI
         {
@@ -160,6 +161,7 @@ namespace GameHeaven.CrashGame
             }
             // Gameover UI Active
             uiManager.GameOver();
+            platform.OnGameOver();
         }
 
         public void GameStart()
