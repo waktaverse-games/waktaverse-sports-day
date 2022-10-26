@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SharedLibs;
+using SharedLibs.Character;
 
 namespace GameHeaven.CrashGame
 {
@@ -32,6 +34,11 @@ namespace GameHeaven.CrashGame
         private Transform ballStartPosition;
         private Transform platform;
         private Transform playerCharacter;
+
+        private CharacterType myCharacter;
+
+        [SerializeField]
+        private List<Sprite> platformSprite;
 
         public Transform BallStartPosition { get { return ballStartPosition; } }
         public Transform Platform { get { return platform; } }
@@ -116,10 +123,17 @@ namespace GameHeaven.CrashGame
             }
         }
 
+        public void OnGameOver()
+        {
+            rigidBody.velocity = Vector2.zero;
+        }
+
         public void PlatformInit()
         {
             platform.localScale = new Vector3(initialPlatformXScale, 2, 1);
             Speed = initialSpeed;
+            rigidBody.position = GameManager.Instance.playerSpawnPosition.position;
+            platform.GetComponent<SpriteRenderer>().sprite = platformSprite[UnityEngine.Random.Range(0, platformSprite.Count)];
             BallInit();
         }
 
@@ -149,6 +163,12 @@ namespace GameHeaven.CrashGame
         public void Stop()
         {
             rigidBody.velocity = Vector2.zero;
+        }
+
+        public void GetCharacterType()
+        {
+            this.myCharacter = CharacterManager.Instance.CurrentCharacter;
+            // Set Character
         }
     }
 }

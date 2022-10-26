@@ -19,7 +19,6 @@ namespace GameHeaven.CrashGame
         private float maxSpeed = 8f;
 
         private PlayerPlatform platform;
-        private Vector2 velocity;
 
         [SerializeField]
         private bool randomBounce;
@@ -72,16 +71,20 @@ namespace GameHeaven.CrashGame
             {
                 DestroyBall();
             }
+            if (Mathf.Abs(rigidBody.velocity.y) < 0.05f)
+            {
+                // 튕겨나가는 각도가 너무 작을 때 보정
+                rigidBody.velocity = Utils.RotateVector(rigidBody.velocity, 10f);
+            }
             isReturning = true;
             //GameManager.Instance.Sound.PlayEffect("tick", volume: .25f);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            velocity = rigidBody.velocity;
+            Vector2 velocity = rigidBody.velocity;
             if (collision.CompareTag("Platform"))
             {
-                // 플랫폼의 운동상태에 상관없이, 플랫폼에 닿으면 일정 각도로 반사
                 // 공이 여러번 플랫폼에 튕기는 행위 방지
                 if (isReturning)
                 {
@@ -155,7 +158,7 @@ namespace GameHeaven.CrashGame
         public void Fire()
         {
             isReturning = false;
-            rigidBody.AddForce(new Vector2(1, 1).normalized * InitialForce);
+            rigidBody.AddForce(new Vector2(Random.Range(-10, 10), Random.Range(5, 10)).normalized * InitialForce);
         }
 
         public void BlockFire()

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static GameHeaven.CrashGame.Utils;
+using SharedLibs;
+using SharedLibs.Score;
 
 namespace GameHeaven.CrashGame
 {
@@ -27,6 +29,7 @@ namespace GameHeaven.CrashGame
         private int score;
         private int highscore;
         private int money;
+        private int backgroundState;
 
         private Coroutine brickAddCoroutineLoop = null;
 
@@ -43,6 +46,8 @@ namespace GameHeaven.CrashGame
         //public GameObject testBallPrefab;
 
         public PlayerPlatform platform;
+        public Transform playerSpawnPosition;
+        public Transform background;
 
         public UIManager UI
         {
@@ -149,6 +154,8 @@ namespace GameHeaven.CrashGame
             CurrentGameState = GameState.Over;
             StopCoroutine(brickAddCoroutineLoop);
             Item.DeleteAll();       // 드랍 코인 및 아이템 전체 삭제
+
+            //ScoreManager.Instance.AddGameRoundScore(MinigameType.CrashGame, Score);
             if (Score > highscore)
             {
                 highscore = Score;
@@ -156,6 +163,7 @@ namespace GameHeaven.CrashGame
             }
             // Gameover UI Active
             uiManager.GameOver();
+            platform.OnGameOver();
         }
 
         public void GameStart()
@@ -166,6 +174,7 @@ namespace GameHeaven.CrashGame
             brickManager.ResetBricks();
             platform.PlatformInit();
             uiManager.GameRestart();
+            RandomBackgroundSelect();
         }
 
         public void BallFire()
@@ -175,6 +184,13 @@ namespace GameHeaven.CrashGame
                 StopCoroutine(brickAddCoroutineLoop);
             }
             brickAddCoroutineLoop = StartCoroutine(Brick.BlockLineAddLoop(brickAddInterval, brickAddInterval));
+        }
+
+        private void RandomBackgroundSelect()
+        {
+            backgroundState = UnityEngine.Random.Range(0, 2);
+            background.GetChild(backgroundState + 1).gameObject.SetActive(true);
+            background.GetChild(2 - backgroundState).gameObject.SetActive(false);
         }
     }
 }
