@@ -111,7 +111,7 @@ namespace GameHeaven.CrashGame
             if (collision.collider.CompareTag("Coin"))
             {
                 GameManager.Instance.Sound.PlayEffect("coin_01");
-                GameManager.Instance.Money += collision.collider.GetComponent<Coin>().CoinValue;
+                GameManager.Instance.AddScore(collision.collider.GetComponent<Coin>().CoinValue);
                 Destroy(collision.gameObject);
             }
             if (collision.collider.CompareTag("CrashGame_Item"))

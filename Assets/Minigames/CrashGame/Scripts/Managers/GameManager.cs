@@ -34,8 +34,11 @@ namespace GameHeaven.CrashGame
         private Coroutine brickAddCoroutineLoop = null;
 
         [SerializeField]
-        private float brickAddInterval = 10f;
+        private float brickInitialInterval = 20f;
+        [SerializeField]
+        private float brickFinalInterval = 10f;
 
+        [Obsolete]
         public int Money
         {
             get { return money; }
@@ -108,7 +111,7 @@ namespace GameHeaven.CrashGame
             highscore = 0;
             uiManager.SetScoreText(Score);
             uiManager.SetHighScoreText(Score);
-            uiManager.SetCoinText(Money);
+            //uiManager.SetCoinText(Money);
         }
 
         private void Start()
@@ -133,13 +136,11 @@ namespace GameHeaven.CrashGame
             }
         }
 
-
-
         // Update is called once per frame
         void Update()
         {
             uiManager.SetScoreText(Score);
-            uiManager.SetCoinText(Money);
+            //uiManager.SetCoinText(Money);
         }
 
         public void AddScore(int score)
@@ -183,7 +184,7 @@ namespace GameHeaven.CrashGame
             {
                 StopCoroutine(brickAddCoroutineLoop);
             }
-            brickAddCoroutineLoop = StartCoroutine(Brick.BlockLineAddLoop(brickAddInterval, brickAddInterval));
+            brickAddCoroutineLoop = StartCoroutine(Brick.BlockLineAddLoop(brickInitialInterval, brickFinalInterval));
         }
 
         private void RandomBackgroundSelect()
