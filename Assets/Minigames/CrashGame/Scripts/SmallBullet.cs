@@ -41,7 +41,7 @@ namespace GameHeaven.CrashGame
             {
                 collision.gameObject.GetComponent<Brick>().BallCollide();
             }
-            GameManager.Instance.Sound.PlayEffect("tick", volume: .25f);
+            //GameManager.Instance.Sound.PlayEffect("tick", volume: .25f);
             DestroySelf();
         }
 
