@@ -265,93 +265,13 @@ RectTransform:
   - {fileID: 512285862}
   - {fileID: 1507341398}
   m_Father: {fileID: 596041587}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &127804794
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 127804795}
-  - component: {fileID: 127804797}
-  - component: {fileID: 127804796}
-  m_Layer: 5
-  m_Name: Coin
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &127804795
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127804794}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 596041587}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -236.6897, y: -430}
-  m_SizeDelta: {x: 395.3639, y: 233.0039}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &127804796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127804794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 1
-    m_MaxSize: 128
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\uCF54\uC778"
---- !u!222 &127804797
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127804794}
-  m_CullTransparentMesh: 1
 --- !u!1 &137661109
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +692,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 140.25}
-  m_SizeDelta: {x: 856.043, y: 280.5016}
+  m_SizeDelta: {x: 500.7692, y: 280.5016}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &512285863
 MonoBehaviour:
@@ -966,7 +886,6 @@ RectTransform:
   - {fileID: 2085674631}
   - {fileID: 1992138483}
   - {fileID: 626628545}
-  - {fileID: 127804795}
   - {fileID: 59797342}
   - {fileID: 2037449896}
   m_Father: {fileID: 0}
@@ -1012,7 +931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -236.6897, y: -301.31287}
+  m_AnchoredPosition: {x: -255.9361, y: -396.2212}
   m_SizeDelta: {x: 395.3639, y: 233.0039}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &626628546
@@ -1611,7 +1530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &836277211
 Transform:
   m_ObjectHideFlags: 0
@@ -1867,7 +1786,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.09803922}
   m_FlipX: 0
@@ -1976,7 +1895,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 837.3842, y: 311.8955}
+  m_SizeDelta: {x: 515.7175, y: 311.8955}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1358986425
 MonoBehaviour:
@@ -2385,7 +2304,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2478,7 +2397,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScore: {fileID: 1992138484}
   highScore: {fileID: 626628546}
-  coin: {fileID: 127804796}
   GameOverUI: {fileID: 59797341}
   PerfectBonusUI: {fileID: 2037449895}
 --- !u!114 &1679308195
@@ -2553,7 +2471,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ff6eb1a743fe24083285f6870bd0d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickAddInterval: 10
+  brickInitialInterval: 18
+  brickFinalInterval: 8
   ballPrefab: {fileID: 1069602127132607227, guid: 6f6b5b82d17d92b438442beae4051006, type: 3}
   platform: {fileID: 646728301}
   playerSpawnPosition: {fileID: 683537454}
@@ -2803,7 +2722,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -275.7539, y: -169.77881}
+  m_AnchoredPosition: {x: -295, y: -215}
   m_SizeDelta: {x: 317.2335, y: 233.0039}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1992138484
@@ -3033,7 +2952,7 @@ RectTransform:
   m_Children:
   - {fileID: 1358986424}
   m_Father: {fileID: 596041587}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3056,7 +2975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &2062961019
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3357,7 +3276,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: cfe77cef45e370443904ae151a67e701, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
