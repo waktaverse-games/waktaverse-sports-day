@@ -19,6 +19,7 @@ namespace GameHeaven.StickyGame
         [SerializeField] private int score;
         [SerializeField] private bool isDeath;
         [SerializeField] private GameObject acquireEffect;
+        [SerializeField] AudioClip acquireSound, associateSound, cutSound;
 
         private Statistics statistics;
 
@@ -95,6 +96,7 @@ namespace GameHeaven.StickyGame
                     }
                     else
                     {
+                        AudioSource.PlayClipAtPoint(associateSound, Vector3.zero);
                         statistics.score += 70 + 20 * statistics.curRunner;
                         statistics.cumulRunner++;
                         statistics.curRunner++;
@@ -109,8 +111,8 @@ namespace GameHeaven.StickyGame
                 }
                 else if (collider.CompareTag("Coin"))
                 {
+                    AudioSource.PlayClipAtPoint(acquireSound, Vector3.zero);
                     Instantiate(acquireEffect, collider.transform.position, acquireEffect.transform.rotation); // »πµÊ ¿Ã∆Â∆Æ
-                    collider.gameObject.GetComponent<Animator>().SetTrigger("Acquire");
                     statistics.score += 70;
                     if (collider.name[0] == 'G') statistics.goldCoin++;
                     else if (collider.name[0] == 'S') statistics.silverCoin++;
@@ -120,6 +122,7 @@ namespace GameHeaven.StickyGame
                 }
                 else if (collider.CompareTag("CutItem"))
                 {
+                    AudioSource.PlayClipAtPoint(cutSound, Vector3.zero);
                     statistics.score += 70;
                     if (statistics.curRunner != 0) statistics.curRunner--;
                     Destroy(collider.gameObject);
