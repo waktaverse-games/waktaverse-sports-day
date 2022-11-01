@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameHeaven.BingleGame
 {
-    public class NewPlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         [SerializeField] GameObject skiEquip;
 

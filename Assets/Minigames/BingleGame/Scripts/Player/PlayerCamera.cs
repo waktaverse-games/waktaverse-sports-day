@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameHeaven.BingleGame
 {
-    public class CharacterCamera : MonoBehaviour
+    public class PlayerCamera : MonoBehaviour
     {
         [SerializeField] Transform player;
 
