@@ -30,7 +30,7 @@ namespace GameHeaven.PassGame
 
         private void Reposition()
         {
-            Vector2 vector = new Vector2(width * 2f, 0);
+            Vector2 vector = new Vector2(width * 3f, 0);
             transform.position = (Vector2)transform.position + vector;
         }
     }
