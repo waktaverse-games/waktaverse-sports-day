@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SharedLibs;
-using UnityEditor.Animations;
 
 namespace GameHeaven.BingleGame
 {
     public class PlayerCharacter : MonoBehaviour
     {
         Animator anim;
-        [SerializeField] AnimatorController[] animatorControllers;
+        [SerializeField] RuntimeAnimatorController[] animatorControllers;
         private void Awake()
         {
             anim = GetComponent<Animator>();
