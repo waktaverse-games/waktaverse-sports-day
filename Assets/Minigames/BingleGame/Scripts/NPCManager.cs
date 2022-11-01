@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameHeaven.BingleGame
 { 
-    public class EnvCharManager : MonoBehaviour
+    public class NPCManager : MonoBehaviour
     {
         SpriteRenderer renderer;
         Vector2 dir;
