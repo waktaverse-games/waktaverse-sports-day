@@ -19,7 +19,7 @@ namespace GameHeaven.StickyGame
         [SerializeField] private int score;
         [SerializeField] private bool isDeath;
         [SerializeField] private GameObject acquireEffect;
-        [SerializeField] AudioClip acquireSound, associateSound, cutSound;
+        [SerializeField] AudioClip acquireSound, associateSound, cutSound, dirChangeSound;
 
         private Statistics statistics;
 
@@ -72,6 +72,7 @@ namespace GameHeaven.StickyGame
 
             if (isPlayer && Input.GetButtonDown("Jump")) // Space Bar 입력시 방향 전환
             {
+                AudioSource.PlayClipAtPoint(dirChangeSound, Vector3.zero);
                 curAxis = 2 * (Vector2)transform.position - curAxis; // 축 중심 변경
                 dir *= -1;  // 축 방향 변경
 
@@ -88,11 +89,14 @@ namespace GameHeaven.StickyGame
             {
                 if (collider.CompareTag("Runner"))
                 {
-                    if (collider.GetComponent<Move>().isAssociated) // 게임 오버
+                    if (collider.GetComponent<Move>().isAssociated)
                     {
-                        Time.timeScale = 0;
-                        isDeath = true;
-                        GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
+                        if (collider.GetComponent<SpriteRenderer>().sortingOrder <= -5) // 게임 오버
+                        {
+                            Time.timeScale = 0;
+                            isDeath = true;
+                            GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
+                        }
                     }
                     else
                     {
