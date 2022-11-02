@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GyunNyang_NPC
+  m_Controller: {fileID: 9100000, guid: 42d98827dfa798f42b2baffeeea6b39a, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: dcfd9edf0e6c2954c8618cc0fc29f3e4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 73d9aa0081932a2418c4afcb284b4e00, type: 2}
