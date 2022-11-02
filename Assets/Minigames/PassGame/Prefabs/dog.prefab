@@ -70,6 +70,7 @@ MonoBehaviour:
   speed: 3
   player: {fileID: 0}
   gameManager: {fileID: 0}
+  deletePosX: 0
 --- !u!1 &6472746738291205298
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 6472746738291205298}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 0.5, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5188398720842620582}
@@ -146,7 +147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1240504175, guid: 1d743ecc069ea2f40b7c6b6e9d617ab5, type: 3}
+  m_Sprite: {fileID: -1204143004, guid: b160dc8a98edfca4bb1f5a2120ddf523, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -181,7 +182,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 0.5}
+  m_Size: {x: 0.65, y: 0.4}
   m_EdgeRadius: 0
 --- !u!114 &283342418643306265
 MonoBehaviour:

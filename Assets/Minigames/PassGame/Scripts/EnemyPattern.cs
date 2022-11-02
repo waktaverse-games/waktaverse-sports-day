@@ -101,17 +101,12 @@ namespace GameHeaven.PassGame
         {
             yield return new WaitForSeconds(3f);
             _animator.SetBool("isFly", true);
-            Invoke("DdulgiMove", 0.3f);
-        }
-
-        void DdulgiMove()
-        {
             transform.DOLocalMoveX(-10f, 4);
         }
 
         IEnumerator Dog()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
         }
     }
 }
