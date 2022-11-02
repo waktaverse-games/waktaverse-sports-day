@@ -85,8 +85,8 @@ namespace GameHeaven.PassGame
         IEnumerator Fox(float time)
         {
             yield return new WaitForSeconds(time);
-            Invoke("FoxGo", 2.2f);
-            Invoke("FoxStop", 0.7f);
+            _animator.SetBool("isPause", false);
+            Invoke("FoxStop", 1f);
             transform.DOLocalMoveX(-3.7f * _count, 1);
             _count++;
             StartCoroutine(Fox(2.5f));
@@ -95,11 +95,6 @@ namespace GameHeaven.PassGame
         void FoxStop()
         {
             _animator.SetBool("isPause", true);
-        }
-
-        void FoxGo()
-        {
-            _animator.SetBool("isPause", false);
         }
 
         IEnumerator Ddulgi()
