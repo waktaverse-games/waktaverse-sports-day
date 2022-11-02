@@ -234,10 +234,7 @@ MonoBehaviour:
   score: 25
   throwingSpeed: 100
   characters:
-  - {fileID: 7461893107214728275, guid: 63ca05b1495a0de41ac34e751dd8255a, type: 3}
-  - {fileID: 5362593405944027248, guid: 16056e01f5cabac45871ebd7e8eba7a8, type: 3}
-  - {fileID: 8188389939054959136, guid: 25d0dec96a8f43147ad519bb8ea51a6a, type: 3}
-  - {fileID: 4408929754533569128, guid: e3964416ff1f13546bd2ccb2f34460c1, type: 3}
+  - {fileID: 7461893107214728275, guid: 8d830081628b98f4c9fe18c1efa9d782, type: 3}
   treeSprites:
   - {fileID: 21300000, guid: 828e00df94f31cd48b8a4fa48996e577, type: 3}
   - {fileID: 21300000, guid: ccb1870c1881ff64e96803dd49ccb505, type: 3}

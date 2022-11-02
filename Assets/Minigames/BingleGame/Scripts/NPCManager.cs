@@ -6,6 +6,9 @@ namespace GameHeaven.BingleGame
 { 
     public class NPCManager : MonoBehaviour
     {
+        Animator anim;
+        [SerializeField] RuntimeAnimatorController[] animatorControllers;
+
         SpriteRenderer renderer;
         Vector2 dir;
 
@@ -13,6 +16,8 @@ namespace GameHeaven.BingleGame
         private void Awake()
         {
             renderer = GetComponent<SpriteRenderer>();
+            anim = GetComponent<Animator>();
+            anim.runtimeAnimatorController = animatorControllers[Random.Range(0,animatorControllers.Length)];
         }
 
         void Update()

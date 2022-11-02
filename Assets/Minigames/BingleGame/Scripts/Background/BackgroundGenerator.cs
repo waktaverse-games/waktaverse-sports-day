@@ -7,8 +7,6 @@ namespace GameHeaven.BingleGame
     public class BackgroundGenerator : MonoBehaviour
     {
         [SerializeField] Transform[] sprites;
-        int startIndex = 0;
-        int endIndex = 2;
         float camHeight;
         private void Awake()
         {

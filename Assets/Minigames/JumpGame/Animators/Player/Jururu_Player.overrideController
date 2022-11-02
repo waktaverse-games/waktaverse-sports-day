@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Jururu_Player
+  m_Controller: {fileID: 9100000, guid: 0e17b3d9909eb9941940ec7bb48b0ef1, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 4c9a13f19c683da4d9a45202f2f648dc, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e6647e05aead92e418c8cab1284a3a14, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4d7e81a9e24ed8049af4e4425fa50888, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 30d295ee7e595d440802e176346fae8e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0c05e3cf7eebbe24da3980dd8f92b0a6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 906976a18d3e1104688e56b791441c69, type: 2}
