@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8374827793681656641}
   - component: {fileID: 6077822752433244462}
-  m_Layer: 17
+  m_Layer: 6
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -54,10 +54,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e540422f90584eb7bbe4f9c769b076d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shape: 0
   isFilled: 1
   isCustom: 1
   customPos: {x: 0, y: -5, z: 0}
   customSize: {x: 10, y: 10, z: 1}
+  customRadius: 1
   gizmosColor: {r: 1, g: 0, b: 0.554585, a: 0.1254902}
 --- !u!1001 &885915886151160743
 PrefabInstance:
