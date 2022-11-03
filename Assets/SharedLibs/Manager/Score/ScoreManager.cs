@@ -12,9 +12,8 @@ namespace SharedLibs.Score
         
         public int AllScore { get; private set; }
 
-        private void Awake()
-        {
-            scoreDic = new ScoreDictionary();
+        public override void Init() {
+            
         }
 
         public void AddGameRoundScore(MinigameType type, int score)
