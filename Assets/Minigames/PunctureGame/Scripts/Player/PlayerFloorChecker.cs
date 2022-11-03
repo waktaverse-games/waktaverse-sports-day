@@ -27,7 +27,7 @@ namespace GameHeaven.PunctureGame
 
         private void Update()
         {
-            CurrentFloor = Mathf.RoundToInt(-player.currentPos.y);
+            CurrentFloor = Mathf.RoundToInt(-player.currentPos.y) - 1;
         }
     }
 }
