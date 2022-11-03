@@ -92,7 +92,7 @@ namespace GameHeaven.SpreadGame
                 EnemyMove enemy = obj.GetComponent<EnemyMove>();
                 obj.transform.localScale = new Vector3(obj.transform.localScale.x * 1.5f, obj.transform.localScale.y * 1.5f, obj.transform.localScale.z);
                 obj.GetComponent<SpriteRenderer>().material.color = Color.yellow;
-                enemy.speed /= 5;
+                enemy.speed = 0.5f;
                 enemy.rigid.velocity = new Vector3(-enemy.speed, enemy.rigid.velocity.y);
                 enemy.HP += 20;
                 enemy.isElite = true;

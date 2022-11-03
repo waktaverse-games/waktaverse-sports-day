@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 2828456054512176404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.3, y: 3.9, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2828456054941461744}
@@ -159,12 +159,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1731187072, guid: 6fbb62cd555aa3244a13dc617f93010f, type: 3}
+  m_Sprite: {fileID: 833096133, guid: e18c269a0ef4a774098f20721f557e3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.658, y: 0.634}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -183,9 +183,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.03, y: 0}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.33
 --- !u!114 &2828456054512176406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 2828456054941461744}
   - component: {fileID: 2828456054941461745}
   m_Layer: 0
-  m_Name: ZuPokDo(Boss)
+  m_Name: GyunNyang(Boss)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,7 +273,7 @@ Animator:
   m_GameObject: {fileID: 2828456054941461742}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d2677ef705c7d9446804333c9f6dedeb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0d5892e6e06b742459c9d9d1d56059f2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
