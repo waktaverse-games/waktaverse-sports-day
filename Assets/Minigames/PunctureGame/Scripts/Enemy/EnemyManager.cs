@@ -2,80 +2,70 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace GameHeaven.PunctureGame
-{
-    public class EnemyManager : MonoBehaviour
-    {
-        [SerializeField] private EnemyFactory factory;
-        private ObjectPool<Enemy> enemyPool;
-        
+namespace GameHeaven.PunctureGame {
+    public class EnemyManager : MonoBehaviour {
+        [SerializeField] private GameObject enemyPrefab;
+
+        [Header("Spawn Value")]
         [SerializeField] private int startSpawnCount = 6;
         [SerializeField] private float spawnHorizontalRange = 4.0f;
-        [SerializeField, ReadOnly] private int spawnYNext = -1;
+        [SerializeField] [ReadOnly] private int spawnYNext = -2;
         [SerializeField] private int spawnYInterval = 2;
 
+        [Header("Components")]
         [SerializeField] private PlayerController player;
         [SerializeField] private PlayerFloorChecker floorChecker;
 
-        private void Awake()
-        {
-            enemyPool = new ObjectPool<Enemy>(
-                createFunc: () =>
-                {
-                    var enemy = factory.Create();
-                    enemy.enemyPool = enemyPool;
-                    enemy.playerController = player;
+        private ObjectPool<EnemyController> enemyPool;
+
+        private void Awake() {
+            enemyPool = new ObjectPool<EnemyController>(
+                () => {
+                    var enemy = Create();
                     return enemy;
                 },
-                actionOnGet: enemy =>
-                {
+                enemy => {
+                    enemy.onRelease += enemyPool.Release;
+                    enemy.Spawn(RandSpawnPoint());
                     enemy.gameObject.SetActive(true);
-                    var pos = transform.position;
-                    pos.x += player.currentPos.x + Random.Range(-spawnHorizontalRange, spawnHorizontalRange);
-                    pos.y = spawnYNext;
-                    spawnYNext -= spawnYInterval;
-                    var isLeft = Random.Range(0, 2) == 1;
-                    enemy.Spawn(pos, isLeft);
-                    Debug.Log($"Spawned - Pos: {pos} / Left: {isLeft}");
                 },
-                actionOnRelease: enemy =>
-                {
+                enemy => {
                     enemy.gameObject.SetActive(false);
+                    enemy.onRelease -= enemyPool.Release;
                 },
-                actionOnDestroy: enemy =>
-                {
-                    Destroy(enemy.gameObject);
-                }, 
+                enemy => { Destroy(enemy.gameObject); },
                 maxSize: 30);
         }
 
-        private void Start()
-        {
-            for (int i = 0; i < startSpawnCount; i++)
-            {
-                enemyPool.Get();
-            }
+        private void Start() {
+            for (var i = 0; i < startSpawnCount; i++) enemyPool.Get();
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() {
             floorChecker.onFloorChanged += OnPlayerFloorChanged;
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable() {
             floorChecker.onFloorChanged -= OnPlayerFloorChanged;
         }
 
-        private void OnPlayerFloorChanged(int floor)
-        {
-            Debug.Log("Player entered on " + floor + " floor");
-            if (floor % spawnYInterval == 0)
-            {
-                enemyPool.Get();
-            }
+        public EnemyController Create() {
+            var obj = Instantiate(enemyPrefab);
+            return obj.GetComponent<EnemyController>();
         }
-        
+
+        private Vector3 RandSpawnPoint() {
+            var pos = Vector3.zero;
+            pos.x += player.currentPos.x + Random.Range(-spawnHorizontalRange, spawnHorizontalRange);
+            pos.y = spawnYNext;
+            spawnYNext -= spawnYInterval;
+            return pos;
+        }
+
+        private void OnPlayerFloorChanged(int floor) {
+            if (floor % spawnYInterval == 0) enemyPool.Get();
+        }
+
         // TODO: 적들 Pool에 되돌리기 및 리스폰
     }
 }
