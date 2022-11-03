@@ -8,6 +8,7 @@ namespace GameHeaven.SpreadGame
     {
         Rigidbody2D rigid;
         public Vector3 dir;
+        public bool isBoss;
 
         private void Awake()
         {
@@ -18,8 +19,17 @@ namespace GameHeaven.SpreadGame
             StartCoroutine(ChangeDir());
         }
 
+        public IEnumerator BossItemMove(float sec)
+        {
+            yield return new WaitForSeconds(sec);
+
+            rigid.velocity = Vector2.left * 5;
+        }
+
         private void Update()
         {
+            if (isBoss) return;
+
             rigid.AddForce(dir, ForceMode2D.Impulse);
 
             rigid.velocity = new Vector2(-1, rigid.velocity.y);

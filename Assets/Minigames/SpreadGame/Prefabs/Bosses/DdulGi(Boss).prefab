@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 8669942877754166981}
   - component: {fileID: 8669942877754166980}
   - component: {fileID: 8669942877754166979}
+  - component: {fileID: 4543544759921266042}
   m_Layer: 0
   m_Name: Model
   m_TagString: Enemy
@@ -112,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 8669942877754166977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.35, y: 3.35, z: 1}
+  m_LocalScale: {x: 3.3, y: 3.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8669942878328253319}
@@ -159,7 +160,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5160935, guid: 036430227c9850d4c8796924dcda0f4b, type: 3}
+  m_Sprite: {fileID: -2145210193, guid: 0d40a9d1f95748049ac3a0adc6da4b05, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -183,7 +184,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.01}
   serializedVersion: 2
   m_Radius: 0.295
 --- !u!114 &8669942877754166979
@@ -229,6 +230,26 @@ MonoBehaviour:
   - {fileID: 6038007275945840213, guid: bd256cb6a1795ec44abdba87d11207cb, type: 3}
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
   isDeath: 0
+--- !u!95 &4543544759921266042
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8669942877754166977}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7fb97eceee28c1648a5758048025f997, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8669942878328253317
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +294,7 @@ Animator:
   m_GameObject: {fileID: 8669942878328253317}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0d5892e6e06b742459c9d9d1d56059f2, type: 2}
+  m_Controller: {fileID: 9100000, guid: f58bfceccc2538241a23f076787f540a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

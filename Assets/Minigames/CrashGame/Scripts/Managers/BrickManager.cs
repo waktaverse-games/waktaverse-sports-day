@@ -60,7 +60,7 @@ namespace GameHeaven.CrashGame
                 yield return new WaitForSeconds(interval / 2);
                 Debug.Log($"{interval} seconds passed!");
                 AddBrickLineInMap();
-                if (interval > finalInterval) interval *= 0.9f;
+                if (interval > finalInterval) interval *= 0.95f;
                 else interval = finalInterval;
             }
         }

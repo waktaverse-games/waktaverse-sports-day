@@ -51,11 +51,6 @@ namespace GameHeaven.SpreadGame
             {
                 rigid.velocity = new Vector2(rigid.velocity.x, (rigid.velocity.y > 0) ? -rigid.velocity.y : rigid.velocity.y);
             }
-
-            if (type == Type.DdongGae)
-            {
-                transform.Rotate(Vector3.forward, 5);
-            }
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
