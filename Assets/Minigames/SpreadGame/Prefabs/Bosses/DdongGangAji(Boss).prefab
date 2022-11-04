@@ -199,8 +199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 300
-  type: 0
+  type: 2
   numOfPatterns: 4
+  bulletIdx: 0
   curPatternDelay: 0
   maxPatternDelay: 4
   curStraightFireDelay: 0

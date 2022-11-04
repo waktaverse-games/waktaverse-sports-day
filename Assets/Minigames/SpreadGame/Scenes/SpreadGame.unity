@@ -645,7 +645,7 @@ MonoBehaviour:
   - {fileID: 9213968054036073803, guid: 3a872964054ac8645b3b526b17901cc2, type: 3}
   - {fileID: 6104123555868368802, guid: e6fbc11fa6b2714468b4737ee107c8ca, type: 3}
   curNormalMonsterSpawnDelay: 0
-  maxNormalMonsterSpawnDelay: 3.1
+  maxNormalMonsterSpawnDelay: 100000
   curEliteMonsterSpawnDelay: 0
   maxEliteMonsterSpawnDelay: 21
   curBossSpawnDelay: 0
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   - {fileID: 2360940325928755872, guid: 4f8dc1c2c554dac489b5d4d6cc671ace, type: 3}
   - {fileID: 2360940325928755872, guid: eb0dc2b6daa7f6e41b8e491a4e1120be, type: 3}
   - {fileID: 2360940325928755872, guid: f28df7927a52fad448c7d0c670cd937d, type: 3}
-  - {fileID: 2360940325928755872, guid: da8309c5f7e762b4b8749f5eb758cc64, type: 3}
+  - {fileID: 2360940325928755872, guid: d9cc754227ca504408174a0605777e1c, type: 3}
   - {fileID: 4983551250352717134, guid: 81e3d3cfaaac1ed4abdd04e7518a66e3, type: 3}
   guidedBullets: []
   sectorBullets: []
