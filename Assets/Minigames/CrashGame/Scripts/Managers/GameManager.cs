@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GameHeaven.CrashGame.Utils;
 using SharedLibs;
+using SharedLibs.Character;
 using SharedLibs.Score;
 
 namespace GameHeaven.CrashGame
@@ -26,6 +27,7 @@ namespace GameHeaven.CrashGame
         private ItemManager itemManager;
         private SoundManager soundManager;
         private GameState currentGameState;
+        private CharacterType currentCharacter;
         private int score;
         private int highscore;
         private int money;
@@ -37,6 +39,9 @@ namespace GameHeaven.CrashGame
         private float brickInitialInterval = 20f;
         [SerializeField]
         private float brickFinalInterval = 10f;
+
+        [SerializeField]
+        private List<Sprite> playerSpriteList;
 
         [Obsolete]
         public int Money
@@ -94,6 +99,14 @@ namespace GameHeaven.CrashGame
             private set { currentGameState = value; }
         }
 
+        public CharacterType CurrentCharacter
+        {
+            get { return currentCharacter; }
+            private set { currentCharacter = value; }
+        }
+
+        public List<Sprite> PlayerSpriteList => playerSpriteList;
+
         public int Score
         {
             get { return score; }
@@ -116,6 +129,13 @@ namespace GameHeaven.CrashGame
 
         private void Start()
         {
+            if (CharacterManager.Instance == null)
+            {
+                CurrentCharacter = CharacterType.Woowakgood;
+            }
+            else CurrentCharacter = CharacterManager.Instance.CurrentCharacter;
+            platform.SetCharacter(CurrentCharacter);
+
             GameStart();
         }
 
@@ -156,7 +176,7 @@ namespace GameHeaven.CrashGame
             StopCoroutine(brickAddCoroutineLoop);
             Item.DeleteAll();       // 드랍 코인 및 아이템 전체 삭제
 
-            //ScoreManager.Instance.AddGameRoundScore(MinigameType.CrashGame, Score);
+            ScoreManager.Instance.AddGameRoundScore(MinigameType.CrashGame, Score);
             if (Score > highscore)
             {
                 highscore = Score;

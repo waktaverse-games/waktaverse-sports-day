@@ -589,9 +589,9 @@ MonoBehaviour:
   curNormalMonsterSpawnDelay: 0
   maxNormalMonsterSpawnDelay: 3.1
   curEliteMonsterSpawnDelay: 0
-  maxEliteMonsterSpawnDelay: 31
+  maxEliteMonsterSpawnDelay: 21
   curBossSpawnDelay: 0
-  maxBossSpawnDelay: 60
+  maxBossSpawnDelay: 40
   mapSize:
   - 14
   - 8
@@ -1403,7 +1403,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6772812a24717d64dbef8d5a78fc81cf, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1653,7 +1653,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: bbbf4042426f5ba4ea68f15d9f2b4ed2, type: 3}
     - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
       propertyPath: hasShield
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7654275226774115365, guid: 74f469430edcdde44acf5910669bbe24, type: 3}
       propertyPath: SlashSound

@@ -141,11 +141,14 @@ namespace GameHeaven.SpreadGame
             }
 
             obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
-            obj.transform.localScale = new Vector3(0.5f, 0.5f);
+            obj.transform.position = new Vector2(5, 2);
+            obj.GetComponent<UpDownMove>().isBoss = true;
+            obj.GetComponent<UpDownMove>().StartCoroutine(obj.GetComponent<UpDownMove>().BossItemMove(2f));
 
-            obj = Instantiate(otherItems[Random.Range(0, 2)], transform.position, Quaternion.Euler(Vector3.zero));
-            obj.GetComponent<UpDownMove>().dir = new Vector3(0, -0.05f, 0);
-            obj.transform.localScale = new Vector3(0.5f, 0.5f);
+            obj = Instantiate(upgradeItems[Random.Range(0, 2)], transform.position, Quaternion.Euler(Vector3.zero));
+            obj.transform.position = new Vector2(5, -2);
+            obj.GetComponent<UpDownMove>().isBoss = true;
+            obj.GetComponent<UpDownMove>().StartCoroutine(obj.GetComponent<UpDownMove>().BossItemMove(2f));
 
             Instantiate(dieEffect, transform.position, dieEffect.transform.rotation);
 

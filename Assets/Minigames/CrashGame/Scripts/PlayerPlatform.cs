@@ -35,8 +35,6 @@ namespace GameHeaven.CrashGame
         private Transform platform;
         private Transform playerCharacter;
 
-        private CharacterType myCharacter;
-
         [SerializeField]
         private List<Sprite> platformSprite;
 
@@ -137,6 +135,12 @@ namespace GameHeaven.CrashGame
             BallInit();
         }
 
+        public void SetCharacter(CharacterType currentCharacter)
+        {
+            playerCharacter.GetComponentInChildren<SpriteRenderer>().sprite = GameManager.Instance.PlayerSpriteList[(int)currentCharacter];
+            playerCharacter.GetComponentInChildren<SpriteRenderer>().sortingOrder = 2;
+        }
+
         private void BallInit()
         {
             ball = Ball.SpawnBall(ballStartPosition.position);
@@ -163,12 +167,6 @@ namespace GameHeaven.CrashGame
         public void Stop()
         {
             rigidBody.velocity = Vector2.zero;
-        }
-
-        public void GetCharacterType()
-        {
-            this.myCharacter = CharacterManager.Instance.CurrentCharacter;
-            // Set Character
         }
     }
 }

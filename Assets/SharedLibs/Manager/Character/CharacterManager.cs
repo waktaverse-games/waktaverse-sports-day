@@ -12,9 +12,8 @@ namespace SharedLibs.Character
         public CharacterType CurrentCharacter { get; set; }
         public CharacterData CurrentCharacterData => characterDic[CurrentCharacter] == null ? null : characterDic[CurrentCharacter];
 
-        private void Awake()
-        {
-            characterDic = new CharacterDictionary();
+        public override void Init() {
+            
         }
     }
 }
