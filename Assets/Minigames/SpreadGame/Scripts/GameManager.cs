@@ -80,11 +80,12 @@ namespace GameHeaven.SpreadGame
                 Instantiate(mobPrefabs[idx], spawnPos + new Vector2(2, 0.5f), mobPrefabs[idx].transform.rotation);
                 Instantiate(mobPrefabs[idx], spawnPos + new Vector2(2, -0.5f), mobPrefabs[idx].transform.rotation);
             } // ¹ÚÁã
+            /*
             else if (idx == 6) // ¼¼±Õ
             {
                 obj = Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation);
                 StartCoroutine(Division(obj)); //ºÐ¿­
-            }
+            }*/
             else obj = Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation);
 
             if (isElite)

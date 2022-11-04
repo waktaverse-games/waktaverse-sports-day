@@ -6,14 +6,14 @@ namespace GameHeaven.SpreadGame
 {
     public class BossMove : MonoBehaviour
     {
-        public enum Type { RaNi, DdulGi }
+        public enum Type { RaNi, DdulGi, DdongGangAji, GyunNyang }
         public int HP;
 
         [SerializeField] Type type;
 
         private Animator anim;
 
-        [SerializeField] int numOfPatterns;
+        [SerializeField] int numOfPatterns, bulletIdx;
 
         [SerializeField] float curPatternDelay, maxPatternDelay;
         [SerializeField] float curStraightFireDelay, maxStraightFireDelay, straightFireSpeed;
@@ -25,7 +25,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] int circleFireNum;
 
         [SerializeField] private GameObject[] coins, upgradeItems, otherItems;
-        [SerializeField] private GameObject dieEffect;
+        [SerializeField] private GameObject dieEffect, gyunNyang;
         [SerializeField] bool isDeath;
 
         private float curCageFireDelay;
@@ -36,6 +36,16 @@ namespace GameHeaven.SpreadGame
         {
             anim = transform.parent.gameObject.GetComponent<Animator>();
             pool = FindObjectOfType<PoolManager>();
+
+            bulletIdx = 4;
+            if (type == Type.DdongGangAji)
+            {
+                bulletIdx = 5;
+            }
+            else if (type == Type.GyunNyang)
+            {
+                StartCoroutine(SpawnGyunNyang(5.1f));
+            }
         }
 
         private void Update()
@@ -54,7 +64,7 @@ namespace GameHeaven.SpreadGame
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if (isDeath) return;
-
+            
             if (collider.CompareTag("Attack"))
             {
                 anim.SetTrigger("Hit");
@@ -83,7 +93,7 @@ namespace GameHeaven.SpreadGame
 
             if (curStraightFireDelay < maxStraightFireDelay) return;
 
-            pool.MyInstantiate(4, transform.position).GetComponent<Rigidbody2D>().velocity =
+            pool.MyInstantiate(bulletIdx, transform.position).GetComponent<Rigidbody2D>().velocity =
                 (isRandomDir ? new Vector2(Random.Range(0, -1f), randomDirY).normalized : straightFireDir.normalized) * straightFireSpeed;
 
             curStraightFireDelay = 0;
@@ -96,7 +106,7 @@ namespace GameHeaven.SpreadGame
 
             for (int i = 0; i < circleFireNum; i++)
             {
-                pool.MyInstantiate(4, transform.position + (Vector3) circleFirePivot).GetComponent<Rigidbody2D>().velocity
+                pool.MyInstantiate(bulletIdx, transform.position + (Vector3) circleFirePivot).GetComponent<Rigidbody2D>().velocity
                     = Quaternion.AngleAxis(360 / circleFireNum * i, Vector3.forward) * circleFireDir.normalized * circleFireSpeed;
             }
 
@@ -112,6 +122,17 @@ namespace GameHeaven.SpreadGame
                 = new Vector2(-8, 0);
 
             curCageFireDelay = 0;
+        }
+        IEnumerator SpawnGyunNyang(float sec)
+        {
+            WaitForSeconds wait = new WaitForSeconds(sec);
+
+            while (true)
+            {
+                yield return wait;
+
+                Instantiate(gyunNyang, transform.position, transform.rotation);
+            }
         }
 
         IEnumerator Die()

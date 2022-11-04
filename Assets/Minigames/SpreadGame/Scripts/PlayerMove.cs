@@ -195,6 +195,21 @@ namespace GameHeaven.SpreadGame
                 StartCoroutine(Stun(0.5f, collider));
             }
         }
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.transform.CompareTag("Enemy"))
+            {
+                if (hasShield)
+                {
+                    StartCoroutine(ShieldBreak());
+                }
+                else
+                {
+                    print("GameOver");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+            }
+        }
 
         IEnumerator Stun(float sec, Collider2D col)
         {
