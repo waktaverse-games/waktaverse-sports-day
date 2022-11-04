@@ -541,6 +541,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2828456054512176406, guid: 0f5d6af9cc3e5b8468fc09a6ea9ad756, type: 3}
+      propertyPath: maxStraightFireDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2828456054941461742, guid: 0f5d6af9cc3e5b8468fc09a6ea9ad756, type: 3}
       propertyPath: m_Name
       value: DdongGangAji(Boss)
