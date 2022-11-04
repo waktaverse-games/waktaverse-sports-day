@@ -44,8 +44,10 @@ namespace GameHeaven.PassGame
             _stageStrings = new List<string>[4];
             _stageStrings[0] = new List<string>();
             _stageStrings[1] = new List<string>() { "egi", "bat" };
-            _stageStrings[2] = new List<string>() { "egi", "bat", "bidul", "dog", "jupok" };
-            _stageStrings[3] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug", "jupok" };
+            _stageStrings[2] = new List<string>() { "egi", "bat", "bidul", "dog"};
+            _stageStrings[3] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani"};
+            _stageStrings[4] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug"};
+            _stageStrings[5] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug", "jupok" };
             GameSet();
         }
 
@@ -100,7 +102,13 @@ namespace GameHeaven.PassGame
             switch (_stage)
             {
                 case 2:
-                    StartCoroutine(UpgradeStage(45));
+                    StartCoroutine(UpgradeStage(40));
+                    break;
+                case 3:
+                    StartCoroutine(UpgradeStage(40));
+                    break;
+                case 4:
+                    StartCoroutine(UpgradeStage(40));
                     break;
             }
         }

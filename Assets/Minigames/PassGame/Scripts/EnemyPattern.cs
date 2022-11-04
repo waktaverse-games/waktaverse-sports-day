@@ -39,6 +39,7 @@ namespace GameHeaven.PassGame
                     StartCoroutine(Ddulgi());
                     break;
                 case "dog":
+                    _animator.SetBool("isFly", false);
                     StartCoroutine(Dog());
                     break;
             }
@@ -107,6 +108,21 @@ namespace GameHeaven.PassGame
         IEnumerator Dog()
         {
             yield return new WaitForSeconds(2);
+            _animator.SetBool("isFly", true);
+            StartCoroutine(DogMove());
+            StartCoroutine(DogWake());
+        }
+
+        IEnumerator DogMove()
+        {
+            yield return new WaitForSeconds(0.2f);
+            transform.Translate(0f, -0.3f, 0f);
+        }
+
+        IEnumerator DogWake()
+        {
+            yield return new WaitForSeconds(6.5f);
+            transform.Translate(0f, 0.3f, 0);
         }
     }
 }
