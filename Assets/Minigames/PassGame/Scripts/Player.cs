@@ -11,6 +11,7 @@ namespace GameHeaven.PassGame
         public bool reachedJump = false;
         public GameManager gameManager;
         public SFXManager SfxManager;
+        public bool jumpItem = false;
         
         private Rigidbody2D _rigid;
         private bool _isGrounded = false;
@@ -37,6 +38,14 @@ namespace GameHeaven.PassGame
                 SfxManager.PlaySfx(0);
                 _anim.SetBool("isJump", true);
                 _isGrounded = false;
+            }
+            else if (Input.GetKey(KeyCode.Space) && jumpItem)
+            {
+                _rigid.velocity = Vector2.up * jumpPower;
+                SfxManager.PlaySfx(0);
+                _anim.SetBool("isJump", true);
+                _isGrounded = false;
+                jumpItem = false;
             }
         }
 

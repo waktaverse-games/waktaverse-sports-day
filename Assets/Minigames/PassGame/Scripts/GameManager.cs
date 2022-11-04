@@ -41,7 +41,7 @@ namespace GameHeaven.PassGame
             playerScript.jumpPower = jumpPower;
             _scoreText = scoreT.GetComponent<TextMeshProUGUI>();
             _stageText = stageT.GetComponent<TextMeshProUGUI>();
-            _stageStrings = new List<string>[4];
+            _stageStrings = new List<string>[6];
             _stageStrings[0] = new List<string>();
             _stageStrings[1] = new List<string>() { "egi", "bat" };
             _stageStrings[2] = new List<string>() { "egi", "bat", "bidul", "dog"};
