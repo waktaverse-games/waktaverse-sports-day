@@ -6,8 +6,8 @@ namespace GameHaven.RunGame
 { 
     public class GameManager : MonoBehaviour
     {
-        public GameObject wall;
-        [SerializeField] GameObject[] coin;
+        public GameObject[] wall;
+        [SerializeField] GameObject[] item;
         public Transform spawnPoints;
         public GameObject dust;
         public Transform dustPoints;
@@ -54,12 +54,12 @@ namespace GameHaven.RunGame
 
         void SpawnWall()
         {
-            Instantiate(wall, spawnPoints.position, spawnPoints.rotation);
+            Instantiate(wall[Random.Range(0, wall.Length)], spawnPoints.position, spawnPoints.rotation);
         }
 
         void SpawnCoin()
         {
-            Instantiate(coin[Random.Range(0, coin.Length)], spawnPoints.position + new Vector3(Random.Range(-3f, 3f),0, 0), spawnPoints.rotation);
+            Instantiate(item[Random.Range(0, item.Length)], spawnPoints.position + new Vector3(Random.Range(-3f, 3f),0, 0), spawnPoints.rotation);
         }
 
         void SpawnDust()

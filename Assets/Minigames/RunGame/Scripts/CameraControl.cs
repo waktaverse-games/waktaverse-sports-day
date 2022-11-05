@@ -10,6 +10,7 @@ namespace GameHaven.RunGame
         public GameObject Caracter;
         float rotTime;
         float maxRotTime;
+        int speed = 1;
         Vector3 CameraRot;
 
         // Start is called before the first frame update
@@ -37,5 +38,6 @@ namespace GameHaven.RunGame
             }
 
         }
+
     }
 }
