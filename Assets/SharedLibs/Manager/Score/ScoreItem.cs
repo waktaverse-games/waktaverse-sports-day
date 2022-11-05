@@ -45,7 +45,6 @@ namespace SharedLibs.Score
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-
             if (scoreEarnTags.Contains(col.gameObject.tag)) { UseItem(); }
             if (disableTags.Contains(col.gameObject.tag)) { DisableItem(); }
         }
