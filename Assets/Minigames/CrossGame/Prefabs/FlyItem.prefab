@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3022274687653228771}
   - component: {fileID: 3022274687653228772}
   - component: {fileID: 3022274687653228773}
-  - component: {fileID: 7411569272734673474}
+  - component: {fileID: 5815385277098705770}
   m_Layer: 0
   m_Name: FlyItem
   m_TagString: Untagged
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Manager: {fileID: 0}
---- !u!58 &7411569272734673474
-CircleCollider2D:
+--- !u!61 &5815385277098705770
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -113,5 +113,15 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 5.12}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 2.5599997
+  m_Size: {x: 5.12, y: 5.12}
+  m_EdgeRadius: 0
