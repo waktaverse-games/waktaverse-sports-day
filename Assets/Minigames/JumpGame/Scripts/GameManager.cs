@@ -8,6 +8,8 @@ namespace GameHeaven.JumpGame
 {
     public class GameManager : MonoBehaviour
     {
+        public bool IsGameOver { get;private set; }
+
         [SerializeField] GameObject buttons;
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] float jumpScore;
@@ -40,12 +42,14 @@ namespace GameHeaven.JumpGame
 
         public void GameOver()
         {
+            IsGameOver = true;
             buttons.SetActive(true);
             Time.timeScale = 0;
         }
 
         public void Restart()
         {
+            IsGameOver = false;
             buttons.SetActive(false);
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
