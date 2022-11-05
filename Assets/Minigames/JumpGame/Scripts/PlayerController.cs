@@ -96,6 +96,7 @@ namespace GameHeaven.JumpGame
         {
             if(collision.name.Equals("Rope Collider"))
             {
+                animator.SetBool("isGameOver", true);
                 GameManager.Instance.GameOver();
             }
         }
