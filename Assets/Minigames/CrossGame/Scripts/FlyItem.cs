@@ -5,38 +5,27 @@ using DG.Tweening;
 
 namespace GameHeaven.CrossGame
 {
-    public class Star : MonoBehaviour
+    public class FlyItem : MonoBehaviour
     {
         public CrossGameManager Manager;
-        public CoinCode code; 
-        Animator MyAnimator;
-        private void Awake()
-        {
-            MyAnimator = GetComponent<Animator>();
-        }
-        public void SetAnim()
-        {
-            MyAnimator.SetInteger("Sort", (int)code);
-        }
         public void Move()
         {
-            transform.DOMoveY(4, 1).SetRelative().SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            transform.DOMoveY(1, 0.8f).SetRelative().SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
         }
 
         public void Kill()
         {
             DOTween.Kill(gameObject.transform);
-            Manager.ObjectController.Stars.Remove(gameObject);
+            Manager.ObjectController.FlyItems.Remove(gameObject);
             Destroy(gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             print(collision.tag);
-            if(collision.tag == "Player")
+            if (collision.tag == "Player")
             {
-                Manager.AddScore(10);
-
+                Manager.ObjectController.Fly();
                 Kill();
             }
             else if(collision.tag == "Outline")
@@ -46,4 +35,3 @@ namespace GameHeaven.CrossGame
         }
     }
 }
-
