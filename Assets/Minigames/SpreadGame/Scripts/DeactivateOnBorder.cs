@@ -7,7 +7,6 @@ namespace GameHeaven.SpreadGame
     public class DeactivateOnBorder : MonoBehaviour
     {
         PoolManager pool;
-        [SerializeField] bool isPoop;
 
 
         private void Awake()
@@ -17,15 +16,7 @@ namespace GameHeaven.SpreadGame
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (isPoop)
-            {
-                if (collision.CompareTag("Border") || collision.gameObject.layer == 13)
-                {
-                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    gameObject.layer = 13;
-                }
-            }
-            else if (collision.CompareTag("Border"))
+            if (collision.CompareTag("Border"))
             {
                 gameObject.SetActive(false);
             }

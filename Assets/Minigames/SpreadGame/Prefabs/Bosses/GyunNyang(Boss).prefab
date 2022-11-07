@@ -200,16 +200,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 300
-  type: 2
+  maxHP: 300
+  type: 3
   numOfPatterns: 1
+  bulletIdx: 0
   curPatternDelay: 0
   maxPatternDelay: 3.1
   curStraightFireDelay: 0
   maxStraightFireDelay: 1000000
   straightFireSpeed: 8
   curCircleFireDelay: 0
-  maxCircleFireDelay: 2
-  circleFireSpeed: 1000000
+  maxCircleFireDelay: 1000000
+  circleFireSpeed: 10
   straightFireDir: {x: -1, y: 0}
   randomDirY: 0
   isRandomDir: 0

@@ -16,6 +16,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] private GameObject dieEffect;
         GameObject player;
         public bool isElite;
+        public bool isCopy;
 
         [SerializeField] private AudioClip dieSound;
 
@@ -37,7 +38,7 @@ namespace GameHeaven.SpreadGame
 
             if (type == Type.PanZee || type == Type.DdongGangAji) StartCoroutine(Fire(projectile));
 
-            if (type == Type.SeGyun || type == Type.GyunNyang) Invoke("Reproduction", 4.0f);
+            if (type == Type.SeGyun || type == Type.GyunNyang) Invoke("Reproduction", 3.0f);
         }
 
         private void Update()
@@ -109,17 +110,17 @@ namespace GameHeaven.SpreadGame
         }
         void Reproduction()
         {
-            Instantiate(this.gameObject, transform.position, transform.rotation);
+            Instantiate(this.gameObject, transform.position, transform.rotation).GetComponent<EnemyMove>().isCopy = true;
         }
 
-        void Die()
+        public void Die()
         {
             AudioSource.PlayClipAtPoint(dieSound, Vector3.zero);
             GameObject obj = null;
 
             if (Random.Range(0, 3) == 0) Instantiate(coins[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
 
-            if (isElite)
+            if (isElite && !isCopy)
             {
                 int[] bulletLVs = player.GetComponent<PlayerMove>().bulletLVs;
 

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameHeaven.SpreadGame
 {
     public class BossMove : MonoBehaviour
     {
-        public enum Type { RaNi, DdulGi, DdongGangAji, GyunNyang }
-        public int HP;
+        public enum Type { RaNi, DdulGi, DdongGangAji, GyunNyang, JuPokDo }
+        public int HP, maxHP;
 
         [SerializeField] Type type;
 
@@ -28,6 +29,8 @@ namespace GameHeaven.SpreadGame
         [SerializeField] private GameObject dieEffect, gyunNyang;
         [SerializeField] bool isDeath;
 
+        GameObject HPBar;
+
         private float curCageFireDelay;
 
         PoolManager pool;
@@ -36,6 +39,8 @@ namespace GameHeaven.SpreadGame
         {
             anim = transform.parent.gameObject.GetComponent<Animator>();
             pool = FindObjectOfType<PoolManager>();
+            HPBar = GameObject.Find("Canvas").transform.GetChild(2).gameObject;
+            HPBar.SetActive(true);
 
             bulletIdx = 4;
             if (type == Type.DdongGangAji)
@@ -59,6 +64,8 @@ namespace GameHeaven.SpreadGame
             {
                 FireCage();
             }
+
+            HPBar.transform.GetChild(1).GetComponent<Image>().fillAmount = (float)HP / (float)maxHP;
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -68,8 +75,41 @@ namespace GameHeaven.SpreadGame
             if (collider.CompareTag("Attack"))
             {
                 anim.SetTrigger("Hit");
+                int prevHP = HP;
                 HP -= collider.GetComponent<BulletInfo>().damage;
                 if (collider.GetComponent<BulletInfo>().type != BulletInfo.Type.Slash) collider.gameObject.SetActive(false);
+
+                if (type == Type.DdongGangAji)
+                {
+                    transform.localScale += transform.localScale * (float)(prevHP-HP)/150f;
+
+                    if (prevHP >= 450 && HP < 450)
+                    {
+                        StartCoroutine(PoopRain(6.0f, 80));
+                        return;
+                    }
+                    else if (prevHP >= 300 && HP < 300)
+                    {
+                        StartCoroutine(PoopRain(6.0f, 120));
+                        return;
+                    }
+                    else if (prevHP >= 150 && HP < 150)
+                    {
+                        StartCoroutine(PoopRain(6.0f, 150));
+                        return;
+                    }
+                }
+                else if (type == Type.JuPokDo)
+                {
+                    if (prevHP >= 100 && HP < 100)
+                    {
+                        anim.SetBool("PokJu", true);
+                        GetComponent<SpriteRenderer>().color = Color.red;
+                        anim.speed = 1.5f;
+                        maxPatternDelay = 2.0f;
+                        return;
+                    }
+                }
 
                 if (HP <= 0) StartCoroutine(Die());
             }
@@ -123,6 +163,25 @@ namespace GameHeaven.SpreadGame
 
             curCageFireDelay = 0;
         }
+        IEnumerator PoopRain(float sec, int num)
+        {
+            WaitForSeconds wait = new WaitForSeconds(sec / (float)num);
+
+            curPatternDelay = 0;
+            anim.SetTrigger("Pattern1");
+
+            yield return new WaitForSeconds(1.0f);
+
+            transform.localScale = new Vector3(2.7f, 2.55f, 1);
+
+            for (int i = 0; i < num; i++)
+            {
+                pool.MyInstantiate(bulletIdx, new Vector2(Random.Range(-7f, 7f), 3.8f)).GetComponent<Rigidbody2D>().velocity = Vector2.down * 6;
+
+                yield return wait;
+            }
+        }
+
         IEnumerator SpawnGyunNyang(float sec)
         {
             WaitForSeconds wait = new WaitForSeconds(sec);
@@ -138,6 +197,7 @@ namespace GameHeaven.SpreadGame
         IEnumerator Die()
         {
             isDeath = true;
+            HPBar.SetActive(false);
 
             GameObject obj = null;
 
@@ -164,18 +224,25 @@ namespace GameHeaven.SpreadGame
             obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
             obj.transform.position = new Vector2(5, 2);
             obj.GetComponent<UpDownMove>().isBoss = true;
-            obj.GetComponent<UpDownMove>().StartCoroutine(obj.GetComponent<UpDownMove>().BossItemMove(2f));
+            obj.GetComponent<UpDownMove>().StartCoroutine(obj.GetComponent<UpDownMove>().BossItemMove(0.5f));
 
-            obj = Instantiate(upgradeItems[Random.Range(0, 2)], transform.position, Quaternion.Euler(Vector3.zero));
+            obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
             obj.transform.position = new Vector2(5, -2);
             obj.GetComponent<UpDownMove>().isBoss = true;
-            obj.GetComponent<UpDownMove>().StartCoroutine(obj.GetComponent<UpDownMove>().BossItemMove(2f));
+            obj.GetComponent<UpDownMove>().StartCoroutine(obj.GetComponent<UpDownMove>().BossItemMove(0.5f));
 
-            Instantiate(dieEffect, transform.position, dieEffect.transform.rotation);
-
-            Destroy(transform.parent.gameObject);
             GameManager spawnManager = FindObjectOfType<GameManager>();
             spawnManager.isBossTime = false;
+
+            if (type == Type.GyunNyang)
+            {
+                foreach(EnemyMove enemy in FindObjectsOfType<EnemyMove>())
+                {
+                    enemy.Die();
+                }
+            }
+
+            Destroy(transform.parent.gameObject);
         }
     }
 }
