@@ -20,9 +20,8 @@ namespace GameHeaven.CrossGame
     {
         int Score;
         int CollectStar;
-        public Text ScoreUI;
-        public Text StarUI;
-        public Text GameOverTextUI;
+        public TMP_Text ScoreUI;
+        public TMP_Text GameOverTextUI;
 
         public ObjectController ObjectController;
         public SoundManager SoundManager;
@@ -47,7 +46,6 @@ namespace GameHeaven.CrossGame
         public void AddGold(int num)
         {
             CollectStar += num;
-            StarUI.text = "°ñµå: " + CollectStar.ToString();
         }
 
         public void GameOver()
