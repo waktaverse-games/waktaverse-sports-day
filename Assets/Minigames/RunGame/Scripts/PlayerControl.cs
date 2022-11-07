@@ -99,7 +99,7 @@ namespace GameHaven.RunGame
         {
             if (other.gameObject.tag == "Enemy")
             {//Destroy(gameObject);
-                Debug.Log("die");
+                GameManager.instance.GameOver();
             }
             else if (other.gameObject.tag == "Coin")
             {
@@ -118,6 +118,7 @@ namespace GameHaven.RunGame
                 else
                 {
                     GetItem = true;
+                    GameManager.instance.ItemScore(15);
                 }
             }
         }
@@ -126,7 +127,7 @@ namespace GameHaven.RunGame
         {
             if (coinName.Contains("GoldCoin"))
             {
-                CoinCount += 5;
+                GameManager.instance.ItemScore(5);
             }
             else if (coinName.Contains("SilverCoin"))
             {
