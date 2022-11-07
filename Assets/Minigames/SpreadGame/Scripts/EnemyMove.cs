@@ -6,7 +6,7 @@ namespace GameHeaven.SpreadGame
 {
     public class EnemyMove : MonoBehaviour
     {
-        public enum Type { BakZwi, DdongGae, DdulGi, Fox, PanZee, RaNi, SeGyun }
+        public enum Type { BakZwi, DdongGangAji, DdulGi, JuPokDo, PanZee, RaNi, SeGyun, GyunNyang }
         public float speed;
         [SerializeField] private float thinkingSpeed, attackSpeed, projectileSpeed;
         public int HP;
@@ -16,6 +16,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] private GameObject dieEffect;
         GameObject player;
         public bool isElite;
+        public bool isCopy;
 
         [SerializeField] private AudioClip dieSound;
 
@@ -35,7 +36,9 @@ namespace GameHeaven.SpreadGame
             if (type != Type.BakZwi) StartCoroutine(RandomMove(thinkingSpeed));
             else rigid.velocity = Vector2.left * 10;
 
-            if (type == Type.PanZee || type == Type.DdongGae) StartCoroutine(Fire(projectile));
+            if (type == Type.PanZee || type == Type.DdongGangAji) StartCoroutine(Fire(projectile));
+
+            if (type == Type.SeGyun || type == Type.GyunNyang) Invoke("Reproduction", 3.0f);
         }
 
         private void Update()
@@ -78,6 +81,10 @@ namespace GameHeaven.SpreadGame
                 {
                     rigid.velocity = new Vector2(-speed, Random.Range(-1, 2) * 3);
                 }
+                else if (type == Type.GyunNyang)
+                {
+                    rigid.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * speed;
+                }
                 else
                 {
                     rigid.velocity = new Vector2(-speed, Random.Range(-1, 2));
@@ -85,12 +92,10 @@ namespace GameHeaven.SpreadGame
                 yield return new WaitForSeconds(sec);
             }
         }
-
         void Rush()
         {
             rigid.velocity = (player.transform.position - transform.position).normalized * 5;
         }
-
         IEnumerator Fire(GameObject projectile)
         {
             WaitForSeconds wait = new WaitForSeconds(attackSpeed);
@@ -103,15 +108,19 @@ namespace GameHeaven.SpreadGame
                 obj.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * projectileSpeed;
             }
         }
+        void Reproduction()
+        {
+            Instantiate(this.gameObject, transform.position, transform.rotation).GetComponent<EnemyMove>().isCopy = true;
+        }
 
-        void Die()
+        public void Die()
         {
             AudioSource.PlayClipAtPoint(dieSound, Vector3.zero);
             GameObject obj = null;
 
             if (Random.Range(0, 3) == 0) Instantiate(coins[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
 
-            if (isElite)
+            if (isElite && !isCopy)
             {
                 int[] bulletLVs = player.GetComponent<PlayerMove>().bulletLVs;
 

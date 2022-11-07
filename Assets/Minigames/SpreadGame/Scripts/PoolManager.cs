@@ -36,7 +36,7 @@ namespace GameHeaven.SpreadGame
             bananaBullets = new GameObject[500];
             for (int i = 0; i < bananaBullets.Length; i++) bananaBullets[i] = Instantiate(bulletPrefabs[4]);
 
-            poopBullets = new GameObject[20];
+            poopBullets = new GameObject[500];
             for (int i = 0; i < poopBullets.Length; i++) poopBullets[i] = Instantiate(bulletPrefabs[5]);
 
             cageBullets = new GameObject[3];

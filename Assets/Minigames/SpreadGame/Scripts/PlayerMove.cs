@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 namespace GameHeaven.SpreadGame
 {
@@ -18,6 +20,8 @@ namespace GameHeaven.SpreadGame
 
         [SerializeField] AudioClip[] bulletSounds, acquireSounds;
         [SerializeField] AudioClip bombSound;
+
+        [SerializeField] bool isInvincible;
 
         private int curSectorIdx, curSectorDir;
         PoolManager pool;
@@ -61,6 +65,22 @@ namespace GameHeaven.SpreadGame
                     Fire(i);
                 }
             }
+
+            // 무적 키
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (isInvincible)
+                {
+                    isInvincible = false;
+                    GameObject.Find("Canvas").transform.GetChild(3).gameObject.SetActive(false);
+                }
+                else
+                {
+                    isInvincible = true;
+                    if (!hasShield) hasShield = true;
+                    GameObject.Find("Canvas").transform.GetChild(3).gameObject.SetActive(true);
+                }
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -91,14 +111,15 @@ namespace GameHeaven.SpreadGame
                 {
                     case 'u': // G'u'ided
                         {
+                            /*
                             int cnt = 0;
                             for (int i = 0; i < bulletLVs.Length; i++)
                             {
                                 if (i == 0) continue;
                                 if (bulletLVs[i] > 0) cnt++;
-                            }
+                            }*/
 
-                            if (cnt < 3 && bulletLVs[0] < 6)
+                            if (bulletLVs[0] < 6)
                             {
                                 bulletLVs[0]++;
 
@@ -106,17 +127,16 @@ namespace GameHeaven.SpreadGame
                                 if (bulletLVs[0] == 3 || bulletLVs[0] == 6) bullet.damage++;
                                 bullet.maxShotDelay -= 0.5f;
                             }
+
+                            GameObject obj = GameObject.Find("BulletLV");
+                            obj.transform.GetChild(0).GetComponent<Image>().color = new Color(255, 255, 255);
+                            obj.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                            obj.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Lv." + bulletLVs[0];
                             break;
                         }
                     case 'e': // S'e'ctor
                         {
-                            int cnt = 0;
-                            for (int i = 0; i < bulletLVs.Length; i++)
-                            {
-                                if (i == 1) continue;
-                                if (bulletLVs[i] > 0) cnt++;
-                            }
-                            if (cnt < 3 && bulletLVs[1] < 6)
+                            if (bulletLVs[1] < 6)
                             {
                                 bulletLVs[1]++;
 
@@ -124,18 +144,16 @@ namespace GameHeaven.SpreadGame
                                 if (bulletLVs[1] == 6) bullet.damage++;
                                 bullet.maxShotDelay -= 0.04f;
                             }
+
+                            GameObject obj = GameObject.Find("BulletLV");
+                            obj.transform.GetChild(1).GetComponent<Image>().color = new Color(255, 255, 255);
+                            obj.transform.GetChild(1).GetChild(0).gameObject.SetActive(true);
+                            obj.transform.GetChild(1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Lv." + bulletLVs[1];
                             break;
                         }
                     case 'l': // S'l'ash
                         {
-                            int cnt = 0;
-                            for (int i = 0; i < bulletLVs.Length; i++)
-                            {
-                                if (i == 2) continue;
-                                if (bulletLVs[i] > 0) cnt++;
-                            }
-
-                            if (cnt < 3 && bulletLVs[2] < 6)
+                            if (bulletLVs[2] < 6)
                             {
                                 bulletLVs[2]++;
 
@@ -143,18 +161,16 @@ namespace GameHeaven.SpreadGame
                                 if (bulletLVs[2] == 3 || bulletLVs[2] == 6) bullet.damage++;
                                 bullet.maxShotDelay -= 0.4f;
                             }
+
+                            GameObject obj = GameObject.Find("BulletLV");
+                            obj.transform.GetChild(2).GetComponent<Image>().color = new Color(255, 255, 255);
+                            obj.transform.GetChild(2).GetChild(0).gameObject.SetActive(true);
+                            obj.transform.GetChild(2).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Lv." + bulletLVs[2];
                             break;
                         }
                     case 't': // S't'raight
                         {
-                            int cnt = 0;
-                            for (int i = 0; i < bulletLVs.Length; i++)
-                            {
-                                if (i == 3) continue;
-                                if (bulletLVs[i] > 0) cnt++;
-                            }
-
-                            if (cnt < 3 && bulletLVs[3] < 6)
+                            if (bulletLVs[3] < 6)
                             {
                                 bulletLVs[3]++;
 
@@ -162,6 +178,11 @@ namespace GameHeaven.SpreadGame
                                 if (bulletLVs[3] == 3 || bulletLVs[3] == 6) bullet.damage++;
                                 bullet.maxShotDelay -= 0.04f;
                             }
+
+                            GameObject obj = GameObject.Find("BulletLV");
+                            obj.transform.GetChild(3).GetComponent<Image>().color = new Color(255, 255, 255);
+                            obj.transform.GetChild(3).GetChild(0).gameObject.SetActive(true);
+                            obj.transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Lv." + bulletLVs[3];
                             break;
                         }
 
@@ -183,16 +204,25 @@ namespace GameHeaven.SpreadGame
                 }
                 Instantiate(coinAcquireEffect, collider.transform.position, coinAcquireEffect.transform.rotation);
                 Destroy(collider.gameObject);
-                /* 나머지 아이템 삭제
-                foreach (GameObject del in GameObject.FindGameObjectsWithTag("UpgradeItem"))
-                {
-                    Destroy(del);
-                }
-                */
             }
             else if (collider.CompareTag("Brick")) // 뚤기 새장
             {
                 StartCoroutine(Stun(0.5f, collider));
+            }
+        }
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.transform.CompareTag("Enemy"))
+            {
+                if (hasShield)
+                {
+                    StartCoroutine(ShieldBreak());
+                }
+                else
+                {
+                    print("GameOver");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
             }
         }
 
@@ -302,7 +332,7 @@ namespace GameHeaven.SpreadGame
             anim.SetTrigger("Hit");
 
             yield return new WaitForSeconds(1);
-            hasShield = false;
+            if (!isInvincible) hasShield = false;
         }
     }
 }
