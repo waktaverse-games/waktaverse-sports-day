@@ -10,7 +10,7 @@ namespace GameHeaven.CrossGame
         public CrossGameManager Manager;
         public void Move()
         {
-            transform.DOMoveY(1, 0.8f).SetRelative().SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            transform.DOMoveY(2, 0.6f).SetRelative().SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
         }
 
         public void Kill()
@@ -22,7 +22,6 @@ namespace GameHeaven.CrossGame
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            print(collision.tag);
             if (collision.tag == "Player")
             {
                 Manager.ObjectController.Fly();
