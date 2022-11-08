@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameHeaven.JumpGame
 {
     public class PlayerController : MonoBehaviour
     {
+        public UnityEvent OnCollideWithRope;
+
         public float maxSpeed;
         public float jumpPower;
         Rigidbody2D rb;
         SpriteRenderer sprite;
         Animator animator;
 
-        [SerializeField] AudioSource audio;
-
+        bool isImmotal = false;
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -45,7 +47,7 @@ namespace GameHeaven.JumpGame
             {
                 rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 animator.SetBool("isJumping", true);
-                audio.Play();
+                SoundManager.Instance.PlayJumpSound();
             }
             if (rb.velocity.y == 0)
             {
@@ -63,7 +65,6 @@ namespace GameHeaven.JumpGame
                 sprite.flipX = true; 
             }
         }
-
         void PlayerMovement()
         {
             float h = Input.GetAxisRaw("Horizontal");
@@ -92,13 +93,37 @@ namespace GameHeaven.JumpGame
             }
         }
 
+        IEnumerator OnDamaged()
+        {
+            isImmotal = true;
+            int countTime = 0;
+            while (countTime < 40)
+            {
+                if(countTime % 2 == 0) { sprite.color = new Color(1, 1, 1, 0.4f); }
+                else { sprite.color = new Color(1, 1, 1, 1); }
+                yield return new WaitForSeconds(0.05f);
+                countTime++;
+            }
+            isImmotal = false;
+        }
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if(collision.name.Equals("Rope Collider"))
             {
-                animator.SetBool("isGameOver", true);
-                GameManager.Instance.GameOver();
+                if(GameManager.Instance.isInvincible) // 무적이면
+                {
+                    GameManager.Instance.isInvincible = false;
+                    OnCollideWithRope.Invoke();
+                    StartCoroutine(OnDamaged());
+                }
+                else if(!isImmotal)
+                {
+                    animator.SetBool("isGameOver", true);
+                    GameManager.Instance.GameOver();
+                }
             }
         }
+
+
     }
 }
