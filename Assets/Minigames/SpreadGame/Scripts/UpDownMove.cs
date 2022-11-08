@@ -14,7 +14,7 @@ namespace GameHeaven.SpreadGame
         {
             rigid = GetComponent<Rigidbody2D>();
 
-            dir = new Vector3(0, 0.05f, 0);
+            dir = new Vector3(0, 0.02f, 0);
 
             StartCoroutine(ChangeDir());
         }
@@ -42,10 +42,11 @@ namespace GameHeaven.SpreadGame
         {
             WaitForSeconds wait = new WaitForSeconds(1.0f);
 
+            yield return new WaitForSeconds(0.5f);
             while (true)
             {
-                yield return wait;
                 dir = new Vector3(0, -dir.y, 0);
+                yield return wait;
             }
         }
     }

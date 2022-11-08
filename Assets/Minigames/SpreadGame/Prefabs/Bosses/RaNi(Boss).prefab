@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8669942877754166981}
   - component: {fileID: 8669942877754166979}
   - component: {fileID: 3036927191660625286}
-  - component: {fileID: 4883152886791532424}
+  - component: {fileID: 4367085562114234118}
   m_Layer: 0
   m_Name: Model
   m_TagString: Enemy
@@ -233,7 +233,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.05}
   m_Size: {x: 0.6, y: 0.73}
   m_Direction: 0
---- !u!95 &4883152886791532424
+--- !u!95 &4367085562114234118
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
