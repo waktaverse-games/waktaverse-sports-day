@@ -18,6 +18,7 @@ namespace GameHeaven.JumpGame
         [SerializeField] GameObject itemPrefab;
         [SerializeField] GameObject gomemItemPrefab;
 
+        [SerializeField] int gomemItemFreq;
         [SerializeField] float itemSpawnDelay;
 
         Queue<GameObject> deactivatedItems = new Queue<GameObject>();
@@ -29,24 +30,36 @@ namespace GameHeaven.JumpGame
 
         void SpawnItem()
         {
-            GameObject item = GetItemFromPool();
+            GameObject item = null;
+            if (GameManager.Instance.JumpSuccessCount >= gomemItemFreq && !GameManager.Instance.isInvincible)
+            {
+
+                item = Instantiate(gomemItemPrefab);
+                item.transform.SetParent(transform);
+                GameManager.Instance.ResetJumpSuccessCount();
+            }
+            else
+            {
+                if (GameManager.Instance.JumpSuccessCount >= gomemItemFreq) { GameManager.Instance.ResetJumpSuccessCount(); }
+                item = GetItemFromPool();
+                item.GetComponent<ItemManager>().InitializeItem(this, Random.Range(0, System.Enum.GetValues(typeof(Items)).Length));
+            }
             float spawnPosX = Random.Range(spawnPosMin.localPosition.x, spawnPosMax.localPosition.x);
-            item.SetActive(true);
-            item.transform.SetParent(transform);
             item.transform.localPosition = new Vector3(spawnPosX, spawnPosMin.localPosition.y, 0);
-            item.GetComponent<Animator>().SetInteger("itemNum", Random.Range(0, System.Enum.GetValues(typeof(Items)).Length));
-            item.GetComponent<ItemPoolConnector>().Spawner = this;
         }
 
         public void DeactiavteItem(GameObject item)
         {
             deactivatedItems.Enqueue(item);
+            item.SetActive(false);
         }
-
         
         GameObject GetItemFromPool()
         {
-            return deactivatedItems.Count == 0 ? Instantiate(itemPrefab) : deactivatedItems.Dequeue();
+            GameObject item = deactivatedItems.Count == 0 ? Instantiate(itemPrefab) : deactivatedItems.Dequeue();
+            item.SetActive(true);
+            item.transform.SetParent(transform);
+            return item;
         }
         
         IEnumerator Spawn()
