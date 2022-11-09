@@ -28,24 +28,26 @@ namespace GameHeaven.PassGame
         void Update()
         {
             Jump();
+            if (transform.position.y > -3.39f) _anim.SetBool("isJump", true);
         }
 
         void Jump()
         {
-            if (Input.GetKey(KeyCode.Space) && _isGrounded)
+            if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
             {
                 _rigid.velocity = Vector2.up * jumpPower;
                 SfxManager.PlaySfx(0);
                 _anim.SetBool("isJump", true);
                 _isGrounded = false;
             }
-            else if (Input.GetKey(KeyCode.Space) && jumpItem)
+            else if (Input.GetKeyDown(KeyCode.Space) && jumpItem)
             {
                 _rigid.velocity = Vector2.up * jumpPower;
                 SfxManager.PlaySfx(0);
                 _anim.SetBool("isJump", true);
                 _isGrounded = false;
                 jumpItem = false;
+                gameManager.ItemDeactivate();
             }
         }
 

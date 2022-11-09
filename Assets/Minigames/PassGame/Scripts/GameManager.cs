@@ -19,6 +19,8 @@ namespace GameHeaven.PassGame
         public GameObject endText;
         public GameObject button;
         public GameObject toMain;
+        public GameObject doubleJumpState;
+        public GameObject doubleJumpItem;
         public TextMeshProUGUI coinText;
         public SFXManager SfxManager;
         public float jumpPower;
@@ -44,9 +46,9 @@ namespace GameHeaven.PassGame
             _stageStrings = new List<string>[6];
             _stageStrings[0] = new List<string>();
             _stageStrings[1] = new List<string>() { "egi", "bat" };
-            _stageStrings[2] = new List<string>() { "egi", "bat", "bidul", "dog"};
-            _stageStrings[3] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani"};
-            _stageStrings[4] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug"};
+            _stageStrings[2] = new List<string>() { "egi", "bat", "bidul", "dog" };
+            _stageStrings[3] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani" };
+            _stageStrings[4] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug" };
             _stageStrings[5] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug", "jupok" };
             GameSet();
         }
@@ -76,6 +78,7 @@ namespace GameHeaven.PassGame
             StartCoroutine(UpgradeStage(45));
             StartCoroutine(StageSpawn(0.1f));
             StartCoroutine(CoinSpawn(0.7f));
+            StartCoroutine(ItemSpawn(10.1f));
         }
 
         public void GameOver()
@@ -126,6 +129,25 @@ namespace GameHeaven.PassGame
             yield return new WaitForSeconds(time);
             objectManager.MakeObject("coin", _coinSpawnPos);
             StartCoroutine(CoinSpawn(6.1f));
+        }
+
+        IEnumerator ItemSpawn(float time)
+        {
+            yield return new WaitForSeconds(time);
+            doubleJumpItem.SetActive(true);
+            doubleJumpItem.transform.position = _coinSpawnPos;
+            StartCoroutine(ItemSpawn(time));
+        }
+
+        public void ItemActivate()
+        {
+            playerScript.jumpItem = true;
+            doubleJumpState.SetActive(true);
+        }
+
+        public void ItemDeactivate()
+        {
+            doubleJumpState.SetActive(false);
         }
 
         public void AddCoin()
