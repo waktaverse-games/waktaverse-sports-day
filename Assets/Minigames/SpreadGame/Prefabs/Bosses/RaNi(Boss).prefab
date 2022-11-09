@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8669942877754166981}
   - component: {fileID: 8669942877754166979}
   - component: {fileID: 3036927191660625286}
-  - component: {fileID: 4883152886791532424}
+  - component: {fileID: 4367085562114234118}
   m_Layer: 0
   m_Name: Model
   m_TagString: Enemy
@@ -183,9 +183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8daf1a167da4dc74a9eff13ee7b73ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
+  HP: 200
+  maxHP: 200
   type: 0
   numOfPatterns: 4
+  bulletIdx: 0
   curPatternDelay: 0
   maxPatternDelay: 4
   curStraightFireDelay: 0
@@ -213,6 +215,7 @@ MonoBehaviour:
   - {fileID: 612043407125858333, guid: 88e3468803f815a499e67a2e0835ce73, type: 3}
   - {fileID: 6038007275945840213, guid: bd256cb6a1795ec44abdba87d11207cb, type: 3}
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
+  gyunNyang: {fileID: 0}
   isDeath: 0
 --- !u!70 &3036927191660625286
 CapsuleCollider2D:
@@ -230,7 +233,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.05}
   m_Size: {x: 0.6, y: 0.73}
   m_Direction: 0
---- !u!95 &4883152886791532424
+--- !u!95 &4367085562114234118
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0

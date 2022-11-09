@@ -9,12 +9,12 @@ namespace GameHeaven.CrossGame
     {
         [Header("Objects")]
         public CrossGameManager Manager;
-
         public GameObject PlatformPrefab;
         public Player Player;
         public GameObject StarPrefab;
-
         public Transform ObjectGroup;
+        public List<GameObject> BackGround = new List<GameObject>();
+        public List<Sprite> normalSprite = new List<Sprite>();
 
         [Header("Setting")]
 
@@ -25,25 +25,45 @@ namespace GameHeaven.CrossGame
         List<Platform> Platforms = new List<Platform>();
         [HideInInspector]
         public List<GameObject> Stars = new List<GameObject>();
-
         public float DefaultMovementSpeed;
 
 
-        //ÇÃ·§Æû ÀÌµ¿ °ü·Ã
+        //ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         [Header("Platform")]
         public float PlatformSpace;
         [Range(0f, 1f)]
         public float TrapProbability;
+        [Range(0f, 1f)]
+        public float StarProbability;
+        [Range(0f, 1f)]
+        public float ItemProbability;
         int PlatformCurosr = 0;
+        int LandPlatformNum = 0, MakePlatformNum = 6;
+        Dictionary<int, bool> PlatformInformation = new Dictionary<int, bool>();
         float MoveCount;
         bool CurrentFlatformIsActive;
 
-        //ÇÃ·¹ÀÌ¾î ÀÌµ¿ °ü·Ã
+        //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ìµï¿½ 
         float JumpTime;
         int JumpCount = 0;
         Vector3 LandPos;
-        Sequence JumpSequence;
+        Sequence MoveSequence;
         bool PlayerPositionIsLimited;
+
+        //ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+        float BackGroundMoveCount;
+
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        [Header("Item")]
+        public GameObject FlyItemPrefab;
+        bool IsFly = false;
+        float FlyCount = 0;
+        float FlyCountInPlatform = 0;
+        int FLyLandFlatformNum;
+        int FlyDistance = 20;
+        int FlatformNumWhenMakeFlyItem = -20;
+        [HideInInspector]
+        public List<GameObject> FlyItems = new List<GameObject>();
 
         private void Awake()
         {
@@ -54,6 +74,10 @@ namespace GameHeaven.CrossGame
                 ObjPos += Vector3.right * 2;
                 Platforms.Add(tmp.GetComponent<Platform>());
             }
+            for (int i = 1; i <= 6; i++)
+            {
+                PlatformInformation.Add(i, true);
+            }
         }
 
         private void Update()
@@ -62,8 +86,9 @@ namespace GameHeaven.CrossGame
             {
                 return;
             }
-            //ÇÃ·¹ÀÌ¾î Á¡ÇÁ
-            if (Input.GetKeyDown(KeyCode.Space))
+
+            //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½
+            if (Input.GetKeyDown(KeyCode.Space) && !IsFly)
             {
                 if (JumpCount == 0 && JumpTime == 0)
                 {
@@ -79,46 +104,48 @@ namespace GameHeaven.CrossGame
             {
                 MakeStar();
             }
-
-            //Á¡ÇÁ ÁßÀÏ ¶§ Ã³¸®
-            if (JumpCount >= 1)
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                //¿À¸¥ÂÊ º®¿¡ °¡±î¿öÁ³À» ¶§ Æ÷Áö¼Ç Á¦ÇÑ
-                if (Player.transform.position.x > 4 && !PlayerPositionIsLimited)
-                {
-                    DefaultMovementSpeed = MovementSpeed;
-                    MovementSpeed = DefaultMovementSpeed * 0.5f + JumpSpeed * 4;
-                    UpdateLandPoint(DefaultMovementSpeed, MovementSpeed);
-                    PlayerPositionIsLimited = true;
+                MakeFlyItem();
+            }
+
+            //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ìµï¿½
+            float DeltaDistance;
+            if (IsFly)
+            {
+                DeltaDistance = 20 * Time.deltaTime;
+                FlyCount += DeltaDistance;
+                FlyCountInPlatform += DeltaDistance;
+                if(FlyCountInPlatform > 2){
+                    FlyCountInPlatform -= 2;
+                    Manager.AddScore(10);
                 }
-                //Æ÷Áö¼Ç Á¦ÇÑ ÇØÁ¦
-                else if (Player.transform.position.x <= 4 && PlayerPositionIsLimited)
+                if (FlyCount > 40)
                 {
-                    UpdateLandPoint(MovementSpeed, DefaultMovementSpeed);
-                    MovementSpeed = DefaultMovementSpeed;
-                    PlayerPositionIsLimited = false;
+                    FlyCount = 0;
+                    EndFly();
                 }
-                //Á¡ÇÁ°¡ Áö¼ÓµÈ ½Ã°£ Ã¼Å©
-                JumpTime += Time.deltaTime;
             }
             else
             {
-                //Æ÷Áö¼Ç Á¦ÇÑ ÇØÁ¦
-                if (Player.transform.position.x <= 4 && PlayerPositionIsLimited)
-                {
-                    MovementSpeed = DefaultMovementSpeed;
-                    PlayerPositionIsLimited = false;
-                }
-                //Á¡ÇÁ°¡ Áö¼ÓµÈ ½Ã°£ ÃÊ±âÈ­
-                JumpTime = 0;
+                DeltaDistance = MovementSpeed * Time.deltaTime;
+                Player.transform.position += Vector3.left * DeltaDistance;
             }
 
-            //ÇÃ·¹ÀÌ¾î ÀÌµ¿
-            float DeltaDistance = MovementSpeed * Time.deltaTime;
             MoveCount += DeltaDistance;
-            Player.transform.position += Vector3.left * DeltaDistance;
 
-            //ÇÃ·§Æû ÀÌµ¿
+            //ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+            BackGround[0].transform.position += Vector3.left * DeltaDistance * 0.3f;
+            BackGround[1].transform.position += Vector3.left * DeltaDistance * 0.3f;
+            BackGroundMoveCount += DeltaDistance * 0.3f;
+            if (BackGroundMoveCount >= 26.78f)
+            {
+                BackGroundMoveCount -= 26.78f;
+                BackGround[0].transform.position += Vector3.right * 26.78f;
+                BackGround[1].transform.position += Vector3.right * 26.78f;
+            }
+
+            //ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
             foreach (Platform tmp in Platforms)
             {
                 tmp.transform.position += Vector3.left * DeltaDistance;
@@ -129,21 +156,56 @@ namespace GameHeaven.CrossGame
                 RepositionPlatform();
             }
 
-            //º° ÀÌµ¿
+            //ï¿½ï¿½ ï¿½Ìµï¿½
             for (int i = 0; i < Stars.Count; i++)
             {
                 Stars[i].transform.position += Vector3.left * DeltaDistance;
-                if (Stars[i].transform.position.x < -11)
+            }
+
+            for (int i = 0; i < FlyItems.Count; i++)
+            {
+                FlyItems[i].transform.position += Vector3.left * DeltaDistance;
+            }
+
+            if (IsFly) return;
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã³ï¿½ï¿½
+            if (JumpCount >= 1)
+            {
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                if (Player.transform.position.x > 4 && !PlayerPositionIsLimited)
                 {
-                    GameObject tmp = Stars[i--];
-                    Stars.Remove(tmp);
-                    tmp.GetComponent<Star>().Kill();
+                    DefaultMovementSpeed = MovementSpeed;
+                    MovementSpeed = DefaultMovementSpeed * 0.5f + JumpSpeed * 4;
+                    UpdateLandPoint(DefaultMovementSpeed, MovementSpeed);
+                    PlayerPositionIsLimited = true;
                 }
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                else if (Player.transform.position.x <= 4 && PlayerPositionIsLimited)
+                {
+                    UpdateLandPoint(MovementSpeed, DefaultMovementSpeed);
+                    MovementSpeed = DefaultMovementSpeed;
+                    PlayerPositionIsLimited = false;
+                }
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½ ï¿½Ã°ï¿½ Ã¼Å©
+                JumpTime += Time.deltaTime;
+            }
+            else
+            {
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                if (Player.transform.position.x <= 4 && PlayerPositionIsLimited)
+                {
+                    MovementSpeed = DefaultMovementSpeed;
+                    PlayerPositionIsLimited = false;
+                }
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½ ï¿½Ã°ï¿½ ï¿½Ê±ï¿½È­
+                JumpTime = 0;
             }
         }
         public void PlayerJump()
         {
             JumpCount++;
+            LandPlatformNum++;
+            //print(LandPlatformNum);
             Player.CntAnimator.SetFloat("JumpSpeed", 0.4f * JumpSpeed);
             Player.CntAnimator.SetTrigger("Jump");
             float Time = 1f / JumpSpeed;
@@ -153,18 +215,18 @@ namespace GameHeaven.CrossGame
                 if (JumpCount == 1)
                 {
                     JumpCallBack();
-                    Manager.AddScore(10);
                 }
             });
-            JumpSequence = DOTween.Sequence().Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownSequence);
+            MoveSequence = DOTween.Sequence().Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownSequence);
         }
 
         public void UpdateLandPoint(float OldSpeed, float NewSpeed)
         {
+            //MoveSequence.Kill();
             float Time = (1f / JumpSpeed) - JumpTime;
             LandPos = LandPos - Vector3.right * Time * (NewSpeed - OldSpeed);
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() =>
+            MoveSequence = DOTween.Sequence();
+            MoveSequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() =>
             {
                 JumpCallBack();
             });
@@ -172,32 +234,50 @@ namespace GameHeaven.CrossGame
 
         public void PlayerDoubleJump()
         {
+            MoveSequence.Kill();
             JumpCount++;
+            LandPlatformNum++;
+            //print(LandPlatformNum);
             float Time = (1f / JumpSpeed) - JumpTime;
             float UpTime = Time - (1f / JumpSpeed) / 2;
             float DownTime = (1f / JumpSpeed) / 2;
             LandPos = LandPos + Vector3.right * 2;
             Sequence UpDownsequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2.3f, UpTime)).Append(Player.transform.DOMoveY(LandPos.y, DownTime));
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownsequence).AppendCallback(() =>
+            MoveSequence = DOTween.Sequence();
+            MoveSequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownsequence).AppendCallback(() =>
             {
-                JumpSequence.Kill();
                 JumpCallBack();
-                Manager.AddScore(20);
             });
         }
 
+        public void Fly()
+        {
+            if (IsFly) return;
+            MoveSequence.Pause<Sequence>();
+            Player.CntAnimator.SetBool("Fly", true);
+            FLyLandFlatformNum = LandPlatformNum + FlyDistance;
+            LandPlatformNum += FlyDistance;
+            //print(FLyLandFlatformNum);
+            IsFly = true;
+        }
 
+        public void EndFly()
+        {
+            MoveSequence.Play<Sequence>();
+            Player.CntAnimator.SetBool("Fly", false);
+            IsFly = false;
+        }
 
         void JumpCallBack()
         {
-            //¿ÀÂ÷ º¸Á¤
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            Manager.AddScore(JumpCount * 10);
             float num = Player.transform.position.x;
             num = Mathf.Round(num + MoveCount) - MoveCount;
-            //¾Æ·¡ 0.1f´Â ÇÃ·¹ÀÌ¾î¿Í ÇÃ·§Æû ½ºÇÁ¶óÀÌÆ® Å©±â Â÷ÀÌ¿¡ ÀÇÇÑ º¸Á¤(½ºÇÁ¶óÀÌÆ®°¡ ¹Ù²î¸é °°ÀÌ ¹Ù²ñ)
+            //ï¿½Æ·ï¿½ 0.1fï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Å©ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½)
             Player.transform.position = new Vector3(num - 0.1f, Player.transform.position.y);
 
-            if (!Player.OnBottom)
+            if (!PlatformInformation[LandPlatformNum])
             {
                 Manager.GameOver();
             }
@@ -207,22 +287,30 @@ namespace GameHeaven.CrossGame
 
         public void RepositionPlatform()
         {
-            if (!CurrentFlatformIsActive || Random.Range(0f, 1f) > TrapProbability)
+            MakePlatformNum++;
+            //print("m:" + MakePlatformNum);
+            if (MakePlatformNum > 11) PlatformInformation.Remove(MakePlatformNum - 11);
+
+            if (MakePlatformNum == FLyLandFlatformNum || !CurrentFlatformIsActive || Random.Range(0f, 1f) > TrapProbability)
             {
                 Platforms[PlatformCurosr].gameObject.SetActive(true);
                 CurrentFlatformIsActive = true;
+                PlatformInformation.Add(MakePlatformNum, true);
+                Platforms[PlatformCurosr].Set();
             }
             else
             {
                 Platforms[PlatformCurosr].gameObject.SetActive(false);
                 CurrentFlatformIsActive = false;
+                PlatformInformation.Add(MakePlatformNum, false);
             }
 
             Platforms[PlatformCurosr++].transform.position += Vector3.right * PlatformSpace * 11;
 
             if (Platforms.Count <= PlatformCurosr) PlatformCurosr = 0;
 
-            if (Random.Range(0f, 1f) < 0.1f) MakeStar();
+            if ((MakePlatformNum > FlatformNumWhenMakeFlyItem + 30) && Random.Range(0f, 1f) < ItemProbability) MakeFlyItem();
+            //if (Random.Range(0f, 1f) < StarProbability) MakeStar();
         }
 
         public void MakeStar()
@@ -246,6 +334,17 @@ namespace GameHeaven.CrossGame
             InstanceScript.Move();
             InstanceScript.Manager = Manager;
             Stars.Add(InstanceStar);
+        }
+
+        public void MakeFlyItem()
+        {
+            FlatformNumWhenMakeFlyItem = MakePlatformNum;
+            GameObject InstanceItem = Instantiate(FlyItemPrefab, new Vector3(11, 1f), Quaternion.identity, ObjectGroup);
+            FlyItem InstanceScript = InstanceItem.GetComponent<FlyItem>();
+            float num = Random.Range(0f, 1f);
+            InstanceScript.Move();
+            InstanceScript.Manager = Manager;
+            FlyItems.Add(InstanceItem);
         }
     }
 }

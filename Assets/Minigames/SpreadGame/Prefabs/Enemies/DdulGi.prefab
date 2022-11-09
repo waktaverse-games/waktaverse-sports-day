@@ -141,7 +141,7 @@ MonoBehaviour:
   thinkingSpeed: 2
   attackSpeed: 5
   projectileSpeed: 5
-  HP: 3
+  HP: 10
   projectile: {fileID: 2360940325928755872, guid: f28df7927a52fad448c7d0c670cd937d, type: 3}
   coins:
   - {fileID: 5954169712361996919, guid: 3b52fda8b80729844bc70d9fbfebc2be, type: 3}

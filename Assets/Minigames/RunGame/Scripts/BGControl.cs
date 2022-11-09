@@ -18,7 +18,7 @@ namespace GameHaven.RunGame
             Vector3 nextPos = Vector3.down * GameHaven.RunGame.GameManager.wallSpeed * Time.deltaTime;
             transform.position = curPos + nextPos;
 
-            if (sprites[endIndex].position.y < -27.5f)
+            if (sprites[endIndex].position.y < -32.5f)
             {
                 Vector3 backSpritePos = sprites[startIndex].localPosition;
                 Vector3 frontSpritePos = sprites[endIndex].localPosition;

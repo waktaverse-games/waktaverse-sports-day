@@ -1,16 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
+using SharedLibs;
 
 namespace GameHaven.RunGame
 { 
     public class GameManager : MonoBehaviour
     {
-        public GameObject wall;
-        [SerializeField] GameObject[] coin;
+        #region Singleton
+        public static GameManager instance = null;
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                if (instance != this)
+                    Destroy(this.gameObject);
+            }
+        }
+        #endregion
+
+        public GameObject[] wall;
+        [SerializeField] GameObject[] item;
         public Transform spawnPoints;
         public GameObject dust;
         public Transform dustPoints;
+
+        public int score = 0;
+        public int highScore;
+
+        public Text scoreText;
+        public Text highScoreText;
+        public GameObject re;
 
         public float wallSpawnDelay;
         public float curSpawnDelay;
@@ -19,14 +46,19 @@ namespace GameHaven.RunGame
         public float curCoinSpawnDelay;
 
         public static float gameTime;
+        public static float scoreTime;
         public static float wallSpeed;
         public float timer;
+
 
         // Update is called once per frame
         void Start()
         {
             gameTime = 0;
             wallSpeed = 2;
+            highScoreText.text = "0";
+            re.SetActive(false);
+
         }
 
         void Update()
@@ -34,7 +66,16 @@ namespace GameHaven.RunGame
             curSpawnDelay += Time.deltaTime;
             curCoinSpawnDelay += Time.deltaTime;
             gameTime += Time.deltaTime;
+            scoreTime += Time.deltaTime;
             timer += Time.deltaTime;
+
+            scoreText.text = string.Format("{0:n0}", score);
+
+            if (scoreTime >= 1)
+            {
+                score += 10;
+                scoreTime = 0;
+            }
 
             if (curSpawnDelay > wallSpawnDelay)
             {
@@ -52,19 +93,37 @@ namespace GameHaven.RunGame
             }
         }
 
-        void SpawnWall()
+        public void SpawnWall()
         {
-            Instantiate(wall, spawnPoints.position, spawnPoints.rotation);
+            Instantiate(wall[Random.Range(0, wall.Length)], spawnPoints.position, spawnPoints.rotation);
         }
 
-        void SpawnCoin()
+        public void SpawnCoin()
         {
-            Instantiate(coin[Random.Range(0, coin.Length)], spawnPoints.position + new Vector3(Random.Range(-3f, 3f),0, 0), spawnPoints.rotation);
+            Instantiate(item[Random.Range(0, item.Length)], spawnPoints.position + new Vector3(Random.Range(-3f, 3f),0, 0), spawnPoints.rotation);
         }
 
-        void SpawnDust()
+        public  void SpawnDust()
         {
             Instantiate(dust, dustPoints.position + new Vector3(Random.Range(-0.5f, 0.5f), -1, 0), dustPoints.rotation);
         }
+
+        public void ItemScore(int num)
+        {
+            score += num;
+        }
+
+        public void GameOver()
+        {
+            re.SetActive(true);
+            Time.timeScale = 0;
+        }
+
+        public void Retry()
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
     }
 }

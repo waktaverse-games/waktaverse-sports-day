@@ -26,18 +26,21 @@ namespace GameHeaven.CrossGame
         public void Kill()
         {
             DOTween.Kill(gameObject.transform);
+            Manager.ObjectController.Stars.Remove(gameObject);
             Destroy(gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            print(collision.tag);
             if(collision.tag == "Player")
             {
-                if (code == CoinCode.Bronze) Manager.AddGold(1);
-                else if (code == CoinCode.Silver) Manager.AddGold(10);
-                else Manager.AddGold(25);
+                Manager.AddScore(10);
 
-                Manager.ObjectController.Stars.Remove(gameObject);
+                Kill();
+            }
+            else if(collision.tag == "Outline")
+            {
                 Kill();
             }
         }

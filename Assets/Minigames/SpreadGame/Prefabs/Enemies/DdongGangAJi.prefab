@@ -142,6 +142,7 @@ MonoBehaviour:
   type: 1
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
   isElite: 0
+  isCopy: 0
   dieSound: {fileID: 8300000, guid: c9597a9bc6c82064788177625248e038, type: 3}
   rigid: {fileID: 0}
 --- !u!95 &8088288893017774908
