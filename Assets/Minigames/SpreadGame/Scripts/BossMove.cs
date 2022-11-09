@@ -213,7 +213,7 @@ namespace GameHeaven.SpreadGame
 
             for (int i = 0; i < 20; i++)
             {
-                Instantiate(dieEffect, transform.position + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f)),
+                Instantiate(dieEffect, new Vector3(5 + Random.Range(-2f, 2f), Random.Range(-3f, 3f)),
                     dieEffect.transform.rotation).transform.localScale = new Vector3(1.0f, 1.0f);
 
                 Instantiate(coins[Random.Range(0, 3)], new Vector3(9, Random.Range(-4.0f, 4.0f), 0), Quaternion.Euler(Vector3.zero));
@@ -221,12 +221,19 @@ namespace GameHeaven.SpreadGame
                 yield return wait;
             }
 
-            obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
+            int ran1 = Random.Range(0, 4), ran2 = Random.Range(0, 4);
+
+            while(ran1 == ran2)
+            {
+                ran2 = Random.Range(0, 4);
+            }
+
+            obj = Instantiate(upgradeItems[ran1], transform.position, Quaternion.Euler(Vector3.zero));
             obj.transform.position = new Vector2(5, 2);
             obj.GetComponent<UpDownMove>().isBoss = true;
             obj.GetComponent<UpDownMove>().StartCoroutine(obj.GetComponent<UpDownMove>().BossItemMove(0.5f));
 
-            obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
+            obj = Instantiate(upgradeItems[ran2], transform.position, Quaternion.Euler(Vector3.zero));
             obj.transform.position = new Vector2(5, -2);
             obj.GetComponent<UpDownMove>().isBoss = true;
             obj.GetComponent<UpDownMove>().StartCoroutine(obj.GetComponent<UpDownMove>().BossItemMove(0.5f));

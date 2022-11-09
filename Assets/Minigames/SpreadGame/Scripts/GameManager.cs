@@ -92,7 +92,7 @@ namespace GameHeaven.SpreadGame
 
             EnemyMove enemy = obj.GetComponent<EnemyMove>();
 
-            enemy.HP += bossIdx * 2;
+            enemy.HP += bossIdx * 3;
 
             if (isElite)
             {
@@ -124,7 +124,7 @@ namespace GameHeaven.SpreadGame
             obj = Instantiate(bossPrefabs[bossIdx++ % 7], Vector2.zero, bossPrefabs[0].transform.rotation);
             isBossTime = true;
             maxNormalMonsterSpawnDelay -= 0.3f;
-            if (maxNormalMonsterSpawnDelay < 2) maxNormalMonsterSpawnDelay = 2;
+            if (maxNormalMonsterSpawnDelay < 1) maxNormalMonsterSpawnDelay = 1;
         }
 
         IEnumerator Division(GameObject obj)

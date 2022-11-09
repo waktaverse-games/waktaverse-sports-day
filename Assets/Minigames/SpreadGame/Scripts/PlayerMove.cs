@@ -124,7 +124,7 @@ namespace GameHeaven.SpreadGame
                                 bulletLVs[0]++;
 
                                 BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
-                                if (bulletLVs[0] == 3 || bulletLVs[0] == 6) bullet.damage++;
+                                if (bulletLVs[0] == 3 || bulletLVs[0] == 6) bullet.damage += 3;
                                 bullet.maxShotDelay -= 0.5f;
                             }
 
@@ -176,7 +176,7 @@ namespace GameHeaven.SpreadGame
 
                                 BulletInfo bullet = pool.bulletPrefabs[3].GetComponent<BulletInfo>();
                                 if (bulletLVs[3] == 3 || bulletLVs[3] == 6) bullet.damage++;
-                                bullet.maxShotDelay -= 0.04f;
+                                bullet.maxShotDelay -= 0.05f;
                             }
 
                             GameObject obj = GameObject.Find("BulletLV");

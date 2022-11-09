@@ -149,9 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  speed: 7
-  curShotDelay: 1.1216365
-  maxShotDelay: 3
+  speed: 10
+  curShotDelay: 0.18937892
+  maxShotDelay: 1
   damage: 3
 --- !u!114 &-7002028162915669063
 MonoBehaviour:
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid: {fileID: 0}
   target: {fileID: 0}
-  speed: 5
+  speed: 8
 --- !u!114 &9062154529222911396
 MonoBehaviour:
   m_ObjectHideFlags: 0
