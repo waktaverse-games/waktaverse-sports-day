@@ -23,6 +23,7 @@ namespace GameHeaven.AttackGame
         public GameManager gameManager;
         public GameObject weapon1;
         public GameObject weapon2;
+        public GameObject hammerIcon;
 
         public bool isHeadingRight = true;
         private bool _stopAction = false;
@@ -54,6 +55,20 @@ namespace GameHeaven.AttackGame
             }
             squareUIs[1].SetActive(false);
             squareUIs[2].SetActive(false);
+        }
+
+        public void UpgradeWeapons()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                weaponsPower[i] = (int)Math.Truncate((float)(weaponsPower[i]) * 1.1f);
+            }
+        }
+        
+        public void ActivateItem()
+        {
+            UpgradeWeapons();
+            hammerIcon.SetActive(true);
         }
 
         // Update is called once per frame

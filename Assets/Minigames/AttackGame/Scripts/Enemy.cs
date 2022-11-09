@@ -19,7 +19,9 @@ namespace GameHeaven.AttackGame
         public bool isBossMonster = false;
         public int damage = 20;
         public int tweenId;
-
+        public bool dropItem = false;
+        public GameObject hammerItem;
+        
         private int currentHp;
         private string _name;
         private Animator _animator;
@@ -87,6 +89,13 @@ namespace GameHeaven.AttackGame
                 isBossMonster = false;
                 Vector3 scale = transform.localScale;
                 transform.localScale = new Vector3(scale.x / 1.6f, scale.y / 1.6f, scale.z);
+            }
+
+            if (dropItem)
+            {
+                Vector3 tmpVector = hammerItem.transform.position;
+                tmpVector.Set(transform.position.x, tmpVector.y, tmpVector.z);
+                hammerItem.SetActive(true);
             }
             gameObject.SetActive(false);
         }

@@ -14,6 +14,7 @@ namespace GameHeaven.AttackGame
         public ObjectManager objectManager;
         public Player player;
         public GameObject mainCamera;
+        public GameObject hammerItem;
         public Camera mainCameraScript;
         public Image hpBar;
         public Image playerXpBar;
@@ -141,8 +142,7 @@ namespace GameHeaven.AttackGame
             {
                 player.ChangeDirection();
             }
-
-            Debug.Log(_tempCoinNum);
+            
             player.transform.DOMoveX(76.8f, 3);
             yield return new WaitForSeconds(3.1f);
             for (int i = 0; i < currMap.Length; i++)
@@ -244,6 +244,11 @@ namespace GameHeaven.AttackGame
             }
             GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(63, 6, 0));
             tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 6, _enemyDamage * 3);
+            if (_stageNum == 2)
+            {
+                tempBoss.GetComponent<Enemy>().dropItem = true;
+                tempBoss.GetComponent<Enemy>().hammerItem = hammerItem;
+            }
         }
 
         public void GetCoin()
@@ -362,7 +367,8 @@ namespace GameHeaven.AttackGame
                 hpText.text = _hpNum + " / " + _defaultHp;
                 hpBar.fillAmount = 1f;
                 _defaultPlayerXpSum = (int)Math.Truncate((float)(_defaultPlayerXpSum) * 1.1f);
-                _enemyDamage = (int)Math.Truncate((float)(_enemyDamage) * 1.1f);
+                // _enemyDamage = (int)Math.Truncate((float)(_enemyDamage) * 1.1f);
+                player.UpgradeWeapons();
             }
             playerXpBar.fillAmount = (float)_playerXpNum / (float)_defaultPlayerXpSum;
             playerXpText.text = _playerXpNum + " / " + _defaultPlayerXpSum;
