@@ -78,7 +78,7 @@ namespace GameHeaven.PassGame
             StartCoroutine(UpgradeStage(45));
             StartCoroutine(StageSpawn(0.1f));
             StartCoroutine(CoinSpawn(0.7f));
-            StartCoroutine(ItemSpawn(10.1f));
+            StartCoroutine(ItemSpawn(30.1f));
         }
 
         public void GameOver()
