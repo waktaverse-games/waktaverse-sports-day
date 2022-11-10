@@ -28,7 +28,7 @@ namespace GameHeaven.CrossGame
         public float DefaultMovementSpeed;
 
 
-        //�÷��� �̵�
+        //플랫폼 이동
         [Header("Platform")]
         public float PlatformSpace;
         [Range(0f, 1f)]
@@ -43,17 +43,17 @@ namespace GameHeaven.CrossGame
         float MoveCount;
         bool CurrentFlatformIsActive;
 
-        //�÷��̾� �̵� 
+        //점프
         float JumpTime;
         int JumpCount = 0;
         Vector3 LandPos;
         Sequence MoveSequence;
         bool PlayerPositionIsLimited;
 
-        //��� �̵�
+        //배경
         float BackGroundMoveCount;
 
-        //������
+        //아이템
         [Header("Item")]
         public GameObject FlyItemPrefab;
         bool IsFly = false;
@@ -87,7 +87,7 @@ namespace GameHeaven.CrossGame
                 return;
             }
 
-            //�÷��̾� ����
+            //점프
             if (Input.GetKeyDown(KeyCode.Space) && !IsFly)
             {
                 if (JumpCount == 0 && JumpTime == 0)
@@ -109,7 +109,7 @@ namespace GameHeaven.CrossGame
                 MakeFlyItem();
             }
 
-            //�÷��̾� �̵�
+            //플레이어 이동
             float DeltaDistance;
             if (IsFly)
             {
@@ -134,7 +134,7 @@ namespace GameHeaven.CrossGame
 
             MoveCount += DeltaDistance;
 
-            //��� �̵�
+            //배경 이동
             BackGround[0].transform.position += Vector3.left * DeltaDistance * 0.3f;
             BackGround[1].transform.position += Vector3.left * DeltaDistance * 0.3f;
             BackGroundMoveCount += DeltaDistance * 0.3f;
@@ -145,7 +145,7 @@ namespace GameHeaven.CrossGame
                 BackGround[1].transform.position += Vector3.right * 26.78f;
             }
 
-            //�÷��� �̵�
+            //플랫폼 이동
             foreach (Platform tmp in Platforms)
             {
                 tmp.transform.position += Vector3.left * DeltaDistance;
@@ -156,7 +156,7 @@ namespace GameHeaven.CrossGame
                 RepositionPlatform();
             }
 
-            //�� �̵�
+            //아이템 이동
             for (int i = 0; i < Stars.Count; i++)
             {
                 Stars[i].transform.position += Vector3.left * DeltaDistance;
@@ -164,14 +164,14 @@ namespace GameHeaven.CrossGame
 
             for (int i = 0; i < FlyItems.Count; i++)
             {
-                FlyItems[i].transform.position += Vector3.left * DeltaDistance;
+                FlyItems[i].transform.position += Vector3.left * DeltaDistance * 1.5f;
             }
 
             if (IsFly) return;
-            //���� ���� �� ó��
+            //오른쪽 벽에 근접한 상황에서 속도를 조절하는 로직
             if (JumpCount >= 1)
             {
-                //������ ���� ��������� �� ������ ����
+                //다가갈 때
                 if (Player.transform.position.x > 4 && !PlayerPositionIsLimited)
                 {
                     DefaultMovementSpeed = MovementSpeed;
@@ -179,25 +179,25 @@ namespace GameHeaven.CrossGame
                     UpdateLandPoint(DefaultMovementSpeed, MovementSpeed);
                     PlayerPositionIsLimited = true;
                 }
-                //������ ���� ����
+                //다시 멀어졌을 떄
                 else if (Player.transform.position.x <= 4 && PlayerPositionIsLimited)
                 {
                     UpdateLandPoint(MovementSpeed, DefaultMovementSpeed);
                     MovementSpeed = DefaultMovementSpeed;
                     PlayerPositionIsLimited = false;
                 }
-                //������ ���ӵ� �ð� üũ
+                //점프 시간 계산
                 JumpTime += Time.deltaTime;
             }
             else
             {
-                //������ ���� ����
+                //점프하지 않은 상황에서 멀어졌을 때
                 if (Player.transform.position.x <= 4 && PlayerPositionIsLimited)
                 {
                     MovementSpeed = DefaultMovementSpeed;
                     PlayerPositionIsLimited = false;
                 }
-                //������ ���ӵ� �ð� �ʱ�ȭ
+                //점프 시간 초기화
                 JumpTime = 0;
             }
         }
@@ -208,6 +208,7 @@ namespace GameHeaven.CrossGame
             //print(LandPlatformNum);
             Player.CntAnimator.SetFloat("JumpSpeed", 0.4f * JumpSpeed);
             Player.CntAnimator.SetTrigger("Jump");
+            Manager.SoundManager.Play("Jump1");
             float Time = 1f / JumpSpeed;
             LandPos = Player.transform.position + Vector3.right * (2 - Time * MovementSpeed);
             //JumpSequence = Player.transform.DOJump(LandPos, 2f, 1, Time);
@@ -270,11 +271,10 @@ namespace GameHeaven.CrossGame
 
         void JumpCallBack()
         {
-            //���� ����
             Manager.AddScore(JumpCount * 10);
             float num = Player.transform.position.x;
             num = Mathf.Round(num + MoveCount) - MoveCount;
-            //�Ʒ� 0.1f�� �÷��̾�� �÷��� ��������Ʈ ũ�� ���̿� ���� ����(��������Ʈ�� �ٲ�� ���� �ٲ�)
+            //0.1은 스프라이트 크기에 의한 보정
             Player.transform.position = new Vector3(num - 0.1f, Player.transform.position.y);
 
             if (!PlatformInformation[LandPlatformNum])
@@ -310,12 +310,12 @@ namespace GameHeaven.CrossGame
             if (Platforms.Count <= PlatformCurosr) PlatformCurosr = 0;
 
             if ((MakePlatformNum > FlatformNumWhenMakeFlyItem + 30) && Random.Range(0f, 1f) < ItemProbability) MakeFlyItem();
-            //if (Random.Range(0f, 1f) < StarProbability) MakeStar();
+            if (Random.Range(0f, 1f) < StarProbability) MakeStar();
         }
 
         public void MakeStar()
         {
-            GameObject InstanceStar = Instantiate(StarPrefab, new Vector3(11, -2), Quaternion.identity, ObjectGroup);
+            GameObject InstanceStar = Instantiate(StarPrefab, new Vector3(10, 1.7f), Quaternion.identity, ObjectGroup);
             Star InstanceScript = InstanceStar.GetComponent<Star>();
             float num = Random.Range(0f, 1f);
             if (num < 0.5f)
@@ -339,7 +339,7 @@ namespace GameHeaven.CrossGame
         public void MakeFlyItem()
         {
             FlatformNumWhenMakeFlyItem = MakePlatformNum;
-            GameObject InstanceItem = Instantiate(FlyItemPrefab, new Vector3(11, 1f), Quaternion.identity, ObjectGroup);
+            GameObject InstanceItem = Instantiate(FlyItemPrefab, new Vector3(11, 0.5f), Quaternion.identity, ObjectGroup);
             FlyItem InstanceScript = InstanceItem.GetComponent<FlyItem>();
             float num = Random.Range(0f, 1f);
             InstanceScript.Move();
