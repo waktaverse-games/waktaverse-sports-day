@@ -107,7 +107,7 @@ namespace GameHeaven.PassGame
 
         IEnumerator Dog()
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(2f);
             _animator.SetBool("isFly", true);
             StartCoroutine(DogMove());
             StartCoroutine(DogWake());
@@ -115,14 +115,14 @@ namespace GameHeaven.PassGame
 
         IEnumerator DogMove()
         {
-            yield return new WaitForSeconds(0.2f);
-            transform.Translate(0f, -0.3f, 0f);
+            yield return new WaitForSeconds(0.12f);
+            transform.Translate(-0.6f, 0f, 0f);
         }
 
         IEnumerator DogWake()
         {
             yield return new WaitForSeconds(6.5f);
-            transform.Translate(0f, 0.3f, 0);
+            transform.Translate(0.6f, 0f, 0);
         }
     }
 }

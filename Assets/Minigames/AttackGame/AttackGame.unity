@@ -590,6 +590,15 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 6ef908a7daf60be4a9a229e3860ccac2, type: 2}
   - {fileID: 9100000, guid: ce1c1e8456b28034898c1e26739f777e, type: 2}
   - {fileID: 9100000, guid: d21d6a803ef819e449c09004c0b5942e, type: 2}
+  sprites:
+  - {fileID: 21300000, guid: 8baed831f6516db42ab1137b5d7edcd8, type: 2}
+  - {fileID: 21300000, guid: eb44bcf01649a164a82d6a4f7a9d1bdc, type: 2}
+  - {fileID: 21300000, guid: 970fbcb6bb1b56748b7a916bd913c0bb, type: 2}
+  - {fileID: 21300000, guid: ad21109a7d329da468cecfc26418c9f3, type: 2}
+  - {fileID: 21300000, guid: 2a065565f2dcc034cb9fae4ea6452290, type: 2}
+  - {fileID: 21300000, guid: a4fd4a51e9ac3644e98a0296a1b69409, type: 2}
+  - {fileID: 21300000, guid: 31d08f75449a59a4ba3bc2268ba44985, type: 2}
+  image: {fileID: 663240117}
   currChar: 2
 --- !u!1 &194994204
 GameObject:
@@ -2524,14 +2533,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1894711755, guid: e959d2353763ed64391df1a3af196660, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5303,7 +5312,7 @@ Animator:
   m_GameObject: {fileID: 1273418568}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8059e667f71b110488c50eb5d2393258, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3f0f7a39ff3805e458adc4a75c191ca8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
