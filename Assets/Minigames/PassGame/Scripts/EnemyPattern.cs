@@ -39,6 +39,7 @@ namespace GameHeaven.PassGame
                     StartCoroutine(Ddulgi());
                     break;
                 case "dog":
+                    _animator.SetBool("isFly", false);
                     StartCoroutine(Dog());
                     break;
             }
@@ -85,8 +86,8 @@ namespace GameHeaven.PassGame
         IEnumerator Fox(float time)
         {
             yield return new WaitForSeconds(time);
-            Invoke("FoxGo", 2.2f);
-            Invoke("FoxStop", 0.7f);
+            _animator.SetBool("isPause", false);
+            Invoke("FoxStop", 1f);
             transform.DOLocalMoveX(-3.7f * _count, 1);
             _count++;
             StartCoroutine(Fox(2.5f));
@@ -97,26 +98,31 @@ namespace GameHeaven.PassGame
             _animator.SetBool("isPause", true);
         }
 
-        void FoxGo()
-        {
-            _animator.SetBool("isPause", false);
-        }
-
         IEnumerator Ddulgi()
         {
             yield return new WaitForSeconds(3f);
             _animator.SetBool("isFly", true);
-            Invoke("DdulgiMove", 0.3f);
-        }
-
-        void DdulgiMove()
-        {
             transform.DOLocalMoveX(-10f, 4);
         }
 
         IEnumerator Dog()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2f);
+            _animator.SetBool("isFly", true);
+            StartCoroutine(DogMove());
+            StartCoroutine(DogWake());
+        }
+
+        IEnumerator DogMove()
+        {
+            yield return new WaitForSeconds(0.12f);
+            transform.Translate(-0.6f, 0f, 0f);
+        }
+
+        IEnumerator DogWake()
+        {
+            yield return new WaitForSeconds(6.5f);
+            transform.Translate(0.6f, 0f, 0);
         }
     }
 }

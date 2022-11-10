@@ -240,7 +240,7 @@ MonoBehaviour:
   numOfPatterns: 5
   bulletIdx: 0
   curPatternDelay: 0
-  maxPatternDelay: 2
+  maxPatternDelay: 2.2
   curStraightFireDelay: 0
   maxStraightFireDelay: 10000
   straightFireSpeed: 8

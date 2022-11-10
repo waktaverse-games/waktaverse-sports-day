@@ -217,6 +217,7 @@ MonoBehaviour:
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
   gyunNyang: {fileID: 0}
   isDeath: 0
+  PokJu: {fileID: 0}
 --- !u!70 &3036927191660625286
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace GameHeaven.SpreadGame
 {
@@ -28,6 +29,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] private GameObject[] coins, upgradeItems, otherItems;
         [SerializeField] private GameObject dieEffect, gyunNyang;
         [SerializeField] bool isDeath;
+        [SerializeField] Sprite PokJu;
 
         GameObject HPBar;
 
@@ -39,7 +41,7 @@ namespace GameHeaven.SpreadGame
         {
             anim = transform.parent.gameObject.GetComponent<Animator>();
             pool = FindObjectOfType<PoolManager>();
-            HPBar = GameObject.Find("Canvas").transform.GetChild(2).gameObject;
+            HPBar = GameObject.Find("Canvas").transform.GetChild(5).gameObject;
             HPBar.SetActive(true);
 
             bulletIdx = 4;
@@ -83,17 +85,17 @@ namespace GameHeaven.SpreadGame
                 {
                     transform.localScale += transform.localScale * (float)(prevHP-HP)/150f;
 
-                    if (prevHP >= 450 && HP < 450)
+                    if (prevHP >= maxHP * 2 / 3 && HP < maxHP * 2 / 3)
                     {
                         StartCoroutine(PoopRain(6.0f, 80));
                         return;
                     }
-                    else if (prevHP >= 300 && HP < 300)
+                    else if (prevHP >= maxHP * 1 / 3 && HP < maxHP * 1 / 3)
                     {
                         StartCoroutine(PoopRain(6.0f, 120));
                         return;
                     }
-                    else if (prevHP >= 150 && HP < 150)
+                    else if (prevHP >= maxHP / 5 && HP < maxHP / 5)
                     {
                         StartCoroutine(PoopRain(6.0f, 150));
                         return;
@@ -103,7 +105,8 @@ namespace GameHeaven.SpreadGame
                 {
                     if (prevHP >= 100 && HP < 100)
                     {
-                        anim.SetBool("PokJu", true);
+                        GetComponent<Animator>().enabled = false;
+                        anim.SetTrigger("PokJu");
                         GetComponent<SpriteRenderer>().color = Color.red;
                         anim.speed = 1.5f;
                         maxPatternDelay = 2.0f;
@@ -156,7 +159,7 @@ namespace GameHeaven.SpreadGame
         {
             curCageFireDelay += Time.deltaTime;
 
-            if (curCageFireDelay < 2.1f) return;
+            if (curCageFireDelay < 1.4f) return;
 
             pool.MyInstantiate(6, new Vector3(6.6f, Random.Range(-3.5f, 3.5f), 0)).GetComponent<Rigidbody2D>().velocity
                 = new Vector2(-8, 0);
@@ -196,18 +199,25 @@ namespace GameHeaven.SpreadGame
 
         IEnumerator Die()
         {
+            if (type == Type.GyunNyang)
+            {
+                foreach (EnemyMove enemy in FindObjectsOfType<EnemyMove>())
+                {
+                    enemy.Die();
+                }
+            }
+
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            gameManager.maxNormalMonsterSpawnDelay -= 0.4f;
+            if (gameManager.maxNormalMonsterSpawnDelay < 0.4f) gameManager.maxNormalMonsterSpawnDelay = 0.4f;
+            gameManager.bossIdx++;
+
+            pool.bulletPrefabs[3].GetComponent<BulletInfo>().maxShotDelay -= 0.03f;
+            if (pool.bulletPrefabs[3].GetComponent<BulletInfo>().maxShotDelay < 0.12f) pool.bulletPrefabs[3].GetComponent<BulletInfo>().maxShotDelay = 0.12f;
             isDeath = true;
             HPBar.SetActive(false);
 
             GameObject obj = null;
-
-            int[] bulletLVs = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>().bulletLVs;
-
-            int cnt = 0;
-            for (int i = 0; i < bulletLVs.Length; i++)
-            {
-                if (bulletLVs[i] > 0) cnt++;
-            }
 
             WaitForSeconds wait = new WaitForSeconds(0.2f);
 
@@ -228,26 +238,24 @@ namespace GameHeaven.SpreadGame
                 ran2 = Random.Range(0, 4);
             }
 
-            obj = Instantiate(upgradeItems[ran1], transform.position, Quaternion.Euler(Vector3.zero));
+            /*
+            obj = Instantiate(upgradeItems[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
+            obj.transform.GetChild(0).GetComponent<TextMeshPro>().text =
+                "x" + (FindObjectOfType<GameManager>().bossIdx / 3 + 1);
             obj.transform.position = new Vector2(5, 2);
             obj.GetComponent<UpDownMove>().isBoss = true;
             obj.GetComponent<UpDownMove>().StartCoroutine(obj.GetComponent<UpDownMove>().BossItemMove(0.5f));
 
-            obj = Instantiate(upgradeItems[ran2], transform.position, Quaternion.Euler(Vector3.zero));
+            obj = Instantiate(upgradeItems[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
+            obj.transform.GetChild(0).GetComponent<TextMeshPro>().text =
+                "x" + (FindObjectOfType<GameManager>().bossIdx / 3 + 1);
             obj.transform.position = new Vector2(5, -2);
             obj.GetComponent<UpDownMove>().isBoss = true;
             obj.GetComponent<UpDownMove>().StartCoroutine(obj.GetComponent<UpDownMove>().BossItemMove(0.5f));
-
+            */
             GameManager spawnManager = FindObjectOfType<GameManager>();
             spawnManager.isBossTime = false;
 
-            if (type == Type.GyunNyang)
-            {
-                foreach(EnemyMove enemy in FindObjectsOfType<EnemyMove>())
-                {
-                    enemy.Die();
-                }
-            }
 
             Destroy(transform.parent.gameObject);
         }

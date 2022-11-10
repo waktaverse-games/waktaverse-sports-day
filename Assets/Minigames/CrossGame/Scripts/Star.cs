@@ -20,7 +20,7 @@ namespace GameHeaven.CrossGame
         }
         public void Move()
         {
-            transform.DOMoveY(4, 1).SetRelative().SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            //transform.DOMoveY(4, 1).SetRelative().SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
         }
 
         public void Kill()
@@ -32,11 +32,10 @@ namespace GameHeaven.CrossGame
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            print(collision.tag);
             if(collision.tag == "Player")
             {
                 Manager.AddScore(10);
-
+                Manager.SoundManager.Play("Coin");
                 Kill();
             }
             else if(collision.tag == "Outline")
