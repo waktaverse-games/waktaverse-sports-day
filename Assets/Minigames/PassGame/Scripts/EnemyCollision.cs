@@ -21,6 +21,11 @@ namespace GameHeaven.PassGame
                 col.gameObject.SetActive(false);
                 gameManager.AddCoin();
             }
+            if (col.CompareTag("UpgradeItem"))
+            {
+                col.gameObject.SetActive(false);
+                gameManager.ItemActivate();
+            }
         }
     }
 }

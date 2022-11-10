@@ -37,6 +37,13 @@ namespace GameHeaven.AttackGame
                 gameObj.SetActive(false);
                 _sfxManager.PlaySfx(0);
             }
+
+            if (gameObj.CompareTag("UpgradeItem"))
+            {
+                _player.ActivateItem();
+                gameObj.SetActive(false);
+                _sfxManager.PlaySfx(0);
+            }
         }
     }
 }
