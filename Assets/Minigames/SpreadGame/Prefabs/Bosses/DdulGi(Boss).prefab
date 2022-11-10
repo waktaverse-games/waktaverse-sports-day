@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8daf1a167da4dc74a9eff13ee7b73ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 400
-  maxHP: 400
+  HP: 700
+  maxHP: 700
   type: 1
   numOfPatterns: 2
   bulletIdx: 0
@@ -233,6 +233,7 @@ MonoBehaviour:
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
   gyunNyang: {fileID: 0}
   isDeath: 0
+  PokJu: {fileID: 0}
 --- !u!95 &4543544759921266042
 Animator:
   serializedVersion: 4

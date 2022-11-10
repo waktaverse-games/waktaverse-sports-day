@@ -41,7 +41,7 @@ namespace GameHeaven.SpreadGame
         {
             anim = transform.parent.gameObject.GetComponent<Animator>();
             pool = FindObjectOfType<PoolManager>();
-            HPBar = GameObject.Find("Canvas").transform.GetChild(3).gameObject;
+            HPBar = GameObject.Find("Canvas").transform.GetChild(5).gameObject;
             HPBar.SetActive(true);
 
             bulletIdx = 4;

@@ -11,7 +11,7 @@ namespace GameHeaven.SpreadGame
     {
         [SerializeField] float speed; // 이동속도
 
-        public int curBullet; // 현재 보유중인 무기
+        public bool[] curBullets; // 현재 보유중인 무기
 
         [SerializeField] GameObject coinAcquireEffect, bombImageUI, canvas;
 
@@ -48,30 +48,29 @@ namespace GameHeaven.SpreadGame
             bullet.damage = 1; bullet.maxShotDelay = 0.3f;
             */
             curSectorDir = 1;
-            Invoke("BulletSound", 0);
         }
 
-        void BulletSound()
-        {
-            if (curBullet != 2) ;
-            Invoke("BulletSound", 0.2f);
-        }
         private void Update()
         {
             Move();
             Bomb();
 
-            Fire(curBullet);
+            for (int i = 0; i < 4; i++)
+            {
+                if(curBullets[i]) Fire(i);
 
-            if (canvas.transform.GetChild(2).GetComponent<Image>().fillAmount > 0)
-            {
-                canvas.transform.GetChild(2).GetComponent<Image>().fillAmount -= 0.0004f;
-            }
-            else
-            {
-                canvas.transform.GetChild(2).GetComponent<Image>().fillAmount = 1;
-                canvas.transform.GetChild(2).gameObject.SetActive(false);
-                curBullet = 3;
+                if (i == 3) continue;
+
+                if (canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount > 0)
+                {
+                    canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount -= 0.0004f;
+                }
+                else
+                {
+                    canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount = 1;
+                    canvas.transform.GetChild(2 + i).gameObject.SetActive(false);
+                    curBullets[i] = false;
+                }
             }
 
             /*
@@ -89,13 +88,13 @@ namespace GameHeaven.SpreadGame
                 if (isInvincible)
                 {
                     isInvincible = false;
-                    GameObject.Find("Canvas").transform.GetChild(4).gameObject.SetActive(false);
+                    GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(false);
                 }
                 else
                 {
                     isInvincible = true;
                     if (!hasShield) hasShield = true;
-                    GameObject.Find("Canvas").transform.GetChild(4).gameObject.SetActive(true);
+                    GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(true);
                 }
             }
         }
@@ -157,30 +156,34 @@ namespace GameHeaven.SpreadGame
             {
                 case 'u': // G'u'ided
                     {
-                        curBullet = 0;
+                        curBullets[0] = true;
                         BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
                         grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1];
 
                         if (grade == '1')
                         {
-                            bullet.damage = 2;
+                            bullet.damage = 3;
                             bullet.maxShotDelay = 1;
                         }
                         else if (grade == '2')
                         {
-                            bullet.damage = 2;
-                            bullet.maxShotDelay = 0.5f;
+                            bullet.damage = 3;
+                            bullet.maxShotDelay = 0.75f;
                         }
                         else if (grade == '3')
                         {
-                            bullet.damage = 2;
-                            bullet.maxShotDelay = 0.25f;
+                            bullet.damage = 3;
+                            bullet.maxShotDelay = 0.5f;
                         }
+                        canvas.transform.GetChild(2).gameObject.SetActive(true);
+                        canvas.transform.GetChild(2).GetComponent<Image>().fillAmount = 1;
+                        canvas.transform.GetChild(2).GetComponent<Image>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
+                        canvas.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + (grade - 48);
                         break;
                     }
                 case 'e': // S'e'ctor
                     {
-                        curBullet = 1;
+                        curBullets[1] = true;
                         BulletInfo bullet = pool.bulletPrefabs[1].GetComponent<BulletInfo>();
                         grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1];
 
@@ -199,11 +202,15 @@ namespace GameHeaven.SpreadGame
                             bullet.damage = 1;
                             bullet.maxShotDelay = 0.05f;
                         }
+                        canvas.transform.GetChild(3).gameObject.SetActive(true);
+                        canvas.transform.GetChild(3).GetComponent<Image>().fillAmount = 1;
+                        canvas.transform.GetChild(3).GetComponent<Image>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
+                        canvas.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + (grade - 48);
                         break;
                     }
                 case 'l': // S'l'ash
                     {
-                        curBullet = 2;
+                        curBullets[2] = true;
                         BulletInfo bullet = pool.bulletPrefabs[2].GetComponent<BulletInfo>();
                         grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1];
 
@@ -222,11 +229,15 @@ namespace GameHeaven.SpreadGame
                             bullet.damage = 1;
                             bullet.maxShotDelay = 0.2f;
                         }
+                        canvas.transform.GetChild(4).gameObject.SetActive(true);
+                        canvas.transform.GetChild(4).GetComponent<Image>().fillAmount = 1;
+                        canvas.transform.GetChild(4).GetComponent<Image>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
+                        canvas.transform.GetChild(4).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + (grade - 48);
                         break;
                     }
                 case 't': // S't'raight
                     {
-                        curBullet = 3;
+                        curBullets[3] = true;
                         break;
                     }
 
@@ -249,10 +260,6 @@ namespace GameHeaven.SpreadGame
 
             if (grade > 0)
             {
-                canvas.transform.GetChild(2).gameObject.SetActive(true);
-                canvas.transform.GetChild(2).GetComponent<Image>().fillAmount = 1;
-                canvas.transform.GetChild(2).GetComponent<Image>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
-                canvas.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + (grade - 48);
             }
         }
 

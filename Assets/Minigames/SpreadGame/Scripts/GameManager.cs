@@ -32,7 +32,6 @@ namespace GameHeaven.SpreadGame
 
         void SpawnRepeatedly(bool isElite)
         {
-
             if (isElite)
             {
                 curEliteMonsterSpawnDelay += Time.deltaTime;
