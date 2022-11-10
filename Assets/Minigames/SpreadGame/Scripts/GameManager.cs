@@ -10,7 +10,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] GameObject[] mobPrefabs;
         [SerializeField] List<GameObject> bossPrefabs;
         public float curNormalMonsterSpawnDelay, maxNormalMonsterSpawnDelay;
-        [SerializeField] int bossIdx = 0;
+        public int bossIdx = 0;
         [SerializeField] float curEliteMonsterSpawnDelay, maxEliteMonsterSpawnDelay;
         [SerializeField] float curBossSpawnDelay, maxBossSpawnDelay;
         [SerializeField] float[] mapSize;
@@ -32,11 +32,6 @@ namespace GameHeaven.SpreadGame
 
         void SpawnRepeatedly(bool isElite)
         {
-            if (isBossTime)
-            {
-                curEliteMonsterSpawnDelay = curNormalMonsterSpawnDelay = 0;
-                return;
-            }
 
             if (isElite)
             {
@@ -47,7 +42,7 @@ namespace GameHeaven.SpreadGame
             else
             {
                 curNormalMonsterSpawnDelay += Time.deltaTime;
-                if (curNormalMonsterSpawnDelay < maxNormalMonsterSpawnDelay) return;
+                if (curNormalMonsterSpawnDelay < maxNormalMonsterSpawnDelay * (isBossTime?2:1)) return;
                 curNormalMonsterSpawnDelay = 0;
             }
 
@@ -92,8 +87,6 @@ namespace GameHeaven.SpreadGame
 
             EnemyMove enemy = obj.GetComponent<EnemyMove>();
 
-            enemy.HP += bossIdx * 3;
-
             if (isElite)
             {
                 obj.transform.localScale = new Vector3(obj.transform.localScale.x * 1.5f, obj.transform.localScale.y * 1.5f, obj.transform.localScale.z);
@@ -121,10 +114,8 @@ namespace GameHeaven.SpreadGame
 
             GameObject obj;
             
-            obj = Instantiate(bossPrefabs[bossIdx++ % 7], Vector2.zero, bossPrefabs[0].transform.rotation);
+            obj = Instantiate(bossPrefabs[bossIdx % 7], Vector2.zero, bossPrefabs[0].transform.rotation);
             isBossTime = true;
-            maxNormalMonsterSpawnDelay -= 0.3f;
-            if (maxNormalMonsterSpawnDelay < 1) maxNormalMonsterSpawnDelay = 1;
         }
 
         IEnumerator Division(GameObject obj)

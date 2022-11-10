@@ -141,13 +141,16 @@ MonoBehaviour:
   thinkingSpeed: 2
   attackSpeed: 5
   projectileSpeed: 5
-  HP: 1
+  HP: 2
   projectile: {fileID: 2360940325928755872, guid: f28df7927a52fad448c7d0c670cd937d, type: 3}
   coins:
   - {fileID: 5954169712361996919, guid: 3b52fda8b80729844bc70d9fbfebc2be, type: 3}
   - {fileID: 4421849469660899113, guid: 3ad909b87098f5941a3bac48eb3b921b, type: 3}
   - {fileID: 666940237586698477, guid: d8bdfd4265ecc5045adb7f9517cbaa39, type: 3}
-  upgradeItems: []
+  upgradeItems:
+  - {fileID: 2360940325928755872, guid: 963c122ac097dce49bb8df32abe1ebd4, type: 3}
+  - {fileID: 2360940325928755872, guid: 7d0d4ebaafd90fd41bc57433a783f594, type: 3}
+  - {fileID: 2360940325928755872, guid: 4f8dc1c2c554dac489b5d4d6cc671ace, type: 3}
   otherItems:
   - {fileID: 612043407125858333, guid: 88e3468803f815a499e67a2e0835ce73, type: 3}
   - {fileID: 6038007275945840213, guid: bd256cb6a1795ec44abdba87d11207cb, type: 3}
