@@ -233,6 +233,7 @@ MonoBehaviour:
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
   gyunNyang: {fileID: 6104123555868368802, guid: e6fbc11fa6b2714468b4737ee107c8ca, type: 3}
   isDeath: 0
+  PokJu: {fileID: 0}
 --- !u!95 &3083333976590650771
 Animator:
   serializedVersion: 4

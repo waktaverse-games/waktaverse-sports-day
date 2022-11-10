@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace GameHeaven.SpreadGame
 {
@@ -122,18 +123,28 @@ namespace GameHeaven.SpreadGame
 
             if (isElite && !isCopy)
             {
-                int[] bulletLVs = player.GetComponent<PlayerMove>().bulletLVs;
-
-                int cnt = 0;
-                for (int i = 0; i < bulletLVs.Length; i++)
+                if(Random.Range(0,3) == 0)
                 {
-                    if (bulletLVs[i] > 0) cnt++;
+                    obj = Instantiate(otherItems[Random.Range(0, 2)], transform.position, Quaternion.Euler(Vector3.zero));
                 }
-
-                obj = Instantiate(upgradeItems[Random.Range(0, 4)], transform.position, Quaternion.Euler(Vector3.zero));
+                else
+                {
+                    obj = Instantiate(upgradeItems[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
+                    obj.transform.GetChild(0).GetComponent<TextMeshPro>().text =
+                        "x" + Mathf.Min(((FindObjectOfType<GameManager>().bossIdx / 3) + (Random.Range(0, 5) == 0 ? 2 : 1)), 3);
+                }
                 obj.transform.localScale = new Vector3(0.5f, 0.5f);
 
-                obj = Instantiate(otherItems[Random.Range(0, 2)], transform.position, Quaternion.Euler(Vector3.zero));
+                if (Random.Range(0, 3) == 0)
+                {
+                    obj = Instantiate(otherItems[Random.Range(0, 2)], transform.position, Quaternion.Euler(Vector3.zero));
+                }
+                else
+                {
+                    obj = Instantiate(upgradeItems[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
+                    obj.transform.GetChild(0).GetComponent<TextMeshPro>().text =
+                        "x" + Mathf.Min(((FindObjectOfType<GameManager>().bossIdx / 3) + (Random.Range(0, 5) == 0 ? 2 : 1)), 3);
+                }
                 obj.GetComponent<UpDownMove>().dir = new Vector3(0, -0.05f, 0);
                 obj.transform.localScale = new Vector3(0.5f, 0.5f);
             }

@@ -3824,7 +3824,7 @@ MonoBehaviour:
   HP: 500
   maxHP: 500
   type: 0
-  numOfPatterns: 5
+  numOfPatterns: 4
   bulletIdx: 0
   curPatternDelay: 0
   maxPatternDelay: 2
@@ -3855,6 +3855,7 @@ MonoBehaviour:
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
   gyunNyang: {fileID: 0}
   isDeath: 0
+  PokJu: {fileID: 0}
 --- !u!95 &2794864492607214196
 Animator:
   serializedVersion: 4

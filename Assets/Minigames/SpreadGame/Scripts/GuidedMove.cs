@@ -39,7 +39,7 @@ namespace GameHeaven.SpreadGame
             }
             else
             {
-                gameObject.SetActive(false);
+                transform.rotation = Quaternion.Euler(0, 0, -90);
             }
 
             if (rigid.velocity.sqrMagnitude > speed * speed) rigid.velocity = rigid.velocity.normalized * speed;
