@@ -41,7 +41,7 @@ namespace GameHeaven.SpreadGame
             else
             {
                 curNormalMonsterSpawnDelay += Time.deltaTime;
-                if (curNormalMonsterSpawnDelay < maxNormalMonsterSpawnDelay * (isBossTime?2:1)) return;
+                if (curNormalMonsterSpawnDelay < maxNormalMonsterSpawnDelay * (isBossTime?3:1)) return;
                 curNormalMonsterSpawnDelay = 0;
             }
 
@@ -114,6 +114,7 @@ namespace GameHeaven.SpreadGame
             GameObject obj;
             
             obj = Instantiate(bossPrefabs[bossIdx % 7], Vector2.zero, bossPrefabs[0].transform.rotation);
+            obj.GetComponent<BossMove>().HP = obj.GetComponent<BossMove>().maxHP += 700 * bossIdx / 7;
             isBossTime = true;
         }
 

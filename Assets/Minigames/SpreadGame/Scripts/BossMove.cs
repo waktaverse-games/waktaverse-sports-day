@@ -199,6 +199,14 @@ namespace GameHeaven.SpreadGame
 
         IEnumerator Die()
         {
+            if (type == Type.GyunNyang)
+            {
+                foreach (EnemyMove enemy in FindObjectsOfType<EnemyMove>())
+                {
+                    enemy.Die();
+                }
+            }
+
             GameManager gameManager = FindObjectOfType<GameManager>();
             gameManager.maxNormalMonsterSpawnDelay -= 0.4f;
             if (gameManager.maxNormalMonsterSpawnDelay < 0.4f) gameManager.maxNormalMonsterSpawnDelay = 0.4f;
@@ -248,13 +256,6 @@ namespace GameHeaven.SpreadGame
             GameManager spawnManager = FindObjectOfType<GameManager>();
             spawnManager.isBossTime = false;
 
-            if (type == Type.GyunNyang)
-            {
-                foreach(EnemyMove enemy in FindObjectsOfType<EnemyMove>())
-                {
-                    enemy.Die();
-                }
-            }
 
             Destroy(transform.parent.gameObject);
         }
