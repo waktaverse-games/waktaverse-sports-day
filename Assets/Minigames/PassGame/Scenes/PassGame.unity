@@ -2517,6 +2517,7 @@ GameObject:
   - component: {fileID: 1330121991}
   - component: {fileID: 1330121992}
   - component: {fileID: 1330121993}
+  - component: {fileID: 1330121994}
   m_Layer: 0
   m_Name: Player
   m_TagString: Runner
@@ -2676,6 +2677,27 @@ MonoBehaviour:
   gameManager: {fileID: 282036050}
   SfxManager: {fileID: 1962322146}
   jumpItem: 0
+--- !u!114 &1330121994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330121986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93fb071d162d470193807f3d41de1f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllers:
+  - {fileID: 9100000, guid: 7b1faec4e9bed2e44aac3ac71b2160f2, type: 2}
+  - {fileID: 9100000, guid: 946af94d8f084b74f9f17117a0b97b63, type: 2}
+  - {fileID: 9100000, guid: 2e1073b0e54fd6b49949e9205e5713f5, type: 2}
+  - {fileID: 9100000, guid: 9cdfa2b21e859a84e84c2f9241f030d3, type: 2}
+  - {fileID: 9100000, guid: e5ea316e8cfdc374b8c5b18d50695ef1, type: 2}
+  - {fileID: 9100000, guid: e9ede5914303deb45ba12cc7901f2dec, type: 2}
+  - {fileID: 9100000, guid: 3017bdd53a47c0e4bb0d608fe8939439, type: 2}
+  currChar: 0
 --- !u!1 &1343385814
 GameObject:
   m_ObjectHideFlags: 0
