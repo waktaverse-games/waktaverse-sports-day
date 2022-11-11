@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
 using SharedLibs;
@@ -22,11 +23,19 @@ namespace GameHeaven.CrossGame
         int CollectStar;
         public TMP_Text ScoreUI;
         public TMP_Text GameOverTextUI;
-
+        public GameObject RestratBtn;
         public ObjectController ObjectController;
         public SoundManager SoundManager;
 
         [HideInInspector] public bool IsOver;
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+        }
 
         public void AddScore(int Point)
         {
@@ -50,17 +59,18 @@ namespace GameHeaven.CrossGame
 
         public void GameOver()
         {
-            DOTween.KillAll(true);
+            //DOTween.KillAll(true);
             GameOverTextUI.gameObject.SetActive(true);
+            RestratBtn.SetActive(true);
             IsOver = true;
             ObjectController.Player.CntAnimator.SetBool("GameOver", true);
+            RestratBtn.SetActive(true);
             //ScoreManager.Instance.AddGameRoundScore(MinigameType.CrossGame, Score);
-            
-/*            foreach (GameObject tmp in ObjectController.FlyItems)
+            foreach (var item in ObjectController.FlyItems)
             {
-                DOTween.Kill(tmp.transform);
-            }*/
-            
+                item.GetComponent<FlyItem>().Stop();
+            }
+
         }
 
         void Balanceing()
@@ -73,6 +83,11 @@ namespace GameHeaven.CrossGame
             {
                 ObjectController.MovementSpeed += 0.005f;
             }
+        }
+
+        public void Restart()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

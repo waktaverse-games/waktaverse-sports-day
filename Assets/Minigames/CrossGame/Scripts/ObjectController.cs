@@ -256,6 +256,7 @@ namespace GameHeaven.CrossGame
             if (IsFly) return;
             MoveSequence.Pause<Sequence>();
             Player.CntAnimator.SetBool("Fly", true);
+            Manager.SoundManager.Play("Pickup1");
             FLyLandFlatformNum = LandPlatformNum + FlyDistance;
             LandPlatformNum += FlyDistance;
             //print(FLyLandFlatformNum);
@@ -315,7 +316,7 @@ namespace GameHeaven.CrossGame
 
         public void MakeStar()
         {
-            GameObject InstanceStar = Instantiate(StarPrefab, new Vector3(10, 1.7f), Quaternion.identity, ObjectGroup);
+            GameObject InstanceStar = Instantiate(StarPrefab, new Vector3(12, 1.3f), Quaternion.identity, ObjectGroup);
             Star InstanceScript = InstanceStar.GetComponent<Star>();
             float num = Random.Range(0f, 1f);
             if (num < 0.5f)
@@ -329,6 +330,11 @@ namespace GameHeaven.CrossGame
             else
             {
                 InstanceScript.code = CoinCode.Gold;
+            }
+            num = Random.Range(0f, 1f);
+            if (num < 0.5f)
+            {
+                InstanceStar.transform.position += new Vector3(0, -3.2f, 0);
             }
             InstanceScript.SetAnim();
             InstanceScript.Move();

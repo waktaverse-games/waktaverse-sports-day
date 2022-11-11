@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 6671957138347105873}
   - component: {fileID: 6671957138347105872}
   - component: {fileID: 6671957138347105871}
-  - component: {fileID: 4694741205116627284}
+  - component: {fileID: 8805893413291461567}
   m_Layer: 0
   m_Name: Model
   m_TagString: Enemy
@@ -349,7 +349,7 @@ MonoBehaviour:
   maxStraightFireDelay: 10000
   straightFireSpeed: 8
   curCircleFireDelay: 0
-  maxCircleFireDelay: 2
+  maxCircleFireDelay: 100000
   circleFireSpeed: 5
   straightFireDir: {x: -1, y: 0}
   randomDirY: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
   gyunNyang: {fileID: 0}
   isDeath: 0
   PokJu: {fileID: 0}
---- !u!95 &4694741205116627284
+--- !u!95 &8805893413291461567
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0

@@ -63,7 +63,7 @@ namespace GameHeaven.SpreadGame
 
                 if (canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount > 0)
                 {
-                    canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount -= 0.0004f;
+                    canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount -= 0.0003f;
                 }
                 else
                 {
@@ -109,8 +109,7 @@ namespace GameHeaven.SpreadGame
                 }
                 else
                 {
-                    print("GameOver");
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    StartCoroutine(GameOver());
                 }
             }
             else if (collider.CompareTag("Coin"))
@@ -142,12 +141,22 @@ namespace GameHeaven.SpreadGame
                 }
                 else
                 {
-                    print("GameOver");
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    StartCoroutine(GameOver());
                 }
             }
         }
+        
 
+        IEnumerator GameOver()
+        {
+            Time.timeScale = 0;
+            GameObject.Find("Canvas").transform.GetChild(7).gameObject.SetActive(true);
+
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.R));
+            Time.timeScale = 1;
+            GameObject.Find("Canvas").transform.GetChild(7).gameObject.SetActive(false);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         void AcquireItem(GameObject obj)
         {
             int grade = 0;
@@ -158,81 +167,93 @@ namespace GameHeaven.SpreadGame
                     {
                         curBullets[0] = true;
                         BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
-                        grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1];
+                        grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1] - 48;
 
-                        if (grade == '1')
+                        switch (grade)
                         {
-                            bullet.damage = 3;
-                            bullet.maxShotDelay = 1;
-                        }
-                        else if (grade == '2')
-                        {
-                            bullet.damage = 3;
-                            bullet.maxShotDelay = 0.75f;
-                        }
-                        else if (grade == '3')
-                        {
-                            bullet.damage = 3;
-                            bullet.maxShotDelay = 0.5f;
+                            case 1:
+                                bullet.damage = 3;
+                                bullet.maxShotDelay = 1;
+                                break;
+                            case 2:
+                                bullet.damage = 3;
+                                bullet.maxShotDelay = 0.75f;
+                                break;
+                            case 3:
+                                bullet.damage = 3;
+                                bullet.maxShotDelay = 0.5f;
+                                break;
+                            case 4:
+                                bullet.damage = 3;
+                                bullet.maxShotDelay = 0.3f;
+                                break;
                         }
                         canvas.transform.GetChild(2).gameObject.SetActive(true);
                         canvas.transform.GetChild(2).GetComponent<Image>().fillAmount = 1;
                         canvas.transform.GetChild(2).GetComponent<Image>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
-                        canvas.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + (grade - 48);
+                        canvas.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + grade;
                         break;
                     }
                 case 'e': // S'e'ctor
                     {
                         curBullets[1] = true;
                         BulletInfo bullet = pool.bulletPrefabs[1].GetComponent<BulletInfo>();
-                        grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1];
+                        grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1] - 48;
 
-                        if (grade == '1')
+                        switch (grade)
                         {
-                            bullet.damage = 1;
-                            bullet.maxShotDelay = 0.2f;
-                        }
-                        else if (grade == '2')
-                        {
-                            bullet.damage = 1;
-                            bullet.maxShotDelay = 0.1f;
-                        }
-                        else if (grade == '3')
-                        {
-                            bullet.damage = 1;
-                            bullet.maxShotDelay = 0.05f;
+                            case 1:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.2f;
+                                break;
+                            case 2:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.15f;
+                                break;
+                            case 3:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.1f;
+                                break;
+                            case 4:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.05f;
+                                break;
                         }
                         canvas.transform.GetChild(3).gameObject.SetActive(true);
                         canvas.transform.GetChild(3).GetComponent<Image>().fillAmount = 1;
                         canvas.transform.GetChild(3).GetComponent<Image>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
-                        canvas.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + (grade - 48);
+                        canvas.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + grade;
                         break;
                     }
                 case 'l': // S'l'ash
                     {
                         curBullets[2] = true;
                         BulletInfo bullet = pool.bulletPrefabs[2].GetComponent<BulletInfo>();
-                        grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1];
+                        grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1] - 48;
 
-                        if (grade == '1')
+                        switch (grade)
                         {
-                            bullet.damage = 1;
-                            bullet.maxShotDelay = 0.6f;
-                        }
-                        else if (grade == '2')
-                        {
-                            bullet.damage = 1;
-                            bullet.maxShotDelay = 0.4f;
-                        }
-                        else if (grade == '3')
-                        {
-                            bullet.damage = 1;
-                            bullet.maxShotDelay = 0.2f;
+                            case 1:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.8f;
+                                break;
+                            case 2:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.6f;
+                                break;
+                            case 3:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.4f;
+                                break;
+                            case 4:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.2f;
+                                break;
                         }
                         canvas.transform.GetChild(4).gameObject.SetActive(true);
                         canvas.transform.GetChild(4).GetComponent<Image>().fillAmount = 1;
                         canvas.transform.GetChild(4).GetComponent<Image>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
-                        canvas.transform.GetChild(4).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + (grade - 48);
+                        canvas.transform.GetChild(4).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + grade;
                         break;
                     }
                 case 't': // S't'raight
@@ -355,10 +376,29 @@ namespace GameHeaven.SpreadGame
                 enemy.HP -= 30;
             }
 
+            foreach (GameObject enemyBullet in GameObject.FindGameObjectsWithTag("Ball"))
+            {
+                enemyBullet.SetActive(false);
+                Instantiate(coinAcquireEffect, enemyBullet.transform.position, coinAcquireEffect.transform.rotation);
+
+                if (enemyBullet.layer == LayerMask.NameToLayer("Ball")) // 보스패턴
+                {
+                    StartCoroutine(BakZwiSetActive(enemyBullet));
+                }
+            }
+
             CameraShake();
             
             GameObject.Find("Canvas").transform.GetChild(0).GetChild(bombCnt - 1).gameObject.SetActive(false);
             bombCnt--;
+        }
+
+        IEnumerator BakZwiSetActive(GameObject obj)
+        {
+            yield return new WaitForSeconds(1.0f);
+
+            obj.SetActive(true);
+
         }
 
         void CameraShake()

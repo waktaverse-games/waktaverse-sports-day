@@ -87,17 +87,17 @@ namespace GameHeaven.SpreadGame
 
                     if (prevHP >= maxHP * 2 / 3 && HP < maxHP * 2 / 3)
                     {
-                        StartCoroutine(PoopRain(6.0f, 80));
+                        StartCoroutine(PoopRain(6.0f, 60));
                         return;
                     }
                     else if (prevHP >= maxHP * 1 / 3 && HP < maxHP * 1 / 3)
                     {
-                        StartCoroutine(PoopRain(6.0f, 120));
+                        StartCoroutine(PoopRain(6.0f, 80));
                         return;
                     }
                     else if (prevHP >= maxHP / 5 && HP < maxHP / 5)
                     {
-                        StartCoroutine(PoopRain(6.0f, 150));
+                        StartCoroutine(PoopRain(6.0f, 100));
                         return;
                     }
                 }
@@ -208,8 +208,8 @@ namespace GameHeaven.SpreadGame
             }
 
             GameManager gameManager = FindObjectOfType<GameManager>();
-            gameManager.maxNormalMonsterSpawnDelay -= 0.4f;
-            if (gameManager.maxNormalMonsterSpawnDelay < 0.4f) gameManager.maxNormalMonsterSpawnDelay = 0.4f;
+            gameManager.maxNormalMonsterSpawnDelay -= 0.3f;
+            if (gameManager.maxNormalMonsterSpawnDelay < 1f) gameManager.maxNormalMonsterSpawnDelay = 1f;
             gameManager.bossIdx++;
 
             pool.bulletPrefabs[3].GetComponent<BulletInfo>().maxShotDelay -= 0.03f;
