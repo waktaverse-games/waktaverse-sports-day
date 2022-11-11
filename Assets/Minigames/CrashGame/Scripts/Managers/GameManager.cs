@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Animations;
 using static GameHeaven.CrashGame.Utils;
 using SharedLibs;
 using SharedLibs.Character;
@@ -42,6 +43,8 @@ namespace GameHeaven.CrashGame
 
         [SerializeField]
         private List<Sprite> playerSpriteList;
+        [SerializeField]
+        private List<AnimatorController> playerAnimatorControllerList;
 
         [Obsolete]
         public int Money
@@ -106,6 +109,7 @@ namespace GameHeaven.CrashGame
         }
 
         public List<Sprite> PlayerSpriteList => playerSpriteList;
+        public List<AnimatorController> PlayerAnimatorControllerList => playerAnimatorControllerList;
 
         public int Score
         {
@@ -134,6 +138,8 @@ namespace GameHeaven.CrashGame
                 CurrentCharacter = CharacterType.Woowakgood;
             }
             else CurrentCharacter = CharacterManager.Instance.CurrentCharacter;
+
+            //CurrentCharacter = CharacterType.Gosegu;   //임시지정
             platform.SetCharacter(CurrentCharacter);
 
             GameStart();

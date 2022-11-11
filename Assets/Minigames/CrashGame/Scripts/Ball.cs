@@ -151,14 +151,14 @@ namespace GameHeaven.CrashGame
 
         public void Fire(Vector2 force)
         {
+            GameManager.Instance.Sound.PlayEffect("ball_bounce", volume: .25f);
             isReturning = false;
             rigidBody.AddForce(force);
         }
 
         public void Fire()
         {
-            isReturning = false;
-            rigidBody.AddForce(new Vector2(Random.Range(-10, 10), Random.Range(5, 10)).normalized * InitialForce);
+            Fire(new Vector2(Random.Range(-10, 10), Random.Range(5, 10)).normalized * InitialForce);
         }
 
         public void BlockFire()
