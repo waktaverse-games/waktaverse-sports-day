@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SharedLibs;
-using UnityEditor.Animations;
+
 
 namespace GameHeaven.PassGame
 {
@@ -10,7 +10,7 @@ namespace GameHeaven.PassGame
     {
         Animator anim;
         [SerializeField]
-        AnimatorController[] controllers;
+        RuntimeAnimatorController[] controllers;
 
         [SerializeField] CharacterType currChar;
         private void Awake()

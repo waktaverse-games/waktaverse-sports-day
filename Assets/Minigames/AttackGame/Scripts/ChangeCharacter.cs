@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SharedLibs;
-using UnityEditor.Animations;
 using UnityEngine.UI;
 
 namespace GameHeaven.AttackGame
@@ -11,7 +10,7 @@ namespace GameHeaven.AttackGame
     {
         Animator anim;
         [SerializeField]
-        AnimatorController[] controllers;
+        RuntimeAnimatorController[] controllers;
         [SerializeField]
         Sprite[] sprites;
 
