@@ -15,6 +15,11 @@ namespace GameHaven.RunGame
         [SerializeField]
         float ChangeSpeed;
 
+        float Camsize;
+        Vector3 Carictorsize;
+        float ItemTime = 0;
+        bool GetItem = false;
+
         int CoinCount = 0;
 
         Vector2 dir = Vector2.left;
@@ -33,6 +38,8 @@ namespace GameHaven.RunGame
         // Update is called once per frame
         void Update()
         {
+            
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (Dirleft) //왼쪽을 보고 있으면
@@ -56,6 +63,33 @@ namespace GameHaven.RunGame
                 }
             }
 
+            if (GetItem == true)
+            {
+                ItemTime += Time.deltaTime;
+                Caracter.GetComponent<CapsuleCollider2D>().enabled = false;
+
+                if (ItemTime > 2 && ItemTime <=3)
+                {
+                    Camsize = Cam.GetComponent<Camera>().orthographicSize;
+                    Carictorsize = Caracter.GetComponent<Transform>().localScale;
+                    Cam.GetComponent<Camera>().orthographicSize = Mathf.Lerp(Camsize, 6.5f, Time.deltaTime * 2f);
+                    Caracter.GetComponent<Transform>().localScale = Vector3.Lerp(Carictorsize, new Vector3(2, 2, 0), Time.deltaTime * 4f);
+                }
+                else if (ItemTime > 3)
+                {
+                    ItemTime = 0;
+                    Caracter.GetComponent<CapsuleCollider2D>().enabled = true;
+                    GetItem = false;
+                }
+                else
+                {
+                    Camsize = Cam.GetComponent<Camera>().orthographicSize;
+                    Carictorsize = Caracter.GetComponent<Transform>().localScale;
+                    Cam.GetComponent<Camera>().orthographicSize = Mathf.Lerp(Camsize, 9f, Time.deltaTime * 1.8f);
+                    Caracter.GetComponent<Transform>().localScale = Vector3.Lerp(Carictorsize, new Vector3(3.5f, 3.5f, 0), Time.deltaTime * 1.8f);
+                }
+            }
+
             Caracter.GetComponent<Rigidbody2D>().velocity = dir * Speed;
 
             
@@ -65,19 +99,27 @@ namespace GameHaven.RunGame
         {
             if (other.gameObject.tag == "Enemy")
             {//Destroy(gameObject);
-                Debug.Log("die");
+                GameManager.instance.GameOver();
             }
             else if (other.gameObject.tag == "Coin")
             {
                 audio = other.GetComponent<AudioSource>();
-                coin = other.GetComponent<Animator>();
+                if (other.GetComponent<Animator>() == true)
+                {
+                    coin = other.GetComponent<Animator>();
 
-                GetCoin(other.gameObject.name);
-                audio.Play();
-                coin.SetBool("Get", true);
+                    GetCoin(other.gameObject.name);
+                    audio.Play();
+                    coin.SetBool("Get", true);
 
-                Destroy(other.gameObject,3);
-                Debug.Log(CoinCount);
+                    Destroy(other.gameObject, 3);
+                    Debug.Log(CoinCount);
+                }
+                else
+                {
+                    GetItem = true;
+                    GameManager.instance.ItemScore(15);
+                }
             }
         }
 
@@ -85,7 +127,7 @@ namespace GameHaven.RunGame
         {
             if (coinName.Contains("GoldCoin"))
             {
-                CoinCount += 5;
+                GameManager.instance.ItemScore(5);
             }
             else if (coinName.Contains("SilverCoin"))
             {

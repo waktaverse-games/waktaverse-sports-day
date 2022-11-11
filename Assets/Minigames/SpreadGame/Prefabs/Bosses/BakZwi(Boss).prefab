@@ -2840,9 +2840,9 @@ GameObject:
   - component: {fileID: 9213968053629669227}
   - component: {fileID: 9213968053629669225}
   - component: {fileID: 9213968053629669226}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (16)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2903,15 +2903,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968053629669226
@@ -3064,9 +3064,9 @@ GameObject:
   - component: {fileID: 9213968053698292436}
   - component: {fileID: 9213968053698292458}
   - component: {fileID: 9213968053698292459}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (11)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3127,15 +3127,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968053698292459
@@ -3288,9 +3288,9 @@ GameObject:
   - component: {fileID: 9213968053734807125}
   - component: {fileID: 9213968053734807147}
   - component: {fileID: 9213968053734807124}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (20)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3351,15 +3351,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968053734807124
@@ -3459,9 +3459,9 @@ GameObject:
   - component: {fileID: 9213968053826620234}
   - component: {fileID: 9213968053826620232}
   - component: {fileID: 9213968053826620233}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (7)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3522,15 +3522,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968053826620233
@@ -3560,9 +3560,9 @@ GameObject:
   - component: {fileID: 9213968053895022345}
   - component: {fileID: 9213968053895022351}
   - component: {fileID: 9213968053895022344}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (18)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3623,15 +3623,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968053895022344
@@ -3821,11 +3821,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8daf1a167da4dc74a9eff13ee7b73ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 400
+  HP: 500
+  maxHP: 500
   type: 0
-  numOfPatterns: 5
+  numOfPatterns: 4
+  bulletIdx: 0
   curPatternDelay: 0
-  maxPatternDelay: 2
+  maxPatternDelay: 2.5
   curStraightFireDelay: 0
   maxStraightFireDelay: 10000
   straightFireSpeed: 7
@@ -3837,7 +3839,7 @@ MonoBehaviour:
   isRandomDir: 0
   circleFireDir: {x: 1, y: 1}
   circleFirePivot: {x: 0, y: 0}
-  circleFireNum: 8
+  circleFireNum: 25
   coins:
   - {fileID: 5954169712361996919, guid: 3b52fda8b80729844bc70d9fbfebc2be, type: 3}
   - {fileID: 4421849469660899113, guid: 3ad909b87098f5941a3bac48eb3b921b, type: 3}
@@ -3851,7 +3853,9 @@ MonoBehaviour:
   - {fileID: 612043407125858333, guid: 88e3468803f815a499e67a2e0835ce73, type: 3}
   - {fileID: 6038007275945840213, guid: bd256cb6a1795ec44abdba87d11207cb, type: 3}
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
+  gyunNyang: {fileID: 0}
   isDeath: 0
+  PokJu: {fileID: 0}
 --- !u!95 &2794864492607214196
 Animator:
   serializedVersion: 4
@@ -3883,9 +3887,9 @@ GameObject:
   - component: {fileID: 9213968054175794069}
   - component: {fileID: 9213968054175794091}
   - component: {fileID: 9213968054175794068}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (1)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3946,15 +3950,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968054175794068
@@ -3984,9 +3988,9 @@ GameObject:
   - component: {fileID: 9213968054263347220}
   - component: {fileID: 9213968054263347242}
   - component: {fileID: 9213968054263347243}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (13)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4047,15 +4051,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968054263347243
@@ -4085,9 +4089,9 @@ GameObject:
   - component: {fileID: 9213968054333881849}
   - component: {fileID: 9213968054333881855}
   - component: {fileID: 9213968054333881848}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (8)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4148,15 +4152,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968054333881848
@@ -4186,9 +4190,9 @@ GameObject:
   - component: {fileID: 9213968054447707327}
   - component: {fileID: 9213968054447707325}
   - component: {fileID: 9213968054447707326}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (14)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4249,15 +4253,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968054447707326
@@ -4410,9 +4414,9 @@ GameObject:
   - component: {fileID: 9213968054482582189}
   - component: {fileID: 9213968054482582179}
   - component: {fileID: 9213968054482582188}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (17)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4473,15 +4477,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968054482582188
@@ -4880,9 +4884,9 @@ GameObject:
   - component: {fileID: 9213968054782176142}
   - component: {fileID: 9213968054782176140}
   - component: {fileID: 9213968054782176141}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (3)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4943,15 +4947,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968054782176141
@@ -4981,9 +4985,9 @@ GameObject:
   - component: {fileID: 9213968054804255938}
   - component: {fileID: 9213968054804255936}
   - component: {fileID: 9213968054804255937}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (6)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5044,15 +5048,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968054804255937
@@ -5205,9 +5209,9 @@ GameObject:
   - component: {fileID: 9213968054947180518}
   - component: {fileID: 9213968054947180516}
   - component: {fileID: 9213968054947180517}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (4)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5268,15 +5272,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968054947180517
@@ -5306,9 +5310,9 @@ GameObject:
   - component: {fileID: 9213968054959080052}
   - component: {fileID: 9213968054959082890}
   - component: {fileID: 9213968054959082891}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (5)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5369,15 +5373,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968054959082891
@@ -5407,9 +5411,9 @@ GameObject:
   - component: {fileID: 9213968054998515853}
   - component: {fileID: 9213968054998515843}
   - component: {fileID: 9213968054998515852}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (19)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5470,15 +5474,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968054998515852
@@ -6175,9 +6179,9 @@ GameObject:
   - component: {fileID: 9213968055247740244}
   - component: {fileID: 9213968055247740266}
   - component: {fileID: 9213968055247740267}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6238,15 +6242,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968055247740267
@@ -6399,9 +6403,9 @@ GameObject:
   - component: {fileID: 9213968055308131171}
   - component: {fileID: 9213968055308131169}
   - component: {fileID: 9213968055308131170}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (9)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6462,15 +6466,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968055308131170
@@ -6830,9 +6834,9 @@ GameObject:
   - component: {fileID: 9213968055461987205}
   - component: {fileID: 9213968055461987227}
   - component: {fileID: 9213968055461987204}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (12)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6893,15 +6897,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968055461987204
@@ -6931,9 +6935,9 @@ GameObject:
   - component: {fileID: 9213968055494847144}
   - component: {fileID: 9213968055494847150}
   - component: {fileID: 9213968055494847151}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (2)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6994,15 +6998,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968055494847151
@@ -7032,9 +7036,9 @@ GameObject:
   - component: {fileID: 9213968055518552666}
   - component: {fileID: 9213968055518552664}
   - component: {fileID: 9213968055518552665}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (10)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7095,15 +7099,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968055518552665
@@ -7133,9 +7137,9 @@ GameObject:
   - component: {fileID: 9213968055537688074}
   - component: {fileID: 9213968055537688072}
   - component: {fileID: 9213968055537688073}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BakZwi (15)
-  m_TagString: Enemy
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7196,15 +7200,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -878006372, guid: e800edeea5eeb77498bfa81678c7bade, type: 3}
+  m_Sprite: {fileID: -544255778, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5675, y: 0.86625}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &9213968055537688073

@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 2828456054512176408}
   - component: {fileID: 2828456054512176409}
   - component: {fileID: 2828456054512176406}
+  - component: {fileID: 3083333976590650771}
   m_Layer: 0
   m_Name: Model
   m_TagString: Enemy
@@ -199,16 +200,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 300
-  type: 0
-  numOfPatterns: 4
+  maxHP: 300
+  type: 3
+  numOfPatterns: 1
+  bulletIdx: 0
   curPatternDelay: 0
-  maxPatternDelay: 4
+  maxPatternDelay: 3.1
   curStraightFireDelay: 0
-  maxStraightFireDelay: 10000
+  maxStraightFireDelay: 1000000
   straightFireSpeed: 8
   curCircleFireDelay: 0
-  maxCircleFireDelay: 2
-  circleFireSpeed: 5
+  maxCircleFireDelay: 1000000
+  circleFireSpeed: 10
   straightFireDir: {x: -1, y: 0}
   randomDirY: 0
   isRandomDir: 0
@@ -228,7 +231,29 @@ MonoBehaviour:
   - {fileID: 612043407125858333, guid: 88e3468803f815a499e67a2e0835ce73, type: 3}
   - {fileID: 6038007275945840213, guid: bd256cb6a1795ec44abdba87d11207cb, type: 3}
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
+  gyunNyang: {fileID: 6104123555868368802, guid: e6fbc11fa6b2714468b4737ee107c8ca, type: 3}
   isDeath: 0
+  PokJu: {fileID: 0}
+--- !u!95 &3083333976590650771
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828456054512176404}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a49fecc7fd53164daa3767ba45fe3f4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2828456054941461742
 GameObject:
   m_ObjectHideFlags: 0

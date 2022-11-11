@@ -70,6 +70,7 @@ MonoBehaviour:
   speed: 3
   player: {fileID: 0}
   gameManager: {fileID: 0}
+  deletePosX: 0
 --- !u!1 &2202300996250037748
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 2089651048, guid: 1d743ecc069ea2f40b7c6b6e9d617ab5, type: 3}
+  m_Sprite: {fileID: 20423369, guid: 5c5672f24353a2d49bba95d61200d0f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -181,7 +182,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 0.65}
+  m_Size: {x: 0.58, y: 0.7}
   m_EdgeRadius: 0
 --- !u!114 &4948707938242547295
 MonoBehaviour:

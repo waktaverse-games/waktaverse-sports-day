@@ -25,7 +25,8 @@ namespace GameHeaven.CrossGame
             Collider = GetComponent<BoxCollider2D>();
             CntAnimator = GetComponent<Animator>();
             print(CharacterManager.Instance.CurrentCharacter);
-            CntAnimator.runtimeAnimatorController = Animators[CharacterManager.Instance.CurrentCharacter];
+            //CntAnimator.runtimeAnimatorController = Animators[CharacterManager.Instance.CurrentCharacter];
+            CntAnimator.runtimeAnimatorController = Animators[Charactor];
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

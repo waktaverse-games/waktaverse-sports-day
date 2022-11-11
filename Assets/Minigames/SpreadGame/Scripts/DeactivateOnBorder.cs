@@ -8,6 +8,7 @@ namespace GameHeaven.SpreadGame
     {
         PoolManager pool;
 
+
         private void Awake()
         {
             pool = FindObjectOfType<PoolManager>();

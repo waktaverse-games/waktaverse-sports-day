@@ -20,12 +20,13 @@ namespace GameHeaven.CrossGame
         }
         public void Move()
         {
-            transform.DOMoveY(4, 1).SetRelative().SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            //transform.DOMoveY(4, 1).SetRelative().SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
         }
 
         public void Kill()
         {
             DOTween.Kill(gameObject.transform);
+            Manager.ObjectController.Stars.Remove(gameObject);
             Destroy(gameObject);
         }
 
@@ -33,11 +34,12 @@ namespace GameHeaven.CrossGame
         {
             if(collision.tag == "Player")
             {
-                if (code == CoinCode.Bronze) Manager.AddGold(1);
-                else if (code == CoinCode.Silver) Manager.AddGold(10);
-                else Manager.AddGold(25);
-
-                Manager.ObjectController.Stars.Remove(gameObject);
+                Manager.AddScore(10);
+                Manager.SoundManager.Play("Coin");
+                Kill();
+            }
+            else if(collision.tag == "Outline")
+            {
                 Kill();
             }
         }

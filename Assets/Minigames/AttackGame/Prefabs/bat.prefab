@@ -291,7 +291,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 212983
+    m_Bits: 16375
 --- !u!1 &9159836396272571984
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +448,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1952976917, guid: 1d743ecc069ea2f40b7c6b6e9d617ab5, type: 3}
+  m_Sprite: {fileID: -1143595542, guid: 2d989ba1fda35fe4da09111f0ff013de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

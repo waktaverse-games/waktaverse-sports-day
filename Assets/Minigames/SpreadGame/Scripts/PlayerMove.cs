@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 namespace GameHeaven.SpreadGame
 {
@@ -9,15 +11,17 @@ namespace GameHeaven.SpreadGame
     {
         [SerializeField] float speed; // 이동속도
 
-        public int[] bulletLVs; // 현재 보유중인 무기
+        public bool[] curBullets; // 현재 보유중인 무기
 
-        [SerializeField] GameObject coinAcquireEffect, bombImageUI;
+        [SerializeField] GameObject coinAcquireEffect, bombImageUI, canvas;
 
         [SerializeField] private int bombCnt;
         [SerializeField] private bool hasShield, isStun;
 
         [SerializeField] AudioClip[] bulletSounds, acquireSounds;
         [SerializeField] AudioClip bombSound;
+
+        [SerializeField] bool isInvincible;
 
         private int curSectorIdx, curSectorDir;
         PoolManager pool;
@@ -29,7 +33,10 @@ namespace GameHeaven.SpreadGame
             rigid = GetComponent<Rigidbody2D>();
             pool = FindObjectOfType<PoolManager>();
             anim = GetComponent<Animator>();
+            canvas = GameObject.Find("Canvas");
 
+            pool.bulletPrefabs[3].GetComponent<BulletInfo>().maxShotDelay = 0.4f;
+            /*
             // bullet 초기화
             BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
             bullet.damage = 3; bullet.maxShotDelay = 3.5f;
@@ -39,26 +46,55 @@ namespace GameHeaven.SpreadGame
             bullet.damage = 1; bullet.maxShotDelay = 3.0f;
             bullet = pool.bulletPrefabs[3].GetComponent<BulletInfo>();
             bullet.damage = 1; bullet.maxShotDelay = 0.3f;
-
+            */
             curSectorDir = 1;
-            Invoke("BulletSound", 0);
         }
 
-        void BulletSound()
-        {
-            AudioSource.PlayClipAtPoint(bulletSounds[0], Vector3.zero);
-            Invoke("BulletSound", 0.2f);
-        }
         private void Update()
         {
             Move();
             Bomb();
 
+            for (int i = 0; i < 4; i++)
+            {
+                if(curBullets[i]) Fire(i);
+
+                if (i == 3) continue;
+
+                if (canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount > 0)
+                {
+                    canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount -= 0.0003f;
+                }
+                else
+                {
+                    canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount = 1;
+                    canvas.transform.GetChild(2 + i).gameObject.SetActive(false);
+                    curBullets[i] = false;
+                }
+            }
+
+            /*
             for (int i = 0; i < 4; i++) // 탄환 총 4개
             {
-                if (bulletLVs[i] > 0)
+                if (bulletLVs[i)
                 {
                     Fire(i);
+                }
+            }*/
+
+            // 무적 키
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (isInvincible)
+                {
+                    isInvincible = false;
+                    GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(false);
+                }
+                else
+                {
+                    isInvincible = true;
+                    if (!hasShield) hasShield = true;
+                    GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(true);
                 }
             }
         }
@@ -73,8 +109,7 @@ namespace GameHeaven.SpreadGame
                 }
                 else
                 {
-                    print("GameOver");
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    StartCoroutine(GameOver());
                 }
             }
             else if (collider.CompareTag("Coin"))
@@ -87,112 +122,165 @@ namespace GameHeaven.SpreadGame
             else if (collider.CompareTag("UpgradeItem"))
             {
                 AudioSource.PlayClipAtPoint(acquireSounds[1], Vector3.zero);
-                switch (collider.name[1])
-                {
-                    case 'u': // G'u'ided
-                        {
-                            int cnt = 0;
-                            for (int i = 0; i < bulletLVs.Length; i++)
-                            {
-                                if (i == 0) continue;
-                                if (bulletLVs[i] > 0) cnt++;
-                            }
-
-                            if (cnt < 3 && bulletLVs[0] < 6)
-                            {
-                                bulletLVs[0]++;
-
-                                BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
-                                if (bulletLVs[0] == 3 || bulletLVs[0] == 6) bullet.damage++;
-                                bullet.maxShotDelay -= 0.5f;
-                            }
-                            break;
-                        }
-                    case 'e': // S'e'ctor
-                        {
-                            int cnt = 0;
-                            for (int i = 0; i < bulletLVs.Length; i++)
-                            {
-                                if (i == 1) continue;
-                                if (bulletLVs[i] > 0) cnt++;
-                            }
-                            if (cnt < 3 && bulletLVs[1] < 6)
-                            {
-                                bulletLVs[1]++;
-
-                                BulletInfo bullet = pool.bulletPrefabs[1].GetComponent<BulletInfo>();
-                                if (bulletLVs[1] == 6) bullet.damage++;
-                                bullet.maxShotDelay -= 0.04f;
-                            }
-                            break;
-                        }
-                    case 'l': // S'l'ash
-                        {
-                            int cnt = 0;
-                            for (int i = 0; i < bulletLVs.Length; i++)
-                            {
-                                if (i == 2) continue;
-                                if (bulletLVs[i] > 0) cnt++;
-                            }
-
-                            if (cnt < 3 && bulletLVs[2] < 6)
-                            {
-                                bulletLVs[2]++;
-
-                                BulletInfo bullet = pool.bulletPrefabs[2].GetComponent<BulletInfo>();
-                                if (bulletLVs[2] == 3 || bulletLVs[2] == 6) bullet.damage++;
-                                bullet.maxShotDelay -= 0.4f;
-                            }
-                            break;
-                        }
-                    case 't': // S't'raight
-                        {
-                            int cnt = 0;
-                            for (int i = 0; i < bulletLVs.Length; i++)
-                            {
-                                if (i == 3) continue;
-                                if (bulletLVs[i] > 0) cnt++;
-                            }
-
-                            if (cnt < 3 && bulletLVs[3] < 6)
-                            {
-                                bulletLVs[3]++;
-
-                                BulletInfo bullet = pool.bulletPrefabs[3].GetComponent<BulletInfo>();
-                                if (bulletLVs[3] == 3 || bulletLVs[3] == 6) bullet.damage++;
-                                bullet.maxShotDelay -= 0.04f;
-                            }
-                            break;
-                        }
-
-                    case 'o': // B'o'mb
-                        {
-                            if (bombCnt < 5)
-                            {
-                                GameObject.Find("Canvas").transform.GetChild(0).GetChild(bombCnt).gameObject.SetActive(true);
-                                bombCnt++;
-                            }
-                            break;
-                        }
-                    case 'h': // S'h'ield
-                        {
-                            hasShield = true;
-                            transform.GetChild(0).gameObject.SetActive(true);
-                            break;
-                        }
-                }
+                AcquireItem(collider.gameObject);
                 Instantiate(coinAcquireEffect, collider.transform.position, coinAcquireEffect.transform.rotation);
                 Destroy(collider.gameObject);
-                /* 나머지 아이템 삭제
-                foreach (GameObject del in GameObject.FindGameObjectsWithTag("UpgradeItem"))
-                {
-                    Destroy(del);
-                }
-                */
             }
             else if (collider.CompareTag("Brick")) // 뚤기 새장
             {
                 StartCoroutine(Stun(0.5f, collider));
+            }
+        }
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.transform.CompareTag("Enemy"))
+            {
+                if (hasShield)
+                {
+                    StartCoroutine(ShieldBreak());
+                }
+                else
+                {
+                    StartCoroutine(GameOver());
+                }
+            }
+        }
+        
+
+        IEnumerator GameOver()
+        {
+            Time.timeScale = 0;
+            GameObject.Find("Canvas").transform.GetChild(7).gameObject.SetActive(true);
+
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.R));
+            Time.timeScale = 1;
+            GameObject.Find("Canvas").transform.GetChild(7).gameObject.SetActive(false);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        void AcquireItem(GameObject obj)
+        {
+            int grade = 0;
+
+            switch (obj.name[1])
+            {
+                case 'u': // G'u'ided
+                    {
+                        curBullets[0] = true;
+                        BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
+                        grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1] - 48;
+
+                        switch (grade)
+                        {
+                            case 1:
+                                bullet.damage = 3;
+                                bullet.maxShotDelay = 1;
+                                break;
+                            case 2:
+                                bullet.damage = 3;
+                                bullet.maxShotDelay = 0.75f;
+                                break;
+                            case 3:
+                                bullet.damage = 3;
+                                bullet.maxShotDelay = 0.5f;
+                                break;
+                            case 4:
+                                bullet.damage = 3;
+                                bullet.maxShotDelay = 0.3f;
+                                break;
+                        }
+                        canvas.transform.GetChild(2).gameObject.SetActive(true);
+                        canvas.transform.GetChild(2).GetComponent<Image>().fillAmount = 1;
+                        canvas.transform.GetChild(2).GetComponent<Image>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
+                        canvas.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + grade;
+                        break;
+                    }
+                case 'e': // S'e'ctor
+                    {
+                        curBullets[1] = true;
+                        BulletInfo bullet = pool.bulletPrefabs[1].GetComponent<BulletInfo>();
+                        grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1] - 48;
+
+                        switch (grade)
+                        {
+                            case 1:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.2f;
+                                break;
+                            case 2:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.15f;
+                                break;
+                            case 3:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.1f;
+                                break;
+                            case 4:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.05f;
+                                break;
+                        }
+                        canvas.transform.GetChild(3).gameObject.SetActive(true);
+                        canvas.transform.GetChild(3).GetComponent<Image>().fillAmount = 1;
+                        canvas.transform.GetChild(3).GetComponent<Image>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
+                        canvas.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + grade;
+                        break;
+                    }
+                case 'l': // S'l'ash
+                    {
+                        curBullets[2] = true;
+                        BulletInfo bullet = pool.bulletPrefabs[2].GetComponent<BulletInfo>();
+                        grade = obj.transform.GetChild(0).GetComponent<TextMeshPro>().text[1] - 48;
+
+                        switch (grade)
+                        {
+                            case 1:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.8f;
+                                break;
+                            case 2:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.6f;
+                                break;
+                            case 3:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.4f;
+                                break;
+                            case 4:
+                                bullet.damage = 1;
+                                bullet.maxShotDelay = 0.2f;
+                                break;
+                        }
+                        canvas.transform.GetChild(4).gameObject.SetActive(true);
+                        canvas.transform.GetChild(4).GetComponent<Image>().fillAmount = 1;
+                        canvas.transform.GetChild(4).GetComponent<Image>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
+                        canvas.transform.GetChild(4).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + grade;
+                        break;
+                    }
+                case 't': // S't'raight
+                    {
+                        curBullets[3] = true;
+                        break;
+                    }
+
+                case 'o': // B'o'mb
+                    {
+                        if (bombCnt < 5)
+                        {
+                            canvas.transform.GetChild(0).GetChild(bombCnt).gameObject.SetActive(true);
+                            bombCnt++;
+                        }
+                        break;
+                    }
+                case 'h': // S'h'ield
+                    {
+                        hasShield = true;
+                        transform.GetChild(0).gameObject.SetActive(true);
+                        break;
+                    }
+            }
+
+            if (grade > 0)
+            {
             }
         }
 
@@ -255,12 +343,16 @@ namespace GameHeaven.SpreadGame
             {
                 AudioSource.PlayClipAtPoint(bulletSounds[1], Vector3.zero);
             }
+            else
+            {
+                AudioSource.PlayClipAtPoint(bulletSounds[0], Vector3.zero);
+            }
 
             if (idx == 1) // Sector
             {
                 pool.MyInstantiate(idx, transform.position).GetComponent<Rigidbody2D>()
-                    .velocity = Quaternion.AngleAxis(-15 * curSectorIdx, Vector3.forward) 
-                                * new Vector2(0.866f, 0.5f) * bullet.speed;
+                    .velocity = Quaternion.AngleAxis(-5 * curSectorIdx, Vector3.forward) 
+                                * new Vector2(0.9848f, 0.1736f) * bullet.speed;
 
                 curSectorIdx += curSectorDir;
                 if (curSectorIdx >= 4 || curSectorIdx <= 0) curSectorDir *= -1;
@@ -284,10 +376,29 @@ namespace GameHeaven.SpreadGame
                 enemy.HP -= 30;
             }
 
+            foreach (GameObject enemyBullet in GameObject.FindGameObjectsWithTag("Ball"))
+            {
+                enemyBullet.SetActive(false);
+                Instantiate(coinAcquireEffect, enemyBullet.transform.position, coinAcquireEffect.transform.rotation);
+
+                if (enemyBullet.layer == LayerMask.NameToLayer("Ball")) // 보스패턴
+                {
+                    StartCoroutine(BakZwiSetActive(enemyBullet));
+                }
+            }
+
             CameraShake();
             
             GameObject.Find("Canvas").transform.GetChild(0).GetChild(bombCnt - 1).gameObject.SetActive(false);
             bombCnt--;
+        }
+
+        IEnumerator BakZwiSetActive(GameObject obj)
+        {
+            yield return new WaitForSeconds(1.0f);
+
+            obj.SetActive(true);
+
         }
 
         void CameraShake()
@@ -302,7 +413,7 @@ namespace GameHeaven.SpreadGame
             anim.SetTrigger("Hit");
 
             yield return new WaitForSeconds(1);
-            hasShield = false;
+            if (!isInvincible) hasShield = false;
         }
     }
 }

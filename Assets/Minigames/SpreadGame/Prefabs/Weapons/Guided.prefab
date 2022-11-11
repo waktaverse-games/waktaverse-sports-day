@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: -8480602467344076912}
   - component: {fileID: 4229098592238403546}
   - component: {fileID: 5253744885416062074}
-  - component: {fileID: -8420892921255241092}
   - component: {fileID: -7002028162915669063}
+  - component: {fileID: 9062154529222911396}
   m_Layer: 0
   m_Name: Guided
   m_TagString: Attack
@@ -149,22 +149,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  speed: 5
-  curShotDelay: 0.42321438
-  maxShotDelay: 3.5
-  damage: 3
---- !u!114 &-8420892921255241092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2360940325928755872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59892c1b6655f74084b2ba2413e6cf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  speed: 10
+  curShotDelay: 0.46180588
+  maxShotDelay: 0.5
+  damage: 2
 --- !u!114 &-7002028162915669063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,4 +167,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid: {fileID: 0}
   target: {fileID: 0}
-  speed: 5
+  speed: 8
+--- !u!114 &9062154529222911396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2360940325928755872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6dd8d544e8fb074cb25e4d51515b5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 7

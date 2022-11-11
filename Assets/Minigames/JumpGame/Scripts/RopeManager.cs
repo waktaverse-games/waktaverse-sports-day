@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameHeaven.JumpGame
 {
@@ -15,10 +16,12 @@ namespace GameHeaven.JumpGame
         public float increasingSpeedTime;
         public float increasingSpeedAmount;
         public float maxSpeed;
+        public float minSpeed;
 
         private int timeCount = 0;
         // Item Spawn Probability
         public int[] itemProb;
+
 
         // Start is called before the first frame update
         void Start()
@@ -41,6 +44,8 @@ namespace GameHeaven.JumpGame
 
             StartCoroutine(IncreaseSpeed(increasingSpeedTime));
         }
+
+
         private void AdjustItemProb()
         {
             switch (timeCount)
@@ -65,10 +70,23 @@ namespace GameHeaven.JumpGame
                     break;
             }
         }
-
-        public void JumpSuccess()
+        public void DecreaseSpeed()
         {
-            GameManager.Instance.IncreaseScore();
+            speed /= 2;
+            if(speed <minSpeed) { speed = minSpeed; }
+            StopAllCoroutines();
+            animator.speed = speed;
+            StartCoroutine(IncreaseSpeed(increasingSpeedTime));
+        }
+        public void JumpSuccess(int score)
+        {
+            GameManager.Instance.IncreaseScore(score);
+            GameManager.Instance.IncreaseJumpSuccessCount();
+        }
+
+        public void PlayRopeSound()
+        {
+            SoundManager.Instance.PlayRopeSound();
         }
     }
 }   

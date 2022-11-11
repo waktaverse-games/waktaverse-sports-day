@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameHeaven.SpreadGame
 {
@@ -9,6 +10,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] GameObject[] mobPrefabs;
         [SerializeField] List<GameObject> bossPrefabs;
         public float curNormalMonsterSpawnDelay, maxNormalMonsterSpawnDelay;
+        public int bossIdx = 0;
         [SerializeField] float curEliteMonsterSpawnDelay, maxEliteMonsterSpawnDelay;
         [SerializeField] float curBossSpawnDelay, maxBossSpawnDelay;
         [SerializeField] float[] mapSize;
@@ -30,12 +32,6 @@ namespace GameHeaven.SpreadGame
 
         void SpawnRepeatedly(bool isElite)
         {
-            if (isBossTime)
-            {
-                curEliteMonsterSpawnDelay = curNormalMonsterSpawnDelay = 0;
-                return;
-            }
-
             if (isElite)
             {
                 curEliteMonsterSpawnDelay += Time.deltaTime;
@@ -45,7 +41,7 @@ namespace GameHeaven.SpreadGame
             else
             {
                 curNormalMonsterSpawnDelay += Time.deltaTime;
-                if (curNormalMonsterSpawnDelay < maxNormalMonsterSpawnDelay) return;
+                if (curNormalMonsterSpawnDelay < maxNormalMonsterSpawnDelay * (isBossTime?3:1)) return;
                 curNormalMonsterSpawnDelay = 0;
             }
 
@@ -80,26 +76,28 @@ namespace GameHeaven.SpreadGame
                 Instantiate(mobPrefabs[idx], spawnPos + new Vector2(2, 0.5f), mobPrefabs[idx].transform.rotation);
                 Instantiate(mobPrefabs[idx], spawnPos + new Vector2(2, -0.5f), mobPrefabs[idx].transform.rotation);
             } // ¹ÚÁã
+            /*
             else if (idx == 6) // ¼¼±Õ
             {
                 obj = Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation);
                 StartCoroutine(Division(obj)); //ºÐ¿­
-            }
+            }*/
             else obj = Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation);
+
+            EnemyMove enemy = obj.GetComponent<EnemyMove>();
+            enemy.HP += bossIdx / 2;
 
             if (isElite)
             {
-                EnemyMove enemy = obj.GetComponent<EnemyMove>();
                 obj.transform.localScale = new Vector3(obj.transform.localScale.x * 1.5f, obj.transform.localScale.y * 1.5f, obj.transform.localScale.z);
                 obj.GetComponent<SpriteRenderer>().material.color = Color.yellow;
                 enemy.speed = 0.5f;
                 enemy.rigid.velocity = new Vector3(-enemy.speed, enemy.rigid.velocity.y);
-                enemy.HP += 20;
+                enemy.HP *= 3;
                 enemy.isElite = true;
             }
         }
 
-        [SerializeField] int bossIdx = 0;
         void SpawnBossRepeatedly()
         {
             if (isBossTime)
@@ -116,10 +114,9 @@ namespace GameHeaven.SpreadGame
 
             GameObject obj;
             
-            obj = Instantiate(bossPrefabs[bossIdx++ % 4], Vector2.zero, bossPrefabs[0].transform.rotation);
+            obj = Instantiate(bossPrefabs[bossIdx % 7], Vector2.zero, bossPrefabs[0].transform.rotation);
+            obj.transform.GetChild(0).GetComponent<BossMove>().HP = obj.transform.GetChild(0).GetComponent<BossMove>().maxHP = 100 + bossIdx * 100;
             isBossTime = true;
-            maxNormalMonsterSpawnDelay -= 0.3f;
-            if (maxNormalMonsterSpawnDelay < 2) maxNormalMonsterSpawnDelay = 2;
         }
 
         IEnumerator Division(GameObject obj)
