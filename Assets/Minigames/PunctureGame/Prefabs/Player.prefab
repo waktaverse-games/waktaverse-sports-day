@@ -101,8 +101,8 @@ MonoBehaviour:
   bounce: {fileID: 2129934477}
   sprite: {fileID: 4569019911962864950}
   animator: {fileID: 4569019911962864948}
-  sfxCollect: {fileID: 2171382870446754892}
   currentAnimState: 0
+  sfxCollect: {fileID: 2171382870446754892}
 --- !u!114 &32037937227510184
 MonoBehaviour:
   m_ObjectHideFlags: 0

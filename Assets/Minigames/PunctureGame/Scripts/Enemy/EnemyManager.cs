@@ -9,7 +9,7 @@ namespace GameHeaven.PunctureGame
     public class EnemyManager : MonoBehaviour, IManagerLogic
     {
         [SerializeField] private Player player;
-        [SerializeField] private EnemySpawner spawner;
+        [SerializeField] private EnemyPoolSpawner spawner;
         
         [SerializeField] private float upperReleaseHeight;
         [SerializeField] private float bottomReleaseHeight;
@@ -22,7 +22,7 @@ namespace GameHeaven.PunctureGame
 
         private void Update()
         {
-            var enemies = spawner.GetActiveEnemies();
+            var enemies = spawner.GetActiveElements();
             for (int i = 0; i < enemies.Count; i++)
             {
                 var enemy = enemies[i];
@@ -56,7 +56,7 @@ namespace GameHeaven.PunctureGame
 
             if (IsEnemyReleasable(enemyPos, playerPos))
             {
-                spawner.ReleaseEnemy(enemy);
+                spawner.Release(enemy);
             }
         }
 
@@ -77,7 +77,7 @@ namespace GameHeaven.PunctureGame
 
         public void Stop()
         {
-            var enemies = spawner.GetActiveEnemies();
+            var enemies = spawner.GetActiveElements();
             foreach (IEntityLogic enemy in enemies)
             {
                 enemy.Inactive();

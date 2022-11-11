@@ -7,7 +7,7 @@ namespace SharedLibs
     /// Inherit from this base class to create a singleton.
     /// e.g. public class MyClassName : Singleton<MyClassName> {}
     /// </summary>
-    public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         // Check to see if we're about to be destroyed
         // private static bool m_ShuttingDown = false;
@@ -33,20 +33,7 @@ namespace SharedLibs
                 // {
                     if (m_Instance == null)
                     {
-                        // Search for existing instance.
-                        m_Instance = (T)FindObjectOfType(typeof(T));
- 
-                        // Create new instance if one doesn't already exist.
-                        if (m_Instance == null)
-                        {
-                            // Need to create a new GameObject to attach the singleton to.
-                            var singletonObject = new GameObject(typeof(T).Name);
-                            m_Instance = singletonObject.AddComponent<T>();
-                            singletonObject.name = typeof(T).ToString() + " (Singleton)";
- 
-                            // Make instance persistent.
-                            DontDestroyOnLoad(singletonObject);
-                        }
+                        m_Instance = GetInstance();
                     }
  
                     return m_Instance;
@@ -55,25 +42,55 @@ namespace SharedLibs
         }
 
         private void Awake() {
-            DontDestroyOnLoad(gameObject);
+            m_Instance = GetInstance();
+            if (m_Instance)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
+            
             Init();
+        }
+
+        private static T GetInstance()
+        {
+            // Search for existing instance.
+            var instances = FindObjectsOfType<T>();
+ 
+            // Create new instance if one doesn't already exist.
+            if (instances.Length == 0)
+            {
+                // Need to create a new GameObject to attach the singleton to.
+                var singletonObject = new GameObject(typeof(T).Name);
+                m_Instance = singletonObject.AddComponent<T>();
+                singletonObject.name = typeof(T).ToString() + " (Singleton)";
+ 
+                // Make instance persistent.
+                DontDestroyOnLoad(singletonObject);
+            }
+            else if (instances.Length > 1)
+            {
+                for (int i = 1; i < instances.Length; i++)
+                {
+                    Destroy(instances[i].gameObject);
+                }
+            }
+
+            return instances[0];
         }
 
         /// <summary>
         /// Use this method instead of "Awake", because of DontDestroyOnLoad
         /// </summary>
-        public virtual void Init() {
-            
-        }
+        public abstract void Init();
  
-        private void OnApplicationQuit()
-        {
-            // m_ShuttingDown = true;
-        }
+        // private void OnApplicationQuit()
+        // {
+        //     m_ShuttingDown = true;
+        // }
         
-        private void OnDestroy()
-        {
-            // m_ShuttingDown = true;
-        }
+        // private void OnDestroy()
+        // {
+        //     m_ShuttingDown = true;
+        // }
     }
 }

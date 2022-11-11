@@ -1,4 +1,7 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using SharedLibs;
+using SharedLibs.Score;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace GameHeaven.PunctureGame
@@ -8,26 +11,37 @@ namespace GameHeaven.PunctureGame
         [SerializeField] private Player player;
 
         [SerializeField] [ReadOnly] private int currentFloor;
+        [SerializeField] private int floorScore = 5;
 
         public delegate void FloorChangeEvent(int floor);
         public event FloorChangeEvent onFloorChanged;
 
-        public int CurrentFloor
+        public int CurrentFloor => currentFloor;
+
+        private void OnEnable()
         {
-            get => currentFloor;
-            private set
-            {
-                if (currentFloor < value)
-                {
-                    currentFloor = value;
-                    onFloorChanged?.Invoke(value);
-                }
-            }
+            onFloorChanged += AddFloorScore;
+        }
+
+        private void OnDisable()
+        {
+            onFloorChanged -= AddFloorScore;
         }
 
         private void Update()
         {
-            CurrentFloor = Mathf.RoundToInt(-player.currentPos.y) - 1;
+            var floor = Mathf.RoundToInt(-player.currentPos.y) - 1;
+            
+            if (currentFloor < floor)
+            {
+                currentFloor = floor;
+                onFloorChanged?.Invoke(floor);
+            }
+        }
+
+        private void AddFloorScore(int floor)
+        {
+            ScoreManager.Instance.AddGameRoundScore(MinigameType.PunctureGame, floorScore);
         }
     }
 }

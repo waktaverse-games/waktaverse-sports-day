@@ -23,13 +23,14 @@ namespace GameHeaven.PunctureGame
         public SpriteRenderer sprite;
         
         [SerializeField] private Animator animator;
-        private static readonly int Run = Animator.StringToHash("Run");
-        private static readonly int Jump = Animator.StringToHash("Jump");
-        private static readonly int Bounce = Animator.StringToHash("Bounce");
+        private static readonly int RunAnimParam = Animator.StringToHash("Run");
+        private static readonly int JumpAnimParam = Animator.StringToHash("Jump");
+        private static readonly int BounceAnimParam = Animator.StringToHash("Bounce");
+        private static readonly int GameOverAnimParam = Animator.StringToHash("GameOver");
         
         public enum AnimationState
         {
-            Idle, Run, Jump, EnterBounce, ExitBounce
+            Idle, Run, Jump, EnterBounce, ExitBounce, GameOver
         }
         [SerializeField] [ReadOnly] private AnimationState currentAnimState = AnimationState.Idle;
 
@@ -59,14 +60,22 @@ namespace GameHeaven.PunctureGame
             if ((enemyHeadLayer & (1 << col.gameObject.layer)) != 0)
             {
                 bounce.BounceJump(col);
-                sfxCollect.PlaySFX(PlayerSoundType.Bounce);
                 var enemy = col.GetComponentInParent<Enemy>();
-                enemy.Stun();
+                TreadEnemy(enemy);
             }
             else if ((enemyBodyLayer & (1 << col.gameObject.layer)) != 0)
             {
+                SetAnimationState(AnimationState.GameOver);
                 GameManager.Instance.GameOver();
             }
+        }
+        
+        // Bounce
+
+        private void TreadEnemy(Enemy enemy)
+        {
+            sfxCollect.PlaySFX(PlayerSoundType.Bounce);
+            enemy.Stun();
         }
         
         // Break Blocks
@@ -106,18 +115,21 @@ namespace GameHeaven.PunctureGame
             {
                 case AnimationState.Idle:
                 case AnimationState.Run:
-                    animator.SetBool(Run, true);
+                    animator.SetBool(RunAnimParam, true);
                     break;
                 case AnimationState.Jump:
-                    if (currentAnimState == AnimationState.Run) animator.SetTrigger(Jump);
+                    if (currentAnimState == AnimationState.Run) animator.SetTrigger(JumpAnimParam);
                     state = AnimationState.Run;
                     break;
                 case AnimationState.EnterBounce:
-                    if (currentAnimState == AnimationState.Run) animator.SetBool(Bounce, true);
+                    if (currentAnimState == AnimationState.Run) animator.SetBool(BounceAnimParam, true);
                     break;
                 case AnimationState.ExitBounce:
-                    if (currentAnimState == AnimationState.EnterBounce) animator.SetBool(Bounce, false);
+                    if (currentAnimState == AnimationState.EnterBounce) animator.SetBool(BounceAnimParam, false);
                     state = AnimationState.Run;
+                    break;
+                case AnimationState.GameOver:
+                    animator.SetBool(GameOverAnimParam, true);
                     break;
             }
             currentAnimState = state;
