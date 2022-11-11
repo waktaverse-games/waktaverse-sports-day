@@ -42,6 +42,8 @@ namespace GameHeaven.CrashGame
 
         [SerializeField]
         private List<Sprite> playerSpriteList;
+        [SerializeField]
+        private List<RuntimeAnimatorController> playerAnimatorControllerList;
 
         [Obsolete]
         public int Money
@@ -106,6 +108,7 @@ namespace GameHeaven.CrashGame
         }
 
         public List<Sprite> PlayerSpriteList => playerSpriteList;
+        public List<RuntimeAnimatorController> PlayerAnimatorControllerList => playerAnimatorControllerList;
 
         public int Score
         {
@@ -134,6 +137,8 @@ namespace GameHeaven.CrashGame
                 CurrentCharacter = CharacterType.Woowakgood;
             }
             else CurrentCharacter = CharacterManager.Instance.CurrentCharacter;
+
+            //CurrentCharacter = CharacterType.Gosegu;   //임시지정
             platform.SetCharacter(CurrentCharacter);
 
             GameStart();
@@ -176,7 +181,9 @@ namespace GameHeaven.CrashGame
             StopCoroutine(brickAddCoroutineLoop);
             Item.DeleteAll();       // 드랍 코인 및 아이템 전체 삭제
 
-            ScoreManager.Instance.AddGameRoundScore(MinigameType.CrashGame, Score);
+            GameManager.Instance.Sound.PlaySound("game over 2");
+
+            //ScoreManager.Instance.AddGameRoundScore(MinigameType.CrashGame, Score);
             if (Score > highscore)
             {
                 highscore = Score;

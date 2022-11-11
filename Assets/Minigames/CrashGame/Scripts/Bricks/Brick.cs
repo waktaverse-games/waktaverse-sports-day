@@ -32,6 +32,8 @@ namespace GameHeaven.CrashGame
             GetComponent<BoxCollider2D>().enabled = false;
             brickDestroyEffect.SetActive(true);
             GameManager.Instance.AddScore(score);
+            GameManager.Instance.Sound.PlaySound("brick Arcade_001");
+            //GameManager.Instance.Sound.PlaySound("brick_001");
         }
 
         public void DestroyAfterEffect()

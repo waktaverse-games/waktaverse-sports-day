@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using SharedLibs;
 
-
 namespace GameHeaven.PassGame
 {
     public class ChangeCharacter : MonoBehaviour

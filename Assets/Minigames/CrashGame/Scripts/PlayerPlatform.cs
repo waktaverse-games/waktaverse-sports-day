@@ -9,6 +9,7 @@ namespace GameHeaven.CrashGame
 {
     public class PlayerPlatform : MonoBehaviour
     {
+
         private Ball ball;
 
         private Rigidbody2D rigidBody;
@@ -35,6 +36,10 @@ namespace GameHeaven.CrashGame
         private Transform platform;
         private Transform playerCharacter;
 
+        private SpriteRenderer playerSprite;
+
+        private Animator playerAnimator;
+
         [SerializeField]
         private List<Sprite> platformSprite;
 
@@ -58,7 +63,9 @@ namespace GameHeaven.CrashGame
             clampRight = wallRight.transform.position.x - 1;
             ballStartPosition = transform.GetChild(0);
             playerCharacter = transform.GetChild(1);
+            playerSprite = playerCharacter.GetComponentInChildren<SpriteRenderer>();
             platform = transform.GetChild(2);
+            playerAnimator = GetComponentInChildren<Animator>();
             //force = new Vector3(1, 1, 0).normalized * ball.InitialSpeed;
         }
 
@@ -97,6 +104,9 @@ namespace GameHeaven.CrashGame
                 // A, D키를 사용해 좌우 이동
                 horizontal = Input.GetAxis("Horizontal");
                 rigidBody.velocity = new Vector2(horizontal * speed, rigidBody.velocity.y);
+                playerAnimator.SetBool("Move", Math.Abs(horizontal) > 0.01);
+                if (horizontal > 0) playerSprite.flipX = true;
+                else if (horizontal < 0) playerSprite.flipX = false;
             }
         }
 
@@ -123,6 +133,7 @@ namespace GameHeaven.CrashGame
 
         public void OnGameOver()
         {
+            playerAnimator.SetBool("GameOver", true);
             rigidBody.velocity = Vector2.zero;
         }
 
@@ -132,13 +143,15 @@ namespace GameHeaven.CrashGame
             Speed = initialSpeed;
             rigidBody.position = GameManager.Instance.playerSpawnPosition.position;
             platform.GetComponent<SpriteRenderer>().sprite = platformSprite[UnityEngine.Random.Range(0, platformSprite.Count)];
+            playerAnimator.SetBool("GameOver", false);
             BallInit();
         }
 
         public void SetCharacter(CharacterType currentCharacter)
         {
-            playerCharacter.GetComponentInChildren<SpriteRenderer>().sprite = GameManager.Instance.PlayerSpriteList[(int)currentCharacter];
-            playerCharacter.GetComponentInChildren<SpriteRenderer>().sortingOrder = 2;
+            playerSprite.sprite = GameManager.Instance.PlayerSpriteList[(int)currentCharacter];
+            playerSprite.sortingOrder = 1;
+            playerAnimator.runtimeAnimatorController = GameManager.Instance.PlayerAnimatorControllerList[(int)currentCharacter];
         }
 
         private void BallInit()
@@ -159,14 +172,21 @@ namespace GameHeaven.CrashGame
             {
                 rigidBody.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
                 isJumping = true;
+                playerAnimator.SetBool("Jump", true);
             }
         }
 
-        private void Land() { isJumping = false; }
+        private void Land() 
+        {
+            isJumping = false;
+            playerAnimator.SetBool("Jump", false);
+        }
 
         public void Stop()
         {
             rigidBody.velocity = Vector2.zero;
+            playerAnimator.SetBool("Jump", false);
+            playerAnimator.SetBool("Move", false);
         }
     }
 }
