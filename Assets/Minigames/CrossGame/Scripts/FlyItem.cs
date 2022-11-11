@@ -8,9 +8,15 @@ namespace GameHeaven.CrossGame
     public class FlyItem : MonoBehaviour
     {
         public CrossGameManager Manager;
+        public Sequence seq;
         public void Move()
         {
             transform.DOMoveY(2, 0.6f).SetRelative().SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+        }
+
+        public void Stop()
+        {
+            DOTween.Kill(gameObject.transform);
         }
 
         public void Kill()
