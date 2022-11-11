@@ -182,6 +182,8 @@ namespace GameHeaven.CrashGame
             StopCoroutine(brickAddCoroutineLoop);
             Item.DeleteAll();       // 드랍 코인 및 아이템 전체 삭제
 
+            GameManager.Instance.Sound.PlaySound("game over 2");
+
             //ScoreManager.Instance.AddGameRoundScore(MinigameType.CrashGame, Score);
             if (Score > highscore)
             {
