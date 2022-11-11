@@ -85,6 +85,7 @@ namespace GameHeaven.SpreadGame
             else obj = Instantiate(mobPrefabs[idx], new Vector2(mapSize[0] / 2, Random.Range(-mapSize[1] / 2, mapSize[1] / 2)), mobPrefabs[idx].transform.rotation);
 
             EnemyMove enemy = obj.GetComponent<EnemyMove>();
+            enemy.HP += bossIdx / 2;
 
             if (isElite)
             {
@@ -114,7 +115,7 @@ namespace GameHeaven.SpreadGame
             GameObject obj;
             
             obj = Instantiate(bossPrefabs[bossIdx % 7], Vector2.zero, bossPrefabs[0].transform.rotation);
-            obj.GetComponent<BossMove>().HP = obj.GetComponent<BossMove>().maxHP += 700 * bossIdx / 7;
+            obj.transform.GetChild(0).GetComponent<BossMove>().HP = obj.transform.GetChild(0).GetComponent<BossMove>().maxHP = 100 + bossIdx * 100;
             isBossTime = true;
         }
 

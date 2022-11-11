@@ -26,7 +26,6 @@ namespace GameHeaven.StickyGame
         private void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
-
             statistics = FindObjectOfType<Statistics>();
 
             curAxis = Vector2.zero;
