@@ -14,8 +14,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Minigames/SpreadGame/Scenes/SpreadGame.unity
     guid: a36c1d8c210bd044182eb5ce00ed0c72
+  - enabled: 0
+    path: Assets/Minigames/PassGame/Scenes/PassGame.unity
+    guid: c2f29f5d89505c1438167c9739c1cd8c
   - enabled: 1
-    path: Assets/Minigames/CrashGame/PpusyeoScene.unity
-    guid: da618484ca51dff45ae52b5c92f4478e
+    path: Assets/Minigames/AttackGame/AttackGame.unity
+    guid: 74911d3e0a367e046b40d9f2cd18a9be
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d25b328042029f94791548d094ea8005, type: 2}
