@@ -47,6 +47,11 @@ namespace GameHeaven.SpreadGame
             if (HP <= 0) Die();
             if (transform.position.x < -7) Destroy(gameObject);
 
+            if (type == Type.SeGyun)
+            {
+                rigid.AddForce(new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * 0.01f, ForceMode2D.Impulse);
+            }
+
             if (transform.position.y < -4)
             {
                 rigid.velocity = new Vector2(rigid.velocity.x, (rigid.velocity.y > 0) ? rigid.velocity.y : -rigid.velocity.y);
@@ -131,7 +136,8 @@ namespace GameHeaven.SpreadGame
                 {
                     obj = Instantiate(upgradeItems[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
                     obj.transform.GetChild(0).GetComponent<TextMeshPro>().text =
-                        "x" + Mathf.Min(((FindObjectOfType<GameManager>().bossIdx / 3) + (Random.Range(0, 5) == 0 ? 2 : 1)), 3);
+                        "x" + Random.Range(Mathf.Min(3, 1 + FindObjectOfType<GameManager>().bossIdx / 3), 
+                        Mathf.Min(5, 2 + FindObjectOfType<GameManager>().bossIdx / 2));
                 }
                 obj.transform.localScale = new Vector3(0.5f, 0.5f);
 
@@ -143,7 +149,8 @@ namespace GameHeaven.SpreadGame
                 {
                     obj = Instantiate(upgradeItems[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
                     obj.transform.GetChild(0).GetComponent<TextMeshPro>().text =
-                        "x" + Mathf.Min(((FindObjectOfType<GameManager>().bossIdx / 3) + (Random.Range(0, 5) == 0 ? 2 : 1)), 3);
+                        "x" + Random.Range(Mathf.Min(3, 1 + FindObjectOfType<GameManager>().bossIdx / 3),
+                        Mathf.Min(5, 1 + FindObjectOfType<GameManager>().bossIdx / 2));
                 }
                 obj.GetComponent<UpDownMove>().dir = new Vector3(0, -0.05f, 0);
                 obj.transform.localScale = new Vector3(0.5f, 0.5f);
