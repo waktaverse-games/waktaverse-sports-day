@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
 using static GameHeaven.CrashGame.Utils;
 using SharedLibs;
 using SharedLibs.Character;
@@ -44,7 +43,7 @@ namespace GameHeaven.CrashGame
         [SerializeField]
         private List<Sprite> playerSpriteList;
         [SerializeField]
-        private List<AnimatorController> playerAnimatorControllerList;
+        private List<RuntimeAnimatorController> playerAnimatorControllerList;
 
         [Obsolete]
         public int Money
@@ -109,7 +108,7 @@ namespace GameHeaven.CrashGame
         }
 
         public List<Sprite> PlayerSpriteList => playerSpriteList;
-        public List<AnimatorController> PlayerAnimatorControllerList => playerAnimatorControllerList;
+        public List<RuntimeAnimatorController> PlayerAnimatorControllerList => playerAnimatorControllerList;
 
         public int Score
         {
