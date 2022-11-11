@@ -1,71 +1,87 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Pool;
+using Random = UnityEngine.Random;
 
-namespace GameHeaven.PunctureGame {
-    public class EnemyManager : MonoBehaviour {
-        [SerializeField] private GameObject enemyPrefab;
+namespace GameHeaven.PunctureGame
+{
+    public class EnemyManager : MonoBehaviour, IManagerLogic
+    {
+        [SerializeField] private Player player;
+        [SerializeField] private EnemyPoolSpawner spawner;
+        
+        [SerializeField] private float upperReleaseHeight;
+        [SerializeField] private float bottomReleaseHeight;
+        [SerializeField] private float relocateWidth;
 
-        [Header("Spawn Value")]
-        [SerializeField] private int startSpawnCount = 6;
-        [SerializeField] private float spawnHorizontalRange = 4.0f;
-        [SerializeField] [ReadOnly] private int spawnYNext = -2;
-        [SerializeField] private int spawnYInterval = 2;
-
-        [Header("Components")]
-        [SerializeField] private PlayerController player;
-        [SerializeField] private PlayerFloorChecker floorChecker;
-
-        private ObjectPool<EnemyController> enemyPool;
-
-        private void Awake() {
-            enemyPool = new ObjectPool<EnemyController>(
-                () => {
-                    var enemy = Create();
-                    return enemy;
-                },
-                enemy => {
-                    enemy.onRelease += enemyPool.Release;
-                    enemy.Spawn(RandSpawnPoint());
-                    enemy.gameObject.SetActive(true);
-                },
-                enemy => {
-                    enemy.gameObject.SetActive(false);
-                    enemy.onRelease -= enemyPool.Release;
-                },
-                enemy => { Destroy(enemy.gameObject); },
-                maxSize: 30);
+        private void OnDisable()
+        {
+            Stop();
         }
 
-        private void Start() {
-            for (var i = 0; i < startSpawnCount; i++) enemyPool.Get();
+        private void Update()
+        {
+            var enemies = spawner.GetActiveElements();
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                var enemy = enemies[i];
+                if (enemy && enemy.enabled)
+                {
+                    EnemyXAxisRelocate(enemy.transform);
+                    EnemyReleaseConditionCheck(enemy);
+                }
+            }
         }
 
-        private void OnEnable() {
-            floorChecker.onFloorChanged += OnPlayerFloorChanged;
+        private void EnemyXAxisRelocate(Transform tf)
+        {
+            var position = tf.position;
+
+            var dist = position.x - player.currentPos.x;
+            if (dist < -relocateWidth)
+                position = new Vector3(player.currentPos.x + relocateWidth,
+                    position.y, position.z);
+            else if (dist > relocateWidth)
+                position = new Vector3(player.currentPos.x - relocateWidth,
+                    position.y, position.z);
+
+            tf.position = position;
         }
 
-        private void OnDisable() {
-            floorChecker.onFloorChanged -= OnPlayerFloorChanged;
+        private void EnemyReleaseConditionCheck(Enemy enemy)
+        {
+            var enemyPos = enemy.transform.position;
+            var playerPos = player.currentPos;
+
+            if (IsEnemyReleasable(enemyPos, playerPos))
+            {
+                spawner.Release(enemy);
+            }
         }
 
-        public EnemyController Create() {
-            var obj = Instantiate(enemyPrefab);
-            return obj.GetComponent<EnemyController>();
+        private bool IsEnemyReleasable(Vector3 enemyPos, Vector3 playerPos)
+        {
+            var upperReleaseCheck = enemyPos.y - playerPos.y > upperReleaseHeight;
+            var bottomReleaseCheck = Mathf.Abs(enemyPos.x - playerPos.x) >= relocateWidth && (enemyPos.y - playerPos.y < -bottomReleaseHeight);
+            
+            return upperReleaseCheck || bottomReleaseCheck;
+        }
+        
+        // Interface Implement
+        
+        public void Run()
+        {
+            throw new NotImplementedException();
         }
 
-        private Vector3 RandSpawnPoint() {
-            var pos = Vector3.zero;
-            pos.x += player.currentPos.x + Random.Range(-spawnHorizontalRange, spawnHorizontalRange);
-            pos.y = spawnYNext;
-            spawnYNext -= spawnYInterval;
-            return pos;
+        public void Stop()
+        {
+            var enemies = spawner.GetActiveElements();
+            foreach (IEntityLogic enemy in enemies)
+            {
+                enemy.Inactive();
+            }
         }
-
-        private void OnPlayerFloorChanged(int floor) {
-            if (floor % spawnYInterval == 0) enemyPool.Get();
-        }
-
-        // TODO: 적들 Pool에 되돌리기 및 리스폰
     }
 }

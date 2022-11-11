@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8374827793681656641}
   - component: {fileID: 6077822752433244462}
+  - component: {fileID: 8433834152182369222}
   m_Layer: 6
   m_Name: Map
   m_TagString: Untagged
@@ -61,6 +62,20 @@ MonoBehaviour:
   customSize: {x: 10, y: 10, z: 1}
   customRadius: 1
   gizmosColor: {r: 1, g: 0, b: 0.554585, a: 0.1254902}
+--- !u!114 &8433834152182369222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8374827793681656640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046b62f36e04441aa7cb8d2979dfac25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockObjects: []
+  spriteColorizes: []
 --- !u!1001 &885915886151160743
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,112 +1,93 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace GameHeaven.PunctureGame {
-    public class MapManager : MonoBehaviour {
-        [SerializeField] [DisableInPlayMode] private GameObject[] rightChunks;
-        [SerializeField] [DisableInPlayMode] private GameObject[] leftChunks;
+namespace GameHeaven.PunctureGame
+{
+    public class MapManager : MonoBehaviour
+    {
+        [SerializeField] [DisableInPlayMode] private Map[] rightSideMaps;
+        [SerializeField] [DisableInPlayMode] private Map[] leftSideMaps;
 
-        [SerializeField] private PlayerController playerController;
+        [SerializeField] private Player player;
 
-        [SerializeField] private float floorWidth = 8.5f;
+        [SerializeField] private float floorWidth = 10.0f;
         [SerializeField] private float mapHeight = 10.0f;
 
-        [SerializeField] [ReadOnly] private Vector3 rightTargetPos = Vector3.zero;
-        [SerializeField] [ReadOnly] private Vector3 leftTargetPos = Vector3.zero;
-        [SerializeField] [ReadOnly] private float bottomTargetHeight;
+        [SerializeField] [ReadOnly] private float leftTargetX;
+        [SerializeField] [ReadOnly] private float rightTargetX;
+        [SerializeField] [ReadOnly] private float bottomTargetY;
 
-        [SerializeField] private float allowDist = 0.2f;
+        [SerializeField] private float allowRelocateDistance = -0.5f;
 
-        private void Start() {
-            bottomTargetHeight -= mapHeight / 2 + mapHeight;
-            rightTargetPos.y = bottomTargetHeight;
-            leftTargetPos.y = bottomTargetHeight;
+        private void Start()
+        {
+            bottomTargetY -= mapHeight / 2 + mapHeight;
         }
 
-        private void Update() {
-            if (playerController.movement.isFacingLeft) {
-                if ((playerController.currentPos - leftTargetPos).x < -allowDist) {
-                    print("To LEFT");
-                    var fixPosVec = new Vector3(-floorWidth, 0.0f);
-                    rightChunks[0].transform.position = leftChunks[0].transform.position + fixPosVec;
-                    rightChunks[1].transform.position = leftChunks[1].transform.position + fixPosVec;
-
-                    var idx0Chunk = leftChunks[0];
-                    var idx1Chunk = leftChunks[1];
-
-                    leftChunks[0] = rightChunks[0];
-                    leftChunks[1] = rightChunks[1];
-
-                    rightChunks[0] = idx0Chunk;
-                    rightChunks[1] = idx1Chunk;
-
-                    rightTargetPos = leftTargetPos;
-                    leftTargetPos.x -= floorWidth;
-                }
-            }
-            else {
-                if ((playerController.currentPos - rightTargetPos).x > allowDist) {
-                    print("To RIGHT");
-                    var fixPosVec = new Vector3(floorWidth, 0.0f);
-                    leftChunks[0].transform.position = rightChunks[0].transform.position + fixPosVec;
-                    leftChunks[1].transform.position = rightChunks[1].transform.position + fixPosVec;
-
-                    var idx0Chunk = rightChunks[0];
-                    var idx1Chunk = rightChunks[1];
-
-                    rightChunks[0] = leftChunks[0];
-                    rightChunks[1] = leftChunks[1];
-
-                    leftChunks[0] = idx0Chunk;
-                    leftChunks[1] = idx1Chunk;
-
-                    leftTargetPos = rightTargetPos;
-                    rightTargetPos.x += floorWidth;
-                }
-            }
-
-            if (playerController.currentPos.y < bottomTargetHeight - allowDist) {
-                leftChunks[0] = ResetMap(leftChunks[0].transform);
-                rightChunks[0] = ResetMap(rightChunks[0].transform);
-
-                var fixPosVec = new Vector3(0.0f, mapHeight);
-                leftChunks[0].transform.position = leftChunks[1].transform.position - fixPosVec;
-                rightChunks[0].transform.position = rightChunks[1].transform.position - fixPosVec;
-
-                var leftChunk = leftChunks[1];
-                var rightChunk = rightChunks[1];
-
-                leftChunks[1] = leftChunks[0];
-                rightChunks[1] = rightChunks[0];
-
-                leftChunks[0] = leftChunk;
-                rightChunks[0] = rightChunk;
-
-                bottomTargetHeight -= mapHeight;
-                rightTargetPos.y -= mapHeight;
-                leftTargetPos.y -= mapHeight;
-            }
+        private void Update()
+        {
+            SwapHorizontal();
+            // Player is moved down, Upper side maps will be moved to bottom side and swap each other
+            if (player.currentPos.y < bottomTargetY - allowRelocateDistance) SwapVertical();
         }
 
-        private void OnDrawGizmos() {
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(rightTargetPos, playerController.currentPos);
+        private void OnDrawGizmos()
+        {
+            var leftTargetVec = new Vector3(leftTargetX, bottomTargetY);
+            var rightTargetVec = new Vector3(rightTargetX, bottomTargetY);
             Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(leftTargetPos, playerController.currentPos);
+            Gizmos.DrawLine(new Vector3(leftTargetX, bottomTargetY), player.currentPos);
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(new Vector3(rightTargetX, bottomTargetY), player.currentPos);
             Gizmos.color = Color.black;
-            Gizmos.DrawLine(leftTargetPos, rightTargetPos);
+            Gizmos.DrawLine(leftTargetVec, rightTargetVec);
         }
 
-        private GameObject ResetMap(Transform map) {
-            // TODO: 적들 초기화 호출
-            var enemyManager = map.GetComponent<EnemyManager>();
+        private void SwapHorizontal()
+        {
+            if (player.motion.isFacingLeft)
+            {
+                // Player is facing left, Right side maps will be moved to left side and swap each other
+                if (player.currentPos.x < leftTargetX - allowRelocateDistance)
+                {
+                    var fixPosVec = new Vector3(-floorWidth, 0.0f);
+                    for (var i = 0; i < rightSideMaps.Length; i++)
+                    {
+                        rightSideMaps[i].MovePosition(leftSideMaps[i].CurrentPosition, fixPosVec);
+                        (leftSideMaps[i], rightSideMaps[i]) = (rightSideMaps[i], leftSideMaps[i]);
+                    }
 
-            foreach (Transform floor in map)
-            foreach (Transform block in floor)
-                if (!block.gameObject.activeInHierarchy)
-                    block.gameObject.SetActive(true);
+                    rightTargetX = leftTargetX;
+                    leftTargetX -= floorWidth;
+                }
+            }
+            else
+            {
+                // Player is facing right, Left side maps will be moved to right side and swap each other
+                if (player.currentPos.x > rightTargetX + allowRelocateDistance)
+                {
+                    var fixPosVec = new Vector3(floorWidth, 0.0f);
+                    for (var i = 0; i < leftSideMaps.Length; i++)
+                    {
+                        leftSideMaps[i].MovePosition(rightSideMaps[i].CurrentPosition, fixPosVec);
+                        (rightSideMaps[i], leftSideMaps[i]) = (leftSideMaps[i], rightSideMaps[i]);
+                    }
 
-            return map.gameObject;
+                    leftTargetX = rightTargetX;
+                    rightTargetX += floorWidth;
+                }
+            }
+        }
+
+        private void SwapVertical()
+        {
+            var fixPosVec = new Vector3(0.0f, -mapHeight);
+            leftSideMaps[0].MapReset().MovePosition(leftSideMaps[1].CurrentPosition, fixPosVec);
+            rightSideMaps[0].MapReset().MovePosition(rightSideMaps[1].CurrentPosition, fixPosVec);
+            (leftSideMaps[0], leftSideMaps[1]) = (leftSideMaps[1], leftSideMaps[0]);
+            (rightSideMaps[0], rightSideMaps[1]) = (rightSideMaps[1], rightSideMaps[0]);
+
+            bottomTargetY -= mapHeight;
         }
     }
 }

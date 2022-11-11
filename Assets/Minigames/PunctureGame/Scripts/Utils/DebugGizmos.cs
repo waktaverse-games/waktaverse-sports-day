@@ -4,8 +4,10 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace GameHeaven.PunctureGame.Utils {
-    public class DebugGizmos : MonoBehaviour {
+namespace GameHeaven.PunctureGame.Utils
+{
+    public class DebugGizmos : MonoBehaviour
+    {
         [SerializeField] private GizmosShape shape;
 
         [SerializeField] private bool isFilled;
@@ -26,10 +28,12 @@ namespace GameHeaven.PunctureGame.Utils {
         private Vector3 scale => isCustom ? customSize : Vector3.one;
         private float radius => isCustom ? customRadius : 1f;
 
-        private void OnDrawGizmos() {
+        private void OnDrawGizmos()
+        {
             Gizmos.color = gizmosColor;
             if (isFilled)
-                switch (shape) {
+                switch (shape)
+                {
                     case GizmosShape.Cube:
                         Gizmos.DrawCube(position, scale);
                         break;
@@ -38,7 +42,8 @@ namespace GameHeaven.PunctureGame.Utils {
                         break;
                 }
             else
-                switch (shape) {
+                switch (shape)
+                {
                     case GizmosShape.Cube:
                         Gizmos.DrawWireCube(position, scale);
                         break;
@@ -51,20 +56,25 @@ namespace GameHeaven.PunctureGame.Utils {
         }
 
         [Button("콜라이더와 동기화하기")]
-        public void SyncCollider() {
-            switch (shape) {
+        public void SyncCollider()
+        {
+            switch (shape)
+            {
                 case GizmosShape.Cube:
                     var boxCol = GetComponent<BoxCollider>();
                     var boxCol2D = GetComponent<BoxCollider2D>();
-                    if (boxCol) {
+                    if (boxCol)
+                    {
                         boxCol.center = customPos;
                         boxCol.size = scale;
                     }
-                    else if (boxCol2D) {
+                    else if (boxCol2D)
+                    {
                         boxCol2D.offset = customPos;
                         boxCol2D.size = scale;
                     }
-                    else {
+                    else
+                    {
                         Debug.Log(name + " Object has no collider!");
                     }
 
@@ -72,15 +82,18 @@ namespace GameHeaven.PunctureGame.Utils {
                 case GizmosShape.Sphere:
                     var sphereCol = GetComponent<SphereCollider>();
                     var circleCol = GetComponent<CircleCollider2D>();
-                    if (sphereCol) {
+                    if (sphereCol)
+                    {
                         sphereCol.center = customPos;
                         sphereCol.radius = customRadius;
                     }
-                    else if (circleCol) {
+                    else if (circleCol)
+                    {
                         circleCol.offset = customPos;
                         circleCol.radius = customRadius;
                     }
-                    else {
+                    else
+                    {
                         Debug.Log(name + " Object has no collider!");
                     }
 
@@ -93,7 +106,8 @@ namespace GameHeaven.PunctureGame.Utils {
             Vector3 worldPosition,
             Color textColor,
             Vector2 anchor,
-            float textSize = 15f) {
+            float textSize = 15f)
+        {
             var view = SceneView.currentDrawingSceneView;
             if (!view)
                 return;
@@ -104,7 +118,8 @@ namespace GameHeaven.PunctureGame.Utils {
             var pixelRatio = HandleUtility.GUIPointToScreenPixelCoordinate(Vector2.right).x -
                              HandleUtility.GUIPointToScreenPixelCoordinate(Vector2.zero).x;
             Handles.BeginGUI();
-            var style = new GUIStyle(GUI.skin.label) {
+            var style = new GUIStyle(GUI.skin.label)
+            {
                 fontSize = (int)textSize,
                 normal = new GUIStyleState { textColor = textColor }
             };
@@ -118,7 +133,8 @@ namespace GameHeaven.PunctureGame.Utils {
         }
 
         [EnumToggleButtons]
-        private enum GizmosShape {
+        private enum GizmosShape
+        {
             Cube,
             Sphere
         }
