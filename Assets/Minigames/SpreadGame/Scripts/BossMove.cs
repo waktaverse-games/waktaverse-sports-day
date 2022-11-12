@@ -193,7 +193,7 @@ namespace GameHeaven.SpreadGame
             {
                 yield return wait;
 
-                Instantiate(gyunNyang, transform.position, transform.rotation);
+                Instantiate(gyunNyang, transform.position, transform.rotation).GetComponent<EnemyMove>().HP = maxHP * 2 / 100;
             }
         }
 
