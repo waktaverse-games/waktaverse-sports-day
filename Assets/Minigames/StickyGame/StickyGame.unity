@@ -4806,6 +4806,40 @@ Transform:
   m_Father: {fileID: 1094628999}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1522415980 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4516913605218833961, guid: 635affe0b9719734f81930c7cbc48d08, type: 3}
+  m_PrefabInstance: {fileID: 6493721503063987127}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1522415981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522415980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c467bd4952cc864fb08f6ef7d2c3a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllers:
+  - {fileID: 9100000, guid: 19c4bd248863d3d46bc48dc1a21d914b, type: 2}
+  - {fileID: 9100000, guid: 0e2e615d60c4f234091a4f862ecd5e20, type: 2}
+  - {fileID: 9100000, guid: 38c3d7e6e84652145b108bc94823fcf6, type: 2}
+  - {fileID: 9100000, guid: 55d68962492350841b6ae6f258a68e84, type: 2}
+  - {fileID: 9100000, guid: 1f2e43f6e88a73d4bbb3a3906c7022a6, type: 2}
+  - {fileID: 9100000, guid: f7c15245349bc1b458fa22a24c032730, type: 2}
+  - {fileID: 9100000, guid: 65394f111a03938489524075cac90be3, type: 2}
+  sprites:
+  - {fileID: 633763255, guid: 6e7cdf48bec350d4da8ea74197613768, type: 3}
+  - {fileID: -1117636702, guid: c6318d5e48838a8499a7e9dc448abdd7, type: 3}
+  - {fileID: 90388250, guid: c2c89dc85b447e84984bba86ba12bbfc, type: 3}
+  - {fileID: -1422597306, guid: a9262a7af15e5254da3c215d49c87a17, type: 3}
+  - {fileID: -298970691, guid: 17954fc24b9949b489f828da53f8b4f3, type: 3}
+  - {fileID: 2089651048, guid: 1d743ecc069ea2f40b7c6b6e9d617ab5, type: 3}
+  - {fileID: -1566900103, guid: a775dcc7eed72ee4a962c8fa95faf1e4, type: 3}
+  currChar: 0
 --- !u!1 &1524994489
 GameObject:
   m_ObjectHideFlags: 0
