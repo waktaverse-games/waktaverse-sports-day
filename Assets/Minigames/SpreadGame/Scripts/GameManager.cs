@@ -86,6 +86,7 @@ namespace GameHeaven.SpreadGame
 
             EnemyMove enemy = obj.GetComponent<EnemyMove>();
             enemy.HP += bossIdx / 2;
+            if (enemy.HP > 10) enemy.HP = 10;
 
             if (isElite)
             {

@@ -173,19 +173,19 @@ namespace GameHeaven.SpreadGame
                         {
                             case 1:
                                 bullet.damage = 3;
-                                bullet.maxShotDelay = 1;
+                                bullet.maxShotDelay = 1.3f;
                                 break;
                             case 2:
                                 bullet.damage = 3;
-                                bullet.maxShotDelay = 0.75f;
+                                bullet.maxShotDelay = 1.0f;
                                 break;
                             case 3:
                                 bullet.damage = 3;
-                                bullet.maxShotDelay = 0.5f;
+                                bullet.maxShotDelay = 0.7f;
                                 break;
                             case 4:
                                 bullet.damage = 3;
-                                bullet.maxShotDelay = 0.3f;
+                                bullet.maxShotDelay = 0.4f;
                                 break;
                         }
                         canvas.transform.GetChild(2).gameObject.SetActive(true);
@@ -264,7 +264,7 @@ namespace GameHeaven.SpreadGame
 
                 case 'o': // B'o'mb
                     {
-                        if (bombCnt < 5)
+                        if (bombCnt < 3)
                         {
                             canvas.transform.GetChild(0).GetChild(bombCnt).gameObject.SetActive(true);
                             bombCnt++;
