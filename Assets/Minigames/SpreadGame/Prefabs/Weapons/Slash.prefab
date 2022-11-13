@@ -217,8 +217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   speed: 10
-  curShotDelay: 0.3667308
-  maxShotDelay: 0.4
+  curShotDelay: 0.0989915
+  maxShotDelay: 0.8
   damage: 1
 --- !u!114 &-9193505824379735034
 MonoBehaviour:

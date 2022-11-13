@@ -120,11 +120,11 @@ namespace GameHeaven.SpreadGame
             copy.isCopy = true;
             if (isElite)
             {
-                copy.GetComponent<SpriteRenderer>().color = Color.yellow;
+                copy.gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
             }
             else
             {
-                copy.GetComponent<SpriteRenderer>().color = Color.white;
+                copy.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
 
