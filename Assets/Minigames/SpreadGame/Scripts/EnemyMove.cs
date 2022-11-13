@@ -47,7 +47,7 @@ namespace GameHeaven.SpreadGame
             if (HP <= 0) Die();
             if (transform.position.x < -7) Destroy(gameObject);
 
-            if (type == Type.SeGyun)
+            if (type == Type.SeGyun || type == Type.JuPokDo)
             {
                 rigid.AddForce(new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * 0.01f, ForceMode2D.Impulse);
             }
