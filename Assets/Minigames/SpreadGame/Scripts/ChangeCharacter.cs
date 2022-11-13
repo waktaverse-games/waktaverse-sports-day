@@ -8,14 +8,16 @@ namespace GameHeaven.SpreadGame
     public class ChangeCharacter : MonoBehaviour
     {
         Animator anim;
+        SpriteRenderer spriteRenderer;
+
         [SerializeField] RuntimeAnimatorController[] controllers;
-        [SerializeField] SpriteRenderer spriteRenderer;
         [SerializeField] Sprite[] sprites;
         [SerializeField] CharacterType currChar;
 
         private void Awake()
         {
             anim = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             ChooseCharacter(currChar);
         }
 

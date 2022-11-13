@@ -2782,7 +2782,6 @@ MonoBehaviour:
   - {fileID: 9100000, guid: e07f2cd82f7e147419b0a1ab862fb837, type: 2}
   - {fileID: 9100000, guid: 5a23af7fa57392746826018004c5f95a, type: 2}
   - {fileID: 9100000, guid: 2fcb1cdabfe11d04bb304866dcd49aec, type: 2}
-  spriteRenderer: {fileID: 0}
   sprites:
   - {fileID: 2091600807, guid: 6e7cdf48bec350d4da8ea74197613768, type: 3}
   - {fileID: -610025438, guid: c6318d5e48838a8499a7e9dc448abdd7, type: 3}
