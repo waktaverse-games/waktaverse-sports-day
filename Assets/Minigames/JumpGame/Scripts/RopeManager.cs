@@ -8,85 +8,114 @@ namespace GameHeaven.JumpGame
 {
     public class RopeManager : MonoBehaviour
     {
+        public UnityEvent ExclamationMarkEvent;
         [SerializeField]
         Animator animator;
 
         // Game Speed
-        public float speed;
-        public float increasingSpeedTime;
-        public float increasingSpeedAmount;
-        public float maxSpeed;
-        public float minSpeed;
+        [SerializeField] float speed;
+        [SerializeField] float increasingSpeedTime;
+        [SerializeField] float increasingSpeedAmount;
+        [SerializeField] float maxSpeed;
+        [SerializeField] float minSpeed;
 
-        private int timeCount = 0;
-        // Item Spawn Probability
-        public int[] itemProb;
+        [SerializeField] int reverseProb;
+        [SerializeField] int slowModeProb;
 
-
+        private bool isReverse = false;
+        private bool isSlowMode = false;
+        private bool isReversing = true;
         // Start is called before the first frame update
         void Start()
         {
             animator.speed = speed;
+            Invoke("EnableReverse", 1f);
             StartCoroutine(IncreaseSpeed(increasingSpeedTime));
-            itemProb = new int[3] { 90, 9, 1 };
         }
 
         IEnumerator IncreaseSpeed(float delayTime)
         {
             yield return new WaitForSeconds(delayTime);
-            speed += increasingSpeedAmount;
-            if (speed > maxSpeed)
-                speed = maxSpeed;
-            animator.speed = speed;
 
-            timeCount++;
-            AdjustItemProb();
-
-            StartCoroutine(IncreaseSpeed(increasingSpeedTime));
-        }
-
-
-        private void AdjustItemProb()
-        {
-            switch (timeCount)
+            while (!GameManager.Instance.IsGameOver)
             {
-                case 5:
-                    itemProb = new int[3] { 85, 13, 2 };
-                    break;
-                case 10:
-                    itemProb = new int[3] { 80, 17, 3 };
-                    break;
-                case 15:
-                    itemProb = new int[3] { 75, 21, 4 };
-                    break;
-                case 20:
-                    itemProb = new int[3] { 70, 25, 5 };
-                    break;
-                case 25:
-                    itemProb = new int[3] { 65, 28, 7 };
-                    break;
-                case 30:
-                    itemProb = new int[3] { 60, 30, 10 };
-                    break;
+                speed += increasingSpeedAmount;
+                if (speed > maxSpeed)
+                    speed = maxSpeed;
+                animator.speed = speed;
+                yield return new WaitForSeconds(delayTime);
             }
         }
+
         public void DecreaseSpeed()
         {
             speed /= 2;
             if(speed <minSpeed) { speed = minSpeed; }
+            ResetSpeedSetting();
+        }
+
+        void Reverse()
+        {
+            if (Random.Range(0, 100) <= reverseProb && !isReversing)
+            {
+                ExclamationMarkEvent.Invoke();
+                isReversing = true;
+                isReverse = !isReverse;
+                if (isReverse) animator.SetFloat("reverse", -1f);
+                else animator.SetFloat("reverse", 1f);
+                Invoke("EnableReverse", 0.2f);
+                speed *= 0.9f;
+                if (speed < minSpeed) { speed = minSpeed; }
+                ResetSpeedSetting();
+            }
+        }
+        void EnableReverse()
+        {
+            isReversing = false;
+        }
+
+        public void SlowMode(int _isReverse)
+        {
+            if (Random.Range(0, 100) <= slowModeProb && isReverse == System.Convert.ToBoolean(_isReverse))
+            {
+                ExclamationMarkEvent.Invoke();
+                float slowSpeed = speed / 2;
+                if (slowSpeed < minSpeed) { slowSpeed = minSpeed; }
+                StopAllCoroutines();
+                animator.speed = slowSpeed;
+                isSlowMode = true;
+            }
+        }
+
+        public void ResetSlowMode(int _isReverse)
+        {
+            if(isSlowMode && isReverse == System.Convert.ToBoolean(_isReverse)) 
+            {
+                ResetSpeedSetting();
+            }
+        }
+        public void JumpSuccess(AnimationEvent animEvent)
+        {
+            if (isReverse == System.Convert.ToBoolean(animEvent.intParameter))
+            {
+                GameManager.Instance.IncreaseScore((int)animEvent.floatParameter);
+                GameManager.Instance.IncreaseJumpSuccessCount();
+            }
+        }
+
+        public void PlayRopeSound(int _isReverse)
+        {
+            if (isReverse == System.Convert.ToBoolean(_isReverse))
+            {
+                SoundManager.Instance.PlayRopeSound();
+            }
+        }
+
+        void ResetSpeedSetting()
+        {
             StopAllCoroutines();
             animator.speed = speed;
             StartCoroutine(IncreaseSpeed(increasingSpeedTime));
-        }
-        public void JumpSuccess(int score)
-        {
-            GameManager.Instance.IncreaseScore(score);
-            GameManager.Instance.IncreaseJumpSuccessCount();
-        }
-
-        public void PlayRopeSound()
-        {
-            SoundManager.Instance.PlayRopeSound();
         }
     }
 }   
