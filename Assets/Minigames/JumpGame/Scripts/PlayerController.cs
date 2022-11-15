@@ -97,6 +97,7 @@ namespace GameHeaven.JumpGame
         {
             VFX.SetActive(true);
             VFX.GetComponent<Animator>().Play("ExclamationMark");
+            SoundManager.Instance.PlayEMSound();
             Invoke("DisableExclamationMark", 1f);
         }
         void DisableExclamationMark()
