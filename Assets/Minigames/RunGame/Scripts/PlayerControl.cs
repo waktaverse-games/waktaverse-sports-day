@@ -104,38 +104,21 @@ namespace GameHaven.RunGame
             else if (other.gameObject.tag == "Coin")
             {
                 audio = other.GetComponent<AudioSource>();
-                if (other.GetComponent<Animator>() == true)
+                coin = other.GetComponent<Animator>();
+                audio.Play();
+                coin.SetBool("Get", true);
+
+                Destroy(other.gameObject, 3);
+
+                if (other.gameObject.name.Contains("PungSin"))
                 {
-                    coin = other.GetComponent<Animator>();
-
-                    GetCoin(other.gameObject.name);
-                    audio.Play();
-                    coin.SetBool("Get", true);
-
-                    Destroy(other.gameObject, 3);
-                    Debug.Log(CoinCount);
+                    GetItem = true;
+                    GameManager.instance.ItemScore(10000);
                 }
                 else
                 {
-                    GetItem = true;
-                    GameManager.instance.ItemScore(15);
+                    GameManager.instance.ItemScore(5);
                 }
-            }
-        }
-
-        void GetCoin(string coinName)
-        {
-            if (coinName.Contains("GoldCoin"))
-            {
-                GameManager.instance.ItemScore(5);
-            }
-            else if (coinName.Contains("SilverCoin"))
-            {
-                CoinCount += 3;
-            }
-            else if (coinName.Contains("BronzCoin"))
-            {
-                CoinCount += 1;
             }
         }
     }
