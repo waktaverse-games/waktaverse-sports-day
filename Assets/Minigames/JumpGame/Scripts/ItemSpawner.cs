@@ -9,9 +9,9 @@ namespace GameHeaven.JumpGame
     {
         enum Items
         {
-            bronzeCoin,
-            silverCoin,
-            GoldCoin
+            Bungeoppang,
+            Sushi,
+            Burger
         }
         [SerializeField] Transform spawnPosMin;
         [SerializeField] Transform spawnPosMax;
@@ -23,6 +23,7 @@ namespace GameHeaven.JumpGame
 
         Queue<GameObject> deactivatedItems = new Queue<GameObject>();
 
+        bool gotGomemItem = false;
         void Start()
         {
             StartCoroutine(Spawn());
@@ -31,12 +32,12 @@ namespace GameHeaven.JumpGame
         void SpawnItem()
         {
             GameObject item = null;
-            if (GameManager.Instance.JumpSuccessCount >= gomemItemFreq && !GameManager.Instance.isInvincible)
+            if (GameManager.Instance.JumpSuccessCount >= gomemItemFreq && !GameManager.Instance.isInvincible && !gotGomemItem)
             {
-
                 item = Instantiate(gomemItemPrefab);
                 item.transform.SetParent(transform);
                 GameManager.Instance.ResetJumpSuccessCount();
+                gotGomemItem = true;
             }
             else
             {

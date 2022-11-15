@@ -47,7 +47,7 @@ namespace GameHeaven.SpreadGame
             if (HP <= 0) Die();
             if (transform.position.x < -7) Destroy(gameObject);
 
-            if (type == Type.SeGyun)
+            if (type == Type.SeGyun || type == Type.JuPokDo)
             {
                 rigid.AddForce(new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * 0.01f, ForceMode2D.Impulse);
             }
@@ -116,7 +116,16 @@ namespace GameHeaven.SpreadGame
         }
         void Reproduction()
         {
-            Instantiate(this.gameObject, transform.position, transform.rotation).GetComponent<EnemyMove>().isCopy = true;
+            EnemyMove copy = Instantiate(this.gameObject, transform.position, transform.rotation).GetComponent<EnemyMove>();
+            copy.isCopy = true;
+            if (isElite)
+            {
+                copy.gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            }
+            else
+            {
+                copy.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            }
         }
 
         public void Die()
@@ -136,7 +145,7 @@ namespace GameHeaven.SpreadGame
                 {
                     obj = Instantiate(upgradeItems[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
                     obj.transform.GetChild(0).GetComponent<TextMeshPro>().text =
-                        "x" + Random.Range(Mathf.Min(3, 1 + FindObjectOfType<GameManager>().bossIdx / 3), 
+                        "x" + Random.Range(Mathf.Min(2, 1 + FindObjectOfType<GameManager>().bossIdx / 4), 
                         Mathf.Min(5, 2 + FindObjectOfType<GameManager>().bossIdx / 2));
                 }
                 obj.transform.localScale = new Vector3(0.5f, 0.5f);
@@ -149,7 +158,7 @@ namespace GameHeaven.SpreadGame
                 {
                     obj = Instantiate(upgradeItems[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
                     obj.transform.GetChild(0).GetComponent<TextMeshPro>().text =
-                        "x" + Random.Range(Mathf.Min(3, 1 + FindObjectOfType<GameManager>().bossIdx / 3),
+                        "x" + Random.Range(Mathf.Min(3, 1 + FindObjectOfType<GameManager>().bossIdx / 4),
                         Mathf.Min(5, 1 + FindObjectOfType<GameManager>().bossIdx / 2));
                 }
                 obj.GetComponent<UpDownMove>().dir = new Vector3(0, -0.05f, 0);

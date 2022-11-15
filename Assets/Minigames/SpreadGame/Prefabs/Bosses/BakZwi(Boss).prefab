@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9123364717874670282}
   - component: {fileID: 9113363569918830183}
   - component: {fileID: 5649261386354528368}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (9)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 3121365996670162704}
   - component: {fileID: 8655705921062870996}
   - component: {fileID: 4669315570803607643}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 5499473606588408694}
   - component: {fileID: 7188623855509237093}
   - component: {fileID: 2267582034980658258}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (2)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -369,6 +369,134 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!1 &2053074688224870639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3611919138910124124}
+  - component: {fileID: 271952382621317615}
+  m_Layer: 0
+  m_Name: "5. \uBC15\uC950_\u3131\u3147\u3147\uD328\uD134(\uC74C\uD5A5\uD6A8\uACFC)"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3611919138910124124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053074688224870639}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9213968054036073801}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &271952382621317615
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053074688224870639}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 31a0df32c6ceaf948ad4325d154ca4a2, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2584962420160510294
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +509,7 @@ GameObject:
   - component: {fileID: 2637669227734516732}
   - component: {fileID: 6131186708088991748}
   - component: {fileID: 7513493130344850278}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (13)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -504,7 +632,7 @@ GameObject:
   - component: {fileID: 3017259578928247901}
   - component: {fileID: 9023556707081442893}
   - component: {fileID: 8795280950765077804}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (4)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -627,7 +755,7 @@ GameObject:
   - component: {fileID: 4962843727123596557}
   - component: {fileID: 3392876539168815251}
   - component: {fileID: 5408438277488789428}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (8)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -750,7 +878,7 @@ GameObject:
   - component: {fileID: 7295717025381640434}
   - component: {fileID: 5321630654622352289}
   - component: {fileID: 252649423151991861}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (5)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -873,7 +1001,7 @@ GameObject:
   - component: {fileID: 1481162773736567889}
   - component: {fileID: 3810282580001299116}
   - component: {fileID: 9155826747362615141}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (1)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -996,7 +1124,7 @@ GameObject:
   - component: {fileID: 2644958282910468623}
   - component: {fileID: 4803916568713296836}
   - component: {fileID: 4778025396265244156}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (3)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -1119,7 +1247,7 @@ GameObject:
   - component: {fileID: 7773151652357600154}
   - component: {fileID: 7713265184697804136}
   - component: {fileID: 3875162107929951590}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (7)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -1242,7 +1370,7 @@ GameObject:
   - component: {fileID: 5220551742572385376}
   - component: {fileID: 5829692286217764762}
   - component: {fileID: 2052326514999927340}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (1)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -1365,7 +1493,7 @@ GameObject:
   - component: {fileID: 541139958348928155}
   - component: {fileID: 1239628959398045757}
   - component: {fileID: 1241663588921918532}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (3)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -1488,7 +1616,7 @@ GameObject:
   - component: {fileID: 7809319963797331801}
   - component: {fileID: 1748732774350869821}
   - component: {fileID: 32456052761911963}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (14)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -1611,7 +1739,7 @@ GameObject:
   - component: {fileID: 4751651320394635153}
   - component: {fileID: 8644886052056428033}
   - component: {fileID: 1997998970628444739}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (5)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -1734,7 +1862,7 @@ GameObject:
   - component: {fileID: 3532940714527496231}
   - component: {fileID: 1778968756293047732}
   - component: {fileID: 2045144565176389550}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (6)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -1857,7 +1985,7 @@ GameObject:
   - component: {fileID: 8263359326099582487}
   - component: {fileID: 8072352604950813402}
   - component: {fileID: 6319618783081014331}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (7)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -1980,7 +2108,7 @@ GameObject:
   - component: {fileID: 7101366308541458194}
   - component: {fileID: 7975271559748961431}
   - component: {fileID: 1793554717191879290}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (6)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -2103,7 +2231,7 @@ GameObject:
   - component: {fileID: 2880868364208916048}
   - component: {fileID: 3470148136346712279}
   - component: {fileID: 6400685685440476987}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (8)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -2226,7 +2354,7 @@ GameObject:
   - component: {fileID: 1872951471634236399}
   - component: {fileID: 8845062783114808391}
   - component: {fileID: 1943893448657138369}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (10)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -2349,7 +2477,7 @@ GameObject:
   - component: {fileID: 8103057196144031625}
   - component: {fileID: 920928532009242896}
   - component: {fileID: 3697281968688079235}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (2)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -2472,7 +2600,7 @@ GameObject:
   - component: {fileID: 811711322789019111}
   - component: {fileID: 6099668951265834018}
   - component: {fileID: 7656820983093910007}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -2595,7 +2723,7 @@ GameObject:
   - component: {fileID: 7988828049072636596}
   - component: {fileID: 3541373438984850931}
   - component: {fileID: 2978207055512691573}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (4)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -2718,7 +2846,7 @@ GameObject:
   - component: {fileID: 9213968053574312820}
   - component: {fileID: 9213968053574312821}
   - component: {fileID: 9213968053574312822}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (7)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -2942,7 +3070,7 @@ GameObject:
   - component: {fileID: 9213968053646801165}
   - component: {fileID: 9213968053646801166}
   - component: {fileID: 9213968053646801167}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (10)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -3166,7 +3294,7 @@ GameObject:
   - component: {fileID: 9213968053722447699}
   - component: {fileID: 9213968053722447708}
   - component: {fileID: 9213968053722447709}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (1)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -3683,6 +3811,7 @@ Transform:
   - {fileID: 9213968055348933499}
   - {fileID: 9213968055198439037}
   - {fileID: 9213968053817523074}
+  - {fileID: 3611919138910124124}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3832,7 +3961,7 @@ MonoBehaviour:
   maxStraightFireDelay: 10000
   straightFireSpeed: 7
   curCircleFireDelay: 0
-  maxCircleFireDelay: 4
+  maxCircleFireDelay: 10000
   circleFireSpeed: 5
   straightFireDir: {x: -1, y: 0}
   randomDirY: 0
@@ -4292,7 +4421,7 @@ GameObject:
   - component: {fileID: 9213968054479391316}
   - component: {fileID: 9213968054479391317}
   - component: {fileID: 9213968054479391318}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (8)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -4516,7 +4645,7 @@ GameObject:
   - component: {fileID: 9213968054591973190}
   - component: {fileID: 9213968054591973191}
   - component: {fileID: 9213968054591973184}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (9)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -4639,7 +4768,7 @@ GameObject:
   - component: {fileID: 9213968054670782151}
   - component: {fileID: 9213968054670782144}
   - component: {fileID: 9213968054670782145}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (15)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -4762,7 +4891,7 @@ GameObject:
   - component: {fileID: 9213968054689331444}
   - component: {fileID: 9213968054689331445}
   - component: {fileID: 9213968054689331446}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (5)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -5087,7 +5216,7 @@ GameObject:
   - component: {fileID: 9213968054831814847}
   - component: {fileID: 9213968054831814840}
   - component: {fileID: 9213968054831814841}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (2)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -5513,7 +5642,7 @@ GameObject:
   - component: {fileID: 9213968055052435731}
   - component: {fileID: 9213968055052435740}
   - component: {fileID: 9213968055052435741}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (6)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -5636,7 +5765,7 @@ GameObject:
   - component: {fileID: 9213968055052860746}
   - component: {fileID: 9213968055052860747}
   - component: {fileID: 9213968055052860724}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (4)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -5759,7 +5888,7 @@ GameObject:
   - component: {fileID: 9213968055096717273}
   - component: {fileID: 9213968055096717274}
   - component: {fileID: 9213968055096717275}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (12)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -5882,7 +6011,7 @@ GameObject:
   - component: {fileID: 9213968055135485192}
   - component: {fileID: 9213968055135485193}
   - component: {fileID: 9213968055135485194}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -6057,7 +6186,7 @@ GameObject:
   - component: {fileID: 9213968055209018963}
   - component: {fileID: 9213968055209018972}
   - component: {fileID: 9213968055209018973}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (16)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -6281,7 +6410,7 @@ GameObject:
   - component: {fileID: 9213968055306909281}
   - component: {fileID: 9213968055306909282}
   - component: {fileID: 9213968055306909283}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (14)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -6505,7 +6634,7 @@ GameObject:
   - component: {fileID: 9213968055317367075}
   - component: {fileID: 9213968055317367084}
   - component: {fileID: 9213968055317367085}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (3)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -6712,7 +6841,7 @@ GameObject:
   - component: {fileID: 9213968055405245826}
   - component: {fileID: 9213968055405245827}
   - component: {fileID: 9213968055405245836}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (13)
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -7239,7 +7368,7 @@ GameObject:
   - component: {fileID: 9213968055560935803}
   - component: {fileID: 9213968055560935780}
   - component: {fileID: 9213968055560935781}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBullet (11)
   m_TagString: Ball
   m_Icon: {fileID: 0}

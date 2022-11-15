@@ -7,18 +7,22 @@ namespace GameHeaven.JumpGame
     public class ItemManager : MonoBehaviour
     {
         [SerializeField] int score;
-
+        [SerializeField]
+        Sprite[] itemSprites;
         ItemSpawner spawner;
-        Animator animator;
+        SpriteRenderer spriteRenderer;
+        //Animator animator;
         private void Awake()
         {
-            animator = GetComponent<Animator>();
+            //animator = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         public void InitializeItem(ItemSpawner _spawner, int itemNum)
         {
             spawner = _spawner;
-            animator.SetInteger("itemNum", itemNum);
+            //animator.SetInteger("itemNum", itemNum);
+            spriteRenderer.sprite = itemSprites[itemNum];
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

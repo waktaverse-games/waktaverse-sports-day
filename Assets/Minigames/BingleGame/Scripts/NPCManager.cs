@@ -9,20 +9,20 @@ namespace GameHeaven.BingleGame
         Animator anim;
         [SerializeField] RuntimeAnimatorController[] animatorControllers;
 
-        SpriteRenderer renderer;
+        SpriteRenderer spriteRenderer;
         Vector2 dir;
 
         public float movingSpeed;
         private void Awake()
         {
-            renderer = GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             anim = GetComponent<Animator>();
             anim.runtimeAnimatorController = animatorControllers[Random.Range(0,animatorControllers.Length)];
         }
 
         void Update()
         {
-            if(renderer.flipX)
+            if(spriteRenderer.flipX)
             {
                 transform.Translate(Vector3.right * movingSpeed * Time.deltaTime);
             }

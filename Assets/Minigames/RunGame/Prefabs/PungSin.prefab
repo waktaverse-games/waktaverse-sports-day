@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8355053281959799510}
   - component: {fileID: 8535631215376107980}
   - component: {fileID: -8027920597942494090}
+  - component: {fileID: 131511848797498598}
   m_Layer: 0
   m_Name: PungSin
   m_TagString: Coin
@@ -147,7 +148,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a17b6fcd9948fed41969b2c2b750fe7c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b1215fc7a7c721f438589a8bfe79616b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -233,3 +234,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &131511848797498598
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912918189500815705}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9b1ccd80bc838ee4490b89ed633ec8b8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
