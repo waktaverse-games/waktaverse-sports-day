@@ -8,6 +8,7 @@ namespace GameHeaven.JumpGame
     public class PlayerController : MonoBehaviour
     {
         public UnityEvent OnCollideWithRope;
+        public GameObject VFX;
 
         public float maxSpeed;
         public float jumpPower;
@@ -76,7 +77,6 @@ namespace GameHeaven.JumpGame
             if (rb.velocity.normalized.x != 0) { animator.SetBool("isRunning", true); }
             else { animator.SetBool("isRunning", false); }
         }
-
         void PlayerLanding()
         {
             if (rb.velocity.y < 0)
@@ -91,6 +91,17 @@ namespace GameHeaven.JumpGame
                     }
                 }
             }
+        }
+
+        public void EnableExclamationMark()
+        {
+            VFX.SetActive(true);
+            VFX.GetComponent<Animator>().Play("ExclamationMark");
+            Invoke("DisableExclamationMark", 1f);
+        }
+        void DisableExclamationMark()
+        {
+            VFX.SetActive(false);
         }
 
         IEnumerator OnDamaged()
