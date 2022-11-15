@@ -9,9 +9,9 @@ namespace GameHeaven.JumpGame
     {
         enum Items
         {
-            bronzeCoin,
-            silverCoin,
-            GoldCoin
+            Bungeoppang,
+            Sushi,
+            Burger
         }
         [SerializeField] Transform spawnPosMin;
         [SerializeField] Transform spawnPosMax;
