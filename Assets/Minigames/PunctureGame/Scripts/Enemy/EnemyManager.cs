@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace GameHeaven.PunctureGame
 {
-    public class EnemyManager : MonoBehaviour, IManagerLogic
+    public class EnemyManager : LogicAffectManager
     {
         [SerializeField] private Player player;
         [SerializeField] private EnemyPoolSpawner spawner;
@@ -17,7 +17,7 @@ namespace GameHeaven.PunctureGame
 
         private void OnDisable()
         {
-            Stop();
+            Inactive();
         }
 
         private void Update()
@@ -68,17 +68,17 @@ namespace GameHeaven.PunctureGame
             return upperReleaseCheck || bottomReleaseCheck;
         }
         
-        // Interface Implement
-        
-        public void Run()
+        // Abstract Implement
+
+        public override void Active()
         {
             throw new NotImplementedException();
         }
 
-        public void Stop()
+        public override void Inactive()
         {
             var enemies = spawner.GetActiveElements();
-            foreach (IEntityLogic enemy in enemies)
+            foreach (LogicBehaviour enemy in enemies)
             {
                 enemy.Inactive();
             }
