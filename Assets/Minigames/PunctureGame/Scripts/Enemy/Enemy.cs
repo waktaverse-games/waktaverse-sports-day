@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace GameHeaven.PunctureGame
 {
-    public class Enemy : MonoBehaviour, IEntityLogic
+    public class Enemy : LogicAffectEntity
     {
         // Variables
         [SerializeField] private EntityController motion;
@@ -74,13 +74,13 @@ namespace GameHeaven.PunctureGame
         
         // Interface Implement
 
-        public void Active()
+        public override void Active()
         {
             motion.SetMovable(true);
             animator.speed = 1.0f;
         }
 
-        public void Inactive()
+        public override void Inactive()
         {
             motion.SetMovable(false);
             animator.speed = 0.0f;

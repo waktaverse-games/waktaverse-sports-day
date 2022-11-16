@@ -15,9 +15,13 @@ namespace GameHeaven.PunctureGame
         [SerializeField] private PunctureBGMCollection bgmCollection;
         [SerializeField] private PunctureSFXCollection sfxCollection;
 
+        private LogicBehaviour[] logicBhvrs;
+
         private void Awake()
         {
             Instance = this;
+
+            logicBhvrs = FindObjectsOfType<LogicBehaviour>();
         }
 
         private void Start()
@@ -29,6 +33,11 @@ namespace GameHeaven.PunctureGame
         public void GameStart()
         {
             bgmCollection.PlayBGM(PunctureBGMType.Default, true);
+
+            foreach (var bhvr in logicBhvrs)
+            {
+                bhvr.Active();
+            }
         }
 
         public void GameOver()
@@ -38,6 +47,11 @@ namespace GameHeaven.PunctureGame
 
             bgmCollection.StopBGM();
             sfxCollection.PlaySFX(PunctureSFXType.GameOver);
+
+            foreach (var bhvr in logicBhvrs)
+            {
+                bhvr.Inactive();
+            }
         }
     }
 }

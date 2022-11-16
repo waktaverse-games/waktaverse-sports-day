@@ -2,7 +2,7 @@
 
 namespace GameHeaven.PunctureGame
 {
-    public class ItemManager : MonoBehaviour, IManagerLogic
+    public class ItemManager : LogicAffectManager
     {
         [SerializeField] private Player player;
         [SerializeField] private ItemPoolSpawner spawner;
@@ -12,7 +12,7 @@ namespace GameHeaven.PunctureGame
 
         private void OnDisable()
         {
-            Stop();
+            Inactive();
         }
 
         private void Update()
@@ -42,13 +42,13 @@ namespace GameHeaven.PunctureGame
 
             tf.position = position;
         }
-        
-        public void Run()
+
+        public override void Active()
         {
             throw new System.NotImplementedException();
         }
 
-        public void Stop()
+        public override void Inactive()
         {
             throw new System.NotImplementedException();
         }

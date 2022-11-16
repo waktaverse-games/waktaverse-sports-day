@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace GameHeaven.PunctureGame
 {
-    public class Player : MonoBehaviour, IEntityLogic
+    public class Player : LogicAffectEntity
     {
         // Variables
         
@@ -137,7 +137,7 @@ namespace GameHeaven.PunctureGame
         
         // Interface Implement
 
-        public void Active()
+        public override void Active()
         {
             SetAnimationState(AnimationState.Run);
             motion.SetMovable(true);
@@ -145,7 +145,7 @@ namespace GameHeaven.PunctureGame
             animator.speed = 1.0f;
         }
 
-        public void Inactive()
+        public override void Inactive()
         {
             motion.SetMovable(false);
             sfxCollect.enabled = false;
