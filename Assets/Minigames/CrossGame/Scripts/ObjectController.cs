@@ -49,6 +49,8 @@ namespace GameHeaven.CrossGame
         Vector3 LandPos;
         Sequence MoveSequence;
         bool PlayerPositionIsLimited;
+        float TotalMoveCountLeft = 0;
+        float TotalMoveCountRight = 0;
 
         //배경
         float BackGroundMoveCount;
@@ -130,6 +132,7 @@ namespace GameHeaven.CrossGame
             {
                 DeltaDistance = MovementSpeed * Time.deltaTime;
                 Player.transform.position += Vector3.left * DeltaDistance;
+                TotalMoveCountLeft += DeltaDistance;
             }
 
             MoveCount += DeltaDistance;
@@ -205,6 +208,7 @@ namespace GameHeaven.CrossGame
         {
             JumpCount++;
             LandPlatformNum++;
+            TotalMoveCountRight += 2;
             //print(LandPlatformNum);
             Player.CntAnimator.SetFloat("JumpSpeed", 0.4f * JumpSpeed);
             Player.CntAnimator.SetTrigger("Jump");
@@ -238,6 +242,7 @@ namespace GameHeaven.CrossGame
             MoveSequence.Kill();
             JumpCount++;
             LandPlatformNum++;
+            TotalMoveCountRight += 2;
             //print(LandPlatformNum);
             float Time = (1f / JumpSpeed) - JumpTime;
             float UpTime = Time - (1f / JumpSpeed) / 2;
@@ -273,10 +278,11 @@ namespace GameHeaven.CrossGame
         void JumpCallBack()
         {
             Manager.AddScore(JumpCount * 10);
-            float num = Player.transform.position.x;
-            num = Mathf.Round(num + MoveCount) - MoveCount;
+            //float num = Player.transform.position.x;
+            //num = Mathf.Round(num + MoveCount) - MoveCount;
+            float num = TotalMoveCountRight - TotalMoveCountLeft - 2.1f;
             //0.1은 스프라이트 크기에 의한 보정
-            Player.transform.position = new Vector3(num - 0.1f, Player.transform.position.y);
+            Player.transform.position = new Vector3(num, Player.transform.position.y);
 
             if (!PlatformInformation[LandPlatformNum])
             {
