@@ -6,13 +6,13 @@ namespace GameHeaven.BingleGame
 {
     public class ItemManager : MonoBehaviour
     {
-        [SerializeField] GameObject VFX;
+        //[SerializeField] GameObject VFX;
         SpriteRenderer spriteRenderer;
         Animator animator;
         private void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
-            animator = VFX.GetComponent<Animator>();
+            //animator = VFX.GetComponent<Animator>();
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -20,23 +20,24 @@ namespace GameHeaven.BingleGame
             {
                 SoundManager.instance.PlayItemSound();
                 spriteRenderer.enabled = false;
-                StartCoroutine(PlayAnimation());
+                //StartCoroutine(PlayAnimation());
             }
         }
+        /*
         IEnumerator PlayAnimation()
         {
             VFX.SetActive(true);
-            animator.Play("ItemGain");
             while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
             {
                 yield return null;
             }
+            yield return new WaitForSeconds(0.3f);
             VFX.SetActive(false);
         }
+        */
         public void ResetItem()
         {
             spriteRenderer.enabled = true;
-            VFX.SetActive(false);
         }
     }
 }
