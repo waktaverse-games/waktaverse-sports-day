@@ -18,14 +18,14 @@ namespace GameHaven.RunGame
         // Update is called once per frame
         void Update()
         {
-            if (GameHaven.RunGame.GameManager.gameTime < 20)
+            if (GameHaven.RunGame.GameManager.gameTime < 10)
             {
                 GameHaven.RunGame.GameManager.wallSpeed += 0.06f * Time.deltaTime;
                 rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
             }
-            else if(GameHaven.RunGame.GameManager.gameTime >= 20 && GameHaven.RunGame.GameManager.wallSpeed <20)
+            else if(GameHaven.RunGame.GameManager.gameTime >= 10 && GameHaven.RunGame.GameManager.wallSpeed <30)
             {
-                GameHaven.RunGame.GameManager.wallSpeed += 0.03f * Time.deltaTime;
+                GameHaven.RunGame.GameManager.wallSpeed += 0.015f * Time.deltaTime;
                 rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
             }
             else

@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Minigames/PunctureGame/Scenes/PunctureGame.unity
     guid: 0e39e073ff86092438f896f450d41234
   - enabled: 0
@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Minigames/JumpGame/JumpGame.unity
     guid: 2aa75c7081ac8944cbff7517456edddd
+  - enabled: 1
+    path: Assets/Minigames/RunGame/Scenes/RunGame.unity
+    guid: aafee391642ee074fbdb9a9ba6f3d41e
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d25b328042029f94791548d094ea8005, type: 2}
