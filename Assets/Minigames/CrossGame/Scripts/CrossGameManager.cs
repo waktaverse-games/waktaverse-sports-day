@@ -77,7 +77,7 @@ namespace GameHeaven.CrossGame
         {
             if (ObjectController.MovementSpeed < 7.5f)
             {
-                ObjectController.MovementSpeed += 0.05f;
+                ObjectController.MovementSpeed += 0.04f;
             }
             else if(ObjectController.MovementSpeed < 9)
             {
