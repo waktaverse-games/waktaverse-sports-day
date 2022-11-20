@@ -23,19 +23,38 @@ namespace GameHeaven.BingleGame
         #endregion
 
         // Game Speed
-        public float speed;
-        public float increasingSpeedTime;
-        public float increasingSpeedAmount;
+        public float xSpeed;
+        public float ySpeed;
+        public float xMaxSpeed;
+        public float yMaxSpeed;
+        public float increasingXSpeedTime;
+        public float increasingXSpeedAmount;
+        public float increasingYSpeedTime;
+        public float increasingYSpeedAmount;
         private void Start()
         {
-            StartCoroutine(IncreaseSpeed(increasingSpeedTime));
+            StartCoroutine(IncreaseXSpeed(increasingXSpeedTime));
+            StartCoroutine(IncreaseYSpeed(increasingYSpeedTime));
         }
-
-        IEnumerator IncreaseSpeed(float delayTime)
+        IEnumerator IncreaseXSpeed(float delayTime)
         {
-            yield return new WaitForSeconds(delayTime);
-            speed += increasingSpeedAmount;
-            StartCoroutine(IncreaseSpeed(increasingSpeedTime));
+            while(!GameManager.instance.isGameOver)
+            {
+                xSpeed += increasingXSpeedAmount;
+                if (xSpeed >= xMaxSpeed) 
+                    xSpeed = xMaxSpeed;
+                yield return new WaitForSeconds(delayTime);
+            }
+        }
+        IEnumerator IncreaseYSpeed(float delayTime)
+        {
+            while (!GameManager.instance.isGameOver)
+            {
+                if (ySpeed >= yMaxSpeed) 
+                    ySpeed = yMaxSpeed;
+                ySpeed += increasingYSpeedAmount;
+                yield return new WaitForSeconds(delayTime);
+            }
         }
     }
 }

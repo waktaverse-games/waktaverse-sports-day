@@ -6,7 +6,8 @@ namespace GameHeaven.BingleGame
 {
     public class ItemManager : MonoBehaviour
     {
-        //[SerializeField] GameObject VFX;
+        [SerializeField] GameObject VFX;
+        [SerializeField] int score;
         SpriteRenderer spriteRenderer;
         Animator animator;
         private void Awake()
@@ -19,22 +20,13 @@ namespace GameHeaven.BingleGame
             if(collision.gameObject.tag == "Player")
             {
                 SoundManager.instance.PlayItemSound();
+                GameManager.instance.IncreaseScore(score);
                 spriteRenderer.enabled = false;
-                //StartCoroutine(PlayAnimation());
+                GameObject vfx = Instantiate(VFX, transform.position, transform.rotation);
+                Destroy(vfx, 3f);
             }
         }
-        /*
-        IEnumerator PlayAnimation()
-        {
-            VFX.SetActive(true);
-            while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
-            {
-                yield return null;
-            }
-            yield return new WaitForSeconds(0.3f);
-            VFX.SetActive(false);
-        }
-        */
+
         public void ResetItem()
         {
             spriteRenderer.enabled = true;

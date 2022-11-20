@@ -196,7 +196,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 3}
+  m_Size: {x: 4.0785437, y: 3}
   m_EdgeRadius: 0
 --- !u!50 &5315763331990848303
 Rigidbody2D:
@@ -235,6 +235,7 @@ MonoBehaviour:
   throwingSpeed: 100
   characters:
   - {fileID: 7461893107214728275, guid: 8d830081628b98f4c9fe18c1efa9d782, type: 3}
+  hitVFX: {fileID: 1041877752519655513, guid: 76175b297f06e6b48a597e29ad912e67, type: 3}
   treeSprites:
   - {fileID: 21300000, guid: 828e00df94f31cd48b8a4fa48996e577, type: 3}
   - {fileID: 21300000, guid: ccb1870c1881ff64e96803dd49ccb505, type: 3}

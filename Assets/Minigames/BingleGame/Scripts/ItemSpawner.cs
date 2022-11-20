@@ -31,7 +31,7 @@ namespace GameHeaven.BingleGame
         public void SpawnItem()
         {
             ResetItem();
-            float xOffset = Random.Range(-3.5f, 3.5f);
+            float xOffset = Random.Range(-2f, 2f);
             int itemIndex = Random.Range(0, System.Enum.GetValues(typeof(ItemType)).Length);
             itemPool[itemIndex].transform.localPosition = new Vector3(xOffset, spawnPoint.localPosition.y, spawnPoint.localPosition.z);
             itemPool[itemIndex].SetActive(true);

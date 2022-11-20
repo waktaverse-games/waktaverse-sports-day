@@ -259,7 +259,7 @@ Transform:
   - {fileID: 1923828857}
   - {fileID: 1418315443}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &88007062
 GameObject:
@@ -543,7 +543,7 @@ Transform:
   - {fileID: 1101805317}
   - {fileID: 1512027140}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &100296194
 MonoBehaviour:
@@ -904,7 +904,7 @@ Transform:
   - {fileID: 1325135432}
   - {fileID: 90698689}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &360321712
 GameObject:
@@ -1239,7 +1239,7 @@ Transform:
   - {fileID: 1791685930}
   - {fileID: 183437101}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &453711549
 Rigidbody2D:
@@ -1311,8 +1311,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skiEquip: {fileID: 1791685929}
-  speed: 0.5
-  slowDownSpeed: 4
+  xSpeed: 0
+  ySpeed: 0
+  slowDownSpeed: 0.9
   controlCoolDown: 0.5
   ableToMove: 0
 --- !u!114 &453711553
@@ -1632,7 +1633,7 @@ Transform:
   - {fileID: 1588833249}
   - {fileID: 1624538679}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &800989344
 AudioSource:
@@ -1812,7 +1813,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &869923402
 GameObject:
@@ -2269,7 +2270,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &993154572
 GameObject:
@@ -2421,7 +2422,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1030131204
 GameObject:
@@ -2452,9 +2453,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4a0a236f25a8944b30d10a1c9a4373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.3
-  increasingSpeedTime: 10
-  increasingSpeedAmount: 0.01
+  xSpeed: 0.1
+  ySpeed: 2
+  xMaxSpeed: 0.5
+  yMaxSpeed: 7
+  increasingXSpeedTime: 1
+  increasingXSpeedAmount: 0.002
+  increasingYSpeedTime: 1
+  increasingYSpeedAmount: 0.035
 --- !u!4 &1030131206
 Transform:
   m_ObjectHideFlags: 0
@@ -2468,7 +2474,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1101805316
 GameObject:
