@@ -9,14 +9,16 @@ namespace GameHeaven.CrossGame
     {
         public CrossGameManager Manager;
         public CoinCode code; 
-        Animator MyAnimator;
+        public List<Sprite> sprites;
+        //Animator MyAnimator;
         private void Awake()
         {
-            MyAnimator = GetComponent<Animator>();
+            //MyAnimator = GetComponent<Animator>();
         }
         public void SetAnim()
         {
-            MyAnimator.SetInteger("Sort", (int)code);
+            //MyAnimator.SetInteger("Sort", (int)code);
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprites[(int)code];
         }
         public void Move()
         {
