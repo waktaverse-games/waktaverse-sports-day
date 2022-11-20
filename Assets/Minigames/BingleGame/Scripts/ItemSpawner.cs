@@ -6,6 +6,13 @@ namespace GameHeaven.BingleGame
 {
     public class ItemSpawner : MonoBehaviour
     {
+
+        public enum ItemType
+        {
+            Sushi,
+            Burger,
+            Bungeoppang
+        }
         [SerializeField] Transform spawnPoint;
         public GameObject[] PF_items;
         public List<GameObject> itemPool;
@@ -25,23 +32,7 @@ namespace GameHeaven.BingleGame
         {
             ResetItem();
             float xOffset = Random.Range(-3.5f, 3.5f);
-
-            int itemIndex;
-            int itemProb = Random.Range(1, 101);
-            int[] probList = GameSpeedController.instance.itemProb;
-
-            if(itemProb <= probList[2])
-            {
-                itemIndex = 2;
-            }
-            else if(itemProb <= probList[1])
-            {
-                itemIndex = 1;
-            }
-            else
-            {
-                itemIndex = 0;
-            }
+            int itemIndex = Random.Range(0, System.Enum.GetValues(typeof(ItemType)).Length);
             itemPool[itemIndex].transform.localPosition = new Vector3(xOffset, spawnPoint.localPosition.y, spawnPoint.localPosition.z);
             itemPool[itemIndex].SetActive(true);
         }
@@ -50,6 +41,7 @@ namespace GameHeaven.BingleGame
         {
             foreach(var item in itemPool)
             {
+                item.GetComponent<ItemManager>().ResetItem();
                 item.SetActive(false);
             }
         }

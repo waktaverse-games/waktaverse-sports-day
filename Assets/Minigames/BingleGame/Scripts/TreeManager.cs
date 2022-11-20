@@ -27,8 +27,8 @@ namespace GameHeaven.BingleGame
         {
             if (collision.gameObject.tag == "Player")
             {
-                // 점수 전달
                 GameManager.instance.IncreaseScore(score);
+                SoundManager.instance.PlayCrashSound();
                 // 체크포인트의 다른 콜라이더 비활성화
                 transform.parent.GetComponent<CheckPointManager>().DisableOtherCollider();
 
