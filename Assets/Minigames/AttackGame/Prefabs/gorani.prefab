@@ -132,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 7018311659907618998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.796, y: 2.631, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7018311660775056173}
@@ -272,6 +272,8 @@ MonoBehaviour:
   isBossMonster: 0
   damage: 20
   tweenId: 0
+  dropItem: 0
+  hammerItem: {fileID: 0}
 --- !u!95 &7018311659907619001
 Animator:
   serializedVersion: 4

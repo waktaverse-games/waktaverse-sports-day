@@ -55,7 +55,7 @@ namespace GameHeaven.AttackGame
         {
             isBossMonster = true;
             Vector3 scale = transform.localScale;
-            _tween = transform.DOScale(new Vector3(scale.x * 1.6f, scale.y * 1.6f, scale.z), 0.5f).SetId(tweenId);
+            _tween = transform.DOScale(new Vector3(scale.x * 3f, scale.y * 3f, scale.z), 0.5f).SetId(tweenId);
             StartCoroutine(BossStart(2f));
         }
 
@@ -165,7 +165,7 @@ namespace GameHeaven.AttackGame
             
             yield return new WaitForSeconds(1.2f);
             float distance = 1.5f;
-            if (isBossMonster) distance = 8f;
+            if (isBossMonster) distance = 3.5f;
             _spriteRenderer.flipX = false;
             _tween = transform.DOLocalMoveX(transform.position.x - distance, 1f).SetId(tweenId);
             StartCoroutine(GoraniToRight());

@@ -143,7 +143,7 @@ namespace GameHeaven.AttackGame
                 player.ChangeDirection();
             }
             
-            player.transform.DOMoveX(76.8f, 3);
+            player.transform.DOMoveX(57.6f, 3);
             yield return new WaitForSeconds(3.1f);
             for (int i = 0; i < currMap.Length; i++)
             {
@@ -189,7 +189,7 @@ namespace GameHeaven.AttackGame
         IEnumerator SpawnMonsters(float time)
         {
             int enemyType;
-            _currentMonsterNum = 25;
+            _currentMonsterNum = 15;
             _isGameEnd = false;
             switch (_stageNum)
             {
@@ -215,7 +215,7 @@ namespace GameHeaven.AttackGame
             {
                 int enemyCode = Random.Range(0, enemyType);
                 GameObject temp = objectManager.MakeObject(_enemyTypes[enemyCode],
-                    new Vector3(Random.Range(11f, 62f), 2, 0));
+                    new Vector3(Random.Range(11f, 42f), 2, 0));
                 temp.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
             }
         }
@@ -239,10 +239,10 @@ namespace GameHeaven.AttackGame
             {
                 int enemyCode = Random.Range(0, 7);
                 GameObject tempEnemy = objectManager.MakeObject(_enemyTypes[enemyCode],
-                    new Vector3(Random.Range(50f, 64f), 2, 0));
+                    new Vector3(Random.Range(31f, 45f), 2, 0));
                 tempEnemy.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
             }
-            GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(63, 6, 0));
+            GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(44, 6, 0));
             tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 6, _enemyDamage * 3);
             if (_stageNum == 2)
             {
@@ -311,7 +311,7 @@ namespace GameHeaven.AttackGame
             yield return new WaitForSeconds(1f);
             for (int i = 0; i < 15; i++)
             {
-                Vector3 newPos = new Vector3(Random.Range(50.6f, 64.6f), Random.Range(2.5f, 4.5f), 0);
+                Vector3 newPos = new Vector3(Random.Range(31.4f, 45.6f), Random.Range(2.5f, 4.5f), 0);
                 GameObject coin = objectManager.MakeObject("coin", newPos);
                 coin.GetComponent<Coin>().StartFall(2f);
             }
