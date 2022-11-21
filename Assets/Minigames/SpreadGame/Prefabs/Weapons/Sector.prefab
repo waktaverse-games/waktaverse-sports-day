@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -8480602467344076912}
   - component: {fileID: -1527100226396663394}
   - component: {fileID: 5253744885416062074}
-  - component: {fileID: -8817998458771464615}
+  - component: {fileID: 7776914393347630253}
   m_Layer: 0
   m_Name: Sector
   m_TagString: Attack
@@ -142,7 +142,7 @@ MonoBehaviour:
   curShotDelay: 0.1906007
   maxShotDelay: 0.2
   damage: 1
---- !u!114 &-8817998458771464615
+--- !u!114 &7776914393347630253
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,6 +151,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2360940325928755872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59892c1b6655f74084b2ba2413e6cf5, type: 3}
+  m_Script: {fileID: 11500000, guid: b6dd8d544e8fb074cb25e4d51515b5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 8
+  y: 6
