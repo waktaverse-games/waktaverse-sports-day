@@ -5384,8 +5384,11 @@ MonoBehaviour:
   arrowPrefab: {fileID: 3725059498140508180, guid: 792ab44f43bbe624c9423210b42d733e, type: 3}
   pyochangPrefab: {fileID: 1521983676506931248, guid: 3ede326187f9bad48a2ca5412f3208f5, type: 3}
   poopPrefab: {fileID: 3891653898472215784, guid: ac2ee2c9dfc65b343aeb8a1b7f7a822e, type: 3}
-  coinPrefab: {fileID: 5017998414993233453, guid: 04ed8af8089f6924e9eb8ceb073d8df4, type: 3}
+  coin1Prefab: {fileID: 4539694789997031087, guid: bb7e947d04d825a4f8c2cbdcc880fca4, type: 3}
+  coin2Prefab: {fileID: 1533196896270837859, guid: 0084ed5e989568249a9df58a0d2f5cf6, type: 3}
+  coin3Prefab: {fileID: 5366326389426736102, guid: 42fe93179dc3a4549829d839887d40d9, type: 3}
   sfxManager: {fileID: 433834156}
+  damagePrefab: {fileID: 1531362590928990392, guid: dc661d06cd6dff341bbc07badbc57b1e, type: 3}
 --- !u!1 &1505321825
 GameObject:
   m_ObjectHideFlags: 0
