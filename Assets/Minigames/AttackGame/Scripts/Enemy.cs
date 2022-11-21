@@ -69,11 +69,14 @@ namespace GameHeaven.AttackGame
         {
             currentHp -= damageProj;
             gameManager.EnemyGetHit();
+            DamageText tmpDamage = objectManager.MakeObject("damage", transform.position).GetComponent<DamageText>();
+            tmpDamage.SetDamage(damageProj);
             if (currentHp <= 0 && _isAlive)
             {
                 currentHp = 0;
                 gameManager.GetEnemyXp(isBossMonster);
                 _isAlive = false;
+                GetComponent<AudioSource>().Play();
                 Invoke("DisableObject", 0.2f);
             }
             hpBar.fillAmount = (float)currentHp / totalHp;
