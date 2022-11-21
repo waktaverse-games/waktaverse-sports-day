@@ -24,6 +24,7 @@ namespace GameHeaven.AttackGame
         public GameObject weapon1;
         public GameObject weapon2;
         public GameObject hammerIcon;
+        public Animation effect;
 
         public bool isHeadingRight = true;
         private bool _stopAction = false;
@@ -76,6 +77,7 @@ namespace GameHeaven.AttackGame
         {
             if (isGamePlaying)
             {
+                
                 ChangeDirection();
                 MovePlayer();
                 PressWeaponKey();
@@ -109,6 +111,8 @@ namespace GameHeaven.AttackGame
         {
             if (Input.GetKeyDown(KeyCode.Space) || !isGamePlaying)
             {
+                effect.Play();
+                effect.wrapMode = WrapMode.Once;
                 if (isHeadingRight)
                 {
                     _spriteRenderer.flipX = false;

@@ -173,11 +173,11 @@ namespace GameHeaven.AttackGame
                 _coin1[i].GetComponent<Coin>().gameManager = gameManager;
                 _coin1[i].SetActive(false);
                 _coin2[i] = Instantiate(coin2Prefab);
-                _coin2[i].GetComponent<Coin>().tweenId = i + 605;
+                _coin2[i].GetComponent<Coin>().tweenId = i + 615;
                 _coin2[i].GetComponent<Coin>().gameManager = gameManager;
                 _coin2[i].SetActive(false);
                 _coin3[i] = Instantiate(coin3Prefab);
-                _coin3[i].GetComponent<Coin>().tweenId = i + 610;
+                _coin3[i].GetComponent<Coin>().tweenId = i + 630;
                 _coin3[i].GetComponent<Coin>().gameManager = gameManager;
                 _coin3[i].SetActive(false);
             }

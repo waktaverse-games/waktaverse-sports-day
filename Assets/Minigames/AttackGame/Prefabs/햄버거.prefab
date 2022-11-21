@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3549498822469315298}
   m_Layer: 0
   m_Name: "\uD584\uBC84\uAC70"
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
