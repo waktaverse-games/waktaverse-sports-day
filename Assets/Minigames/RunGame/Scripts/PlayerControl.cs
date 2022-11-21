@@ -18,7 +18,7 @@ namespace GameHaven.RunGame
         float Camsize;
         Vector3 Carictorsize;
         float ItemTime = 0;
-        bool GetItem = false;
+        public static bool GetItem = false;
 
         int CoinCount = 0;
 
@@ -26,12 +26,14 @@ namespace GameHaven.RunGame
         bool Dirleft = true;
 
         Animator coin;
+        Animator run;
 
         AudioSource audio;
 
         // Start is called before the first frame update
         void Start()
         {
+            run = Caracter.GetComponent<Animator>();
 
         }
 
@@ -68,18 +70,19 @@ namespace GameHaven.RunGame
                 ItemTime += Time.deltaTime;
                 Caracter.GetComponent<CapsuleCollider2D>().enabled = false;
 
-                if (ItemTime > 2 && ItemTime <=3)
+                if (ItemTime > 2 && ItemTime <=2.7)
                 {
                     Camsize = Cam.GetComponent<Camera>().orthographicSize;
                     Carictorsize = Caracter.GetComponent<Transform>().localScale;
                     Cam.GetComponent<Camera>().orthographicSize = Mathf.Lerp(Camsize, 6.5f, Time.deltaTime * 2f);
                     Caracter.GetComponent<Transform>().localScale = Vector3.Lerp(Carictorsize, new Vector3(2, 2, 0), Time.deltaTime * 4f);
                 }
-                else if (ItemTime > 3)
+                else if (ItemTime >2.7 )
                 {
                     ItemTime = 0;
                     Caracter.GetComponent<CapsuleCollider2D>().enabled = true;
                     GetItem = false;
+                    run.SetBool("Stop", false);
                 }
                 else
                 {
@@ -113,7 +116,8 @@ namespace GameHaven.RunGame
                 if (other.gameObject.name.Contains("PungSin"))
                 {
                     GetItem = true;
-                    GameManager.instance.ItemScore(10000);
+                    GameManager.instance.ItemScore(15);
+                    run.SetBool("Stop", true);
                 }
                 else
                 {

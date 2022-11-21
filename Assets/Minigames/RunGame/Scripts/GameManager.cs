@@ -105,7 +105,10 @@ namespace GameHaven.RunGame
 
         public  void SpawnDust()
         {
-            Instantiate(dust, dustPoints.position + new Vector3(Random.Range(-0.5f, 0.5f), -1, 0), dustPoints.rotation);
+            if (PlayerControl.GetItem == false)
+            {
+                Instantiate(dust, dustPoints.position + new Vector3(Random.Range(-0.5f, 0.5f), -1, 0), dustPoints.rotation);
+            }
         }
 
         public void ItemScore(int num)
