@@ -110,7 +110,7 @@ namespace GameHeaven.SpreadGame
             GameObject obj;
             
             obj = Instantiate(bossPrefabs[bossIdx % 7], Vector2.zero, bossPrefabs[0].transform.rotation);
-            obj.transform.GetChild(0).GetComponent<BossMove>().HP = obj.transform.GetChild(0).GetComponent<BossMove>().maxHP = 100 + bossIdx * 100;
+            obj.transform.GetChild(0).GetComponent<BossMove>().HP = obj.transform.GetChild(0).GetComponent<BossMove>().maxHP = 100 + bossIdx * 80;
             isBossTime = true;
         }
 

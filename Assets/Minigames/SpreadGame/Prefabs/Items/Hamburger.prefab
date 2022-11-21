@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4421849469660899119}
   - component: {fileID: -314843883917328520}
   - component: {fileID: -5345221371560929223}
-  - component: {fileID: -2052766691973682619}
   - component: {fileID: -402367282741559752}
   - component: {fileID: 7796914251762897821}
+  - component: {fileID: 2379491345498229427}
   m_Layer: 0
   m_Name: Hamburger
   m_TagString: Coin
@@ -251,19 +251,6 @@ PolygonCollider2D:
       - {x: 0.0078125, y: -0.19238281}
       - {x: 0.0146484375, y: -0.19335938}
       - {x: 0.05078125, y: -0.19238281}
---- !u!114 &-2052766691973682619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4421849469660899113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6dd8d544e8fb074cb25e4d51515b5ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  x: 7
 --- !u!95 &-402367282741559752
 Animator:
   serializedVersion: 4
@@ -296,3 +283,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d6ece9bae96514285651b33ce9a05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2379491345498229427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4421849469660899113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59892c1b6655f74084b2ba2413e6cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sec: 15

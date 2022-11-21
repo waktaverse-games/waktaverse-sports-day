@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5954169712361996873}
   - component: {fileID: 6019257093617139146}
   - component: {fileID: 7711523380485134634}
-  - component: {fileID: 4152594733306280129}
   - component: {fileID: -509630032799035753}
   - component: {fileID: 6662805686438962398}
+  - component: {fileID: -8951389276426077657}
   m_Layer: 0
   m_Name: Bung
   m_TagString: Coin
@@ -245,19 +245,6 @@ PolygonCollider2D:
       - {x: 0.103515625, y: -0.24121094}
       - {x: 0.11230469, y: -0.23339844}
       - {x: 0.119140625, y: -0.22558594}
---- !u!114 &4152594733306280129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5954169712361996919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6dd8d544e8fb074cb25e4d51515b5ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  x: 7
 --- !u!95 &-509630032799035753
 Animator:
   serializedVersion: 4
@@ -290,3 +277,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d6ece9bae96514285651b33ce9a05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8951389276426077657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954169712361996919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59892c1b6655f74084b2ba2413e6cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sec: 15

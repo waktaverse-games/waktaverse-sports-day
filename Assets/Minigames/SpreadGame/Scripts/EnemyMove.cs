@@ -52,11 +52,11 @@ namespace GameHeaven.SpreadGame
                 rigid.AddForce(new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * 0.01f, ForceMode2D.Impulse);
             }
 
-            if (transform.position.y < -4)
+            if ((isElite && transform.position.y < -3) || transform.position.y < -4)
             {
                 rigid.velocity = new Vector2(rigid.velocity.x, (rigid.velocity.y > 0) ? rigid.velocity.y : -rigid.velocity.y);
             }
-            else if (transform.position.y > 4)
+            else if ((isElite && transform.position.y > 3) || transform.position.y > 4)
             {
                 rigid.velocity = new Vector2(rigid.velocity.x, (rigid.velocity.y > 0) ? -rigid.velocity.y : rigid.velocity.y);
             }

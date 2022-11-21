@@ -26,7 +26,6 @@ namespace GameHeaven.SpreadGame
         [SerializeField] Vector2 circleFireDir, circleFirePivot;
         [SerializeField] int circleFireNum;
 
-        [SerializeField] private GameObject[] coins, upgradeItems, otherItems;
         [SerializeField] private GameObject dieEffect, gyunNyang;
         [SerializeField] bool isDeath;
         [SerializeField] Sprite PokJu;
@@ -43,6 +42,11 @@ namespace GameHeaven.SpreadGame
             pool = FindObjectOfType<PoolManager>();
             HPBar = GameObject.Find("Canvas").transform.GetChild(5).gameObject;
             HPBar.SetActive(true);
+
+            if (HP > 800)
+            {
+                HP = maxHP = 800;
+            }
 
             bulletIdx = 4;
             if (type == Type.DdongGangAji)
@@ -230,8 +234,6 @@ namespace GameHeaven.SpreadGame
             {
                 Instantiate(dieEffect, new Vector3(5 + Random.Range(-2f, 2f), Random.Range(-3f, 3f)),
                     dieEffect.transform.rotation).transform.localScale = new Vector3(1.0f, 1.0f);
-
-                Instantiate(coins[Random.Range(0, 3)], new Vector3(9, Random.Range(-4.0f, 4.0f), 0), Quaternion.Euler(Vector3.zero));
 
                 yield return wait;
             }
