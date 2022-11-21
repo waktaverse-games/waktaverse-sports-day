@@ -53,6 +53,10 @@ namespace GameHeaven.SpreadGame
             {
                 StartCoroutine(SpawnGyunNyang(5.1f));
             }
+            else if (type == Type.JuPokDo)
+            {
+                anim.speed = 1.5f;
+            }
         }
 
         private void Update()
@@ -103,13 +107,13 @@ namespace GameHeaven.SpreadGame
                 }
                 else if (type == Type.JuPokDo)
                 {
-                    if (prevHP >= 100 && HP < 100)
+                    if (prevHP >= maxHP / 5 && HP < maxHP / 5)
                     {
                         GetComponent<Animator>().enabled = false;
                         anim.SetTrigger("PokJu");
                         GetComponent<SpriteRenderer>().color = Color.red;
-                        anim.speed = 1.5f;
-                        maxPatternDelay = 2.0f;
+                        anim.speed = 1.0f;
+                        maxPatternDelay = 2.5f;
                         return;
                     }
                 }
@@ -199,6 +203,7 @@ namespace GameHeaven.SpreadGame
 
         IEnumerator Die()
         {
+            FindObjectOfType<ScoreUpdate>().score += 500;
             if (type == Type.GyunNyang)
             {
                 foreach (EnemyMove enemy in FindObjectsOfType<EnemyMove>())
@@ -209,7 +214,7 @@ namespace GameHeaven.SpreadGame
 
             GameManager gameManager = FindObjectOfType<GameManager>();
             gameManager.maxNormalMonsterSpawnDelay -= 0.3f;
-            if (gameManager.maxNormalMonsterSpawnDelay < 1f) gameManager.maxNormalMonsterSpawnDelay = 1f;
+            if (gameManager.maxNormalMonsterSpawnDelay < 0.7f) gameManager.maxNormalMonsterSpawnDelay = 0.7f;
             gameManager.bossIdx++;
 
             pool.bulletPrefabs[3].GetComponent<BulletInfo>().maxShotDelay -= 0.03f;

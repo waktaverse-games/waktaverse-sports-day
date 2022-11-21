@@ -133,7 +133,7 @@ namespace GameHeaven.SpreadGame
             AudioSource.PlayClipAtPoint(dieSound, Vector3.zero);
             GameObject obj = null;
 
-            if (Random.Range(0, 3) == 0) Instantiate(coins[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
+            if (Random.Range(0, 3) == 0 && type != Type.GyunNyang) Instantiate(coins[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
 
             if (isElite && !isCopy)
             {
@@ -163,6 +163,11 @@ namespace GameHeaven.SpreadGame
                 }
                 obj.GetComponent<UpDownMove>().dir = new Vector3(0, -0.05f, 0);
                 obj.transform.localScale = new Vector3(0.5f, 0.5f);
+            }
+
+            if (type != Type.GyunNyang)
+            {
+                FindObjectOfType<ScoreUpdate>().score += (isElite) ? 50 : 15;
             }
 
             Instantiate(dieEffect, transform.position, dieEffect.transform.rotation);

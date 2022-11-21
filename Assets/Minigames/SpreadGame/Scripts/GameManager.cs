@@ -20,7 +20,6 @@ namespace GameHeaven.SpreadGame
 
         private void Awake()
         {
-            Screen.SetResolution(960, 540, false);
         }
 
         private void Update()
@@ -41,26 +40,21 @@ namespace GameHeaven.SpreadGame
             else
             {
                 curNormalMonsterSpawnDelay += Time.deltaTime;
-                if (curNormalMonsterSpawnDelay < maxNormalMonsterSpawnDelay * (isBossTime?3:1)) return;
+                if (curNormalMonsterSpawnDelay < maxNormalMonsterSpawnDelay * (isBossTime?4:1)) return;
                 curNormalMonsterSpawnDelay = 0;
             }
 
             GameObject obj = null;
 
             int idx = Random.Range(0, bossIdx + 1);
-            /*
-            while (true)
-            {
-                if (idx < ) idx = 0;
-                else if (idx < 20) idx = 1;
-                else if (idx < 35) idx = 2;
-                else if (idx < 50) idx = 3;
-                else if (idx < 75) idx = 4;
-                else if (idx < 90) idx = 5;
-                else if (idx < 100) idx = 6;
 
-                if (!isElite || idx != 0) break;
-            }*/
+            if (isElite)
+            {
+                while (idx == 4)
+                {
+                    idx = Random.Range(0, bossIdx + 1);
+                }
+            }
 
             if (idx == 4) // ¹ÚÁã´Ü
             {

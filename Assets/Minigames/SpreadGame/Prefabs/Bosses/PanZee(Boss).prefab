@@ -240,7 +240,7 @@ MonoBehaviour:
   numOfPatterns: 5
   bulletIdx: 0
   curPatternDelay: 0
-  maxPatternDelay: 2.2
+  maxPatternDelay: 3.2
   curStraightFireDelay: 0
   maxStraightFireDelay: 10000
   straightFireSpeed: 8
@@ -269,7 +269,6 @@ MonoBehaviour:
   gyunNyang: {fileID: 0}
   isDeath: 0
   PokJu: {fileID: 0}
-  bossSounds: []
 --- !u!95 &8544603803038463850
 Animator:
   serializedVersion: 4

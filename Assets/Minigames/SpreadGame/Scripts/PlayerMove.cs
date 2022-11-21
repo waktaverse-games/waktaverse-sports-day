@@ -27,6 +27,7 @@ namespace GameHeaven.SpreadGame
         PoolManager pool;
         Rigidbody2D rigid;
         Animator anim;
+        ScoreUpdate score;
 
         private void Awake()
         {
@@ -34,6 +35,7 @@ namespace GameHeaven.SpreadGame
             pool = FindObjectOfType<PoolManager>();
             anim = GetComponent<Animator>();
             canvas = GameObject.Find("Canvas");
+            score = FindObjectOfType<ScoreUpdate>();
 
             pool.bulletPrefabs[3].GetComponent<BulletInfo>().maxShotDelay = 0.4f;
             /*
@@ -63,7 +65,7 @@ namespace GameHeaven.SpreadGame
 
                 if (canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount > 0)
                 {
-                    canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount -= 0.0003f;
+                    canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount -= Time.deltaTime * 0.03f;
                 }
                 else
                 {
@@ -105,7 +107,7 @@ namespace GameHeaven.SpreadGame
             {
                 if (hasShield)
                 {
-                    StartCoroutine(ShieldBreak());
+                    ShieldBreak();
                 }
                 else
                 {
@@ -114,6 +116,7 @@ namespace GameHeaven.SpreadGame
             }
             else if (collider.CompareTag("Coin"))
             {
+                score.score += 30;
                 AudioSource.PlayClipAtPoint(acquireSounds[0], Vector3.zero);
                 // coin count up
                 Instantiate(coinAcquireEffect, collider.transform.position, coinAcquireEffect.transform.rotation);
@@ -121,6 +124,7 @@ namespace GameHeaven.SpreadGame
             }
             else if (collider.CompareTag("UpgradeItem"))
             {
+                score.score += 30;
                 AudioSource.PlayClipAtPoint(acquireSounds[1], Vector3.zero);
                 AcquireItem(collider.gameObject);
                 Instantiate(coinAcquireEffect, collider.transform.position, coinAcquireEffect.transform.rotation);
@@ -137,7 +141,7 @@ namespace GameHeaven.SpreadGame
             {
                 if (hasShield)
                 {
-                    StartCoroutine(ShieldBreak());
+                    ShieldBreak();
                 }
                 else
                 {
@@ -407,13 +411,12 @@ namespace GameHeaven.SpreadGame
                 .SetTrigger("Shake");
         }
 
-        IEnumerator ShieldBreak()
+        void ShieldBreak()
         {
+            if (!isInvincible) hasShield = false;
+
             transform.GetChild(0).gameObject.SetActive(false);
             anim.SetTrigger("Hit");
-
-            yield return new WaitForSeconds(1);
-            if (!isInvincible) hasShield = false;
         }
     }
 }
