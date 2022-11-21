@@ -38,7 +38,6 @@ namespace GameHeaven.AttackGame
         public TextMeshProUGUI playerXpText;
         public TextMeshProUGUI stageText;
         public TextMeshProUGUI stageStartText;
-        public TextMeshProUGUI coinText;
 
         private int _scoreNum;
         public int _hpNum;
@@ -99,7 +98,6 @@ namespace GameHeaven.AttackGame
             allXpBar.fillAmount = 0;
             playerXpBar.fillAmount = 0;
             retryObject.SetActive(false);
-            coinText.text = "x " + _coinNum;
             player.transform.position = new Vector3(0, 1, 0);
             mainCamera.transform.position = new Vector3(0, 0, -10);
             StartCoroutine(StartGame());
@@ -253,8 +251,6 @@ namespace GameHeaven.AttackGame
 
         public void GetCoin()
         {
-            _coinNum++;
-            coinText.text = "x " + _coinNum;
             ControlScore(10);
         }
 
