@@ -28,11 +28,11 @@ namespace GameHeaven.JumpGame
         {
             PlayerBrake();
             PlayerJump();
-            UpdateFace();
         }
         private void FixedUpdate()
         {
             PlayerMovement();
+            //UpdateFace();
             PlayerLanding();
         }
         void PlayerBrake()
@@ -76,6 +76,10 @@ namespace GameHeaven.JumpGame
 
             if (rb.velocity.normalized.x != 0) { animator.SetBool("isRunning", true); }
             else { animator.SetBool("isRunning", false); }
+
+            if(rb.velocity.x > 0) { sprite.flipX = true; }
+            else if(rb.velocity.x < 0) { sprite.flipX = false; }
+            
         }
         void PlayerLanding()
         {

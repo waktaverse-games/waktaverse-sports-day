@@ -34,6 +34,7 @@ namespace GameHeaven.BingleGame
         void Update()
         {
             scoreText.text = string.Format("{0:n0}", score);
+            ReStart();
         }
         public void IncreaseScore(int num)
         {
@@ -52,6 +53,12 @@ namespace GameHeaven.BingleGame
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
+        void ReStart()
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
     }
 }

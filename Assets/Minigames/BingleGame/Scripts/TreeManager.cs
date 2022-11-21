@@ -11,7 +11,7 @@ namespace GameHeaven.BingleGame
         public float throwingSpeed;
 
         public GameObject[] characters;
-
+        [SerializeField] GameObject hitVFX;
         [SerializeField] Sprite[] treeSprites;
 
         Rigidbody2D rigid;
@@ -27,11 +27,13 @@ namespace GameHeaven.BingleGame
         {
             if (collision.gameObject.tag == "Player")
             {
-                // 점수 전달
                 GameManager.instance.IncreaseScore(score);
+                SoundManager.instance.PlayCrashSound();
                 // 체크포인트의 다른 콜라이더 비활성화
                 transform.parent.GetComponent<CheckPointManager>().DisableOtherCollider();
 
+                GameObject vfx = Instantiate(hitVFX, transform.position, transform.rotation);
+                Destroy(vfx, 3f);
                 ThrowTree(collision, out Vector2 charDir);
                 GenerateCharacter();
             }
