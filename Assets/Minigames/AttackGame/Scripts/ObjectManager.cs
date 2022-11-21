@@ -25,7 +25,7 @@ namespace GameHeaven.AttackGame
         public GameObject coin3Prefab;
         public SFXManager sfxManager;
         public GameObject damagePrefab;
-        public Camera mainCam;
+        // public Camera mainCam;
 
         private GameObject[] _monkey;
         private GameObject[] _pigeon;

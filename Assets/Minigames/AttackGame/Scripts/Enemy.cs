@@ -28,6 +28,7 @@ namespace GameHeaven.AttackGame
         private SpriteRenderer _spriteRenderer;
         private Tween _tween;
         private bool _isAlive;
+        private bool _isMonkeyMove;
 
         private void Start()
         {
@@ -35,6 +36,7 @@ namespace GameHeaven.AttackGame
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             isBossMonster = false;
+            _isMonkeyMove = false;
             damage = 10;
         }
 
@@ -48,6 +50,15 @@ namespace GameHeaven.AttackGame
             if (isBoss)
             {
                 SetBoss();
+            }
+        }
+
+        public void Update()
+        {
+            if (_isMonkeyMove)
+            {
+                // Debug.Log("VAR");
+                transform.Translate(-0.4f * Time.deltaTime, 0, 0);
             }
         }
 
@@ -120,6 +131,7 @@ namespace GameHeaven.AttackGame
             switch (_name)
             {
                 case "monkey(Clone)":
+                    StartCoroutine(MonkeyMove());
                     return;
                 case "fox(Clone)":
                     StartCoroutine(FoxMove());
@@ -140,6 +152,12 @@ namespace GameHeaven.AttackGame
                     StartCoroutine(DogThrow());
                     break;
             }
+        }
+
+        IEnumerator MonkeyMove()
+        {
+            yield return new WaitForSeconds(0.9f);
+            _isMonkeyMove = true;
         }
 
         IEnumerator FoxMove()
@@ -179,7 +197,7 @@ namespace GameHeaven.AttackGame
             yield return new WaitForSeconds(1.2f);
             _spriteRenderer.flipX = true;
             float distance = 1.5f;
-            if (isBossMonster) distance = 8f;
+            if (isBossMonster) distance = 3.5f;
             _tween = transform.DOLocalMoveX(transform.position.x + distance, 1f).SetId(tweenId);
             StartCoroutine(GoraniToLeft());
         }
