@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using SharedLibs.Score;
 
 namespace GameHeaven.PassGame
 {
@@ -87,9 +88,13 @@ namespace GameHeaven.PassGame
             Time.timeScale = 0;
             StopAllCoroutines();
             objectManager.FailGame();
+            player.SetActive(false);
+            Debug.Log("Game Over");
             // endText.SetActive(true);
             // button.SetActive(true);
             // toMain.SetActive(true);
+            // ScoreManager.Instance.AddGameRoundScore(MinigameType.PassGame, Score);
+            // 여기에 씬이동 넣으시면 될 것 같습니다!! 게임 오버, 게임오버, 게임 종료, game over, gameover
         }
 
         public void AddScore(int addScore)
