@@ -116,7 +116,7 @@ namespace GameHeaven.StickyGame
                 {
                     AudioSource.PlayClipAtPoint(acquireSound, Vector3.zero);
                     Instantiate(acquireEffect, collider.transform.position, acquireEffect.transform.rotation); // »πµÊ ¿Ã∆Â∆Æ
-                    statistics.score += 70;
+                    statistics.score += 70 + 20 * statistics.curRunner;
                     if (collider.name[0] == 'G') statistics.goldCoin++;
                     else if (collider.name[0] == 'S') statistics.silverCoin++;
                     else if (collider.name[0] == 'B') statistics.bronzeCoin++;

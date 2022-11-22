@@ -10,9 +10,7 @@ namespace GameHeaven.JumpGame
         Animator anim;
         [SerializeField]
         AnimatorOverrideController[] controllers;
-        [SerializeField] NPCCharacter NPC_Left;
-        [SerializeField] NPCCharacter NPC_Right;
-
+        [SerializeField] NPCSpawner npcSpawner;
         [SerializeField] CharacterType currChar;
         private void Awake()
         {
@@ -27,10 +25,8 @@ namespace GameHeaven.JumpGame
 
         void ChooseCharacter(CharacterType type)
         {
+            npcSpawner.SetFandomCharacter(type);
             anim.runtimeAnimatorController = controllers[(int)type];
-            NPC_Left.SetCharacter(type);
-            if (type == CharacterType.Gosegu) { NPC_Right.SetCharacter(type, true); }
-            else { NPC_Right.SetCharacter(type); }
         }
     }
 }

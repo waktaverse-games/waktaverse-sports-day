@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 namespace GameHeaven.JumpGame
 {
     public class GameManager : MonoBehaviour
     {
+        public UnityEvent EnableHearthEffect;
+        public UnityEvent DisableHearthEffect;
         public bool IsGameOver { get;private set; }
-        public bool isInvincible { get; set; }
+        public bool isInvincible { get; private set; }
         public int JumpSuccessCount { get => jumpSuccessCount; }
         [SerializeField] GameObject buttons;
         [SerializeField] TextMeshProUGUI scoreText;
@@ -36,6 +39,10 @@ namespace GameHeaven.JumpGame
         {
             scoreText.text = "Á¡¼ö : 0";
         }
+        private void Update()
+        {
+            Retry();
+        }
         public void IncreaseScore(int score)
         {
             totalScore += score;
@@ -50,6 +57,13 @@ namespace GameHeaven.JumpGame
         {
             jumpSuccessCount = 0;
         }
+
+        public void SetInvinsible(bool value)
+        {
+            isInvincible = value;
+            if (value) EnableHearthEffect.Invoke();
+            else DisableHearthEffect.Invoke();
+        }
         public void GameOver()
         {
             IsGameOver = true;
@@ -63,6 +77,14 @@ namespace GameHeaven.JumpGame
             buttons.SetActive(false);
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        void Retry()
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
         public void MainMenu()
         {

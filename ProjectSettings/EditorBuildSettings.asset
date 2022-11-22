@@ -18,10 +18,7 @@ EditorBuildSettings:
     path: Assets/Minigames/RunGame/Scenes/RunGame.unity
     guid: aafee391642ee074fbdb9a9ba6f3d41e
   - enabled: 0
-    path: Assets/Minigames/AttackGame/AttackGame.unity
-    guid: 74911d3e0a367e046b40d9f2cd18a9be
-  - enabled: 1
-    path: Assets/Minigames/PassGame/Scenes/PassGame.unity
-    guid: c2f29f5d89505c1438167c9739c1cd8c
+    path: Assets/Minigames/StickyGame/StickyGame.unity
+    guid: 261fcff8c187cf040987fbdba28d32c3
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d25b328042029f94791548d094ea8005, type: 2}

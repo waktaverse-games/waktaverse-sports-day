@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4857549849096971510}
   - component: {fileID: -8480602467344076912}
   - component: {fileID: -8167225743937319374}
-  - component: {fileID: -1483110762611717689}
+  - component: {fileID: -4251344058968623131}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: Ball
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-1483110762611717689
+--- !u!114 &-4251344058968623131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,6 +133,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2360940325928755872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59892c1b6655f74084b2ba2413e6cf5, type: 3}
+  m_Script: {fileID: 11500000, guid: b6dd8d544e8fb074cb25e4d51515b5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 8
+  y: 6
