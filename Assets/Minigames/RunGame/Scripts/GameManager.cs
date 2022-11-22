@@ -31,6 +31,8 @@ namespace GameHaven.RunGame
         public Transform spawnPoints;
         public GameObject dust;
         public Transform dustPoints;
+        public GameObject cone;
+        int coneCount = 1;
 
         public int score = 0;
         public int highScore;
@@ -81,6 +83,7 @@ namespace GameHaven.RunGame
             {
                 SpawnWall();
                 SpawnDust();
+                SpawnCone(Random.Range(0, 21));
                 curSpawnDelay = 0;
                 wallSpawnDelay = 2 / wallSpeed;
             }
@@ -105,7 +108,24 @@ namespace GameHaven.RunGame
 
         public  void SpawnDust()
         {
-            Instantiate(dust, dustPoints.position + new Vector3(Random.Range(-0.5f, 0.5f), -1, 0), dustPoints.rotation);
+            if (PlayerControl.GetItem == false)
+            {
+                Instantiate(dust, dustPoints.position + new Vector3(Random.Range(-0.5f, 0.5f), -1, 0), dustPoints.rotation);
+            }
+        }
+
+        public void SpawnCone(int num)
+        {
+            if ((num == 0 || num == 11) && coneCount == 1)
+            {
+                Instantiate(cone, spawnPoints.position + new Vector3(9, 0, 0), spawnPoints.rotation);
+                coneCount = 0;
+            }
+            else if((num == 10 || num == 20) && coneCount == 0)
+            {
+                Instantiate(cone, spawnPoints.position + new Vector3(-9, 0, 0), spawnPoints.rotation);
+                coneCount = 1;
+            }
         }
 
         public void ItemScore(int num)

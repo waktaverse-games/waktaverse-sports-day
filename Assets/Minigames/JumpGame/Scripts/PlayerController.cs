@@ -28,11 +28,11 @@ namespace GameHeaven.JumpGame
         {
             PlayerBrake();
             PlayerJump();
-            UpdateFace();
         }
         private void FixedUpdate()
         {
             PlayerMovement();
+            //UpdateFace();
             PlayerLanding();
         }
         void PlayerBrake()
@@ -76,6 +76,10 @@ namespace GameHeaven.JumpGame
 
             if (rb.velocity.normalized.x != 0) { animator.SetBool("isRunning", true); }
             else { animator.SetBool("isRunning", false); }
+
+            if(rb.velocity.x > 0) { sprite.flipX = true; }
+            else if(rb.velocity.x < 0) { sprite.flipX = false; }
+            
         }
         void PlayerLanding()
         {
@@ -91,18 +95,6 @@ namespace GameHeaven.JumpGame
                     }
                 }
             }
-        }
-
-        public void EnableExclamationMark()
-        {
-            VFX.SetActive(true);
-            VFX.GetComponent<Animator>().Play("ExclamationMark");
-            SoundManager.Instance.PlayEMSound();
-            Invoke("DisableExclamationMark", 1f);
-        }
-        void DisableExclamationMark()
-        {
-            VFX.SetActive(false);
         }
 
         IEnumerator OnDamaged()
@@ -124,7 +116,7 @@ namespace GameHeaven.JumpGame
             {
                 if(GameManager.Instance.isInvincible) // 무적이면
                 {
-                    GameManager.Instance.isInvincible = false;
+                    GameManager.Instance.SetInvinsible(false);
                     OnCollideWithRope.Invoke();
                     StartCoroutine(OnDamaged());
                 }

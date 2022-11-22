@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using SharedLibs;
 
-public class SoundManager : MonoBehaviour
+namespace GameHeaven.CrossGame
 {
-    [System.Serializable]
-    private class AnimatorDictionary : UnitySerializedDictionary<string, AudioClip> { }
-
-    [SerializeField] private AnimatorDictionary AudioClips;
-    public AudioSource[] AudioSource;
-
-    int AudioCursor = 0;
-
-    public void Play(string ClipName)
+    public class SoundManager : MonoBehaviour
     {
-        AudioSource[AudioCursor].clip = AudioClips[ClipName];
-        AudioSource[AudioCursor].Play();
+        [System.Serializable]
+        private class AnimatorDictionary : UnitySerializedDictionary<string, AudioClip> { }
 
-        if (++AudioCursor >= AudioSource.Length)
+        [SerializeField] private AnimatorDictionary AudioClips;
+        public AudioSource[] AudioSource;
+
+        int AudioCursor = 0;
+
+        public void Play(string ClipName)
         {
-            AudioCursor = 0;
+            AudioSource[AudioCursor].clip = AudioClips[ClipName];
+            AudioSource[AudioCursor].Play();
+
+            if (++AudioCursor >= AudioSource.Length)
+            {
+                AudioCursor = 0;
+            }
         }
     }
 }

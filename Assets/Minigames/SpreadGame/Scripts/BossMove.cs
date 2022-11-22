@@ -26,7 +26,6 @@ namespace GameHeaven.SpreadGame
         [SerializeField] Vector2 circleFireDir, circleFirePivot;
         [SerializeField] int circleFireNum;
 
-        [SerializeField] private GameObject[] coins, upgradeItems, otherItems;
         [SerializeField] private GameObject dieEffect, gyunNyang;
         [SerializeField] bool isDeath;
         [SerializeField] Sprite PokJu;
@@ -44,6 +43,11 @@ namespace GameHeaven.SpreadGame
             HPBar = GameObject.Find("Canvas").transform.GetChild(5).gameObject;
             HPBar.SetActive(true);
 
+            if (HP > 800)
+            {
+                HP = maxHP = 800;
+            }
+
             bulletIdx = 4;
             if (type == Type.DdongGangAji)
             {
@@ -52,6 +56,10 @@ namespace GameHeaven.SpreadGame
             else if (type == Type.GyunNyang)
             {
                 StartCoroutine(SpawnGyunNyang(5.1f));
+            }
+            else if (type == Type.JuPokDo)
+            {
+                anim.speed = 1.5f;
             }
         }
 
@@ -103,13 +111,13 @@ namespace GameHeaven.SpreadGame
                 }
                 else if (type == Type.JuPokDo)
                 {
-                    if (prevHP >= 100 && HP < 100)
+                    if (prevHP >= maxHP / 5 && HP < maxHP / 5)
                     {
                         GetComponent<Animator>().enabled = false;
                         anim.SetTrigger("PokJu");
                         GetComponent<SpriteRenderer>().color = Color.red;
-                        anim.speed = 1.5f;
-                        maxPatternDelay = 2.0f;
+                        anim.speed = 1.0f;
+                        maxPatternDelay = 2.5f;
                         return;
                     }
                 }
@@ -199,6 +207,7 @@ namespace GameHeaven.SpreadGame
 
         IEnumerator Die()
         {
+            FindObjectOfType<ScoreUpdate>().score += 500;
             if (type == Type.GyunNyang)
             {
                 foreach (EnemyMove enemy in FindObjectsOfType<EnemyMove>())
@@ -209,7 +218,7 @@ namespace GameHeaven.SpreadGame
 
             GameManager gameManager = FindObjectOfType<GameManager>();
             gameManager.maxNormalMonsterSpawnDelay -= 0.3f;
-            if (gameManager.maxNormalMonsterSpawnDelay < 1f) gameManager.maxNormalMonsterSpawnDelay = 1f;
+            if (gameManager.maxNormalMonsterSpawnDelay < 0.7f) gameManager.maxNormalMonsterSpawnDelay = 0.7f;
             gameManager.bossIdx++;
 
             pool.bulletPrefabs[3].GetComponent<BulletInfo>().maxShotDelay -= 0.03f;
@@ -225,8 +234,6 @@ namespace GameHeaven.SpreadGame
             {
                 Instantiate(dieEffect, new Vector3(5 + Random.Range(-2f, 2f), Random.Range(-3f, 3f)),
                     dieEffect.transform.rotation).transform.localScale = new Vector3(1.0f, 1.0f);
-
-                Instantiate(coins[Random.Range(0, 3)], new Vector3(9, Random.Range(-4.0f, 4.0f), 0), Quaternion.Euler(Vector3.zero));
 
                 yield return wait;
             }

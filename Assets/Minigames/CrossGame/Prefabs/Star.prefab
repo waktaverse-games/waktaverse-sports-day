@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4043596627002334667}
   - component: {fileID: 5525434957928930162}
   - component: {fileID: 8295736643011720642}
-  - component: {fileID: 2657994020498640109}
   m_Layer: 0
   m_Name: Star
   m_TagString: Coin
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2792241445067652169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.65, y: 1.93, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 31c80828e75b2a54080c56823628c686, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3c0503784e58e604b9ba71bfaac50fd4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,6 +100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Manager: {fileID: 0}
   code: 0
+  sprites:
+  - {fileID: 21300000, guid: 3c0503784e58e604b9ba71bfaac50fd4, type: 3}
+  - {fileID: 21300000, guid: 28913c5f37e4b6e4b92c59bb6be43545, type: 3}
+  - {fileID: 21300000, guid: 7288ad9e7e482ab49897c7b83f267640, type: 3}
 --- !u!61 &8295736643011720642
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -114,36 +117,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0058419704, y: -0.0014605522}
+  m_Offset: {x: 0.0069258213, y: 0.009483159}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7429662, y: 0.6757877}
+  m_Size: {x: 0.3380499, y: 0.3109982}
   m_EdgeRadius: 0
---- !u!95 &2657994020498640109
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2792241445067652169}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 002f894dbabed1d4e9eea63e28e9edd8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

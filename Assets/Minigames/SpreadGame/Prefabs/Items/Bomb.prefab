@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1961674104385629398}
   - component: {fileID: 6187386378302384528}
   - component: {fileID: -1723769665011472636}
-  - component: {fileID: -7794229735195045562}
+  - component: {fileID: 5463421538837928952}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: UpgradeItem
@@ -105,7 +105,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -148,8 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dir: {x: 0, y: 0, z: 0}
-  isBoss: 0
---- !u!114 &-7794229735195045562
+--- !u!114 &5463421538837928952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +157,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6038007275945840213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6dd8d544e8fb074cb25e4d51515b5ec, type: 3}
+  m_Script: {fileID: 11500000, guid: d59892c1b6655f74084b2ba2413e6cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 7
+  sec: 15

@@ -8,7 +8,8 @@ namespace GameHeaven.BingleGame
     {
         [SerializeField] GameObject skiEquip;
 
-        [SerializeField] float speed;
+        [SerializeField] float xSpeed;
+        [SerializeField] float ySpeed;
         [SerializeField] float slowDownSpeed;
         [SerializeField] float controlCoolDown;
         [SerializeField] bool ableToMove;
@@ -26,18 +27,20 @@ namespace GameHeaven.BingleGame
             rb = GetComponent<Rigidbody2D>();
             sprite = GetComponent<SpriteRenderer>();
             ableToMove = true;
-            rb.velocity = dir * 5;
+            //rb.velocity = dir * 2;
         }
 
         void Update()
         {
-            speed = GameSpeedController.instance.speed;
+            xSpeed = GameSpeedController.instance.xSpeed;
+            ySpeed = GameSpeedController.instance.ySpeed * -1f;
             ChangeDirection();
             FlipSprite();
         }
         void FixedUpdate()
         {
-            rb.velocity += new Vector2(dir.normalized.x * speed, 0);
+            rb.velocity += new Vector2(dir.normalized.x * xSpeed, 0);
+            rb.velocity = new Vector2(rb.velocity.x, ySpeed);
         }
 
         private void ChangeDirection()
@@ -49,7 +52,7 @@ namespace GameHeaven.BingleGame
                 ableToMove = false;
                 curTime = 0;
                 movingLeft = !movingLeft;
-                rb.velocity = new Vector2(rb.velocity.x * 0.8f, rb.velocity.y);
+                rb.velocity = new Vector2(rb.velocity.x * slowDownSpeed, rb.velocity.y);
                 dir = movingLeft ? new Vector2(-1,-1) : new Vector2(1,-1);
             }
         }

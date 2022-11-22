@@ -45,7 +45,7 @@ namespace GameHaven.RunGame
 
                     SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
                     timer = 0;
-                    del = Random.Range(0, 1.5f);
+                    del = Random.Range(0, 1.3f);
                 }
             }
 
@@ -53,7 +53,7 @@ namespace GameHaven.RunGame
             {
                 if (timer > del)
                 {
-                    Speed = Random.Range(4f, 9f);
+                    Speed = Random.Range(4f, 8f);
                     if (Dirleft == true)
                     {
                         Dirleft = false;
@@ -67,7 +67,7 @@ namespace GameHaven.RunGame
 
                     SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
                     timer = 0;
-                    del = Random.Range(0, 1.1f);
+                    del = Random.Range(0, 0.85f);
                 }
             }
 
@@ -94,9 +94,13 @@ namespace GameHaven.RunGame
             }
 
 
-            if (SpawnPoint.transform.position.x < -5 || SpawnPoint.transform.position.x > 5)
+            if (SpawnPoint.transform.position.x < -5)
             {
-                SpawnPoint.GetComponent<Rigidbody2D>().velocity = -(dir) * Speed;
+                SpawnPoint.transform.position = new Vector3(-4.5f, 16.5f, 0.5f);
+            }
+            else if (SpawnPoint.transform.position.x > 5)
+            {
+                SpawnPoint.transform.position = new Vector3(4.5f,16.5f,0.5f);
             }
 
 

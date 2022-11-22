@@ -37,7 +37,7 @@ namespace GameHeaven.AttackGame
             currentWeapon = 1;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             weaponsPossible = new bool[3] { true, false, false };
-            weaponsPower = new int[3] { 13, 12, 11 };
+            weaponsPower = new int[3] { 13, 12, 14 };
             _rabbit = 0;
             rabbit.SetActive(false);
             StartShooting(2f);
@@ -76,6 +76,7 @@ namespace GameHeaven.AttackGame
         {
             if (isGamePlaying)
             {
+                
                 ChangeDirection();
                 MovePlayer();
                 PressWeaponKey();
@@ -199,7 +200,7 @@ namespace GameHeaven.AttackGame
                     ShootWhip();
                     break;
                 case 2:
-                    StartCoroutine(Shoot(1.2f));
+                    StartCoroutine(Shoot(1.35f));
                     ShootArrow();
                     break;
                 case 3:
@@ -285,7 +286,7 @@ namespace GameHeaven.AttackGame
             Vector3 pos = transform.position;
             if (_combo == 4)
             {
-                float tempFloat = 2f;
+                float tempFloat = 3.5f;
                 for (int i = 0; i < 3; i++)
                 {
                     GameObject arr = objectManager.MakeObject("pyochang", pos);
@@ -293,7 +294,7 @@ namespace GameHeaven.AttackGame
                     proj.SetState(isHeadingRight);
                     proj.damage = weaponsPower[2];
                     proj.ShootPyochang(isHeadingRight, pyochangTime, tempFloat);
-                    tempFloat += 0.5f;
+                    tempFloat += 0.6f;
                 }
 
                 _combo = 0;
@@ -304,7 +305,7 @@ namespace GameHeaven.AttackGame
                 Projectile proj = arr.GetComponent<Projectile>();
                 proj.SetState(isHeadingRight);
                 proj.damage = weaponsPower[2];
-                proj.ShootPyochang(isHeadingRight, pyochangTime, 2.5f);
+                proj.ShootPyochang(isHeadingRight, pyochangTime, 4.5f);
             }
         }
     }

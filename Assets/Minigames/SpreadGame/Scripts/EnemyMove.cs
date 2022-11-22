@@ -52,11 +52,11 @@ namespace GameHeaven.SpreadGame
                 rigid.AddForce(new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * 0.01f, ForceMode2D.Impulse);
             }
 
-            if (transform.position.y < -4)
+            if ((isElite && transform.position.y < -3) || transform.position.y < -4)
             {
                 rigid.velocity = new Vector2(rigid.velocity.x, (rigid.velocity.y > 0) ? rigid.velocity.y : -rigid.velocity.y);
             }
-            else if (transform.position.y > 4)
+            else if ((isElite && transform.position.y > 3) || transform.position.y > 4)
             {
                 rigid.velocity = new Vector2(rigid.velocity.x, (rigid.velocity.y > 0) ? -rigid.velocity.y : rigid.velocity.y);
             }
@@ -133,7 +133,7 @@ namespace GameHeaven.SpreadGame
             AudioSource.PlayClipAtPoint(dieSound, Vector3.zero);
             GameObject obj = null;
 
-            if (Random.Range(0, 3) == 0) Instantiate(coins[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
+            if (Random.Range(0, 3) == 0 && type != Type.GyunNyang) Instantiate(coins[Random.Range(0, 3)], transform.position, Quaternion.Euler(Vector3.zero));
 
             if (isElite && !isCopy)
             {
@@ -163,6 +163,11 @@ namespace GameHeaven.SpreadGame
                 }
                 obj.GetComponent<UpDownMove>().dir = new Vector3(0, -0.05f, 0);
                 obj.transform.localScale = new Vector3(0.5f, 0.5f);
+            }
+
+            if (type != Type.GyunNyang)
+            {
+                FindObjectOfType<ScoreUpdate>().score += (isElite) ? 50 : 15;
             }
 
             Instantiate(dieEffect, transform.position, dieEffect.transform.rotation);

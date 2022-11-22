@@ -1,25 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class Statistics : MonoBehaviour
 {
     public int curRunner, cumulRunner, goldCoin, silverCoin, bronzeCoin, score;
-    private Text text;
+    private TextMeshProUGUI tmp;
 
     private void Awake()
     {
-        text = GetComponent<Text>();
+        tmp = GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()
     {
-        text.text = "Score : " + score +
-            "\nRunner(Current) : " + curRunner + 
-            "\nRunner(Cumulative) : " + cumulRunner +
-            "\nGold Coin : " + goldCoin +
-            "\nSilver Coin : " + silverCoin +
-            "\nBronze Coin : " + bronzeCoin;
+        tmp.text = score.ToString();
     }
 }

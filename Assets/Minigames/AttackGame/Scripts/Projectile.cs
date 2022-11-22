@@ -84,7 +84,14 @@ namespace GameHeaven.AttackGame
             float tempDir = 1f;
             if (!isTowardRight) tempDir = -1;
             Vector3 currentPos = transform.position;
-            _tween = transform.DOMoveX(currentPos.x + 20 * tempDir, 10-speed).SetId(tweenId);
+            _tween = transform.DOMoveX(currentPos.x + 8 * tempDir, 10-speed).SetId(tweenId).SetEase(Ease.Linear);
+            StartCoroutine(DisableArrow(10 - speed + 0.01f));
+        }
+
+        IEnumerator DisableArrow(float time)
+        {
+            yield return new WaitForSeconds(time);
+            gameObject.SetActive(false);
         }
 
         public void ShootPyochang(bool isTowardRight, float speed, float distance)

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GameHeaven.AttackGame
 {
@@ -18,8 +20,12 @@ namespace GameHeaven.AttackGame
         public GameObject arrowPrefab;
         public GameObject pyochangPrefab;
         public GameObject poopPrefab;
-        public GameObject coinPrefab;
+        public GameObject coin1Prefab;
+        public GameObject coin2Prefab;
+        public GameObject coin3Prefab;
         public SFXManager sfxManager;
+        public GameObject damagePrefab;
+        // public Camera mainCam;
 
         private GameObject[] _monkey;
         private GameObject[] _pigeon;
@@ -32,7 +38,10 @@ namespace GameHeaven.AttackGame
         private GameObject[] _arrow;
         private GameObject[] _poop;
         private GameObject[] _targetPool;
-        private GameObject[] _coin;
+        private GameObject[] _coin1;
+        private GameObject[] _coin2;
+        private GameObject[] _coin3;
+        private GameObject[] _damageText;
         private GameObject _emptyObject;
         private ObjectManager _objectManager;
 
@@ -48,7 +57,10 @@ namespace GameHeaven.AttackGame
             _arrow = new GameObject[50];
             _pyochang = new GameObject[50];
             _poop = new GameObject[50];
-            _coin = new GameObject[15];
+            _coin1 = new GameObject[15];
+            _coin2 = new GameObject[15];
+            _coin3 = new GameObject[15];
+            _damageText = new GameObject[15];
             _objectManager = GetComponent<ObjectManager>();
             Generate();
             player.SetActive(false);
@@ -148,13 +160,26 @@ namespace GameHeaven.AttackGame
                 _poop[i].GetComponent<Projectile>().tweenId = i + 540;
                 _poop[i].SetActive(false);
             }
-
-            for (int i = 0; i < _coin.Length; i++)
+            for (int i = 0; i < _damageText.Length; i++)
             {
-                _coin[i] = Instantiate(coinPrefab);
-                _coin[i].GetComponent<Coin>().tweenId = i + 600;
-                _coin[i].GetComponent<Coin>().gameManager = gameManager;
-                _coin[i].SetActive(false);
+                _damageText[i] = Instantiate(damagePrefab);
+                _damageText[i].SetActive(false);
+            }
+
+            for (int i = 0; i < _coin1.Length; i++)
+            {
+                _coin1[i] = Instantiate(coin1Prefab);
+                _coin1[i].GetComponent<Coin>().tweenId = i + 600;
+                _coin1[i].GetComponent<Coin>().gameManager = gameManager;
+                _coin1[i].SetActive(false);
+                _coin2[i] = Instantiate(coin2Prefab);
+                _coin2[i].GetComponent<Coin>().tweenId = i + 615;
+                _coin2[i].GetComponent<Coin>().gameManager = gameManager;
+                _coin2[i].SetActive(false);
+                _coin3[i] = Instantiate(coin3Prefab);
+                _coin3[i].GetComponent<Coin>().tweenId = i + 630;
+                _coin3[i].GetComponent<Coin>().gameManager = gameManager;
+                _coin3[i].SetActive(false);
             }
         }
 
@@ -198,7 +223,22 @@ namespace GameHeaven.AttackGame
                     _targetPool = _poop;
                     break;
                 case "coin":
-                    _targetPool = _coin;
+                    int x = Random.Range(0, 3);
+                    switch (x)
+                    {
+                        case 0:
+                            _targetPool = _coin1;
+                            break;
+                        case 1:
+                            _targetPool = _coin2;
+                            break;
+                        case 2:
+                            _targetPool = _coin3;
+                            break;
+                    }
+                    break;
+                case "damage":
+                    _targetPool = _damageText;
                     break;
             }
             for (int i = 0; i < _targetPool.Length; i++)
@@ -254,6 +294,11 @@ namespace GameHeaven.AttackGame
             for (int i = 0; i < _poop.Length; i++)
             {
                 _poop[i].SetActive(false);
+            }
+
+            for (int i = 0; i < _damageText.Length; i++)
+            {
+                _damageText[i].SetActive(false);
             }
         }
     }

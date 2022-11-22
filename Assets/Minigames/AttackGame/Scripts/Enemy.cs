@@ -28,6 +28,7 @@ namespace GameHeaven.AttackGame
         private SpriteRenderer _spriteRenderer;
         private Tween _tween;
         private bool _isAlive;
+        private bool _isMonkeyMove;
 
         private void Start()
         {
@@ -35,6 +36,7 @@ namespace GameHeaven.AttackGame
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             isBossMonster = false;
+            _isMonkeyMove = false;
             damage = 10;
         }
 
@@ -51,11 +53,20 @@ namespace GameHeaven.AttackGame
             }
         }
 
+        public void Update()
+        {
+            if (_isMonkeyMove)
+            {
+                // Debug.Log("VAR");
+                transform.Translate(-0.4f * Time.deltaTime, 0, 0);
+            }
+        }
+
         private void SetBoss()
         {
             isBossMonster = true;
             Vector3 scale = transform.localScale;
-            _tween = transform.DOScale(new Vector3(scale.x * 1.6f, scale.y * 1.6f, scale.z), 0.5f).SetId(tweenId);
+            _tween = transform.DOScale(new Vector3(scale.x * 3f, scale.y * 3f, scale.z), 0.5f).SetId(tweenId);
             StartCoroutine(BossStart(2f));
         }
 
@@ -69,11 +80,14 @@ namespace GameHeaven.AttackGame
         {
             currentHp -= damageProj;
             gameManager.EnemyGetHit();
+            DamageText tmpDamage = objectManager.MakeObject("damage", transform.position).GetComponent<DamageText>();
+            tmpDamage.SetDamage(damageProj);
             if (currentHp <= 0 && _isAlive)
             {
                 currentHp = 0;
                 gameManager.GetEnemyXp(isBossMonster);
                 _isAlive = false;
+                GetComponent<AudioSource>().Play();
                 Invoke("DisableObject", 0.2f);
             }
             hpBar.fillAmount = (float)currentHp / totalHp;
@@ -88,7 +102,7 @@ namespace GameHeaven.AttackGame
             {
                 isBossMonster = false;
                 Vector3 scale = transform.localScale;
-                transform.localScale = new Vector3(scale.x / 1.6f, scale.y / 1.6f, scale.z);
+                transform.localScale = new Vector3(1.5f, 1.5f, scale.z);
             }
 
             if (dropItem)
@@ -96,6 +110,7 @@ namespace GameHeaven.AttackGame
                 Vector3 tmpVector = hammerItem.transform.position;
                 tmpVector.Set(transform.position.x, tmpVector.y, tmpVector.z);
                 hammerItem.SetActive(true);
+                dropItem = false;
             }
             gameObject.SetActive(false);
         }
@@ -108,7 +123,7 @@ namespace GameHeaven.AttackGame
             {
                 isBossMonster = false;
                 Vector3 scale = transform.localScale;
-                transform.localScale = new Vector3(scale.x / 1.6f, scale.y / 1.6f, scale.z);
+                transform.localScale = new Vector3(1.5f, 1.5f, scale.z);
             }
         }
 
@@ -117,12 +132,13 @@ namespace GameHeaven.AttackGame
             switch (_name)
             {
                 case "monkey(Clone)":
+                    StartCoroutine(MonkeyMove());
                     return;
                 case "fox(Clone)":
                     StartCoroutine(FoxMove());
                     break;
                 case "gorani(Clone)":
-                    StartCoroutine(GoraniToLeft());
+                    StartCoroutine(GoraniToLeft(2f));
                     break;
                 case "pigeon(Clone)":
                     StartCoroutine(PigeonMove());
@@ -139,6 +155,12 @@ namespace GameHeaven.AttackGame
             }
         }
 
+        IEnumerator MonkeyMove()
+        {
+            yield return new WaitForSeconds(0.9f);
+            _isMonkeyMove = true;
+        }
+
         IEnumerator FoxMove()
         {
             yield return new WaitForSeconds(0.9f);
@@ -153,32 +175,37 @@ namespace GameHeaven.AttackGame
             _animator.SetBool("isMove", false);
             if (isBossMonster)
             {
-                yield return new WaitForSeconds(1.2f);
+                yield return new WaitForSeconds(2.2f);
                 Vector3 pos = transform.position;
-                transform.position = new Vector3(Random.Range(58f, 65f), pos.y, pos.z);
+                transform.position = new Vector3(Random.Range(38.4f, 45.4f), pos.y, pos.z);
             }
             StartCoroutine(FoxMove());
         }
 
-        IEnumerator GoraniToLeft()
+        IEnumerator GoraniToLeft(float distance)
         {
             
-            yield return new WaitForSeconds(1.2f);
-            float distance = 1.5f;
-            if (isBossMonster) distance = 8f;
+            yield return new WaitForSeconds(distance * 0.7f + 0.2f);
+            distance = Random.Range(1.5f, 2.5f);
+            if (isBossMonster) distance = Random.Range(3.5f, 6f);
             _spriteRenderer.flipX = false;
-            _tween = transform.DOLocalMoveX(transform.position.x - distance, 1f).SetId(tweenId);
-            StartCoroutine(GoraniToRight());
+            _tween = transform.DOLocalMoveX(transform.position.x - distance, distance * 0.7f).SetId(tweenId);
+            StartCoroutine(GoraniToRight(distance));
         }
 
-        IEnumerator GoraniToRight()
+        IEnumerator GoraniToRight(float distance)
         {
-            yield return new WaitForSeconds(1.2f);
+            if (isBossMonster)
+            {
+                yield return new WaitForSeconds(distance * 0.7f + 0.7f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(distance * 0.7f + 0.2f);
+            }
             _spriteRenderer.flipX = true;
-            float distance = 1.5f;
-            if (isBossMonster) distance = 8f;
-            _tween = transform.DOLocalMoveX(transform.position.x + distance, 1f).SetId(tweenId);
-            StartCoroutine(GoraniToLeft());
+            _tween = transform.DOLocalMoveX(transform.position.x + distance, distance * 0.7f).SetId(tweenId);
+            StartCoroutine(GoraniToLeft(distance));
         }
 
         IEnumerator PigeonMove()
@@ -186,7 +213,7 @@ namespace GameHeaven.AttackGame
             _animator.SetBool("isMove", true);
             yield return new WaitForSeconds(1f);
             Vector3 pos = player.transform.position;
-            _tween = transform.DOMove(new Vector3(pos.x + 3, pos.y + 2, pos.z), 2).SetId(tweenId);
+            _tween = transform.DOMove(new Vector3(pos.x + 5, pos.y + 2, pos.z), 2).SetId(tweenId);
             StartCoroutine(PigeonStop());
         }
 

@@ -8,9 +8,8 @@ namespace GameHeaven.BingleGame
     {
         public enum TreeType
         {
-            type1 = 0,
-            type2 = 1,
-            type3 = 2
+            left,
+            right
         }
     }
 }

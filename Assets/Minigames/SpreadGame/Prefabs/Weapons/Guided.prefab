@@ -152,7 +152,7 @@ MonoBehaviour:
   speed: 10
   curShotDelay: 0.46180588
   maxShotDelay: 0.5
-  damage: 2
+  damage: 3
 --- !u!114 &-7002028162915669063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,4 +180,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6dd8d544e8fb074cb25e4d51515b5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 7
+  x: 8
+  y: 6

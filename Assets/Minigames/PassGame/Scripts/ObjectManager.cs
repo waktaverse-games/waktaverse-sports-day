@@ -17,7 +17,9 @@ namespace GameHeaven.PassGame
         public GameObject bugPrefab;
         public GameObject goraniPrefab;
         public GameObject jupokPrefab;
-        public GameObject coinPrefab;
+        public GameObject coin1Prefab;
+        public GameObject coin2Prefab;
+        public GameObject coin3Prefab;
 
         private GameObject[] _egi;
         private GameObject[] _bidul;
@@ -26,7 +28,9 @@ namespace GameHeaven.PassGame
         private GameObject[] _bug;
         private GameObject[] _gorani;
         private GameObject[] _jupok;
-        private GameObject[] _coin;
+        private GameObject[] _coin1;
+        private GameObject[] _coin2;
+        private GameObject[] _coin3;
         private GameObject[] _targetPool;
 
         // Start is called before the first frame update
@@ -39,7 +43,9 @@ namespace GameHeaven.PassGame
             _bug = new GameObject[10];
             _gorani = new GameObject[10];
             _jupok = new GameObject[10];
-            _coin = new GameObject[5];
+            _coin1 = new GameObject[8];
+            _coin2 = new GameObject[8];
+            _coin3 = new GameObject[8];
             Generate();
         }
 
@@ -108,11 +114,17 @@ namespace GameHeaven.PassGame
                 _jupok[i].GetComponent<EnemyDefaultMove>().deletePosX = posX;
                 _jupok[i].SetActive(false);
             }
-            for (int i = 0; i < _coin.Length; i++)
+            for (int i = 0; i < _coin1.Length; i++)
             {
-                _coin[i] = Instantiate(coinPrefab);
-                _coin[i].GetComponent<Coin>().deletePosX = posX;
-                _coin[i].SetActive(false);
+                _coin1[i] = Instantiate(coin1Prefab);
+                _coin1[i].GetComponent<Coin>().deletePosX = posX;
+                _coin1[i].SetActive(false);
+                _coin2[i] = Instantiate(coin2Prefab);
+                _coin2[i].GetComponent<Coin>().deletePosX = posX;
+                _coin2[i].SetActive(false);
+                _coin3[i] = Instantiate(coin3Prefab);
+                _coin3[i].GetComponent<Coin>().deletePosX = posX;
+                _coin3[i].SetActive(false);
             }
         }
 
@@ -142,7 +154,19 @@ namespace GameHeaven.PassGame
                     _targetPool = _jupok;
                     break;
                 case "coin":
-                    _targetPool = _coin;
+                    int x = Random.Range(0, 3);
+                    switch (x)
+                    {
+                        case 0:
+                            _targetPool = _coin1;
+                            break;
+                        case 1:
+                            _targetPool = _coin2;
+                            break;
+                        case 2:
+                            _targetPool = _coin3;
+                            break;
+                    }
                     break;
             }
 
@@ -151,7 +175,15 @@ namespace GameHeaven.PassGame
                 if (!_targetPool[i].activeSelf)
                 {
                     _targetPool[i].SetActive(true);
-                    _targetPool[i].transform.position = pos;
+                    if (type == "dog")
+                    {
+                        _targetPool[i].transform.position = new Vector3(pos.x, -3.6f, pos.z);
+                    }
+                    else
+                    {
+                        _targetPool[i].transform.position = pos;
+                    }
+                    
                     return;
                 }
             }
@@ -196,9 +228,11 @@ namespace GameHeaven.PassGame
                 _jupok[i].SetActive(false);
             }
 
-            for (int i = 0; i < _coin.Length; i++)
+            for (int i = 0; i < _coin1.Length; i++)
             {
-                _coin[i].SetActive(false);
+                _coin1[i].SetActive(false);
+                _coin2[i].SetActive(false);
+                _coin3[i].SetActive(false);
             }
         }
     }
