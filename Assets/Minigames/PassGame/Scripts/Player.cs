@@ -12,6 +12,7 @@ namespace GameHeaven.PassGame
         public GameManager gameManager;
         public SFXManager SfxManager;
         public bool jumpItem = false;
+        public GameObject boomEffect;
         
         private Rigidbody2D _rigid;
         private bool _isGrounded = false;
@@ -76,7 +77,15 @@ namespace GameHeaven.PassGame
                 _rigid.velocity = Vector2.up * jumpPower;
                 SfxManager.PlaySfx(1);
                 gameManager.AddScore(15);
+                boomEffect.SetActive(true);
+                boomEffect.GetComponent<Animator>().Play("effect");
+                Invoke("DisableEffect", 0.3f);
             }
+        }
+
+        private void DisableEffect()
+        {
+            boomEffect.SetActive(false);
         }
     }
 }

@@ -5,6 +5,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using SharedLibs.Score;
 using Random = UnityEngine.Random;
 
 namespace GameHeaven.AttackGame
@@ -38,7 +39,6 @@ namespace GameHeaven.AttackGame
         public TextMeshProUGUI playerXpText;
         public TextMeshProUGUI stageText;
         public TextMeshProUGUI stageStartText;
-        public TextMeshProUGUI coinText;
 
         private int _scoreNum;
         public int _hpNum;
@@ -60,12 +60,14 @@ namespace GameHeaven.AttackGame
         private int _tempCoinNum;
         private bool _isBossStage;
         private bool _isGameEnd;
+        private bool _hammerSpawned;
         // Start is called before the first frame update
         void Start()
         {
             _enemyTypes = new string[7] {"monkey", "gorani", "fox", "cat", "pigeon", "bat", "dog"};
             stageStartAnim = stageStart.GetComponent<Animator>();
             stageStartAnim.enabled = false;
+            _hammerSpawned = false;
             NewGame();
         }
 
@@ -99,7 +101,6 @@ namespace GameHeaven.AttackGame
             allXpBar.fillAmount = 0;
             playerXpBar.fillAmount = 0;
             retryObject.SetActive(false);
-            coinText.text = "x " + _coinNum;
             player.transform.position = new Vector3(0, 1, 0);
             mainCamera.transform.position = new Vector3(0, 0, -10);
             StartCoroutine(StartGame());
@@ -127,9 +128,11 @@ namespace GameHeaven.AttackGame
             _isGameEnd = true;
             objectManager.FailGame();
             yield return new WaitForSeconds(0.2f);
-            retryObject.SetActive(true);
+            // retryObject.SetActive(true);
             playerObject.SetActive(false);
-            retryAnim.Play("EndGame", -1, 0f);
+            // retryAnim.Play("EndGame", -1, 0f);
+            // ScoreManager.Instance.AddGameRoundScore(MinigameType.AttackGame, Score);
+            // 여기에 씬이동 넣으시면 될 것 같습니다!! 게임 오버, 게임오버, 게임 종료, game over, gameover
         }
 
         IEnumerator MoveToNextStage(float time)
@@ -143,7 +146,7 @@ namespace GameHeaven.AttackGame
                 player.ChangeDirection();
             }
             
-            player.transform.DOMoveX(76.8f, 3);
+            player.transform.DOMoveX(57.6f, 3);
             yield return new WaitForSeconds(3.1f);
             for (int i = 0; i < currMap.Length; i++)
             {
@@ -189,7 +192,7 @@ namespace GameHeaven.AttackGame
         IEnumerator SpawnMonsters(float time)
         {
             int enemyType;
-            _currentMonsterNum = 25;
+            _currentMonsterNum = 15;
             _isGameEnd = false;
             switch (_stageNum)
             {
@@ -215,7 +218,7 @@ namespace GameHeaven.AttackGame
             {
                 int enemyCode = Random.Range(0, enemyType);
                 GameObject temp = objectManager.MakeObject(_enemyTypes[enemyCode],
-                    new Vector3(Random.Range(11f, 62f), 2, 0));
+                    new Vector3(Random.Range(11f, 42f), 2, 0));
                 temp.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
             }
         }
@@ -239,10 +242,10 @@ namespace GameHeaven.AttackGame
             {
                 int enemyCode = Random.Range(0, 7);
                 GameObject tempEnemy = objectManager.MakeObject(_enemyTypes[enemyCode],
-                    new Vector3(Random.Range(50f, 64f), 2, 0));
+                    new Vector3(Random.Range(31f, 45f), 2, 0));
                 tempEnemy.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
             }
-            GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(63, 6, 0));
+            GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(44, 6, 0));
             tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 6, _enemyDamage * 3);
             if (_stageNum == 2)
             {
@@ -253,8 +256,6 @@ namespace GameHeaven.AttackGame
 
         public void GetCoin()
         {
-            _coinNum++;
-            coinText.text = "x " + _coinNum;
             ControlScore(10);
         }
 
@@ -311,7 +312,7 @@ namespace GameHeaven.AttackGame
             yield return new WaitForSeconds(1f);
             for (int i = 0; i < 15; i++)
             {
-                Vector3 newPos = new Vector3(Random.Range(50.6f, 64.6f), Random.Range(2.5f, 4.5f), 0);
+                Vector3 newPos = new Vector3(Random.Range(31.4f, 45.6f), Random.Range(2.5f, 4.5f), 0);
                 GameObject coin = objectManager.MakeObject("coin", newPos);
                 coin.GetComponent<Coin>().StartFall(2f);
             }
@@ -391,6 +392,11 @@ namespace GameHeaven.AttackGame
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
                 _hpNum = 1500;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
             }
         }
     }

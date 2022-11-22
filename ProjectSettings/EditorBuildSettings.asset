@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Minigames/JumpGame/JumpGame.unity
     guid: 2aa75c7081ac8944cbff7517456edddd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Minigames/RunGame/Scenes/RunGame.unity
     guid: aafee391642ee074fbdb9a9ba6f3d41e
   - enabled: 0
