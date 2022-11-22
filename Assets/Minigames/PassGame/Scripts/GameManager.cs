@@ -68,7 +68,7 @@ namespace GameHeaven.PassGame
             Time.timeScale = 1;
             _stageText.SetText("Lv 1");
             _scoreText.SetText(_score.ToString());
-            coinText.SetText(_coins.ToString());
+            // coinText.SetText(_coins.ToString());
             playerScript.ResetGame();
             Invoke("GameStart", 2f);
         }
@@ -153,9 +153,10 @@ namespace GameHeaven.PassGame
 
         public void AddCoin()
         {
-            _coins++;
+            // _coins++;
             SfxManager.PlaySfx(2);
-            coinText.SetText(_coins.ToString());
+            AddScore(10);
+            // coinText.SetText(_coins.ToString());
         }
 
         public void EndGame()
