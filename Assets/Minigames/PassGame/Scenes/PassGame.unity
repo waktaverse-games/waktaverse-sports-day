@@ -1815,7 +1815,9 @@ MonoBehaviour:
   bugPrefab: {fileID: 8964413685104735280, guid: 1c604d6d54cebea4580c020ecff8a4c8, type: 3}
   goraniPrefab: {fileID: 5038197806936821973, guid: f9329be6949d7684f9fcf697ba461f07, type: 3}
   jupokPrefab: {fileID: 2162727208032248899, guid: f00cafc0109458e4aa82b9c289b66633, type: 3}
-  coinPrefab: {fileID: 4376747008224103453, guid: 01aa11fb7f68ee34bb2f53a9198ab1b3, type: 3}
+  coin1Prefab: {fileID: 6950070614868577954, guid: f48aa3b0fae05014697a60af285c7c11, type: 3}
+  coin2Prefab: {fileID: 4600867823324030250, guid: a56e2363357b6a44cb24654055c26524, type: 3}
+  coin3Prefab: {fileID: 419161459602992798, guid: 00ca910315599f14090466fb02ffcf13, type: 3}
 --- !u!1 &873869211
 GameObject:
   m_ObjectHideFlags: 0
