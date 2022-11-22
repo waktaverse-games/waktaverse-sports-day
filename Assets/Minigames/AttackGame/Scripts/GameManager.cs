@@ -5,6 +5,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using SharedLibs.Score;
 using Random = UnityEngine.Random;
 
 namespace GameHeaven.AttackGame
@@ -130,6 +131,7 @@ namespace GameHeaven.AttackGame
             // retryObject.SetActive(true);
             playerObject.SetActive(false);
             // retryAnim.Play("EndGame", -1, 0f);
+            //ScoreManager.Instance.AddGameRoundScore(MinigameType.AttackGame, Score);
             // 여기에 씬이동 넣으시면 될 것 같습니다!! 게임 오버, 게임오버, 게임 종료, game over, gameover
         }
 
