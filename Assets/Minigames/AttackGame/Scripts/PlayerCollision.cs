@@ -8,12 +8,18 @@ namespace GameHeaven.AttackGame
     public class PlayerCollision : MonoBehaviour
     {
         public SFXManager _sfxManager;
+        public GameObject effect;
         
         private Player _player;
 
         private void OnEnable()
         {
             _player = GetComponentInParent<Player>();
+        }
+        
+        void DisableEffect()
+        {
+            effect.SetActive(false);
         }
 
         private void OnTriggerEnter2D(Collider2D col)
@@ -36,6 +42,9 @@ namespace GameHeaven.AttackGame
                 _player.HitByCoin();
                 gameObj.SetActive(false);
                 _sfxManager.PlaySfx(0);
+                effect.SetActive(true);
+                effect.GetComponent<Animator>().Play("Star");
+                Invoke("DisableEffect", 0.3f);
             }
 
             if (gameObj.CompareTag("UpgradeItem"))
@@ -43,6 +52,9 @@ namespace GameHeaven.AttackGame
                 _player.ActivateItem();
                 gameObj.SetActive(false);
                 _sfxManager.PlaySfx(0);
+                effect.SetActive(true);
+                effect.GetComponent<Animator>().Play("Star");
+                Invoke("DisableEffect", 0.3f);
             }
         }
     }

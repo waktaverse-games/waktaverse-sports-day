@@ -102,7 +102,7 @@ namespace GameHeaven.AttackGame
             {
                 isBossMonster = false;
                 Vector3 scale = transform.localScale;
-                transform.localScale = new Vector3(scale.x / 1.6f, scale.y / 1.6f, scale.z);
+                transform.localScale = new Vector3(scale.x / 3f, scale.y / 3f, scale.z);
             }
 
             if (dropItem)
@@ -122,7 +122,7 @@ namespace GameHeaven.AttackGame
             {
                 isBossMonster = false;
                 Vector3 scale = transform.localScale;
-                transform.localScale = new Vector3(scale.x / 1.6f, scale.y / 1.6f, scale.z);
+                transform.localScale = new Vector3(scale.x / 3f, scale.y / 3f, scale.z);
             }
         }
 

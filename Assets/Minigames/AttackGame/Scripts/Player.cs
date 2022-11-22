@@ -24,7 +24,6 @@ namespace GameHeaven.AttackGame
         public GameObject weapon1;
         public GameObject weapon2;
         public GameObject hammerIcon;
-        public Animation effect;
 
         public bool isHeadingRight = true;
         private bool _stopAction = false;
@@ -111,8 +110,6 @@ namespace GameHeaven.AttackGame
         {
             if (Input.GetKeyDown(KeyCode.Space) || !isGamePlaying)
             {
-                effect.Play();
-                effect.wrapMode = WrapMode.Once;
                 if (isHeadingRight)
                 {
                     _spriteRenderer.flipX = false;
@@ -289,7 +286,7 @@ namespace GameHeaven.AttackGame
             Vector3 pos = transform.position;
             if (_combo == 4)
             {
-                float tempFloat = 2f;
+                float tempFloat = 3.5f;
                 for (int i = 0; i < 3; i++)
                 {
                     GameObject arr = objectManager.MakeObject("pyochang", pos);
@@ -297,7 +294,7 @@ namespace GameHeaven.AttackGame
                     proj.SetState(isHeadingRight);
                     proj.damage = weaponsPower[2];
                     proj.ShootPyochang(isHeadingRight, pyochangTime, tempFloat);
-                    tempFloat += 0.5f;
+                    tempFloat += 0.6f;
                 }
 
                 _combo = 0;
@@ -308,7 +305,7 @@ namespace GameHeaven.AttackGame
                 Projectile proj = arr.GetComponent<Projectile>();
                 proj.SetState(isHeadingRight);
                 proj.damage = weaponsPower[2];
-                proj.ShootPyochang(isHeadingRight, pyochangTime, 2.5f);
+                proj.ShootPyochang(isHeadingRight, pyochangTime, 4.5f);
             }
         }
     }
