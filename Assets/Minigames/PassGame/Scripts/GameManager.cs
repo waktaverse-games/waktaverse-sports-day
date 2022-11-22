@@ -46,8 +46,8 @@ namespace GameHeaven.PassGame
             _stageText = stageT.GetComponent<TextMeshProUGUI>();
             _stageStrings = new List<string>[6];
             _stageStrings[0] = new List<string>();
-            // _stageStrings[1] = new List<string>() { "egi", "bat" };
-            _stageStrings[1] = new List<string>() { "dog" };
+            _stageStrings[1] = new List<string>() { "egi", "bat" };
+            // _stageStrings[1] = new List<string>() { "dog" };
             _stageStrings[2] = new List<string>() { "egi", "bat", "bidul", "dog" };
             _stageStrings[3] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani" };
             _stageStrings[4] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug" };
