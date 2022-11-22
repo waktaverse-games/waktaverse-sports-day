@@ -12,7 +12,7 @@ namespace GameHeaven.AttackGame
         private void OnEnable()
         {
             _enemy = GetComponentInParent<Enemy>();
-            if (transform.position.x < 12f)
+            if (transform.position.x < 10f)
             {
                 _enemy.ActivateMovement();
                 _isActivated = true;
@@ -38,7 +38,7 @@ namespace GameHeaven.AttackGame
                 gameObj.SetActive(false);
             }
 
-            if (gameObj.name == "right" && !_isActivated)
+            if (gameObj.name == "startcollision" && !_isActivated)
             {
                 _isActivated = true;
                 if (!_enemy.isBossMonster)
