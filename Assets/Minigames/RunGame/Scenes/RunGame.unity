@@ -654,6 +654,7 @@ MonoBehaviour:
   spawnPoints: {fileID: 475504235}
   dust: {fileID: 5660925069831497148, guid: 1c20d34b838c64d44bc1503436ec2570, type: 3}
   dustPoints: {fileID: 1075842155}
+  cone: {fileID: 1616399433486522858, guid: 7ed1d091e22f70f4b9d1d2c0d3783631, type: 3}
   score: 0
   highScore: 0
   scoreText: {fileID: 1244712733}
@@ -741,7 +742,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d79493aa31894df4cac1df2e8be97272, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4195d8bcf7985f144b733016f24e030c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1464,7 +1465,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.6, y: 1}
+  m_Size: {x: 0.6, y: 0.8}
   m_Direction: 0
 --- !u!50 &1075842153
 Rigidbody2D:
@@ -2222,7 +2223,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d79493aa31894df4cac1df2e8be97272, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4195d8bcf7985f144b733016f24e030c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2445,7 +2446,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d79493aa31894df4cac1df2e8be97272, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4195d8bcf7985f144b733016f24e030c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
