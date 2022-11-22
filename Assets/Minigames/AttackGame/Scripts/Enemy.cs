@@ -110,6 +110,7 @@ namespace GameHeaven.AttackGame
                 Vector3 tmpVector = hammerItem.transform.position;
                 tmpVector.Set(transform.position.x, tmpVector.y, tmpVector.z);
                 hammerItem.SetActive(true);
+                dropItem = false;
             }
             gameObject.SetActive(false);
         }
@@ -174,9 +175,9 @@ namespace GameHeaven.AttackGame
             _animator.SetBool("isMove", false);
             if (isBossMonster)
             {
-                yield return new WaitForSeconds(1.2f);
+                yield return new WaitForSeconds(2.2f);
                 Vector3 pos = transform.position;
-                transform.position = new Vector3(Random.Range(58f, 65f), pos.y, pos.z);
+                transform.position = new Vector3(Random.Range(38.4f, 45.4f), pos.y, pos.z);
             }
             StartCoroutine(FoxMove());
         }
@@ -194,7 +195,14 @@ namespace GameHeaven.AttackGame
 
         IEnumerator GoraniToRight()
         {
-            yield return new WaitForSeconds(1.2f);
+            if (isBossMonster)
+            {
+                yield return new WaitForSeconds(2.5f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(1.2f);
+            }
             _spriteRenderer.flipX = true;
             float distance = 1.5f;
             if (isBossMonster) distance = 3.5f;

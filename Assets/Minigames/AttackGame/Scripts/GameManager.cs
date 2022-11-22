@@ -59,12 +59,14 @@ namespace GameHeaven.AttackGame
         private int _tempCoinNum;
         private bool _isBossStage;
         private bool _isGameEnd;
+        private bool _hammerSpawned;
         // Start is called before the first frame update
         void Start()
         {
             _enemyTypes = new string[7] {"monkey", "gorani", "fox", "cat", "pigeon", "bat", "dog"};
             stageStartAnim = stageStart.GetComponent<Animator>();
             stageStartAnim.enabled = false;
+            _hammerSpawned = false;
             NewGame();
         }
 

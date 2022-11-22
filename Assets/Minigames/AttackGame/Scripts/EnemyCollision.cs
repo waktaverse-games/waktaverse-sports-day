@@ -12,7 +12,7 @@ namespace GameHeaven.AttackGame
         private void OnEnable()
         {
             _enemy = GetComponentInParent<Enemy>();
-            if (transform.position.x < 9.8f)
+            if (transform.position.x < 10.5f)
             {
                 _enemy.ActivateMovement();
                 _isActivated = true;
