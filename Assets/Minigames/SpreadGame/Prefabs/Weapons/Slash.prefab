@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -8480602467344076912}
   - component: {fileID: 7715688422113509052}
   - component: {fileID: 5253744885416062074}
-  - component: {fileID: -9193505824379735034}
+  - component: {fileID: 7761623193428582264}
   m_Layer: 0
   m_Name: Slash
   m_TagString: Attack
@@ -217,10 +217,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   speed: 10
-  curShotDelay: 0.0989915
+  curShotDelay: 0.116283
   maxShotDelay: 0.8
   damage: 1
---- !u!114 &-9193505824379735034
+--- !u!114 &7761623193428582264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,4 +232,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6dd8d544e8fb074cb25e4d51515b5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 7
+  x: 8
+  y: 6

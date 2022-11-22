@@ -16,6 +16,7 @@ namespace GameHeaven.StickyGame
         private void Awake()
         {
             anim = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             ChooseCharacter(currChar);
         }
 

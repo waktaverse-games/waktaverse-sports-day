@@ -11,8 +11,8 @@ namespace GameHeaven.JumpGame
         {
             if (collision.gameObject.tag == "Player")
             {
-                SoundManager.Instance.PlayItemSound();
-                GameManager.Instance.isInvincible = true;
+                SoundManager.Instance.PlayRusukSound();
+                GameManager.Instance.SetInvinsible(true);
                 Destroy(gameObject);
             }
             if (collision.gameObject.tag == "Border")
