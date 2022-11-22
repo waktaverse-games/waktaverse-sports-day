@@ -393,6 +393,11 @@ namespace GameHeaven.AttackGame
             {
                 _hpNum = 1500;
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
         }
     }
 }
