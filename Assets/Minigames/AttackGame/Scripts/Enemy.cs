@@ -138,7 +138,7 @@ namespace GameHeaven.AttackGame
                     StartCoroutine(FoxMove());
                     break;
                 case "gorani(Clone)":
-                    StartCoroutine(GoraniToLeft());
+                    StartCoroutine(GoraniToLeft(2f));
                     break;
                 case "pigeon(Clone)":
                     StartCoroutine(PigeonMove());
@@ -182,32 +182,30 @@ namespace GameHeaven.AttackGame
             StartCoroutine(FoxMove());
         }
 
-        IEnumerator GoraniToLeft()
+        IEnumerator GoraniToLeft(float distance)
         {
             
-            yield return new WaitForSeconds(1.2f);
-            float distance = 1.5f;
-            if (isBossMonster) distance = 3.5f;
+            yield return new WaitForSeconds(distance * 0.7f + 0.2f);
+            distance = Random.Range(1.5f, 2.5f);
+            if (isBossMonster) distance = Random.Range(3.5f, 6f);
             _spriteRenderer.flipX = false;
-            _tween = transform.DOLocalMoveX(transform.position.x - distance, 1f).SetId(tweenId);
-            StartCoroutine(GoraniToRight());
+            _tween = transform.DOLocalMoveX(transform.position.x - distance, distance * 0.7f).SetId(tweenId);
+            StartCoroutine(GoraniToRight(distance));
         }
 
-        IEnumerator GoraniToRight()
+        IEnumerator GoraniToRight(float distance)
         {
             if (isBossMonster)
             {
-                yield return new WaitForSeconds(2.5f);
+                yield return new WaitForSeconds(distance * 0.7f + 0.7f);
             }
             else
             {
-                yield return new WaitForSeconds(1.2f);
+                yield return new WaitForSeconds(distance * 0.7f + 0.2f);
             }
             _spriteRenderer.flipX = true;
-            float distance = 1.5f;
-            if (isBossMonster) distance = 3.5f;
-            _tween = transform.DOLocalMoveX(transform.position.x + distance, 1f).SetId(tweenId);
-            StartCoroutine(GoraniToLeft());
+            _tween = transform.DOLocalMoveX(transform.position.x + distance, distance * 0.7f).SetId(tweenId);
+            StartCoroutine(GoraniToLeft(distance));
         }
 
         IEnumerator PigeonMove()
