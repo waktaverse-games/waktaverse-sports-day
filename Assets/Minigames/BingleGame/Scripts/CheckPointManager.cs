@@ -43,9 +43,8 @@ namespace GameHeaven.BingleGame
 
         void ChooseTreeType()
         {
-            int type = Random.Range(0, System.Enum.GetValues(typeof(TreeType)).Length);
-            leftTree.SetTreeType(type);
-            rightTree.SetTreeType(type);
+            leftTree.SetTreeType(TreeType.left);
+            rightTree.SetTreeType(TreeType.right);
         }
 
         void ResetTree()

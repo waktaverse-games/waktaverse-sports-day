@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4834915280246067118
 Transform:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5315763331990848303}
   - component: {fileID: 9221044416773269882}
   m_Layer: 0
-  m_Name: Tree
+  m_Name: Flag
   m_TagString: Pole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 2fe02e6cbc995c847a130913d57f1aac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3297d5dc2f6811246bf603740c5edb94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -236,7 +236,6 @@ MonoBehaviour:
   characters:
   - {fileID: 7461893107214728275, guid: 8d830081628b98f4c9fe18c1efa9d782, type: 3}
   hitVFX: {fileID: 1041877752519655513, guid: 76175b297f06e6b48a597e29ad912e67, type: 3}
-  treeSprites:
-  - {fileID: 21300000, guid: 828e00df94f31cd48b8a4fa48996e577, type: 3}
-  - {fileID: 21300000, guid: ccb1870c1881ff64e96803dd49ccb505, type: 3}
-  - {fileID: 21300000, guid: 2fe02e6cbc995c847a130913d57f1aac, type: 3}
+  flagSprites:
+  - {fileID: 21300000, guid: d17cf229216404f41b29ac6317bcc784, type: 3}
+  - {fileID: 21300000, guid: 96abf68f41ce741418feb405b83ee06a, type: 3}

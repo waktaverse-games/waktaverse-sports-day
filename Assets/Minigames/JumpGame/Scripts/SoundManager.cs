@@ -9,7 +9,7 @@ namespace GameHeaven.JumpGame
         [SerializeField] AudioSource itemSFX;
         [SerializeField] AudioSource jumpSFX;
         [SerializeField] AudioSource ropeSFX;
-        [SerializeField] AudioSource emSFX;
+        [SerializeField] AudioSource rusukSFX;
         #region Singleton
         public static SoundManager Instance = null;
         private void Awake()
@@ -29,6 +29,10 @@ namespace GameHeaven.JumpGame
         public void PlayItemSound() => itemSFX.Play();
         public void PlayJumpSound() => jumpSFX.Play();
         public void PlayRopeSound() => ropeSFX.Play();
-        public void PlayEMSound() => emSFX.Play();
+        public void PlayRusukSound()
+        {
+            itemSFX.Play();
+            rusukSFX.Play();
+        }
     }
 }
