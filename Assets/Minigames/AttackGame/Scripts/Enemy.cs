@@ -215,7 +215,7 @@ namespace GameHeaven.AttackGame
             _animator.SetBool("isMove", true);
             yield return new WaitForSeconds(1f);
             Vector3 pos = player.transform.position;
-            _tween = transform.DOMove(new Vector3(pos.x + 3, pos.y + 2, pos.z), 2).SetId(tweenId);
+            _tween = transform.DOMove(new Vector3(pos.x + 5, pos.y + 2, pos.z), 2).SetId(tweenId);
             StartCoroutine(PigeonStop());
         }
 
