@@ -127,9 +127,10 @@ namespace GameHeaven.AttackGame
             _isGameEnd = true;
             objectManager.FailGame();
             yield return new WaitForSeconds(0.2f);
-            retryObject.SetActive(true);
+            // retryObject.SetActive(true);
             playerObject.SetActive(false);
-            retryAnim.Play("EndGame", -1, 0f);
+            // retryAnim.Play("EndGame", -1, 0f);
+            // 여기에 씬이동 넣으시면 될 것 같습니다!! 게임 오버, 게임오버, 게임 종료, game over, gameover
         }
 
         IEnumerator MoveToNextStage(float time)
