@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 1, b: 1, a: 0.47058824}
+  m_Color: {r: 0, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -602,17 +602,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5315763331990848297, guid: 952c7395deb455948bad771ccf822eff, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d17cf229216404f41b29ac6317bcc784, type: 3}
     - target: {fileID: 5315763331990848300, guid: 952c7395deb455948bad771ccf822eff, type: 3}
       propertyPath: m_Name
       value: Tree Left
       objectReference: {fileID: 0}
     - target: {fileID: 5315763331990848302, guid: 952c7395deb455948bad771ccf822eff, type: 3}
       propertyPath: m_Size.x
-      value: 2.6575327
+      value: 2.2552521
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315763331990848302, guid: 952c7395deb455948bad771ccf822eff, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5048854
       objectReference: {fileID: 0}
     - target: {fileID: 5315763331990848302, guid: 952c7395deb455948bad771ccf822eff, type: 3}
       propertyPath: m_Offset.x
-      value: -0.7105055
+      value: -0.91164577
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315763331990848302, guid: 952c7395deb455948bad771ccf822eff, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.2475573
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 952c7395deb455948bad771ccf822eff, type: 3}
@@ -707,18 +719,26 @@ PrefabInstance:
     - target: {fileID: 5315763331990848297, guid: 952c7395deb455948bad771ccf822eff, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2fe02e6cbc995c847a130913d57f1aac, type: 3}
+      objectReference: {fileID: 21300000, guid: 96abf68f41ce741418feb405b83ee06a, type: 3}
     - target: {fileID: 5315763331990848300, guid: 952c7395deb455948bad771ccf822eff, type: 3}
       propertyPath: m_Name
       value: Tree Right
       objectReference: {fileID: 0}
     - target: {fileID: 5315763331990848302, guid: 952c7395deb455948bad771ccf822eff, type: 3}
       propertyPath: m_Size.x
-      value: 2.7005935
+      value: 2.3292575
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315763331990848302, guid: 952c7395deb455948bad771ccf822eff, type: 3}
+      propertyPath: m_Size.y
+      value: 2.53583
       objectReference: {fileID: 0}
     - target: {fileID: 5315763331990848302, guid: 952c7395deb455948bad771ccf822eff, type: 3}
       propertyPath: m_Offset.x
-      value: 0.6889751
+      value: 0.8746431
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315763331990848302, guid: 952c7395deb455948bad771ccf822eff, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.232085
       objectReference: {fileID: 0}
     - target: {fileID: 5315763331990848302, guid: 952c7395deb455948bad771ccf822eff, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x

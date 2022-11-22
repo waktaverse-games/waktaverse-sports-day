@@ -97,18 +97,6 @@ namespace GameHeaven.JumpGame
             }
         }
 
-        public void EnableExclamationMark()
-        {
-            VFX.SetActive(true);
-            VFX.GetComponent<Animator>().Play("ExclamationMark");
-            SoundManager.Instance.PlayEMSound();
-            Invoke("DisableExclamationMark", 1f);
-        }
-        void DisableExclamationMark()
-        {
-            VFX.SetActive(false);
-        }
-
         IEnumerator OnDamaged()
         {
             isImmotal = true;
@@ -128,7 +116,7 @@ namespace GameHeaven.JumpGame
             {
                 if(GameManager.Instance.isInvincible) // 무적이면
                 {
-                    GameManager.Instance.isInvincible = false;
+                    GameManager.Instance.SetInvinsible(false);
                     OnCollideWithRope.Invoke();
                     StartCoroutine(OnDamaged());
                 }
