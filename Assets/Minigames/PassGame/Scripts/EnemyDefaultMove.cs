@@ -21,6 +21,7 @@ namespace GameHeaven.PassGame
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _rigidbody.velocity = new Vector2(-speed, 0);
+            // transform.Translate(0,0.3f,0);
         }
 
         private void OnDisable()

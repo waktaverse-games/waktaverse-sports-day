@@ -175,7 +175,15 @@ namespace GameHeaven.PassGame
                 if (!_targetPool[i].activeSelf)
                 {
                     _targetPool[i].SetActive(true);
-                    _targetPool[i].transform.position = pos;
+                    if (type == "dog")
+                    {
+                        _targetPool[i].transform.position = new Vector3(pos.x, -3.6f, pos.z);
+                    }
+                    else
+                    {
+                        _targetPool[i].transform.position = pos;
+                    }
+                    
                     return;
                 }
             }
