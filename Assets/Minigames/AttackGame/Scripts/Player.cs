@@ -37,7 +37,7 @@ namespace GameHeaven.AttackGame
             currentWeapon = 1;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             weaponsPossible = new bool[3] { true, false, false };
-            weaponsPower = new int[3] { 13, 10, 14 };
+            weaponsPower = new int[3] { 13, 12, 14 };
             _rabbit = 0;
             rabbit.SetActive(false);
             StartShooting(2f);
