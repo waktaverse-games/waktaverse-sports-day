@@ -133,6 +133,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 29cfe1ba65efd1c48a77bd933aa4d834, type: 3}
   - {fileID: 21300000, guid: b2696e018be30d64cbe8c9f0c594932b, type: 3}
   - {fileID: 21300000, guid: 81945f64857d2874ea827e035bc7e0b6, type: 3}
+  - {fileID: 21300000, guid: 1c0ca005bcb1b684d8e920223fd7f5f2, type: 3}
   pushedSprite:
   - {fileID: 21300000, guid: b78e53f06d6b48347be3665d722a0280, type: 3}
   - {fileID: 21300000, guid: 6d209d81a103373499e997120a2ae249, type: 3}
@@ -141,3 +142,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 90eb7e9f5c2cd1041a4549a1c3d79049, type: 3}
   - {fileID: 21300000, guid: d9a99a43a7630614891d9a1bff360872, type: 3}
   - {fileID: 21300000, guid: 9afdec6d39831604f8c2c7c42a8827e5, type: 3}
+  - {fileID: 21300000, guid: 332a9989c273f5f46a578546148721f9, type: 3}

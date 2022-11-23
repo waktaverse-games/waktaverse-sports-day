@@ -14,7 +14,8 @@ namespace GameHeaven.CrossGame
         Jururu,
         Lilpa,
         Jingburger,
-        Ine
+        Ine,
+        Wakgood
     }
     public class Platform : MonoBehaviour
     {
@@ -31,7 +32,7 @@ namespace GameHeaven.CrossGame
 
         public void Set()
         {
-            int num = Random.Range(0, 12);
+            int num = Random.Range(0, 14);
 
             if (num < 2) type = PlatformType.Viichan;
             else if (num < 3) type = PlatformType.Gosegu1;
@@ -40,6 +41,7 @@ namespace GameHeaven.CrossGame
             else if (num < 8) type = PlatformType.Lilpa;
             else if (num < 10) type = PlatformType.Jingburger;
             else if (num < 12) type = PlatformType.Ine;
+            else if (num < 14) type = PlatformType.Wakgood;
 
             spriteRenderer.sprite = normalSprite[(int)type];
         }

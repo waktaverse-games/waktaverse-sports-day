@@ -46,8 +46,10 @@ namespace GameHeaven.CrossGame
         //점프
         float JumpTime;
         int JumpCount = 0;
+        bool ReadyJump = false;
         Vector3 LandPos;
         Sequence MoveSequence;
+        Sequence UpDownSequence;
         bool PlayerPositionIsLimited;
         float TotalMoveCountLeft = 0;
         float TotalMoveCountRight = 0;
@@ -64,6 +66,7 @@ namespace GameHeaven.CrossGame
         int FLyLandFlatformNum;
         int FlyDistance = 20;
         int FlatformNumWhenMakeFlyItem = -20;
+        public Animator Effect;
         [HideInInspector]
         public List<GameObject> FlyItems = new List<GameObject>();
 
@@ -89,6 +92,16 @@ namespace GameHeaven.CrossGame
                 return;
             }
 
+            //점프 선입력
+            if (ReadyJump && !IsFly)
+            {
+                if (JumpCount == 0 && JumpTime == 0)
+                {
+                    PlayerJump();
+                    ReadyJump = false;
+                }
+            }
+
             //점프
             if (Input.GetKeyDown(KeyCode.Space) && !IsFly)
             {
@@ -100,11 +113,17 @@ namespace GameHeaven.CrossGame
                 {
                     PlayerDoubleJump();
                 }
+
+           /*     if(JumpTime * JumpSpeed > 0.5f)
+                {
+                    ReadyJump = true;
+                }*/
             }
 
             if (Input.GetKeyDown(KeyCode.X))
             {
-                MakeStar();
+                Effect.transform.position = Player.transform.position;
+                Effect.SetTrigger("Boom");
             }
             if (Input.GetKeyDown(KeyCode.C))
             {
@@ -121,6 +140,7 @@ namespace GameHeaven.CrossGame
                 if(FlyCountInPlatform > 2){
                     FlyCountInPlatform -= 2;
                     Manager.AddScore(10);
+                    Balanceing();
                 }
                 if (FlyCount > 40)
                 {
@@ -170,6 +190,9 @@ namespace GameHeaven.CrossGame
                 FlyItems[i].transform.position += Vector3.left * DeltaDistance * 1.5f;
             }
 
+            //이펙트 이동
+            if (-15 < Effect.transform.position.x) Effect.transform.position += Vector3.left * DeltaDistance;
+
             if (IsFly) return;
             //오른쪽 벽에 근접한 상황에서 속도를 조절하는 로직
             if (JumpCount >= 1)
@@ -216,18 +239,18 @@ namespace GameHeaven.CrossGame
             float Time = 1f / JumpSpeed;
             LandPos = Player.transform.position + Vector3.right * (2 - Time * MovementSpeed);
             //JumpSequence = Player.transform.DOJump(LandPos, 2f, 1, Time);
-            Sequence UpDownSequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2, Time / 2)).Append(Player.transform.DOMoveY(LandPos.y, Time / 2)).AppendCallback(() => {
+            UpDownSequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2, Time / 2)).Append(Player.transform.DOMoveY(LandPos.y, Time / 2));
+            MoveSequence = DOTween.Sequence().Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() => {
                 if (JumpCount == 1)
                 {
                     JumpCallBack();
                 }
             });
-            MoveSequence = DOTween.Sequence().Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownSequence);
         }
 
         public void UpdateLandPoint(float OldSpeed, float NewSpeed)
         {
-            //MoveSequence.Kill();
+            MoveSequence.Kill();
             float Time = (1f / JumpSpeed) - JumpTime;
             LandPos = LandPos - Vector3.right * Time * (NewSpeed - OldSpeed);
             MoveSequence = DOTween.Sequence();
@@ -239,7 +262,15 @@ namespace GameHeaven.CrossGame
 
         public void PlayerDoubleJump()
         {
-            MoveSequence.Kill();
+            if (IsFly)
+            {
+                return;
+            }
+            else
+            {
+                UpDownSequence.Kill();
+                MoveSequence.Kill();
+            }
             JumpCount++;
             LandPlatformNum++;
             TotalMoveCountRight += 2;
@@ -248,9 +279,9 @@ namespace GameHeaven.CrossGame
             float UpTime = Time - (1f / JumpSpeed) / 2;
             float DownTime = (1f / JumpSpeed) / 2;
             LandPos = LandPos + Vector3.right * 2;
-            Sequence UpDownsequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2.3f, UpTime)).Append(Player.transform.DOMoveY(LandPos.y, DownTime));
+            UpDownSequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2.3f, UpTime)).Append(Player.transform.DOMoveY(LandPos.y, DownTime));
             MoveSequence = DOTween.Sequence();
-            MoveSequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownsequence).AppendCallback(() =>
+            MoveSequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() =>
             {
                 JumpCallBack();
             });
@@ -260,6 +291,9 @@ namespace GameHeaven.CrossGame
         {
             if (IsFly) return;
             MoveSequence.Pause<Sequence>();
+            UpDownSequence.Pause<Sequence>();
+            Effect.transform.position = Player.transform.position;
+            Effect.SetTrigger("Boom");
             Player.CntAnimator.SetBool("Fly", true);
             Manager.SoundManager.Play("Pickup1");
             FLyLandFlatformNum = LandPlatformNum + FlyDistance;
@@ -271,6 +305,9 @@ namespace GameHeaven.CrossGame
         public void EndFly()
         {
             MoveSequence.Play<Sequence>();
+            UpDownSequence.Play<Sequence>();
+            Effect.transform.position = Player.transform.position;
+            Effect.SetTrigger("Boom");
             Player.CntAnimator.SetBool("Fly", false);
             IsFly = false;
         }
@@ -278,13 +315,15 @@ namespace GameHeaven.CrossGame
         void JumpCallBack()
         {
             Manager.AddScore(JumpCount * 10);
+            Balanceing();
+            if (JumpCount == 2) Balanceing();
             //float num = Player.transform.position.x;
             //num = Mathf.Round(num + MoveCount) - MoveCount;
             float num = TotalMoveCountRight - TotalMoveCountLeft - 2.1f;
             //0.1은 스프라이트 크기에 의한 보정
-            Player.transform.position = new Vector3(num, Player.transform.position.y);
+            Player.transform.position = new Vector3(num, -1.7f);
 
-            if (!PlatformInformation[LandPlatformNum])
+            if (LandPlatformNum <= MakePlatformNum && !PlatformInformation[LandPlatformNum])
             {
                 Manager.GameOver();
             }
@@ -317,12 +356,12 @@ namespace GameHeaven.CrossGame
             if (Platforms.Count <= PlatformCurosr) PlatformCurosr = 0;
 
             if ((MakePlatformNum > FlatformNumWhenMakeFlyItem + 30) && Random.Range(0f, 1f) < ItemProbability) MakeFlyItem();
-            if (Random.Range(0f, 1f) < StarProbability) MakeStar();
+            if (Random.Range(0f, 1f) < StarProbability) MakeStar(CurrentFlatformIsActive);
         }
 
-        public void MakeStar()
+        public void MakeStar(bool CurrentFlatformIsActive)
         {
-            GameObject InstanceStar = Instantiate(StarPrefab, new Vector3(12, 1.3f), Quaternion.identity, ObjectGroup);
+            GameObject InstanceStar = Instantiate(StarPrefab, new Vector3(10, 1.3f), Quaternion.identity, ObjectGroup);
             Star InstanceScript = InstanceStar.GetComponent<Star>();
             float num = Random.Range(0f, 1f);
             if (num < 0.5f)
@@ -338,7 +377,7 @@ namespace GameHeaven.CrossGame
                 InstanceScript.code = CoinCode.Gold;
             }
             num = Random.Range(0f, 1f);
-            if (num < 0.5f)
+            if (num < 0.5f && CurrentFlatformIsActive)
             {
                 InstanceStar.transform.position += new Vector3(0, -3.2f, 0);
             }
@@ -357,6 +396,18 @@ namespace GameHeaven.CrossGame
             InstanceScript.Move();
             InstanceScript.Manager = Manager;
             FlyItems.Add(InstanceItem);
+        }
+
+        void Balanceing()
+        {
+            if (MovementSpeed < 6.5f)
+            {
+                MovementSpeed += 0.04f;
+            }
+            else if (MovementSpeed < 8.8f)
+            {
+                MovementSpeed += 0.005f;
+            }
         }
     }
 }

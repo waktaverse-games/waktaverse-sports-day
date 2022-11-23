@@ -41,20 +41,6 @@ namespace GameHeaven.CrossGame
         {
             Score += Point;
             ScoreUI.text = "Á¡¼ö : " + Score.ToString();
-            if (Point == 10)
-            {
-                Balanceing();
-            }
-            else if (Point == 20)
-            {
-                Balanceing();
-                Balanceing();
-            }
-        }
-
-        public void AddGold(int num)
-        {
-            CollectStar += num;
         }
 
         public void GameOver()
@@ -73,17 +59,7 @@ namespace GameHeaven.CrossGame
 
         }
 
-        void Balanceing()
-        {
-            if (ObjectController.MovementSpeed < 7.5f)
-            {
-                ObjectController.MovementSpeed += 0.04f;
-            }
-            else if(ObjectController.MovementSpeed < 9)
-            {
-                ObjectController.MovementSpeed += 0.005f;
-            }
-        }
+
 
         public void Restart()
         {
