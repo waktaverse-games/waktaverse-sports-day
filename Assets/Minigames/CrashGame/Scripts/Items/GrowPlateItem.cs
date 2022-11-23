@@ -21,6 +21,7 @@ namespace GameHeaven.CrashGame
                 platformScale = new Vector3(platformScale.x * 1.2f, platformScale.y, platformScale.z);
                 platform.localScale = platformScale;
             }
+            GameManager.Instance.UI.ShowItemEffect("쟁반 크기 증가!");
         }
     }
 }

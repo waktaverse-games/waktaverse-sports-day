@@ -21,5 +21,10 @@ namespace GameHeaven.CrashGame
             rigidBody = GetComponent<Rigidbody2D>();
         }
 
+        public void ShowEffect()
+        {
+            GameManager.Instance.UI.ShowItemEffect($"+{coinValue}p");
+        }
+
     }
 }

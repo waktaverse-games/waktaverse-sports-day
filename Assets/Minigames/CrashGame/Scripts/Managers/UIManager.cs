@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace GameHeaven.CrashGame
 {
     public class UIManager : MonoBehaviour
     {
         [SerializeField]
-        private Text gameScore;
-        [SerializeField]
+        private TextMeshProUGUI gameScore;
+        [System.Obsolete, SerializeField]
         private Text highScore;
+        [SerializeField]
+        private TextMeshProUGUI itemEffectText;
         //[SerializeField]
         //private Text coin;
 
@@ -18,6 +21,10 @@ namespace GameHeaven.CrashGame
         private GameObject GameOverUI;
         [SerializeField]
         private GameObject PerfectBonusUI;
+
+        private Coroutine itemEffectCoroutine;
+        private Vector3 itemEffectPos = new Vector3(0, 100f, 0);
+
 
         public void SetScoreText(int score)
         {
@@ -55,6 +62,31 @@ namespace GameHeaven.CrashGame
         {
             GameManager.Instance.GameStart();
             GameOverUI.SetActive(false);
+        }
+
+        public void ShowItemEffect(string effect)
+        {
+            if (itemEffectCoroutine != null) StopCoroutine(itemEffectCoroutine);
+            Color textColor = itemEffectText.color;
+            textColor.a = 1f;
+            itemEffectText.color = textColor;
+            itemEffectText.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.platform.transform.position) + itemEffectPos;
+            itemEffectText.text = effect;
+            itemEffectText.gameObject.SetActive(true);
+            itemEffectCoroutine = StartCoroutine(FadeText());
+        }
+
+        private IEnumerator FadeText()
+        {
+            Color textColor = itemEffectText.color;
+            while (textColor.a > 0.05f)
+            {
+                textColor.a *= 0.8f;
+                itemEffectText.color = textColor;
+                itemEffectText.transform.Translate(0, 5f, 0);
+                yield return new WaitForSeconds(.05f);
+            }
+            itemEffectText.gameObject.SetActive(false);
         }
     }
 }

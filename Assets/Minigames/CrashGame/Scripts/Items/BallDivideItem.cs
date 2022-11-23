@@ -19,10 +19,12 @@ namespace GameHeaven.CrashGame
             foreach (Ball ball in ballList)
             {
                 Ball newBall = Ball.SpawnBall(ball.rigidBody.position);
+                newBall.isReturning = ball.isReturning;
                 Vector2 velocity = ball.rigidBody.velocity;
                 newBall.rigidBody.velocity = Utils.RotateVector(velocity, -15f);
                 ball.rigidBody.velocity = Utils.RotateVector(velocity, 15f);
             }
+            GameManager.Instance.UI.ShowItemEffect("º®·ÂÀÏ¼¶!");
         }
     }
 }

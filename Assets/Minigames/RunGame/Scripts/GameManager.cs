@@ -135,7 +135,7 @@ namespace GameHaven.RunGame
 
         public void GameOver()
         {
-            re.SetActive(true);
+            //re.SetActive(true);
             Time.timeScale = 0;
         }
 

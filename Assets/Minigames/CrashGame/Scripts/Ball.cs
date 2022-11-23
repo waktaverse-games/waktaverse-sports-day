@@ -22,7 +22,8 @@ namespace GameHeaven.CrashGame
 
         [SerializeField]
         private bool randomBounce;
-        private bool isReturning;
+
+        public bool isReturning;
 
         public float InitialForce
         {

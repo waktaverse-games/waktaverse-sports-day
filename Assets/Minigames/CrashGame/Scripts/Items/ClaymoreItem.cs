@@ -48,6 +48,7 @@ namespace GameHeaven.CrashGame
         {
             Debug.Log("Claymore Acquired!");
             SpawnBullet();
+            GameManager.Instance.UI.ShowItemEffect("수류탄 폭발!");
         }
     }
 }
