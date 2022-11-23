@@ -23,6 +23,7 @@ namespace GameHeaven.CrashGame
         private GameObject PerfectBonusUI;
 
         private Coroutine itemEffectCoroutine;
+        private Vector3 itemEffectPos = new Vector3(0, 100f, 0);
 
 
         public void SetScoreText(int score)
@@ -69,7 +70,7 @@ namespace GameHeaven.CrashGame
             Color textColor = itemEffectText.color;
             textColor.a = 1f;
             itemEffectText.color = textColor;
-            itemEffectText.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.platform.transform.position);
+            itemEffectText.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.platform.transform.position) + itemEffectPos;
             itemEffectText.text = effect;
             itemEffectText.gameObject.SetActive(true);
             itemEffectCoroutine = StartCoroutine(FadeText());
@@ -78,12 +79,11 @@ namespace GameHeaven.CrashGame
         private IEnumerator FadeText()
         {
             Color textColor = itemEffectText.color;
-            Vector3 textPos = itemEffectText.transform.position;
-            while (textColor.a > 0.1)
+            while (textColor.a > 0.05f)
             {
-                textColor.a *= 0.85f;
+                textColor.a *= 0.8f;
                 itemEffectText.color = textColor;
-                //itemEffectText.transform.Translate(0, .05f, 0);
+                itemEffectText.transform.Translate(0, 5f, 0);
                 yield return new WaitForSeconds(.05f);
             }
             itemEffectText.gameObject.SetActive(false);
