@@ -49,6 +49,7 @@ namespace GameHeaven.CrossGame
         bool ReadyJump = false;
         Vector3 LandPos;
         Sequence MoveSequence;
+        Sequence UpDownSequence;
         bool PlayerPositionIsLimited;
         float TotalMoveCountLeft = 0;
         float TotalMoveCountRight = 0;
@@ -113,10 +114,10 @@ namespace GameHeaven.CrossGame
                     PlayerDoubleJump();
                 }
 
-                if(JumpTime * JumpSpeed > 0.5f)
+           /*     if(JumpTime * JumpSpeed > 0.5f)
                 {
                     ReadyJump = true;
-                }
+                }*/
             }
 
             if (Input.GetKeyDown(KeyCode.X))
@@ -238,18 +239,18 @@ namespace GameHeaven.CrossGame
             float Time = 1f / JumpSpeed;
             LandPos = Player.transform.position + Vector3.right * (2 - Time * MovementSpeed);
             //JumpSequence = Player.transform.DOJump(LandPos, 2f, 1, Time);
-            Sequence UpDownSequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2, Time / 2)).Append(Player.transform.DOMoveY(LandPos.y, Time / 2)).AppendCallback(() => {
+            UpDownSequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2, Time / 2)).Append(Player.transform.DOMoveY(LandPos.y, Time / 2));
+            MoveSequence = DOTween.Sequence().Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() => {
                 if (JumpCount == 1)
                 {
                     JumpCallBack();
                 }
             });
-            MoveSequence = DOTween.Sequence().Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownSequence);
         }
 
         public void UpdateLandPoint(float OldSpeed, float NewSpeed)
         {
-            //MoveSequence.Kill();
+            MoveSequence.Kill();
             float Time = (1f / JumpSpeed) - JumpTime;
             LandPos = LandPos - Vector3.right * Time * (NewSpeed - OldSpeed);
             MoveSequence = DOTween.Sequence();
@@ -267,6 +268,7 @@ namespace GameHeaven.CrossGame
             }
             else
             {
+                UpDownSequence.Kill();
                 MoveSequence.Kill();
             }
             JumpCount++;
@@ -277,9 +279,9 @@ namespace GameHeaven.CrossGame
             float UpTime = Time - (1f / JumpSpeed) / 2;
             float DownTime = (1f / JumpSpeed) / 2;
             LandPos = LandPos + Vector3.right * 2;
-            Sequence UpDownsequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2.3f, UpTime)).Append(Player.transform.DOMoveY(LandPos.y, DownTime));
+            UpDownSequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2.3f, UpTime)).Append(Player.transform.DOMoveY(LandPos.y, DownTime));
             MoveSequence = DOTween.Sequence();
-            MoveSequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).Join(UpDownsequence).AppendCallback(() =>
+            MoveSequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() =>
             {
                 JumpCallBack();
             });
@@ -289,6 +291,7 @@ namespace GameHeaven.CrossGame
         {
             if (IsFly) return;
             MoveSequence.Pause<Sequence>();
+            UpDownSequence.Pause<Sequence>();
             Effect.transform.position = Player.transform.position;
             Effect.SetTrigger("Boom");
             Player.CntAnimator.SetBool("Fly", true);
@@ -302,6 +305,7 @@ namespace GameHeaven.CrossGame
         public void EndFly()
         {
             MoveSequence.Play<Sequence>();
+            UpDownSequence.Play<Sequence>();
             Effect.transform.position = Player.transform.position;
             Effect.SetTrigger("Boom");
             Player.CntAnimator.SetBool("Fly", false);
@@ -352,12 +356,12 @@ namespace GameHeaven.CrossGame
             if (Platforms.Count <= PlatformCurosr) PlatformCurosr = 0;
 
             if ((MakePlatformNum > FlatformNumWhenMakeFlyItem + 30) && Random.Range(0f, 1f) < ItemProbability) MakeFlyItem();
-            if (Random.Range(0f, 1f) < StarProbability) MakeStar();
+            if (Random.Range(0f, 1f) < StarProbability) MakeStar(CurrentFlatformIsActive);
         }
 
-        public void MakeStar()
+        public void MakeStar(bool CurrentFlatformIsActive)
         {
-            GameObject InstanceStar = Instantiate(StarPrefab, new Vector3(12, 1.3f), Quaternion.identity, ObjectGroup);
+            GameObject InstanceStar = Instantiate(StarPrefab, new Vector3(10, 1.3f), Quaternion.identity, ObjectGroup);
             Star InstanceScript = InstanceStar.GetComponent<Star>();
             float num = Random.Range(0f, 1f);
             if (num < 0.5f)
@@ -373,7 +377,7 @@ namespace GameHeaven.CrossGame
                 InstanceScript.code = CoinCode.Gold;
             }
             num = Random.Range(0f, 1f);
-            if (num < 0.5f)
+            if (num < 0.5f && CurrentFlatformIsActive)
             {
                 InstanceStar.transform.position += new Vector3(0, -3.2f, 0);
             }
@@ -386,7 +390,7 @@ namespace GameHeaven.CrossGame
         public void MakeFlyItem()
         {
             FlatformNumWhenMakeFlyItem = MakePlatformNum;
-            GameObject InstanceItem = Instantiate(FlyItemPrefab, new Vector3(11, -1.5f), Quaternion.identity, ObjectGroup);
+            GameObject InstanceItem = Instantiate(FlyItemPrefab, new Vector3(11, 0.5f), Quaternion.identity, ObjectGroup);
             FlyItem InstanceScript = InstanceItem.GetComponent<FlyItem>();
             float num = Random.Range(0f, 1f);
             InstanceScript.Move();
@@ -400,7 +404,7 @@ namespace GameHeaven.CrossGame
             {
                 MovementSpeed += 0.04f;
             }
-            else if (MovementSpeed < 8.5f)
+            else if (MovementSpeed < 8.8f)
             {
                 MovementSpeed += 0.005f;
             }

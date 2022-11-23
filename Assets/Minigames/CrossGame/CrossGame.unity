@@ -296,7 +296,7 @@ MonoBehaviour:
   Stars: []
   DefaultMovementSpeed: 3
   PlatformSpace: 2
-  TrapProbability: 0
+  TrapProbability: 0.3
   StarProbability: 0.1
   ItemProbability: 0.1
   FlyItemPrefab: {fileID: 3022274687653228774, guid: d3af3804f5c6abc448490d04cb3d52b5, type: 3}
