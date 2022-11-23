@@ -14,7 +14,7 @@ namespace GameHeaven.BingleGame
         {
             anim = GetComponent<Animator>();
             //var currChar = SharedLibs.Character.CharacterManager.Instance.CurrentCharacter;
-            ChooseCharacter(currChar);
+            ChooseCharacter(currChar); 
         }
 
         void ChooseCharacter(CharacterType type)
