@@ -126,7 +126,7 @@ namespace GameHeaven.CrashGame
             score = 0;
             highscore = 0;
             uiManager.SetScoreText(Score);
-            uiManager.SetHighScoreText(Score);
+            //uiManager.SetHighScoreText(Score);
             //uiManager.SetCoinText(Money);
         }
 
@@ -183,12 +183,12 @@ namespace GameHeaven.CrashGame
 
             GameManager.Instance.Sound.PlaySound("game over 2");
 
-            //ScoreManager.Instance.AddGameRoundScore(MinigameType.CrashGame, Score);
-            if (Score > highscore)
-            {
-                highscore = Score;
-                uiManager.SetHighScoreText(Score);
-            }
+            ScoreManager.Instance.AddGameRoundScore(MinigameType.CrashGame, Score);
+            //if (Score > highscore)
+            //{
+            //    highscore = Score;
+            //    uiManager.SetHighScoreText(Score);
+            //}
             // Gameover UI Active
             uiManager.GameOver();
             platform.OnGameOver();

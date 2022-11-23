@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SharedLibs;
 using SharedLibs.Character;
+using TMPro;
 
 namespace GameHeaven.CrashGame
 {
@@ -120,6 +121,7 @@ namespace GameHeaven.CrashGame
             {
                 GameManager.Instance.Sound.PlayEffect("coin_01");
                 GameManager.Instance.AddScore(collision.collider.GetComponent<Coin>().CoinValue);
+                collision.collider.GetComponent<Coin>().ShowEffect();
                 Destroy(collision.gameObject);
             }
             if (collision.collider.CompareTag("CrashGame_Item"))

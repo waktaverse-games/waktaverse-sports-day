@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Minigames/StickyGame/StickyGame.unity
     guid: 261fcff8c187cf040987fbdba28d32c3
+  - enabled: 1
+    path: Assets/Minigames/CrashGame/PpusyeoScene.unity
+    guid: da618484ca51dff45ae52b5c92f4478e
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d25b328042029f94791548d094ea8005, type: 2}

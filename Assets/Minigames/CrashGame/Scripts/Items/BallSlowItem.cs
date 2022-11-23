@@ -17,6 +17,7 @@ namespace GameHeaven.CrashGame
             {
                 ball.GetComponent<Ball>().ResetBallSpeed();
             }
+            GameManager.Instance.UI.ShowItemEffect("공의 속도 초기화!");
         }
     }
 }
