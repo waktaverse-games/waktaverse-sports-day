@@ -1,80 +1,74 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
-namespace GameHeaven.PunctureGame.UI
+namespace GameHeaven.PunctureGame
 {
     public class BackgroundScroll : MonoBehaviour
     {
         [SerializeField] private Sprite[] bgSprites;
-        [SerializeField] [ReadOnly] private Sprite currentSprite;
-        [SerializeField] [ReadOnly] private int currentSpriteIdx = 0;
-        
-        [SerializeField] private Transform target;
+        [SerializeField] private PingPongRange rangeIndex;
+
+        [SerializeField] private PlayerController controller;
         [SerializeField] private Transform upperTransform, bottomTransform;
+        [SerializeField] private SpriteRenderer upperSprite, bottomSprite;
+
+        [SerializeField] [ReadOnly] private int spriteIndex;
+        [SerializeField] [ReadOnly] private int spriteMoveCount = 1;
         
-        [SerializeField] private float upperFixYPos, bottomFixYPos;
-        [SerializeField] private float gap;
+        private float upperFixYPos, bottomFixYPos;
+        private float gap;
 
-        [SerializeField] [ReadOnly] private int changeCount = 1;
+        public event Action<int> OnBackgroundChanged;
 
-        [SerializeField] private UnityEvent onChangeBgSprite;
-
-        private int CurrentSpriteIdx
+        private void Awake()
         {
-            get => currentSpriteIdx;
-            set => currentSpriteIdx = value >= bgSprites.Length ? 0 : value;
+            controller = FindObjectOfType<PlayerController>();
+            
+            upperSprite = upperSprite ? upperSprite : upperTransform.GetComponent<SpriteRenderer>();
+            bottomSprite = bottomSprite ? bottomSprite : bottomTransform.GetComponent<SpriteRenderer>();
         }
 
         private void Start()
         {
             gap = upperTransform.position.y - bottomTransform.position.y;
-            
-            bottomTransform.position = new Vector3(target.position.x, target.position.y - gap);
-            upperTransform.position = target.position;
-            
+
+            bottomTransform.position = new Vector3(controller.Position.x, controller.Position.y - gap);
+            upperTransform.position = controller.Position;
+
             var upperPos = upperTransform.position;
             var bottomPos = bottomTransform.position;
-            
+
             upperFixYPos = upperPos.y;
             bottomFixYPos = bottomPos.y;
 
-            currentSprite = bgSprites[CurrentSpriteIdx];
+            spriteIndex = rangeIndex.GetPingPongValue();
         }
 
         private void Update()
         {
-            upperTransform.position = new Vector3(target.position.x, upperFixYPos);
-            bottomTransform.position = new Vector3(target.position.x, bottomFixYPos);
+            upperTransform.position = new Vector3(controller.Position.x, upperFixYPos);
+            bottomTransform.position = new Vector3(controller.Position.x, bottomFixYPos);
 
-            if (target.position.y < bottomFixYPos)
+            if (controller.Position.y < bottomFixYPos)
             {
                 upperFixYPos = bottomFixYPos;
                 bottomFixYPos = bottomTransform.position.y - gap;
-                upperTransform.position = new Vector3(target.position.x, bottomFixYPos);
+                upperTransform.position = new Vector3(controller.Position.x, bottomFixYPos);
 
                 (upperTransform, bottomTransform) = (bottomTransform, upperTransform);
+                (upperSprite, bottomSprite) = (bottomSprite, upperSprite);
 
-                var image = bottomTransform.GetComponent<Image>();
-                image.sprite = bgSprites[currentSpriteIdx];
+                spriteMoveCount++;
+                if (spriteMoveCount % 4 == 0)
+                {
+                    spriteIndex = rangeIndex.GetPingPongValue();
+                    OnBackgroundChanged?.Invoke(spriteIndex);
+                }
 
-                changeCount++;
-                if (changeCount % 4 == 0)
-                {
-                    CurrentSpriteIdx++;
-                }
-                if (changeCount % 4 == 1)
-                {
-                    onChangeBgSprite.Invoke();
-                }
-                
+                bottomSprite.sprite = bgSprites[spriteIndex];
             }
-        }
-
-        private void Test()
-        {
-            
         }
     }
 }

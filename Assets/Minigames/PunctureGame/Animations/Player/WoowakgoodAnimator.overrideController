@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WoowakgoodAnimator
+  m_Controller: {fileID: 9100000, guid: f118b4de95315b84c94f5997c2b43ca2, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 7f1a79a266b428145bcd6f28a5dc09b0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7fddbd26d55369a469c144f9b408b9db, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 65baf8d6b984352429a16b2c1b754f7d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4c9a13f19c683da4d9a45202f2f648dc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 89277e5337ce9d14792390d84868a88e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4d7e81a9e24ed8049af4e4425fa50888, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e4a9bf48353d7be49b6db27c16b63885, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0c05e3cf7eebbe24da3980dd8f92b0a6, type: 2}

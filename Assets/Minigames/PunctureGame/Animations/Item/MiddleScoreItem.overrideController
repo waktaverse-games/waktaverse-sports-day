@@ -9,5 +9,7 @@ AnimatorOverrideController:
   m_Name: MiddleScoreItem
   m_Controller: {fileID: 9100000, guid: 67b309d1756454040b4b53168006c727, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: d7f243c21190bcd4890c4973fcc12941, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 2473be95f014e6a4db02233aebede10b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 7d69335efd73ac442a4c10cd97aeecb7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0fd4b5c9b2a2bd04faf3baae8869e428, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1ab67f57c56d2364ea49c33ce688f12e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ce7030b7f1fcc9d4aa736eae77d44822, type: 2}
