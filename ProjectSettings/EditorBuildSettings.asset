@@ -17,10 +17,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Minigames/RunGame/Scenes/RunGame.unity
     guid: aafee391642ee074fbdb9a9ba6f3d41e
+  - enabled: 1
+    path: Assets/Minigames/CrossGame/CrossGame.unity
+    guid: 2b4d24cefa56dbe41a9b38602ec9b1ba
   - enabled: 0
     path: Assets/Minigames/StickyGame/StickyGame.unity
     guid: 261fcff8c187cf040987fbdba28d32c3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Minigames/CrashGame/PpusyeoScene.unity
     guid: da618484ca51dff45ae52b5c92f4478e
   m_configObjects:
