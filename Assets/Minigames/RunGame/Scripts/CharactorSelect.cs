@@ -18,7 +18,6 @@ namespace GameHaven.RunGame
             anim = GetComponent<Animator>();
             var currChar = SharedLibs.Character.CharacterManager.Instance.CurrentCharacter;
             Select(currChar);
-            Debug.Log((int)currChar);
 
         }
 
