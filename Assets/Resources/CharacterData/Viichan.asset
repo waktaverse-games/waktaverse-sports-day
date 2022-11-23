@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c1bc274c064de9910028c3f782b5b4, type: 3}
   m_Name: Viichan
   m_EditorClassIdentifier: 
-  characterName: 
+  characterName: "\uBE44\uCC64"
   characterDescription: 
