@@ -14,6 +14,7 @@ namespace GameHeaven.CrashGame
             {
                 GameManager.Instance.platform.Speed *= 1.2f;
             }
+            GameManager.Instance.UI.ShowItemEffect("이동속도 증가!");
         }
     }
 }
