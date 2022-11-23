@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8088288893017774908}
   - component: {fileID: 6963723071858187316}
   m_Layer: 0
-  m_Name: Fox
+  m_Name: JuPokDo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

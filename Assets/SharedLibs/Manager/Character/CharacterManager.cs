@@ -14,8 +14,10 @@ namespace SharedLibs.Character
 
         [SerializeField] private List<CharacterDicValue> characterList;
         private Dictionary<CharacterType, CharacterData> characterDic;
-        
-        public CharacterType CurrentCharacter { get; set; }
+
+        [SerializeField] private CharacterType currentCharacter;
+
+        public CharacterType CurrentCharacter => currentCharacter;
         public CharacterData CurrentCharacterData => characterDic[CurrentCharacter] == null ? null : characterDic[CurrentCharacter];
 
         public override void Init() {
@@ -25,5 +27,7 @@ namespace SharedLibs.Character
                 characterDic.Add(data.type, data.data);
             }
         }
+
+        public void SetCharacter(CharacterType character) => currentCharacter = character;
     }
 }
