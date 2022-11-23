@@ -208,7 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7132201539557170604}
   - component: {fileID: 757129010}
-  - component: {fileID: 1878776816767166155}
+  - component: {fileID: 7526085930613776070}
   - component: {fileID: 7686784539066378676}
   m_Layer: 0
   m_Name: Dulgi
@@ -246,16 +246,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05c9202eed7444e9545b6bb2d592d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  motion: {fileID: 1878776816767166155}
-  sprite: {fileID: 7132201540542711523}
-  animator: {fileID: 7132201540542711525}
+  type: Dulgi
+  controller: {fileID: 7526085930613776070}
   cols:
   - {fileID: 362474910325508756}
   - {fileID: 275133987850724671}
   - {fileID: 4532390985339805228}
-  treadTime: 1
-  treadScore: 10
---- !u!114 &1878776816767166155
+  sprite: {fileID: 7132201540542711523}
+  animator: {fileID: 7132201540542711525}
+--- !u!114 &7526085930613776070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -264,21 +263,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 7132201539557170602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1f6598a10041359883a4788d453c5b, type: 3}
+  m_Script: {fileID: 11500000, guid: aab1b7a1a90a48fe99b570fa2777cdd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   floorLayer:
     serializedVersion: 2
     m_Bits: 64
-  isFacingLeft: 1
-  moveSpeed: 1.6
-  gravity: 4
-  gravityLerpInterval: 0.05
-  lerpGravity: 0
+  startRightSide: 0
+  isReversed: 0
+  speed: 1.8
+  gravityPower: 4
+  gravityChangeIntrp: 0.05
+  intrpGravityPower: 0
   groundCheckRad: 0.06
   isGrounded: 0
-  isMovable: 1
-  isActiveGroundCheck: 1
+  canControl: 1
+  canGroundCheck: 1
 --- !u!114 &7686784539066378676
 MonoBehaviour:
   m_ObjectHideFlags: 0

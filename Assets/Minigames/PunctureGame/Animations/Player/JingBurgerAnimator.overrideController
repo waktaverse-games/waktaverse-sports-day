@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: JingBurgerAnimator
+  m_Controller: {fileID: 9100000, guid: f118b4de95315b84c94f5997c2b43ca2, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 7f1a79a266b428145bcd6f28a5dc09b0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: daeac206906d34042bc35bb5b12323c8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 65baf8d6b984352429a16b2c1b754f7d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0695ec8f9bd62cd47b22b09acbbff4e2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 89277e5337ce9d14792390d84868a88e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a893fd3abe4b0f24082f09400d11da95, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e4a9bf48353d7be49b6db27c16b63885, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ed469bb7d3bb33c47b4358fb725eccf7, type: 2}

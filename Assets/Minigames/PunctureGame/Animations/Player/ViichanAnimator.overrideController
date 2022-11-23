@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ViichanAnimator
+  m_Controller: {fileID: 9100000, guid: f118b4de95315b84c94f5997c2b43ca2, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 7f1a79a266b428145bcd6f28a5dc09b0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ce14abb9f2ea1934396d1f680fc0946e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 65baf8d6b984352429a16b2c1b754f7d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2efac12ff2d14d94e854655954629593, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 89277e5337ce9d14792390d84868a88e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9a06402cf7c7c994392d289fac4aba54, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e4a9bf48353d7be49b6db27c16b63885, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9387af4f78ea65d47b2efcb7f3518674, type: 2}

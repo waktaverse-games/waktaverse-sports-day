@@ -9,5 +9,7 @@ AnimatorOverrideController:
   m_Name: LowScoreItem
   m_Controller: {fileID: 9100000, guid: 67b309d1756454040b4b53168006c727, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: d7f243c21190bcd4890c4973fcc12941, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: f14174dbbc80b9d438d8fe9325fe0566, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 7d69335efd73ac442a4c10cd97aeecb7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9be772fba981cea4783b539494f04062, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1ab67f57c56d2364ea49c33ce688f12e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 70968f31532289645bdc76d53ee8c3aa, type: 2}
