@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c1bc274c064de9910028c3f782b5b4, type: 3}
   m_Name: Wakgood
   m_EditorClassIdentifier: 
-  charName: 
-  charDesc: 
+  characterName: "\uC6B0\uC641\uAD73"
+  characterDescription: 
