@@ -6,6 +6,7 @@ namespace GameHeaven.JumpGame
 {
     public class ItemManager : MonoBehaviour
     {
+        [SerializeField] GameObject VFX;
         [SerializeField] int score;
         [SerializeField]
         Sprite[] itemSprites;
@@ -31,6 +32,8 @@ namespace GameHeaven.JumpGame
             {
                 SoundManager.Instance.PlayItemSound();
                 GameManager.Instance.IncreaseScore(score);
+                GameObject vfx = Instantiate(VFX, transform.position, transform.rotation);
+                Destroy(vfx, 2f);
                 spawner.DeactiavteItem(gameObject);
             }
             if(collision.gameObject.tag == "Border")
