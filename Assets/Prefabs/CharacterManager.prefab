@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7650525251853892425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7650525251853892438}
+  - component: {fileID: 7650525251853892439}
+  m_Layer: 0
+  m_Name: CharacterManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7650525251853892438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7650525251853892425}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7650525251853892439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7650525251853892425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc6e8d8af964a6496ee4ba34f2eda6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterList:
+  - type: 0
+    data: {fileID: 11400000, guid: 5868884a126850c4fb6231f82219b55d, type: 2}
+  - type: 1
+    data: {fileID: 11400000, guid: 49cdd3ddd0cdc5c439f5208da10d9b39, type: 2}
+  - type: 2
+    data: {fileID: 11400000, guid: 025742adf8dbeb041be6329f5c723315, type: 2}
+  - type: 3
+    data: {fileID: 11400000, guid: db4fe4c1df898a44b8635c55c4e828d3, type: 2}
+  - type: 4
+    data: {fileID: 11400000, guid: 1368fe8984ce9844ab4ef58781660a38, type: 2}
+  - type: 5
+    data: {fileID: 11400000, guid: d021d19ed928b834386b2bfca287e350, type: 2}
+  - type: 6
+    data: {fileID: 11400000, guid: 5fa3bc9df5b0ef4468e0e341ac471728, type: 2}
+  currentCharacter: 0
