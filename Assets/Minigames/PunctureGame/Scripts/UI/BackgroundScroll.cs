@@ -16,19 +16,13 @@ namespace GameHeaven.PunctureGame
 
         [SerializeField] [ReadOnly] private int spriteIndex;
         [SerializeField] [ReadOnly] private int spriteMoveCount = 1;
+
+        [SerializeField] private int changeInterval;
         
         private float upperFixYPos, bottomFixYPos;
         private float gap;
 
         public event Action<int> OnBackgroundChanged;
-
-        private void Awake()
-        {
-            controller = FindObjectOfType<PlayerController>();
-            
-            upperSprite = upperSprite ? upperSprite : upperTransform.GetComponent<SpriteRenderer>();
-            bottomSprite = bottomSprite ? bottomSprite : bottomTransform.GetComponent<SpriteRenderer>();
-        }
 
         private void Start()
         {
@@ -61,7 +55,7 @@ namespace GameHeaven.PunctureGame
                 (upperSprite, bottomSprite) = (bottomSprite, upperSprite);
 
                 spriteMoveCount++;
-                if (spriteMoveCount % 4 == 0)
+                if (spriteMoveCount % changeInterval == 0)
                 {
                     spriteIndex = rangeIndex.GetPingPongValue();
                     OnBackgroundChanged?.Invoke(spriteIndex);

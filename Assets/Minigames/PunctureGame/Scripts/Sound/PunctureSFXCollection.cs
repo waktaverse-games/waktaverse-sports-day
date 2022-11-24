@@ -3,7 +3,7 @@
     public enum PunctureSFXType
     {
         GameOver,
-        CoinGet,
+        ItemGet,
         Bounce,
         BlockBreak
     }

@@ -6,37 +6,38 @@ using Random = UnityEngine.Random;
 namespace GameHeaven.PunctureGame
 {
     [RequireComponent(typeof(AudioSource))]
-    public class SFXCollection<T> : DisposableSingleton<SFXCollection<T>> where T : Enum
+    public class SFXCollection<T> : MonoBehaviour where T : Enum
     {
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private List<SFXData> sfxList;
-        private Dictionary<T, AudioClip[]> sfxDic;
+        private Dictionary<T, AudioData[]> sfxDic;
 
-        protected override void Initialize()
+        private void Awake()
         {
             audioSource.playOnAwake = false;
 
-            sfxDic = new Dictionary<T, AudioClip[]>();
-            foreach (var data in sfxList) sfxDic.Add(data.type, data.clips);
+            sfxDic = new Dictionary<T, AudioData[]>();
+            foreach (var data in sfxList) sfxDic.Add(data.type, data.audios);
         }
 
         public void PlaySFX(T type, bool isRand = true)
         {
-            var clips = sfxDic[type];
-            audioSource.PlayOneShot(clips[isRand ? Random.Range(0, clips.Length) : 0]);
+            var audios = sfxDic[type];
+            var audio = audios[isRand ? Random.Range(0, audios.Length) : 0];
+            audioSource.PlayOneShot(audio.clip, audio.volume);
         }
-
         public void PlaySFX(T type, float volume, bool isRand = true)
         {
-            var clips = sfxDic[type];
-            audioSource.PlayOneShot(clips[isRand ? Random.Range(0, clips.Length) : 0], volume);
+            var audios = sfxDic[type];
+            var audio = audios[isRand ? Random.Range(0, audios.Length) : 0];
+            audioSource.PlayOneShot(audio.clip, volume);
         }
 
         [Serializable]
         public class SFXData
         {
             public T type;
-            public AudioClip[] clips;
+            public AudioData[] audios;
         }
     }
 }
