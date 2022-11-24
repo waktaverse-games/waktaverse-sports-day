@@ -239,9 +239,10 @@ MonoBehaviour:
     max: 3
   spawnYPos: 0
   spawnFloorInterval: 2
-  spawnSpeed: 1.6
+  enemySpeed: 1.6
   speedIncreaseInterval: 4
-  speedIncreaseValue: 0.2
+  speedIncreaseValue: 0.3
+  maxEnemySpeed: 4
   scoreCollector: {fileID: 902876782}
 --- !u!1 &50838769
 GameObject:
@@ -1019,20 +1020,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterList:
   - type: 0
-    data: {fileID: 0}
+    data: {fileID: 11400000, guid: 5868884a126850c4fb6231f82219b55d, type: 2}
   - type: 1
-    data: {fileID: 0}
+    data: {fileID: 11400000, guid: 49cdd3ddd0cdc5c439f5208da10d9b39, type: 2}
   - type: 2
-    data: {fileID: 0}
+    data: {fileID: 11400000, guid: 025742adf8dbeb041be6329f5c723315, type: 2}
   - type: 3
-    data: {fileID: 0}
-  - type: 6
-    data: {fileID: 0}
+    data: {fileID: 11400000, guid: db4fe4c1df898a44b8635c55c4e828d3, type: 2}
+  - type: 4
+    data: {fileID: 11400000, guid: 1368fe8984ce9844ab4ef58781660a38, type: 2}
   - type: 5
-    data: {fileID: 0}
+    data: {fileID: 11400000, guid: d021d19ed928b834386b2bfca287e350, type: 2}
   - type: 6
-    data: {fileID: 0}
-  currentCharacter: 0
+    data: {fileID: 11400000, guid: 5fa3bc9df5b0ef4468e0e341ac471728, type: 2}
+  currentCharacter: 4
 --- !u!1 &531470773
 GameObject:
   m_ObjectHideFlags: 0
@@ -3238,10 +3239,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7392837126333116154, guid: b2fa4061b65baa84cab7708070b33344, type: 3}
+      propertyPath: gravityPower
+      value: 4.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7392837126333116155, guid: b2fa4061b65baa84cab7708070b33344, type: 3}
       propertyPath: sfxCollection
       value: 
       objectReference: {fileID: 1646262021}
+    - target: {fileID: 7392837126333116155, guid: b2fa4061b65baa84cab7708070b33344, type: 3}
+      propertyPath: blockCheckPos.x
+      value: -0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7392837126333116155, guid: b2fa4061b65baa84cab7708070b33344, type: 3}
       propertyPath: particleSpawner
       value: 

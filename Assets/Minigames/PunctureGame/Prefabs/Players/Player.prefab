@@ -783,7 +783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533318a4fd39469d8bd7800d8d8fbb33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockCheckSize: {x: 1, y: 0.2}
+  blockCheckSize: {x: 1, y: 0.2, z: 0}
+  blockCheckPos: {x: 0.15, y: 0, z: 0}
   blockLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -796,9 +797,10 @@ MonoBehaviour:
   controller: {fileID: 7392837126333116154}
   playerSwitch: {fileID: 4458572060066955944}
   blockBreakKey: 32
-  allowBreakBlock: 0
+  allowCollisionDetect: 0
   enemyStunTime: 1
   speedUpPerMin: 1.2
+  maxSpeed: 4
   animator: {fileID: 0}
   sfxCollection: {fileID: 0}
   currentAnimState: 0
@@ -820,8 +822,8 @@ MonoBehaviour:
     m_Bits: 64
   startRightSide: 0
   isReversed: 0
-  speed: 2.2
-  gravityPower: 4
+  speed: 2.1
+  gravityPower: 3.8
   gravityChangeIntrp: 0.1
   intrpGravityPower: 0
   targetSprite: {fileID: 0}

@@ -14,9 +14,10 @@ namespace GameHeaven.PunctureGame
 
         [SerializeField] [Min(1)] private int spawnFloorInterval;
         
-        [SerializeField] private float spawnSpeed;
+        [SerializeField] private float enemySpeed;
         [SerializeField] [Min(1)] private int speedIncreaseInterval;
         [SerializeField] private float speedIncreaseValue;
+        [SerializeField] private float maxEnemySpeed;
 
         [SerializeField] private ScoreCollector scoreCollector;
 
@@ -49,7 +50,7 @@ namespace GameHeaven.PunctureGame
             if (((floor <= SpeedIncreaseInterval - 10) && (floor % SpeedIncreaseInterval == 10)) ||
                 (floor % SpeedIncreaseInterval == 0))
             {
-                spawnSpeed += speedIncreaseValue;
+                enemySpeed = Mathf.Clamp(enemySpeed + speedIncreaseValue, 0.0f, maxEnemySpeed);
             }
         }
 
@@ -62,7 +63,7 @@ namespace GameHeaven.PunctureGame
                 enemy.OnTrodden += scoreCollector.AddEnemyScore;
                 
                 enemy.SetPositionState(SpawnPosition);
-                enemy.Controller.Speed = spawnSpeed;
+                enemy.Controller.Speed = enemySpeed;
             }
 
             return enemy;

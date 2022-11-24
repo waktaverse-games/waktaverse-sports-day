@@ -258,10 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: SegyunNya
   controller: {fileID: 6761592158373652066}
-  cols:
-  - {fileID: 5434797908759805874}
-  - {fileID: 275133987850724671}
-  - {fileID: 4532390985339805228}
+  colsParentObj: {fileID: 2648985521720180090}
   animator: {fileID: 7132201540542711525}
 --- !u!114 &6761592158373652066
 MonoBehaviour:
@@ -281,7 +278,7 @@ MonoBehaviour:
   startRightSide: 0
   isReversed: 0
   speed: 0
-  gravityPower: 4
+  gravityPower: 3.8
   gravityChangeIntrp: 0.05
   intrpGravityPower: 0
   targetSprite: {fileID: 7132201540542711523}

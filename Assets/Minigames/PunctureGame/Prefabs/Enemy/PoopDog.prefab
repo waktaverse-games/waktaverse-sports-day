@@ -248,10 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: PoopDog
   controller: {fileID: 4290690056559467233}
-  cols:
-  - {fileID: 362474910325508756}
-  - {fileID: 275133987850724671}
-  - {fileID: 4532390985339805228}
+  colsParentObj: {fileID: 2648985521720180090}
   animator: {fileID: 7132201540542711525}
 --- !u!114 &4290690056559467233
 MonoBehaviour:
@@ -271,7 +268,7 @@ MonoBehaviour:
   startRightSide: 0
   isReversed: 0
   speed: 0
-  gravityPower: 4
+  gravityPower: 3.8
   gravityChangeIntrp: 0.05
   intrpGravityPower: 0
   targetSprite: {fileID: 7132201540542711523}
