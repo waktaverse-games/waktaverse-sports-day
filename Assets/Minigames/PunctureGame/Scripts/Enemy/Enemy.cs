@@ -12,7 +12,7 @@ namespace GameHeaven.PunctureGame
 
         // Variables
         [SerializeField] private Controller2D controller;
-        [SerializeField] private Collider2D[] cols;
+        [SerializeField] private GameObject colsParentObj;
 
         [SerializeField] private Animator animator;
         private static readonly int TreadAnimParam = Animator.StringToHash("Tread");
@@ -63,7 +63,7 @@ namespace GameHeaven.PunctureGame
         {
             controller.CanControl = !value;
             animator.SetBool(TreadAnimParam, value);
-            foreach (var col in cols) col.enabled = !value;
+            colsParentObj.SetActive(!value);
         }
 
         public void SetPositionState(Vector3 point)
@@ -72,6 +72,8 @@ namespace GameHeaven.PunctureGame
 
             var isRight = Random.Range(0, 2) == 0;
             controller.SetStartSide(isRight);
+            var localScale = colsParentObj.transform.localScale;
+            localScale.Set(-localScale.x, localScale.y, localScale.z);
         }
 
         public void Ready()
@@ -84,16 +86,18 @@ namespace GameHeaven.PunctureGame
         {
             controller.CanControl = true;
             animator.speed = 1.0f;
-            
-            foreach (var col in cols) col.enabled = true;
+            colsParentObj.SetActive(true);
         }
 
         public void Inactive()
         {
+            if (stunCoroutine != null)
+            {
+                StopCoroutine(stunCoroutine);
+            }
             controller.CanControl = false;
             animator.speed = 0.0f;
-            
-            foreach (var col in cols) col.enabled = false;
+            colsParentObj.SetActive(false);
         }
 
         public void OnCreatedInPool()

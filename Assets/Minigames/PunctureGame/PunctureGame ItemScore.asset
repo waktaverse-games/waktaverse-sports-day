@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PunctureGame ItemScore
   m_EditorClassIdentifier: 
   data:
-  - name: GoldCoin
-    score: 30
-  - name: SilverCoin
+  - name: Sushi
+    score: 40
+  - name: Hamburger
     score: 20
-  - name: BronzeCoin
-    score: 10
+  - name: FishBread
+    score: 5

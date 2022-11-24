@@ -9,6 +9,7 @@ namespace GameHeaven.PunctureGame
     public class Player : LogicBehaviour
     {
         [SerializeField] private Vector2 blockCheckSize;
+        [SerializeField] private Vector2 blockCheckPos;
 
         [SerializeField] private LayerMask blockLayer;
         [SerializeField] private LayerMask enemyHeadLayer;
@@ -18,13 +19,14 @@ namespace GameHeaven.PunctureGame
         [SerializeField] private PlayerObjectSwitch playerSwitch;
 
         [SerializeField] private KeyCode blockBreakKey;
-        [SerializeField] [ReadOnly] private bool allowBreakBlock;
+        [SerializeField] [ReadOnly] private bool allowCollisionDetect;
         
         private RaycastHit2D[] blockHits;
 
         [SerializeField] private float enemyStunTime;
 
         [SerializeField] private float speedUpPerMin;
+        [SerializeField] private float maxSpeed;
 
         [SerializeField] [ReadOnly] private Animator animator;
         private static readonly int RunAnimParam = Animator.StringToHash("Run");
@@ -62,7 +64,7 @@ namespace GameHeaven.PunctureGame
         {
             controller.Move();
 
-            if (allowBreakBlock)
+            if (allowCollisionDetect)
             {
                 if (Input.GetKeyDown(blockBreakKey)) BreakBlocks();
             }
@@ -87,6 +89,8 @@ namespace GameHeaven.PunctureGame
 
         private void OnTriggerEnter2D(Collider2D col)
         {
+            if (!allowCollisionDetect) return;
+            
             if (ColliderUtil.CheckColliderHitLayer(col, enemyBodyLayer))
             {
                 GameManager.Instance.GameOver();
@@ -110,7 +114,11 @@ namespace GameHeaven.PunctureGame
 
         private void BreakBlocks()
         {
-            var num = DetectBlocks();
+            var playerPos = controller.Position;
+            var checkPos = new Vector2(playerPos.x + (controller.IsRightSide ? -blockCheckPos.x : blockCheckPos.x),
+                playerPos.y + blockCheckPos.y);
+            var num = Physics2D.BoxCastNonAlloc(checkPos, blockCheckSize, 0.0f, Vector2.zero, blockHits, 0.0f,
+                blockLayer);
             if (num > 0)
             {
                 sfxCollection.PlaySFX(PunctureSFXType.BlockBreak);
@@ -118,12 +126,6 @@ namespace GameHeaven.PunctureGame
                 
                 for (var i = 0; i < num; i++) blockHits[i].transform.gameObject.SetActive(false);
             }
-        }
-
-        private int DetectBlocks()
-        {
-            return Physics2D.BoxCastNonAlloc(transform.position, blockCheckSize, 0.0f, Vector2.zero, blockHits, 0.0f,
-                blockLayer);
         }
 
         // ips: increase per second
@@ -134,7 +136,7 @@ namespace GameHeaven.PunctureGame
                 speed += up * Time.deltaTime / 60f;
             }
 
-            return speed;
+            return Mathf.Clamp(speed, 0.0f, maxSpeed);
         }
 
         public void SetAnimationState(AnimationState state)
@@ -166,16 +168,15 @@ namespace GameHeaven.PunctureGame
 
         public override void GameReady()
         {
-            allowBreakBlock = false;
+            allowCollisionDetect = false;
             
             controller.CanControl = false;
-            Debug.Log("플레리러 레듸" + controller.CanControl);
             animator.speed = 0.0f;
         }
 
         public override void GameStart()
         {
-            allowBreakBlock = true;
+            allowCollisionDetect = true;
             
             SetAnimationState(AnimationState.Run);
             controller.CanControl = true;
