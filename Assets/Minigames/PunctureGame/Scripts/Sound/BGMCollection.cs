@@ -5,13 +5,13 @@ using UnityEngine;
 namespace GameHeaven.PunctureGame
 {
     [RequireComponent(typeof(AudioSource))]
-    public class BGMCollection<T> : DisposableSingleton<BGMCollection<T>> where T : Enum
+    public class BGMCollection<T> : MonoBehaviour where T : Enum
     {
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private List<BGMData> bgmList;
         private Dictionary<T, AudioClip> bgmDic;
 
-        protected override void Initialize()
+        private void Awake()
         {
             audioSource.playOnAwake = false;
 

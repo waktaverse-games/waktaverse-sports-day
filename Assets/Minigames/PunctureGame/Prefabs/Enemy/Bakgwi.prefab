@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125692738944664555}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.166, y: 0.218, z: 0}
+  m_LocalPosition: {x: 0.1307, y: 0.1939, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -117,7 +117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6404440306995068476}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.166, y: 0.218, z: 0}
+  m_LocalPosition: {x: -0.1372, y: 0.1939, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7483779852723304183}
-  - component: {fileID: 362474910325508756}
+  - component: {fileID: 9214181840309369852}
   m_Layer: 7
   m_Name: Bounce
   m_TagString: Untagged
@@ -175,15 +175,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6451673258060127041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.496, z: 0}
+  m_LocalPosition: {x: 0.0084, y: 0.4161, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1772909358982590709}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &362474910325508756
-CircleCollider2D:
+--- !u!61 &9214181840309369852
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -192,12 +192,22 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.06}
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Size: {x: 0.33, y: 0.35}
+  m_EdgeRadius: 0
 --- !u!1 &7132201539557170602
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,11 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: Bakgwi
   controller: {fileID: 7711131490568696596}
-  cols:
-  - {fileID: 362474910325508756}
-  - {fileID: 275133987850724671}
-  - {fileID: 4532390985339805228}
-  sprite: {fileID: 7132201540542711523}
+  colsParentObj: {fileID: 2648985521720180090}
   animator: {fileID: 7132201540542711525}
 --- !u!114 &7711131490568696596
 MonoBehaviour:
@@ -271,10 +277,11 @@ MonoBehaviour:
     m_Bits: 64
   startRightSide: 0
   isReversed: 0
-  speed: 1.8
-  gravityPower: 4
+  speed: 0
+  gravityPower: 3.8
   gravityChangeIntrp: 0.05
   intrpGravityPower: 0
+  targetSprite: {fileID: 7132201540542711523}
   groundCheckRad: 0.06
   isGrounded: 0
   canControl: 1
