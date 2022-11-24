@@ -449,7 +449,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CrashGame
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
   m_sharedMaterial: {fileID: -6647027237454538588, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
@@ -675,7 +675,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SkiGame
+  m_text: "\uB3CC\uB824\uB3CC\uB824"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
   m_sharedMaterial: {fileID: -6647027237454538588, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
@@ -810,7 +810,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: AttackGame
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
   m_sharedMaterial: {fileID: -6647027237454538588, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
@@ -977,7 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20add5772924337b21a3da37e8224d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minigameList: []
+  gameSceneData: {fileID: 11400000, guid: 15816769a5a50344ca273884da9288c4, type: 2}
 --- !u!1 &444859808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PunctureGame
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
   m_sharedMaterial: {fileID: -6647027237454538588, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
@@ -1278,7 +1278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: RunGame
+  m_text: "\uC2A4\uD0A4\uC2A4\uD0A4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
   m_sharedMaterial: {fileID: -6647027237454538588, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
@@ -1781,7 +1781,7 @@ GameObject:
   - component: {fileID: 721654909}
   - component: {fileID: 721654911}
   m_Layer: 5
-  m_Name: PassGame
+  m_Name: RunGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1821,8 +1821,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 0.3137255}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1858,23 +1858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &730481459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,7 +2104,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BingleGame
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
   m_sharedMaterial: {fileID: -6647027237454538588, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
@@ -2500,7 +2484,7 @@ GameObject:
   - component: {fileID: 909823489}
   - component: {fileID: 909823491}
   m_Layer: 5
-  m_Name: CrashGame
+  m_Name: AttackGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2540,8 +2524,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 0.3137255}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2577,23 +2561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &919214808
 GameObject:
   m_ObjectHideFlags: 0
@@ -2652,7 +2620,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SpreadGame
+  m_text: "\uBE60\uC0E4\uBE60\uC0E4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
   m_sharedMaterial: {fileID: -6647027237454538588, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
@@ -2984,7 +2952,7 @@ GameObject:
   - component: {fileID: 967550240}
   - component: {fileID: 967550242}
   m_Layer: 5
-  m_Name: PunctureGame
+  m_Name: CrashGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3024,8 +2992,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 0.3137255}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3061,23 +3029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &976891991
 GameObject:
   m_ObjectHideFlags: 0
@@ -3167,7 +3119,7 @@ GameObject:
   - component: {fileID: 990093866}
   - component: {fileID: 990093868}
   m_Layer: 5
-  m_Name: BingleGame
+  m_Name: StickyGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3207,8 +3159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 0.3137255}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3244,23 +3196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &1171255765
 GameObject:
   m_ObjectHideFlags: 0
@@ -3319,7 +3255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: StickyGame
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
   m_sharedMaterial: {fileID: -6647027237454538588, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
@@ -3409,7 +3345,7 @@ GameObject:
   - component: {fileID: 1172572470}
   - component: {fileID: 1172572472}
   m_Layer: 5
-  m_Name: RunGame
+  m_Name: BingleGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3450,7 +3386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3491,16 +3427,16 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
+        - m_Target: {fileID: 362241080}
+          m_TargetAssemblyTypeName: GameHeaven.UI.GameSelectUI, Assembly-CSharp
+          m_MethodName: SelectGame
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: "\uC2A4\uD0A4\uC2A4\uD0A4"
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &1210496070
@@ -3676,7 +3612,7 @@ GameObject:
   - component: {fileID: 1393214138}
   - component: {fileID: 1393214140}
   m_Layer: 5
-  m_Name: AttackGame
+  m_Name: SpreadGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3716,8 +3652,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 0.3137255}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3753,23 +3689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &1398810698
 GameObject:
   m_ObjectHideFlags: 0
@@ -4273,7 +4193,7 @@ GameObject:
   - component: {fileID: 1527672118}
   - component: {fileID: 1527672120}
   m_Layer: 5
-  m_Name: SkiGame
+  m_Name: JumpGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4314,7 +4234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4355,16 +4275,16 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
+        - m_Target: {fileID: 362241080}
+          m_TargetAssemblyTypeName: GameHeaven.UI.GameSelectUI, Assembly-CSharp
+          m_MethodName: SelectGame
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: "\uB3CC\uB824\uB3CC\uB824"
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &1535629932
@@ -4502,7 +4422,7 @@ GameObject:
   - component: {fileID: 1578396494}
   - component: {fileID: 1578396496}
   m_Layer: 5
-  m_Name: StickyGame
+  m_Name: PassGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4542,8 +4462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 0.3137255}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4579,23 +4499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &1608887812
 GameObject:
   m_ObjectHideFlags: 0
@@ -4923,7 +4827,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PassGame
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
   m_sharedMaterial: {fileID: -6647027237454538588, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
@@ -5118,6 +5022,7 @@ GameObject:
   - component: {fileID: 1929614387}
   - component: {fileID: 1929614389}
   - component: {fileID: 1929614388}
+  - component: {fileID: 1929614390}
   m_Layer: 5
   m_Name: Character UI
   m_TagString: Untagged
@@ -5186,6 +5091,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929614386}
   m_CullTransparentMesh: 1
+--- !u!114 &1929614390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929614386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcce97b45ef4d7d9e7f5755f7945ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1970564152
 GameObject:
   m_ObjectHideFlags: 0
@@ -5351,7 +5268,7 @@ GameObject:
   - component: {fileID: 2015396996}
   - component: {fileID: 2015396998}
   m_Layer: 5
-  m_Name: SpreadGame
+  m_Name: PunctureGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5392,7 +5309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5433,16 +5350,16 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
+        - m_Target: {fileID: 362241080}
+          m_TargetAssemblyTypeName: GameHeaven.UI.GameSelectUI, Assembly-CSharp
+          m_MethodName: SelectGame
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: "\uBE60\uC0E4\uBE60\uC0E4"
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &2029865815
@@ -5535,7 +5452,7 @@ GameObject:
   - component: {fileID: 2078017235}
   - component: {fileID: 2078017237}
   m_Layer: 5
-  m_Name: JumpGame
+  m_Name: CrossGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5575,8 +5492,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 0.90196085, b: 0.89019614, a: 0.3137255}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5612,23 +5529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &2106477373
 GameObject:
   m_ObjectHideFlags: 0
@@ -5687,7 +5588,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JumpGame
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}
   m_sharedMaterial: {fileID: -6647027237454538588, guid: d5780bdc9352a584492d4abce6d6223c, type: 2}

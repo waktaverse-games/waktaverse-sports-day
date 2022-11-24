@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace GameHeaven.UI
 {
     public class CharacterSelectUI : MonoBehaviour
     {
-        
     }
 }
