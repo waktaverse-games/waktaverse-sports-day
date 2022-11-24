@@ -2,7 +2,7 @@
 
 namespace SharedLibs.Character
 {
-    [CreateAssetMenu(fileName = "CharacterData", menuName = "Minigame/Character", order = 0)]
+    [CreateAssetMenu(fileName = "Character Data", menuName = "Minigame/Character Data", order = 0)]
     public class CharacterData : ScriptableObject
     {
         public string characterName;
