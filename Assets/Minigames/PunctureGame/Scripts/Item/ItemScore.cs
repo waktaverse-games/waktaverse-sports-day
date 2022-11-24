@@ -14,7 +14,7 @@ namespace GameHeaven.PunctureGame
         public int Score => score;
     }
 
-    [CreateAssetMenu(fileName = "PunctureGame ItemScore", menuName = "Minigames/PunctureGame", order = 0)]
+    [CreateAssetMenu(fileName = "Items Score", menuName = "Minigame/PunctureGame/Items Score", order = 0)]
     public class ItemScore : ScriptableObject
     {
         [SerializeField] private List<ItemScoreData> data;
