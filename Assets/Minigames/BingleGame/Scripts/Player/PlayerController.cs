@@ -32,6 +32,15 @@ namespace GameHeaven.BingleGame
 
         void Update()
         {
+            if (!GameManager.instance.isGameStart)
+                return;
+            if (GameManager.instance.isGameOver)
+            {
+                xSpeed = 0;
+                ySpeed = 0;
+                rb.velocity = Vector2.zero;
+                return;
+            }
             xSpeed = GameSpeedController.instance.xSpeed;
             ySpeed = GameSpeedController.instance.ySpeed * -1f;
             ChangeDirection();
@@ -67,8 +76,8 @@ namespace GameHeaven.BingleGame
 
         private void FlipSprite()
         {
-            sprite.flipX = rb.velocity.x >= 0 ? true : false;
-            skiEquip.transform.localScale = rb.velocity.x >= 0 ? new Vector3(-1, 1, 1) : Vector3.one;
+            sprite.flipX = rb.velocity.x > 0 ? true : false;
+            skiEquip.transform.localScale = rb.velocity.x > 0 ? new Vector3(-1, 1, 1) : Vector3.one;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
