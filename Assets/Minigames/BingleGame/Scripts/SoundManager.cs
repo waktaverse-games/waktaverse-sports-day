@@ -6,6 +6,7 @@ namespace GameHeaven.BingleGame
 {
     public class SoundManager : MonoBehaviour
     {
+        [SerializeField] AudioSource bgm;
         [SerializeField] AudioSource itemSFX;
         [SerializeField] AudioSource turnSFX;
         [SerializeField] AudioSource crashSFX;
@@ -25,7 +26,7 @@ namespace GameHeaven.BingleGame
             }
         }
         #endregion
-
+        public void PlayBGM() => bgm.Play();
         public void PlayItemSound() => itemSFX.Play();
         public void PlayTurnSound() => turnSFX.Play();
         public void PlayCrashSound() => crashSFX.Play();

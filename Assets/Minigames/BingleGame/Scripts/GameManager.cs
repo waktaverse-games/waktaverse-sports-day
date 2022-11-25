@@ -71,6 +71,7 @@ namespace GameHeaven.BingleGame
             readyButton.SetActive(false);
             startButton.SetActive(true);
             isGameStart = true;
+            SoundManager.instance.PlayBGM();
             yield return new WaitForSeconds(1f);
             startButton.SetActive(false);
         }
