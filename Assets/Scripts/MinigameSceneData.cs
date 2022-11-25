@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using SharedLibs;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace GameHeaven.Temp
 {
     [Serializable]
     public struct GameSceneData
     {
         [SerializeField] private string name;
         [SerializeField] private MinigameType type;
+        [SerializeField] private Sprite icon;
         [SerializeField] [Scene] private string sceneName;
 
         public string Name => name;
         public MinigameType Type => type;
+        public Sprite Icon => icon;
         public string SceneName => sceneName;
     }
 
