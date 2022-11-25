@@ -28,15 +28,24 @@ namespace GameHeaven.JumpGame
         private bool isReverse = false;
         private bool isSlowMode = false;
         private bool isReversing = true;
-        // Start is called before the first frame update
-        void Start()
+
+        private void Start()
+        {
+            animator.speed = 0;
+        }
+
+        public void StartRope()
         {
             animator.speed = speed;
             Invoke("EnableReverse", 1f);
             StartCoroutine(IncreaseSpeed(increasingSpeedTime));
             Invoke("StartVariation", variationStartTime);
         }
-
+        public void EndRope()
+        {
+            StopAllCoroutines();
+            animator.speed = 0;
+        }
         IEnumerator IncreaseSpeed(float delayTime)
         {
             yield return new WaitForSeconds(delayTime);
