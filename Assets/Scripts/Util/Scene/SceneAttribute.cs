@@ -1,6 +1,4 @@
-﻿#if UNITY_EDITOR
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GameHeaven.Temp
 {
@@ -8,5 +6,3 @@ namespace GameHeaven.Temp
     {
     }
 }
-
-#endif
