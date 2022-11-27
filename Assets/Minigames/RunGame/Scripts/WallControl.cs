@@ -9,42 +9,64 @@ namespace GameHaven.RunGame
     {
         Rigidbody2D rig;
 
-        void Awake()
+        public GameManager gameManager;
+        public GameObject main;
+        GameObject tree1;
+        GameObject tree2;
+
+        Animator move1;
+        Animator move2;
+
+            void Awake()
         {
             rig = GetComponent<Rigidbody2D>();
-            rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
+            rig.velocity = Vector2.down * gameManager.wallSpeed;
+
+            if (main.name.Contains("Spawn"))
+            {
+                tree1 = main.transform.Find("Tree").gameObject;
+                tree2 = main.transform.Find("Tree (1)").gameObject;
+
+                move1 = tree1.GetComponent<Animator>();
+                move2 = tree2.GetComponent<Animator>();
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
-            switch (GameManager.gameTime)
+            if (gameManager.gameStop == false && gameManager.gameStart == true)
             {
-                case < 10:
-                    GameManager.wallSpeed += 0.06f * Time.deltaTime;
-                    break;
-                case >= 10 when GameManager.wallSpeed < 30:
-                    GameManager.wallSpeed += 0.015f * Time.deltaTime;
-                    break;
+                if (main.name.Contains("Spawn"))
+                {
+                    move1.SetBool("Stop", false);
+                    move2.SetBool("Stop", false);
+                }
+
+                switch (gameManager.gameTime)
+                {
+                    case < 10:
+                        gameManager.wallSpeed += 0.02f * Time.deltaTime;
+                        break;
+                    case >= 10 when gameManager.wallSpeed < 20:
+                        gameManager.wallSpeed += 0.008f * Time.deltaTime;
+                        break;
+                }
             }
-            
-            // if (GameHaven.RunGame.GameManager.gameTime < 10)
-            // {
-            //     GameHaven.RunGame.GameManager.wallSpeed += 0.06f * Time.deltaTime;
-            //     rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
-            // }
-            // else if(GameHaven.RunGame.GameManager.gameTime >= 10 && GameHaven.RunGame.GameManager.wallSpeed <30)
-            // {
-            //     GameHaven.RunGame.GameManager.wallSpeed += 0.015f * Time.deltaTime;
-            //     rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
-            // }
-            // else
-            //     rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed;
+            else
+            {
+                rig.velocity = Vector2.down * 0;
+                if (main.name.Contains("Spawn"))
+                {
+                    move1.SetBool("Stop", true);
+                    move2.SetBool("Stop", true);
+                }
+            }
         }
 
         private void FixedUpdate()
         {
-            rig.velocity = Vector2.Lerp(rig.velocity, Vector2.down * GameManager.wallSpeed, 0.5f);
+            rig.velocity = Vector2.Lerp(rig.velocity, Vector2.down * gameManager.wallSpeed, 0.5f);
         }
 
         void OnTriggerEnter2D(Collider2D other)
