@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: d144c1c8323186f4cb5fff878d3165bd
   - enabled: 1
-    path: Assets/Scenes/TestGameSelectScene.unity
+    path: Assets/Scenes/ModeSelectScene.unity
     guid: cdb22a69143263b478b40eb75f5307b2
   - enabled: 1
     path: Assets/Minigames/AttackGame/AttackGame.unity
