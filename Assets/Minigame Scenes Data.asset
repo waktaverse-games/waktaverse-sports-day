@@ -13,33 +13,43 @@ MonoBehaviour:
   m_Name: Minigame Scenes Data
   m_EditorClassIdentifier: 
   scenesData:
-  - name: 1
+  - name: "\uD64B\uCE58\uD64B\uCE58"
     type: 0
-    sceneName: 
+    icon: {fileID: 0}
+    sceneName: AttackGame
   - name: "\uC2A4\uD0A4\uC2A4\uD0A4"
     type: 1
+    icon: {fileID: 0}
     sceneName: BingleGame
-  - name: 3
+  - name: "\uAE68\uBD80\uAE68\uBD80"
     type: 2
-    sceneName: 
-  - name: 4
+    icon: {fileID: 0}
+    sceneName: PpusyeoScene
+  - name: "\uD3F4\uC9DD\uD3F4\uC9DD"
     type: 3
-    sceneName: 
+    icon: {fileID: 0}
+    sceneName: CrossGame
   - name: "\uB3CC\uB824\uB3CC\uB824"
     type: 4
+    icon: {fileID: 0}
     sceneName: JumpGame
-  - name: 6
+  - name: "\uB760\uC6A9\uB760\uC6A9"
     type: 5
-    sceneName: 
+    icon: {fileID: 0}
+    sceneName: PassGame
   - name: "\uBE60\uC0E4\uBE60\uC0E4"
     type: 6
+    icon: {fileID: 0}
     sceneName: PunctureGame
-  - name: 8
+  - name: "\uC694\uB9AC\uC870\uB9AC"
     type: 7
-    sceneName: 
-  - name: 9
+    icon: {fileID: 0}
+    sceneName: RunGame
+  - name: "\uBE75\uC57C\uBE75\uC57C"
     type: 8
-    sceneName: 
-  - name: 10
+    icon: {fileID: 0}
+    sceneName: SpreadGame
+  - name: "\uC7A1\uC544\uC7A1\uC544"
     type: 9
-    sceneName: 
+    icon: {fileID: 0}
+    sceneName: StickyGame

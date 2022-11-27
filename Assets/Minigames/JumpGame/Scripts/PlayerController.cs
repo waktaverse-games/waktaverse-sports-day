@@ -26,11 +26,15 @@ namespace GameHeaven.JumpGame
 
         private void Update()
         {
+            if (!GameManager.Instance.IsGameStart || GameManager.Instance.IsGameOver)
+                return;
             PlayerBrake();
             PlayerJump();
         }
         private void FixedUpdate()
         {
+            if (!GameManager.Instance.IsGameStart || GameManager.Instance.IsGameOver)
+                return;
             PlayerMovement();
             //UpdateFace();
             PlayerLanding();

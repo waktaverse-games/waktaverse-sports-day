@@ -11,14 +11,26 @@ namespace GameHeaven.JumpGame
     {
         public UnityEvent EnableHearthEffect;
         public UnityEvent DisableHearthEffect;
-        public bool IsGameOver { get;private set; }
+        public UnityEvent GameStartEvent;
+        public UnityEvent GameEndEvent;
+        public bool IsGameStart { get => isGameStart; }
+        public bool IsGameOver { get => isGameOver; }
         public bool isInvincible { get; private set; }
         public int JumpSuccessCount { get => jumpSuccessCount; }
+
         [SerializeField] GameObject buttons;
+        [SerializeField] GameObject readyButton;
+        [SerializeField] GameObject startButton;
+        [Space]
+        [SerializeField]
+        GameObject[] objects;
+
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] int jumpSuccessCount = 0;
 
         private float totalScore = 0;
+        bool isGameStart = false;
+        bool isGameOver;
         #region Singleton
         public static GameManager Instance = null;
         private void Awake()
@@ -38,11 +50,27 @@ namespace GameHeaven.JumpGame
         private void Start()
         {
             scoreText.text = "Á¡¼ö : 0";
+            StartCoroutine(StartGame());
         }
         private void Update()
         {
             Retry();
         }
+        IEnumerator StartGame()
+        {
+            yield return new WaitForSeconds(0.1f);
+            readyButton.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            readyButton.SetActive(false);
+            startButton.SetActive(true);
+            isGameStart = true;
+            SoundManager.Instance.PlayBGM();
+            ObjectTurnOnOff(true);
+            GameStartEvent.Invoke();
+            yield return new WaitForSeconds(1f);
+            startButton.SetActive(false);
+        }
+
         public void IncreaseScore(int score)
         {
             totalScore += score;
@@ -66,19 +94,19 @@ namespace GameHeaven.JumpGame
         }
         public void GameOver()
         {
-            IsGameOver = true;
+            GameEndEvent.Invoke();
+            ObjectTurnOnOff(false);
+            isGameOver = true;
             buttons.SetActive(true);
-            Time.timeScale = 0;
         }
 
         public void Restart()
         {
-            IsGameOver = false;
+            isGameOver = false;
             buttons.SetActive(false);
-            Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
+        
         void Retry()
         {
             if(Input.GetKeyDown(KeyCode.R))
@@ -86,9 +114,13 @@ namespace GameHeaven.JumpGame
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
-        public void MainMenu()
+
+        void ObjectTurnOnOff(bool isTurnOn)
         {
-            print("Go to main menu");
+            foreach(var obj in objects)
+            {
+                obj.SetActive(isTurnOn);
+            }
         }
     }
 }
