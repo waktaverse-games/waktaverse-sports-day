@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using SharedLibs;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -22,15 +24,18 @@ namespace GameHeaven.PunctureGame
 
         public void PlaySFX(T type, bool isRand = true)
         {
-            var audios = sfxDic[type];
-            var audio = audios[isRand ? Random.Range(0, audios.Length) : 0];
-            audioSource.PlayOneShot(audio.clip, audio.volume);
+            PlaySFX(type, audioSource.volume, isRand);
         }
         public void PlaySFX(T type, float volume, bool isRand = true)
         {
             var audios = sfxDic[type];
             var audio = audios[isRand ? Random.Range(0, audios.Length) : 0];
             audioSource.PlayOneShot(audio.clip, volume);
+        }
+
+        public void SetVolume(float volume)
+        {
+            audioSource.volume = volume;
         }
 
         [Serializable]

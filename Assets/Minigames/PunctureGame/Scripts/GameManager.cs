@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using SharedLibs;
 using SharedLibs.Score;
 using UnityEngine;
@@ -14,18 +15,19 @@ namespace GameHeaven.PunctureGame
         
         [SerializeField] private ScoreCollector scoreCollector;
 
+        [SerializeField] private AnimationCounter counter;
+
+        private void OnEnable()
+        {
+            counter.OnEndCount += () =>
+            {
+                GameStart();
+            };
+        }
+
         private void Start()
         {
-            // GameStart();
-            
-            IEnumerator TestMethod()
-            {
-                GameReady();
-                yield return new WaitForSeconds(3.0f);
-                GameStart();
-            }
-            
-            StartCoroutine(TestMethod());
+            GameReady();
         }
 
         protected override void Initialize()
