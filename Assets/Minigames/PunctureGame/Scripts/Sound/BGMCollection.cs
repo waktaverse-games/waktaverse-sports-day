@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace GameHeaven.PunctureGame
@@ -39,6 +40,11 @@ namespace GameHeaven.PunctureGame
         public void StopBGM()
         {
             audioSource.Stop();
+        }
+
+        public void SetVolume(float volume)
+        {
+            audioSource.volume = volume;
         }
 
         [Serializable]
