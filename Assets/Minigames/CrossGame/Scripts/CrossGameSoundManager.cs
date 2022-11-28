@@ -5,7 +5,7 @@ using SharedLibs;
 
 namespace GameHeaven.CrossGame
 {
-    public class SoundManager : MonoBehaviour
+    public class CrossGameSoundManager : MonoBehaviour
     {
         [System.Serializable]
         private class AnimatorDictionary : UnitySerializedDictionary<string, AudioClip> { }

@@ -25,7 +25,7 @@ namespace GameHeaven.CrossGame
         public TMP_Text gameOverTextUI;
         public GameObject restratBtn;
         public ObjectController objectController;
-        public SoundManager soundManager;
+        public CrossGameSoundManager soundManager;
         public AnimationCounter counter;
 
         [HideInInspector] public bool IsStop = true;
