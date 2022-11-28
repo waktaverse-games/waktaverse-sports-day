@@ -60,7 +60,7 @@ namespace GameHeaven.CrossGame
             IsStop = true;
             objectController.player.cntAnimator.SetBool("GameOver", true);
             restratBtn.SetActive(true);
-            //ScoreManager.Instance.AddGameRoundScore(MinigameType.CrossGame, Score);
+            ScoreManager.Instance.SetGameHighScore(MinigameType.CrossGame, score);
             foreach (var item in objectController.flyItems)
             {
                 item.GetComponent<FlyItem>().Stop();
