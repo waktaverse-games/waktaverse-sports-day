@@ -41,5 +41,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Minigames/StickyGame/StickyGame.unity
     guid: 261fcff8c187cf040987fbdba28d32c3
+  - enabled: 1
+    path: Assets/Scenes/StoryMenuScene.unity
+    guid: f0293189c1378b94ab99dc97669599e7
+  - enabled: 1
+    path: Assets/Scenes/MinigameMenuScene.unity
+    guid: 818a65a9c1e0e1c4591f89ec15d9f2c0
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 93dbb5b625b659c4c8a53fbfe957c38c
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d25b328042029f94791548d094ea8005, type: 2}
