@@ -11,6 +11,7 @@ namespace GameHeaven.UIUX
         [SerializeField] AudioClip[] buttonSounds;
         [SerializeField] RuntimeAnimatorController[] charControllers;
         [SerializeField] SpriteRenderer[] minigameSprites;
+        [SerializeField] string[] charNames, gameNames;
 
         private Stack<int> prevMenues;
         private bool enableClick;
@@ -82,6 +83,7 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
+            transform.GetChild(5).GetChild(4).GetComponent<TextMeshProUGUI>().text = gameNames[curGame];/*
             switch (curGame)
             {
                 case 0:
@@ -114,7 +116,7 @@ namespace GameHeaven.UIUX
                 case 9:
                     transform.GetChild(5).GetChild(4).GetComponent<TextMeshProUGUI>().text = "ÈÊÄ¡ÈÊÄ¡";
                     break;
-            }
+            }*/
             AudioSource.PlayClipAtPoint(buttonSounds[1], Vector3.zero);
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(5).GetComponent<Animator>().SetTrigger("On");
@@ -169,6 +171,8 @@ namespace GameHeaven.UIUX
             AudioSource.PlayClipAtPoint(buttonSounds[0], Vector3.zero);
             if (curChar < 6)
             {
+                transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
+                transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
                 StartCoroutine(ArrowClick(transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0), -330));
                 curChar++;
             }
@@ -180,10 +184,20 @@ namespace GameHeaven.UIUX
             AudioSource.PlayClipAtPoint(buttonSounds[0], Vector3.zero);
             if (curChar > 0)
             {
+                transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
+                transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
                 StartCoroutine(ArrowClick(transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0), 330));
                 curChar--;
             }
             Invoke("SetEnableClick", 0.1f);
+        }
+        private void CharChange(int idx)
+        {
+            switch (idx)
+            {
+                case 0:
+                    break;
+            }
         }
     }
 }
