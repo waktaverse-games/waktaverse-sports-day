@@ -144,6 +144,7 @@ namespace GameHeaven.CrossGame
                 }
                 if (FlyCount > 40)
                 {
+                    TotalMoveCountLeft -= 40;
                     FlyCount = 0;
                     EndFly();
                 }
@@ -152,10 +153,10 @@ namespace GameHeaven.CrossGame
             {
                 DeltaDistance = MovementSpeed * Time.deltaTime;
                 Player.transform.position += Vector3.left * DeltaDistance;
-                TotalMoveCountLeft += DeltaDistance;
             }
 
             MoveCount += DeltaDistance;
+            TotalMoveCountLeft += DeltaDistance;
 
             //배경 이동
             BackGround[0].transform.position += Vector3.left * DeltaDistance * 0.3f;
