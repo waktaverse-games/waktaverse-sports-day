@@ -19,15 +19,24 @@ namespace GameHeaven.CrossGame
     }
     public class CrossGameManager : MonoBehaviour
     {
-        int Score;
-        int CollectStar;
-        public TMP_Text ScoreUI;
-        public TMP_Text GameOverTextUI;
-        public GameObject RestratBtn;
-        public ObjectController ObjectController;
-        public SoundManager SoundManager;
+        int score;
+        int collectStar;
+        public TMP_Text scoreUI;
+        public TMP_Text gameOverTextUI;
+        public GameObject restratBtn;
+        public ObjectController objectController;
+        public SoundManager soundManager;
+        public AnimationCounter counter;
 
-        [HideInInspector] public bool IsOver;
+        [HideInInspector] public bool IsStop = true;
+
+        private void OnEnable()
+        {
+            counter.OnEndCount += () =>
+            {
+                IsStop = false;
+            };
+        }
 
         private void Update()
         {
@@ -39,20 +48,20 @@ namespace GameHeaven.CrossGame
 
         public void AddScore(int Point)
         {
-            Score += Point;
-            ScoreUI.text = "점수 : " + Score.ToString();
+            score += Point;
+            scoreUI.text = "점수 : " + score.ToString();
         }
 
         public void GameOver()
         {
             //DOTween.KillAll(true);
-            GameOverTextUI.gameObject.SetActive(true);
-            RestratBtn.SetActive(true);
-            IsOver = true;
-            ObjectController.Player.CntAnimator.SetBool("GameOver", true);
-            RestratBtn.SetActive(true);
+            gameOverTextUI.gameObject.SetActive(true);
+            restratBtn.SetActive(true);
+            IsStop = true;
+            objectController.player.cntAnimator.SetBool("GameOver", true);
+            restratBtn.SetActive(true);
             //ScoreManager.Instance.AddGameRoundScore(MinigameType.CrossGame, Score);
-            foreach (var item in ObjectController.FlyItems)
+            foreach (var item in objectController.flyItems)
             {
                 item.GetComponent<FlyItem>().Stop();
             }
