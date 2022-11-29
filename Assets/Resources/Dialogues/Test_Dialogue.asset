@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782293fdbe994548ba7e69b20bf6aac5, type: 3}
+  m_Name: Test_Dialogue
+  m_EditorClassIdentifier: 
+  gameName: "\uBE60\uC0E4\uBE60\uC0E4"
+  sceneName: PunctureGame
+  dialogue:
+  - name: "\uC6B0\uC641\uAD73"
+    sentence: "\uC5B4~ \uC74C~ \uADF8~"
+    bgSprite: {fileID: 21300000, guid: a2e4ee640d5993a48a7f31c32cc79b9b, type: 3}
+  - name: "\uC6B0\uC641\uAD73"
+    sentence: "\uC624\uB298\uC740~ \uADF8~"
+    bgSprite: {fileID: 21300000, guid: 0d4f5a598458a5b4292020a56bb60fba, type: 3}
+  - name: "\uACE0\uC138\uAD6C"
+    sentence: "\uBB34\uC694 \uC73C\uCBD4\uB77C\uAD6C\uC694"
+    bgSprite: {fileID: 0}
+  - name: "\uC6B0\uC641\uAD73"
+    sentence: "\uD14C\uD5F9~"
+    bgSprite: {fileID: 21300000, guid: fa6b180b923e23d4d83c967153f29ef8, type: 3}
+  - name: "\uC8FC\uB974\uB974"
+    sentence: "\uCC38\uC744 \uC218 \uC5C6\uC5B4\uC694!"
+    bgSprite: {fileID: 0}
