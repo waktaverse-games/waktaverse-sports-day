@@ -23,6 +23,8 @@ namespace GameHeaven.UIUX
         private void Awake()
         {
             Time.timeScale = 1.0f;
+            ResultSceneManager.SetResultType(false);
+            
             prevMenues = new Stack<int>();
             prevMenues.Push(1);
             enableClick = true;
@@ -88,7 +90,7 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
-            transform.GetChild(5).GetChild(4).GetComponent<TextMeshProUGUI>().text = gameNames[curGame];
+            transform.GetChild(5).GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = gameNames[curGame];
             AudioSource.PlayClipAtPoint(buttonSounds[1], Vector3.zero);
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(5).GetComponent<Animator>().SetTrigger("On");

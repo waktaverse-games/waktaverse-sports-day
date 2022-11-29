@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,26 +15,16 @@ public class LoadingSceneManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LoadScene());
+        SceneLoader.LoadSceneAsync(nextScene, () =>
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = loadingImg;
+        }, 2.0f);
     }
 
     public static void LoadScene(string sceneName, Sprite loadingImage)
     {
         nextScene = sceneName;
         loadingImg = loadingImage;
-        SceneManager.LoadScene("LoadingScene");
-    }
-
-    IEnumerator LoadScene()
-    {
-        AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
-
-        transform.GetChild(0).GetComponent<Image>().sprite = loadingImg;
-        op.allowSceneActivation = false;
-
-        yield return new WaitForSeconds(1.0f);
-        yield return new WaitUntil(() => op.progress >= 0.9f);
-
-        op.allowSceneActivation = true;
+        SceneLoader.LoadSceneAsync("LoadingScene");
     }
 }
