@@ -49,12 +49,14 @@ namespace GameHeaven.PunctureGame
 
         public void GameOver()
         {
+            ScoreManager.Instance.SetGameHighScore(MinigameType.PunctureGame, scoreCollector.TotalScore);
+            
             bgmCollection.StopBGM();
             sfxCollection.PlaySFX(PunctureSFXType.GameOver);
 
             foreach (var bhvr in logicBhvrs) bhvr.GameOver();
             
-            ScoreManager.Instance.AddGameRoundScore(MinigameType.PunctureGame, scoreCollector.TotalScore);
+            ResultSceneManager.ShowResult(MinigameType.PunctureGame);
         }
     }
 }
