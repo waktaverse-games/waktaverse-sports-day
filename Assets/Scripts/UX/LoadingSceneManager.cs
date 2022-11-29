@@ -7,20 +7,18 @@ using UnityEngine.UI;
 public class LoadingSceneManager : MonoBehaviour
 {
     public static string nextScene;
-    [SerializeField] static Image[] loadingImages;
+    private static Sprite loadingImg;
+    [SerializeField] Image[] loadingImages;
 
     private void Start()
     {
-        nextScene = "SpreadGame";
         StartCoroutine(LoadScene());
     }
 
-    public static void LoadScene(string sceneName)
+    public static void LoadScene(string sceneName, Sprite loadingImage)
     {
         nextScene = sceneName;
-
-        // loading image change;
-
+        loadingImg = loadingImage;
         SceneManager.LoadScene("LoadingScene");
     }
 
@@ -28,6 +26,7 @@ public class LoadingSceneManager : MonoBehaviour
     {
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
 
+        transform.GetChild(0).GetComponent<Image>().sprite = loadingImg;
         op.allowSceneActivation = false;
 
         yield return new WaitForSeconds(1.0f);

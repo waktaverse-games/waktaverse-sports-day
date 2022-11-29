@@ -7,11 +7,12 @@ namespace GameHaven.RunGame
     public class Delete : MonoBehaviour
     {
         Rigidbody2D rig;
+        public GameManager gameManager;
 
         void Awake()
         {
             rig = GetComponent<Rigidbody2D>();
-            rig.velocity = Vector2.down * GameHaven.RunGame.GameManager.wallSpeed/4;
+            rig.velocity = Vector2.down * gameManager.wallSpeed/4;
         }
 
         void OnTriggerEnter2D(Collider2D other)
