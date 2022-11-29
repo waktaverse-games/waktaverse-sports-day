@@ -12,9 +12,7 @@ namespace GameHeaven.Temp
 
         public async void LoadScene(string sceneName)
         {
-            var oper = SceneManager.LoadSceneAsync(sceneName);
-            oper.allowSceneActivation = true;
-            await Task.Delay(100);
+            SceneManager.LoadScene("MinigameMenuScene");
         }
     }
 }
