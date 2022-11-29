@@ -7,6 +7,7 @@ namespace GameHaven.RunGame
     public class SpawnPoinMove : MonoBehaviour
     {
         public GameObject SpawnPoint;
+        public GameManager gameManager;
 
         float Speed;
         float timer;
@@ -25,94 +26,113 @@ namespace GameHaven.RunGame
         // Update is called once per frame
         void Update()
         {
-            timer += Time.deltaTime;
-
-            if (GameHaven.RunGame.GameManager.gameTime < 20)
+            if (gameManager.gameStop == false && gameManager.gameStart == true)
             {
-                if (timer > del)
+                timer += Time.deltaTime;
+
+                if (gameManager.gameTime < 20)
                 {
-                    Speed = Random.Range(2f, 4.5f);
-                    if (Dirleft == true)
+                    if (timer > del)
                     {
-                        Dirleft = false;
-                        dir = Vector2.right;
-                    }
-                    else
-                    {
-                        Dirleft = true;
-                        dir = Vector2.left;
-                    }
+                        Speed = Random.Range(2f, 4.5f);
+                        if (Dirleft == true)
+                        {
+                            Dirleft = false;
+                            dir = Vector2.right;
+                        }
+                        else
+                        {
+                            Dirleft = true;
+                            dir = Vector2.left;
+                        }
 
-                    SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
-                    timer = 0;
-                    del = Random.Range(0, 1.3f);
+                        SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
+                        timer = 0;
+                        del = Random.Range(0, 1.3f);
+                    }
                 }
-            }
 
-            else if (GameHaven.RunGame.GameManager.gameTime >= 20 && GameHaven.RunGame.GameManager.gameTime < 40)
-            {
-                if (timer > del)
+                else if (gameManager.gameTime >= 20 && gameManager.gameTime < 40)
                 {
-                    Speed = Random.Range(4f, 8f);
-                    if (Dirleft == true)
+                    if (timer > del)
                     {
-                        Dirleft = false;
-                        dir = Vector2.right;
-                    }
-                    else
-                    {
-                        Dirleft = true;
-                        dir = Vector2.left;
-                    }
+                        Speed = Random.Range(4f, 8f);
+                        if (Dirleft == true)
+                        {
+                            Dirleft = false;
+                            dir = Vector2.right;
+                        }
+                        else
+                        {
+                            Dirleft = true;
+                            dir = Vector2.left;
+                        }
 
-                    SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
-                    timer = 0;
-                    del = Random.Range(0, 0.85f);
+                        SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
+                        timer = 0;
+                        del = Random.Range(0, 0.85f);
+                    }
                 }
-            }
 
-            else if (GameHaven.RunGame.GameManager.gameTime >= 40)
-            {
-                if (timer > del)
+                else if (gameManager.gameTime >= 40 && gameManager.gameTime < 80)
                 {
-                    Speed = Random.Range(7f, 10f);
-                    if (Dirleft == true)
+                    if (timer > del)
                     {
-                        Dirleft = false;
-                        dir = Vector2.right;
-                    }
-                    else
-                    {
-                        Dirleft = true;
-                        dir = Vector2.left;
-                    }
+                        Speed = Random.Range(7f, 10f);
+                        if (Dirleft == true)
+                        {
+                            Dirleft = false;
+                            dir = Vector2.right;
+                        }
+                        else
+                        {
+                            Dirleft = true;
+                            dir = Vector2.left;
+                        }
 
-                    SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
-                    timer = 0;
-                    del = Random.Range(0, 0.3f);
+                        SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
+                        timer = 0;
+                        del = Random.Range(0, 0.3f);
+                    }
                 }
-            }
+                else
+                {
+                    if (timer > del)
+                    {
+                        Speed = Random.Range(3f, 12f);
+                        if (Dirleft == true)
+                        {
+                            Dirleft = false;
+                            dir = Vector2.right;
+                        }
+                        else
+                        {
+                            Dirleft = true;
+                            dir = Vector2.left;
+                        }
+
+                        SpawnPoint.GetComponent<Rigidbody2D>().velocity = dir * Speed;
+                        timer = 0;
+                        del = Random.Range(0, 0.6f);
+                    }
+                }
 
 
-            if (SpawnPoint.transform.position.x < -5)
-            {
-                SpawnPoint.transform.position = new Vector3(-4.5f, 16.5f, 0.5f);
-            }
-            else if (SpawnPoint.transform.position.x > 5)
-            {
-                SpawnPoint.transform.position = new Vector3(4.5f,16.5f,0.5f);
+
+                if (SpawnPoint.transform.position.x < -7)
+                {
+                    SpawnPoint.transform.position = new Vector3(-6.5f, 16.5f, 0.5f);
+                }
+                else if (SpawnPoint.transform.position.x > 7)
+                {
+                    SpawnPoint.transform.position = new Vector3(6.5f, 16.5f, 0.5f);
+                }
+
             }
 
 
         }
 
- /*       void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.gameObject.name == "SpawnWall")
-            {
-                SpawnPoint.GetComponent<Rigidbody2D>().velocity = -(dir)*Speed;
-            }
-        }*/
     }
 }
 
