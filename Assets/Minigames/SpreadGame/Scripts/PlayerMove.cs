@@ -100,19 +100,11 @@ namespace GameHeaven.SpreadGame
                 }
             }
         }
-
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.CompareTag("Enemy") || collider.CompareTag("Ball"))
             {
-                if (hasShield)
-                {
-                    ShieldBreak();
-                }
-                else
-                {
-                    StartCoroutine(GameOver());
-                }
+                Hit();
             }
             else if (collider.CompareTag("Coin"))
             {
@@ -135,18 +127,12 @@ namespace GameHeaven.SpreadGame
                 StartCoroutine(Stun(0.5f, collider));
             }
         }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.transform.CompareTag("Enemy"))
             {
-                if (hasShield)
-                {
-                    ShieldBreak();
-                }
-                else
-                {
-                    StartCoroutine(GameOver());
-                }
+                Hit();
             }
         }
         
@@ -410,13 +396,20 @@ namespace GameHeaven.SpreadGame
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>()
                 .SetTrigger("Shake");
         }
-
-        void ShieldBreak()
+        private bool onHit;
+        void Hit()
         {
-            if (!isInvincible) hasShield = false;
-
-            transform.GetChild(0).gameObject.SetActive(false);
-            anim.SetTrigger("Hit");
+            if (isInvincible) return;
+            if (hasShield)
+            {
+                hasShield = false;
+                transform.GetChild(0).gameObject.SetActive(false);
+                anim.SetTrigger("Hit");
+            }
+            else
+            {
+                StartCoroutine(GameOver());
+            }
         }
     }
 }
