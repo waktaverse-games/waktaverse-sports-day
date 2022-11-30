@@ -23,6 +23,7 @@ TagManager:
   - Platform
   - UpgradeItem
   - CrashGame_Item
+  - ItemDestroyArea
   layers:
   - Default
   - TransparentFX

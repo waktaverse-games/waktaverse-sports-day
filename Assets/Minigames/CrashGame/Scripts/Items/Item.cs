@@ -7,6 +7,7 @@ namespace GameHeaven.CrashGame
     public abstract class Item : MonoBehaviour, IDestroyEffect
     {
         // Parent Class of all items
+
         private GameObject destroyEffect;
 
         public abstract void ActivateItem();        // æ∆¿Ã≈€ »πµÊ Ω√ ¡Ôπﬂ
