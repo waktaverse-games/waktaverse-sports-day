@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using SharedLibs;
+using SharedLibs.Score;
 
 namespace GameHeaven.JumpGame
 {
@@ -18,17 +20,12 @@ namespace GameHeaven.JumpGame
         public bool isInvincible { get; private set; }
         public int JumpSuccessCount { get => jumpSuccessCount; }
 
-        [SerializeField] GameObject buttons;
-        [SerializeField] GameObject readyButton;
-        [SerializeField] GameObject startButton;
-        [Space]
-        [SerializeField]
-        GameObject[] objects;
-
+        [SerializeField] AnimationCounter counter;
+        [SerializeField] GameObject[] objects;
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] int jumpSuccessCount = 0;
 
-        private float totalScore = 0;
+        private int totalScore = 0;
         bool isGameStart = false;
         bool isGameOver;
         #region Singleton
@@ -47,28 +44,21 @@ namespace GameHeaven.JumpGame
         }
         #endregion
 
-        private void Start()
+        private void OnEnable()
+        {
+            counter.OnEndCount += () =>
+            {
+                GameStart();
+            };
+        }
+
+        void GameStart()
         {
             scoreText.text = "Á¡¼ö : 0";
-            StartCoroutine(StartGame());
-        }
-        private void Update()
-        {
-            Retry();
-        }
-        IEnumerator StartGame()
-        {
-            yield return new WaitForSeconds(0.1f);
-            readyButton.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            readyButton.SetActive(false);
-            startButton.SetActive(true);
             isGameStart = true;
             SoundManager.Instance.PlayBGM();
             ObjectTurnOnOff(true);
             GameStartEvent.Invoke();
-            yield return new WaitForSeconds(1f);
-            startButton.SetActive(false);
         }
 
         public void IncreaseScore(int score)
@@ -97,22 +87,8 @@ namespace GameHeaven.JumpGame
             GameEndEvent.Invoke();
             ObjectTurnOnOff(false);
             isGameOver = true;
-            buttons.SetActive(true);
-        }
-
-        public void Restart()
-        {
-            isGameOver = false;
-            buttons.SetActive(false);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        
-        void Retry()
-        {
-            if(Input.GetKeyDown(KeyCode.R))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+            ScoreManager.Instance.SetGameHighScore(MinigameType.JumpGame, totalScore);
+            ResultSceneManager.ShowResult(MinigameType.JumpGame);
         }
 
         void ObjectTurnOnOff(bool isTurnOn)

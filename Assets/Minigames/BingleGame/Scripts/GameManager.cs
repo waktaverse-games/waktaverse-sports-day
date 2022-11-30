@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using SharedLibs;
+using SharedLibs.Score;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 namespace GameHeaven.BingleGame
 {
@@ -26,24 +28,22 @@ namespace GameHeaven.BingleGame
         }
         #endregion
 
+        [SerializeField] AnimationCounter counter;
         private int score = 0;
         public Text scoreText;
         public bool isGameOver = false;
         public bool isGameStart = false;
-
-        public GameObject retryButton;
-
-        [SerializeField] GameObject readyButton;
-        [SerializeField] GameObject startButton;
-
-        void Start()
+        private void OnEnable()
         {
-            StartCoroutine(StartGame());
+            counter.OnEndCount += () =>
+            {
+                GameStart();
+            };
         }
+
         void Update()
         {
             scoreText.text = string.Format("{0:n0}", score);
-            ReStart();
         }
         public void IncreaseScore(int num)
         {
@@ -53,34 +53,14 @@ namespace GameHeaven.BingleGame
         public void GameOver()
         {
             isGameOver = true;
-            startButton.SetActive(false);   //혹시 게임 시작하고 바로 죽는경우를 대비해서...
-            //SharedLibs.Score.ScoreManager.Instance.AddGameRoundScore(MinigameType.BingleGame, score);
-            retryButton.SetActive(true);
+            ScoreManager.Instance.SetGameHighScore(MinigameType.JumpGame, score);
+            ResultSceneManager.ShowResult(MinigameType.JumpGame);
         }
 
-        public void Retry()
+        void GameStart()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
-        IEnumerator StartGame()
-        {
-            yield return new WaitForSeconds(0.1f);
-            readyButton.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            readyButton.SetActive(false);
-            startButton.SetActive(true);
             isGameStart = true;
             SoundManager.instance.PlayBGM();
-            yield return new WaitForSeconds(1f);
-            startButton.SetActive(false);
-        }
-        void ReStart()
-        {
-            if(Input.GetKeyDown(KeyCode.R))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
         }
     }
 }
