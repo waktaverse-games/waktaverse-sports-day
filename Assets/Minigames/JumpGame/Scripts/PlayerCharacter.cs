@@ -11,7 +11,6 @@ namespace GameHeaven.JumpGame
         [SerializeField]
         AnimatorOverrideController[] controllers;
         [SerializeField] NPCSpawner npcSpawner;
-        [SerializeField] CharacterType currChar;
         private void Awake()
         {
             anim = GetComponent<Animator>();
@@ -19,7 +18,7 @@ namespace GameHeaven.JumpGame
         }
         private void Start()
         {
-            //var currChar = SharedLibs.Character.CharacterManager.Instance.CurrentCharacter;
+            CharacterType currChar = SharedLibs.Character.CharacterManager.Instance.CurrentCharacter;
             ChooseCharacter(currChar);
         }
 
