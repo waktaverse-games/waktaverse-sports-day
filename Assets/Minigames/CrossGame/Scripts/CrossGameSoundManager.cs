@@ -11,16 +11,26 @@ namespace GameHeaven.CrossGame
         private class AnimatorDictionary : UnitySerializedDictionary<string, AudioClip> { }
 
         [SerializeField] private AnimatorDictionary audioClips;
-        public AudioSource[] audioSource;
+        public AudioSource[] sfxPlayers;
+        public AudioSource bgmPlayer;
 
         int audioCursor = 0;
 
+        private void Start()
+        {
+            foreach (AudioSource tmp in sfxPlayers)
+            {
+                tmp.volume = SoundManager.Instance.SFXVolume;
+            }
+            bgmPlayer.volume = SoundManager.Instance.BGMVolume;
+        }
+
         public void Play(string ClipName)
         {
-            audioSource[audioCursor].clip = audioClips[ClipName];
-            audioSource[audioCursor].Play();
+            sfxPlayers[audioCursor].clip = audioClips[ClipName];
+            sfxPlayers[audioCursor].Play();
 
-            if (++audioCursor >= audioSource.Length)
+            if (++audioCursor >= sfxPlayers.Length)
             {
                 audioCursor = 0;
             }

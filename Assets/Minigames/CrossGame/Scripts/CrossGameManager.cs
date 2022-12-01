@@ -38,14 +38,6 @@ namespace GameHeaven.CrossGame
             };
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Application.Quit();
-            }
-        }
-
         public void AddScore(int Point)
         {
             score += Point;
@@ -59,16 +51,13 @@ namespace GameHeaven.CrossGame
             restratBtn.SetActive(true);
             IsStop = true;
             objectController.player.cntAnimator.SetBool("GameOver", true);
-            restratBtn.SetActive(true);
             ScoreManager.Instance.SetGameHighScore(MinigameType.CrossGame, score);
             foreach (var item in objectController.flyItems)
             {
                 item.GetComponent<FlyItem>().Stop();
             }
-
+            ResultSceneManager.ShowResult(MinigameType.CrossGame);
         }
-
-
 
         public void Restart()
         {
