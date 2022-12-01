@@ -114,10 +114,10 @@ namespace GameHeaven.CrossGame
                     PlayerDoubleJump();
                 }
 
-           /*     if(JumpTime * JumpSpeed > 0.5f)
+                if (jumpTime * jumpSpeed > 0.7f)
                 {
-                    ReadyJump = true;
-                }*/
+                    readyJump = true;
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.X))
@@ -403,7 +403,7 @@ namespace GameHeaven.CrossGame
         {
             if (movementSpeed < 6.5f)
             {
-                movementSpeed += 0.04f;
+                movementSpeed += 0.03f;
             }
             else if (movementSpeed < 8.8f)
             {
