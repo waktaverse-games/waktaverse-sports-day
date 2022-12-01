@@ -1,48 +1,82 @@
 ﻿using System;
+using System.Collections.Generic;
+using GameHeaven.Root;
+using GameHeaven.UIUX;
 using SharedLibs;
 using SharedLibs.Score;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
+[System.Serializable]
+public class ResultSceneData
+{
+    [SerializeField] private MinigameType gameType;
+    [SerializeField] private string gameName;
+
+    public MinigameType GameType => gameType;
+    public string GameName => gameName;
+}
 
 public class ResultSceneManager : MonoBehaviour
 {
-    [SerializeField] private GameObject StoryModeResultObject;
-    [SerializeField] private TextMeshProUGUI storyGameNameText;
-    [SerializeField] private TextMeshProUGUI storyScoreText;
+    [SerializeField] private TextMeshProUGUI gameNameText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI goPrevBtnText;
     
-    [SerializeField] private GameObject MinigameModeResultObject;
-    [SerializeField] private TextMeshProUGUI minigameGameNameText;
-    [SerializeField] private TextMeshProUGUI minigameScoreText;
+    [SerializeField] private GameObject successImageObj;
+    [SerializeField] private GameObject failedImageObj;
+
+    [SerializeField] private ResultSceneData[] gameNameArr;
+    private static Dictionary<MinigameType, string> _gameNameDic;
 
     private static MinigameType gameType;
-    private static bool IsStoryModeResult;
 
     private void Awake()
     {
-        StoryModeResultObject.SetActive(IsStoryModeResult);
-        MinigameModeResultObject.SetActive(!IsStoryModeResult);
+        if (_gameNameDic == null)
+        {
+            _gameNameDic = new Dictionary<MinigameType, string>();
+            foreach (var data in gameNameArr)
+            {
+                _gameNameDic.Add(data.GameType, data.GameName);
+            }
+        }
     }
 
     private void Start()
     {
+        gameNameText.text = _gameNameDic[gameType];
+
+        SetResultScreenUI(GameManager.GameMode);
+    }
+
+    private void SetResultScreenUI(GameMode mode)
+    {
         var score = ScoreManager.Instance.GetGameScore(gameType);
-        
-        if (IsStoryModeResult)
+        if (mode == GameMode.StoryMode)
         {
-            storyGameNameText.text = gameType.ToString();
-            storyScoreText.text = score + " / " + 9999;
+            var target = ScoreManager.Instance.GetGameTargetScore(gameType);
+            scoreText.text = score + " / " + target;
+
+            var succeeded = score >= target;
+
+            // next story unlock when success
+            if (succeeded && StoryManager.Instance.SelectStoryIndex == StoryManager.Instance.UnlockProgress)
+            {
+                StoryManager.Instance.UnlockNext();
+            }
+        
+            successImageObj.SetActive(succeeded);
+            failedImageObj.SetActive(!succeeded);
+
+            goPrevBtnText.text = "스토리모드";
         }
         else
         {
-            minigameGameNameText.text = gameType.ToString();
-            minigameScoreText.text = score.ToString();
+            scoreText.text = score.ToString();
+            
+            goPrevBtnText.text = "미니게임으로";
         }
-    }
-
-    public static void SetResultType(bool isStoryMode)
-    {
-        IsStoryModeResult = isStoryMode;
     }
 
     public static void ShowResult(MinigameType type)
@@ -50,17 +84,15 @@ public class ResultSceneManager : MonoBehaviour
         gameType = type;
         SceneLoader.AddSceneAsync("ResultScene");
     }
+    
+    // Scene Load (Temporary)
 
-    public void GoToMain()
+    public void LoadMain()
     {
         SceneLoader.LoadSceneAsync("ModeSelectScene");
     }
-    public void GoToStory()
+    public void LoadPrevMode()
     {
-        SceneLoader.LoadSceneAsync("StoryMenuScene");
-    }
-    public void GoToMinigame()
-    {
-        SceneLoader.LoadSceneAsync("MinigameMenuScene");
+        SceneLoader.LoadSceneAsync(GameManager.GameMode == GameMode.StoryMode ? "StoryMenuScene" : "MinigameMenuScene");
     }
 }
