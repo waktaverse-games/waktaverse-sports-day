@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using SharedLibs;
+using SharedLibs.Score;
 
 namespace GameHeaven.StickyGame
 {
@@ -16,12 +18,11 @@ namespace GameHeaven.StickyGame
         public float cumulativeCoin;
         private SpriteRenderer spriteRenderer;
         [SerializeField] private Vector2 randomDir;
-        [SerializeField] private int score;
         [SerializeField] private bool isDeath;
         [SerializeField] private GameObject acquireEffect;
-        [SerializeField] AudioClip acquireSound, associateSound, cutSound, dirChangeSound;
 
         private Statistics statistics;
+        private bool moveLock = false;
 
         private void Awake()
         {
@@ -37,17 +38,22 @@ namespace GameHeaven.StickyGame
             {
                 StartCoroutine(RandomMove(0.5f));
             }
+
+            if (isPlayer)
+            {
+                moveLock = true;
+                Invoke("ResetMoveLock", 3.0f);
+            }
+        }
+
+        void ResetMoveLock()
+        {
+            moveLock = false;
         }
 
         private void Update()
         {
-            if (isDeath && Input.anyKeyDown)
-            {
-                Time.timeScale = 1;
-                isDeath = false;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-
+            if (moveLock) return;
             if (isAssociated)
             {
                 if (transform.position.y > curAxis.y)
@@ -71,7 +77,8 @@ namespace GameHeaven.StickyGame
 
             if (isPlayer && Input.GetButtonDown("Jump")) // Space Bar 입력시 방향 전환
             {
-                AudioSource.PlayClipAtPoint(dirChangeSound, Vector3.zero);
+                SoundManager.Instance.PlaySpaceSound();
+                //sound
                 curAxis = 2 * (Vector2)transform.position - curAxis; // 축 중심 변경
                 dir *= -1;  // 축 방향 변경
 
@@ -93,13 +100,13 @@ namespace GameHeaven.StickyGame
                         if (collider.GetComponent<SpriteRenderer>().sortingOrder <= -5) // 게임 오버
                         {
                             Time.timeScale = 0;
-                            isDeath = true;
-                            GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
+                            ScoreManager.Instance.SetGameHighScore(MinigameType.StickyGame, statistics.score);
+                            ResultSceneManager.ShowResult(MinigameType.StickyGame);
                         }
                     }
                     else
                     {
-                        AudioSource.PlayClipAtPoint(associateSound, Vector3.zero);
+                        SoundManager.Instance.PlayAssociateSound();
                         statistics.score += 70 + 20 * statistics.curRunner;
                         statistics.cumulRunner++;
                         statistics.curRunner++;
@@ -109,12 +116,12 @@ namespace GameHeaven.StickyGame
                 else if (collider.CompareTag("Outline")) // 게임 오버
                 {
                     Time.timeScale = 0;
-                    isDeath = true;
-                    GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
+                    ScoreManager.Instance.SetGameHighScore(MinigameType.StickyGame, statistics.score);
+                    ResultSceneManager.ShowResult(MinigameType.StickyGame);
                 }
                 else if (collider.CompareTag("Coin"))
                 {
-                    AudioSource.PlayClipAtPoint(acquireSound, Vector3.zero);
+                    SoundManager.Instance.PlayAcquireSound();
                     Instantiate(acquireEffect, collider.transform.position, acquireEffect.transform.rotation); // 획득 이펙트
                     statistics.score += 70 + 20 * statistics.curRunner;
                     if (collider.name[0] == 'G') statistics.goldCoin++;
@@ -125,7 +132,7 @@ namespace GameHeaven.StickyGame
                 }
                 else if (collider.CompareTag("CutItem"))
                 {
-                    AudioSource.PlayClipAtPoint(cutSound, Vector3.zero);
+                    SoundManager.Instance.PlayCutSound();
                     statistics.score += 70;
                     if (statistics.curRunner != 0) statistics.curRunner--;
                     Destroy(collider.gameObject);
@@ -139,13 +146,6 @@ namespace GameHeaven.StickyGame
             }
         }
 
-        IEnumerator Pause()
-        {
-            Time.timeScale = 0;
-
-            yield return new WaitUntil(() => Input.anyKeyDown);
-            Time.timeScale = 1;
-        }
         IEnumerator RandomMove(float sec)
         {
             WaitForSeconds wait = new WaitForSeconds(sec);

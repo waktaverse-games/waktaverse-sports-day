@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using SharedLibs;
+using SharedLibs.Score;
 
 namespace GameHeaven.SpreadGame
 {
@@ -52,9 +54,13 @@ namespace GameHeaven.SpreadGame
             curSectorDir = 1;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             Move();
+        }
+
+        private void Update()
+        {
             Bomb();
 
             for (int i = 0; i < 4; i++)
@@ -72,31 +78,6 @@ namespace GameHeaven.SpreadGame
                     canvas.transform.GetChild(2 + i).GetComponent<Image>().fillAmount = 1;
                     canvas.transform.GetChild(2 + i).gameObject.SetActive(false);
                     curBullets[i] = false;
-                }
-            }
-
-            /*
-            for (int i = 0; i < 4; i++) // ÅºÈ¯ ÃÑ 4°³
-            {
-                if (bulletLVs[i)
-                {
-                    Fire(i);
-                }
-            }*/
-
-            // ¹«Àû Å°
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                if (isInvincible)
-                {
-                    isInvincible = false;
-                    GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(false);
-                }
-                else
-                {
-                    isInvincible = true;
-                    if (!hasShield) hasShield = true;
-                    GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(true);
                 }
             }
         }
@@ -136,17 +117,6 @@ namespace GameHeaven.SpreadGame
             }
         }
         
-
-        IEnumerator GameOver()
-        {
-            Time.timeScale = 0;
-            GameObject.Find("Canvas").transform.GetChild(7).gameObject.SetActive(true);
-
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.R));
-            Time.timeScale = 1;
-            GameObject.Find("Canvas").transform.GetChild(7).gameObject.SetActive(false);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
         void AcquireItem(GameObject obj)
         {
             int grade = 0;
@@ -408,7 +378,9 @@ namespace GameHeaven.SpreadGame
             }
             else
             {
-                StartCoroutine(GameOver());
+                Time.timeScale = 0;
+                ScoreManager.Instance.SetGameHighScore(MinigameType.StickyGame, score.score);
+                ResultSceneManager.ShowResult(MinigameType.StickyGame);
             }
         }
     }
