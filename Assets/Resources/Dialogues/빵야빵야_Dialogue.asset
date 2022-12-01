@@ -15,33 +15,33 @@ MonoBehaviour:
   gameName: "\uBE75\uC57C\uBE75\uC57C"
   sceneName: SpreadGame
   dialogue:
-  - name: 
-    sentence: 
+  - name: 1
+    sentence: "\uD14C\uC2A4\uD2B8"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 2
+    sentence: "\uD14C\uC2A4\uD2B82"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 3
+    sentence: "\uD14C\uC2A4\uD2B83"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 4
+    sentence: "\uD14C\uC2A4\uD2B84"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 5
+    sentence: "\uD14C\uC2A4\uD2B85"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 6
+    sentence: "\uD14C\uC2A4\uD2B8a"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 7
+    sentence: "\uD14C\uC2A4\uD2B8b"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 8
+    sentence: "\uD14C\uC2A4\uD2B8c"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 9
+    sentence: "\uD14C\uC2A4\uD2B8d"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 10
+    sentence: "\uD14C\uC2A4\uD2B8 \uB05D"
     bgSprite: {fileID: 0}

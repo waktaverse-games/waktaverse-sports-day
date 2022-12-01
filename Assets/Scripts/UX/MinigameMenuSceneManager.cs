@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameHeaven.Root;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -23,7 +24,7 @@ namespace GameHeaven.UIUX
         private void Awake()
         {
             Time.timeScale = 1.0f;
-            ResultSceneManager.SetResultType(false);
+            GameManager.SetGameMode(GameMode.MinigameMode);
             
             prevMenues = new Stack<int>();
             prevMenues.Push(1);

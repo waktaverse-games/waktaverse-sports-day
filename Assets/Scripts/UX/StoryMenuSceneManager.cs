@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameHeaven.Root;
 using SharedLibs;
 using SharedLibs.Character;
 using Sirenix.OdinInspector;
@@ -17,9 +18,7 @@ namespace GameHeaven.UIUX
         [SerializeField] private string[] gameNames, engNames;
         [SerializeField] private CharacterType[] charTypes;
 
-        [SerializeField] [ReadOnly] private int curIndex;
-        [SerializeField] [ReadOnly] private int storyProgressIndex = -1;
-        private const string StoryProgressPrefsKey = "Game.Root.Story.Progress.Index";
+        [SerializeField] private GameObject[] lockScreens;
 
         [SerializeField] private GameObject gameDescObj;
         [SerializeField] private TextMeshProUGUI gameNameText;
@@ -29,19 +28,20 @@ namespace GameHeaven.UIUX
         [SerializeField] [ReadOnly] private string selectEngName;
 
         [SerializeField] AudioClip buttonSound;
-        
+
         private void Awake()
         {
-            // DEBUG
-            storyProgressIndex = -1;
-            
-            // storyProgressIndex = PlayerPrefs.HasKey(StoryProgressPrefsKey)
-            //     ? PlayerPrefs.GetInt(StoryProgressPrefsKey)
-            //     : -1;
-
-            ResultSceneManager.SetResultType(true);
+            GameManager.SetGameMode(GameMode.StoryMode);
             
             AudioSource.PlayClipAtPoint(buttonSound, Vector3.zero);
+        }
+
+        private void Start()
+        {
+            for (int i = 0; i <= StoryManager.Instance.UnlockProgress; i++)
+            {
+                lockScreens[Mathf.Clamp(i, 0, lockScreens.Length - 1)].SetActive(false);
+            }
         }
 
         private void Update()
@@ -59,7 +59,7 @@ namespace GameHeaven.UIUX
 
         public void OpenDescWindow(int index)
         {
-            curIndex = index;
+            StoryManager.Instance.SetCurrentIndex(index);
             
             gameNameText.text = gameNames[index];
             gameImage.sprite = minigameSprites[index];
@@ -72,21 +72,20 @@ namespace GameHeaven.UIUX
 
         public void StartGame()
         {
-            if (curIndex > storyProgressIndex)
+            var curIdx = StoryManager.Instance.SelectStoryIndex;
+            
+            if (curIdx > StoryManager.Instance.UnlockProgress) return;
+            
+            if (curIdx > StoryManager.Instance.ViewProgress)
             {
-                UpdateStoryProgress();
+                StoryManager.Instance.UpdateViewProgressLatest();
+                
                 DialogueSceneManager.LoadDialogue(selectEngName);
             }
             else
             {
-                LoadingSceneManager.LoadScene(engNames[curIndex], minigameSprites[curIndex]);
+                LoadingSceneManager.LoadScene(engNames[curIdx], minigameSprites[curIdx]);
             }
-        }
-
-        private void UpdateStoryProgress()
-        {
-            storyProgressIndex = curIndex > storyProgressIndex ? curIndex : storyProgressIndex;
-            PlayerPrefs.SetInt(StoryProgressPrefsKey, storyProgressIndex);
         }
     }
 }
