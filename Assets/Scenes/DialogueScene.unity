@@ -730,7 +730,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues:
-  - {fileID: 11400000, guid: 87d9d9f577936104892c86d1db4a4cfc, type: 2}
+  - {fileID: 11400000, guid: 28b41cf4a54c3d045bb9fdbc3ebde152, type: 2}
+  - {fileID: 11400000, guid: 88b01a595ef9eef49a066c071d49c299, type: 2}
+  - {fileID: 11400000, guid: b6d3ec9a284f27548b9459c80e89908d, type: 2}
+  - {fileID: 11400000, guid: dc90c0369b0e69a4fbf45adfc7acac5b, type: 2}
+  - {fileID: 11400000, guid: 9d846cfb4af54374e91b87b66b9b6470, type: 2}
+  - {fileID: 11400000, guid: 9f4aacd8940db0f45a9cb2be8759478c, type: 2}
+  - {fileID: 11400000, guid: 1fd7ddde819c25445a3fd1998a326879, type: 2}
+  - {fileID: 11400000, guid: a551b3d36feb8b940a866c893adf5395, type: 2}
+  - {fileID: 11400000, guid: e8c142ea45b90cb43ac3f070a31616d0, type: 2}
+  - {fileID: 11400000, guid: a3bac5113d8360a488c0c8882560a6e7, type: 2}
   currentDialogue: {fileID: 0}
   bgImage: {fileID: 5130748891473808484}
   nameText: {fileID: 5130748890191321952}

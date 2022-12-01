@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa44a4df9f14b63b1b4c7eb7af9f870, type: 3}
+  m_Name: Score Goals Data
+  m_EditorClassIdentifier: 
+  goalDataList:
+  - type: 0
+    storyGoal: 100
+    rewardGoals: 64000000c80000002c010000
+  - type: 1
+    storyGoal: 100
+    rewardGoals: 64000000c80000002c010000
+  - type: 2
+    storyGoal: 100
+    rewardGoals: 64000000c80000002c010000
+  - type: 3
+    storyGoal: 100
+    rewardGoals: 64000000c80000002c010000
+  - type: 4
+    storyGoal: 100
+    rewardGoals: 64000000c80000002c010000
+  - type: 5
+    storyGoal: 100
+    rewardGoals: 64000000c80000002c010000
+  - type: 6
+    storyGoal: 100
+    rewardGoals: 64000000c80000002c010000
+  - type: 7
+    storyGoal: 100
+    rewardGoals: 64000000c80000002c010000
+  - type: 8
+    storyGoal: 100
+    rewardGoals: 64000000c80000002c010000
+  - type: 9
+    storyGoal: 100
+    rewardGoals: 64000000c80000002c010000

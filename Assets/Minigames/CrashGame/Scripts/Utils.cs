@@ -9,6 +9,7 @@ namespace GameHeaven.CrashGame
     {
         public enum GameState
         {
+            Countdown,
             Start,
             Over
         }

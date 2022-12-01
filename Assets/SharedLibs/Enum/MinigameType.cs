@@ -2,6 +2,6 @@
 {
     public enum MinigameType
     {
-        AttackGame, BingleGame, CrashGame, CrossGame, JumpGame, PassGame, PunctureGame, RunGame, SpreadGame, StickyGame
+        AttackGame = 0, BingleGame, CrashGame, CrossGame, JumpGame, PassGame, PunctureGame, RunGame, SpreadGame, StickyGame
     }
 }

@@ -126,6 +126,7 @@ namespace GameHeaven.CrashGame
             score = 0;
             highscore = 0;
             uiManager.SetScoreText(Score);
+            UI.counterPrefab.OnEndCount += GameStart;
             //uiManager.SetHighScoreText(Score);
             //uiManager.SetCoinText(Money);
         }
@@ -141,7 +142,7 @@ namespace GameHeaven.CrashGame
             //CurrentCharacter = CharacterType.Gosegu;   //임시지정
             platform.SetCharacter(CurrentCharacter);
 
-            GameStart();
+            GameReStart();
         }
 
         private static void InstanceInit()
@@ -182,8 +183,7 @@ namespace GameHeaven.CrashGame
             Item.DeleteAll();       // 드랍 코인 및 아이템 전체 삭제
 
             GameManager.Instance.Sound.PlaySound("game over 2");
-
-            ScoreManager.Instance.AddGameRoundScore(MinigameType.CrashGame, Score);
+            ScoreManager.Instance.SetGameHighScore(MinigameType.CrashGame, Score);
             //if (Score > highscore)
             //{
             //    highscore = Score;
@@ -192,17 +192,23 @@ namespace GameHeaven.CrashGame
             // Gameover UI Active
             uiManager.GameOver();
             platform.OnGameOver();
+            ResultSceneManager.ShowResult(MinigameType.CrashGame);
         }
 
-        public void GameStart()
+        public void GameReStart()
         {
             Ball.BallNumber = 0;
             Score = 0;
-            CurrentGameState = GameState.Start;
+            CurrentGameState = GameState.Countdown;
             brickManager.ResetBricks();
             platform.PlatformInit();
             uiManager.GameRestart();
             RandomBackgroundSelect();
+        }
+
+        public void GameStart()
+        {
+            CurrentGameState = GameState.Start;
         }
 
         public void BallFire()

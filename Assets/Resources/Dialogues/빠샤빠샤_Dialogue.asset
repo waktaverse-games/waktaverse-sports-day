@@ -10,38 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 782293fdbe994548ba7e69b20bf6aac5, type: 3}
-  m_Name: "\uBE60\uC0E4\uBE60\uC0E4_Dialogue 1"
+  m_Name: "\uBE60\uC0E4\uBE60\uC0E4_Dialogue"
   m_EditorClassIdentifier: 
   gameName: "\uBE60\uC0E4\uBE60\uC0E4"
   sceneName: PunctureGame
   dialogue:
-  - name: 
-    sentence: 
+  - name: 1
+    sentence: "\uD14C\uC2A4\uD2B8"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 2
+    sentence: "\uD14C\uC2A4\uD2B82"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 3
+    sentence: "\uD14C\uC2A4\uD2B83"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 4
+    sentence: "\uD14C\uC2A4\uD2B84"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 5
+    sentence: "\uD14C\uC2A4\uD2B85"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 6
+    sentence: "\uD14C\uC2A4\uD2B8a"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 7
+    sentence: "\uD14C\uC2A4\uD2B8b"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 8
+    sentence: "\uD14C\uC2A4\uD2B8c"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 9
+    sentence: "\uD14C\uC2A4\uD2B8d"
     bgSprite: {fileID: 0}
-  - name: 
-    sentence: 
+  - name: 10
+    sentence: "\uD14C\uC2A4\uD2B8 \uB05D"
     bgSprite: {fileID: 0}
