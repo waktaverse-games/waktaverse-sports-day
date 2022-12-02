@@ -73,7 +73,8 @@ namespace GameHaven.RunGame
                 if (GetItem == true)
                 {
                     ItemTime += Time.deltaTime;
-                    Caracter.GetComponent<CapsuleCollider2D>().enabled = false;
+                    Caracter.GetComponent<CapsuleCollider2D>().isTrigger = false;
+                    Caracter.GetComponent<CapsuleCollider2D>().size = new Vector2(0.34f, 0.44f);
                     Effect.SetActive(true);
 
                     if (ItemTime > 2 && ItemTime <= 2.7)
@@ -86,7 +87,8 @@ namespace GameHaven.RunGame
                     else if (ItemTime > 2.7)
                     {
                         ItemTime = 0;
-                        Caracter.GetComponent<CapsuleCollider2D>().enabled = true;
+                        Caracter.GetComponent<CapsuleCollider2D>().size = new Vector2(0.6f, 0.77f);
+                        Caracter.GetComponent<CapsuleCollider2D>().isTrigger = false;
                         GetItem = false;
                         Effect.SetActive(false);
                         run.SetBool("Jump", false);
