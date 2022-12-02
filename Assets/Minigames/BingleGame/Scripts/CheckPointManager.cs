@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static GameHeaven.BingleGame.Enums;
 
 namespace GameHeaven.BingleGame
 {
@@ -43,8 +42,8 @@ namespace GameHeaven.BingleGame
 
         void ChooseTreeType()
         {
-            leftTree.SetTreeType(TreeType.left);
-            rightTree.SetTreeType(TreeType.right);
+            leftTree.SetTreeType(0);
+            rightTree.SetTreeType(1);
         }
 
         void ResetTree()

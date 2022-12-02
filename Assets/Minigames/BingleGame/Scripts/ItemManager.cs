@@ -27,9 +27,5 @@ namespace GameHeaven.BingleGame
             }
         }
 
-        public void ResetItem()
-        {
-            spriteRenderer.enabled = true;
-        }
     }
 }
