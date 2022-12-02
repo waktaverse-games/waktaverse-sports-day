@@ -29,6 +29,7 @@ namespace GameHeaven.Root
         {
             _db.unlockProgress++;
         }
+
         public void UpdateViewProgressLatest()
         {
             _db.viewProgress = SelectStoryIndex;

@@ -39,7 +39,7 @@ namespace SharedLibs.Score
                     if ((scoreDb.achievement & (1 << i)) == 0)
                     {
                         scoreDb.achievement |= (1 << i);
-                        PuzzleManager.GetPuzzle();
+                        PuzzleManager.GetPuzzlePiece();
                     }
                 }
 

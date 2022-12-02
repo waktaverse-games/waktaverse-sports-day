@@ -11,7 +11,6 @@ namespace GameHeaven.UIUX
 {
     public class MinigameMenuSceneManager : MonoBehaviour
     {
-        [SerializeField] AudioClip[] buttonSounds;
         [SerializeField] RuntimeAnimatorController[] charControllers;
         [SerializeField] Sprite[] minigameSprites;
         [SerializeField] string[] charNames, gameNames, engNames;
@@ -23,6 +22,7 @@ namespace GameHeaven.UIUX
 
         private void Awake()
         {
+
             Time.timeScale = 1.0f;
             GameManager.SetGameMode(GameMode.MinigameMode);
             
@@ -30,9 +30,13 @@ namespace GameHeaven.UIUX
             prevMenues.Push(1);
             enableClick = true;
             curGame = curChar = 0;
-            AudioSource.PlayClipAtPoint(buttonSounds[1], Vector3.zero);
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("On");
             characterManager = FindObjectOfType<CharacterManager>();
+        }
+
+        private void Start()
+        {
+            UISoundManager.Instance.PlayButtonSFX2();
         }
 
         private void Update()
@@ -46,7 +50,7 @@ namespace GameHeaven.UIUX
                 else
                 {
                     enableClick = false;
-                    AudioSource.PlayClipAtPoint(buttonSounds[1], Vector3.zero);
+                    UISoundManager.Instance.PlayButtonSFX2();
                     transform.GetChild(prevMenues.Pop()).GetComponent<Animator>().SetTrigger("Off");
                     transform.GetChild(prevMenues.Peek()).GetComponent<Animator>().SetTrigger("On");
                     Invoke("SetEnableClick", 0.2f);
@@ -71,7 +75,7 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
-            AudioSource.PlayClipAtPoint(buttonSounds[1], Vector3.zero);
+            UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("On");
             prevMenues.Push(2);
@@ -81,7 +85,7 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
-            AudioSource.PlayClipAtPoint(buttonSounds[1], Vector3.zero);
+            UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(4).GetComponent<Animator>().SetTrigger("On");
             prevMenues.Push(4);
@@ -92,7 +96,7 @@ namespace GameHeaven.UIUX
             if (!enableClick) return;
             enableClick = false;
             transform.GetChild(5).GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = gameNames[curGame];
-            AudioSource.PlayClipAtPoint(buttonSounds[1], Vector3.zero);
+            UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(5).GetComponent<Animator>().SetTrigger("On");
             prevMenues.Push(5);
@@ -102,7 +106,7 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
-            AudioSource.PlayClipAtPoint(buttonSounds[1], Vector3.zero);
+            UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(6).GetComponent<Animator>().SetTrigger("On");
             prevMenues.Push(6);
@@ -112,7 +116,7 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
-            AudioSource.PlayClipAtPoint(buttonSounds[1], Vector3.zero);
+            UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(5).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(3).GetComponent<Animator>().SetTrigger("On");
             prevMenues.Push(3);
@@ -121,7 +125,7 @@ namespace GameHeaven.UIUX
         public void GameRightClick()
         {
             if (!enableClick) return;
-            AudioSource.PlayClipAtPoint(buttonSounds[0], Vector3.zero);
+            UISoundManager.Instance.PlayButtonSFX1();
             if (curGame < 9)
             {
                 StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0), -400));
@@ -133,7 +137,7 @@ namespace GameHeaven.UIUX
         public void GameLeftClick()
         {
             if (!enableClick) return;
-            AudioSource.PlayClipAtPoint(buttonSounds[0], Vector3.zero);
+            UISoundManager.Instance.PlayButtonSFX1();
             if (curGame > 0)
             {
                 StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0), 400));
@@ -145,7 +149,7 @@ namespace GameHeaven.UIUX
         public void CharRightClick()
         {
             if (!enableClick) return;
-            AudioSource.PlayClipAtPoint(buttonSounds[0], Vector3.zero);
+            UISoundManager.Instance.PlayButtonSFX1();
             if (curChar < 6)
             {
                 curChar++;
@@ -158,7 +162,7 @@ namespace GameHeaven.UIUX
         public void CharLeftClick()
         {
             if (!enableClick) return;
-            AudioSource.PlayClipAtPoint(buttonSounds[0], Vector3.zero);
+            UISoundManager.Instance.PlayButtonSFX1();
             if (curChar > 0)
             {
                 curChar--;
