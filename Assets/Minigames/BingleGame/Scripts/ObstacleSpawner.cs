@@ -1,15 +1,12 @@
+using GameHeaven.PunctureGame;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameHeaven.BingleGame
 {
-    public class Enums : MonoBehaviour
+    public class ObstacleSpawner : Spawner
     {
-        public enum TreeType
-        {
-            left,
-            right
-        }
+
     }
 }

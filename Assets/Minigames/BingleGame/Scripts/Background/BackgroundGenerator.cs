@@ -8,6 +8,7 @@ namespace GameHeaven.BingleGame
     {
         [SerializeField] Transform[] sprites;
         float camHeight;
+        bool firstWarning = false;
         private void Awake()
         {
             camHeight = Camera.main.orthographicSize * 2;
@@ -17,7 +18,12 @@ namespace GameHeaven.BingleGame
             int index = (id + 1) % 3;
             sprites[index].position = new Vector3(0, yVal - camHeight * 2, 0);
             sprites[index].gameObject.GetComponentInChildren<CheckpointSpawner>().SpawnCheckpoint();
-            sprites[index].gameObject.GetComponentInChildren<ItemSpawner>().SpawnItem();
+            sprites[index].gameObject.GetComponentInChildren<Spawner>().SpawnObject();
+
+            if (GameManager.instance.Score >= 1000)
+            {
+                sprites[index].gameObject.GetComponentInChildren<ObstacleSpawner>().SpawnObject();
+            }
         }
     }
 }
