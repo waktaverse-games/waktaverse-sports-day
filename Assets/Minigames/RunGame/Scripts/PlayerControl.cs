@@ -120,18 +120,6 @@ namespace GameHaven.RunGame
                 run.SetBool("Over", true);
             }
 
-            
-           /* Vector3 pos1 = Camera.main.WorldToViewportPoint(Caracter.GetComponent<Transform>().position + new Vector3(-1,-1,0));
-            Vector3 pos2 = Camera.main.WorldToViewportPoint(Caracter.GetComponent<Transform>().position + new Vector3(1, -1, 0));
-            Vector3 pos3 = Camera.main.WorldToViewportPoint(Caracter.GetComponent<Transform>().position + new Vector3(1, 1, 0));
-            Vector3 pos4 = Camera.main.WorldToViewportPoint(Caracter.GetComponent<Transform>().position + new Vector3(-1, 1, 0));
-            Vector3 pos5 = Camera.main.WorldToViewportPoint(Caracter.GetComponent<Transform>().position);
-            pos1 = CameraOut(pos1);
-            pos2 = CameraOut(pos2);
-            pos3 = CameraOut(pos3);
-            pos4 = CameraOut(pos4);
-
-            Caracter.GetComponent<Transform>().position = Camera.main.ViewportToWorldPoint((pos1+pos2+pos3+pos4)/4);*/
 
         }
 
@@ -162,41 +150,28 @@ namespace GameHaven.RunGame
                     gameManager.ItemScore(5);
                 }
             }
+
+            if (other.gameObject.tag == "Border")
+            {
+                dir.x = 0;
+            }
         }
 
-        public void GameStart()
+        void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "Border")
+            {
+                if(Dirleft == true)
+                    dir = Vector2.left;
+                else
+                    dir = Vector2.right;
+            }
+        }
+
+            public void GameStart()
         {
             run.SetBool("Stop", false);
         }
-
-        /*public Vector3 CameraOut(Vector3 pos)
-        {
-            if (pos.x < 0f)
-            {
-                pos.x = 0.000001f;
-                dir.x = 0f;
-            }
-            if (pos.x > 1f)
-            {
-                pos.x = 0.999999f;
-                dir.x = 0f;
-            }
-
-            if (pos.y < 0f)
-            {
-                pos.y = 0.000001f;
-                dir.x = 0f;
-            }
-
-            if (pos.y > 1f)
-            {
-                pos.y = 0.999999f;
-                dir.x = 0f;
-            }
-
-            return pos;
-
-        }*/
 
     }
 }
