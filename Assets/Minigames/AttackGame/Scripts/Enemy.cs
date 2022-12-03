@@ -196,11 +196,11 @@ namespace GameHeaven.AttackGame
         IEnumerator GoraniToLeft(float distance)
         {
             
-            yield return new WaitForSeconds(distance * 0.7f + 0.2f);
+            yield return new WaitForSeconds(distance * 0.5f + 0.2f);
             distance = Random.Range(1.5f, 2.5f);
-            if (isBossMonster) distance = Random.Range(3.5f, 6f);
+            if (isBossMonster) distance = Random.Range(8f, 14f);
             _spriteRenderer.flipX = false;
-            _tween = transform.DOLocalMoveX(transform.position.x - distance, distance * 0.7f).SetId(tweenId);
+            _tween = transform.DOLocalMoveX(transform.position.x - distance, distance * 0.5f).SetId(tweenId);
             StartCoroutine(GoraniToRight(distance));
         }
 
@@ -208,14 +208,14 @@ namespace GameHeaven.AttackGame
         {
             if (isBossMonster)
             {
-                yield return new WaitForSeconds(distance * 0.7f + 0.7f);
+                yield return new WaitForSeconds(distance * 0.5f + 0.7f);
             }
             else
             {
-                yield return new WaitForSeconds(distance * 0.7f + 0.2f);
+                yield return new WaitForSeconds(distance * 0.5f + 0.2f);
             }
             _spriteRenderer.flipX = true;
-            _tween = transform.DOLocalMoveX(transform.position.x + distance, distance * 0.7f).SetId(tweenId);
+            _tween = transform.DOLocalMoveX(transform.position.x + distance, distance * 0.5f).SetId(tweenId);
             StartCoroutine(GoraniToLeft(distance));
         }
 
