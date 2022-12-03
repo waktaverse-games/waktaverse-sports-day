@@ -229,7 +229,7 @@ namespace GameHeaven.AttackGame
             if (_stageNum < 8)
             {
                 bossNum = _stageNum - 1;
-                bossNum = 3;
+                // bossNum = 3;
                 enemyNum = 0;
             }
             else
@@ -247,7 +247,7 @@ namespace GameHeaven.AttackGame
                 tempEnemy.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
             }
             GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(44, 6, 0));
-            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 6, _enemyDamage * 5);
+            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 11, _enemyDamage * 3);
             if (_stageNum == 2)
             {
                 tempBoss.GetComponent<Enemy>().dropItem = true;

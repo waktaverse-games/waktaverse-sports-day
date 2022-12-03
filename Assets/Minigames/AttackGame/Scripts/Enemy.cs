@@ -29,6 +29,7 @@ namespace GameHeaven.AttackGame
         private Tween _tween;
         private bool _isAlive;
         private bool _isMonkeyMove;
+        private float _bossMonkeySpeed = -0.4f;
 
         private void OnEnable()
         {
@@ -57,7 +58,17 @@ namespace GameHeaven.AttackGame
             if (_isMonkeyMove)
             {
                 // Debug.Log("VAR");
-                transform.Translate(-0.4f * Time.deltaTime, 0, 0);
+                
+                transform.Translate(_bossMonkeySpeed * Time.deltaTime, 0, 0);
+                if (transform.position.x < player.transform.position.x && _bossMonkeySpeed < 0 && isBossMonster)
+                {
+                    _bossMonkeySpeed *= -1;
+                    transform.GetComponent<SpriteRenderer>().flipX = true;
+                } else if (transform.position.x > player.transform.position.x && _bossMonkeySpeed > 0 && isBossMonster)
+                {
+                    _bossMonkeySpeed *= -1;
+                    transform.GetComponent<SpriteRenderer>().flipX = false;
+                }
             }
         }
 
