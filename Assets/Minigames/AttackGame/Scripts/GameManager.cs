@@ -390,15 +390,7 @@ namespace GameHeaven.AttackGame
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Backspace))
-            {
-                _hpNum = 1500;
-            }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Application.Quit();
-            }
         }
     }
 }
