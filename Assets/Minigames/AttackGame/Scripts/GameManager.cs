@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using SharedLibs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +40,11 @@ namespace GameHeaven.AttackGame
         public TextMeshProUGUI playerXpText;
         public TextMeshProUGUI stageText;
         public TextMeshProUGUI stageStartText;
+        public GameObject countdown;
+        public AnimationCounter counter;
+        public GameObject whipSquare;
+        public AudioSource backAudio;
+        [HideInInspector] public bool IsStop = true;
 
         private int _scoreNum;
         public int _hpNum;
@@ -68,6 +74,7 @@ namespace GameHeaven.AttackGame
             stageStartAnim = stageStart.GetComponent<Animator>();
             stageStartAnim.enabled = false;
             _hammerSpawned = false;
+            backAudio.volume = SharedLibs.SoundManager.Instance.BGMVolume;
             NewGame();
         }
 
@@ -108,11 +115,14 @@ namespace GameHeaven.AttackGame
 
         IEnumerator StartGame()
         {
-            startGameText.SetActive(true);
             _isBossStage = false;
-            startGameText.GetComponent<Animator>().Play("StartGame", -1, 0f);
-            yield return new WaitForSeconds(1.1f);
-            startGameText.SetActive(false);
+            counter.OnEndCount += () =>
+            {
+                IsStop = false;
+            };
+            yield return new WaitForSeconds(3f);
+            countdown.SetActive(false);
+            whipSquare.SetActive(true);
             yield return new WaitForSeconds(0.7f);
             playerObject.SetActive(true);
             yield return new WaitForSeconds(0.1f);
@@ -130,9 +140,8 @@ namespace GameHeaven.AttackGame
             yield return new WaitForSeconds(0.2f);
             // retryObject.SetActive(true);
             playerObject.SetActive(false);
-            // retryAnim.Play("EndGame", -1, 0f);
-            // ScoreManager.Instance.AddGameRoundScore(MinigameType.AttackGame, Score);
-            // 여기에 씬이동 넣으시면 될 것 같습니다!! 게임 오버, 게임오버, 게임 종료, game over, gameover!!
+            ScoreManager.Instance.SetGameHighScore(MinigameType.AttackGame, _scoreNum);
+            ResultSceneManager.ShowResult(MinigameType.AttackGame);
         }
 
         IEnumerator MoveToNextStage(float time)

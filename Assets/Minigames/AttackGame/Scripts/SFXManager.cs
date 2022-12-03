@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SharedLibs;
 
 namespace GameHeaven.AttackGame
 {
@@ -13,6 +14,7 @@ namespace GameHeaven.AttackGame
         void Start()
         {
             _audioSource = GetComponent<AudioSource>();
+            _audioSource.volume = SharedLibs.SoundManager.Instance.SFXVolume;
         }
 
         // Update is called once per frame
