@@ -8,36 +8,34 @@ namespace GameHeaven.CrossGame
 {
     public class Player : MonoBehaviour
     {
-        public CrossGameManager Manager;
-        Vector3 LandPos;
+        public CrossGameManager manager;
+        Vector3 landPos;
 
-        BoxCollider2D Collider;
-        public CharacterType Charactor;
+        public CharacterType charactor;
         [System.Serializable]
         private class AnimatorDictionary : UnitySerializedDictionary<CharacterType, RuntimeAnimatorController> { }
 
-        [SerializeField] private AnimatorDictionary Animators;
-        [HideInInspector] public Animator CntAnimator;
-        public bool OnBottom;
+        [SerializeField] private AnimatorDictionary animators;
+        [HideInInspector] public Animator cntAnimator;
+        public bool onBottom;
 
         private void Awake()
         {
-            Collider = GetComponent<BoxCollider2D>();
-            CntAnimator = GetComponent<Animator>();
+            cntAnimator = GetComponent<Animator>();
             //print(CharacterManager.Instance.CurrentCharacter);
-            //CntAnimator.runtimeAnimatorController = Animators[CharacterManager.Instance.CurrentCharacter];
-            CntAnimator.runtimeAnimatorController = Animators[Charactor];
+            cntAnimator.runtimeAnimatorController = animators[CharacterManager.Instance.CurrentCharacter];
+            //cntAnimator.runtimeAnimatorController = animators[charactor];
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == "Bottom")
             {
-                OnBottom = true;
+                onBottom = true;
             }
             else if(collision.tag == "Outline")
             {
-                Manager.GameOver();
+                manager.GameOver();
             }
         }
 
@@ -45,7 +43,7 @@ namespace GameHeaven.CrossGame
         {
             if (collision.tag == "Bottom")
             {
-                OnBottom = true;
+                onBottom = true;
             }
         }
 
@@ -53,7 +51,7 @@ namespace GameHeaven.CrossGame
         {
             if (collision.gameObject.GetComponent<Platform>() as Platform)
             {
-                OnBottom = false;
+                onBottom = false;
             }
         }
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using SharedLibs;
+using SharedLibs.Score;
 
 namespace GameHeaven.SpreadGame
 {
@@ -52,9 +54,13 @@ namespace GameHeaven.SpreadGame
             curSectorDir = 1;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             Move();
+        }
+
+        private void Update()
+        {
             Bomb();
 
             for (int i = 0; i < 4; i++)
@@ -74,45 +80,12 @@ namespace GameHeaven.SpreadGame
                     curBullets[i] = false;
                 }
             }
-
-            /*
-            for (int i = 0; i < 4; i++) // ÅºÈ¯ ÃÑ 4°³
-            {
-                if (bulletLVs[i)
-                {
-                    Fire(i);
-                }
-            }*/
-
-            // ¹«Àû Å°
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                if (isInvincible)
-                {
-                    isInvincible = false;
-                    GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(false);
-                }
-                else
-                {
-                    isInvincible = true;
-                    if (!hasShield) hasShield = true;
-                    GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(true);
-                }
-            }
         }
-
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.CompareTag("Enemy") || collider.CompareTag("Ball"))
             {
-                if (hasShield)
-                {
-                    ShieldBreak();
-                }
-                else
-                {
-                    StartCoroutine(GameOver());
-                }
+                Hit();
             }
             else if (collider.CompareTag("Coin"))
             {
@@ -135,32 +108,15 @@ namespace GameHeaven.SpreadGame
                 StartCoroutine(Stun(0.5f, collider));
             }
         }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.transform.CompareTag("Enemy"))
             {
-                if (hasShield)
-                {
-                    ShieldBreak();
-                }
-                else
-                {
-                    StartCoroutine(GameOver());
-                }
+                Hit();
             }
         }
         
-
-        IEnumerator GameOver()
-        {
-            Time.timeScale = 0;
-            GameObject.Find("Canvas").transform.GetChild(7).gameObject.SetActive(true);
-
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.R));
-            Time.timeScale = 1;
-            GameObject.Find("Canvas").transform.GetChild(7).gameObject.SetActive(false);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
         void AcquireItem(GameObject obj)
         {
             int grade = 0;
@@ -410,13 +366,22 @@ namespace GameHeaven.SpreadGame
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>()
                 .SetTrigger("Shake");
         }
-
-        void ShieldBreak()
+        private bool onHit;
+        void Hit()
         {
-            if (!isInvincible) hasShield = false;
-
-            transform.GetChild(0).gameObject.SetActive(false);
-            anim.SetTrigger("Hit");
+            if (isInvincible) return;
+            if (hasShield)
+            {
+                hasShield = false;
+                transform.GetChild(0).gameObject.SetActive(false);
+                anim.SetTrigger("Hit");
+            }
+            else
+            {
+                Time.timeScale = 0;
+                ScoreManager.Instance.SetGameHighScore(MinigameType.StickyGame, score.score);
+                ResultSceneManager.ShowResult(MinigameType.StickyGame);
+            }
         }
     }
 }

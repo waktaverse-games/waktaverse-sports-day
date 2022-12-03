@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace GameHeaven.BingleGame
 {
@@ -16,10 +17,8 @@ namespace GameHeaven.BingleGame
 
         private float curTime = 0;
         private bool movingLeft = true;
-
         Rigidbody2D rb;
         SpriteRenderer sprite;
-
         private Vector2 dir = new Vector2(-1,-1);
 
         void Awake()
@@ -78,14 +77,6 @@ namespace GameHeaven.BingleGame
         {
             sprite.flipX = rb.velocity.x > 0 ? true : false;
             skiEquip.transform.localScale = rb.velocity.x > 0 ? new Vector3(-1, 1, 1) : Vector3.one;
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.gameObject.tag == "GameOverArea" || collision.gameObject.tag == "Border")
-            {
-                GameManager.instance.GameOver();
-            }
         }
     }
 }

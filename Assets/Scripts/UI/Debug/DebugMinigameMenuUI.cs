@@ -7,7 +7,7 @@ namespace GameHeaven.Temp
     {
         public void GoToMainMenu()
         {
-            SceneManager.LoadScene("TestGameSelectScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("MinigameMenuScene", LoadSceneMode.Single);
         }
     }
 }

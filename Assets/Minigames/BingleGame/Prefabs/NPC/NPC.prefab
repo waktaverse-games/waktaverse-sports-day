@@ -121,20 +121,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorControllers:
+  - {fileID: 9100000, guid: addf7b2ec5897f242ba14a6c03eb3c8e, type: 2}
+  - {fileID: 9100000, guid: 5c4680c03789ea249a9d1a636e6017a4, type: 2}
+  - {fileID: 9100000, guid: 43fb45b06cd7d27479431a676b46831d, type: 2}
+  - {fileID: 9100000, guid: 4977eb77006082a46ad38e775004fd54, type: 2}
+  - {fileID: 9100000, guid: c98af053c1bfce54a8db8f8e805aff5f, type: 2}
+  - {fileID: 9100000, guid: ed8e707eee1b9e2479cbf846b92d099d, type: 2}
+  - {fileID: 9100000, guid: d194674e29bd8084c8ab4a0b8b75a4d3, type: 2}
   - {fileID: 9100000, guid: 647a843a64447704192e3ec5ed433bef, type: 2}
   - {fileID: 9100000, guid: 2eba7c6845b391e47b204a5414dc483d, type: 2}
   - {fileID: 9100000, guid: dbfed5e673d2c0d40bb1931925823bb0, type: 2}
-  - {fileID: 9100000, guid: ed8e707eee1b9e2479cbf846b92d099d, type: 2}
   - {fileID: 9100000, guid: 8352b85abdb3fb545b19b8f04f6cd8b1, type: 2}
-  - {fileID: 9100000, guid: 5c4680c03789ea249a9d1a636e6017a4, type: 2}
-  - {fileID: 9100000, guid: 43fb45b06cd7d27479431a676b46831d, type: 2}
-  - {fileID: 9100000, guid: c98af053c1bfce54a8db8f8e805aff5f, type: 2}
-  - {fileID: 9100000, guid: 4977eb77006082a46ad38e775004fd54, type: 2}
   - {fileID: 9100000, guid: a6f88acb32543bc4eb7981dab9bf56ff, type: 2}
   - {fileID: 9100000, guid: dd5750f7287561a4780497598c3fec4f, type: 2}
   - {fileID: 9100000, guid: c8d1fbcec55b7794daf02a08521b3ba1, type: 2}
-  - {fileID: 9100000, guid: d194674e29bd8084c8ab4a0b8b75a4d3, type: 2}
-  - {fileID: 9100000, guid: addf7b2ec5897f242ba14a6c03eb3c8e, type: 2}
   - {fileID: 9100000, guid: 2a30ce89fe03eb84a8f171f122e50f23, type: 2}
   movingSpeed: 3
 --- !u!61 &5403404328601642774
