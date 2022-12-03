@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SharedLibs;
+using SharedLibs.Character;
 
 namespace GameHeaven.PassGame
 {
@@ -19,8 +20,11 @@ namespace GameHeaven.PassGame
         }
         private void Start()
         {
-            //var currChar = SharedLibs.Character.CharacterManager.Instance.CurrentCharacter;
-            ChooseCharacter(currChar);
+            if (CharacterManager.Instance == null)
+            {
+                ChooseCharacter(CharacterType.Woowakgood);
+            }
+            else ChooseCharacter(CharacterManager.Instance.CurrentCharacter);
         }
 
         void ChooseCharacter(CharacterType type)

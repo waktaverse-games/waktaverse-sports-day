@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SharedLibs;
+using SharedLibs.Character;
 using UnityEngine.UI;
 
 namespace GameHeaven.AttackGame
@@ -23,8 +24,11 @@ namespace GameHeaven.AttackGame
         }
         private void Start()
         {
-            //var currChar = SharedLibs.Character.CharacterManager.Instance.CurrentCharacter;
-            ChooseCharacter(currChar);
+            if (CharacterManager.Instance == null)
+            {
+                ChooseCharacter(CharacterType.Woowakgood);
+            }
+            else ChooseCharacter(CharacterManager.Instance.CurrentCharacter);
             image.sprite = sprites[(int)currChar];
             var tempColor = image.color;
             tempColor.a = 255f;

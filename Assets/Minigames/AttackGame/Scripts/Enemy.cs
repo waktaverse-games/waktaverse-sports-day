@@ -29,13 +29,13 @@ namespace GameHeaven.AttackGame
         private Tween _tween;
         private bool _isAlive;
         private bool _isMonkeyMove;
+        private float _bossMonkeySpeed = -0.4f;
 
-        private void Start()
+        private void OnEnable()
         {
             _name = gameObject.name;
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            isBossMonster = false;
             _isMonkeyMove = false;
             damage = 10;
         }
@@ -58,7 +58,17 @@ namespace GameHeaven.AttackGame
             if (_isMonkeyMove)
             {
                 // Debug.Log("VAR");
-                transform.Translate(-0.4f * Time.deltaTime, 0, 0);
+                
+                transform.Translate(_bossMonkeySpeed * Time.deltaTime, 0, 0);
+                if (transform.position.x < player.transform.position.x && _bossMonkeySpeed < 0 && isBossMonster)
+                {
+                    _bossMonkeySpeed *= -1;
+                    transform.GetComponent<SpriteRenderer>().flipX = true;
+                } else if (transform.position.x > player.transform.position.x && _bossMonkeySpeed > 0 && isBossMonster)
+                {
+                    _bossMonkeySpeed *= -1;
+                    transform.GetComponent<SpriteRenderer>().flipX = false;
+                }
             }
         }
 
@@ -68,6 +78,7 @@ namespace GameHeaven.AttackGame
             Vector3 scale = transform.localScale;
             _tween = transform.DOScale(new Vector3(scale.x * 3f, scale.y * 3f, scale.z), 0.5f).SetId(tweenId);
             StartCoroutine(BossStart(2f));
+            Debug.Log(isBossMonster);
         }
 
         IEnumerator BossStart(float time)
@@ -185,11 +196,11 @@ namespace GameHeaven.AttackGame
         IEnumerator GoraniToLeft(float distance)
         {
             
-            yield return new WaitForSeconds(distance * 0.7f + 0.2f);
+            yield return new WaitForSeconds(distance * 0.5f + 0.2f);
             distance = Random.Range(1.5f, 2.5f);
-            if (isBossMonster) distance = Random.Range(3.5f, 6f);
+            if (isBossMonster) distance = Random.Range(8f, 14f);
             _spriteRenderer.flipX = false;
-            _tween = transform.DOLocalMoveX(transform.position.x - distance, distance * 0.7f).SetId(tweenId);
+            _tween = transform.DOLocalMoveX(transform.position.x - distance, distance * 0.5f).SetId(tweenId);
             StartCoroutine(GoraniToRight(distance));
         }
 
@@ -197,33 +208,48 @@ namespace GameHeaven.AttackGame
         {
             if (isBossMonster)
             {
-                yield return new WaitForSeconds(distance * 0.7f + 0.7f);
+                yield return new WaitForSeconds(distance * 0.5f + 0.7f);
             }
             else
             {
-                yield return new WaitForSeconds(distance * 0.7f + 0.2f);
+                yield return new WaitForSeconds(distance * 0.5f + 0.2f);
             }
             _spriteRenderer.flipX = true;
-            _tween = transform.DOLocalMoveX(transform.position.x + distance, distance * 0.7f).SetId(tweenId);
+            _tween = transform.DOLocalMoveX(transform.position.x + distance, distance * 0.5f).SetId(tweenId);
             StartCoroutine(GoraniToLeft(distance));
         }
 
         IEnumerator PigeonMove()
         {
-            _animator.SetBool("isMove", true);
             yield return new WaitForSeconds(1f);
+            _animator.SetBool("isMove", true);
             Vector3 pos = player.transform.position;
-            _tween = transform.DOMove(new Vector3(pos.x + 5, pos.y + 2, pos.z), 2).SetId(tweenId);
+            if (!isBossMonster)
+            {
+                _tween = transform.DOMove(new Vector3(pos.x + 4f, pos.y + 4, pos.z), 1).SetId(tweenId);
+            }
+            else
+            {
+                if (pos.x > transform.position.x)
+                {
+                    _spriteRenderer.flipX = true;
+                }
+                else
+                {
+                    _spriteRenderer.flipX = false;
+                }
+                _tween = transform.DOMove(new Vector3(pos.x, pos.y + 5, pos.z), 0.5f).SetId(tweenId);
+            }
             StartCoroutine(PigeonStop());
         }
 
         IEnumerator PigeonStop()
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             _animator.SetBool("isMove", false);
             if (isBossMonster)
             {
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(1.3f);
                 StartCoroutine(PigeonMove());
             }
         }
@@ -233,13 +259,24 @@ namespace GameHeaven.AttackGame
             yield return new WaitForSeconds(1f);
             _animator.SetBool("isMove", true);
             Vector3 pos = player.transform.position;
-            StartCoroutine(CatStop());
-            _tween = transform.DOMoveY(2.5f, 1).SetId(tweenId);
+            if (isBossMonster)
+            {
+                float randNum = Random.Range(35f, 47f);
+                _tween = transform.DOJump(new Vector3(randNum, 1.327732f, 0), 3, 1, 2f);
+
+                yield return new WaitForSeconds(1f);
+                StartCoroutine(CatStop());
+            }
+            else
+            {
+                _tween = transform.DOMoveY(2.5f, 1).SetId(tweenId);
+                StartCoroutine(CatStop());
+            }
         }
 
         IEnumerator CatStop()
         {
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(1f);
             _animator.SetBool("isMove", false);
             StartCoroutine(CatJump());
         }
