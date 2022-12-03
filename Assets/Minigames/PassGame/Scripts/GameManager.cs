@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SharedLibs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +27,7 @@ namespace GameHeaven.PassGame
         public SFXManager SfxManager;
         public TestBack testBack;
         public float jumpPower;
+        public AudioSource bgm;
 
         private int _score = 0;
         private int _stage = 0;
@@ -34,7 +36,7 @@ namespace GameHeaven.PassGame
         private Vector3 _coinSpawnPos;
         private TextMeshProUGUI _scoreText;
         private TextMeshProUGUI _stageText;
-        private List<string>[] _stageStrings = new List<string>[4];
+        private List<string>[] _stageStrings = new List<string>[6];
 
         // Start is called before the first frame update
         void Start()
@@ -42,17 +44,19 @@ namespace GameHeaven.PassGame
             _spawnPos = spawnPoint.transform.position;
             _coinSpawnPos = coinSpawnPoint.transform.position;
             _coins = 0;
+            bgm.volume = SharedLibs.SoundManager.Instance.BGMVolume;
             playerScript.jumpPower = jumpPower;
             _scoreText = scoreT.GetComponent<TextMeshProUGUI>();
             _stageText = stageT.GetComponent<TextMeshProUGUI>();
             _stageStrings = new List<string>[6];
             _stageStrings[0] = new List<string>();
             _stageStrings[1] = new List<string>() { "egi", "bat" };
-            // _stageStrings[1] = new List<string>() { "dog" };
-            _stageStrings[2] = new List<string>() { "egi", "bat", "bidul", "dog" };
-            _stageStrings[3] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani" };
-            _stageStrings[4] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug" };
-            _stageStrings[5] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug", "jupok" };
+            // _stageStrings[1] = new List<string>() { "jupok" };
+            _stageStrings[2] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani" };
+            _stageStrings[3] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug" };
+            _stageStrings[4] = new List<string>() { "egi", "bat", "bidul", "dog", "gorani", "bug", "jupok"  };
+            _stageStrings[5] = new List<string>() {  "bat", "bidul", "gorani", "bug", "jupok", "dog" };
+            // _stageStrings[6] = new List<string>() { "bat", "bidul", "gorani", "bug", "jupok" };
             GameSet();
         }
 
@@ -63,7 +67,7 @@ namespace GameHeaven.PassGame
             endText.SetActive(false);
             toMain.SetActive(false);
             button.SetActive(false);
-            startText.SetActive(true);
+            // startText.SetActive(true);
             playerScript.reachedJump = false;
             _score = 0;
             _stage = 1;
@@ -72,13 +76,13 @@ namespace GameHeaven.PassGame
             _scoreText.SetText(_score.ToString());
             // coinText.SetText(_coins.ToString());
             playerScript.ResetGame();
-            Invoke("GameStart", 2f);
+            Invoke("GameStart", 3.5f);
         }
 
         public void GameStart()
         {
             startText.SetActive(false);
-            StartCoroutine(UpgradeStage(45));
+            StartCoroutine(UpgradeStage(40));
             StartCoroutine(StageSpawn(0.1f));
             StartCoroutine(CoinSpawn(0.7f));
             StartCoroutine(ItemSpawn(30.1f));
@@ -93,11 +97,8 @@ namespace GameHeaven.PassGame
             testBack.shouldMove = false;
             Time.timeScale = 1;
             Debug.Log("Game Over");
-            // endText.SetActive(true);
-            // button.SetActive(true);
-            // toMain.SetActive(true);
-            // ScoreManager.Instance.AddGameRoundScore(MinigameType.PassGame, Score);
-            // 여기에 씬이동 넣으시면 될 것 같습니다!! 게임 오버, 게임오버, 게임 종료, game over, gameover!!
+            ScoreManager.Instance.SetGameHighScore(MinigameType.PassGame, _score);
+            ResultSceneManager.ShowResult(MinigameType.PassGame);
         }
 
         public void AddScore(int addScore)
