@@ -24,6 +24,7 @@ namespace GameHeaven.PassGame
         public GameObject doubleJumpItem;
         public TextMeshProUGUI coinText;
         public SFXManager SfxManager;
+        public TestBack testBack;
         public float jumpPower;
 
         private int _score = 0;
@@ -89,6 +90,8 @@ namespace GameHeaven.PassGame
             StopAllCoroutines();
             objectManager.FailGame();
             player.SetActive(false);
+            testBack.shouldMove = false;
+            Time.timeScale = 1;
             Debug.Log("Game Over");
             // endText.SetActive(true);
             // button.SetActive(true);
@@ -127,7 +130,7 @@ namespace GameHeaven.PassGame
             yield return new WaitForSeconds(time);
             int rnd = Random.Range(0, _stageStrings[_stage].Count);
             objectManager.MakeObject(_stageStrings[_stage][rnd], _spawnPos);
-            StartCoroutine(StageSpawn(3f));
+            StartCoroutine(StageSpawn(2.25f));
         }
 
         IEnumerator CoinSpawn(float time)

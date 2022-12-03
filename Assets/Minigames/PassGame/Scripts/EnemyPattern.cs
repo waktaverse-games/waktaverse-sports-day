@@ -42,6 +42,9 @@ namespace GameHeaven.PassGame
                     _animator.SetBool("isFly", false);
                     StartCoroutine(Dog());
                     break;
+                case "bat":
+                    StartCoroutine(Bat());
+                    break;
             }
         }
 
@@ -55,6 +58,12 @@ namespace GameHeaven.PassGame
         IEnumerator Panchi()
         {
             yield break;
+        }
+
+        IEnumerator Bat()
+        {
+            yield return new WaitForSeconds(5f);
+            transform.DOMoveY(-1f, 1);
         }
 
         IEnumerator Segyun(float time)

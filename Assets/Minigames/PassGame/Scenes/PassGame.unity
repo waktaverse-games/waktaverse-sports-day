@@ -824,6 +824,7 @@ MonoBehaviour:
   doubleJumpItem: {fileID: 1788386958}
   coinText: {fileID: 353772237}
   SfxManager: {fileID: 1962322146}
+  testBack: {fileID: 1585382353}
   jumpPower: 7
 --- !u!1 &305636353
 GameObject:
@@ -1709,6 +1710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  shouldMove: 0
 --- !u!61 &807515396
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2053,6 +2055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  shouldMove: 0
 --- !u!61 &873869213
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2373,6 +2376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  shouldMove: 0
 --- !u!61 &1009955790
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3547,6 +3551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d100ac95bdffa44aab7e90fa1b6a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shouldMove: 0
 --- !u!23 &1585382354
 MeshRenderer:
   m_ObjectHideFlags: 0
