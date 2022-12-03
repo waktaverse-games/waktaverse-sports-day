@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8535631215376107980}
   - component: {fileID: -8027920597942494090}
   m_Layer: 0
-  m_Name: SilverCoin
+  m_Name: SpawnTestCoin
   m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
