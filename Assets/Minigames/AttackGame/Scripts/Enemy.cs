@@ -30,12 +30,11 @@ namespace GameHeaven.AttackGame
         private bool _isAlive;
         private bool _isMonkeyMove;
 
-        private void Start()
+        private void OnEnable()
         {
             _name = gameObject.name;
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            isBossMonster = false;
             _isMonkeyMove = false;
             damage = 10;
         }
@@ -68,6 +67,7 @@ namespace GameHeaven.AttackGame
             Vector3 scale = transform.localScale;
             _tween = transform.DOScale(new Vector3(scale.x * 3f, scale.y * 3f, scale.z), 0.5f).SetId(tweenId);
             StartCoroutine(BossStart(2f));
+            Debug.Log(isBossMonster);
         }
 
         IEnumerator BossStart(float time)
@@ -233,13 +233,24 @@ namespace GameHeaven.AttackGame
             yield return new WaitForSeconds(1f);
             _animator.SetBool("isMove", true);
             Vector3 pos = player.transform.position;
-            StartCoroutine(CatStop());
-            _tween = transform.DOMoveY(2.5f, 1).SetId(tweenId);
+            if (isBossMonster)
+            {
+                float randNum = Random.Range(35f, 47f);
+                _tween = transform.DOJump(new Vector3(randNum, 1.327732f, 0), 3, 1, 2f);
+
+                yield return new WaitForSeconds(1f);
+                StartCoroutine(CatStop());
+            }
+            else
+            {
+                _tween = transform.DOMoveY(2.5f, 1).SetId(tweenId);
+                StartCoroutine(CatStop());
+            }
         }
 
         IEnumerator CatStop()
         {
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(1f);
             _animator.SetBool("isMove", false);
             StartCoroutine(CatJump());
         }

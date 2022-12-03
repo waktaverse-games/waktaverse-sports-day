@@ -4793,7 +4793,7 @@ MonoBehaviour:
   playerXpText: {fileID: 1136788811}
   stageText: {fileID: 516771573}
   stageStartText: {fileID: 766080595}
-  _hpNum: 0
+  _hpNum: 1000
 --- !u!1 &1214094089
 GameObject:
   m_ObjectHideFlags: 0
