@@ -221,20 +221,35 @@ namespace GameHeaven.AttackGame
 
         IEnumerator PigeonMove()
         {
-            _animator.SetBool("isMove", true);
             yield return new WaitForSeconds(1f);
+            _animator.SetBool("isMove", true);
             Vector3 pos = player.transform.position;
-            _tween = transform.DOMove(new Vector3(pos.x + 5, pos.y + 2, pos.z), 2).SetId(tweenId);
+            if (!isBossMonster)
+            {
+                _tween = transform.DOMove(new Vector3(pos.x + 4f, pos.y + 4, pos.z), 1).SetId(tweenId);
+            }
+            else
+            {
+                if (pos.x > transform.position.x)
+                {
+                    _spriteRenderer.flipX = true;
+                }
+                else
+                {
+                    _spriteRenderer.flipX = false;
+                }
+                _tween = transform.DOMove(new Vector3(pos.x, pos.y + 5, pos.z), 0.5f).SetId(tweenId);
+            }
             StartCoroutine(PigeonStop());
         }
 
         IEnumerator PigeonStop()
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             _animator.SetBool("isMove", false);
             if (isBossMonster)
             {
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(1.3f);
                 StartCoroutine(PigeonMove());
             }
         }
