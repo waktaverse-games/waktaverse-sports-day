@@ -236,7 +236,7 @@ namespace GameHeaven.CrossGame
             //print(LandPlatformNum);
             player.cntAnimator.SetFloat("JumpSpeed", 0.4f * jumpSpeed);
             player.cntAnimator.SetTrigger("Jump");
-            manager.soundManager.Play("Jump1");
+            manager.soundManager.SfxPlay("Jump1");
             float Time = 1f / jumpSpeed;
             landPos = player.transform.position + Vector3.right * (2 - Time * movementSpeed);
             //JumpSequence = Player.transform.DOJump(LandPos, 2f, 1, Time);
@@ -296,7 +296,7 @@ namespace GameHeaven.CrossGame
             effect.transform.position = player.transform.position;
             effect.SetTrigger("Boom");
             player.cntAnimator.SetBool("Fly", true);
-            manager.soundManager.Play("PickUp1");
+            manager.soundManager.SfxPlay("PickUp1");
             flyLandFlatformNum = landPlatformNum + flyDistance;
             landPlatformNum += flyDistance;
             //print(FLyLandFlatformNum);
