@@ -18,7 +18,7 @@ namespace GameHeaven.UIUX
         CharacterManager characterManager;
         private Stack<int> prevMenues;
         private bool enableClick;
-        private int curGame, curChar;
+        private int curGame, curChar, curPuzzle;
 
         private void Awake()
         {
@@ -169,6 +169,30 @@ namespace GameHeaven.UIUX
                 transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
                 transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
                 StartCoroutine(ArrowClick(transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0), 330));
+            }
+            Invoke("SetEnableClick", 0.1f);
+        }
+        public void PuzzleRightClick()
+        {
+            if (!enableClick) return;
+            UISoundManager.Instance.PlayButtonSFX1();
+            if (curPuzzle < 4)
+            {
+                curPuzzle++;
+                transform.GetChild(4).GetChild(2).position += new Vector3(105, 0, 0);
+                StartCoroutine(ArrowClick(transform.GetChild(4).GetChild(0).GetChild(0), -2000));
+            }
+            Invoke("SetEnableClick", 0.1f);
+        }
+        public void PuzzleLeftClick()
+        {
+            if (!enableClick) return;
+            UISoundManager.Instance.PlayButtonSFX1();
+            if (curPuzzle > 0)
+            {
+                curPuzzle--;
+                transform.GetChild(4).GetChild(2).position += new Vector3(-105, 0, 0);
+                StartCoroutine(ArrowClick(transform.GetChild(4).GetChild(0).GetChild(0), 2000));
             }
             Invoke("SetEnableClick", 0.1f);
         }

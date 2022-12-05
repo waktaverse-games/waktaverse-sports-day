@@ -50,6 +50,7 @@ namespace GameHeaven.UIUX
                 if (isDescMenuOpen)
                 {
                     gameDescObj.GetComponent<Animator>().SetTrigger("Off");
+                    isDescMenuOpen = false;
                 }
                 else
                 {
