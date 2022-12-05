@@ -36,12 +36,12 @@ namespace GameHeaven.CrashGame
         protected override void Awake()
         {
             base.Awake();
-            itemManager = GameManager.Instance.Item;
+            itemManager = MiniGameManager.Instance.Item;
         }
 
         private void Start()
         {
-            BrickColor = GameManager.Instance.Brick.brickColorArray[Random.Range(0, 6)];
+            BrickColor = MiniGameManager.Instance.Brick.brickColorArray[Random.Range(0, 6)];
         }
 
         private void DropItem()

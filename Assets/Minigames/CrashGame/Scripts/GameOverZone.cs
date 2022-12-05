@@ -23,7 +23,7 @@ namespace GameHeaven.CrashGame
             if (collider.CompareTag("Brick"))
             {
                 Debug.Log("Brick!");
-                GameManager.Instance.GameOver();
+                MiniGameManager.Instance.GameOver();
             }
         }
     }

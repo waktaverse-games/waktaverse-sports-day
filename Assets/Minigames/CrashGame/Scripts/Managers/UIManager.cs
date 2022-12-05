@@ -67,7 +67,7 @@ namespace GameHeaven.CrashGame
             SetCountdownText("1");
             yield return new WaitForSeconds(.5f);
             SetCountdownText("Start!");
-            GameManager.Instance.GameStart();
+            MiniGameManager.Instance.GameStart();
             yield return new WaitForSeconds(.5f);
             countdownUI.gameObject.SetActive(false);
         }
@@ -88,14 +88,14 @@ namespace GameHeaven.CrashGame
 
         public void RestartGame()
         {
-            GameManager.Instance.GameReStart();
+            MiniGameManager.Instance.GameReStart();
             gameOverUI.SetActive(false);
         }
 
         public void ShowItemEffect(string effect)
         {
             if (itemEffectCoroutine != null) StopCoroutine(itemEffectCoroutine);
-            itemEffectText.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.platform.transform.position) + itemEffectPos;
+            itemEffectText.transform.position = Camera.main.WorldToScreenPoint(MiniGameManager.Instance.platform.transform.position) + itemEffectPos;
             itemEffectText.text = effect;
             itemEffectText.gameObject.SetActive(true);
             itemEffectCoroutine = StartCoroutine(FadeText(itemEffectText, false));

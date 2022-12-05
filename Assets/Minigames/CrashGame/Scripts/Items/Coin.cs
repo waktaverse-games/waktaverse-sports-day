@@ -23,7 +23,7 @@ namespace GameHeaven.CrashGame
 
         public void ShowEffect()
         {
-            GameManager.Instance.UI.ShowItemEffect($"+{coinValue}p");
+            MiniGameManager.Instance.UI.ShowItemEffect($"+{coinValue}p");
         }
 
     }
