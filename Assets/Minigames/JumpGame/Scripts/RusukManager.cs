@@ -14,6 +14,7 @@ namespace GameHeaven.JumpGame
             {
                 SoundManager.Instance.PlayRusukSound();
                 GameManager.Instance.SetInvinsible(true);
+                GameManager.Instance.ShowTextEffect("1È¸ ¹«Àû!");
                 GameObject vfx = Instantiate(VFX, transform.position, transform.rotation);
                 Destroy(vfx, 2f);
                 Destroy(gameObject);

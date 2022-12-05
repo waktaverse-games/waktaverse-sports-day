@@ -31,7 +31,8 @@ namespace GameHeaven.PassGame
                     StartCoroutine(Gorani(1.5f));
                     break;
                 case "fox":
-                    _animator.SetBool("isPause", false);
+                    transform.localPosition = new Vector3(-14.8f, 0, 0);
+                    _animator.SetBool("isPause", true);
                     StartCoroutine(Fox(1.5f));
                     break;
                 case "ddulgi":
@@ -41,6 +42,9 @@ namespace GameHeaven.PassGame
                 case "dog":
                     _animator.SetBool("isFly", false);
                     StartCoroutine(Dog());
+                    break;
+                case "bat":
+                    StartCoroutine(Bat());
                     break;
             }
         }
@@ -55,6 +59,12 @@ namespace GameHeaven.PassGame
         IEnumerator Panchi()
         {
             yield break;
+        }
+
+        IEnumerator Bat()
+        {
+            yield return new WaitForSeconds(5f);
+            transform.DOMoveY(-1f, 1);
         }
 
         IEnumerator Segyun(float time)
@@ -89,6 +99,7 @@ namespace GameHeaven.PassGame
             _animator.SetBool("isPause", false);
             Invoke("FoxStop", 1f);
             transform.DOLocalMoveX(-3.7f * _count, 1);
+            // Debug.Log(_count);
             _count++;
             StartCoroutine(Fox(2.5f));
         }

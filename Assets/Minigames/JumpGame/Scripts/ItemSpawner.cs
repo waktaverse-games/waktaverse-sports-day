@@ -17,16 +17,21 @@ namespace GameHeaven.JumpGame
         [SerializeField] Transform spawnPosMax;
         [SerializeField] GameObject itemPrefab;
         [SerializeField] GameObject gomemItemPrefab;
+        [SerializeField] GameObject obstaclePrefab;
 
         [SerializeField] int gomemItemFreq;
         [SerializeField] float itemSpawnDelay;
 
+        [SerializeField] float obstacleSpawnDelayMin;
+        [SerializeField] float obstacleSpawnDelayMax;
         Queue<GameObject> deactivatedItems = new Queue<GameObject>();
+        Queue<GameObject> deactivatedObstacles = new Queue<GameObject>();
 
         bool gotGomemItem = false;
         void Start()
         {
             StartCoroutine(Spawn());
+            StartCoroutine(SpawnObstacle());
         }
 
         void SpawnItem()
@@ -49,12 +54,24 @@ namespace GameHeaven.JumpGame
             item.transform.localPosition = new Vector3(spawnPosX, spawnPosMin.localPosition.y, 0);
         }
 
+        void SpawnObstacles()
+        {
+            GameObject obstacle = Instantiate(obstaclePrefab, transform);
+            float spawnPosX = Random.Range(spawnPosMin.localPosition.x, spawnPosMax.localPosition.x);
+            obstacle.transform.localPosition = new Vector3(spawnPosX, spawnPosMin.localPosition.y, 0);
+            obstacle.GetComponent<ObstacleManager>().Initialize(this);
+        }
+
         public void DeactiavteItem(GameObject item)
         {
             deactivatedItems.Enqueue(item);
             item.SetActive(false);
         }
-        
+        public void DeactiaveObstacle(GameObject obstacle)
+        {
+            deactivatedObstacles.Enqueue(obstacle);
+            obstacle.SetActive(false);
+        }
         GameObject GetItemFromPool()
         {
             GameObject item = deactivatedItems.Count == 0 ? Instantiate(itemPrefab) : deactivatedItems.Dequeue();
@@ -63,6 +80,14 @@ namespace GameHeaven.JumpGame
             return item;
         }
         
+        GameObject GetObstacleFromPool()
+        {
+            GameObject obstacle = deactivatedObstacles.Count == 0 ? Instantiate(obstaclePrefab) : deactivatedObstacles.Dequeue();
+            obstacle.SetActive(true);
+            obstacle.transform.SetParent(transform);
+            return obstacle;
+        }
+
         IEnumerator Spawn()
         {
             yield return new WaitForSeconds(itemSpawnDelay);    // 게임시작후 일정시간 뒤에 코루틴 시작
@@ -72,7 +97,33 @@ namespace GameHeaven.JumpGame
                 SpawnItem();
                 yield return new WaitForSeconds(itemSpawnDelay);
             }
+        }
+        IEnumerator SpawnObstacle()
+        {
+            yield return new WaitForSeconds(Random.Range(obstacleSpawnDelayMin, obstacleSpawnDelayMax));
+            while (!GameManager.Instance.IsGameOver)
+            {
+                SpawnObstacles();
+                if(GameManager.Instance.Score >= 1500)
+                {
+                    SpawnObstacle();
+                }
+                yield return new WaitForSeconds(Random.Range(obstacleSpawnDelayMin, obstacleSpawnDelayMax));
+            }
+        }
 
+        void UpdateObstacleSpawnSpeed()
+        {
+            if(GameManager.Instance.Score >= 2000)
+            {
+                obstacleSpawnDelayMin = 3f;
+                obstacleSpawnDelayMax = 5f;
+            }
+            else if(GameManager.Instance.Score >= 1000)
+            {
+                obstacleSpawnDelayMin = 3f;
+                obstacleSpawnDelayMax = 8f;
+            }
         }
     }
 }

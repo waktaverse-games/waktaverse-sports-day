@@ -27,13 +27,12 @@ namespace GameHeaven.UIUX
 
         [SerializeField] [ReadOnly] private string selectEngName;
 
-        [SerializeField] AudioClip buttonSound;
+        private int curSeletedStage = 0;
+        private bool isDescMenuOpen = false;
 
         private void Awake()
         {
             GameManager.SetGameMode(GameMode.StoryMode);
-            
-            AudioSource.PlayClipAtPoint(buttonSound, Vector3.zero);
         }
 
         private void Start()
@@ -48,7 +47,15 @@ namespace GameHeaven.UIUX
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                SceneLoader.LoadSceneAsync("ModeSelectScene");
+                if (isDescMenuOpen)
+                {
+                    gameDescObj.GetComponent<Animator>().SetTrigger("Off");
+                    isDescMenuOpen = false;
+                }
+                else
+                {
+                    SceneLoader.LoadSceneAsync("ModeSelectScene");
+                }
             }
         }
 
@@ -64,10 +71,36 @@ namespace GameHeaven.UIUX
             gameNameText.text = gameNames[index];
             gameImage.sprite = minigameSprites[index];
 
-            gameDescObj.SetActive(true);
+            gameDescObj.GetComponent<Animator>().SetTrigger("On");
+            isDescMenuOpen = true;
             
             selectEngName = engNames[index];
             CharacterManager.Instance.SetCharacter(charTypes[index]);
+        }
+
+        public void ClickArrowButton(int x)
+        {
+            if (x > 0 && 0 < curSeletedStage)
+            {
+                curSeletedStage--;
+                StartCoroutine(MoveX(transform.GetChild(3), x));
+            }
+            else if (curSeletedStage < 9 && x < 0)
+            {
+                curSeletedStage++;
+                StartCoroutine(MoveX(transform.GetChild(3), x));
+            }
+        }
+
+        IEnumerator MoveX(Transform obj, int x)
+        {
+            WaitForSeconds wait = new WaitForSeconds(0.01f);
+
+            for (int i = 0; i < 10; i++)
+            {
+                obj.transform.position += new Vector3(x / 10, 0, 0);
+                yield return wait;
+            }
         }
 
         public void StartGame()
@@ -75,17 +108,18 @@ namespace GameHeaven.UIUX
             var curIdx = StoryManager.Instance.SelectStoryIndex;
             
             if (curIdx > StoryManager.Instance.UnlockProgress) return;
-            
+
+            StoryManager.Instance.UpdateViewProgressLatest();
+
+            DialogueSceneManager.LoadDialogue(selectEngName);
+            /*
             if (curIdx > StoryManager.Instance.ViewProgress)
             {
-                StoryManager.Instance.UpdateViewProgressLatest();
-                
-                DialogueSceneManager.LoadDialogue(selectEngName);
             }
             else
             {
                 LoadingSceneManager.LoadScene(engNames[curIdx], minigameSprites[curIdx]);
-            }
+            }*/
         }
     }
 }

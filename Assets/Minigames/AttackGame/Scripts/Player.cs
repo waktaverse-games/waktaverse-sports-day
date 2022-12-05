@@ -127,12 +127,12 @@ namespace GameHeaven.AttackGame
         private void MovePlayer()
         {
             Vector3 pos = UnityEngine.Camera.main.WorldToViewportPoint(transform.position);
-            if (pos.x < 0f)
+            if (pos.x < -0.001f)
             {
                 pos.x = 0f;
                 transform.position = UnityEngine.Camera.main.ViewportToWorldPoint(pos);
             }
-            else if (pos.x > 1f)
+            else if (pos.x > 1.001f)
             {
                 pos.x = 1f;
                 transform.position = UnityEngine.Camera.main.ViewportToWorldPoint(pos);

@@ -19,12 +19,14 @@ namespace GameHeaven.JumpGame
         public bool IsGameOver { get => isGameOver; }
         public bool isInvincible { get; private set; }
         public int JumpSuccessCount { get => jumpSuccessCount; }
-
+        public int Score { get => totalScore; }
         [SerializeField] AnimationCounter counter;
         [SerializeField] GameObject[] objects;
         [SerializeField] TextMeshProUGUI scoreText;
+        [SerializeField] TextMeshProUGUI textEffect;
         [SerializeField] int jumpSuccessCount = 0;
 
+        private Coroutine textEffectCoroutine;
         private int totalScore = 0;
         bool isGameStart = false;
         bool isGameOver;
@@ -90,6 +92,29 @@ namespace GameHeaven.JumpGame
             ScoreManager.Instance.SetGameHighScore(MinigameType.JumpGame, totalScore);
             ResultSceneManager.ShowResult(MinigameType.JumpGame);
         }
+        public void ShowTextEffect(string effect)
+        {
+            if (textEffectCoroutine != null) StopCoroutine(textEffectCoroutine);
+            textEffect.transform.position = Camera.main.WorldToScreenPoint(GameObject.Find("Player").transform.position) + new Vector3(0,100f,0);
+            textEffect.text = effect;
+            textEffect.gameObject.SetActive(true);
+            textEffectCoroutine = StartCoroutine(FadeText(textEffect, true));
+        }
+
+         IEnumerator FadeText(TextMeshProUGUI textUI, bool floatText, float interval = .05f)
+        {
+            Color textColor = textUI.color;
+            textColor.a = 1f;
+            textEffect.color = textColor;
+            while (textColor.a > 0.05f)
+            {
+                textColor.a *= 0.8f;
+                textUI.color = textColor;
+                if (floatText) textUI.transform.Translate(0, 5f, 0);
+                yield return new WaitForSeconds(interval);
+            }
+            textUI.gameObject.SetActive(false);
+        }
 
         void ObjectTurnOnOff(bool isTurnOn)
         {
@@ -98,5 +123,7 @@ namespace GameHeaven.JumpGame
                 obj.SetActive(isTurnOn);
             }
         }
+
+
     }
 }
