@@ -11,6 +11,7 @@ namespace GameHeaven.PassGame
         private float width;
 
         public float speed = 3f;
+        public bool shouldMove;
 
         private void Awake()
         {
@@ -18,11 +19,12 @@ namespace GameHeaven.PassGame
             _rigidbody = GetComponent<Rigidbody2D>();
             width = _boxCollider.size.x;
             _rigidbody.velocity = new Vector2(-speed, 0);
+            shouldMove = true;
         }
 
         void Update()
         {
-            if (transform.position.x < -width)
+            if (transform.position.x < -width && shouldMove)
             {
                 Reposition();
             }

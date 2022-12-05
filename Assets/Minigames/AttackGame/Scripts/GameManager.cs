@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using SharedLibs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +40,11 @@ namespace GameHeaven.AttackGame
         public TextMeshProUGUI playerXpText;
         public TextMeshProUGUI stageText;
         public TextMeshProUGUI stageStartText;
+        public GameObject countdown;
+        public AnimationCounter counter;
+        public GameObject whipSquare;
+        public AudioSource backAudio;
+        [HideInInspector] public bool IsStop = true;
 
         private int _scoreNum;
         public int _hpNum;
@@ -64,10 +70,12 @@ namespace GameHeaven.AttackGame
         // Start is called before the first frame update
         void Start()
         {
-            _enemyTypes = new string[7] {"monkey", "gorani", "fox", "cat", "pigeon", "bat", "dog"};
+            // _enemyTypes = new string[7] {"monkey", "gorani", "fox", "cat", "pigeon", "bat", "dog"};
+            _enemyTypes = new string[7] {"monkey", "gorani", "cat", "fox", "bat", "dog", "pigeon"};
             stageStartAnim = stageStart.GetComponent<Animator>();
             stageStartAnim.enabled = false;
             _hammerSpawned = false;
+            backAudio.volume = SharedLibs.SoundManager.Instance.BGMVolume;
             NewGame();
         }
 
@@ -108,11 +116,14 @@ namespace GameHeaven.AttackGame
 
         IEnumerator StartGame()
         {
-            startGameText.SetActive(true);
             _isBossStage = false;
-            startGameText.GetComponent<Animator>().Play("StartGame", -1, 0f);
-            yield return new WaitForSeconds(1.1f);
-            startGameText.SetActive(false);
+            counter.OnEndCount += () =>
+            {
+                IsStop = false;
+            };
+            yield return new WaitForSeconds(3f);
+            countdown.SetActive(false);
+            whipSquare.SetActive(true);
             yield return new WaitForSeconds(0.7f);
             playerObject.SetActive(true);
             yield return new WaitForSeconds(0.1f);
@@ -130,9 +141,8 @@ namespace GameHeaven.AttackGame
             yield return new WaitForSeconds(0.2f);
             // retryObject.SetActive(true);
             playerObject.SetActive(false);
-            // retryAnim.Play("EndGame", -1, 0f);
-            // ScoreManager.Instance.AddGameRoundScore(MinigameType.AttackGame, Score);
-            // 여기에 씬이동 넣으시면 될 것 같습니다!! 게임 오버, 게임오버, 게임 종료, game over, gameover!!
+            ScoreManager.Instance.SetGameHighScore(MinigameType.AttackGame, _scoreNum);
+            ResultSceneManager.ShowResult(MinigameType.AttackGame);
         }
 
         IEnumerator MoveToNextStage(float time)
@@ -229,6 +239,7 @@ namespace GameHeaven.AttackGame
             if (_stageNum < 8)
             {
                 bossNum = _stageNum - 1;
+                // bossNum = 3;
                 enemyNum = 0;
             }
             else
@@ -246,7 +257,7 @@ namespace GameHeaven.AttackGame
                 tempEnemy.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
             }
             GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(44, 6, 0));
-            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 6, _enemyDamage * 3);
+            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 11, _enemyDamage * 3);
             if (_stageNum == 2)
             {
                 tempBoss.GetComponent<Enemy>().dropItem = true;
@@ -389,15 +400,7 @@ namespace GameHeaven.AttackGame
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Backspace))
-            {
-                _hpNum = 1500;
-            }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Application.Quit();
-            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace GameHaven.RunGame
     {
         Rigidbody2D rig;
 
-        public GameManager gameManager;
+        GameManager gameManager;
         public GameObject main;
         GameObject tree1;
         GameObject tree2;
@@ -19,6 +19,8 @@ namespace GameHaven.RunGame
 
             void Awake()
         {
+            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
             rig = GetComponent<Rigidbody2D>();
             rig.velocity = Vector2.down * gameManager.wallSpeed;
 

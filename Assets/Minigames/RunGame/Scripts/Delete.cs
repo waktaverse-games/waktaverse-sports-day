@@ -7,10 +7,11 @@ namespace GameHaven.RunGame
     public class Delete : MonoBehaviour
     {
         Rigidbody2D rig;
-        public GameManager gameManager;
+        GameManager gameManager;
 
         void Awake()
         {
+            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
             rig = GetComponent<Rigidbody2D>();
             rig.velocity = Vector2.down * gameManager.wallSpeed/4;
         }

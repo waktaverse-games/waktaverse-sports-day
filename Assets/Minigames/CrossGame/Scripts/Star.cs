@@ -37,7 +37,7 @@ namespace GameHeaven.CrossGame
             if(collision.tag == "Player")
             {
                 manager.AddScore(10);
-                manager.soundManager.Play("Coin");
+                manager.soundManager.SfxPlay("Coin");
                 Kill();
             }
             else if(collision.tag == "Outline")

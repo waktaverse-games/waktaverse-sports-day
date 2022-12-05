@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 189301411}
   - component: {fileID: 189301410}
   m_Layer: 0
-  m_Name: Audio Source (1)
+  m_Name: SFX Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -788,7 +788,7 @@ GameObject:
   - component: {fileID: 658473095}
   - component: {fileID: 658473094}
   m_Layer: 0
-  m_Name: Audio Source (3)
+  m_Name: SFX Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1047,10 +1047,13 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 2f8f2d3a7468d4743bb7c4fd97b15c52, type: 3}
     - {fileID: 8300000, guid: 373fdcc56e534f94cbdb249a358b206e, type: 3}
   sfxPlayers:
-  - {fileID: 800356387}
   - {fileID: 189301410}
   - {fileID: 1338190237}
-  bgmPlayer: {fileID: 658473094}
+  - {fileID: 658473094}
+  Bgm: {fileID: 8300000, guid: faf494b533012e849855bab1bf94ffd2, type: 3}
+  BgmFast: {fileID: 8300000, guid: d736e22439e5cdb4ea892e1223344abd, type: 3}
+  BgmIsFast: 0
+  bgmPlayer: {fileID: 800356387}
 --- !u!4 &754429917
 Transform:
   m_ObjectHideFlags: 0
@@ -1192,7 +1195,7 @@ GameObject:
   - component: {fileID: 800356388}
   - component: {fileID: 800356387}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: BGM Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1208,11 +1211,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: faf494b533012e849855bab1bf94ffd2, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.25
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1466,7 +1469,7 @@ GameObject:
   - component: {fileID: 1338190238}
   - component: {fileID: 1338190237}
   m_Layer: 0
-  m_Name: Audio Source (2)
+  m_Name: SFX Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

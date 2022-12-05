@@ -11,6 +11,7 @@ namespace GameHeaven.PassGame
         void Start()
         {
             _audioSource = GetComponent<AudioSource>();
+            _audioSource.volume = SharedLibs.SoundManager.Instance.SFXVolume;
         }
 
         // Update is called once per frame
