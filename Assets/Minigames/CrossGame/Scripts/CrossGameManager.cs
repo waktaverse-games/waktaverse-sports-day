@@ -35,6 +35,7 @@ namespace GameHeaven.CrossGame
             counter.OnEndCount += () =>
             {
                 IsStop = false;
+                soundManager.BgmPlay();
             };
         }
 
