@@ -16,7 +16,7 @@ namespace GameHeaven.CrashGame
         protected override void Awake()
         {
             base.Awake();
-            brickManager = GameManager.Instance.Brick;
+            brickManager = MiniGameManager.Instance.Brick;
         }
 
         //private void BreakBrick(int number)
@@ -32,13 +32,13 @@ namespace GameHeaven.CrashGame
 
         private void SpawnBullet()
         {
-            Vector2 spawnPosition = (Vector2)GameManager.Instance.platform.transform.GetChild(0).position;
+            Vector2 spawnPosition = (Vector2)MiniGameManager.Instance.platform.transform.GetChild(0).position;
             Vector2 bulletFireDirection = new Vector2(0f, 1f);
             bulletFireDirection = Utils.RotateVector(bulletFireDirection, -20);
             for (int i = 0; i < 5; i++) 
             {
                 SmallBullet newBullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
-                newBullet.transform.SetParent(GameManager.Instance.Item.ItemParent);
+                newBullet.transform.SetParent(MiniGameManager.Instance.Item.ItemParent);
                 newBullet.FireBullet(bulletFireDirection);
                 bulletFireDirection = Utils.RotateVector(bulletFireDirection, 10);
             }
@@ -48,7 +48,7 @@ namespace GameHeaven.CrashGame
         {
             Debug.Log("Claymore Acquired!");
             SpawnBullet();
-            GameManager.Instance.UI.ShowItemEffect("수류탄 폭발!");
+            MiniGameManager.Instance.UI.ShowItemEffect("수류탄 폭발!");
         }
     }
 }

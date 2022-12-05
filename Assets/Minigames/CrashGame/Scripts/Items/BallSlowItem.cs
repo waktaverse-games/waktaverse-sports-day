@@ -13,11 +13,11 @@ namespace GameHeaven.CrashGame
         public override void ActivateItem()
         {
             Debug.Log("BallSlow Item Acquired!");
-            foreach (Transform ball in GameManager.Instance.Item.BallParent)
+            foreach (Transform ball in MiniGameManager.Instance.Item.BallParent)
             {
                 ball.GetComponent<Ball>().ResetBallSpeed();
             }
-            GameManager.Instance.UI.ShowItemEffect("공의 속도 초기화!");
+            MiniGameManager.Instance.UI.ShowItemEffect("공의 속도 초기화!");
         }
     }
 }

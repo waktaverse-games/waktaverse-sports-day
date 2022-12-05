@@ -12,7 +12,7 @@ namespace GameHeaven.CrashGame
         protected override void Awake()
         {
             base.Awake();
-            itemManager = GameManager.Instance.Item;
+            itemManager = MiniGameManager.Instance.Item;
         }
 
         protected virtual void DropCoinByPercentage(int net)
@@ -22,7 +22,7 @@ namespace GameHeaven.CrashGame
             {
                 // Bronze: 90%, Silver: 9%, Gold: 1%
                 int coinTypeRandom = UnityEngine.Random.Range(0, 3);
-                DropCoin(GameManager.Instance.Brick.coinPrefabList[coinTypeRandom]);
+                DropCoin(MiniGameManager.Instance.Brick.coinPrefabList[coinTypeRandom]);
                 //Debug.Log($"Item Number: {coinTypeRandom}");
                 //if (coinTypeRandom < 1)
                 //{

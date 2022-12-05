@@ -45,7 +45,7 @@ namespace GameHeaven.CrashGame
         {
             rigidBody = GetComponent<Rigidbody2D>();
             isReturning = false;
-            platform = GameManager.Instance.platform;
+            platform = MiniGameManager.Instance.platform;
         }
 
         private void Start()
@@ -55,7 +55,7 @@ namespace GameHeaven.CrashGame
         // Update is called once per frame
         private void FixedUpdate()
         {
-            if (GameManager.Instance.CurrentGameState == Utils.GameState.Over)
+            if (MiniGameManager.Instance.CurrentGameState == Utils.GameState.Over)
             {
                 StopBall();
                 
@@ -78,7 +78,7 @@ namespace GameHeaven.CrashGame
                 rigidBody.velocity = Utils.RotateVector(rigidBody.velocity, 10f);
             }
             isReturning = true;
-            GameManager.Instance.Sound.PlayEffect("ball_bounce", volume: .5f);
+            MiniGameManager.Instance.Sound.PlayEffect("ball_bounce", volume: .5f);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -114,7 +114,7 @@ namespace GameHeaven.CrashGame
 
                     // 공에 닿을 시 점프 중단.
                     platform.Stop();
-                    GameManager.Instance.Sound.PlayEffect("ball_bounce", pitch: .5f, volume: .5f);
+                    MiniGameManager.Instance.Sound.PlayEffect("ball_bounce", pitch: .5f, volume: .5f);
                 }
             }
             rigidBody.velocity = velocity;
@@ -124,8 +124,8 @@ namespace GameHeaven.CrashGame
         public static Ball SpawnBall(Vector2 position)
         {
             BallNumber++;
-            Ball ball = Instantiate(GameManager.Instance.ballPrefab, position, Quaternion.identity);
-            ball.transform.SetParent(GameManager.Instance.Item.BallParent, true);
+            Ball ball = Instantiate(MiniGameManager.Instance.ballPrefab, position, Quaternion.identity);
+            ball.transform.SetParent(MiniGameManager.Instance.Item.BallParent, true);
             return ball;
         }
 
@@ -133,7 +133,7 @@ namespace GameHeaven.CrashGame
         {
             Debug.Log("DestroyBall called");
             BallNumber--;
-            if (BallNumber <= 0) GameManager.Instance.GameOver();
+            if (BallNumber <= 0) MiniGameManager.Instance.GameOver();
             Destroy(gameObject);
         }
 
@@ -152,7 +152,7 @@ namespace GameHeaven.CrashGame
 
         public void Fire(Vector2 force)
         {
-            GameManager.Instance.Sound.PlayEffect("ball_bounce", volume: .5f);
+            MiniGameManager.Instance.Sound.PlayEffect("ball_bounce", volume: .5f);
             isReturning = false;
             rigidBody.AddForce(force);
         }
