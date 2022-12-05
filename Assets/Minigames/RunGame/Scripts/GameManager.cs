@@ -61,7 +61,7 @@ namespace GameHaven.RunGame
 
         void Awake()
         {
-            bgm = GameObject.Find("GameManager").GetComponent<AudioSource>();
+            bgm = GameObject.Find("RunGameManager").GetComponent<AudioSource>();
             gameStart = false;
             gameStop = false;
             wallSpeed = 0;
