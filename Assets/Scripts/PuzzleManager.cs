@@ -57,34 +57,32 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    public static void GetPuzzle(int count = 1)
+    public static void GetPuzzlePiece(int count = 1)
     {
         PuzzlePiece += count;
         print("Current Puzzle Piece: " + PuzzlePiece);
     }
 
-    public void UsePuzzle(int count = 1)
+    public void UsePuzzlePiece(int count = 1)
     {
         PuzzlePiece -= count;
     }
-
-    public bool PiecePuzzle(int puzzleIndex, int pieceIndex)
+    
+    public int GetPuzzle(int puzzleIndex)
     {
-        if (!IsPlaceablePiece(puzzleIndex, pieceIndex)) return false;
-        
-        _db.completeState[puzzleIndex] |= 1 << pieceIndex;
-        UsePuzzle();
-        
+        return _db.completeState[puzzleIndex];
+    }
+
+    public bool PiecePuzzle(int puzzleIndex)
+    {
+        if (GetPuzzle(puzzleIndex) < 6)
+        {
+            _db.completeState[puzzleIndex]++;
+            UsePuzzlePiece();
+        }
+
         // 여기에 애니메이션 재생 넣기
 
         return true;
-    }
-
-    public bool IsPlaceablePiece(int puzzleIndex, int pieceIndex)
-    {
-        var beforePiece = _db.completeState[puzzleIndex];
-        var afterPiece = beforePiece | 1 << pieceIndex;
-
-        return beforePiece != afterPiece;
     }
 }

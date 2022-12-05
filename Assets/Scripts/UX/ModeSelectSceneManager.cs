@@ -7,11 +7,10 @@ namespace GameHeaven.UIUX
 {
     public class ModeSelectSceneManager : MonoBehaviour
     {
-        [SerializeField] AudioClip buttonSound;
         private void Awake()
         {
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("On");
-            AudioSource.PlayClipAtPoint(buttonSound, Vector3.zero);
+            UISoundManager.Instance.PlayButtonSFX2();
         }
         public void SelectStoryMode()
         {
