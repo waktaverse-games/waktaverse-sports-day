@@ -10,11 +10,11 @@ namespace GameHeaven.CrashGame
         {
             // 플랫폼이 1.2배 빨라짐: 3중첩까지
             Debug.Log("SpeedUp Item Acquired");
-            if (GameManager.Instance.platform.Speed * 1.2f < GameManager.Instance.platform.InitialSpeed * 2f)
+            if (MiniGameManager.Instance.platform.Speed * 1.2f < MiniGameManager.Instance.platform.InitialSpeed * 2f)
             {
-                GameManager.Instance.platform.Speed *= 1.2f;
+                MiniGameManager.Instance.platform.Speed *= 1.2f;
             }
-            GameManager.Instance.UI.ShowItemEffect("이동속도 증가!");
+            MiniGameManager.Instance.UI.ShowItemEffect("이동속도 증가!");
         }
     }
 }

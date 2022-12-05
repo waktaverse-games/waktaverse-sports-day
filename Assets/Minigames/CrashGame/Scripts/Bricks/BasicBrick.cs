@@ -26,7 +26,7 @@ namespace GameHeaven.CrashGame
 
         private void Start()
         {
-            BrickColor = GameManager.Instance.Brick.brickColorArray[Random.Range(0, 6)];
+            BrickColor = MiniGameManager.Instance.Brick.brickColorArray[Random.Range(0, 6)];
         }
 
         // Update is called once per frame

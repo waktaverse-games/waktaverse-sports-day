@@ -96,9 +96,9 @@ namespace GameHeaven.CrashGame
         private void PerfectBonus()
         {
             //TODO Effect
-            StartCoroutine(GameManager.Instance.UI.PerfectBonus());
-            GameManager.Instance.AddScore(500);
-            GameManager.Instance.Sound.PlaySound("bonus", volume: .6f);
+            StartCoroutine(MiniGameManager.Instance.UI.PerfectBonus());
+            MiniGameManager.Instance.AddScore(500);
+            MiniGameManager.Instance.Sound.PlaySound("bonus", volume: .6f);
             ResetBricks();
         }
 

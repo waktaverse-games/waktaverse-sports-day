@@ -76,7 +76,7 @@ namespace GameHeaven.CrashGame
 
         private void Update()
         {
-            if (GameManager.Instance.CurrentGameState == Utils.GameState.Start)
+            if (MiniGameManager.Instance.CurrentGameState == Utils.GameState.Start)
             {
                 if (!isFired)
                 {
@@ -84,7 +84,7 @@ namespace GameHeaven.CrashGame
                     if (Input.GetKey(KeyCode.Space))
                     {
                         isFired = true;
-                        GameManager.Instance.BallFire();
+                        MiniGameManager.Instance.BallFire();
                         ball.Fire();
                     }
                 }
@@ -100,7 +100,7 @@ namespace GameHeaven.CrashGame
 
         private void FixedUpdate()
         {
-            if (GameManager.Instance.CurrentGameState == Utils.GameState.Start)
+            if (MiniGameManager.Instance.CurrentGameState == Utils.GameState.Start)
             {
                 // A, D키를 사용해 좌우 이동
                 horizontal = Input.GetAxis("Horizontal");
@@ -119,14 +119,14 @@ namespace GameHeaven.CrashGame
             }
             if (collision.collider.CompareTag("Coin"))
             {
-                GameManager.Instance.Sound.PlayEffect("coin_01");
-                GameManager.Instance.AddScore(collision.collider.GetComponent<Coin>().CoinValue);
+                CrashGame.MiniGameManager.Instance.Sound.PlayEffect("coin_01");
+                MiniGameManager.Instance.AddScore(collision.collider.GetComponent<Coin>().CoinValue);
                 collision.collider.GetComponent<Coin>().ShowEffect();
                 Destroy(collision.gameObject);
             }
             if (collision.collider.CompareTag("CrashGame_Item"))
             {
-                GameManager.Instance.Sound.PlayEffect("coin_02");
+                MiniGameManager.Instance.Sound.PlayEffect("coin_02");
                 // 아이템 즉발 사용
                 collision.collider.GetComponent<Item>().ActivateItem();
                 collision.collider.GetComponent<Item>().DestroyItem();
@@ -143,7 +143,7 @@ namespace GameHeaven.CrashGame
         {
             platform.localScale = new Vector3(initialPlatformXScale, 2, 1);
             Speed = initialSpeed;
-            rigidBody.position = GameManager.Instance.playerSpawnPosition.position;
+            rigidBody.position = MiniGameManager.Instance.playerSpawnPosition.position;
             platform.GetComponent<SpriteRenderer>().sprite = platformSprite[UnityEngine.Random.Range(0, platformSprite.Count)];
             playerAnimator.SetBool("GameOver", false);
             BallInit();
@@ -151,9 +151,9 @@ namespace GameHeaven.CrashGame
 
         public void SetCharacter(CharacterType currentCharacter)
         {
-            playerSprite.sprite = GameManager.Instance.PlayerSpriteList[(int)currentCharacter];
+            playerSprite.sprite = MiniGameManager.Instance.PlayerSpriteList[(int)currentCharacter];
             playerSprite.sortingOrder = 1;
-            playerAnimator.runtimeAnimatorController = GameManager.Instance.PlayerAnimatorControllerList[(int)currentCharacter];
+            playerAnimator.runtimeAnimatorController = MiniGameManager.Instance.PlayerAnimatorControllerList[(int)currentCharacter];
         }
 
         private void BallInit()
