@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SharedLibs;
 
 namespace GameHaven.RunGame
 {
@@ -8,6 +9,7 @@ namespace GameHaven.RunGame
     {
 
         public GameObject Caracter;
+        public GameObject Effect;
         public GameObject Cam;
         public GameManager gameManager;
 
@@ -54,27 +56,26 @@ namespace GameHaven.RunGame
                     {
                         Dirleft = false; //왼쪽X
                         dir = Vector2.right; //오른쪽으로 이동
-                        if (Cam.GetComponent<Transform>().rotation.z <= -55 && Cam.GetComponent<Transform>().rotation.z > -140)
-                        {
-                            Caracter.GetComponent<SpriteRenderer>().flipX = false; //캐릭터 좌측
-                        }
-                        else
-                        {
-                            Caracter.GetComponent<SpriteRenderer>().flipX = true; // 캐릭터 우측
-                        }
+                        Caracter.GetComponent<SpriteRenderer>().flipX = true; //캐릭터 좌측
+                        Effect.GetComponent<SpriteRenderer>().flipX = false; //캐릭터 좌측
+                        
                     }
                     else
                     {
                         Dirleft = true;
                         dir = Vector2.left;
                         Caracter.GetComponent<SpriteRenderer>().flipX = false;
+                        Effect.GetComponent<SpriteRenderer>().flipX = true; //캐릭터 좌측
+
                     }
                 }
 
                 if (GetItem == true)
                 {
                     ItemTime += Time.deltaTime;
-                    Caracter.GetComponent<CapsuleCollider2D>().enabled = false;
+                    Caracter.GetComponent<CapsuleCollider2D>().isTrigger = false;
+                    Caracter.GetComponent<CapsuleCollider2D>().size = new Vector2(0.34f, 0.44f);
+                    Effect.SetActive(true);
 
                     if (ItemTime > 2 && ItemTime <= 2.7)
                     {
@@ -86,9 +87,11 @@ namespace GameHaven.RunGame
                     else if (ItemTime > 2.7)
                     {
                         ItemTime = 0;
-                        Caracter.GetComponent<CapsuleCollider2D>().enabled = true;
+                        Caracter.GetComponent<CapsuleCollider2D>().size = new Vector2(0.6f, 0.77f);
+                        Caracter.GetComponent<CapsuleCollider2D>().isTrigger = false;
                         GetItem = false;
-                        run.SetBool("Stop", false);
+                        Effect.SetActive(false);
+                        run.SetBool("Jump", false);
                     }
                     else
                     {
@@ -119,6 +122,7 @@ namespace GameHaven.RunGame
                 run.SetBool("Over", true);
             }
 
+
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -131,6 +135,7 @@ namespace GameHaven.RunGame
             {
                 audio = other.GetComponent<AudioSource>();
                 coin = other.GetComponent<Animator>();
+                audio.volume = SoundManager.Instance.SFXVolume;
                 audio.Play();
                 coin.SetBool("Get", true);
 
@@ -140,18 +145,35 @@ namespace GameHaven.RunGame
                 {
                     GetItem = true;
                     gameManager.ItemScore(15);
-                    run.SetBool("Stop", true);
+                    run.SetBool("Jump", true);
                 }
                 else
                 {
                     gameManager.ItemScore(5);
                 }
             }
+
+            if (other.gameObject.tag == "Border")
+            {
+                dir.x = 0;
+            }
         }
 
-        public void GameStart()
+        void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "Border")
+            {
+                if(Dirleft == true)
+                    dir = Vector2.left;
+                else
+                    dir = Vector2.right;
+            }
+        }
+
+            public void GameStart()
         {
             run.SetBool("Stop", false);
         }
+
     }
 }

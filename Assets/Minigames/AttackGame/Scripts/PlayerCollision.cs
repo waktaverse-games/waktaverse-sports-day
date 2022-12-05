@@ -9,6 +9,7 @@ namespace GameHeaven.AttackGame
     {
         public SFXManager _sfxManager;
         public GameObject effect;
+        public GameObject damageup;
         
         private Player _player;
 
@@ -20,6 +21,11 @@ namespace GameHeaven.AttackGame
         void DisableEffect()
         {
             effect.SetActive(false);
+        }
+
+        void DisableDamage()
+        {
+            damageup.SetActive(false);
         }
 
         private void OnTriggerEnter2D(Collider2D col)
@@ -53,8 +59,10 @@ namespace GameHeaven.AttackGame
                 gameObj.SetActive(false);
                 _sfxManager.PlaySfx(0);
                 effect.SetActive(true);
+                damageup.SetActive(true);
                 effect.GetComponent<Animator>().Play("Star");
                 Invoke("DisableEffect", 0.3f);
+                Invoke("DisableDamage", 1.2f);
             }
         }
     }

@@ -43,16 +43,25 @@ namespace GameHaven.RunGame
 
         public AnimationCounter counter;
 
+        AudioSource bgm;
+
         private void OnEnable()
         {
+            SoundManager.Instance.OnBGMVolumeChanged += SetVolume;
             counter.OnEndCount += () =>
             {
                 GameStart();
             };
         }
 
+        private void OnDisable()
+        {
+            SoundManager.Instance.OnBGMVolumeChanged -= SetVolume;
+        }
+
         void Awake()
         {
+            bgm = GameObject.Find("GameManager").GetComponent<AudioSource>();
             gameStart = false;
             gameStop = false;
             wallSpeed = 0;
@@ -64,7 +73,7 @@ namespace GameHaven.RunGame
         // Update is called once per frame
         void Start()
         {
-
+            SetVolume(SoundManager.Instance.BGMVolume);
         }
 
         void Update()
@@ -146,6 +155,7 @@ namespace GameHaven.RunGame
             gameStop = true;
             wallSpeed = 0;
             ScoreManager.Instance.SetGameHighScore(MinigameType.RunGame, score);
+            ResultSceneManager.ShowResult(MinigameType.RunGame);
         }
 
         public void GameStart()
@@ -154,6 +164,11 @@ namespace GameHaven.RunGame
             wallSpeed = 2;
             gameStart = true;
             control.GameStart();
+        }
+
+        public void SetVolume(float volume)
+        {
+            bgm.volume = volume;
         }
     }
 }
