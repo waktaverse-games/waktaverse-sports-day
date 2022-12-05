@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SharedLibs;
+using SharedLibs.Character;
 
 
 namespace GameHaven.RunGame

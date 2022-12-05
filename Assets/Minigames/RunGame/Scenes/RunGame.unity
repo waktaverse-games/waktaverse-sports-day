@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 537367247}
   - component: {fileID: 537367248}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: RunGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1998,12 +1998,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSelectControllers:
-  - {fileID: 9100000, guid: 37798f902b15cad40a3840c6811ccd24, type: 2}
   - {fileID: 9100000, guid: 7e65cb660086a6048917e80ac6a3fc72, type: 2}
   - {fileID: 9100000, guid: 07f688678351c104ba68e6dafa97298a, type: 2}
   - {fileID: 9100000, guid: 5090d2937ae162a45b9fc1b37e28528d, type: 2}
   - {fileID: 9100000, guid: a66a5b8bfcbf70042afc64a271bf28b9, type: 2}
   - {fileID: 9100000, guid: b0cea5c65f79a3345a0f65f5250780aa, type: 2}
+  - {fileID: 9100000, guid: 37798f902b15cad40a3840c6811ccd24, type: 2}
   - {fileID: 9100000, guid: 7107b5ef28a573b468cd7823a9564db8, type: 2}
 --- !u!1001 &1082886211
 PrefabInstance:
