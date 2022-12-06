@@ -37,22 +37,14 @@ public class PuzzleManager : MonoBehaviour
 
     private void Start()
     {
-        for (var i = 0; i < puzzleList.Count; i++)
+        print("PieceCount : " + _db.pieceCount);
+        for (var i = 0; i < _db.completeState.Count; i++)
         {
-            var state = _db.completeState[i];
-            var count = 0;
-            for (var j = 0; j < 6; j++)
+            print("Puzzle" + i + " : " + _db.completeState[i]);
+            for (var j = 0; j < _db.completeState[i]; j++)
             {
-                if ((state & (1 << j)) == 1)
-                {
-                    puzzleList[i].PuzzleObjArr[j].SetActive(true);
-                    count++;
-                }
-            }
-
-            if (count >= 6)
-            {
-                puzzleList[i].SetCompletePuzzle();
+                GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0).GetChild(i).GetChild(1).GetChild(j)
+                    .GetComponent<Animator>().SetTrigger("Piece");
             }
         }
     }
@@ -63,25 +55,28 @@ public class PuzzleManager : MonoBehaviour
         print("Current Puzzle Piece: " + PuzzlePiece);
     }
 
-    public void UsePuzzlePiece(int count = 1)
+    public static void UsePuzzlePiece(int count = 1)
     {
         PuzzlePiece -= count;
     }
     
-    public int GetPuzzle(int puzzleIndex)
+    public static int GetPuzzle(int puzzleIndex)
     {
         return _db.completeState[puzzleIndex];
     }
 
-    public bool PiecePuzzle(int puzzleIndex)
+    public static bool PiecePuzzle(int puzzleIndex)
     {
+        if (PuzzlePiece < 1) return false;
+
         if (GetPuzzle(puzzleIndex) < 6)
         {
+            GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0).GetChild(puzzleIndex).GetChild(1).GetChild(GetPuzzle(puzzleIndex))
+                .GetComponent<Animator>().SetTrigger("Piece");
+
             _db.completeState[puzzleIndex]++;
             UsePuzzlePiece();
         }
-
-        // 여기에 애니메이션 재생 넣기
 
         return true;
     }
