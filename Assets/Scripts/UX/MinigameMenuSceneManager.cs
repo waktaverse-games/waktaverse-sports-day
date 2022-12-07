@@ -203,5 +203,9 @@ namespace GameHeaven.UIUX
             LoadingSceneManager.LoadScene(engNames[curGame], minigameSprites[curGame]);
             Invoke("SetEnableClick", 0.2f);
         }
+        public void PiecePuzzle(int puzzleIndex)
+        {
+            PuzzleManager.PiecePuzzle(puzzleIndex);
+        }
     }
 }
