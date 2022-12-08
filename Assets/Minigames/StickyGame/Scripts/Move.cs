@@ -9,11 +9,11 @@ namespace GameHeaven.StickyGame
 {
     public class Move : MonoBehaviour
     {
-        [SerializeField] private float rotateSpeed; // È¸Àü¼Óµµ
-        [SerializeField] private Vector2 curAxis; // ÇöÀç È¸Àü Ãà ÁÂÇ¥
-        [SerializeField] private int dir; // 1 : ½Ã°è¹Ý´ë¹æÇâ, -1 : ½Ã°è¹æÇâ
+        [SerializeField] private float rotateSpeed; // È¸ï¿½ï¿½ï¿½Óµï¿½
+        [SerializeField] private Vector2 curAxis; // ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ç¥
+        [SerializeField] private int dir; // 1 : ï¿½Ã°ï¿½Ý´ï¿½ï¿½ï¿½ï¿½, -1 : ï¿½Ã°ï¿½ï¿½ï¿½ï¿½
 
-        [SerializeField] private List<Transform> backRunners; // ÇöÀç±îÁö associateÇÑ backRunnerµé
+        [SerializeField] private List<Transform> backRunners; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ associateï¿½ï¿½ backRunnerï¿½ï¿½
         public bool isPlayer, isAssociated;
         public float cumulativeCoin;
         private SpriteRenderer spriteRenderer;
@@ -75,12 +75,12 @@ namespace GameHeaven.StickyGame
                     Mathf.Clamp(transform.position.y + randomDir.y, -4f, 4f));
             }
 
-            if (isPlayer && Input.GetButtonDown("Jump")) // Space Bar ÀÔ·Â½Ã ¹æÇâ ÀüÈ¯
+            if (isPlayer && Input.GetButtonDown("Jump")) // Space Bar ï¿½Ô·Â½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
             {
                 SoundManager.Instance.PlaySpaceSound();
                 //sound
-                curAxis = 2 * (Vector2)transform.position - curAxis; // Ãà Áß½É º¯°æ
-                dir *= -1;  // Ãà ¹æÇâ º¯°æ
+                curAxis = 2 * (Vector2)transform.position - curAxis; // ï¿½ï¿½ ï¿½ß½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                dir *= -1;  // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
                 if (backRunners.Count > 0)
                 {
@@ -97,11 +97,12 @@ namespace GameHeaven.StickyGame
                 {
                     if (collider.GetComponent<Move>().isAssociated)
                     {
-                        if (collider.GetComponent<SpriteRenderer>().sortingOrder <= -5) // °ÔÀÓ ¿À¹ö
+                        if (collider.GetComponent<SpriteRenderer>().sortingOrder <= -5) // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                         {
-                            Time.timeScale = 0;
+                            // Time.timeScale = 0;
+                            rotateSpeed = 0.0f;
                             ScoreManager.Instance.SetGameHighScore(MinigameType.StickyGame, statistics.score);
-                            ResultSceneManager.ShowResult(MinigameType.StickyGame);
+                            GameResultManager.ShowResult(MinigameType.StickyGame, statistics.score);
                         }
                     }
                     else
@@ -113,16 +114,17 @@ namespace GameHeaven.StickyGame
                         Associate(collider);
                     }
                 }
-                else if (collider.CompareTag("Outline")) // °ÔÀÓ ¿À¹ö
+                else if (collider.CompareTag("Outline")) // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 {
-                    Time.timeScale = 0;
+                    // Time.timeScale = 0;
+                    rotateSpeed = 0.0f;
                     ScoreManager.Instance.SetGameHighScore(MinigameType.StickyGame, statistics.score);
-                    ResultSceneManager.ShowResult(MinigameType.StickyGame);
+                    GameResultManager.ShowResult(MinigameType.StickyGame, statistics.score);
                 }
                 else if (collider.CompareTag("Coin"))
                 {
                     SoundManager.Instance.PlayAcquireSound();
-                    Instantiate(acquireEffect, collider.transform.position, acquireEffect.transform.rotation); // È¹µæ ÀÌÆåÆ®
+                    Instantiate(acquireEffect, collider.transform.position, acquireEffect.transform.rotation); // È¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
                     statistics.score += 70 + 20 * statistics.curRunner;
                     if (collider.name[0] == 'G') statistics.goldCoin++;
                     else if (collider.name[0] == 'S') statistics.silverCoin++;
@@ -153,7 +155,7 @@ namespace GameHeaven.StickyGame
             while (!isAssociated)
             {
                 if (Random.Range(0, 2) == 0) randomDir = Vector2.zero;
-                else randomDir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 0.0002f * statistics.curRunner; // Á¡¼ö ºñ·Ê Áõ°¡
+                else randomDir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 0.0002f * statistics.curRunner; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
                 if (randomDir.x > 0) spriteRenderer.flipX = true;
                 else spriteRenderer.flipX = false;
@@ -161,7 +163,7 @@ namespace GameHeaven.StickyGame
                 yield return wait;
             }
         }
-        IEnumerator changeDirOfBackRunners() // backRunnersÀÇ ¹æÇâÀ» Â÷·Ê´ë·Î ¹Ù²ãÁÖ´Â ÇÔ¼ö
+        IEnumerator changeDirOfBackRunners() // backRunnersï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ê´ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½Ö´ï¿½ ï¿½Ô¼ï¿½
         {
             WaitForSeconds wait = new WaitForSeconds(60 / rotateSpeed);
 
@@ -181,14 +183,14 @@ namespace GameHeaven.StickyGame
 
                 Move curRunner = backRunners[idx].GetComponent<Move>();
 
-                curRunner.transform.position = prevPos; // ¿ÀÂ÷ Á¤Á¤
+                curRunner.transform.position = prevPos; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-                // ¹æÇâ º¯°æ
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 curRunner.curAxis = prevAxis;
-                curRunner.dir = prevDir;  // Ãà ¹æÇâ º¯°æ
+                curRunner.dir = prevDir;  // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
         }
-        private void Associate(Collider2D collider) // Ãæµ¹½Ã µÚ ÁÖÀÚ·Î Associate
+        private void Associate(Collider2D collider) // ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ú·ï¿½ Associate
         {
             Move moveCS = collider.GetComponent<Move>();
             
@@ -198,7 +200,7 @@ namespace GameHeaven.StickyGame
                 moveCS.isAssociated = true;
                 moveCS.curAxis = curAxis;
                 moveCS.dir = dir;
-                collider.transform.RotateAround(curAxis, dir * Vector3.forward, -60); // 30µµ¸¸Å­ ÀÌÀü¿¡ À§Ä¡
+                collider.transform.RotateAround(curAxis, dir * Vector3.forward, -60); // 30ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
             }
             else
             {
@@ -208,7 +210,7 @@ namespace GameHeaven.StickyGame
                 moveCS.isAssociated = true;
                 moveCS.curAxis = lastRunner.curAxis;
                 moveCS.dir = lastRunner.dir;
-                collider.transform.RotateAround(lastRunner.curAxis, lastRunner.dir * Vector3.forward, -60); // 30µµ¸¸Å­ ÀÌÀü¿¡ À§Ä¡
+                collider.transform.RotateAround(lastRunner.curAxis, lastRunner.dir * Vector3.forward, -60); // 30ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
             }
 
             moveCS.spriteRenderer.sortingOrder = -statistics.cumulRunner;

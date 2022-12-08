@@ -155,7 +155,7 @@ namespace GameHaven.RunGame
             gameStop = true;
             wallSpeed = 0;
             ScoreManager.Instance.SetGameHighScore(MinigameType.RunGame, score);
-            ResultSceneManager.ShowResult(MinigameType.RunGame);
+            GameResultManager.ShowResult(MinigameType.RunGame, score);
         }
 
         public void GameStart()

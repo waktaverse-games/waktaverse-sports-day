@@ -42,7 +42,7 @@ namespace GameHeaven.CrossGame
         public void AddScore(int Point)
         {
             score += Point;
-            scoreUI.text = "Á¡¼ö : " + score.ToString();
+            scoreUI.text = "ï¿½ï¿½ï¿½ï¿½ : " + score.ToString();
         }
 
         public void GameOver()
@@ -57,7 +57,7 @@ namespace GameHeaven.CrossGame
             {
                 item.GetComponent<FlyItem>().Stop();
             }
-            ResultSceneManager.ShowResult(MinigameType.CrossGame);
+            GameResultManager.ShowResult(MinigameType.CrossGame, score);
         }
 
         public void Restart()

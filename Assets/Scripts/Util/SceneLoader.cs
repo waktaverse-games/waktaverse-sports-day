@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class SceneLoader
 {
-    public static async void LoadSceneAsync(string sceneName, float waitSec = 0.0f)
+    public static async Task LoadSceneAsync(string sceneName, float waitSec = 0.0f)
     {
-        LoadSceneAsync(sceneName, null, waitSec);
+        await LoadSceneAsync(sceneName, null, waitSec);
     }
-    public static async void LoadSceneAsync(string sceneName, Action onLoading, float waitSec = 0.0f)
+
+    public static async Task LoadSceneAsync(string sceneName, Action onLoading, float waitSec = 0.0f)
     {
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
-        
+        var op = SceneManager.LoadSceneAsync(sceneName);
+
         op.allowSceneActivation = false;
 
         onLoading?.Invoke();
@@ -21,20 +21,38 @@ public static class SceneLoader
 
         op.allowSceneActivation = true;
     }
-    
-    public static async void AddSceneAsync(string sceneName)
+
+    public static async Task AddSceneAsync(string sceneName)
     {
-        AddSceneAsync(sceneName, null);
+        await AddSceneAsync(sceneName, null);
     }
-    public static async void AddSceneAsync(string sceneName, Action onLoading)
+
+    public static async Task AddSceneAsync(string sceneName, Action onLoading)
     {
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        
+        var op = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
         op.allowSceneActivation = false;
 
         onLoading?.Invoke();
         while (op.progress < 0.9f) await Task.Yield();
 
         op.allowSceneActivation = true;
+    }
+
+    public static async Task UnloadSceneAsync(string sceneName)
+    {
+        await UnloadSceneAsync(sceneName, null);
+    }
+
+    public static async Task UnloadSceneAsync(string sceneName, Action onLoading)
+    {
+        var op = SceneManager.UnloadSceneAsync(sceneName);
+
+        // op.allowSceneActivation = false;
+
+        onLoading?.Invoke();
+        while (op.progress < 0.9f) await Task.Yield();
+
+        // op.allowSceneActivation = true;
     }
 }

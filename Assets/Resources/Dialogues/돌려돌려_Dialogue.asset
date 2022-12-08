@@ -15,33 +15,31 @@ MonoBehaviour:
   gameName: "\uB3CC\uB824\uB3CC\uB824"
   sceneName: JumpGame
   dialogue:
-  - name: 1
-    sentence: "\uD14C\uC2A4\uD2B8"
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uC774\uBC88\uC5D0\uB294 \uC6B4\uB3D9\uD68C\uC758 \uAD6D\uBC25 \uC885\uBAA9!
+      \uC904\uB118\uAE30\uAC00 \uB418\uACA0\uC2B5\uB2C8\uB2E4! "
+    bgSprite: {fileID: 21300000, guid: 0bd8b54979876854da3f0dc7dac0ed9b, type: 3}
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uC544\uBB34\uB798\uB3C4 \uCD5C\uADFC\uAE4C\uC9C0 \uD559\uAD50\uC5D0\uC11C
+      \uC904\uB118\uAE30\uB97C \uB6F0\uC5B4\uBD24\uC744 \uAC70\uB77C \uC0DD\uAC01\uB418\uB294
+      13\uB0A8\uC790 \uB9CC\uB450\uAC00 \uC720\uB9AC\uD560 \uAC83 \uAC19\uC740\uB370\uC694!"
     bgSprite: {fileID: 0}
-  - name: 2
-    sentence: "\uD14C\uC2A4\uD2B82"
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uC608? \uB531 \uD55C \uBC88 \uB118\uACE0 \uB5A8\uC5B4\uC84C\uB2E4\uACE0\uC694?"
     bgSprite: {fileID: 0}
-  - name: 3
-    sentence: "\uD14C\uC2A4\uD2B83"
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "...\uC5B4\uCA0C\uB4E0 \uD558\uCFE0 \uC120\uC218! \uB208\uC5D0 \uBCF4\uC774\uC9C0
+      \uC54A\uB294 \uC18D\uB3C4\uB85C \uAD49\uC7A5\uD788 \uBE60\uB974\uAC8C \uB118\uACE0
+      \uC788\uC2B5\uB2C8\uB2E4!"
     bgSprite: {fileID: 0}
-  - name: 4
-    sentence: "\uD14C\uC2A4\uD2B84"
+  - name: "\uB3C5\uACE0\uD61C\uC9C0"
+    sentence: "\uC544\uB2C8! \uC774\uAC78 \uC5B4\uB5BB\uAC8C \uB118\uB294\uAC70\uC57C!!"
     bgSprite: {fileID: 0}
-  - name: 5
-    sentence: "\uD14C\uC2A4\uD2B85"
+  - name: "\uBE44\uBC00\uC18C\uB140"
+    sentence: "\uB9C8\uBC95\uC758 \uD798\uC744 \uC4F0\uB294\uB370\uB3C4 \uD314\uC774
+      \uBD80\uB7EC\uC9C8 \uAC83 \uAC19\uC544\uC694.."
     bgSprite: {fileID: 0}
-  - name: 6
-    sentence: "\uD14C\uC2A4\uD2B8a"
-    bgSprite: {fileID: 0}
-  - name: 7
-    sentence: "\uD14C\uC2A4\uD2B8b"
-    bgSprite: {fileID: 0}
-  - name: 8
-    sentence: "\uD14C\uC2A4\uD2B8c"
-    bgSprite: {fileID: 0}
-  - name: 9
-    sentence: "\uD14C\uC2A4\uD2B8d"
-    bgSprite: {fileID: 0}
-  - name: 10
-    sentence: "\uD14C\uC2A4\uD2B8 \uB05D"
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uD558\uCFE0 \uC120\uC218! \uAE30\uC5B4\uCF54 5\uB2E8\uC810\uD504\uAE4C\uC9C0
+      \uD574\uB0C5\uB2C8\uB2E4!!"
     bgSprite: {fileID: 0}

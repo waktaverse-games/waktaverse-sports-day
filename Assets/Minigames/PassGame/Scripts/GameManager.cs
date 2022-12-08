@@ -98,11 +98,13 @@ namespace GameHeaven.PassGame
             Time.timeScale = 1;
             Debug.Log("Game Over");
             ScoreManager.Instance.SetGameHighScore(MinigameType.PassGame, _score);
-            ResultSceneManager.ShowResult(MinigameType.PassGame);
+            Debug.Log(_score);
+            GameResultManager.ShowResult(MinigameType.PassGame, _score);
         }
 
         public void AddScore(int addScore)
         {
+            Debug.Log("Add Score: " + addScore);
             _score += addScore;
             _scoreText.text = _score.ToString();
         }

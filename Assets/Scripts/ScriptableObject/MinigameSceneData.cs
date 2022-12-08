@@ -28,5 +28,14 @@ namespace GameHeaven.Temp
         {
             return scenesData;
         }
+        
+        public string GetGameName(MinigameType type)
+        {
+            return scenesData.Find(data => data.Type == type).Name;
+        }
+        public string GetSceneName(MinigameType type)
+        {
+            return scenesData.Find(data => data.Type == type).SceneName;
+        }
     }
 }

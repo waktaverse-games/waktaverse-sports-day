@@ -24,5 +24,6 @@ namespace GameHeaven.Root
         {
             Instance.gameMode = mode;
         }
+        
     }
 }

@@ -56,7 +56,7 @@ namespace GameHeaven.JumpGame
 
         void GameStart()
         {
-            scoreText.text = "Á¡¼ö : 0";
+            scoreText.text = "ï¿½ï¿½ï¿½ï¿½ : 0";
             isGameStart = true;
             SoundManager.Instance.PlayBGM();
             ObjectTurnOnOff(true);
@@ -66,7 +66,7 @@ namespace GameHeaven.JumpGame
         public void IncreaseScore(int score)
         {
             totalScore += score;
-            scoreText.text = "Á¡¼ö : " + totalScore.ToString();
+            scoreText.text = "ï¿½ï¿½ï¿½ï¿½ : " + totalScore.ToString();
         }
         public void IncreaseJumpSuccessCount()
         {
@@ -90,7 +90,7 @@ namespace GameHeaven.JumpGame
             ObjectTurnOnOff(false);
             isGameOver = true;
             ScoreManager.Instance.SetGameHighScore(MinigameType.JumpGame, totalScore);
-            ResultSceneManager.ShowResult(MinigameType.JumpGame);
+            GameResultManager.ShowResult(MinigameType.JumpGame, totalScore);
         }
         public void ShowTextEffect(string effect)
         {

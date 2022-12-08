@@ -22,13 +22,23 @@ namespace SharedLibs
 
         public override void Init()
         {
-            sfxVolume = SetSFXVolume(PlayerPrefs.HasKey(SFXVolumeValueKey) ? PlayerPrefs.GetFloat(SFXVolumeValueKey) : 1.0f);
-            bgmVolume = SetBGMVolume(PlayerPrefs.HasKey(BGMVolumeValueKey) ? PlayerPrefs.GetFloat(BGMVolumeValueKey) : 1.0f);
+            sfxVolume = SetSFXVolume(PlayerPrefs.HasKey(SFXVolumeValueKey) ? PlayerPrefs.GetFloat(SFXVolumeValueKey) : 0.5f);
+            bgmVolume = SetBGMVolume(PlayerPrefs.HasKey(BGMVolumeValueKey) ? PlayerPrefs.GetFloat(BGMVolumeValueKey) : 0.5f);
         }
 
         protected override void SingletonDestroy()
         {
             PlayerPrefs.Save();
+        }
+        
+        public (float bgmVolume, float sfxVolume) ResetVolume()
+        {
+            sfxVolume = SetSFXVolume(0.5f);
+            bgmVolume = SetBGMVolume(0.5f);
+            
+            PlayerPrefs.Save();
+
+            return (bgmVolume, sfxVolume);
         }
 
         public float SetSFXVolume(float volume)

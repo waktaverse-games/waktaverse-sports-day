@@ -52,9 +52,10 @@ namespace GameHeaven.BingleGame
 
         public void GameOver()
         {
+            ScoreManager.Instance.SetGameHighScore(MinigameType.BingleGame, score);
+            GameResultManager.ShowResult(MinigameType.BingleGame, score);
+            
             isGameOver = true;
-            ScoreManager.Instance.SetGameHighScore(MinigameType.JumpGame, score);
-            ResultSceneManager.ShowResult(MinigameType.JumpGame);
         }
 
         void GameStart()

@@ -1813,27 +1813,7 @@ MonoBehaviour:
   goPrevBtnText: {fileID: 1499275891}
   successImageObj: {fileID: 919824692}
   failedImageObj: {fileID: 2005085573}
-  gameNameArr:
-  - gameType: 0
-    gameName: "\uD64B\uCE58\uD64B\uCE58"
-  - gameType: 1
-    gameName: "\uC2A4\uD0A4\uC2A4\uD0A4"
-  - gameType: 2
-    gameName: "\uAE68\uBD80\uAE68\uBD80"
-  - gameType: 3
-    gameName: "\uD3F4\uC9DD\uD3F4\uC9DD"
-  - gameType: 4
-    gameName: "\uB3CC\uB824\uB3CC\uB824"
-  - gameType: 5
-    gameName: "\uB760\uC6A9\uB760\uC6A9"
-  - gameType: 6
-    gameName: "\uBE60\uC0E4\uBE60\uC0E4"
-  - gameType: 7
-    gameName: "\uC694\uB9AC\uC870\uB9AC"
-  - gameType: 8
-    gameName: "\uBE75\uC57C\uBE75\uC57C"
-  - gameType: 9
-    gameName: "\uC7A1\uC544\uC7A1\uC544"
+  minigameData: {fileID: 11400000, guid: 15816769a5a50344ca273884da9288c4, type: 2}
 --- !u!1 &2005085573
 GameObject:
   m_ObjectHideFlags: 0
