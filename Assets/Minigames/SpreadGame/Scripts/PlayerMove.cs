@@ -11,9 +11,9 @@ namespace GameHeaven.SpreadGame
 {
     public class PlayerMove : MonoBehaviour
     {
-        [SerializeField] float speed; // ÀÌµ¿¼Óµµ
+        [SerializeField] float speed; // ï¿½Ìµï¿½ï¿½Óµï¿½
 
-        public bool[] curBullets; // ÇöÀç º¸À¯ÁßÀÎ ¹«±â
+        public bool[] curBullets; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         [SerializeField] GameObject coinAcquireEffect, bombImageUI, canvas;
 
@@ -41,7 +41,7 @@ namespace GameHeaven.SpreadGame
 
             pool.bulletPrefabs[3].GetComponent<BulletInfo>().maxShotDelay = 0.4f;
             /*
-            // bullet ÃÊ±âÈ­
+            // bullet ï¿½Ê±ï¿½È­
             BulletInfo bullet = pool.bulletPrefabs[0].GetComponent<BulletInfo>();
             bullet.damage = 3; bullet.maxShotDelay = 3.5f;
             bullet = pool.bulletPrefabs[1].GetComponent<BulletInfo>();
@@ -103,7 +103,7 @@ namespace GameHeaven.SpreadGame
                 Instantiate(coinAcquireEffect, collider.transform.position, coinAcquireEffect.transform.rotation);
                 Destroy(collider.gameObject);
             }
-            else if (collider.CompareTag("Brick")) // ¶Ô±â »õÀå
+            else if (collider.CompareTag("Brick")) // ï¿½Ô±ï¿½ ï¿½ï¿½ï¿½ï¿½
             {
                 StartCoroutine(Stun(0.5f, collider));
             }
@@ -292,7 +292,7 @@ namespace GameHeaven.SpreadGame
         {
             BulletInfo bullet = pool.bulletPrefabs[idx].GetComponent<BulletInfo>();
 
-            bullet.curShotDelay += Time.deltaTime; // ÀåÀü ½Ã°£
+            bullet.curShotDelay += Time.deltaTime; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 
             if (bullet.curShotDelay < bullet.maxShotDelay)
             {
@@ -341,7 +341,7 @@ namespace GameHeaven.SpreadGame
                 enemyBullet.SetActive(false);
                 Instantiate(coinAcquireEffect, enemyBullet.transform.position, coinAcquireEffect.transform.rotation);
 
-                if (enemyBullet.layer == LayerMask.NameToLayer("Ball")) // º¸½ºÆÐÅÏ
+                if (enemyBullet.layer == LayerMask.NameToLayer("Ball")) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 {
                     StartCoroutine(BakZwiSetActive(enemyBullet));
                 }
@@ -378,9 +378,9 @@ namespace GameHeaven.SpreadGame
             }
             else
             {
-                Time.timeScale = 0;
-                ScoreManager.Instance.SetGameHighScore(MinigameType.StickyGame, score.score);
-                ResultSceneManager.ShowResult(MinigameType.StickyGame);
+                // Time.timeScale = 0;
+                ScoreManager.Instance.SetGameHighScore(MinigameType.SpreadGame, score.score);
+                GameResultManager.ShowResult(MinigameType.SpreadGame, score.score);
             }
         }
     }

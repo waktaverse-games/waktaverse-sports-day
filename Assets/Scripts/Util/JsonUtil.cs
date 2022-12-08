@@ -19,6 +19,11 @@ public static class JsonUtil
     
     public static void SaveData<T>(T data, string path)
     {
+        var fileInfo = new FileInfo(path);
+        if (!fileInfo.Directory!.Exists)
+        {
+            fileInfo.Directory.Create();
+        }
         var result = JsonConvert.SerializeObject(data);
         File.WriteAllText(path, result);
     }

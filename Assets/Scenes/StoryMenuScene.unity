@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 54331729}
   - component: {fileID: 54331728}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,7 +422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 78292888}
   m_Layer: 5
-  m_Name: Stage
+  m_Name: "1_\uC694\uB9AC\uC870\uB9AC"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 81546879}
   - component: {fileID: 81546878}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_RoundLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -488,8 +488,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221, y: -14}
-  m_SizeDelta: {x: 248.4263, y: 66.4952}
+  m_AnchoredPosition: {x: 221, y: -10}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &81546878
 MonoBehaviour:
@@ -545,7 +545,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -798,7 +798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 923239ff637e4e0448b40e73acaa1a37, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a8b998d69689994a867c6f6afa70892, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1057,7 +1057,7 @@ GameObject:
   - component: {fileID: 279193282}
   - component: {fileID: 279193281}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_RoundLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1080,8 +1080,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221, y: -14}
-  m_SizeDelta: {x: 248.4263, y: 66.4952}
+  m_AnchoredPosition: {x: 221, y: -10}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &279193281
 MonoBehaviour:
@@ -1130,14 +1130,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 44
+  m_fontSizeBase: 44
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1269,7 +1269,7 @@ GameObject:
   - component: {fileID: 459140878}
   - component: {fileID: 459140877}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_RoundLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1292,8 +1292,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221, y: -14}
-  m_SizeDelta: {x: 248.4263, y: 66.4952}
+  m_AnchoredPosition: {x: 221, y: -10}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &459140877
 MonoBehaviour:
@@ -1349,7 +1349,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1378,7 +1378,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1482,7 +1482,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 7
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: PunctureGame
           m_BoolArgument: 0
@@ -1583,7 +1583,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5e4827bfe1f099643a3f0d76dacac7ad, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1771,7 +1771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 552678623}
   m_Layer: 5
-  m_Name: Stage (2)
+  m_Name: "3_\uB3CC\uB824\uB3CC\uB824"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2152,7 +2152,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: PunctureGame
           m_BoolArgument: 0
@@ -2421,7 +2421,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7b40c423bdb014340a41573ffa20be67, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2574,7 +2574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fa6b180b923e23d4d83c967153f29ef8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2960,7 +2960,7 @@ GameObject:
   - component: {fileID: 827625869}
   - component: {fileID: 827625868}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3006,7 +3006,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD3F4\uC9DD\uD3F4\uC9DD"
+  m_text: "\uAE68\uBD80\uAE68\uBD80"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
   m_sharedMaterial: {fileID: -8314726065972834963, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
@@ -3095,7 +3095,7 @@ GameObject:
   - component: {fileID: 833716917}
   - component: {fileID: 833716916}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3141,7 +3141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD64B\uCE58\uD64B\uCE58"
+  m_text: "\uC694\uB9AC\uC870\uB9AC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
   m_sharedMaterial: {fileID: -8314726065972834963, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
@@ -3437,7 +3437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 887533631}
   m_Layer: 5
-  m_Name: Stage (5)
+  m_Name: "6_\uC7A1\uC544\uC7A1\uC544"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3733,7 +3733,7 @@ GameObject:
   - component: {fileID: 1012640927}
   - component: {fileID: 1012640926}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_RoundLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3756,8 +3756,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221, y: -14}
-  m_SizeDelta: {x: 248.4263, y: 66.4952}
+  m_AnchoredPosition: {x: 221, y: -10}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1012640926
 MonoBehaviour:
@@ -3813,7 +3813,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3842,7 +3842,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3914,7 +3914,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1a8b998d69689994a867c6f6afa70892, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0fdc6fcc537fae6489f4e4edfd997749, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4196,7 +4196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a2e4ee640d5993a48a7f31c32cc79b9b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 923239ff637e4e0448b40e73acaa1a37, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4226,7 +4226,7 @@ GameObject:
   - component: {fileID: 1152103795}
   - component: {fileID: 1152103794}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_RoundLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4249,8 +4249,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221, y: -14}
-  m_SizeDelta: {x: 248.4263, y: 66.4952}
+  m_AnchoredPosition: {x: 221, y: -10}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1152103794
 MonoBehaviour:
@@ -4306,7 +4306,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4335,7 +4335,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4361,7 +4361,7 @@ GameObject:
   - component: {fileID: 1167741741}
   - component: {fileID: 1167741740}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4407,7 +4407,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2A4\uD0A4\uC2A4\uD0A4"
+  m_text: "\uB760\uC6A9\uB760\uC6A9"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
   m_sharedMaterial: {fileID: -8314726065972834963, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
@@ -4904,14 +4904,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minigameSprites:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 0fdc6fcc537fae6489f4e4edfd997749, type: 3}
   - {fileID: 21300000, guid: a2e4ee640d5993a48a7f31c32cc79b9b, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 0bd8b54979876854da3f0dc7dac0ed9b, type: 3}
   - {fileID: 21300000, guid: fa6b180b923e23d4d83c967153f29ef8, type: 3}
   - {fileID: 21300000, guid: 908556d07c2041c48843ce274e322b49, type: 3}
   - {fileID: 21300000, guid: 923239ff637e4e0448b40e73acaa1a37, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 7b40c423bdb014340a41573ffa20be67, type: 3}
+  - {fileID: 21300000, guid: 5e4827bfe1f099643a3f0d76dacac7ad, type: 3}
   - {fileID: 21300000, guid: 34dee1ae3b5973a49a20beaacb77350c, type: 3}
   - {fileID: 21300000, guid: 1a8b998d69689994a867c6f6afa70892, type: 3}
   gameNames:
@@ -4953,7 +4953,6 @@ MonoBehaviour:
   gameImage: {fileID: 1239811154}
   gameDescText: {fileID: 1239811153}
   selectEngName: 
-  buttonSound: {fileID: 8300000, guid: cb8549bc6e27c1f47917cc0bc506daf5, type: 3}
 --- !u!1 &1233514932
 GameObject:
   m_ObjectHideFlags: 0
@@ -4966,7 +4965,7 @@ GameObject:
   - component: {fileID: 1233514935}
   - component: {fileID: 1233514934}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_RoundLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4989,8 +4988,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221, y: -14}
-  m_SizeDelta: {x: 248.4263, y: 66.4952}
+  m_AnchoredPosition: {x: 221, y: -10}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1233514934
 MonoBehaviour:
@@ -5046,7 +5045,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5075,7 +5074,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5407,7 +5406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1296222751}
   m_Layer: 5
-  m_Name: Stage (8)
+  m_Name: "9_\uBE75\uC57C\uBE75\uC57C"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5525,7 +5524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1349075158}
   m_Layer: 5
-  m_Name: Stage (1)
+  m_Name: "2_\uB760\uC6A9\uB760\uC6A9"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6114,7 +6113,7 @@ GameObject:
   - component: {fileID: 1457927363}
   - component: {fileID: 1457927362}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_RoundLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6137,8 +6136,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221, y: -14}
-  m_SizeDelta: {x: 248.4263, y: 66.4952}
+  m_AnchoredPosition: {x: 221, y: -10}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1457927362
 MonoBehaviour:
@@ -6194,7 +6193,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6223,7 +6222,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6326,7 +6325,7 @@ GameObject:
   - component: {fileID: 1495503018}
   - component: {fileID: 1495503017}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6372,7 +6371,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAE68\uBD80\uAE68\uBD80"
+  m_text: "\uB3CC\uB824\uB3CC\uB824"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
   m_sharedMaterial: {fileID: -8314726065972834963, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
@@ -6459,7 +6458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1497797110}
   m_Layer: 5
-  m_Name: Stage (3)
+  m_Name: "4_\uAE68\uBD80\uAE68\uBD80"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6500,7 +6499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1517325010}
   m_Layer: 5
-  m_Name: Stage (9)
+  m_Name: "10_\uD64B\uCE58\uD64B\uCE58"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6773,7 +6772,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 9
+          m_IntArgument: 8
           m_FloatArgument: 0
           m_StringArgument: PunctureGame
           m_BoolArgument: 0
@@ -6951,7 +6950,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fa6b180b923e23d4d83c967153f29ef8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0bd8b54979876854da3f0dc7dac0ed9b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7210,7 +7209,7 @@ GameObject:
   - component: {fileID: 1689520002}
   - component: {fileID: 1689520001}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_RoundLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7233,8 +7232,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221, y: -14}
-  m_SizeDelta: {x: 248.4263, y: 66.4952}
+  m_AnchoredPosition: {x: 221, y: -10}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1689520001
 MonoBehaviour:
@@ -7290,7 +7289,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -7319,7 +7318,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7391,7 +7390,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 908556d07c2041c48843ce274e322b49, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7554,7 +7553,7 @@ GameObject:
   - component: {fileID: 1791127252}
   - component: {fileID: 1791127251}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7767,7 +7766,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 9
           m_FloatArgument: 0
           m_StringArgument: PunctureGame
           m_BoolArgument: 0
@@ -8077,7 +8076,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 908556d07c2041c48843ce274e322b49, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2e4ee640d5993a48a7f31c32cc79b9b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8184,7 +8183,7 @@ GameObject:
   - component: {fileID: 1875004552}
   - component: {fileID: 1875004551}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8230,7 +8229,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC7A1\uC544\uC7A1\uC544"
+  m_text: "\uD64B\uCE58\uD64B\uCE58"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
   m_sharedMaterial: {fileID: -8314726065972834963, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
@@ -8319,7 +8318,7 @@ GameObject:
   - component: {fileID: 1901374642}
   - component: {fileID: 1901374641}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8365,7 +8364,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB760\uC6A9\uB760\uC6A9"
+  m_text: "\uC7A1\uC544\uC7A1\uC544"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
   m_sharedMaterial: {fileID: -8314726065972834963, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
@@ -8530,7 +8529,7 @@ GameObject:
   - component: {fileID: 1911074361}
   - component: {fileID: 1911074360}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_RoundLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8553,8 +8552,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221, y: -14}
-  m_SizeDelta: {x: 248.4263, y: 66.4952}
+  m_AnchoredPosition: {x: 221, y: -10}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1911074360
 MonoBehaviour:
@@ -8610,7 +8609,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -8639,7 +8638,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8665,7 +8664,7 @@ GameObject:
   - component: {fileID: 1940033138}
   - component: {fileID: 1940033137}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8711,7 +8710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC694\uB9AC\uC870\uB9AC"
+  m_text: "\uD3F4\uC9DD\uD3F4\uC9DD"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
   m_sharedMaterial: {fileID: -8314726065972834963, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
@@ -8798,7 +8797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1945719557}
   m_Layer: 5
-  m_Name: Stage (6)
+  m_Name: "7_\uBE60\uC0E4\uBE60\uC0E4"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8839,7 +8838,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1960796513}
   m_Layer: 5
-  m_Name: Stage (4)
+  m_Name: "5_\uC2A4\uD0A4\uC2A4\uD0A4"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8880,7 +8879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2028023595}
   m_Layer: 5
-  m_Name: Stage (7)
+  m_Name: "8_\uD3F4\uC9DD\uD3F4\uC9DD"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8923,7 +8922,7 @@ GameObject:
   - component: {fileID: 2053305097}
   - component: {fileID: 2053305096}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_RoundLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8946,8 +8945,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221, y: -14}
-  m_SizeDelta: {x: 248.4263, y: 66.4952}
+  m_AnchoredPosition: {x: 221, y: -10}
+  m_SizeDelta: {x: 280, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2053305096
 MonoBehaviour:
@@ -9003,7 +9002,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -9032,7 +9031,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9400,7 +9399,7 @@ GameObject:
   - component: {fileID: 2146721577}
   - component: {fileID: 2146721576}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9446,7 +9445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB3CC\uB824\uB3CC\uB824"
+  m_text: "\uC2A4\uD0A4\uC2A4\uD0A4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
   m_sharedMaterial: {fileID: -8314726065972834963, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}

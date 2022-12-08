@@ -15,33 +15,23 @@ MonoBehaviour:
   gameName: "\uAE68\uBD80\uAE68\uBD80"
   sceneName: PpusyeoScene
   dialogue:
-  - name: 1
-    sentence: "\uD14C\uC2A4\uD2B8"
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uB2E4\uC74C \uC885\uBAA9\uC740 \uBCBD\uB3CC \uBD80\uC218\uAE30! \uB204\uAD6C\uB098
+      \uD55C\uBC88\uCBE4 \uD574\uBCF8 \uCD94\uC5B5\uC758 \uAC8C\uC784\uC774\uC8E0!"
+    bgSprite: {fileID: 21300000, guid: fa6b180b923e23d4d83c967153f29ef8, type: 3}
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uADF8\uB7F0\uB370 \uBCBD\uB3CC\uC774.. \uD504\uB9AC\uD130 \uC120\uC218?"
     bgSprite: {fileID: 0}
-  - name: 2
-    sentence: "\uD14C\uC2A4\uD2B82"
+  - name: "\uD504\uB9AC\uD130"
+    sentence: "\uD6C4\uD6C4\uD6C4... \uBB54\uAC00 \uC798\uBABB\uB41C \uAC70 \uAC19\uC2B5\uB2C8\uB2E4\uB9CC..
+      \uC7A0\uC2DC \uBA48\uCDB0\uC8FC\uC2DC..."
     bgSprite: {fileID: 0}
-  - name: 3
-    sentence: "\uD14C\uC2A4\uD2B83"
+  - name: "\uC641\uD30C\uACE0"
+    sentence: "\uC7A5\uC804 \uC644\uB8CC. \uBC1C\uC0AC\uD558\uACA0\uC2B5\uB2C8\uB2E4."
     bgSprite: {fileID: 0}
-  - name: 4
-    sentence: "\uD14C\uC2A4\uD2B84"
+  - name: "\uD558\uCFE00089"
+    sentence: "\uBC1C%@##\uC0AC! \uBC1C(*&\uC0AC!"
     bgSprite: {fileID: 0}
-  - name: 5
-    sentence: "\uD14C\uC2A4\uD2B85"
-    bgSprite: {fileID: 0}
-  - name: 6
-    sentence: "\uD14C\uC2A4\uD2B8a"
-    bgSprite: {fileID: 0}
-  - name: 7
-    sentence: "\uD14C\uC2A4\uD2B8b"
-    bgSprite: {fileID: 0}
-  - name: 8
-    sentence: "\uD14C\uC2A4\uD2B8c"
-    bgSprite: {fileID: 0}
-  - name: 9
-    sentence: "\uD14C\uC2A4\uD2B8d"
-    bgSprite: {fileID: 0}
-  - name: 10
-    sentence: "\uD14C\uC2A4\uD2B8 \uB05D"
+  - name: "\uD504\uB9AC\uD130"
+    sentence: "\uC774\uB7F0.. \uCE59\uC1FC\uC624\uC624\uC624!!!"
     bgSprite: {fileID: 0}

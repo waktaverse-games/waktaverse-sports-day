@@ -109,17 +109,7 @@ namespace GameHeaven.UIUX
             
             if (curIdx > StoryManager.Instance.UnlockProgress) return;
 
-            StoryManager.Instance.UpdateViewProgressLatest();
-
             DialogueSceneManager.LoadDialogue(selectEngName);
-            /*
-            if (curIdx > StoryManager.Instance.ViewProgress)
-            {
-            }
-            else
-            {
-                LoadingSceneManager.LoadScene(engNames[curIdx], minigameSprites[curIdx]);
-            }*/
         }
     }
 }

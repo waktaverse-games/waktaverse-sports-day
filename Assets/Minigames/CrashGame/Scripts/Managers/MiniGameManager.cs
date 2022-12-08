@@ -139,7 +139,7 @@ namespace GameHeaven.CrashGame
             }
             else CurrentCharacter = CharacterManager.Instance.CurrentCharacter;
 
-            //CurrentCharacter = CharacterType.Gosegu;   //ÀÓ½ÃÁöÁ¤
+            //CurrentCharacter = CharacterType.Gosegu;   //ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½
             platform.SetCharacter(CurrentCharacter);
 
             GameReStart();
@@ -147,7 +147,7 @@ namespace GameHeaven.CrashGame
 
         private static void InstanceInit()
         {
-            // Singleton ÃÊ±âÈ­
+            // Singleton ï¿½Ê±ï¿½È­
             if (instance == null)
             {
                 GameObject go = GameObject.Find("MiniGameManager");
@@ -176,11 +176,11 @@ namespace GameHeaven.CrashGame
 
         public void GameOver()
         {
-            // °ÔÀÓ ¿À¹ö ½Ã
-            //TODO °ÔÀÓ ¿À¹ö UI ¶ç¿ì±â.
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+            //TODO ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½.
             CurrentGameState = GameState.Over;
             StopCoroutine(brickAddCoroutineLoop);
-            Item.DeleteAll();       // µå¶ø ÄÚÀÎ ¹× ¾ÆÀÌÅÛ ÀüÃ¼ »èÁ¦
+            Item.DeleteAll();       // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 
             MiniGameManager.Instance.Sound.PlaySound("game over 2");
             ScoreManager.Instance.SetGameHighScore(MinigameType.CrashGame, Score);
@@ -192,7 +192,7 @@ namespace GameHeaven.CrashGame
             // Gameover UI Active
             uiManager.GameOver();
             platform.OnGameOver();
-            ResultSceneManager.ShowResult(MinigameType.CrashGame);
+            GameResultManager.ShowResult(MinigameType.CrashGame, Score);
         }
 
         public void GameReStart()

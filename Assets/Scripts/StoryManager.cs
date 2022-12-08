@@ -10,10 +10,13 @@ namespace GameHeaven.Root
 
         [SerializeField] [ReadOnly] private int selectStoryIndex;
 
-        public int UnlockProgress => _db.unlockProgress;
-        public int ViewProgress => _db.viewProgress;
-
         public int SelectStoryIndex => selectStoryIndex;
+        
+        public int UnlockProgress => _db.unlockProgress;
+        public bool IsAllUnlock => UnlockProgress == 10;
+        
+        public bool ViewPrologue { get => _db.viewPrologue; set => _db.viewPrologue = value; }
+        public bool ViewEpilogue { get => _db.viewEpilogue; set => _db.viewEpilogue = value; }
 
         public override void Init()
         {
@@ -30,9 +33,15 @@ namespace GameHeaven.Root
             _db.unlockProgress++;
         }
 
-        public void UpdateViewProgressLatest()
+        public void ResetStoryProgress()
         {
-            _db.viewProgress = SelectStoryIndex;
+            _db.unlockProgress = 0;
+            selectStoryIndex = 0;
+
+            ViewPrologue = false;
+            ViewEpilogue = false;
+
+            SceneLoader.LoadSceneAsync("ModeSelectScene");
         }
     }
 }

@@ -142,7 +142,7 @@ namespace GameHeaven.AttackGame
             // retryObject.SetActive(true);
             playerObject.SetActive(false);
             ScoreManager.Instance.SetGameHighScore(MinigameType.AttackGame, _scoreNum);
-            ResultSceneManager.ShowResult(MinigameType.AttackGame);
+            GameResultManager.ShowResult(MinigameType.AttackGame, _scoreNum);
         }
 
         IEnumerator MoveToNextStage(float time)

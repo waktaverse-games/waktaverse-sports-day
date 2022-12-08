@@ -15,33 +15,20 @@ MonoBehaviour:
   gameName: "\uBE60\uC0E4\uBE60\uC0E4"
   sceneName: PunctureGame
   dialogue:
-  - name: 1
-    sentence: "\uD14C\uC2A4\uD2B8"
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uC218\uB9CE\uC740 \uD32C\uB364\uB4E4\uC5D0\uAC8C \uB458\uB7EC\uC2F8\uC5EC
+      \uB3C4\uB9DD\uCE58\uACE0 \uC788\uB294 \uC120\uC218\uB4E4! \uACFC\uC5F0 \uC5B4\uB290
+      \uC120\uC218\uAC00 \uC624\uB798 \uC0B4\uC544\uB0A8\uC744 \uC218 \uC788\uC744\uAE4C\uC694!!"
+    bgSprite: {fileID: 21300000, guid: 7b40c423bdb014340a41573ffa20be67, type: 3}
+  - name: "\uCE98\uB9AC\uCE7C\uB9AC \uB370\uC774\uBE44\uC2A8"
+    sentence: "\uC774 \uC815\uB3C4\uB294 \uAC00\uBFD0..!  \uC7A0\uAE50 \uC774\uAC8C
+      \uC65C \uBE60\uC838.. \uC73C\uC544\uC544\uC544\u314F\u314F\u314F"
     bgSprite: {fileID: 0}
-  - name: 2
-    sentence: "\uD14C\uC2A4\uD2B82"
+  - name: "\uAE40\uCE58\uB9CC\uB450\uBC88\uC601\uD0DD\uC0AC\uC2A4\uAC00"
+    sentence: "\uC624\uB2C8!!!"
     bgSprite: {fileID: 0}
-  - name: 3
-    sentence: "\uD14C\uC2A4\uD2B83"
-    bgSprite: {fileID: 0}
-  - name: 4
-    sentence: "\uD14C\uC2A4\uD2B84"
-    bgSprite: {fileID: 0}
-  - name: 5
-    sentence: "\uD14C\uC2A4\uD2B85"
-    bgSprite: {fileID: 0}
-  - name: 6
-    sentence: "\uD14C\uC2A4\uD2B8a"
-    bgSprite: {fileID: 0}
-  - name: 7
-    sentence: "\uD14C\uC2A4\uD2B8b"
-    bgSprite: {fileID: 0}
-  - name: 8
-    sentence: "\uD14C\uC2A4\uD2B8c"
-    bgSprite: {fileID: 0}
-  - name: 9
-    sentence: "\uD14C\uC2A4\uD2B8d"
-    bgSprite: {fileID: 0}
-  - name: 10
-    sentence: "\uD14C\uC2A4\uD2B8 \uB05D"
+  - name: "\uC8FC\uB974\uB974"
+    sentence: "\uD0A4--\uBAA8!! \uC774 \uB140\uC11D\uC740 \uC65C \uC790\uAFB8 \uB098\uB9CC
+      \uB530\uB77C\uC624\uB294 \uAC70\uC57C! \uC815\uB9D0 \uB530\uB77C\uC624\uC9C0
+      \uB9D0\uB77C\uAD6C-!!"
     bgSprite: {fileID: 0}

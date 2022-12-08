@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MinigameMenuScene.unity
     guid: 818a65a9c1e0e1c4591f89ec15d9f2c0
   - enabled: 1
+    path: Assets/Scenes/SettingScene.unity
+    guid: 170fdc4652004d545a0a0279d3813f8c
+  - enabled: 1
     path: Assets/Scenes/ResultScene.unity
     guid: 876d71b3ee419924abc7b801a20a165a
   - enabled: 1
@@ -59,5 +62,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Minigames/StickyGame/StickyGame.unity
     guid: 261fcff8c187cf040987fbdba28d32c3
+  - enabled: 1
+    path: Assets/Scenes/EpilogueStoryScene.unity
+    guid: aa6efbe3d14c5784580c3753c5bb62e2
+  - enabled: 1
+    path: Assets/Scenes/PrologueStoryScene.unity
+    guid: a67ba23b7201e524f9d21cd07c895048
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d25b328042029f94791548d094ea8005, type: 2}

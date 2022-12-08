@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameHeaven.Root;
+using PlayFab.ClientModels;
+using SharedLibs;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -14,17 +17,21 @@ namespace GameHeaven.UIUX
         [SerializeField] RuntimeAnimatorController[] charControllers;
         [SerializeField] Sprite[] minigameSprites;
         [SerializeField] string[] charNames, gameNames, engNames;
+        [SerializeField] private MinigameType[] types;
 
         CharacterManager characterManager;
         private Stack<int> prevMenues;
         private bool enableClick;
         private int curGame, curChar, curPuzzle;
 
+        [SerializeField] private RankingUI rankingUI;
+
         private void Awake()
         {
-
             Time.timeScale = 1.0f;
             GameManager.SetGameMode(GameMode.MinigameMode);
+            
+            PlayFabManager.Instance.UpdateLeaderBoard();
             
             prevMenues = new Stack<int>();
             prevMenues.Push(1);
@@ -36,7 +43,12 @@ namespace GameHeaven.UIUX
 
         private void Start()
         {
+            rankingUI.SetRankingUI(types[curGame]);
             UISoundManager.Instance.PlayButtonSFX2();
+        }
+
+        private void OnEnable()
+        {
         }
 
         private void Update()
@@ -57,6 +69,7 @@ namespace GameHeaven.UIUX
                 }
             }
         }
+        
         private void SetEnableClick()
         {
             enableClick = true;
@@ -109,6 +122,7 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(6).GetComponent<Animator>().SetTrigger("On");
+            rankingUI.SetRankingBoard(types[curGame]);
             prevMenues.Push(6);
             Invoke("SetEnableClick", 0.2f);
         }
@@ -128,6 +142,7 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX1();
             if (curGame < 9)
             {
+                rankingUI.SetRankingUI(types[curGame + 1]);
                 StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0), -400));
                 curGame++;
                 transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
@@ -140,6 +155,7 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX1();
             if (curGame > 0)
             {
+                rankingUI.SetRankingUI(types[curGame - 1]);
                 StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0), 400));
                 curGame--;
                 transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];

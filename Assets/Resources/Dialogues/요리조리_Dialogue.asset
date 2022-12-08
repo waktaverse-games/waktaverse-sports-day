@@ -15,33 +15,29 @@ MonoBehaviour:
   gameName: "\uC694\uB9AC\uC870\uB9AC"
   sceneName: RunGame
   dialogue:
-  - name: 1
-    sentence: "\uD14C\uC2A4\uD2B8"
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uCCAB\uBC88\uC9F8 \uACBD\uAE30 \uC2DC\uC791\uB418\uC5C8\uC2B5\uB2C8\uB2E4!
+      \uC120\uB450\uB294 \uD61C\uC9C0, \uD558\uCFE0, \uC0C8\uC6B0\uD280\uAE40 \uC21C\uC73C\uB85C
+      \uCE58\uC5F4\uD55C \uC811\uC804\uC744 \uBC8C\uC774\uACE0 \uC788\uB294\uB370\uC694."
+    bgSprite: {fileID: 21300000, guid: 0fdc6fcc537fae6489f4e4edfd997749, type: 3}
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uC774\uB54C \uD558\uCFE0 \uC120\uC218 \uB118\uC5B4\uC9C0\uACE0 \uB9D9\uB2C8\uB2E4!!"
     bgSprite: {fileID: 0}
-  - name: 2
-    sentence: "\uD14C\uC2A4\uD2B82"
+  - name: "\uD558\uCFE00089"
+    sentence: "\uC624@#\uB958! &*(\uC624@!\uB958! "
     bgSprite: {fileID: 0}
-  - name: 3
-    sentence: "\uD14C\uC2A4\uD2B83"
+  - name: "\uC0C8\uC6B0\uD280\uAE40"
+    sentence: "\uC73C\uC557! \uAE5C\uC9DD\uC774\uC57C! \uD558\uCFE0\uC57C!!"
     bgSprite: {fileID: 0}
-  - name: 4
-    sentence: "\uD14C\uC2A4\uD2B84"
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uC544 \uADF8\uB7F0\uB370 \uD61C\uC9C0 \uC120\uC218! \uD53C\uB3C4
+      \uB208\uBB3C\uB3C4 \uC5C6\uC774 \uC55E\uC73C\uB85C \uB2EC\uB824\uB098\uAC00\uB294\uB370\uC694!"
     bgSprite: {fileID: 0}
-  - name: 5
-    sentence: "\uD14C\uC2A4\uD2B85"
+  - name: "\uB3C5\uACE0\uD61C\uC9C0"
+    sentence: "\uD558\uB098 \uB458! \uD558\uB098 \uB458!"
     bgSprite: {fileID: 0}
-  - name: 6
-    sentence: "\uD14C\uC2A4\uD2B8a"
-    bgSprite: {fileID: 0}
-  - name: 7
-    sentence: "\uD14C\uC2A4\uD2B8b"
-    bgSprite: {fileID: 0}
-  - name: 8
-    sentence: "\uD14C\uC2A4\uD2B8c"
-    bgSprite: {fileID: 0}
-  - name: 9
-    sentence: "\uD14C\uC2A4\uD2B8d"
-    bgSprite: {fileID: 0}
-  - name: 10
-    sentence: "\uD14C\uC2A4\uD2B8 \uB05D"
+  - name: "\uD574\uB8E8\uC11D"
+    sentence: "\uC5D0\uC5B4\uD31F\uC744 \uB07C\uACE0 \uC788\uC5B4\uC11C \uB208\uCE58\uB97C
+      \uBABB \uCC48 \uAC74\uC9C0! \uC544\uB2C8\uBA74 \uD53C\uB3C4 \uB208\uBB3C\uB3C4
+      \uC5C6\uB294 \uAC83\uC778\uC9C0! \uC5B4\uCA0C\uB4E0 \uC815\uB9D0 \uBE60\uB985\uB2C8\uB2E4!!"
     bgSprite: {fileID: 0}

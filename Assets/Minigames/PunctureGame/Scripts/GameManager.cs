@@ -56,7 +56,7 @@ namespace GameHeaven.PunctureGame
 
             foreach (var bhvr in logicBhvrs) bhvr.GameOver();
             
-            ResultSceneManager.ShowResult(MinigameType.PunctureGame);
+            GameResultManager.ShowResult(MinigameType.PunctureGame, scoreCollector.TotalScore);
         }
     }
 }
