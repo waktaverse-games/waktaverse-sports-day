@@ -12,12 +12,13 @@ namespace GameHeaven.UIUX
         
         private void Awake()
         {
-            transform.GetChild(1).GetComponent<Animator>().SetTrigger("On");
-            UISoundManager.Instance.PlayButtonSFX2();
         }
 
         private void Start()
         {
+            transform.GetChild(1).GetComponent<Animator>().SetTrigger("On");
+            UISoundManager.Instance.PlayButtonSFX2();
+            
             minigameModeLock.SetActive(!debugMode && !StoryManager.Instance.IsAllUnlock);
         }
 
