@@ -866,6 +866,9 @@ MonoBehaviour:
   gameStop: 0
   control: {fileID: 1075842156}
   counter: {fileID: 1966278938}
+  gameOver:
+  - {fileID: 8300000, guid: c35532713fd678a4f9ec53127d04aa33, type: 3}
+  - {fileID: 8300000, guid: 48906374c03a9564ba28ac03b2bc2e44, type: 3}
 --- !u!82 &537367248
 AudioSource:
   m_ObjectHideFlags: 0

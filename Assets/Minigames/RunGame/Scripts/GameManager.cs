@@ -44,6 +44,7 @@ namespace GameHaven.RunGame
         public AnimationCounter counter;
 
         AudioSource bgm;
+        public AudioClip[] gameOver;
 
         private void OnEnable()
         {
@@ -62,6 +63,7 @@ namespace GameHaven.RunGame
         void Awake()
         {
             bgm = GameObject.Find("RunGameManager").GetComponent<AudioSource>();
+            bgm.Stop();
             gameStart = false;
             gameStop = false;
             wallSpeed = 0;
@@ -73,7 +75,7 @@ namespace GameHaven.RunGame
         // Update is called once per frame
         void Start()
         {
-            SetVolume(SoundManager.Instance.BGMVolume);
+           
         }
 
         void Update()
@@ -152,6 +154,9 @@ namespace GameHaven.RunGame
 
         public void GameOver()
         {
+            bgm.clip = gameOver[Random.Range(0, 2)];
+            bgm.loop = false;
+            bgm.Play();
             gameStop = true;
             wallSpeed = 0;
             ScoreManager.Instance.SetGameHighScore(MinigameType.RunGame, score);
@@ -162,7 +167,9 @@ namespace GameHaven.RunGame
         {
             gameTime = 0;
             wallSpeed = 2;
+            bgm.Play();
             gameStart = true;
+            SetVolume(SoundManager.Instance.BGMVolume);
             control.GameStart();
         }
 
