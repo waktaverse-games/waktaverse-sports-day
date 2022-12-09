@@ -382,6 +382,7 @@ namespace GameHeaven.SpreadGame
             }
             else
             {
+                anim.SetTrigger("GameOver");
                 isInvincible = true;
                 isDeath = true;
                 FindObjectOfType<GameManager>().gameObject.SetActive(false);
