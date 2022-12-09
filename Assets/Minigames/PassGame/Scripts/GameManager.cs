@@ -28,6 +28,7 @@ namespace GameHeaven.PassGame
         public TestBack testBack;
         public float jumpPower;
         public AudioSource bgm;
+        public GameObject mandu;
 
         private int _score = 0;
         private int _stage = 0;
@@ -82,23 +83,39 @@ namespace GameHeaven.PassGame
         public void GameStart()
         {
             startText.SetActive(false);
+            StartCoroutine(PlayBgm());
             StartCoroutine(UpgradeStage(40));
             StartCoroutine(StageSpawn(0.1f));
             StartCoroutine(CoinSpawn(0.7f));
             StartCoroutine(ItemSpawn(30.1f));
         }
 
+        IEnumerator PlayBgm()
+        {
+            yield return new WaitForSeconds(0.8f);
+            bgm.Play();
+        }
+
         public void GameOver()
         {
             Time.timeScale = 0;
             StopAllCoroutines();
+            StartCoroutine(GameOverEnum());
+        }
+
+        IEnumerator GameOverEnum()
+        {
             objectManager.FailGame();
+            mandu.SetActive(false);
             player.SetActive(false);
             testBack.shouldMove = false;
             Time.timeScale = 1;
-            Debug.Log("Game Over");
+            SfxManager.PlaySfx(3);
+            bgm.Stop();
+            yield return new WaitForSeconds(4);
+            // Debug.Log("Game Over");
             ScoreManager.Instance.SetGameHighScore(MinigameType.PassGame, _score);
-            Debug.Log(_score);
+            // Debug.Log(_score);
             GameResultManager.ShowResult(MinigameType.PassGame, _score);
         }
 
@@ -154,6 +171,7 @@ namespace GameHeaven.PassGame
         public void ItemActivate()
         {
             playerScript.jumpItem = true;
+            SfxManager.PlaySfx(2);
             doubleJumpState.SetActive(true);
         }
 
