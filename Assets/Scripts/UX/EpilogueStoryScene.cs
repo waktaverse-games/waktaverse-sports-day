@@ -1,5 +1,6 @@
 ﻿using GameHeaven.Root;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameHeaven.UIUX
 {
@@ -8,7 +9,7 @@ namespace GameHeaven.UIUX
         public void ReturnToModeSelect()
         {
             StoryManager.Instance.ViewEpilogue = true;
-            SceneLoader.LoadSceneAsync("ModeSelectScene");
+            SceneManager.LoadScene("ModeSelectScene");
         }
     }
 }
