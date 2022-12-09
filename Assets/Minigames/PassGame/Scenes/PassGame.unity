@@ -1370,6 +1370,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5480173455962128176, guid: 98284f8566ddb724cb514e47a19b1b11, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5480173455962128178, guid: 98284f8566ddb724cb514e47a19b1b11, type: 3}
       propertyPath: m_Name
       value: Canvas_Countdown
