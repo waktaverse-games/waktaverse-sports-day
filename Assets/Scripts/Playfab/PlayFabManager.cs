@@ -15,6 +15,7 @@ public class PlayFabLeaderboardElement
 {
     [SerializeField] private MinigameType type;
     [SerializeField] [ReadOnly] private List<PlayerLeaderboardEntry> entries;
+    [SerializeField] [ReadOnly] private PlayerLeaderboardEntry playerEntry;
 
     public MinigameType Type => type;
     public List<PlayerLeaderboardEntry> Entries
@@ -22,16 +23,22 @@ public class PlayFabLeaderboardElement
         get => entries;
         internal set => entries = value;
     }
+    public PlayerLeaderboardEntry PlayerEntry
+    {
+        get => playerEntry;
+        internal set => playerEntry = value;
+    }
 }
 
 public class PlayFabManager : MonoSingleton<PlayFabManager>
 {
     [SerializeField] private List<PlayFabLeaderboardElement> leaderboardEntries;
 
-    [SerializeField] private int delayMinute = 5;
-    [SerializeField] [ReadOnly] private bool isLoggedIn;
+    [SerializeField] [ReadOnly] private string playFabId;
+    
+    [SerializeField] [ReadOnly] private int lastUpdateMinute;
 
-    private Coroutine routine;
+    // private Coroutine routine;
 
     [Header("[DEBUG] 활성화 시 테스트 리더보드로 연결")] [SerializeField]
     private bool isDebug;
@@ -39,22 +46,24 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
     public override void Init()
     {
         Login();
+
+        lastUpdateMinute = -1;
     }
 
     private void OnEnable()
     {
-        isLoggedIn = false;
+        playFabId = "";
         ScoreManager.OnHighScoreChanged += SendLeaderboard;
 
-        routine = StartCoroutine(LeaderBoardUpdateRoutine(delayMinute));
+        // routine = StartCoroutine(LeaderBoardUpdateRoutine(delayMinute));
     }
     
     private void OnDisable()
     {
-        isLoggedIn = false;
+        playFabId = "";
         ScoreManager.OnHighScoreChanged -= SendLeaderboard;
         
-        StopCoroutine(routine);
+        // StopCoroutine(routine);
     }
 
     private void Login()
@@ -71,12 +80,15 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
         PlayFabClientAPI.LoginWithCustomID(req, result =>
         {
             Debug.Log("Login Success");
-            isLoggedIn = true;
+            playFabId = result.PlayFabId;
+
             var profile = result.InfoResultPayload.PlayerProfile;
             if (profile != null)
                 GameDatabase.NickName = profile.DisplayName;
             else
                 UpdateDisplayName(GameDatabase.NickName);
+
+            UpdateLeaderBoard();
         }, error => Debug.LogError("Login Failed (" + error.Error.ToString() + "): " + error.ErrorMessage));
     }
 
@@ -103,51 +115,94 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
         return element.Entries;
     }
 
-    private IEnumerator LeaderBoardUpdateRoutine(int delay)
+    public PlayerLeaderboardEntry GetLeaderBoardAroundPlayer(MinigameType type)
     {
-        while (true)
-        {
-            if (!isLoggedIn)
-            {
-                yield return null;
-                continue;
-            }
-
-            UpdateLeaderBoard();
-
-            yield return new WaitForSeconds(delay * 60);
-        }
+        var element = leaderboardEntries.Find(t => t.Type == type);
+        return element.PlayerEntry;
     }
+
+    // private IEnumerator LeaderBoardUpdateRoutine(int delay)
+    // {
+    //     while (true)
+    //     {
+    //         if (!isLoggedIn)
+    //         {
+    //             yield return null;
+    //             continue;
+    //         }
+    //
+    //         UpdateLeaderBoard();
+    //
+    //         yield return new WaitForSeconds(delay * 60);
+    //     }
+    // }
 
     public void UpdateLeaderBoard()
     {
+        if (lastUpdateMinute == DateTime.Now.Minute)
+            return;
+        lastUpdateMinute = DateTime.Now.Minute;
+        
+        Debug.Log("Update Leaderboard");
+        
         foreach (var element in leaderboardEntries)
         {
-            var req = new GetLeaderboardRequest
+            var leaderboardReq = new GetLeaderboardRequest
             {
                 StatisticName = GetStasticName(element.Type),
                 StartPosition = 0,
                 MaxResultsCount = 10
             };
-            StartCoroutine(UpdateLeaderBoardElement(element, req));
+            var playerReq = new GetLeaderboardAroundPlayerRequest
+            {
+                StatisticName = GetStasticName(element.Type),
+                MaxResultsCount = 1
+            };
+            StartCoroutine(UpdateLeaderBoardElement(element, leaderboardReq, playerReq));
         }
     }
 
-    private static IEnumerator UpdateLeaderBoardElement(PlayFabLeaderboardElement element, GetLeaderboardRequest req)
+    private IEnumerator UpdateLeaderBoardElement(PlayFabLeaderboardElement element, GetLeaderboardRequest leaderboardReq, GetLeaderboardAroundPlayerRequest playerReq)
     {
-        var isComplete = false;
-        PlayFabClientAPI.GetLeaderboard(req, result =>
+        var isLeaderboardComplete = false;
+        var isPlayerComplete = false;
+        PlayFabClientAPI.GetLeaderboard(leaderboardReq, result =>
         {
             element.Entries = result.Leaderboard;
-            isComplete = true;
+            isLeaderboardComplete = true;
             Debug.Log("Get Leaderboard Success");
         }, error =>
         {
             Debug.LogError("Get Leaderboard Failed (" + error.Error.ToString() + "): " + error.ErrorMessage);
+            isLeaderboardComplete = true;
+            throw new Exception(error.ErrorMessage);
+        });
+        PlayFabClientAPI.GetLeaderboardAroundPlayer(playerReq, result =>
+        {
+            var entry = result.Leaderboard[0];
+            if (entry.PlayFabId == playFabId)
+            {
+                if (entry.Position != 1 || entry.StatValue != 0)
+                {
+                    element.PlayerEntry = entry;
+                    Debug.Log(entry.Position + " : " + entry.StatValue);
+                }
+                else
+                {
+                    element.PlayerEntry = null;
+                    Debug.Log(element.Type.ToString() + " - 없음");
+                }
+            }
+            isPlayerComplete = true;
+            Debug.Log("Get LeaderboardAroundPlayer Success");
+        }, error =>
+        {
+            Debug.LogError("Get LeaderboardAroundPlayer Failed (" + error.Error.ToString() + "): " + error.ErrorMessage);
+            isPlayerComplete = true;
             throw new Exception(error.ErrorMessage);
         });
 
-        yield return new WaitUntil((() => isComplete));
+        yield return new WaitUntil((() => isLeaderboardComplete && isPlayerComplete));
     }
 
     public void UpdateDisplayName(string displayName)
