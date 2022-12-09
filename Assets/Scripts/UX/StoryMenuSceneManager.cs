@@ -37,6 +37,11 @@ namespace GameHeaven.UIUX
 
         private void Start()
         {
+            UISoundManager.Instance.PlayButtonSFX1();
+
+            curSeletedStage = GameDatabase.Instance.DB.storyDB.unlockProgress;
+            transform.GetChild(3).position -= new Vector3(curSeletedStage * 1610, 0, 0);
+
             for (int i = 0; i <= StoryManager.Instance.UnlockProgress; i++)
             {
                 lockScreens[Mathf.Clamp(i, 0, lockScreens.Length - 1)].SetActive(false);
@@ -49,6 +54,7 @@ namespace GameHeaven.UIUX
             {
                 if (isDescMenuOpen)
                 {
+                    UISoundManager.Instance.PlayButtonSFX1();
                     gameDescObj.GetComponent<Animator>().SetTrigger("Off");
                     isDescMenuOpen = false;
                 }
@@ -66,6 +72,7 @@ namespace GameHeaven.UIUX
 
         public void OpenDescWindow(int index)
         {
+            UISoundManager.Instance.PlayButtonSFX1();
             StoryManager.Instance.SetCurrentIndex(index);
             
             gameNameText.text = gameNames[index];
@@ -80,6 +87,7 @@ namespace GameHeaven.UIUX
 
         public void ClickArrowButton(int x)
         {
+            UISoundManager.Instance.PlayButtonSFX2();
             if (x > 0 && 0 < curSeletedStage)
             {
                 curSeletedStage--;
@@ -105,6 +113,7 @@ namespace GameHeaven.UIUX
 
         public void StartGame()
         {
+            UISoundManager.Instance.PlayButtonSFX1();
             var curIdx = StoryManager.Instance.SelectStoryIndex;
             
             if (curIdx > StoryManager.Instance.UnlockProgress) return;
