@@ -218,18 +218,6 @@ MonoBehaviour:
   circleFireDir: {x: 1, y: 0}
   circleFirePivot: {x: 0, y: 0}
   circleFireNum: 30
-  coins:
-  - {fileID: 5954169712361996919, guid: 3b52fda8b80729844bc70d9fbfebc2be, type: 3}
-  - {fileID: 4421849469660899113, guid: 3ad909b87098f5941a3bac48eb3b921b, type: 3}
-  - {fileID: 666940237586698477, guid: d8bdfd4265ecc5045adb7f9517cbaa39, type: 3}
-  upgradeItems:
-  - {fileID: 7333060228594184106, guid: 570bdb888e952ae4d9731d715459eb6b, type: 3}
-  - {fileID: 7333060228594184106, guid: 711350b49978c2d4ab6c465a6686ef9e, type: 3}
-  - {fileID: 7333060228594184106, guid: 2a0592e808a329844a227eec57cbf9f5, type: 3}
-  - {fileID: 7333060228594184106, guid: 2ce9e23c62512be4cb05383e50fa7249, type: 3}
-  otherItems:
-  - {fileID: 612043407125858333, guid: 88e3468803f815a499e67a2e0835ce73, type: 3}
-  - {fileID: 6038007275945840213, guid: bd256cb6a1795ec44abdba87d11207cb, type: 3}
   dieEffect: {fileID: 1041877752519655513, guid: 8f1a2e7941f357a4388fa527e423e1b6, type: 3}
   gyunNyang: {fileID: 0}
   isDeath: 0
@@ -266,7 +254,7 @@ GameObject:
   - component: {fileID: 8669942878328253318}
   m_Layer: 0
   m_Name: DdulGi(Boss)
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
