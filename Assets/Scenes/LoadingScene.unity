@@ -412,7 +412,7 @@ MonoBehaviour:
   m_text: "Tip. \uD301\uC774\uB2E4 \uD301\uC774\uB2E4 \uD301\uC774\uB2E4 \uD301\uC774\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
-  m_sharedMaterial: {fileID: -8314726065972834963, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0696cb51154f74f42a0924125391f808, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -602,6 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40acd01b3e785e4682e27d44892a1f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingImages: []
 --- !u!1 &1205339662
 GameObject:
   m_ObjectHideFlags: 0

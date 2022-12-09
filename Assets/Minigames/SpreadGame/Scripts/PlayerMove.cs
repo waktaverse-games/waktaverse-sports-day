@@ -18,7 +18,7 @@ namespace GameHeaven.SpreadGame
         [SerializeField] GameObject coinAcquireEffect, bombImageUI, canvas;
 
         [SerializeField] private int bombCnt;
-        [SerializeField] private bool hasShield, isStun;
+        [SerializeField] private bool hasShield, isStun, isDeath;
 
         [SerializeField] AudioClip[] bulletSounds, acquireSounds;
         [SerializeField] AudioClip bombSound;
@@ -56,11 +56,15 @@ namespace GameHeaven.SpreadGame
 
         private void FixedUpdate()
         {
+            if (isDeath) return;
+
             Move();
         }
 
         private void Update()
         {
+            if (isDeath) return;
+
             Bomb();
 
             for (int i = 0; i < 4; i++)
@@ -378,7 +382,19 @@ namespace GameHeaven.SpreadGame
             }
             else
             {
-                // Time.timeScale = 0;
+                isInvincible = true;
+                isDeath = true;
+                FindObjectOfType<GameManager>().gameObject.SetActive(false);
+                foreach (EnemyMove enemy in FindObjectsOfType<EnemyMove>())
+                {
+                    enemy.gameObject.SetActive(false);
+                }
+                foreach (GameObject enemyBullet in GameObject.FindGameObjectsWithTag("Ball"))
+                {
+                    enemyBullet.SetActive(false);
+                }
+                FindObjectOfType<SoundManager>().transform.GetChild(0).gameObject.SetActive(true);
+                SoundManager.Instance.PlayGameoverSound();
                 ScoreManager.Instance.SetGameHighScore(MinigameType.SpreadGame, score.score);
                 GameResultManager.ShowResult(MinigameType.SpreadGame, score.score);
             }

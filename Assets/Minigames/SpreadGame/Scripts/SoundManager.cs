@@ -6,7 +6,8 @@ namespace GameHeaven.SpreadGame
 {
     public class SoundManager : MonoBehaviour
     {
-        [SerializeField] AudioSource bgm, bulletSFX, slashSFX, scoreItemSFX, upgradeItemSFX, bombSFX, GgangSFX, MonkeySFX, RaNiSFX, PokJuSFX;
+        [SerializeField] AudioSource bgm, bulletSFX, slashSFX, scoreItemSFX, upgradeItemSFX, bombSFX, 
+            GgangSFX, MonkeySFX, RaNiSFX, PokJuSFX, gameoverSFX;
 
         #region Singleton
         public static SoundManager Instance = null;
@@ -51,6 +52,7 @@ namespace GameHeaven.SpreadGame
         public void PlayMonkeySound() => MonkeySFX.Play();
         public void PlayRaNiSound() => RaNiSFX.Play();
         public void PlayPokJuSound() => PokJuSFX.Play();
+        public void PlayGameoverSound() => gameoverSFX.Play();
 
         public void SetBGMVolume(float volume)
         {
@@ -67,6 +69,7 @@ namespace GameHeaven.SpreadGame
             MonkeySFX.volume = volume;
             RaNiSFX.volume = volume;
             PokJuSFX.volume = volume;
+            gameoverSFX.volume = volume;
         }
     }
 }

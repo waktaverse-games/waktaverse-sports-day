@@ -2543,7 +2543,7 @@ GameObject:
   - component: {fileID: 5868071845125079868}
   m_Layer: 10
   m_Name: Wave
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2849,7 +2849,7 @@ GameObject:
   - component: {fileID: 9213968054036073802}
   m_Layer: 0
   m_Name: BakZwi(Boss)
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -88,7 +88,7 @@ namespace GameHaven.RunGame
                     {
                         ItemTime = 0;
                         Caracter.GetComponent<CapsuleCollider2D>().size = new Vector2(0.6f, 0.77f);
-                        Caracter.GetComponent<CapsuleCollider2D>().isTrigger = false;
+                        Caracter.GetComponent<CapsuleCollider2D>().isTrigger = true;
                         GetItem = false;
                         Effect.SetActive(false);
                         run.SetBool("Jump", false);
