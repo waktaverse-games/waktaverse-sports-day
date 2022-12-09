@@ -1633,6 +1633,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2d88ba980213ea34c819785e58e40ff5, type: 3}
   - {fileID: 8300000, guid: 2cb17ee577be18b4d84a493b51f63c9e, type: 3}
   - {fileID: 8300000, guid: 68d8afcb70afcf6458f6da7180c6cc67, type: 3}
+  - {fileID: 8300000, guid: c35532713fd678a4f9ec53127d04aa33, type: 3}
+  - {fileID: 8300000, guid: c9597a9bc6c82064788177625248e038, type: 3}
 --- !u!82 &433834157
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5065,6 +5067,7 @@ MonoBehaviour:
   counter: {fileID: 1657046404}
   whipSquare: {fileID: 1901309986}
   backAudio: {fileID: 1702272443}
+  SfxManager: {fileID: 433834156}
   IsStop: 1
   _hpNum: 1000
 --- !u!1 &1214094089
@@ -6544,8 +6547,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 412783853020d544a851043fb121c41f, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: b4cfe048de2b059409bec580c95d6560, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 0.489
   m_Pitch: 1
   Loop: 1
@@ -7031,6 +7034,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5480173455962128176, guid: 98284f8566ddb724cb514e47a19b1b11, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5480173455962128178, guid: 98284f8566ddb724cb514e47a19b1b11, type: 3}
       propertyPath: m_Name
       value: Canvas_Countdown

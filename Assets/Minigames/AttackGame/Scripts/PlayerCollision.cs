@@ -34,6 +34,7 @@ namespace GameHeaven.AttackGame
             string objectName = gameObj.name;
             if (gameObj.CompareTag("Enemy"))
             {
+                _sfxManager.PlaySfx(5);
                 _player.HitByEnemy(gameObj.GetComponent<EnemyCollision>().Damage());
             }
 
