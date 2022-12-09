@@ -12,7 +12,6 @@ namespace GameHeaven.Root
         
         public int UnlockProgress => _db.unlockProgress;
         public bool IsAllUnlock => UnlockProgress == 10;
-        public int LastViewedChapter => _db.lastViewedChapter;
         
         public bool ViewPrologue { get => _db.viewPrologue; set => _db.viewPrologue = value; }
         public bool ViewEpilogue { get => _db.viewEpilogue; set => _db.viewEpilogue = value; }
