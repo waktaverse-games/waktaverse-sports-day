@@ -77,7 +77,7 @@ public class GameDB : ILocalData
     
     public void ResetData()
     {
-        storyDB = new StoryDB() { unlockProgress = 0, viewPrologue = false, viewEpilogue = false};
+        storyDB = new StoryDB() { unlockProgress = 0, lastViewedChapter = 0, viewPrologue = false, viewEpilogue = false};
         puzzleDB = new PuzzleDB() { pieceCount = 0 };
         scoreDBList = new List<ScoreDB>()
         {
@@ -103,6 +103,7 @@ public class GameDB : ILocalData
 public class StoryDB
 {
     public int unlockProgress;
+    public int lastViewedChapter;
     
     public bool viewPrologue;
     public bool viewEpilogue;
