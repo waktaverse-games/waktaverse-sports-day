@@ -8,12 +8,11 @@ namespace GameHeaven.Root
     {
         private StoryDB _db;
 
-        [SerializeField] [ReadOnly] private int selectStoryIndex;
-
-        public int SelectStoryIndex => selectStoryIndex;
+        public int SelectStoryIndex => _db.lastViewedChapter;
         
         public int UnlockProgress => _db.unlockProgress;
         public bool IsAllUnlock => UnlockProgress == 10;
+        public int LastViewedChapter => _db.lastViewedChapter;
         
         public bool ViewPrologue { get => _db.viewPrologue; set => _db.viewPrologue = value; }
         public bool ViewEpilogue { get => _db.viewEpilogue; set => _db.viewEpilogue = value; }
@@ -25,7 +24,7 @@ namespace GameHeaven.Root
 
         public void SetCurrentIndex(int index)
         {
-            selectStoryIndex = index;
+            _db.lastViewedChapter = index;
         }
         
         public void UnlockNext()
@@ -36,7 +35,7 @@ namespace GameHeaven.Root
         public void ResetStoryProgress()
         {
             _db.unlockProgress = 0;
-            selectStoryIndex = 0;
+            _db.lastViewedChapter = 0;
 
             ViewPrologue = false;
             ViewEpilogue = false;
