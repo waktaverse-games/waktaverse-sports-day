@@ -1,4 +1,5 @@
-﻿using GameHeaven.Root;
+﻿using System.Collections;
+using GameHeaven.Root;
 using GameHeaven.Temp;
 using SharedLibs;
 using SharedLibs.Score;
@@ -12,6 +13,8 @@ public class GameResultManager : MonoBehaviour
     
     public static bool IsResultScreen = false;
     
+    [SerializeField] private GameObject resultScreen;
+    
     [SerializeField] private TextMeshProUGUI gameNameText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI goPrevBtnText;
@@ -20,23 +23,13 @@ public class GameResultManager : MonoBehaviour
     [SerializeField] private GameObject failedImageObj;
 
     [SerializeField] private MinigameSceneData minigameData;
+    
+    [SerializeField] private float waitShowResultTime = 2f;
 
     private void Start()
     {
-        var gameType = ResultGame;
-        var score = ResultScore;
-        
-        var gameName = minigameData.GetGameName(gameType);
-        gameNameText.text = gameName;
-        if (GameManager.GameMode == GameMode.StoryMode)
-        {
-            var targetScore = ScoreManager.Instance.GetGameTargetScore(gameType);
-            ShowStoryResultScreen(score, targetScore);
-        }
-        else
-        {
-            ShowMinigameResultScreen(score);
-        }
+        resultScreen.SetActive(false);
+        StartCoroutine(ShowResultScreen(waitShowResultTime));
     }
 
     private void OnEnable()
@@ -62,8 +55,30 @@ public class GameResultManager : MonoBehaviour
         {
             StoryManager.Instance.UnlockNext();
         }
-
         SceneLoader.AddSceneAsync("ResultScene");
+    }
+
+    private IEnumerator ShowResultScreen(float waitSec)
+    {
+        yield return new WaitForSeconds(waitSec);
+        resultScreen.SetActive(true);
+        
+        var gameType = ResultGame;
+        var score = ResultScore;
+        
+        var gameName = minigameData.GetGameName(gameType);
+        gameNameText.text = gameName;
+        if (GameManager.GameMode == GameMode.StoryMode)
+        {
+            var targetScore = ScoreManager.Instance.GetGameTargetScore(gameType);
+            
+            ShowStoryResultScreen(score, targetScore);
+            goPrevBtnText.text = (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue) ? "다음으로" : "다시하기";
+        }
+        else
+        {
+            ShowMinigameResultScreen(score);
+        }
     }
 
     private void ShowStoryResultScreen(int score, int target)
@@ -72,38 +87,38 @@ public class GameResultManager : MonoBehaviour
         var success = score >= target;
         successImageObj.SetActive(success);
         failedImageObj.SetActive(!success);
-        goPrevBtnText.text = "스토리모드";
     }
     private void ShowMinigameResultScreen(int score)
     {
         successImageObj.SetActive(false);
         failedImageObj.SetActive(false);
         scoreText.text = score.ToString();
-        goPrevBtnText.text = "미니게임으로";
     }
     
     // Scene Load (Temporary)
 
-    public void LoadMain()
-    {
-        SceneLoader.LoadSceneAsync("ModeSelectScene");
-    }
-    public void LoadPrevMode()
+    public void Return()
     {
         if (GameManager.GameMode == GameMode.StoryMode)
         {
-            if (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue)
-            {
-                SceneLoader.LoadSceneAsync("EpilogueStoryScene");
-            }
-            else
-            {
-                SceneLoader.LoadSceneAsync("StoryMenuScene");
-            }
+            SceneLoader.LoadSceneAsync("StoryMenuScene");
         }
         else
         {
             SceneLoader.LoadSceneAsync("MinigameMenuScene");
+        }
+    }
+    public void Replay()
+    {
+        if (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue)
+        {
+            SceneLoader.LoadSceneAsync("EpilogueStoryScene");
+        }
+        else
+        {
+            var sceneName = minigameData.GetSceneName(ResultGame);
+            var illustSprite = minigameData.GetIllustSprite(ResultGame);
+            LoadingSceneManager.LoadScene(sceneName, illustSprite);
         }
     }
 }
