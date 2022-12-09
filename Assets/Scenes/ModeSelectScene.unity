@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minigameModeLock: {fileID: 840515815}
-  debugMode: 0
+  debugMode: 1
 --- !u!1 &1418700545
 GameObject:
   m_ObjectHideFlags: 0

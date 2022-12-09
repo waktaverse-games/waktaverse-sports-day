@@ -108,7 +108,7 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
-            transform.GetChild(5).GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = gameNames[curGame];
+            transform.GetChild(5).GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>().text = gameNames[curGame];
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(5).GetComponent<Animator>().SetTrigger("On");
