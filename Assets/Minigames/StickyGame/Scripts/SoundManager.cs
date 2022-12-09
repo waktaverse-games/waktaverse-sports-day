@@ -6,7 +6,7 @@ namespace GameHeaven.StickyGame
 {
     public class SoundManager : MonoBehaviour
     {
-        [SerializeField] AudioSource bgm, acquireSFX, associateSFX, cutSFX, spaceSFX;
+        [SerializeField] AudioSource bgm, acquireSFX, associateSFX, cutSFX, spaceSFX, gameoverSFX;
 
         #region Singleton
         public static SoundManager Instance = null;
@@ -46,6 +46,7 @@ namespace GameHeaven.StickyGame
         public void PlayAssociateSound() => associateSFX.Play();
         public void PlayCutSound() => cutSFX.Play();
         public void PlaySpaceSound() => spaceSFX.Play();
+        public void PlayGameOverSound() => gameoverSFX.Play();
 
         public void SetBGMVolume(float volume)
         {
@@ -57,6 +58,7 @@ namespace GameHeaven.StickyGame
             associateSFX.volume = volume;
             cutSFX.volume = volume;
             spaceSFX.volume = volume;
+            gameoverSFX.volume = volume;
         }
     }
 }

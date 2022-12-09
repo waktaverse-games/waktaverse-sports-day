@@ -43,7 +43,13 @@ namespace GameHeaven.StickyGame
             {
                 moveLock = true;
                 Invoke("ResetMoveLock", 3.0f);
+                Invoke("SetBGM", 3.0f);
             }
+        }
+
+        private void SetBGM()
+        {
+            FindObjectOfType<SoundManager>().transform.GetChild(0).gameObject.SetActive(true);
         }
 
         void ResetMoveLock()
@@ -99,10 +105,7 @@ namespace GameHeaven.StickyGame
                     {
                         if (collider.GetComponent<SpriteRenderer>().sortingOrder <= -5) // ���� ����
                         {
-                            // Time.timeScale = 0;
-                            rotateSpeed = 0.0f;
-                            ScoreManager.Instance.SetGameHighScore(MinigameType.StickyGame, statistics.score);
-                            GameResultManager.ShowResult(MinigameType.StickyGame, statistics.score);
+                            Die();
                         }
                     }
                     else
@@ -116,10 +119,7 @@ namespace GameHeaven.StickyGame
                 }
                 else if (collider.CompareTag("Outline")) // ���� ����
                 {
-                    // Time.timeScale = 0;
-                    rotateSpeed = 0.0f;
-                    ScoreManager.Instance.SetGameHighScore(MinigameType.StickyGame, statistics.score);
-                    GameResultManager.ShowResult(MinigameType.StickyGame, statistics.score);
+                    Die();
                 }
                 else if (collider.CompareTag("Coin"))
                 {
@@ -218,6 +218,18 @@ namespace GameHeaven.StickyGame
             StopCoroutine("RandomMove");
             moveCS.GetComponentsInChildren<SpriteRenderer>()[1].enabled = false;
             backRunners.Add(collider.transform);
+        }
+        private void Die()
+        {
+            FindObjectOfType<SpawnManager>().gameObject.SetActive(false);
+            foreach (Move obj in FindObjectsOfType<Move>())
+            {
+                obj.rotateSpeed = 0;
+            }
+            FindObjectOfType<SoundManager>().transform.GetChild(0).gameObject.SetActive(false);
+            SoundManager.Instance.PlayGameOverSound();
+            ScoreManager.Instance.SetGameHighScore(MinigameType.StickyGame, statistics.score);
+            GameResultManager.ShowResult(MinigameType.StickyGame, statistics.score);
         }
     }
 }

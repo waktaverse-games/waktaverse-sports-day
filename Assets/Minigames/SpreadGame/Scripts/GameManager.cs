@@ -20,6 +20,12 @@ namespace GameHeaven.SpreadGame
 
         private void Awake()
         {
+            Invoke("SetBGM", 3.0f);
+        }
+
+        private void SetBGM()
+        {
+            FindObjectOfType<SoundManager>().transform.GetChild(0).gameObject.SetActive(true);
         }
 
         private void Update()
