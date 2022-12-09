@@ -1,5 +1,6 @@
 ﻿using GameHeaven.Root;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameHeaven.UIUX
 {
@@ -8,7 +9,7 @@ namespace GameHeaven.UIUX
         public void OpenStoryMenu()
         {
             StoryManager.Instance.ViewPrologue = true;
-            SceneLoader.LoadSceneAsync("StoryMenuScene");
+            SceneManager.LoadScene("StoryMenuScene");
         }
     }
 }

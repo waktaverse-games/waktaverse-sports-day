@@ -39,7 +39,7 @@ namespace GameHeaven.UIUX
         {
             UISoundManager.Instance.PlayButtonSFX1();
 
-            curSeletedStage = GameDatabase.Instance.DB.storyDB.unlockProgress;
+            curSeletedStage = StoryManager.Instance.SelectStoryIndex;
             transform.GetChild(3).position -= new Vector3(curSeletedStage * 1610, 0, 0);
 
             for (int i = 0; i <= StoryManager.Instance.UnlockProgress; i++)
