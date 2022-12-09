@@ -44,6 +44,7 @@ namespace GameHeaven.AttackGame
         public AnimationCounter counter;
         public GameObject whipSquare;
         public AudioSource backAudio;
+        public SFXManager SfxManager;
         [HideInInspector] public bool IsStop = true;
 
         private int _scoreNum;
@@ -76,6 +77,7 @@ namespace GameHeaven.AttackGame
             stageStartAnim.enabled = false;
             _hammerSpawned = false;
             backAudio.volume = SharedLibs.SoundManager.Instance.BGMVolume;
+            backAudio.PlayDelayed(5);
             NewGame();
         }
 
@@ -140,6 +142,14 @@ namespace GameHeaven.AttackGame
             objectManager.FailGame();
             yield return new WaitForSeconds(0.2f);
             // retryObject.SetActive(true);
+            playerObject.GetComponent<Animator>().SetBool("isDead", true);
+            yield return new WaitForSeconds(0.04f);
+            Time.timeScale = 0;
+            SfxManager.PlaySfx(4);
+            backAudio.Stop();
+            // playerObject.SetActive(false);
+            yield return new WaitForSecondsRealtime(3);
+            Time.timeScale = 1;
             playerObject.SetActive(false);
             ScoreManager.Instance.SetGameHighScore(MinigameType.AttackGame, _scoreNum);
             GameResultManager.ShowResult(MinigameType.AttackGame, _scoreNum);
