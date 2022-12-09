@@ -221,6 +221,7 @@ namespace GameHeaven.StickyGame
         }
         private void Die()
         {
+            GetComponent<Animator>().SetTrigger("GameOver");
             FindObjectOfType<SpawnManager>().gameObject.SetActive(false);
             foreach (Move obj in FindObjectsOfType<Move>())
             {
