@@ -10,12 +10,12 @@ namespace GameHeaven.Temp
     {
         [SerializeField] private string name;
         [SerializeField] private MinigameType type;
-        [SerializeField] private Sprite icon;
+        [SerializeField] private Sprite illustSprite;
         [SerializeField] [Scene] private string sceneName;
 
         public string Name => name;
         public MinigameType Type => type;
-        public Sprite Icon => icon;
+        public Sprite IllustSprite => illustSprite;
         public string SceneName => sceneName;
     }
 
@@ -36,6 +36,10 @@ namespace GameHeaven.Temp
         public string GetSceneName(MinigameType type)
         {
             return scenesData.Find(data => data.Type == type).SceneName;
+        }
+        public Sprite GetIllustSprite(MinigameType type)
+        {
+            return scenesData.Find(data => data.Type == type).IllustSprite;
         }
     }
 }
