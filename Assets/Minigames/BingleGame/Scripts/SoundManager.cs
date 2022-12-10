@@ -7,6 +7,7 @@ namespace GameHeaven.BingleGame
     public class SoundManager : MonoBehaviour
     {
         [SerializeField] AudioSource bgm;
+        [SerializeField] AudioSource gameOverSFX;
         [SerializeField] AudioSource itemSFX;
         [SerializeField] AudioSource turnSFX;
         [SerializeField] AudioSource crashSFX;
@@ -42,9 +43,12 @@ namespace GameHeaven.BingleGame
             SharedLibs.SoundManager.Instance.OnSFXVolumeChanged -= SetSFXVolume;
         }
         public void PlayBGM() => bgm.Play();
+        public void PlayGameOverSound() => gameOverSFX.Play();
         public void PlayItemSound() => itemSFX.Play();
         public void PlayTurnSound() => turnSFX.Play();
         public void PlayCrashSound() => crashSFX.Play();
+        public void TurnOffBGM() => bgm.Stop();
+        
         public void SetBGMVolume(float volume)
         {
             bgm.volume = volume;
@@ -54,6 +58,7 @@ namespace GameHeaven.BingleGame
             itemSFX.volume = volume;
             turnSFX.volume = volume;
             crashSFX.volume = volume;
+            gameOverSFX.volume = volume;
         }
     }
 }

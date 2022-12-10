@@ -121,6 +121,7 @@ namespace GameHeaven.JumpGame
                 if(GameManager.Instance.isInvincible) // 무적이면
                 {
                     GameManager.Instance.SetInvinsible(false);
+                    SoundManager.Instance.PlayHitSound();
                     OnCollideWithRope.Invoke();
                     StartCoroutine(OnDamaged());
                 }

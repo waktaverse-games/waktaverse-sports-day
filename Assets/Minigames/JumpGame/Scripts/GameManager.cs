@@ -89,6 +89,8 @@ namespace GameHeaven.JumpGame
             GameEndEvent.Invoke();
             ObjectTurnOnOff(false);
             isGameOver = true;
+            SoundManager.Instance.TurnOffBGM();
+            SoundManager.Instance.PlayGameOverSound();
             ScoreManager.Instance.SetGameHighScore(MinigameType.JumpGame, totalScore);
             GameResultManager.ShowResult(MinigameType.JumpGame, totalScore);
         }
