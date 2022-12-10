@@ -7,10 +7,12 @@ namespace GameHeaven.JumpGame
     public class SoundManager : MonoBehaviour
     {
         [SerializeField] AudioSource bgm;
+        [SerializeField] AudioSource gameOverSFX;
         [SerializeField] AudioSource itemSFX;
         [SerializeField] AudioSource jumpSFX;
         [SerializeField] AudioSource ropeSFX;
         [SerializeField] AudioSource rusukSFX;
+        [SerializeField] AudioSource hitSFX;
         #region Singleton
         public static SoundManager Instance = null;
         private void Awake()
@@ -43,15 +45,17 @@ namespace GameHeaven.JumpGame
         }
 
         public void PlayBGM() => bgm.Play();
+        public void PlayGameOverSound() => gameOverSFX.Play();
         public void PlayItemSound() => itemSFX.Play();
         public void PlayJumpSound() => jumpSFX.Play();
         public void PlayRopeSound() => ropeSFX.Play();
+        public void PlayHitSound() => hitSFX.Play();
+        public void TurnOffBGM() => bgm.Stop();
         public void PlayRusukSound()
         {
             itemSFX.Play();
             rusukSFX.Play();
         }
-
         public void SetBGMVolume(float volume)
         {
             bgm.volume = volume;
@@ -62,6 +66,8 @@ namespace GameHeaven.JumpGame
             jumpSFX.volume = volume;
             ropeSFX.volume = volume;
             rusukSFX.volume = volume;
+            hitSFX.volume = volume;
+            gameOverSFX.volume = volume;
         }
     }
 }

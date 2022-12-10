@@ -52,6 +52,8 @@ namespace GameHeaven.BingleGame
 
         public void GameOver()
         {
+            SoundManager.instance.TurnOffBGM();
+            SoundManager.instance.PlayGameOverSound();
             ScoreManager.Instance.SetGameHighScore(MinigameType.BingleGame, score);
             GameResultManager.ShowResult(MinigameType.BingleGame, score);
             
