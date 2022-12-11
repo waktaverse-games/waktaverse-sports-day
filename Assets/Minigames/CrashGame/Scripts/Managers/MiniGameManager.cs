@@ -182,7 +182,8 @@ namespace GameHeaven.CrashGame
             StopCoroutine(brickAddCoroutineLoop);
             Item.DeleteAll();       // ��� ���� �� ������ ��ü ����
 
-            MiniGameManager.Instance.Sound.PlaySound("game over 2");
+            Sound.StopBGM();
+            Sound.PlaySound("game over 2");
             ScoreManager.Instance.SetGameHighScore(MinigameType.CrashGame, Score);
             //if (Score > highscore)
             //{
@@ -209,6 +210,7 @@ namespace GameHeaven.CrashGame
         public void GameStart()
         {
             CurrentGameState = GameState.Start;
+            Sound.PlayBGM("Waktaverse_Minigame");
         }
 
         public void BallFire()

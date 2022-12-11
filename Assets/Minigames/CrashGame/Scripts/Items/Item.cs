@@ -31,6 +31,20 @@ namespace GameHeaven.CrashGame
         {
             Destroy(gameObject);
         }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.tag == "Bottom")
+            {
+                StartCoroutine(TimeoutDestroy(2));
+            }
+        }
+
+        private IEnumerator TimeoutDestroy(int seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            Destroy(gameObject);
+        }
     }
 
 }
