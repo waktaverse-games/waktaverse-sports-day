@@ -51,6 +51,7 @@ namespace GameHeaven.CrossGame
             //gameOverTextUI.gameObject.SetActive(true);
             //restratBtn.SetActive(true);
             soundManager.BgmStop();
+            soundManager.SfxPlay("GameOver");
             objectController.player.GameOver();
             IsStop = true;
             objectController.player.cntAnimator.SetBool("GameOver", true);

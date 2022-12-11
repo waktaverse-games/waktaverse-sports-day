@@ -57,7 +57,7 @@ namespace GameHeaven.CrossGame
 
         public void GameOver()
         {
-            manager.soundManager.SfxPlay("Drop");
+            //manager.soundManager.SfxPlay("Drop");
             StartCoroutine(OverRoutine());
         }
 
