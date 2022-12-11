@@ -12,9 +12,6 @@ namespace GameHeaven.CrossGame
 
         [SerializeField] private AnimatorDictionary audioClips;
         public AudioSource[] sfxPlayers;
-
-        public AudioClip Bgm, BgmFast;
-        public bool BgmIsFast = false;
         public AudioSource bgmPlayer;
 
         int audioCursor = 0;
@@ -39,23 +36,14 @@ namespace GameHeaven.CrossGame
             }
         }
 
-        public void BgmPlay(bool isFast = false)
+        public void BgmPlay()
         {
-            if (BgmIsFast && isFast)
-            {
-                return;
-            }
+            bgmPlayer.Play();
+        }
 
-            if (isFast)
-            {
-                bgmPlayer.clip = BgmFast;
-                BgmIsFast = true;
-                bgmPlayer.Play();
-            }
-            else
-            {
-                bgmPlayer.Play();
-            }
+        public void BgmStop()
+        {
+            bgmPlayer.Stop();
         }
     }
 }
