@@ -77,8 +77,9 @@ public class GameDB : ILocalData
     
     public void ResetData()
     {
+        Debug.Log("ResetData");
         storyDB = new StoryDB() { unlockProgress = 0, lastViewedChapter = 0, viewPrologue = false, viewEpilogue = false};
-        puzzleDB = new PuzzleDB() { pieceCount = 0 };
+        puzzleDB = new PuzzleDB() { pieceCount = 0, completeState = new List<int>() { 0, 0, 0, 0, 0 } };
         scoreDBList = new List<ScoreDB>()
         {
             new() { type = MinigameType.AttackGame }, new() { type = MinigameType.BingleGame },
@@ -114,11 +115,6 @@ public class PuzzleDB
 {
     public List<int> completeState;
     public int pieceCount;
-
-    public PuzzleDB()
-    {
-        completeState = new List<int>() { 0, 0, 0, 0, 0 };
-    }
 }
 
 [Serializable]
