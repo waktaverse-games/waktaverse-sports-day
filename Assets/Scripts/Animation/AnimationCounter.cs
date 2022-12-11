@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SharedLibs;
 using UnityEngine;
 
 public class AnimationCounter : MonoBehaviour
@@ -10,7 +11,14 @@ public class AnimationCounter : MonoBehaviour
     
     [SerializeField] private AnimationEndChecker animEndChecker;
 
+    [SerializeField] private AudioSource countdownAudio;
+
     public event Action OnEndCount;
+
+    private void Awake()
+    {
+        countdownAudio.volume = SoundManager.Instance.SFXVolume;
+    }
 
     private void Start()
     {
