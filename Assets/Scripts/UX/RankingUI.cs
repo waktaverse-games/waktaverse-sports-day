@@ -9,7 +9,7 @@ namespace GameHeaven.UIUX
     {
         [SerializeField] private TextMeshProUGUI[] top5RankingUI;
         [SerializeField] private TextMeshProUGUI myHighRankingUI;
-        [SerializeField] private TextMeshProUGUI rankingList;
+        [SerializeField] private GameObject rankingList;
 
         public async void SetRankingUI(MinigameType type)
         {
@@ -39,15 +39,24 @@ namespace GameHeaven.UIUX
         public async void SetRankingBoard(MinigameType type)
         {
             var leaderboard = PlayFabManager.Instance.GetLeaderboard(type);
-            
-            var rankingStr = leaderboard.Count > 0 ? "" : "랭킹이 없어요!";
+            var player = PlayFabManager.Instance.GetLeaderBoardAroundPlayer(type);
 
+            int i = 0;
             foreach (var data in leaderboard)
             {
-                rankingStr += $"[{data.Position + 1}위] {data.DisplayName} : {data.StatValue}점\n";
+                rankingList.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = data.DisplayName;
+                rankingList.transform.GetChild(i).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = data.StatValue.ToString();
+                i++;
+                if (i > 9) return; // 10위까지만 표시
+
+                //rankingStr += $"[{data.Position + 1}위] {data.DisplayName} : {data.StatValue}점\n";
             }
 
-            rankingList.text = rankingStr;
+            transform.GetChild(6).GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = player.DisplayName;
+            transform.GetChild(6).GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().text = player.StatValue.ToString();
+            transform.GetChild(6).GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = (player.Position + 1).ToString();
+
+            //rankingList.text = rankingStr;
         }
     }
 }

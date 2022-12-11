@@ -54,6 +54,21 @@ namespace GameHeaven.CrossGame
                 onBottom = false;
             }
         }
+
+        public void GameOver()
+        {
+            //manager.soundManager.SfxPlay("Drop");
+            StartCoroutine(OverRoutine());
+        }
+
+        IEnumerator OverRoutine()
+        {
+            for (int i = 0; i < 1200; i++)
+            {
+                yield return null;
+                transform.position += Vector3.down * 0.01f;
+            }
+        }
     }
 }
 

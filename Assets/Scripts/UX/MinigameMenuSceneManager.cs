@@ -122,6 +122,8 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(6).GetComponent<Animator>().SetTrigger("On");
+            var tr = transform.GetChild(6).GetChild(1).GetChild(0).GetChild(0).transform;
+            tr.position = new Vector3(tr.position.x, -1000, tr.position.z);
             rankingUI.SetRankingBoard(types[curGame]);
             prevMenues.Push(6);
             Invoke("SetEnableClick", 0.2f);

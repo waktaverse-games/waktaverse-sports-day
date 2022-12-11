@@ -42,14 +42,17 @@ namespace GameHeaven.CrossGame
         public void AddScore(int Point)
         {
             score += Point;
-            scoreUI.text = "���� : " + score.ToString();
+            scoreUI.text = "Score : " + score.ToString();
         }
 
         public void GameOver()
         {
             //DOTween.KillAll(true);
-            gameOverTextUI.gameObject.SetActive(true);
-            restratBtn.SetActive(true);
+            //gameOverTextUI.gameObject.SetActive(true);
+            //restratBtn.SetActive(true);
+            soundManager.BgmStop();
+            soundManager.SfxPlay("GameOver");
+            objectController.player.GameOver();
             IsStop = true;
             objectController.player.cntAnimator.SetBool("GameOver", true);
             ScoreManager.Instance.SetGameHighScore(MinigameType.CrossGame, score);
