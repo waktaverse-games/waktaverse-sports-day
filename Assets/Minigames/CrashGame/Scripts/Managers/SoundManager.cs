@@ -35,7 +35,7 @@ namespace GameHeaven.CrashGame
             {
                 audioSoundDictionary.Add(clip.name, clip);
             }
-            foreach (var clip in audioSoundClips)
+            foreach (var clip in audioBGMClips)
             {
                 audioBGMDictionary.Add(clip.name, clip);
             }
@@ -63,6 +63,16 @@ namespace GameHeaven.CrashGame
             this.bgmVolume = bgmVolume;
         }
 
+        public void StopBGM()
+        {
+            audioSources[2].Stop();
+        }
+
+        public void StopSound()
+        {
+            audioSources[1].Stop();
+        }
+
         public void PlayBGM(string audioName, float pitch = 1f)
         {
             audioSources[2].volume = bgmVolume;
@@ -72,7 +82,7 @@ namespace GameHeaven.CrashGame
             audioSources[2].Play();
         }
 
-        public void PlaySound(string audioName, float pitch = 1f, float volume = .5f)
+        public void PlaySound(string audioName, float pitch = 1f, float volume = 1f)
         {
             audioSources[1].volume = sfxVolume * volume;
             audioSources[1].pitch = pitch;
@@ -81,7 +91,7 @@ namespace GameHeaven.CrashGame
             audioSources[1].Play();
         }
 
-        public void PlayEffect(string audioName, float pitch = 1f, float volume = .5f)
+        public void PlayEffect(string audioName, float pitch = 1f, float volume = 1f)
         {
             audioSources[0].volume = sfxVolume * volume;
             audioSources[0].pitch = pitch;

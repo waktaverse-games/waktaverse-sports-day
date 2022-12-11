@@ -78,7 +78,7 @@ namespace GameHeaven.CrashGame
                 rigidBody.velocity = Utils.RotateVector(rigidBody.velocity, 10f);
             }
             isReturning = true;
-            MiniGameManager.Instance.Sound.PlayEffect("ball_bounce", volume: .5f);
+            MiniGameManager.Instance.Sound.PlayEffect("button_01", volume: .5f);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -114,7 +114,7 @@ namespace GameHeaven.CrashGame
 
                     // 공에 닿을 시 점프 중단.
                     platform.Stop();
-                    MiniGameManager.Instance.Sound.PlayEffect("ball_bounce", pitch: .5f, volume: .5f);
+                    MiniGameManager.Instance.Sound.PlayEffect("button_01", pitch: .5f, volume: .5f);
                 }
             }
             rigidBody.velocity = velocity;
@@ -152,7 +152,7 @@ namespace GameHeaven.CrashGame
 
         public void Fire(Vector2 force)
         {
-            MiniGameManager.Instance.Sound.PlayEffect("ball_bounce", volume: .5f);
+            MiniGameManager.Instance.Sound.PlayEffect("button_01", volume: .5f);
             isReturning = false;
             rigidBody.AddForce(force);
         }
