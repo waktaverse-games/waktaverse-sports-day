@@ -17,7 +17,13 @@ namespace GameHeaven.BingleGame
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             anim = GetComponent<Animator>();
-            anim.runtimeAnimatorController = animatorControllers[Random.Range(0,animatorControllers.Length)];
+        }
+        public void Initialize(bool isPerson)
+        {
+            if(isPerson)
+                anim.runtimeAnimatorController = animatorControllers[Random.Range(0, 7)];
+            else
+                anim.runtimeAnimatorController = animatorControllers[Random.Range(7, animatorControllers.Length)];
         }
 
         void Update()

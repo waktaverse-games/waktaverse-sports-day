@@ -12,8 +12,13 @@ namespace GameHeaven.StickyGame
 
         private void Awake()
         {
-            StartCoroutine(RandomSpawnRepeatedly(spawnCool));
+            Invoke("MyVegitableSpawn", 3.0f);
             StartCoroutine(SpawnVegitableRepeatedly(vegitableSpawnCool));
+        }
+
+        void MyVegitableSpawn()
+        {
+            StartCoroutine(RandomSpawnRepeatedly(spawnCool));
         }
 
         int idx = 0;

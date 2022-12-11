@@ -12,7 +12,7 @@ namespace GameHeaven.CrashGame
             // 게임 내 모든 공이 두배!
             Debug.Log("BallDivide Item Acquired");
             ballList = new List<Ball>();
-            foreach (Transform ball in GameManager.Instance.Item.BallParent)
+            foreach (Transform ball in MiniGameManager.Instance.Item.BallParent)
             {
                 ballList.Add(ball.GetComponent<Ball>());
             }
@@ -24,7 +24,7 @@ namespace GameHeaven.CrashGame
                 newBall.rigidBody.velocity = Utils.RotateVector(velocity, -15f);
                 ball.rigidBody.velocity = Utils.RotateVector(velocity, 15f);
             }
-            GameManager.Instance.UI.ShowItemEffect("벽력일섬!");
+            MiniGameManager.Instance.UI.ShowItemEffect("벽력일섬!");
         }
     }
 }

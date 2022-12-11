@@ -19,47 +19,46 @@ namespace GameHeaven.CrossGame
     }
     public class CrossGameManager : MonoBehaviour
     {
-        int Score;
-        int CollectStar;
-        public TMP_Text ScoreUI;
-        public TMP_Text GameOverTextUI;
-        public GameObject RestratBtn;
-        public ObjectController ObjectController;
-        public SoundManager SoundManager;
+        int score;
+        int collectStar;
+        public TMP_Text scoreUI;
+        public TMP_Text gameOverTextUI;
+        public GameObject restratBtn;
+        public ObjectController objectController;
+        public CrossGameSoundManager soundManager;
+        public AnimationCounter counter;
 
-        [HideInInspector] public bool IsOver;
+        [HideInInspector] public bool IsStop = true;
 
-        private void Update()
+        private void OnEnable()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            counter.OnEndCount += () =>
             {
-                Application.Quit();
-            }
+                IsStop = false;
+                soundManager.BgmPlay();
+            };
         }
 
         public void AddScore(int Point)
         {
-            Score += Point;
-            ScoreUI.text = "Á¡¼ö : " + Score.ToString();
+            score += Point;
+            scoreUI.text = "ï¿½ï¿½ï¿½ï¿½ : " + score.ToString();
         }
 
         public void GameOver()
         {
             //DOTween.KillAll(true);
-            GameOverTextUI.gameObject.SetActive(true);
-            RestratBtn.SetActive(true);
-            IsOver = true;
-            ObjectController.Player.CntAnimator.SetBool("GameOver", true);
-            RestratBtn.SetActive(true);
-            //ScoreManager.Instance.AddGameRoundScore(MinigameType.CrossGame, Score);
-            foreach (var item in ObjectController.FlyItems)
+            gameOverTextUI.gameObject.SetActive(true);
+            restratBtn.SetActive(true);
+            IsStop = true;
+            objectController.player.cntAnimator.SetBool("GameOver", true);
+            ScoreManager.Instance.SetGameHighScore(MinigameType.CrossGame, score);
+            foreach (var item in objectController.flyItems)
             {
                 item.GetComponent<FlyItem>().Stop();
             }
-
+            GameResultManager.ShowResult(MinigameType.CrossGame, score);
         }
-
-
 
         public void Restart()
         {

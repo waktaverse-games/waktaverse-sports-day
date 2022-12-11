@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using SharedLibs;
+using SharedLibs.Score;
 
 namespace GameHeaven.BingleGame
 {
@@ -26,61 +27,69 @@ namespace GameHeaven.BingleGame
         }
         #endregion
 
+        [SerializeField] AnimationCounter counter;
+        [SerializeField] TextMeshProUGUI textEffect;
+        [SerializeField] TextMeshProUGUI scoreText;
+
+        private Coroutine textEffectCoroutine;
+        public int Score { get => score; }
         private int score = 0;
-        public Text scoreText;
         public bool isGameOver = false;
         public bool isGameStart = false;
-
-        public GameObject retryButton;
-
-        [SerializeField] GameObject readyButton;
-        [SerializeField] GameObject startButton;
-
-        void Start()
+        private void OnEnable()
         {
-            StartCoroutine(StartGame());
+            counter.OnEndCount += () =>
+            {
+                GameStart();
+            };
         }
-        void Update()
-        {
-            scoreText.text = string.Format("{0:n0}", score);
-            ReStart();
-        }
+
         public void IncreaseScore(int num)
         {
             score += num;
+            scoreText.text = "점수 : " + score.ToString();
         }
 
         public void GameOver()
         {
+            SoundManager.instance.TurnOffBGM();
+            SoundManager.instance.PlayGameOverSound();
+            ScoreManager.Instance.SetGameHighScore(MinigameType.BingleGame, score);
+            GameResultManager.ShowResult(MinigameType.BingleGame, score);
+            
             isGameOver = true;
-            startButton.SetActive(false);   //혹시 게임 시작하고 바로 죽는경우를 대비해서...
-            //SharedLibs.Score.ScoreManager.Instance.AddGameRoundScore(MinigameType.BingleGame, score);
-            retryButton.SetActive(true);
         }
 
-        public void Retry()
+        void GameStart()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
-        IEnumerator StartGame()
-        {
-            yield return new WaitForSeconds(0.1f);
-            readyButton.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            readyButton.SetActive(false);
-            startButton.SetActive(true);
             isGameStart = true;
+            scoreText.text = "점수 : 0";
             SoundManager.instance.PlayBGM();
-            yield return new WaitForSeconds(1f);
-            startButton.SetActive(false);
         }
-        void ReStart()
+
+        public void ShowTextEffect(string effect, bool isBlue)
         {
-            if(Input.GetKeyDown(KeyCode.R))
+            if (textEffectCoroutine != null) StopCoroutine(textEffectCoroutine);
+            textEffect.transform.position = Camera.main.WorldToScreenPoint(GameObject.Find("Player").transform.position) + new Vector3(0, 100f, 0);
+            textEffect.text = effect;
+            textEffect.color = isBlue ? Color.blue : Color.red;
+            textEffect.gameObject.SetActive(true);
+            textEffectCoroutine = StartCoroutine(FadeText(textEffect, false));
+        }
+
+        IEnumerator FadeText(TextMeshProUGUI textUI, bool floatText, float interval = .05f)
+        {
+            Color textColor = textUI.color;
+            textColor.a = 1f;
+            textEffect.color = textColor;
+            while (textColor.a > 0.05f)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                textColor.a *= 0.8f;
+                textUI.color = textColor;
+                if (floatText) textUI.transform.Translate(0, 5f, 0);
+                yield return new WaitForSeconds(interval);
             }
+            textUI.gameObject.SetActive(false);
         }
     }
 }

@@ -84,8 +84,6 @@ namespace GameHeaven.JumpGame
                 if (isReverse) animator.SetFloat("reverse", -1f);
                 else animator.SetFloat("reverse", 1f);
                 Invoke("EnableReverse", 0.2f);
-                speed *= 0.9f;
-                if (speed < minSpeed) { speed = minSpeed; }
                 ResetSpeedSetting();
             }
         }

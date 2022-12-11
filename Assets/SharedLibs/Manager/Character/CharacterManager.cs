@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SharedLibs.Character
@@ -15,7 +16,7 @@ namespace SharedLibs.Character
         [SerializeField] private List<CharacterDicValue> characterList;
         private Dictionary<CharacterType, CharacterData> characterDic;
 
-        [SerializeField] private CharacterType currentCharacter;
+        [SerializeField] [ReadOnly] private CharacterType currentCharacter;
 
         public CharacterType CurrentCharacter => currentCharacter;
         public CharacterData CurrentCharacterData => characterDic[CurrentCharacter] == null ? null : characterDic[CurrentCharacter];

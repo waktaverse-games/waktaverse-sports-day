@@ -15,41 +15,41 @@ MonoBehaviour:
   scenesData:
   - name: "\uD64B\uCE58\uD64B\uCE58"
     type: 0
-    icon: {fileID: 0}
+    illustSprite: {fileID: 21300000, guid: 1a8b998d69689994a867c6f6afa70892, type: 3}
     sceneName: AttackGame
   - name: "\uC2A4\uD0A4\uC2A4\uD0A4"
     type: 1
-    icon: {fileID: 0}
+    illustSprite: {fileID: 21300000, guid: 908556d07c2041c48843ce274e322b49, type: 3}
     sceneName: BingleGame
   - name: "\uAE68\uBD80\uAE68\uBD80"
     type: 2
-    icon: {fileID: 0}
+    illustSprite: {fileID: 21300000, guid: fa6b180b923e23d4d83c967153f29ef8, type: 3}
     sceneName: PpusyeoScene
   - name: "\uD3F4\uC9DD\uD3F4\uC9DD"
     type: 3
-    icon: {fileID: 0}
+    illustSprite: {fileID: 21300000, guid: 5e4827bfe1f099643a3f0d76dacac7ad, type: 3}
     sceneName: CrossGame
   - name: "\uB3CC\uB824\uB3CC\uB824"
     type: 4
-    icon: {fileID: 0}
+    illustSprite: {fileID: 21300000, guid: 0bd8b54979876854da3f0dc7dac0ed9b, type: 3}
     sceneName: JumpGame
   - name: "\uB760\uC6A9\uB760\uC6A9"
     type: 5
-    icon: {fileID: 0}
+    illustSprite: {fileID: 21300000, guid: a2e4ee640d5993a48a7f31c32cc79b9b, type: 3}
     sceneName: PassGame
   - name: "\uBE60\uC0E4\uBE60\uC0E4"
     type: 6
-    icon: {fileID: 0}
+    illustSprite: {fileID: 21300000, guid: 7b40c423bdb014340a41573ffa20be67, type: 3}
     sceneName: PunctureGame
   - name: "\uC694\uB9AC\uC870\uB9AC"
     type: 7
-    icon: {fileID: 0}
+    illustSprite: {fileID: 21300000, guid: 0fdc6fcc537fae6489f4e4edfd997749, type: 3}
     sceneName: RunGame
   - name: "\uBE75\uC57C\uBE75\uC57C"
     type: 8
-    icon: {fileID: 0}
+    illustSprite: {fileID: 21300000, guid: 34dee1ae3b5973a49a20beaacb77350c, type: 3}
     sceneName: SpreadGame
   - name: "\uC7A1\uC544\uC7A1\uC544"
     type: 9
-    icon: {fileID: 0}
+    illustSprite: {fileID: 21300000, guid: 923239ff637e4e0448b40e73acaa1a37, type: 3}
     sceneName: StickyGame

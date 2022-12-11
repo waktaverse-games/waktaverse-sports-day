@@ -31,8 +31,8 @@ namespace GameHeaven.CrashGame
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
             brickDestroyEffect.SetActive(true);
-            GameManager.Instance.AddScore(score);
-            GameManager.Instance.Sound.PlaySound("brick Arcade_001");
+            MiniGameManager.Instance.AddScore(score);
+            MiniGameManager.Instance.Sound.PlaySound("brick Arcade_001");
             //GameManager.Instance.Sound.PlaySound("brick_001");
         }
 
@@ -40,7 +40,7 @@ namespace GameHeaven.CrashGame
         {
             brickDestroyEffect.SetActive(false);
             gameObject.SetActive(false);
-            GameManager.Instance.Brick.CheckOuterLineDestroyed(false);
+            MiniGameManager.Instance.Brick.CheckOuterLineDestroyed(false);
         }
 
         public abstract void BallCollide();

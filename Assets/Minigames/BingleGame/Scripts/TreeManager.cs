@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static GameHeaven.BingleGame.Enums;
 
 namespace GameHeaven.BingleGame
 {
     public class TreeManager : MonoBehaviour
     {
-        public int score;
         public float throwingSpeed;
 
         public GameObject[] characters;
@@ -26,7 +24,6 @@ namespace GameHeaven.BingleGame
         {
             if (collision.gameObject.tag == "Player")
             {
-                GameManager.instance.IncreaseScore(score);
                 SoundManager.instance.PlayCrashSound();
                 // 체크포인트의 다른 콜라이더 비활성화
                 transform.parent.GetComponent<CheckPointManager>().DisableOtherCollider();
@@ -40,7 +37,6 @@ namespace GameHeaven.BingleGame
 
         private void ThrowTree(Collider2D collision, out Vector2 charDir)
         {
-            // Throw away this object
             Vector3 playerPos = collision.transform.position;
             Vector3 direction = transform.position - playerPos;
             charDir = direction.x >= 0 ? new Vector2(1, -1) : new Vector2(-1, -1);
@@ -52,6 +48,9 @@ namespace GameHeaven.BingleGame
         {
             int randIdx = Random.Range(0, characters.Length);
             GameObject character = Instantiate(characters[randIdx], transform.position, transform.rotation);
+            bool isPerson = transform.gameObject.name == "Tree Left" ? true : false;
+            character.GetComponent<NPCManager>().Initialize(isPerson);
+
             if(transform.gameObject.name == "Tree Right")
             {
                 character.GetComponent<SpriteRenderer>().flipX = true;
@@ -59,10 +58,9 @@ namespace GameHeaven.BingleGame
 
         }
 
-
-        public void SetTreeType(TreeType type)
+        public void SetTreeType(int type)
         {
-            transform.GetComponent<SpriteRenderer>().sprite = flagSprites[(int)type];
+            transform.GetComponent<SpriteRenderer>().sprite = flagSprites[type];
         }
 
         public void ResetTree()

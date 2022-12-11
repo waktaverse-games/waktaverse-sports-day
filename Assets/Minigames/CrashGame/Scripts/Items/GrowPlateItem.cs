@@ -11,7 +11,7 @@ namespace GameHeaven.CrashGame
 
         public override void ActivateItem()
         {
-            player = GameManager.Instance.platform;
+            player = MiniGameManager.Instance.platform;
             platform = player.Platform;
             // «√∑ß∆˚¿Ã 1.2πË ≥–æÓ¡¸: 3¡ﬂ√∏±Ó¡ˆ
             Debug.Log("GrowPlate Item Acquired");
@@ -21,7 +21,7 @@ namespace GameHeaven.CrashGame
                 platformScale = new Vector3(platformScale.x * 1.2f, platformScale.y, platformScale.z);
                 platform.localScale = platformScale;
             }
-            GameManager.Instance.UI.ShowItemEffect("¿Ôπ› ≈©±‚ ¡ı∞°!");
+            MiniGameManager.Instance.UI.ShowItemEffect("¿Ôπ› ≈©±‚ ¡ı∞°!");
         }
     }
 }

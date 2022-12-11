@@ -1,65 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameHeaven.Root;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SharedLibs.Score
 {
     public class ScoreManager : MonoSingleton<ScoreManager>
     {
-        [System.Serializable]
-        public class ScoreDicValue
-        {
-            public MinigameType type;
-            public int score;
-        }
+        private List<ScoreDB> _dbList;
 
-        [SerializeField] private List<ScoreDicValue> scoreList;
-        private Dictionary<MinigameType, int> scoreDic;
+        [SerializeField] private ScoreGoalObject goalObject;
 
-        /// <summary>
-        /// (added score, total score, origin score)
-        /// </summary>
-        public Action<int, int> OnAddScore;
-        /// <summary>
-        /// (new score, prev score)
-        /// </summary>
-        public Action<int, int> OnSetScore;
-
-        public int AllScore { get; private set; }
+        public static event Action<MinigameType, int> OnHighScoreChanged; 
 
         public override void Init()
         {
-            scoreDic = new Dictionary<MinigameType, int>();
-            foreach (var data in scoreList)
+            _dbList = GameDatabase.Instance.DB.scoreDBList;
+        }
+
+        public async void SetGameHighScore(MinigameType type, int score)
+        {
+            if (GameManager.GameMode != GameMode.MinigameMode) return;
+            
+            var rewardGoals = goalObject.GetRewardGoals(type);
+            var scoreDb = _dbList.Find((data) => data.type == type);
+                
+            for (var i = 0; i < rewardGoals.Length; i++)
             {
-                scoreDic.Add(data.type, data.score);
+                if (score < rewardGoals[i]) continue;
+                    
+                if ((scoreDb.achievement & (1 << i)) == 0)
+                {
+                    scoreDb.achievement |= (1 << i);
+                    PuzzleManager.GetPuzzlePiece();
+                }
             }
-        }
-
-        public void AddGameRoundScore(MinigameType type, int score)
-        {
-            OnAddScore?.Invoke(score, scoreDic[type]);
             
-            AllScore += score;
-            scoreDic[type] += score;
-#if UNITY_EDITOR
-            scoreList.Find((val) => val.type == type).score += score;
-#endif
-        }
-
-        public void SetGameHighScore(MinigameType type, int score)
-        {
-            OnAddScore?.Invoke(score, scoreDic[type]);
-            
-            scoreDic[type] = score;
-#if UNITY_EDITOR
-            scoreList.Find((val) => val.type == type).score = score;
-#endif
+            if (score > scoreDb.highScore)
+            {
+                scoreDb.highScore = score;
+                OnHighScoreChanged?.Invoke(type, score);
+                // PlayFabManager.Instance.RenewHighScore(type, score);
+            }
         }
 
         public int GetGameScore(MinigameType type)
         {
-            return scoreDic[type];
+            var scoreData = _dbList.Find((data) => data.type == type);
+            return scoreData.highScore;
+        }
+        
+        public int GetGameTargetScore(MinigameType type)
+        {
+            return goalObject.GetStoryGoal(type);
         }
     }
 }

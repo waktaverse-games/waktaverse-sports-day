@@ -7,6 +7,7 @@ namespace GameHeaven.CrashGame
     public abstract class Item : MonoBehaviour, IDestroyEffect
     {
         // Parent Class of all items
+
         private GameObject destroyEffect;
 
         public abstract void ActivateItem();        // æ∆¿Ã≈€ »πµÊ Ω√ ¡Ôπﬂ
@@ -28,6 +29,20 @@ namespace GameHeaven.CrashGame
 
         public void DestroyAfterEffect()
         {
+            Destroy(gameObject);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.tag == "Bottom")
+            {
+                StartCoroutine(TimeoutDestroy(2));
+            }
+        }
+
+        private IEnumerator TimeoutDestroy(int seconds)
+        {
+            yield return new WaitForSeconds(seconds);
             Destroy(gameObject);
         }
     }

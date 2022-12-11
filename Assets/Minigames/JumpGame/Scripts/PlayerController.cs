@@ -116,11 +116,12 @@ namespace GameHeaven.JumpGame
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.name.Equals("Rope Collider"))
+            if(collision.name.Equals("Rope Collider") || collision.gameObject.tag == "Enemy")
             {
                 if(GameManager.Instance.isInvincible) // 무적이면
                 {
                     GameManager.Instance.SetInvinsible(false);
+                    SoundManager.Instance.PlayHitSound();
                     OnCollideWithRope.Invoke();
                     StartCoroutine(OnDamaged());
                 }

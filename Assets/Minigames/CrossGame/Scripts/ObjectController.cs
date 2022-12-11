@@ -8,122 +8,122 @@ namespace GameHeaven.CrossGame
     public class ObjectController : MonoBehaviour
     {
         [Header("Objects")]
-        public CrossGameManager Manager;
-        public GameObject PlatformPrefab;
-        public Player Player;
-        public GameObject StarPrefab;
-        public Transform ObjectGroup;
-        public List<GameObject> BackGround = new List<GameObject>();
+        public CrossGameManager manager;
+        public GameObject platformPrefab;
+        public Player player;
+        public GameObject starPrefab;
+        public Transform objectGroup;
+        public List<GameObject> backGround = new List<GameObject>();
         public List<Sprite> normalSprite = new List<Sprite>();
 
         [Header("Setting")]
 
         [Range(1f, 20f)]
-        public float MovementSpeed;
+        public float movementSpeed;
         [Range(1f, 10f)]
-        public float JumpSpeed;
-        List<Platform> Platforms = new List<Platform>();
+        public float jumpSpeed;
+        List<Platform> platforms = new List<Platform>();
         [HideInInspector]
-        public List<GameObject> Stars = new List<GameObject>();
-        public float DefaultMovementSpeed;
+        public List<GameObject> stars = new List<GameObject>();
+        public float defaultMovementSpeed;
 
 
         //플랫폼 이동
         [Header("Platform")]
-        public float PlatformSpace;
+        public float platformSpace;
         [Range(0f, 1f)]
-        public float TrapProbability;
+        public float trapProbability;
         [Range(0f, 1f)]
-        public float StarProbability;
+        public float starProbability;
         [Range(0f, 1f)]
-        public float ItemProbability;
-        int PlatformCurosr = 0;
-        int LandPlatformNum = 0, MakePlatformNum = 6;
-        Dictionary<int, bool> PlatformInformation = new Dictionary<int, bool>();
-        float MoveCount;
-        bool CurrentFlatformIsActive;
+        public float itemProbability;
+        int platformCurosr = 0;
+        int landPlatformNum = 0, makePlatformNum = 6;
+        Dictionary<int, bool> platformInformation = new Dictionary<int, bool>();
+        float moveCount;
+        bool currentFlatformIsActive;
 
         //점프
-        float JumpTime;
-        int JumpCount = 0;
-        bool ReadyJump = false;
-        Vector3 LandPos;
-        Sequence MoveSequence;
-        Sequence UpDownSequence;
-        bool PlayerPositionIsLimited;
-        float TotalMoveCountLeft = 0;
-        float TotalMoveCountRight = 0;
+        float jumpTime;
+        int jumpCount = 0;
+        bool readyJump = false;
+        Vector3 landPos;
+        Sequence moveSequence;
+        Sequence upDownSequence;
+        bool playerPositionIsLimited;
+        float totalMoveCountLeft = 0;
+        float totalMoveCountRight = 0;
 
         //배경
-        float BackGroundMoveCount;
+        float backGroundMoveCount;
 
         //아이템
         [Header("Item")]
-        public GameObject FlyItemPrefab;
-        bool IsFly = false;
-        float FlyCount = 0;
-        float FlyCountInPlatform = 0;
-        int FLyLandFlatformNum;
-        int FlyDistance = 20;
-        int FlatformNumWhenMakeFlyItem = -20;
-        public Animator Effect;
+        public GameObject flyItemPrefab;
+        bool isFly = false;
+        float flyCount = 0;
+        float flyCountInPlatform = 0;
+        int flyLandFlatformNum;
+        int flyDistance = 20;
+        int flatformNumWhenMakeFlyItem = -20;
+        public Animator effect;
         [HideInInspector]
-        public List<GameObject> FlyItems = new List<GameObject>();
+        public List<GameObject> flyItems = new List<GameObject>();
 
         private void Awake()
         {
             Vector3 ObjPos = new Vector3(-10, -3);
             for (int i = 0; i < 11; i++)
             {
-                GameObject tmp = Instantiate(PlatformPrefab, ObjPos, Quaternion.identity, ObjectGroup);
+                GameObject tmp = Instantiate(platformPrefab, ObjPos, Quaternion.identity, objectGroup);
                 ObjPos += Vector3.right * 2;
-                Platforms.Add(tmp.GetComponent<Platform>());
+                platforms.Add(tmp.GetComponent<Platform>());
             }
             for (int i = 1; i <= 6; i++)
             {
-                PlatformInformation.Add(i, true);
+                platformInformation.Add(i, true);
             }
         }
 
         private void Update()
         {
-            if (Manager.IsOver)
+            if (manager.IsStop)
             {
                 return;
             }
 
             //점프 선입력
-            if (ReadyJump && !IsFly)
+            if (readyJump && !isFly)
             {
-                if (JumpCount == 0 && JumpTime == 0)
+                if (jumpCount == 0 && jumpTime == 0)
                 {
                     PlayerJump();
-                    ReadyJump = false;
+                    readyJump = false;
                 }
             }
 
             //점프
-            if (Input.GetKeyDown(KeyCode.Space) && !IsFly)
+            if (Input.GetKeyDown(KeyCode.Space) && !isFly)
             {
-                if (JumpCount == 0 && JumpTime == 0)
+                if (jumpCount == 0 && jumpTime == 0)
                 {
                     PlayerJump();
                 }
-                else if (JumpCount == 1 && JumpTime * JumpSpeed < 0.5f)
+                else if (jumpCount == 1 && jumpTime * jumpSpeed < 0.5f)
                 {
                     PlayerDoubleJump();
                 }
 
-           /*     if(JumpTime * JumpSpeed > 0.5f)
+                if (jumpTime * jumpSpeed > 0.7f)
                 {
-                    ReadyJump = true;
-                }*/
+                    readyJump = true;
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.X))
             {
-                Effect.transform.position = Player.transform.position;
-                Effect.SetTrigger("Boom");
+                effect.transform.position = player.transform.position;
+                effect.SetTrigger("Boom");
             }
             if (Input.GetKeyDown(KeyCode.C))
             {
@@ -132,116 +132,117 @@ namespace GameHeaven.CrossGame
 
             //플레이어 이동
             float DeltaDistance;
-            if (IsFly)
+            if (isFly)
             {
                 DeltaDistance = 20 * Time.deltaTime;
-                FlyCount += DeltaDistance;
-                FlyCountInPlatform += DeltaDistance;
-                if(FlyCountInPlatform > 2){
-                    FlyCountInPlatform -= 2;
-                    Manager.AddScore(10);
+                flyCount += DeltaDistance;
+                flyCountInPlatform += DeltaDistance;
+                if(flyCountInPlatform > 2){
+                    flyCountInPlatform -= 2;
+                    manager.AddScore(10);
                     Balanceing();
                 }
-                if (FlyCount > 40)
+                if (flyCount > 40)
                 {
-                    FlyCount = 0;
+                    totalMoveCountLeft -= 40;
+                    flyCount = 0;
                     EndFly();
                 }
             }
             else
             {
-                DeltaDistance = MovementSpeed * Time.deltaTime;
-                Player.transform.position += Vector3.left * DeltaDistance;
-                TotalMoveCountLeft += DeltaDistance;
+                DeltaDistance = movementSpeed * Time.deltaTime;
+                player.transform.position += Vector3.left * DeltaDistance;
             }
 
-            MoveCount += DeltaDistance;
+            moveCount += DeltaDistance;
+            totalMoveCountLeft += DeltaDistance;
 
             //배경 이동
-            BackGround[0].transform.position += Vector3.left * DeltaDistance * 0.3f;
-            BackGround[1].transform.position += Vector3.left * DeltaDistance * 0.3f;
-            BackGroundMoveCount += DeltaDistance * 0.3f;
-            if (BackGroundMoveCount >= 26.78f)
+            backGround[0].transform.position += Vector3.left * DeltaDistance * 0.3f;
+            backGround[1].transform.position += Vector3.left * DeltaDistance * 0.3f;
+            backGroundMoveCount += DeltaDistance * 0.3f;
+            if (backGroundMoveCount >= 26.78f)
             {
-                BackGroundMoveCount -= 26.78f;
-                BackGround[0].transform.position += Vector3.right * 26.78f;
-                BackGround[1].transform.position += Vector3.right * 26.78f;
+                backGroundMoveCount -= 26.78f;
+                backGround[0].transform.position += Vector3.right * 26.78f;
+                backGround[1].transform.position += Vector3.right * 26.78f;
             }
 
             //플랫폼 이동
-            foreach (Platform tmp in Platforms)
+            foreach (Platform tmp in platforms)
             {
                 tmp.transform.position += Vector3.left * DeltaDistance;
             }
-            if (MoveCount >= 2)
+            if (moveCount >= 2)
             {
-                MoveCount -= 2;
+                moveCount -= 2;
                 RepositionPlatform();
             }
 
             //아이템 이동
-            for (int i = 0; i < Stars.Count; i++)
+            for (int i = 0; i < stars.Count; i++)
             {
-                Stars[i].transform.position += Vector3.left * DeltaDistance;
+                stars[i].transform.position += Vector3.left * DeltaDistance;
             }
 
-            for (int i = 0; i < FlyItems.Count; i++)
+            for (int i = 0; i < flyItems.Count; i++)
             {
-                FlyItems[i].transform.position += Vector3.left * DeltaDistance * 1.5f;
+                flyItems[i].transform.position += Vector3.left * DeltaDistance * 1.5f;
             }
 
             //이펙트 이동
-            if (-15 < Effect.transform.position.x) Effect.transform.position += Vector3.left * DeltaDistance;
+            if (-15 < effect.transform.position.x) effect.transform.position += Vector3.left * DeltaDistance;
 
-            if (IsFly) return;
+            if (isFly) return;
             //오른쪽 벽에 근접한 상황에서 속도를 조절하는 로직
-            if (JumpCount >= 1)
+            if (jumpCount >= 1)
             {
                 //다가갈 때
-                if (Player.transform.position.x > 4 && !PlayerPositionIsLimited)
+                if (player.transform.position.x > 4 && !playerPositionIsLimited)
                 {
-                    DefaultMovementSpeed = MovementSpeed;
-                    MovementSpeed = DefaultMovementSpeed * 0.5f + JumpSpeed * 4;
-                    UpdateLandPoint(DefaultMovementSpeed, MovementSpeed);
-                    PlayerPositionIsLimited = true;
+                    defaultMovementSpeed = movementSpeed;
+                    movementSpeed = defaultMovementSpeed * 0.5f + jumpSpeed * 4;
+                    UpdateLandPoint(defaultMovementSpeed, movementSpeed);
+                    playerPositionIsLimited = true;
                 }
                 //다시 멀어졌을 떄
-                else if (Player.transform.position.x <= 4 && PlayerPositionIsLimited)
+                else if (player.transform.position.x <= 4 && playerPositionIsLimited)
                 {
-                    UpdateLandPoint(MovementSpeed, DefaultMovementSpeed);
-                    MovementSpeed = DefaultMovementSpeed;
-                    PlayerPositionIsLimited = false;
+                    UpdateLandPoint(movementSpeed, defaultMovementSpeed);
+                    movementSpeed = defaultMovementSpeed;
+                    playerPositionIsLimited = false;
                 }
                 //점프 시간 계산
-                JumpTime += Time.deltaTime;
+                jumpTime += Time.deltaTime;
             }
             else
             {
                 //점프하지 않은 상황에서 멀어졌을 때
-                if (Player.transform.position.x <= 4 && PlayerPositionIsLimited)
+                if (player.transform.position.x <= 4 && playerPositionIsLimited)
                 {
-                    MovementSpeed = DefaultMovementSpeed;
-                    PlayerPositionIsLimited = false;
+                    movementSpeed = defaultMovementSpeed;
+                    playerPositionIsLimited = false;
                 }
                 //점프 시간 초기화
-                JumpTime = 0;
+                jumpTime = 0;
             }
         }
         public void PlayerJump()
         {
-            JumpCount++;
-            LandPlatformNum++;
-            TotalMoveCountRight += 2;
+            jumpCount++;
+            landPlatformNum++;
+            totalMoveCountRight += 2;
             //print(LandPlatformNum);
-            Player.CntAnimator.SetFloat("JumpSpeed", 0.4f * JumpSpeed);
-            Player.CntAnimator.SetTrigger("Jump");
-            Manager.SoundManager.Play("Jump1");
-            float Time = 1f / JumpSpeed;
-            LandPos = Player.transform.position + Vector3.right * (2 - Time * MovementSpeed);
+            player.cntAnimator.SetFloat("JumpSpeed", 0.4f * jumpSpeed);
+            player.cntAnimator.SetTrigger("Jump");
+            manager.soundManager.SfxPlay("Jump1");
+            float Time = 1f / jumpSpeed;
+            landPos = player.transform.position + Vector3.right * (2 - Time * movementSpeed);
             //JumpSequence = Player.transform.DOJump(LandPos, 2f, 1, Time);
-            UpDownSequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2, Time / 2)).Append(Player.transform.DOMoveY(LandPos.y, Time / 2));
-            MoveSequence = DOTween.Sequence().Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() => {
-                if (JumpCount == 1)
+            upDownSequence = DOTween.Sequence().Append(player.transform.DOMoveY(landPos.y + 2, Time / 2)).Append(player.transform.DOMoveY(landPos.y, Time / 2));
+            moveSequence = DOTween.Sequence().Append(player.transform.DOMoveX(landPos.x, Time)).AppendCallback(() => {
+                if (jumpCount == 1)
                 {
                     JumpCallBack();
                 }
@@ -250,11 +251,11 @@ namespace GameHeaven.CrossGame
 
         public void UpdateLandPoint(float OldSpeed, float NewSpeed)
         {
-            MoveSequence.Kill();
-            float Time = (1f / JumpSpeed) - JumpTime;
-            LandPos = LandPos - Vector3.right * Time * (NewSpeed - OldSpeed);
-            MoveSequence = DOTween.Sequence();
-            MoveSequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() =>
+            moveSequence.Kill();
+            float Time = (1f / jumpSpeed) - jumpTime;
+            landPos = landPos - Vector3.right * Time * (NewSpeed - OldSpeed);
+            moveSequence = DOTween.Sequence();
+            moveSequence.Append(player.transform.DOMoveX(landPos.x, Time)).AppendCallback(() =>
             {
                 JumpCallBack();
             });
@@ -262,26 +263,26 @@ namespace GameHeaven.CrossGame
 
         public void PlayerDoubleJump()
         {
-            if (IsFly)
+            if (isFly)
             {
                 return;
             }
             else
             {
-                UpDownSequence.Kill();
-                MoveSequence.Kill();
+                upDownSequence.Kill();
+                moveSequence.Kill();
             }
-            JumpCount++;
-            LandPlatformNum++;
-            TotalMoveCountRight += 2;
+            jumpCount++;
+            landPlatformNum++;
+            totalMoveCountRight += 2;
             //print(LandPlatformNum);
-            float Time = (1f / JumpSpeed) - JumpTime;
-            float UpTime = Time - (1f / JumpSpeed) / 2;
-            float DownTime = (1f / JumpSpeed) / 2;
-            LandPos = LandPos + Vector3.right * 2;
-            UpDownSequence = DOTween.Sequence().Append(Player.transform.DOMoveY(LandPos.y + 2.3f, UpTime)).Append(Player.transform.DOMoveY(LandPos.y, DownTime));
-            MoveSequence = DOTween.Sequence();
-            MoveSequence.Append(Player.transform.DOMoveX(LandPos.x, Time)).AppendCallback(() =>
+            float Time = (1f / jumpSpeed) - jumpTime;
+            float UpTime = Time - (1f / jumpSpeed) / 2;
+            float DownTime = (1f / jumpSpeed) / 2;
+            landPos = landPos + Vector3.right * 2;
+            upDownSequence = DOTween.Sequence().Append(player.transform.DOMoveY(landPos.y + 2.3f, UpTime)).Append(player.transform.DOMoveY(landPos.y, DownTime));
+            moveSequence = DOTween.Sequence();
+            moveSequence.Append(player.transform.DOMoveX(landPos.x, Time)).AppendCallback(() =>
             {
                 JumpCallBack();
             });
@@ -289,79 +290,79 @@ namespace GameHeaven.CrossGame
 
         public void Fly()
         {
-            if (IsFly) return;
-            MoveSequence.Pause<Sequence>();
-            UpDownSequence.Pause<Sequence>();
-            Effect.transform.position = Player.transform.position;
-            Effect.SetTrigger("Boom");
-            Player.CntAnimator.SetBool("Fly", true);
-            Manager.SoundManager.Play("Pickup1");
-            FLyLandFlatformNum = LandPlatformNum + FlyDistance;
-            LandPlatformNum += FlyDistance;
+            if (isFly) return;
+            moveSequence.Pause<Sequence>();
+            upDownSequence.Pause<Sequence>();
+            effect.transform.position = player.transform.position;
+            effect.SetTrigger("Boom");
+            player.cntAnimator.SetBool("Fly", true);
+            manager.soundManager.SfxPlay("PickUp1");
+            flyLandFlatformNum = landPlatformNum + flyDistance;
+            landPlatformNum += flyDistance;
             //print(FLyLandFlatformNum);
-            IsFly = true;
+            isFly = true;
         }
 
         public void EndFly()
         {
-            MoveSequence.Play<Sequence>();
-            UpDownSequence.Play<Sequence>();
-            Effect.transform.position = Player.transform.position;
-            Effect.SetTrigger("Boom");
-            Player.CntAnimator.SetBool("Fly", false);
-            IsFly = false;
+            moveSequence.Play<Sequence>();
+            upDownSequence.Play<Sequence>();
+            effect.transform.position = player.transform.position;
+            effect.SetTrigger("Boom");
+            player.cntAnimator.SetBool("Fly", false);
+            isFly = false;
         }
 
         void JumpCallBack()
         {
-            Manager.AddScore(JumpCount * 10);
+            manager.AddScore(jumpCount * 10);
             Balanceing();
-            if (JumpCount == 2) Balanceing();
+            if (jumpCount == 2) Balanceing();
             //float num = Player.transform.position.x;
             //num = Mathf.Round(num + MoveCount) - MoveCount;
-            float num = TotalMoveCountRight - TotalMoveCountLeft - 2.1f;
+            float num = totalMoveCountRight - totalMoveCountLeft - 2.1f;
             //0.1은 스프라이트 크기에 의한 보정
-            Player.transform.position = new Vector3(num, -1.7f);
+            player.transform.position = new Vector3(num, -1.7f);
 
-            if (LandPlatformNum <= MakePlatformNum && !PlatformInformation[LandPlatformNum])
+            if (landPlatformNum <= makePlatformNum && !platformInformation[landPlatformNum])
             {
-                Manager.GameOver();
+                manager.GameOver();
             }
 
-            JumpCount = 0;
+            jumpCount = 0;
         }
 
         public void RepositionPlatform()
         {
-            MakePlatformNum++;
+            makePlatformNum++;
             //print("m:" + MakePlatformNum);
-            if (MakePlatformNum > 11) PlatformInformation.Remove(MakePlatformNum - 11);
+            if (makePlatformNum > 11) platformInformation.Remove(makePlatformNum - 11);
 
-            if (MakePlatformNum == FLyLandFlatformNum || !CurrentFlatformIsActive || Random.Range(0f, 1f) > TrapProbability)
+            if (makePlatformNum == flyLandFlatformNum || !currentFlatformIsActive || Random.Range(0f, 1f) > trapProbability)
             {
-                Platforms[PlatformCurosr].gameObject.SetActive(true);
-                CurrentFlatformIsActive = true;
-                PlatformInformation.Add(MakePlatformNum, true);
-                Platforms[PlatformCurosr].Set();
+                platforms[platformCurosr].gameObject.SetActive(true);
+                currentFlatformIsActive = true;
+                platformInformation.Add(makePlatformNum, true);
+                platforms[platformCurosr].Set();
             }
             else
             {
-                Platforms[PlatformCurosr].gameObject.SetActive(false);
-                CurrentFlatformIsActive = false;
-                PlatformInformation.Add(MakePlatformNum, false);
+                platforms[platformCurosr].gameObject.SetActive(false);
+                currentFlatformIsActive = false;
+                platformInformation.Add(makePlatformNum, false);
             }
 
-            Platforms[PlatformCurosr++].transform.position += Vector3.right * PlatformSpace * 11;
+            platforms[platformCurosr++].transform.position += Vector3.right * platformSpace * 11;
 
-            if (Platforms.Count <= PlatformCurosr) PlatformCurosr = 0;
+            if (platforms.Count <= platformCurosr) platformCurosr = 0;
 
-            if ((MakePlatformNum > FlatformNumWhenMakeFlyItem + 30) && Random.Range(0f, 1f) < ItemProbability) MakeFlyItem();
-            if (Random.Range(0f, 1f) < StarProbability) MakeStar(CurrentFlatformIsActive);
+            if ((makePlatformNum > flatformNumWhenMakeFlyItem + 30) && Random.Range(0f, 1f) < itemProbability) MakeFlyItem();
+            if (Random.Range(0f, 1f) < starProbability) MakeStar(currentFlatformIsActive);
         }
 
         public void MakeStar(bool CurrentFlatformIsActive)
         {
-            GameObject InstanceStar = Instantiate(StarPrefab, new Vector3(10, 1.3f), Quaternion.identity, ObjectGroup);
+            GameObject InstanceStar = Instantiate(starPrefab, new Vector3(10, 1.3f), Quaternion.identity, objectGroup);
             Star InstanceScript = InstanceStar.GetComponent<Star>();
             float num = Random.Range(0f, 1f);
             if (num < 0.5f)
@@ -383,30 +384,30 @@ namespace GameHeaven.CrossGame
             }
             InstanceScript.SetAnim();
             InstanceScript.Move();
-            InstanceScript.Manager = Manager;
-            Stars.Add(InstanceStar);
+            InstanceScript.manager = manager;
+            stars.Add(InstanceStar);
         }
 
         public void MakeFlyItem()
         {
-            FlatformNumWhenMakeFlyItem = MakePlatformNum;
-            GameObject InstanceItem = Instantiate(FlyItemPrefab, new Vector3(11, 0.5f), Quaternion.identity, ObjectGroup);
+            flatformNumWhenMakeFlyItem = makePlatformNum;
+            GameObject InstanceItem = Instantiate(flyItemPrefab, new Vector3(11, 0.5f), Quaternion.identity, objectGroup);
             FlyItem InstanceScript = InstanceItem.GetComponent<FlyItem>();
             float num = Random.Range(0f, 1f);
             InstanceScript.Move();
-            InstanceScript.Manager = Manager;
-            FlyItems.Add(InstanceItem);
+            InstanceScript.manager = manager;
+            flyItems.Add(InstanceItem);
         }
 
         void Balanceing()
         {
-            if (MovementSpeed < 6.5f)
+            if (movementSpeed < 6.5f)
             {
-                MovementSpeed += 0.04f;
+                movementSpeed += 0.03f;
             }
-            else if (MovementSpeed < 8.8f)
+            else if (movementSpeed < 8.8f)
             {
-                MovementSpeed += 0.005f;
+                movementSpeed += 0.005f;
             }
         }
     }

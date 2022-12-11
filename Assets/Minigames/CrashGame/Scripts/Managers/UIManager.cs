@@ -18,12 +18,18 @@ namespace GameHeaven.CrashGame
         //private Text coin;
 
         [SerializeField]
-        private GameObject GameOverUI;
+        private GameObject gameOverUI;
         [SerializeField]
-        private GameObject PerfectBonusUI;
+        private GameObject perfectBonusUI;
+        [SerializeField]
+        private TextMeshProUGUI countdownUI;
+        [SerializeField]
+        public AnimationCounter counterPrefab;
 
         private Coroutine itemEffectCoroutine;
         private Vector3 itemEffectPos = new Vector3(0, 100f, 0);
+
+        private Coroutine countdownFadeCoroutine;
 
 
         public void SetScoreText(int score)
@@ -43,50 +49,71 @@ namespace GameHeaven.CrashGame
 
         public void GameOver()
         {
-            GameOverUI.SetActive(true);
+            //gameOverUI.SetActive(true);
         }
 
         public void GameRestart()
         {
-            GameOverUI.SetActive(false);
+            gameOverUI.SetActive(false);
+        }
+
+        public IEnumerator CountDownRoutine()
+        {
+            countdownUI.gameObject.SetActive(true);
+            SetCountdownText("3");
+            yield return new WaitForSeconds(.5f);
+            SetCountdownText("2");
+            yield return new WaitForSeconds(.5f);
+            SetCountdownText("1");
+            yield return new WaitForSeconds(.5f);
+            SetCountdownText("Start!");
+            MiniGameManager.Instance.GameStart();
+            yield return new WaitForSeconds(.5f);
+            countdownUI.gameObject.SetActive(false);
+        }
+
+        private void SetCountdownText(string text)
+        {
+            countdownUI.text = text;
+            if (countdownFadeCoroutine != null) StopCoroutine(countdownFadeCoroutine);
+            countdownFadeCoroutine = StartCoroutine(FadeText(countdownUI, false));
         }
 
         public IEnumerator PerfectBonus()
         {
-            PerfectBonusUI.SetActive(true);
+            perfectBonusUI.SetActive(true);
             yield return new WaitForSeconds(1.5f);
-            PerfectBonusUI.SetActive(false);
+            perfectBonusUI.SetActive(false);
         }
 
         public void RestartGame()
         {
-            GameManager.Instance.GameStart();
-            GameOverUI.SetActive(false);
+            MiniGameManager.Instance.GameReStart();
+            gameOverUI.SetActive(false);
         }
 
         public void ShowItemEffect(string effect)
         {
             if (itemEffectCoroutine != null) StopCoroutine(itemEffectCoroutine);
-            Color textColor = itemEffectText.color;
-            textColor.a = 1f;
-            itemEffectText.color = textColor;
-            itemEffectText.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.platform.transform.position) + itemEffectPos;
+            itemEffectText.transform.position = Camera.main.WorldToScreenPoint(MiniGameManager.Instance.platform.transform.position) + itemEffectPos;
             itemEffectText.text = effect;
             itemEffectText.gameObject.SetActive(true);
-            itemEffectCoroutine = StartCoroutine(FadeText());
+            itemEffectCoroutine = StartCoroutine(FadeText(itemEffectText, false));
         }
 
-        private IEnumerator FadeText()
+        private IEnumerator FadeText(TextMeshProUGUI textUI, bool floatText, float interval = .05f)
         {
-            Color textColor = itemEffectText.color;
+            Color textColor = textUI.color;
+            textColor.a = 1f;
+            itemEffectText.color = textColor;
             while (textColor.a > 0.05f)
             {
                 textColor.a *= 0.8f;
-                itemEffectText.color = textColor;
-                itemEffectText.transform.Translate(0, 5f, 0);
-                yield return new WaitForSeconds(.05f);
+                textUI.color = textColor;
+                if (floatText) textUI.transform.Translate(0, 5f, 0);
+                yield return new WaitForSeconds(interval);
             }
-            itemEffectText.gameObject.SetActive(false);
+            textUI.gameObject.SetActive(false);
         }
     }
 }

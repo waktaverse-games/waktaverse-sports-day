@@ -17,6 +17,7 @@ namespace GameHeaven.StickyGame
         {
             anim = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
+            currChar = SharedLibs.Character.CharacterManager.Instance.CurrentCharacter;
             ChooseCharacter(currChar);
         }
 

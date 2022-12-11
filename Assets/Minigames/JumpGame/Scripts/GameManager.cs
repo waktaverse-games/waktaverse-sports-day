@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using SharedLibs;
+using SharedLibs.Score;
 
 namespace GameHeaven.JumpGame
 {
@@ -17,18 +19,15 @@ namespace GameHeaven.JumpGame
         public bool IsGameOver { get => isGameOver; }
         public bool isInvincible { get; private set; }
         public int JumpSuccessCount { get => jumpSuccessCount; }
-
-        [SerializeField] GameObject buttons;
-        [SerializeField] GameObject readyButton;
-        [SerializeField] GameObject startButton;
-        [Space]
-        [SerializeField]
-        GameObject[] objects;
-
+        public int Score { get => totalScore; }
+        [SerializeField] AnimationCounter counter;
+        [SerializeField] GameObject[] objects;
         [SerializeField] TextMeshProUGUI scoreText;
+        [SerializeField] TextMeshProUGUI textEffect;
         [SerializeField] int jumpSuccessCount = 0;
 
-        private float totalScore = 0;
+        private Coroutine textEffectCoroutine;
+        private int totalScore = 0;
         bool isGameStart = false;
         bool isGameOver;
         #region Singleton
@@ -47,34 +46,27 @@ namespace GameHeaven.JumpGame
         }
         #endregion
 
-        private void Start()
+        private void OnEnable()
         {
-            scoreText.text = "Á¡¼ö : 0";
-            StartCoroutine(StartGame());
+            counter.OnEndCount += () =>
+            {
+                GameStart();
+            };
         }
-        private void Update()
+
+        void GameStart()
         {
-            Retry();
-        }
-        IEnumerator StartGame()
-        {
-            yield return new WaitForSeconds(0.1f);
-            readyButton.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            readyButton.SetActive(false);
-            startButton.SetActive(true);
+            scoreText.text = "ï¿½ï¿½ï¿½ï¿½ : 0";
             isGameStart = true;
             SoundManager.Instance.PlayBGM();
             ObjectTurnOnOff(true);
             GameStartEvent.Invoke();
-            yield return new WaitForSeconds(1f);
-            startButton.SetActive(false);
         }
 
         public void IncreaseScore(int score)
         {
             totalScore += score;
-            scoreText.text = "Á¡¼ö : " + totalScore.ToString();
+            scoreText.text = "ï¿½ï¿½ï¿½ï¿½ : " + totalScore.ToString();
         }
         public void IncreaseJumpSuccessCount()
         {
@@ -97,22 +89,33 @@ namespace GameHeaven.JumpGame
             GameEndEvent.Invoke();
             ObjectTurnOnOff(false);
             isGameOver = true;
-            buttons.SetActive(true);
+            SoundManager.Instance.TurnOffBGM();
+            SoundManager.Instance.PlayGameOverSound();
+            ScoreManager.Instance.SetGameHighScore(MinigameType.JumpGame, totalScore);
+            GameResultManager.ShowResult(MinigameType.JumpGame, totalScore);
+        }
+        public void ShowTextEffect(string effect)
+        {
+            if (textEffectCoroutine != null) StopCoroutine(textEffectCoroutine);
+            textEffect.transform.position = Camera.main.WorldToScreenPoint(GameObject.Find("Player").transform.position) + new Vector3(0,100f,0);
+            textEffect.text = effect;
+            textEffect.gameObject.SetActive(true);
+            textEffectCoroutine = StartCoroutine(FadeText(textEffect, true));
         }
 
-        public void Restart()
+         IEnumerator FadeText(TextMeshProUGUI textUI, bool floatText, float interval = .05f)
         {
-            isGameOver = false;
-            buttons.SetActive(false);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        
-        void Retry()
-        {
-            if(Input.GetKeyDown(KeyCode.R))
+            Color textColor = textUI.color;
+            textColor.a = 1f;
+            textEffect.color = textColor;
+            while (textColor.a > 0.05f)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                textColor.a *= 0.8f;
+                textUI.color = textColor;
+                if (floatText) textUI.transform.Translate(0, 5f, 0);
+                yield return new WaitForSeconds(interval);
             }
+            textUI.gameObject.SetActive(false);
         }
 
         void ObjectTurnOnOff(bool isTurnOn)
@@ -122,5 +125,7 @@ namespace GameHeaven.JumpGame
                 obj.SetActive(isTurnOn);
             }
         }
+
+
     }
 }

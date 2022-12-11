@@ -7,7 +7,7 @@ namespace GameHeaven.CrossGame
 {
     public class FlyItem : MonoBehaviour
     {
-        public CrossGameManager Manager;
+        public CrossGameManager manager;
         public Sequence seq;
         public void Move()
         {
@@ -22,7 +22,7 @@ namespace GameHeaven.CrossGame
         public void Kill()
         {
             DOTween.Kill(gameObject.transform);
-            Manager.ObjectController.FlyItems.Remove(gameObject);
+            manager.objectController.flyItems.Remove(gameObject);
             Destroy(gameObject);
         }
 
@@ -30,7 +30,7 @@ namespace GameHeaven.CrossGame
         {
             if (collision.tag == "Player")
             {
-                Manager.ObjectController.Fly();
+                manager.objectController.Fly();
                 Kill();
             }
             else if(collision.tag == "Outline")

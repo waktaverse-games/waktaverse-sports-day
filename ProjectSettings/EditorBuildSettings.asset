@@ -6,11 +6,32 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: 38f0a3cf295dcc14d8e3e3fa1fbc1868
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: d144c1c8323186f4cb5fff878d3165bd
   - enabled: 1
     path: Assets/Scenes/ModeSelectScene.unity
     guid: cdb22a69143263b478b40eb75f5307b2
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 93dbb5b625b659c4c8a53fbfe957c38c
+  - enabled: 1
+    path: Assets/Scenes/StoryMenuScene.unity
+    guid: f0293189c1378b94ab99dc97669599e7
+  - enabled: 1
+    path: Assets/Scenes/DialogueScene.unity
+    guid: 264a96e8ee74ce5408da10010453f624
+  - enabled: 1
+    path: Assets/Scenes/MinigameMenuScene.unity
+    guid: 818a65a9c1e0e1c4591f89ec15d9f2c0
+  - enabled: 1
+    path: Assets/Scenes/SettingScene.unity
+    guid: 170fdc4652004d545a0a0279d3813f8c
+  - enabled: 1
+    path: Assets/Scenes/ResultScene.unity
+    guid: 876d71b3ee419924abc7b801a20a165a
   - enabled: 1
     path: Assets/Minigames/AttackGame/AttackGame.unity
     guid: 74911d3e0a367e046b40d9f2cd18a9be
@@ -41,5 +62,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Minigames/StickyGame/StickyGame.unity
     guid: 261fcff8c187cf040987fbdba28d32c3
+  - enabled: 1
+    path: Assets/Scenes/PrologueStoryScene.unity
+    guid: 079a0b9d7f14c3e4fb0fa780a85e608a
+  - enabled: 1
+    path: Assets/Scenes/EpilogueStoryScene.unity
+    guid: aa6efbe3d14c5784580c3753c5bb62e2
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d25b328042029f94791548d094ea8005, type: 2}

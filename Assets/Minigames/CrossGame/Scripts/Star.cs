@@ -7,7 +7,7 @@ namespace GameHeaven.CrossGame
 {
     public class Star : MonoBehaviour
     {
-        public CrossGameManager Manager;
+        public CrossGameManager manager;
         public CoinCode code; 
         public List<Sprite> sprites;
         //Animator MyAnimator;
@@ -28,7 +28,7 @@ namespace GameHeaven.CrossGame
         public void Kill()
         {
             DOTween.Kill(gameObject.transform);
-            Manager.ObjectController.Stars.Remove(gameObject);
+            manager.objectController.stars.Remove(gameObject);
             Destroy(gameObject);
         }
 
@@ -36,8 +36,8 @@ namespace GameHeaven.CrossGame
         {
             if(collision.tag == "Player")
             {
-                Manager.AddScore(10);
-                Manager.SoundManager.Play("Coin");
+                manager.AddScore(10);
+                manager.soundManager.SfxPlay("Coin");
                 Kill();
             }
             else if(collision.tag == "Outline")
