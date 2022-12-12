@@ -67,7 +67,7 @@ public class GameDatabase : MonoSingleton<GameDatabase>
 }
 
 [Serializable]
-public class GameDB : ILocalData
+public class GameDB
 {
     public StoryDB storyDB;
     public PuzzleDB puzzleDB;
@@ -121,11 +121,5 @@ public class PuzzleDB
 public class ScoreDB
 {
     public MinigameType type;
-    public int highScore;
     public int achievement;
-}
-
-public interface ILocalData
-{
-    void ResetData();
 }

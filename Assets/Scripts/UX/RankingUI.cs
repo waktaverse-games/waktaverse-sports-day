@@ -13,8 +13,8 @@ namespace GameHeaven.UIUX
 
         public async void SetRankingUI(MinigameType type)
         {
-            var leaderboard = PlayFabManager.Instance.GetLeaderboard(type);
-            var player = PlayFabManager.Instance.GetLeaderBoardAroundPlayer(type);
+            var leaderboard = PlayFabManager.Instance.GetLeaderboardData(type);
+            var player = PlayFabManager.Instance.GetLeaderBoardAroundPlayerData(type);
             
             for (int i = 0; i < top5RankingUI.Length; i++)
             {
@@ -33,28 +33,30 @@ namespace GameHeaven.UIUX
                 }
             }
             
-            myHighRankingUI.text = player == null ? "기록 없음" : $"{player.Position + 1}위";
+            myHighRankingUI.text = player is { StatValue: > 0 } ?  $"{player.Position + 1}위" : "기록 없음";
         }
 
         public async void SetRankingBoard(MinigameType type)
         {
-            var leaderboard = PlayFabManager.Instance.GetLeaderboard(type);
-            var player = PlayFabManager.Instance.GetLeaderBoardAroundPlayer(type);
+            var leaderboard = PlayFabManager.Instance.GetLeaderboardData(type);
+            var player = PlayFabManager.Instance.GetLeaderBoardAroundPlayerData(type);
 
-            int i = 0;
-            foreach (var data in leaderboard)
+            var boardSize = Mathf.Min(leaderboard.Count, 10);
+            for (var i = 0; i < boardSize; i++)
             {
+                var data = leaderboard[i];
                 rankingList.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = data.DisplayName;
                 rankingList.transform.GetChild(i).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = data.StatValue.ToString();
-                i++;
-                if (i > 9) return; // 10위까지만 표시
-
-                //rankingStr += $"[{data.Position + 1}위] {data.DisplayName} : {data.StatValue}점\n";
+            }
+            for (var i = boardSize; i < 10; i++)
+            {
+                rankingList.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "-";
+                rankingList.transform.GetChild(i).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = "-";
             }
 
             transform.GetChild(6).GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = player.DisplayName;
-            transform.GetChild(6).GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().text = player.StatValue.ToString();
-            transform.GetChild(6).GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = (player.Position + 1).ToString();
+            transform.GetChild(6).GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().text = player.StatValue > 0 ? player.StatValue.ToString() : "-";
+            transform.GetChild(6).GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = player.StatValue > 0 ? (player.Position + 1).ToString() : "-";
 
             //rankingList.text = rankingStr;
         }
