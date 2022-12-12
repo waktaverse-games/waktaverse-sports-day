@@ -20,7 +20,7 @@ namespace GameHeaven.UIUX
             }
             else
             {
-                PlayFabManager.Instance.UpdateDisplayName(displayName);
+                PlayFabManager.Instance.PostDisplayName(displayName);
                 if (GameDatabase.Instance.IsFirstTime) GameDatabase.Instance.IsFirstTime = false;
             }
         }

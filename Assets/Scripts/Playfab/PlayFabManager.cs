@@ -53,17 +53,13 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
     private void OnEnable()
     {
         playFabId = "";
-        ScoreManager.OnHighScoreChanged += SendLeaderboard;
-
-        // routine = StartCoroutine(LeaderBoardUpdateRoutine(delayMinute));
+        ScoreManager.OnHighScoreChanged += PostLeaderboard;
     }
     
     private void OnDisable()
     {
         playFabId = "";
-        ScoreManager.OnHighScoreChanged -= SendLeaderboard;
-        
-        // StopCoroutine(routine);
+        ScoreManager.OnHighScoreChanged -= PostLeaderboard;
     }
 
     private void Login()
@@ -86,14 +82,16 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
             if (profile != null)
                 GameDatabase.NickName = profile.DisplayName;
             else
-                UpdateDisplayName(GameDatabase.NickName);
+                PostDisplayName(GameDatabase.NickName);
 
             UpdateLeaderBoard();
         }, error => Debug.LogError("Login Failed (" + error.Error.ToString() + "): " + error.ErrorMessage));
     }
 
-    public void SendLeaderboard(MinigameType type, int score)
+    public void PostLeaderboard(MinigameType type, int score)
     {
+        leaderboardEntries.Find(ent => ent.Type == type).PlayerEntry.StatValue = score;
+        
         var req = new UpdatePlayerStatisticsRequest
         {
             Statistics = new List<StatisticUpdate>
@@ -109,33 +107,14 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
             error => Debug.LogError("Update Failed (" + error.Error.ToString() + "): " + error.ErrorMessage));
     }
 
-    public List<PlayerLeaderboardEntry> GetLeaderboard(MinigameType type)
+    public void PostDisplayName(string displayName)
     {
-        var element = leaderboardEntries.Find(t => t.Type == type);
-        return element.Entries;
-    }
+        GameDatabase.NickName = displayName;
 
-    public PlayerLeaderboardEntry GetLeaderBoardAroundPlayer(MinigameType type)
-    {
-        var element = leaderboardEntries.Find(t => t.Type == type);
-        return element.PlayerEntry;
+        var req = new UpdateUserTitleDisplayNameRequest { DisplayName = displayName };
+        PlayFabClientAPI.UpdateUserTitleDisplayName(req, result => { Debug.Log("UpdateUserTitleDisplayName Success"); },
+            error => { Debug.LogError("UpdateUserTitleDisplayName Error (" + error.Error.ToString() + "): " + error.ErrorMessage); });
     }
-
-    // private IEnumerator LeaderBoardUpdateRoutine(int delay)
-    // {
-    //     while (true)
-    //     {
-    //         if (!isLoggedIn)
-    //         {
-    //             yield return null;
-    //             continue;
-    //         }
-    //
-    //         UpdateLeaderBoard();
-    //
-    //         yield return new WaitForSeconds(delay * 60);
-    //     }
-    // }
 
     public void UpdateLeaderBoard()
     {
@@ -158,11 +137,11 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
                 StatisticName = GetStasticName(element.Type),
                 MaxResultsCount = 1
             };
-            StartCoroutine(UpdateLeaderBoardElement(element, leaderboardReq, playerReq));
+            StartCoroutine(UpdateRequestLeaderBoard(element, leaderboardReq, playerReq));
         }
     }
 
-    private IEnumerator UpdateLeaderBoardElement(PlayFabLeaderboardElement element, GetLeaderboardRequest leaderboardReq, GetLeaderboardAroundPlayerRequest playerReq)
+    private IEnumerator UpdateRequestLeaderBoard(PlayFabLeaderboardElement element, GetLeaderboardRequest leaderboardReq, GetLeaderboardAroundPlayerRequest playerReq)
     {
         var isLeaderboardComplete = false;
         var isPlayerComplete = false;
@@ -180,18 +159,10 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
         PlayFabClientAPI.GetLeaderboardAroundPlayer(playerReq, result =>
         {
             var entry = result.Leaderboard[0];
+            Debug.Log(entry.PlayFabId + " / " + entry.DisplayName);
             if (entry.PlayFabId == playFabId)
             {
-                if (entry.Position != 1 || entry.StatValue != 0)
-                {
-                    element.PlayerEntry = entry;
-                    Debug.Log(entry.Position + " : " + entry.StatValue);
-                }
-                else
-                {
-                    element.PlayerEntry = null;
-                    Debug.Log(element.Type.ToString() + " - 없음");
-                }
+                element.PlayerEntry = entry;
             }
             isPlayerComplete = true;
             Debug.Log("Get LeaderboardAroundPlayer Success");
@@ -205,13 +176,16 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
         yield return new WaitUntil((() => isLeaderboardComplete && isPlayerComplete));
     }
 
-    public void UpdateDisplayName(string displayName)
+    public List<PlayerLeaderboardEntry> GetLeaderboardData(MinigameType type)
     {
-        GameDatabase.NickName = displayName;
+        var element = leaderboardEntries.Find(t => t.Type == type);
+        return element.Entries;
+    }
 
-        var req = new UpdateUserTitleDisplayNameRequest { DisplayName = displayName };
-        PlayFabClientAPI.UpdateUserTitleDisplayName(req, result => { Debug.Log("UpdateUserTitleDisplayName Success"); },
-            error => { Debug.LogError("UpdateUserTitleDisplayName Error (" + error.Error.ToString() + "): " + error.ErrorMessage); });
+    public PlayerLeaderboardEntry GetLeaderBoardAroundPlayerData(MinigameType type)
+    {
+        var element = leaderboardEntries.Find(t => t.Type == type);
+        return element.PlayerEntry;
     }
 
     private string GetStasticName(MinigameType type)

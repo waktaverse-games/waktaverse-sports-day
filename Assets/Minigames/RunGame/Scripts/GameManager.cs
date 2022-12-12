@@ -67,7 +67,7 @@ namespace GameHaven.RunGame
             gameStart = false;
             gameStop = false;
             wallSpeed = 0;
-            highScoreText.text = ScoreManager.Instance.GetGameScore(MinigameType.RunGame).ToString();
+            highScoreText.text = "";
             scoreText.text = "0";
 
         }

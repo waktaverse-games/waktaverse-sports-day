@@ -18,7 +18,9 @@ public class GameResultManager : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI gameNameText;
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI goPrevBtnText;
+    [SerializeField] private GameObject returnBtn;
+    [SerializeField] private GameObject retryBtn;
+    [SerializeField] private GameObject epilogueBtn;
     
     [SerializeField] private GameObject successImageObj;
     [SerializeField] private GameObject failedImageObj;
@@ -73,7 +75,12 @@ public class GameResultManager : MonoBehaviour
             var targetScore = ScoreManager.Instance.GetGameTargetScore(ResultGame);
             
             ShowStoryResultScreen(ResultScore, targetScore);
-            goPrevBtnText.text = (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue) ? "다음으로" : "다시하기";
+            if (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue)
+            {
+                returnBtn.SetActive(false);
+                retryBtn.SetActive(false);
+                epilogueBtn.SetActive(true);
+            }
         }
         else
         {
@@ -87,12 +94,14 @@ public class GameResultManager : MonoBehaviour
         var success = score >= target;
         successImageObj.SetActive(success);
         failedImageObj.SetActive(!success);
+        
         puzzleRoot.SetActive(false);
     }
     private void ShowMinigameResultScreen(int score)
     {
         successImageObj.SetActive(false);
         failedImageObj.SetActive(false);
+        
         puzzleRoot.SetActive(true);
         ShowPuzzlePiece();
         
@@ -133,26 +142,16 @@ public class GameResultManager : MonoBehaviour
 
     public void Return()
     {
-        if (GameManager.GameMode == GameMode.StoryMode)
-        {
-            SceneLoader.LoadSceneAsync("StoryMenuScene");
-        }
-        else
-        {
-            SceneLoader.LoadSceneAsync("MinigameMenuScene");
-        }
+        SceneLoader.LoadSceneAsync(GameManager.GameMode == GameMode.StoryMode ? "StoryMenuScene" : "MinigameMenuScene");
     }
     public void Replay()
     {
-        if (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue)
-        {
-            SceneLoader.LoadSceneAsync("EpilogueStoryScene");
-        }
-        else
-        {
-            var sceneName = minigameData.GetSceneName(ResultGame);
-            var illustSprite = minigameData.GetIllustSprite(ResultGame);
-            LoadingSceneManager.LoadScene(sceneName, illustSprite);
-        }
+        var sceneName = minigameData.GetSceneName(ResultGame);
+        var illustSprite = minigameData.GetIllustSprite(ResultGame);
+        LoadingSceneManager.LoadScene(sceneName, illustSprite);
+    }
+    public void Epilogue()
+    {
+        SceneLoader.LoadSceneAsync("EpilogueStoryScene");
     }
 }

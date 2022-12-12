@@ -24,24 +24,13 @@ namespace SharedLibs.Score
             if (GameManager.GameMode != GameMode.MinigameMode) return;
             
             var scoreDb = _dbList.Find((data) => data.type == type);
+            var entry = PlayFabManager.Instance.GetLeaderBoardAroundPlayerData(type);
             
-            if (score > scoreDb.highScore)
+            if (score > entry.StatValue)
             {
-                scoreDb.highScore = score;
+                entry.StatValue = score;
                 OnHighScoreChanged?.Invoke(type, score);
-                // PlayFabManager.Instance.RenewHighScore(type, score);
             }
-        }
-
-        public int GetGameScore(MinigameType type)
-        {
-            var scoreData = _dbList.Find((data) => data.type == type);
-            return scoreData.highScore;
-        }
-        
-        public int GetGameTargetScore(MinigameType type)
-        {
-            return goalObject.GetStoryGoal(type);
         }
         
         public int SetGameAchievement(MinigameType type, int score)
@@ -77,6 +66,11 @@ namespace SharedLibs.Score
             }
 
             return i;
+        }
+        
+        public int GetGameTargetScore(MinigameType type)
+        {
+            return goalObject.GetStoryGoal(type);
         }
     }
 }
