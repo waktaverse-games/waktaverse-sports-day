@@ -24,6 +24,7 @@ namespace GameHeaven.UIUX
         private bool enableClick;
         private int curGame, curChar, curPuzzle;
 
+        [SerializeField] private PuzzleManager puzzleManager;
         [SerializeField] private RankingUI rankingUI;
 
         private void Awake()
@@ -45,10 +46,6 @@ namespace GameHeaven.UIUX
         {
             rankingUI.SetRankingUI(types[curGame]);
             UISoundManager.Instance.PlayButtonSFX2();
-        }
-
-        private void OnEnable()
-        {
         }
 
         private void Update()
@@ -223,7 +220,10 @@ namespace GameHeaven.UIUX
         }
         public void PiecePuzzle(int puzzleIndex)
         {
-            PuzzleManager.PiecePuzzle(puzzleIndex);
+            if (!puzzleManager.PiecePuzzle(puzzleIndex))
+            {
+                Debug.Log("퍼즐이 꽉 찼거나 놓을 퍼즐이 없습니다");
+            }
         }
     }
 }

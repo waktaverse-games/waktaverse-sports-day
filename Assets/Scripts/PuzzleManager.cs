@@ -18,16 +18,10 @@ public class PuzzleObjectArray
 
 public class PuzzleManager : MonoBehaviour
 {
-    private static PuzzleDB _db;
+    private PuzzleDB _db;
 
-    [SerializeField] private List<PuzzleObjectArray> puzzleList;
+    // [SerializeField] private List<PuzzleObjectArray> puzzleList;
     [SerializeField] private TextMeshProUGUI pieceCountTMP;
-
-    private static int PuzzlePiece
-    {
-        get => _db.pieceCount;
-        set => _db.pieceCount = value;
-    }
 
     private void Awake()
     {
@@ -51,44 +45,26 @@ public class PuzzleManager : MonoBehaviour
             }
         }
     }
-
-    public static void GetPuzzlePiece(int count = 1)
-    {
-        PuzzlePiece += count;
-        print("Current Puzzle Piece: " + PuzzlePiece);
-    }
-
-    public static int UsePuzzlePiece(int count = 1)
-    {
-        return PuzzlePiece -= count;
-    }
     
-    public static int GetPuzzle(int puzzleIndex)
+    public int GetPuzzle(int puzzleIndex)
     {
         return _db.completeState[puzzleIndex];
     }
-    
-    public static int SetPuzzle(int puzzleIndex)
+
+    public bool PiecePuzzle(int puzzleIndex)
     {
-        return ++_db.completeState[puzzleIndex];
-    }
+        if (_db.pieceCount < 1) return false;
+        if (GetPuzzle(puzzleIndex) >= 6) return true;
+        
+        Transform puzzles = GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0);
 
-    public static bool PiecePuzzle(int puzzleIndex)
-    {
-        if (PuzzlePiece < 1) return false;
+        puzzles.GetChild(puzzleIndex).GetChild(1).GetChild(GetPuzzle(puzzleIndex)).GetComponent<Animator>().SetTrigger("Piece");
 
-        if (GetPuzzle(puzzleIndex) < 6)
-        {
-            Transform puzzles = GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0);
+        var complNum = ++_db.completeState[puzzleIndex];
+        var remainPzl = --_db.pieceCount;
 
-            puzzles.GetChild(puzzleIndex).GetChild(1).GetChild(GetPuzzle(puzzleIndex)).GetComponent<Animator>().SetTrigger("Piece");
-
-            var complNum = SetPuzzle(puzzleIndex);
-            var remainPzl = UsePuzzlePiece();
-
-            puzzles.GetChild(puzzleIndex).GetChild(4).GetComponent<TextMeshProUGUI>().text = complNum + " / 6";
-            puzzles.parent.parent.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = remainPzl.ToString();
-        }
+        puzzles.GetChild(puzzleIndex).GetChild(4).GetComponent<TextMeshProUGUI>().text = complNum + " / 6";
+        puzzles.parent.parent.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = remainPzl.ToString();
 
         return true;
     }
