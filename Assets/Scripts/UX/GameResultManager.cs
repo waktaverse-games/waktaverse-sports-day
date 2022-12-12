@@ -5,6 +5,7 @@ using SharedLibs;
 using SharedLibs.Score;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameResultManager : MonoBehaviour
 {
@@ -21,7 +22,8 @@ public class GameResultManager : MonoBehaviour
     
     [SerializeField] private GameObject successImageObj;
     [SerializeField] private GameObject failedImageObj;
-    [SerializeField] private GameObject puzzleImageObj;
+    [SerializeField] private GameObject puzzleRoot;
+    [SerializeField] private Image[] puzzleInnerImgs;
 
     [SerializeField] private MinigameSceneData minigameData;
     
@@ -64,21 +66,18 @@ public class GameResultManager : MonoBehaviour
         yield return new WaitForSeconds(waitSec);
         resultScreen.SetActive(true);
         
-        var gameType = ResultGame;
-        var score = ResultScore;
-        
-        var gameName = minigameData.GetGameName(gameType);
+        var gameName = minigameData.GetGameName(ResultGame);
         gameNameText.text = gameName;
         if (GameManager.GameMode == GameMode.StoryMode)
         {
-            var targetScore = ScoreManager.Instance.GetGameTargetScore(gameType);
+            var targetScore = ScoreManager.Instance.GetGameTargetScore(ResultGame);
             
-            ShowStoryResultScreen(score, targetScore);
+            ShowStoryResultScreen(ResultScore, targetScore);
             goPrevBtnText.text = (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue) ? "다음으로" : "다시하기";
         }
         else
         {
-            ShowMinigameResultScreen(score);
+            ShowMinigameResultScreen(ResultScore);
         }
     }
 
@@ -88,14 +87,46 @@ public class GameResultManager : MonoBehaviour
         var success = score >= target;
         successImageObj.SetActive(success);
         failedImageObj.SetActive(!success);
-        puzzleImageObj.SetActive(false);
+        puzzleRoot.SetActive(false);
     }
     private void ShowMinigameResultScreen(int score)
     {
         successImageObj.SetActive(false);
         failedImageObj.SetActive(false);
-        puzzleImageObj.SetActive(true);
+        puzzleRoot.SetActive(true);
+        ShowPuzzlePiece();
+        
         scoreText.text = score.ToString();
+    }
+    
+    private void ShowPuzzlePiece()
+    {
+        var havePiece = ScoreManager.Instance.GetGameAchievement(ResultGame);
+        var resultPiece = ScoreManager.Instance.SetGameAchievement(ResultGame, ResultScore);
+        
+        Debug.Log("Achievement : " + havePiece + " -> " + resultPiece);
+        
+        havePiece = Mathf.Min(havePiece, puzzleInnerImgs.Length);
+        resultPiece = Mathf.Min(resultPiece, puzzleInnerImgs.Length);
+
+        // 얻지 못한 퍼즐 조각
+        for (var i = resultPiece; i < puzzleInnerImgs.Length; i++)
+        {
+            var color = puzzleInnerImgs[i].color;
+            color.a = 0.0f;
+            puzzleInnerImgs[i].color = color;
+        }
+        // 이미 얻은 퍼즐 조각
+        for (var i = 0; i < havePiece; i++)
+        {
+            var color = puzzleInnerImgs[i].color;
+            color.a = 0.8f;
+            puzzleInnerImgs[i].color = color;
+        }
+        // 새로 얻은 퍼즐 조각
+        for (var i = havePiece; i < resultPiece; i++)
+        {
+        }
     }
     
     // Scene Load (Temporary)

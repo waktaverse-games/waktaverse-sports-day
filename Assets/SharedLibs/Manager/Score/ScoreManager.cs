@@ -23,19 +23,7 @@ namespace SharedLibs.Score
         {
             if (GameManager.GameMode != GameMode.MinigameMode) return;
             
-            var rewardGoals = goalObject.GetRewardGoals(type);
             var scoreDb = _dbList.Find((data) => data.type == type);
-                
-            for (var i = 0; i < rewardGoals.Length; i++)
-            {
-                if (score < rewardGoals[i]) continue;
-                    
-                if ((scoreDb.achievement & (1 << i)) == 0)
-                {
-                    scoreDb.achievement |= (1 << i);
-                    PuzzleManager.GetPuzzlePiece();
-                }
-            }
             
             if (score > scoreDb.highScore)
             {
@@ -54,6 +42,41 @@ namespace SharedLibs.Score
         public int GetGameTargetScore(MinigameType type)
         {
             return goalObject.GetStoryGoal(type);
+        }
+        
+        public int SetGameAchievement(MinigameType type, int score)
+        {
+            var scoreDb = _dbList.Find((data) => data.type == type);
+            var rewardGoals = goalObject.GetRewardGoals(type);
+                
+            for (var i = 0; i < rewardGoals.Length; i++)
+            {
+                if (score < rewardGoals[i])
+                {
+                    return i;
+                }
+                    
+                if ((scoreDb.achievement & (1 << i)) == 0)
+                {
+                    scoreDb.achievement |= (1 << i);
+                    PuzzleManager.GetPuzzlePiece();
+                }
+            }
+
+            return rewardGoals.Length;
+        }
+        
+        public int GetGameAchievement(MinigameType type)
+        {
+            var scoreData = _dbList.Find((data) => data.type == type);
+
+            var i = 0;
+            while ((scoreData.achievement & (1 << i)) != 0)
+            {
+                i++;
+            }
+
+            return i;
         }
     }
 }
