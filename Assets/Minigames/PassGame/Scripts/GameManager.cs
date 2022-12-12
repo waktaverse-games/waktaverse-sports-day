@@ -116,6 +116,7 @@ namespace GameHeaven.PassGame
             ScoreManager.Instance.SetGameHighScore(MinigameType.PassGame, _score);
             // Debug.Log(_score);
             GameResultManager.ShowResult(MinigameType.PassGame, _score);
+            yield return null;
         }
 
         public void AddScore(int addScore)
