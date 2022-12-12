@@ -10,6 +10,7 @@ namespace GameHeaven.UIUX
         {
             StoryManager.Instance.ViewEpilogue = true;
             SceneManager.LoadScene("ModeSelectScene");
+            SceneLoader.AddSceneAsync("UnlockMessagesScene");
         }
     }
 }
