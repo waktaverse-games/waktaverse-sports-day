@@ -21,6 +21,7 @@ public class GameResultManager : MonoBehaviour
     
     [SerializeField] private GameObject successImageObj;
     [SerializeField] private GameObject failedImageObj;
+    [SerializeField] private GameObject puzzleImageObj;
 
     [SerializeField] private MinigameSceneData minigameData;
     
@@ -87,11 +88,13 @@ public class GameResultManager : MonoBehaviour
         var success = score >= target;
         successImageObj.SetActive(success);
         failedImageObj.SetActive(!success);
+        puzzleImageObj.SetActive(false);
     }
     private void ShowMinigameResultScreen(int score)
     {
         successImageObj.SetActive(false);
         failedImageObj.SetActive(false);
+        puzzleImageObj.SetActive(true);
         scoreText.text = score.ToString();
     }
     

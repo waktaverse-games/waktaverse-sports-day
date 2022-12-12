@@ -169,36 +169,237 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderboardEntries:
   - type: 0
-    updateMinute: -1
     entries: []
+    playerEntry:
+      DisplayName: 
+      PlayFabId: 
+      Position: 0
+      Profile:
+        AdCampaignAttributions: []
+        AvatarUrl: 
+        ContactEmailAddresses: []
+        DisplayName: 
+        ExperimentVariants: []
+        LinkedAccounts: []
+        Locations: []
+        Memberships: []
+        PlayerId: 
+        PublisherId: 
+        PushNotificationRegistrations: []
+        Statistics: []
+        Tags: []
+        TitleId: 
+        ValuesToDate: []
+      StatValue: 0
   - type: 1
-    updateMinute: -1
     entries: []
+    playerEntry:
+      DisplayName: 
+      PlayFabId: 
+      Position: 0
+      Profile:
+        AdCampaignAttributions: []
+        AvatarUrl: 
+        ContactEmailAddresses: []
+        DisplayName: 
+        ExperimentVariants: []
+        LinkedAccounts: []
+        Locations: []
+        Memberships: []
+        PlayerId: 
+        PublisherId: 
+        PushNotificationRegistrations: []
+        Statistics: []
+        Tags: []
+        TitleId: 
+        ValuesToDate: []
+      StatValue: 0
   - type: 2
-    updateMinute: -1
     entries: []
+    playerEntry:
+      DisplayName: 
+      PlayFabId: 
+      Position: 0
+      Profile:
+        AdCampaignAttributions: []
+        AvatarUrl: 
+        ContactEmailAddresses: []
+        DisplayName: 
+        ExperimentVariants: []
+        LinkedAccounts: []
+        Locations: []
+        Memberships: []
+        PlayerId: 
+        PublisherId: 
+        PushNotificationRegistrations: []
+        Statistics: []
+        Tags: []
+        TitleId: 
+        ValuesToDate: []
+      StatValue: 0
   - type: 3
-    updateMinute: -1
     entries: []
+    playerEntry:
+      DisplayName: 
+      PlayFabId: 
+      Position: 0
+      Profile:
+        AdCampaignAttributions: []
+        AvatarUrl: 
+        ContactEmailAddresses: []
+        DisplayName: 
+        ExperimentVariants: []
+        LinkedAccounts: []
+        Locations: []
+        Memberships: []
+        PlayerId: 
+        PublisherId: 
+        PushNotificationRegistrations: []
+        Statistics: []
+        Tags: []
+        TitleId: 
+        ValuesToDate: []
+      StatValue: 0
   - type: 4
-    updateMinute: -1
     entries: []
+    playerEntry:
+      DisplayName: 
+      PlayFabId: 
+      Position: 0
+      Profile:
+        AdCampaignAttributions: []
+        AvatarUrl: 
+        ContactEmailAddresses: []
+        DisplayName: 
+        ExperimentVariants: []
+        LinkedAccounts: []
+        Locations: []
+        Memberships: []
+        PlayerId: 
+        PublisherId: 
+        PushNotificationRegistrations: []
+        Statistics: []
+        Tags: []
+        TitleId: 
+        ValuesToDate: []
+      StatValue: 0
   - type: 5
-    updateMinute: -1
     entries: []
+    playerEntry:
+      DisplayName: 
+      PlayFabId: 
+      Position: 0
+      Profile:
+        AdCampaignAttributions: []
+        AvatarUrl: 
+        ContactEmailAddresses: []
+        DisplayName: 
+        ExperimentVariants: []
+        LinkedAccounts: []
+        Locations: []
+        Memberships: []
+        PlayerId: 
+        PublisherId: 
+        PushNotificationRegistrations: []
+        Statistics: []
+        Tags: []
+        TitleId: 
+        ValuesToDate: []
+      StatValue: 0
   - type: 6
-    updateMinute: -1
     entries: []
+    playerEntry:
+      DisplayName: 
+      PlayFabId: 
+      Position: 0
+      Profile:
+        AdCampaignAttributions: []
+        AvatarUrl: 
+        ContactEmailAddresses: []
+        DisplayName: 
+        ExperimentVariants: []
+        LinkedAccounts: []
+        Locations: []
+        Memberships: []
+        PlayerId: 
+        PublisherId: 
+        PushNotificationRegistrations: []
+        Statistics: []
+        Tags: []
+        TitleId: 
+        ValuesToDate: []
+      StatValue: 0
   - type: 7
-    updateMinute: -1
     entries: []
+    playerEntry:
+      DisplayName: 
+      PlayFabId: 
+      Position: 0
+      Profile:
+        AdCampaignAttributions: []
+        AvatarUrl: 
+        ContactEmailAddresses: []
+        DisplayName: 
+        ExperimentVariants: []
+        LinkedAccounts: []
+        Locations: []
+        Memberships: []
+        PlayerId: 
+        PublisherId: 
+        PushNotificationRegistrations: []
+        Statistics: []
+        Tags: []
+        TitleId: 
+        ValuesToDate: []
+      StatValue: 0
   - type: 8
-    updateMinute: -1
     entries: []
+    playerEntry:
+      DisplayName: 
+      PlayFabId: 
+      Position: 0
+      Profile:
+        AdCampaignAttributions: []
+        AvatarUrl: 
+        ContactEmailAddresses: []
+        DisplayName: 
+        ExperimentVariants: []
+        LinkedAccounts: []
+        Locations: []
+        Memberships: []
+        PlayerId: 
+        PublisherId: 
+        PushNotificationRegistrations: []
+        Statistics: []
+        Tags: []
+        TitleId: 
+        ValuesToDate: []
+      StatValue: 0
   - type: 9
-    updateMinute: -1
     entries: []
-  updateInterval: 1
+    playerEntry:
+      DisplayName: 
+      PlayFabId: 
+      Position: 0
+      Profile:
+        AdCampaignAttributions: []
+        AvatarUrl: 
+        ContactEmailAddresses: []
+        DisplayName: 
+        ExperimentVariants: []
+        LinkedAccounts: []
+        Locations: []
+        Memberships: []
+        PlayerId: 
+        PublisherId: 
+        PushNotificationRegistrations: []
+        Statistics: []
+        Tags: []
+        TitleId: 
+        ValuesToDate: []
+      StatValue: 0
+  playFabId: 
+  lastUpdateMinute: 0
   isDebug: 1
 --- !u!1 &570481602
 GameObject:
