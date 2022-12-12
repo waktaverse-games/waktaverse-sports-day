@@ -4,27 +4,18 @@ using UnityEngine;
 
 namespace GameHeaven.PunctureGame.UI
 {
-    public class DebugUI : MonoBehaviour
+    public class ScoreUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI debugScoreUI;
-        [SerializeField] private TextMeshProUGUI debugAddScoreUI;
-        [SerializeField] private TextMeshProUGUI debugPlayerUI;
-
-        [SerializeField] private PlayerController controller;
         [SerializeField] private ScoreCollector scoreCollector;
-
+        
+        [SerializeField] private TextMeshProUGUI scoreText;
+        
         private void Start()
         {
             scoreCollector.OnAddScore += (score, total) =>
             {
-                debugScoreUI.text = "Score: " + (total);
-                debugAddScoreUI.text = "Added! (+" + score + ")";
+                scoreText.text = total.ToString();
             };
-        }
-
-        private void Update()
-        {
-            debugPlayerUI.text = controller.MoveVector.ToString();
         }
     }
 }
