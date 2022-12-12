@@ -22,7 +22,6 @@ public class PuzzleManager : MonoBehaviour
 
     [SerializeField] private List<PuzzleObjectArray> puzzleList;
     [SerializeField] private TextMeshProUGUI pieceCountTMP;
-    [SerializeField] private GameObject puzzles;
 
     private static int PuzzlePiece
     {
@@ -40,6 +39,8 @@ public class PuzzleManager : MonoBehaviour
 
     private void Start()
     {
+        Transform puzzles = GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0);
+
         pieceCountTMP.text = _db.pieceCount.ToString();
         for (var i = 0; i < 6; i++)
         {
@@ -76,11 +77,12 @@ public class PuzzleManager : MonoBehaviour
             Transform puzzles = GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0);
 
             puzzles.GetChild(puzzleIndex).GetChild(1).GetChild(GetPuzzle(puzzleIndex)).GetComponent<Animator>().SetTrigger("Piece");
-            puzzles.GetChild(puzzleIndex).GetChild(4).GetComponent<TextMeshProUGUI>().text = _db.completeState[puzzleIndex] + " / 6";
-            puzzles.parent.parent.GetChild(5).GetComponent<TextMeshProUGUI>().text = _db.pieceCount.ToString();
 
             _db.completeState[puzzleIndex]++;
             UsePuzzlePiece();
+
+            puzzles.GetChild(puzzleIndex).GetChild(4).GetComponent<TextMeshProUGUI>().text = _db.completeState[puzzleIndex] + " / 6";
+            puzzles.parent.parent.GetChild(5).GetComponent<TextMeshProUGUI>().text = _db.pieceCount.ToString();
         }
 
         return true;
