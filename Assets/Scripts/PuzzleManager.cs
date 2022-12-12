@@ -58,31 +58,36 @@ public class PuzzleManager : MonoBehaviour
         print("Current Puzzle Piece: " + PuzzlePiece);
     }
 
-    public static void UsePuzzlePiece(int count = 1)
+    public static int UsePuzzlePiece(int count = 1)
     {
-        PuzzlePiece -= count;
+        return PuzzlePiece -= count;
     }
     
     public static int GetPuzzle(int puzzleIndex)
     {
         return _db.completeState[puzzleIndex];
     }
+    
+    public static int SetPuzzle(int puzzleIndex)
+    {
+        return ++_db.completeState[puzzleIndex];
+    }
 
     public static bool PiecePuzzle(int puzzleIndex)
     {
         if (PuzzlePiece < 1) return false;
 
-        if (GetPuzzle(puzzleIndex) < _db.completeState.Count)
+        if (GetPuzzle(puzzleIndex) < 6)
         {
             Transform puzzles = GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0);
 
             puzzles.GetChild(puzzleIndex).GetChild(1).GetChild(GetPuzzle(puzzleIndex)).GetComponent<Animator>().SetTrigger("Piece");
 
-            _db.completeState[puzzleIndex]++;
-            UsePuzzlePiece();
+            var complNum = SetPuzzle(puzzleIndex);
+            var remainPzl = UsePuzzlePiece();
 
-            puzzles.GetChild(puzzleIndex).GetChild(4).GetComponent<TextMeshProUGUI>().text = _db.completeState[puzzleIndex] + " / 6";
-            puzzles.parent.parent.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = _db.pieceCount.ToString();
+            puzzles.GetChild(puzzleIndex).GetChild(4).GetComponent<TextMeshProUGUI>().text = complNum + " / 6";
+            puzzles.parent.parent.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = remainPzl.ToString();
         }
 
         return true;
