@@ -2104,7 +2104,7 @@ MonoBehaviour:
   goPrevBtnText: {fileID: 1499275891}
   successImageObj: {fileID: 919824692}
   failedImageObj: {fileID: 2005085573}
-  puzzleImageObj: {fileID: 0}
+  puzzleImageObj: {fileID: 74800200}
   minigameData: {fileID: 11400000, guid: 15816769a5a50344ca273884da9288c4, type: 2}
   waitShowResultTime: 2
 --- !u!1 &2005085573
