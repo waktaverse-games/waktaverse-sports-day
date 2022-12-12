@@ -2540,6 +2540,9 @@ MonoBehaviour:
   counter: {fileID: 1538696300}
   textEffect: {fileID: 364373467}
   scoreText: {fileID: 594874899}
+  itemScore: 20
+  passScore: 10
+  flagScore: 20
   isGameOver: 0
   isGameStart: 0
 --- !u!4 &949334650

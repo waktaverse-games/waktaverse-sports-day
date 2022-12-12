@@ -31,7 +31,7 @@ namespace GameHeaven.JumpGame
             if (collision.gameObject.tag == "Player")
             {
                 SoundManager.Instance.PlayItemSound();
-                GameManager.Instance.IncreaseScore(score);
+                GameManager.Instance.IncreaseScore(ScoreType.item);
                 GameObject vfx = Instantiate(VFX, transform.position, transform.rotation);
                 Destroy(vfx, 2f);
                 spawner.DeactiavteItem(gameObject);
