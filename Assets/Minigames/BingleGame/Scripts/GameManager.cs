@@ -9,6 +9,13 @@ using SharedLibs.Score;
 
 namespace GameHeaven.BingleGame
 {
+    public enum ScoreType
+    {
+        item,
+        pass,
+        flag
+    }
+
     public class GameManager : MonoBehaviour
     {
         #region Singleton
@@ -30,12 +37,20 @@ namespace GameHeaven.BingleGame
         [SerializeField] AnimationCounter counter;
         [SerializeField] TextMeshProUGUI textEffect;
         [SerializeField] TextMeshProUGUI scoreText;
+        [SerializeField] int itemScore;
+        [SerializeField] int passScore;
+        [SerializeField] int flagScore;
 
         private Coroutine textEffectCoroutine;
-        public int Score { get => score; }
-        private int score = 0;
-        public bool isGameOver = false;
-        public bool isGameStart = false;
+        int totalScore = 0;
+        int comboScore = 0;
+        bool isGameOver = false;
+        bool isGameStart = false;
+
+        public int TotalScore { get => totalScore; }
+        public bool IsGameOver { get => isGameOver; }
+        public bool IsGameStart { get => isGameStart; }
+        public int ComboScore { get=>comboScore; }
         private void OnEnable()
         {
             counter.OnEndCount += () =>
@@ -44,18 +59,23 @@ namespace GameHeaven.BingleGame
             };
         }
 
-        public void IncreaseScore(int num)
+        public void IncreaseScore(ScoreType type)
         {
-            score += num;
-            scoreText.text = "점수 : " + score.ToString();
+            totalScore += ScoreMap(type);
+            scoreText.text = "점수 : " + totalScore.ToString();
+        }
+        public void IncreaseScore(ScoreType type, int combo)
+        {
+            totalScore += ScoreMap(type) + combo;
+            scoreText.text = "점수 : " + totalScore.ToString();
         }
 
         public void GameOver()
         {
             SoundManager.instance.TurnOffBGM();
             SoundManager.instance.PlayGameOverSound();
-            ScoreManager.Instance.SetGameHighScore(MinigameType.BingleGame, score);
-            GameResultManager.ShowResult(MinigameType.BingleGame, score);
+            ScoreManager.Instance.SetGameHighScore(MinigameType.BingleGame, totalScore);
+            GameResultManager.ShowResult(MinigameType.BingleGame, totalScore);
             
             isGameOver = true;
         }
@@ -67,16 +87,18 @@ namespace GameHeaven.BingleGame
             SoundManager.instance.PlayBGM();
         }
 
-        public void ShowTextEffect(string effect, bool isBlue)
+        public void ShowTextEffect()
         {
             if (textEffectCoroutine != null) StopCoroutine(textEffectCoroutine);
             textEffect.transform.position = Camera.main.WorldToScreenPoint(GameObject.Find("Player").transform.position) + new Vector3(0, 100f, 0);
-            textEffect.text = effect;
-            textEffect.color = isBlue ? Color.blue : Color.red;
+            textEffect.text = comboScore == 1 ? $"콤보 + {comboScore}" : $"+ {comboScore}"; ;
+            textEffect.color = Color.red;
             textEffect.gameObject.SetActive(true);
             textEffectCoroutine = StartCoroutine(FadeText(textEffect, false));
         }
 
+        public void ComboReset() { comboScore = 0; }
+        public void IncreaseCombo() { comboScore++; }
         IEnumerator FadeText(TextMeshProUGUI textUI, bool floatText, float interval = .05f)
         {
             Color textColor = textUI.color;
@@ -91,5 +113,14 @@ namespace GameHeaven.BingleGame
             }
             textUI.gameObject.SetActive(false);
         }
+
+        int ScoreMap(ScoreType type)
+        {
+            if (type == ScoreType.item) return itemScore;
+            if (type == ScoreType.pass) return passScore;
+            if (type == ScoreType.flag) return flagScore + comboScore;
+            return 0;
+        }
+
     }
 }

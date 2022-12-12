@@ -658,6 +658,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566efa375fb136a40baa5e54cb58a66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  counter: {fileID: 1902825151}
+  objects:
+  - {fileID: 1527866163}
+  - {fileID: 1270595703}
+  scoreText: {fileID: 174693816}
+  textEffect: {fileID: 430773695}
+  itemScore: 20
+  jumpSuccessScore: 10
   EnableHearthEffect:
     m_PersistentCalls:
       m_Calls:
@@ -718,13 +726,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  counter: {fileID: 1902825151}
-  objects:
-  - {fileID: 1527866163}
-  - {fileID: 1270595703}
-  scoreText: {fileID: 174693816}
-  textEffect: {fileID: 430773695}
-  jumpSuccessCount: 0
 --- !u!1 &430773693
 GameObject:
   m_ObjectHideFlags: 0

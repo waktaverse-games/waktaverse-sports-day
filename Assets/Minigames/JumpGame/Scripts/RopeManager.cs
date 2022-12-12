@@ -116,7 +116,7 @@ namespace GameHeaven.JumpGame
         {
             if (isReverse == System.Convert.ToBoolean(animEvent.intParameter))
             {
-                GameManager.Instance.IncreaseScore((int)animEvent.floatParameter);
+                GameManager.Instance.IncreaseScore(ScoreType.jumpSuccess);
                 GameManager.Instance.IncreaseJumpSuccessCount();
             }
         }

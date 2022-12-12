@@ -20,7 +20,7 @@ namespace GameHeaven.BingleGame
             sprites[index].gameObject.GetComponentInChildren<CheckpointSpawner>().SpawnCheckpoint();
             sprites[index].gameObject.GetComponentInChildren<Spawner>().SpawnObject();
 
-            if (GameManager.instance.Score >= 1000)
+            if (GameManager.instance.TotalScore >= 1000)
             {
                 sprites[index].gameObject.GetComponentInChildren<ObstacleSpawner>().SpawnObject();
             }
