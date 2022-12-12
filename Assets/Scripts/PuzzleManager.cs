@@ -42,7 +42,7 @@ public class PuzzleManager : MonoBehaviour
         Transform puzzles = GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0);
 
         pieceCountTMP.text = _db.pieceCount.ToString();
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < _db.completeState.Count; i++)
         {
             for (var j = 0; j < _db.completeState[i]; j++)
             {
@@ -72,7 +72,7 @@ public class PuzzleManager : MonoBehaviour
     {
         if (PuzzlePiece < 1) return false;
 
-        if (GetPuzzle(puzzleIndex) < 6)
+        if (GetPuzzle(puzzleIndex) < _db.completeState.Count)
         {
             Transform puzzles = GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0);
 
@@ -82,7 +82,7 @@ public class PuzzleManager : MonoBehaviour
             UsePuzzlePiece();
 
             puzzles.GetChild(puzzleIndex).GetChild(4).GetComponent<TextMeshProUGUI>().text = _db.completeState[puzzleIndex] + " / 6";
-            puzzles.parent.parent.GetChild(5).GetComponent<TextMeshProUGUI>().text = _db.pieceCount.ToString();
+            puzzles.parent.parent.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = _db.pieceCount.ToString();
         }
 
         return true;
