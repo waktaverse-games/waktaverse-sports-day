@@ -18,6 +18,8 @@ public class GameDatabase : MonoSingleton<GameDatabase>
     [SerializeField] private bool isFirstTime;
     
     public GameDB DB => db;
+
+    public static PuzzleDB PuzzleDB => Instance.DB.puzzleDB;
     
     public bool IsFirstTime { get => isFirstTime; set => isFirstTime = value; }
     
@@ -40,6 +42,10 @@ public class GameDatabase : MonoSingleton<GameDatabase>
             Debug.Log("First time");
             ResetData();
         }
+
+        Debug.Log(db.puzzleDB.pieceCount + " / " + db.puzzleDB.completeState[0] + " / " + db.puzzleDB.completeState[1] +
+                  " / " + db.puzzleDB.completeState[2] + " / " + db.puzzleDB.completeState[3] + " / " +
+                  db.puzzleDB.completeState[4]);
     }
     
     public void SaveData(string path = "")
