@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using TMPro;
 
 [Serializable]
 public class PuzzleObjectArray
@@ -20,6 +21,7 @@ public class PuzzleManager : MonoBehaviour
     private static PuzzleDB _db;
 
     [SerializeField] private List<PuzzleObjectArray> puzzleList;
+    [SerializeField] private TextMeshProUGUI pieceCountTMP;
 
     private static int PuzzlePiece
     {
@@ -37,14 +39,15 @@ public class PuzzleManager : MonoBehaviour
 
     private void Start()
     {
-        print("PieceCount : " + _db.pieceCount);
-        for (var i = 0; i < _db.completeState.Count; i++)
+        Transform puzzles = GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0);
+
+        pieceCountTMP.text = _db.pieceCount.ToString();
+        for (var i = 0; i < 6; i++)
         {
-            print("Puzzle" + i + " : " + _db.completeState[i]);
             for (var j = 0; j < _db.completeState[i]; j++)
             {
-                GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0).GetChild(i).GetChild(1).GetChild(j)
-                    .GetComponent<Animator>().SetTrigger("Piece");
+                puzzles.transform.GetChild(i).GetChild(1).GetChild(j).GetComponent<Animator>().SetTrigger("Piece");
+                puzzles.transform.GetChild(i).GetChild(4).GetComponent<TextMeshProUGUI>().text = _db.completeState[i] + " / 6";
             }
         }
     }
@@ -71,11 +74,15 @@ public class PuzzleManager : MonoBehaviour
 
         if (GetPuzzle(puzzleIndex) < 6)
         {
-            GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0).GetChild(puzzleIndex).GetChild(1).GetChild(GetPuzzle(puzzleIndex))
-                .GetComponent<Animator>().SetTrigger("Piece");
+            Transform puzzles = GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0);
+
+            puzzles.GetChild(puzzleIndex).GetChild(1).GetChild(GetPuzzle(puzzleIndex)).GetComponent<Animator>().SetTrigger("Piece");
 
             _db.completeState[puzzleIndex]++;
             UsePuzzlePiece();
+
+            puzzles.GetChild(puzzleIndex).GetChild(4).GetComponent<TextMeshProUGUI>().text = _db.completeState[puzzleIndex] + " / 6";
+            puzzles.parent.parent.GetChild(5).GetComponent<TextMeshProUGUI>().text = _db.pieceCount.ToString();
         }
 
         return true;
