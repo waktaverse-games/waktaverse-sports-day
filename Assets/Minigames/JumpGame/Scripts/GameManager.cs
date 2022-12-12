@@ -9,25 +9,39 @@ using SharedLibs.Score;
 
 namespace GameHeaven.JumpGame
 {
+    public enum ScoreType
+    {
+        item,
+        jumpSuccess
+    }
     public class GameManager : MonoBehaviour
     {
-        public UnityEvent EnableHearthEffect;
-        public UnityEvent DisableHearthEffect;
-        public UnityEvent GameStartEvent;
-        public UnityEvent GameEndEvent;
+
         public bool IsGameStart { get => isGameStart; }
         public bool IsGameOver { get => isGameOver; }
         public bool isInvincible { get; private set; }
         public int JumpSuccessCount { get => jumpSuccessCount; }
         public int Score { get => totalScore; }
+
         [SerializeField] AnimationCounter counter;
         [SerializeField] GameObject[] objects;
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] TextMeshProUGUI textEffect;
-        [SerializeField] int jumpSuccessCount = 0;
+        [Space]
+        [Space]
 
-        private Coroutine textEffectCoroutine;
-        private int totalScore = 0;
+        [SerializeField] int itemScore;
+        [SerializeField] int jumpSuccessScore;
+        [Space]
+        [Space]
+
+        public UnityEvent EnableHearthEffect;
+        public UnityEvent DisableHearthEffect;
+        public UnityEvent GameStartEvent;
+        public UnityEvent GameEndEvent;
+        Coroutine textEffectCoroutine;
+        int jumpSuccessCount = 0;
+        int totalScore = 0;
         bool isGameStart = false;
         bool isGameOver;
         #region Singleton
@@ -56,17 +70,17 @@ namespace GameHeaven.JumpGame
 
         void GameStart()
         {
-            scoreText.text = "���� : 0";
+            scoreText.text = "점수 : 0";
             isGameStart = true;
             SoundManager.Instance.PlayBGM();
             ObjectTurnOnOff(true);
             GameStartEvent.Invoke();
         }
 
-        public void IncreaseScore(int score)
+        public void IncreaseScore(ScoreType type)
         {
-            totalScore += score;
-            scoreText.text = "���� : " + totalScore.ToString();
+            totalScore += ScoreMap(type);
+            scoreText.text = "점수 : " + totalScore.ToString();
         }
         public void IncreaseJumpSuccessCount()
         {
@@ -126,6 +140,11 @@ namespace GameHeaven.JumpGame
             }
         }
 
-
+        int ScoreMap(ScoreType type)
+        {
+            if (type == ScoreType.item) return itemScore;
+            if (type == ScoreType.jumpSuccess) return jumpSuccessScore;
+            return 0;
+        }
     }
 }
