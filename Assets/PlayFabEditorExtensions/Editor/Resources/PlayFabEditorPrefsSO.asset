@@ -15,10 +15,10 @@ MonoBehaviour:
   DevAccountEmail: zhdlxh48@gmail.com
   DevAccountToken: rxcrr6auqufqrs3pskuroyszbg5gjz54kwg4sxerw87p6bwuei6797y597c8wf48gsh854bgxiuufxyu9a1pn3g8cnu719cdsq8m9f3apt1jw1xafrf6mptd3ueaxjqidgmrmx6h3pnhq4f8r6tfkyn55p9x359yr7ax1aap1jwyd71initohs8ag7gfbap9ux663eya
   AadAuthorization: 
-  SelectedStudio: 
+  SelectedStudio: Waktaverse Games
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
-  PanelIsShown: 1
-  curMainMenuIdx: 4
+  PanelIsShown: 0
+  curMainMenuIdx: 1
   curSubMenuIdx: 0

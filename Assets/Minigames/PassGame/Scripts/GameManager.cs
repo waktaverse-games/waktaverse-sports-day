@@ -112,11 +112,11 @@ namespace GameHeaven.PassGame
             Time.timeScale = 1;
             SfxManager.PlaySfx(3);
             bgm.Stop();
-            yield return new WaitForSeconds(4);
             // Debug.Log("Game Over");
             ScoreManager.Instance.SetGameHighScore(MinigameType.PassGame, _score);
             // Debug.Log(_score);
             GameResultManager.ShowResult(MinigameType.PassGame, _score);
+            yield return null;
         }
 
         public void AddScore(int addScore)

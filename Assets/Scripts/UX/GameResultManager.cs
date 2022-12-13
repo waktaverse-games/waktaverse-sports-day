@@ -5,6 +5,7 @@ using SharedLibs;
 using SharedLibs.Score;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameResultManager : MonoBehaviour
 {
@@ -17,10 +18,16 @@ public class GameResultManager : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI gameNameText;
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI goPrevBtnText;
+    [SerializeField] private GameObject returnBtn;
+    [SerializeField] private GameObject retryBtn;
+    [SerializeField] private GameObject epilogueBtn;
     
     [SerializeField] private GameObject successImageObj;
     [SerializeField] private GameObject failedImageObj;
+    [SerializeField] private GameObject puzzleRoot;
+    [SerializeField] private GameObject[] puzzlePieces;
+
+    [SerializeField] private AudioSource pieceGetSound;
 
     [SerializeField] private MinigameSceneData minigameData;
     
@@ -30,6 +37,7 @@ public class GameResultManager : MonoBehaviour
     {
         resultScreen.SetActive(false);
         StartCoroutine(ShowResultScreen(waitShowResultTime));
+        pieceGetSound.volume = SoundManager.Instance.SFXVolume;
     }
 
     private void OnEnable()
@@ -63,21 +71,23 @@ public class GameResultManager : MonoBehaviour
         yield return new WaitForSeconds(waitSec);
         resultScreen.SetActive(true);
         
-        var gameType = ResultGame;
-        var score = ResultScore;
-        
-        var gameName = minigameData.GetGameName(gameType);
+        var gameName = minigameData.GetGameName(ResultGame);
         gameNameText.text = gameName;
         if (GameManager.GameMode == GameMode.StoryMode)
         {
-            var targetScore = ScoreManager.Instance.GetGameTargetScore(gameType);
+            var targetScore = ScoreManager.Instance.GetGameTargetScore(ResultGame);
             
-            ShowStoryResultScreen(score, targetScore);
-            goPrevBtnText.text = (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue) ? "다음으로" : "다시하기";
+            ShowStoryResultScreen(ResultScore, targetScore);
+            if (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue)
+            {
+                returnBtn.SetActive(false);
+                retryBtn.SetActive(false);
+                epilogueBtn.SetActive(true);
+            }
         }
         else
         {
-            ShowMinigameResultScreen(score);
+            ShowMinigameResultScreen(ResultScore);
         }
     }
 
@@ -87,38 +97,73 @@ public class GameResultManager : MonoBehaviour
         var success = score >= target;
         successImageObj.SetActive(success);
         failedImageObj.SetActive(!success);
+        
+        puzzleRoot.SetActive(false);
     }
     private void ShowMinigameResultScreen(int score)
     {
         successImageObj.SetActive(false);
         failedImageObj.SetActive(false);
+        
+        puzzleRoot.SetActive(true);
+        ShowPuzzlePiece();
+        
         scoreText.text = score.ToString();
+    }
+    
+    private void ShowPuzzlePiece()
+    {
+        var havePiece = ScoreManager.Instance.GetGameAchievement(ResultGame);
+        var resultPiece = ScoreManager.Instance.SetGameAchievement(ResultGame, ResultScore);
+        
+        Debug.Log("Achievement : " + havePiece + " -> " + resultPiece);
+        
+        havePiece = Mathf.Min(havePiece, puzzlePieces.Length);
+        resultPiece = Mathf.Min(resultPiece, puzzlePieces.Length);
+
+        // Mouse Over Event Text
+        var goals = ScoreManager.Instance.GetRewardGoals(ResultGame);
+        for (int i = 0; i < 3; i++)
+        {
+            puzzlePieces[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = goals[i] + "점 이상";
+        }
+
+        // 이미 얻은 퍼즐 조각
+        for (var i = 0; i < havePiece; i++)
+        {
+            puzzlePieces[i].GetComponent<Animator>().SetTrigger("Aquired");
+        }
+
+        // 새로 얻은 퍼즐 조각
+        StartCoroutine(PieceGetSequentially(havePiece, resultPiece));
+    }
+
+    IEnumerator PieceGetSequentially(int havePiece, int resultPiece)
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.5f);
+        // 새로 얻은 퍼즐 조각
+        for (var i = havePiece; i < resultPiece; i++)
+        {
+            pieceGetSound.Play();
+            puzzleRoot.transform.GetChild(i).GetComponent<Animator>().SetTrigger("PieceGet");
+            yield return wait;
+        }
     }
     
     // Scene Load (Temporary)
 
     public void Return()
     {
-        if (GameManager.GameMode == GameMode.StoryMode)
-        {
-            SceneLoader.LoadSceneAsync("StoryMenuScene");
-        }
-        else
-        {
-            SceneLoader.LoadSceneAsync("MinigameMenuScene");
-        }
+        SceneLoader.LoadSceneAsync(GameManager.GameMode == GameMode.StoryMode ? "StoryMenuScene" : "MinigameMenuScene");
     }
     public void Replay()
     {
-        if (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue)
-        {
-            SceneLoader.LoadSceneAsync("EpilogueStoryScene");
-        }
-        else
-        {
-            var sceneName = minigameData.GetSceneName(ResultGame);
-            var illustSprite = minigameData.GetIllustSprite(ResultGame);
-            LoadingSceneManager.LoadScene(sceneName, illustSprite);
-        }
+        var sceneName = minigameData.GetSceneName(ResultGame);
+        var illustSprite = minigameData.GetIllustSprite(ResultGame);
+        LoadingSceneManager.LoadScene(sceneName, illustSprite);
+    }
+    public void Epilogue()
+    {
+        SceneLoader.LoadSceneAsync("EpilogueStoryScene");
     }
 }

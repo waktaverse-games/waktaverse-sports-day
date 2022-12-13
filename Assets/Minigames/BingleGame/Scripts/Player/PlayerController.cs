@@ -31,9 +31,9 @@ namespace GameHeaven.BingleGame
 
         void Update()
         {
-            if (!GameManager.instance.isGameStart)
+            if (!GameManager.instance.IsGameStart)
                 return;
-            if (GameManager.instance.isGameOver)
+            if (GameManager.instance.IsGameOver)
             {
                 xSpeed = 0;
                 ySpeed = 0;

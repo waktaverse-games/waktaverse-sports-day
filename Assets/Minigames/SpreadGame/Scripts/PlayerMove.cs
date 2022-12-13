@@ -394,6 +394,10 @@ namespace GameHeaven.SpreadGame
                 {
                     enemyBullet.SetActive(false);
                 }
+                foreach (GameObject boss in GameObject.FindGameObjectsWithTag("Other"))
+                {
+                    boss.SetActive(false);
+                }
                 FindObjectOfType<SoundManager>().transform.GetChild(0).gameObject.SetActive(true);
                 SoundManager.Instance.PlayGameoverSound();
                 ScoreManager.Instance.SetGameHighScore(MinigameType.SpreadGame, score.score);

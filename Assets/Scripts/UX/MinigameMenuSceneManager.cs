@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using SharedLibs.Character;
+using SharedLibs.Score;
 
 namespace GameHeaven.UIUX
 {
@@ -18,12 +19,15 @@ namespace GameHeaven.UIUX
         [SerializeField] Sprite[] minigameSprites;
         [SerializeField] string[] charNames, gameNames, engNames;
         [SerializeField] private MinigameType[] types;
+        [SerializeField] private GameObject pieces;
+        [SerializeField] private string[] characterDescription;
 
         CharacterManager characterManager;
         private Stack<int> prevMenues;
         private bool enableClick;
         private int curGame, curChar, curPuzzle;
 
+        [SerializeField] private PuzzleManager puzzleManager;
         [SerializeField] private RankingUI rankingUI;
 
         private void Awake()
@@ -43,12 +47,29 @@ namespace GameHeaven.UIUX
 
         private void Start()
         {
+            for (int i = 0; i < 7; i++)
+            {
+                characterDescription[i] = characterDescription[i].Replace("\\n", "\n");
+            }
+
+            var goals = ScoreManager.Instance.GetRewardGoals(types[curGame]);
+            for (int i = 0; i < 3; i++)
+            {
+                pieces.transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = goals[i] + "점 이상";
+            }
+
+            for (int i = 0; i < ScoreManager.Instance.GetGameAchievement(types[curGame]); i++)
+            {
+                pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(84 / 255f, 204 / 255f, 61 / 255f);
+            }
+            for (int i = ScoreManager.Instance.GetGameAchievement(types[curGame]); i < 3; i++)
+            {
+                pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
+            }
+
+            transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
             rankingUI.SetRankingUI(types[curGame]);
             UISoundManager.Instance.PlayButtonSFX2();
-        }
-
-        private void OnEnable()
-        {
         }
 
         private void Update()
@@ -147,6 +168,19 @@ namespace GameHeaven.UIUX
                 rankingUI.SetRankingUI(types[curGame + 1]);
                 StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0), -400));
                 curGame++;
+                for (int i = 0; i < ScoreManager.Instance.GetGameAchievement(types[curGame]); i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(84 / 255f, 204 / 255f, 61 / 255f);
+                }
+                for (int i = ScoreManager.Instance.GetGameAchievement(types[curGame]); i < 3; i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
+                }
+                var goals = ScoreManager.Instance.GetRewardGoals(types[curGame]);
+                for (int i = 0; i < 3; i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = goals[i] + "점 이상";
+                }
                 transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
             }
             Invoke("SetEnableClick", 0.1f);
@@ -160,6 +194,19 @@ namespace GameHeaven.UIUX
                 rankingUI.SetRankingUI(types[curGame - 1]);
                 StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0), 400));
                 curGame--;
+                for (int i = 0; i < ScoreManager.Instance.GetGameAchievement(types[curGame]); i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(84 / 255f, 204 / 255f, 61 / 255f);
+                }
+                for (int i = ScoreManager.Instance.GetGameAchievement(types[curGame]); i < 3; i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
+                }
+                var goals = ScoreManager.Instance.GetRewardGoals(types[curGame]);
+                for (int i = 0; i < 3; i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = goals[i] + "점 이상";
+                }
                 transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
             }
             Invoke("SetEnableClick", 0.1f);
@@ -174,6 +221,7 @@ namespace GameHeaven.UIUX
                 transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
                 transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
                 StartCoroutine(ArrowClick(transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0), -330));
+                transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
             }
             Invoke("SetEnableClick", 0.1f);
         }
@@ -187,6 +235,7 @@ namespace GameHeaven.UIUX
                 transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
                 transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
                 StartCoroutine(ArrowClick(transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0), 330));
+                transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
             }
             Invoke("SetEnableClick", 0.1f);
         }
@@ -223,7 +272,10 @@ namespace GameHeaven.UIUX
         }
         public void PiecePuzzle(int puzzleIndex)
         {
-            PuzzleManager.PiecePuzzle(puzzleIndex);
+            if (!puzzleManager.PiecePuzzle(puzzleIndex))
+            {
+                Debug.Log("퍼즐이 꽉 찼거나 놓을 퍼즐이 없습니다");
+            }
         }
     }
 }

@@ -21,8 +21,7 @@ namespace GameHaven.RunGame
 
         public int score = 0;
 
-        public Text scoreText;
-        public Text highScoreText;
+        public TextMeshProUGUI scoreText;
         public GameObject re;
 
         public float wallSpawnDelay;
@@ -67,7 +66,6 @@ namespace GameHaven.RunGame
             gameStart = false;
             gameStop = false;
             wallSpeed = 0;
-            highScoreText.text = ScoreManager.Instance.GetGameScore(MinigameType.RunGame).ToString();
             scoreText.text = "0";
 
         }

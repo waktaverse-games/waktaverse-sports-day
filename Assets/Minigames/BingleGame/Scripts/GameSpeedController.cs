@@ -38,7 +38,7 @@ namespace GameHeaven.BingleGame
         }
         IEnumerator IncreaseXSpeed(float delayTime)
         {
-            while(!GameManager.instance.isGameOver)
+            while(!GameManager.instance.IsGameOver)
             {
                 xSpeed += increasingXSpeedAmount;
                 if (xSpeed >= xMaxSpeed) 
@@ -48,7 +48,7 @@ namespace GameHeaven.BingleGame
         }
         IEnumerator IncreaseYSpeed(float delayTime)
         {
-            while (!GameManager.instance.isGameOver)
+            while (!GameManager.instance.IsGameOver)
             {
                 if (ySpeed >= yMaxSpeed) 
                     ySpeed = yMaxSpeed;
