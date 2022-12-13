@@ -103,7 +103,7 @@ namespace GameHeaven.UIUX
 
         IEnumerator MoveX(Transform obj, int x)
         {
-            WaitForSeconds wait = new WaitForSeconds(0.01f);
+            WaitForSeconds wait = new WaitForSeconds(0.005f);
 
             for (int i = 0; i < 10; i++)
             {
