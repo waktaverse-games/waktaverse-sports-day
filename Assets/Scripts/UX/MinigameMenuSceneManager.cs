@@ -20,6 +20,7 @@ namespace GameHeaven.UIUX
         [SerializeField] string[] charNames, gameNames, engNames;
         [SerializeField] private MinigameType[] types;
         [SerializeField] private GameObject pieces;
+        [SerializeField] private string[] characterDescription;
 
         CharacterManager characterManager;
         private Stack<int> prevMenues;
@@ -46,6 +47,17 @@ namespace GameHeaven.UIUX
 
         private void Start()
         {
+            for (int i = 0; i < 7; i++)
+            {
+                characterDescription[i] = characterDescription[i].Replace("\\n", "\n");
+            }
+
+            var goals = ScoreManager.Instance.GetRewardGoals(types[curGame]);
+            for (int i = 0; i < 3; i++)
+            {
+                pieces.transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = goals[i] + "점 이상";
+            }
+
             for (int i = 0; i < ScoreManager.Instance.GetGameAchievement(types[curGame]); i++)
             {
                 pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(84 / 255f, 204 / 255f, 61 / 255f);
@@ -54,6 +66,8 @@ namespace GameHeaven.UIUX
             {
                 pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
             }
+
+            transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
             rankingUI.SetRankingUI(types[curGame]);
             UISoundManager.Instance.PlayButtonSFX2();
         }
@@ -162,6 +176,11 @@ namespace GameHeaven.UIUX
                 {
                     pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
                 }
+                var goals = ScoreManager.Instance.GetRewardGoals(types[curGame]);
+                for (int i = 0; i < 3; i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = goals[i] + "점 이상";
+                }
                 transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
             }
             Invoke("SetEnableClick", 0.1f);
@@ -183,6 +202,11 @@ namespace GameHeaven.UIUX
                 {
                     pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
                 }
+                var goals = ScoreManager.Instance.GetRewardGoals(types[curGame]);
+                for (int i = 0; i < 3; i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = goals[i] + "점 이상";
+                }
                 transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
             }
             Invoke("SetEnableClick", 0.1f);
@@ -197,6 +221,7 @@ namespace GameHeaven.UIUX
                 transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
                 transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
                 StartCoroutine(ArrowClick(transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0), -330));
+                transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
             }
             Invoke("SetEnableClick", 0.1f);
         }
@@ -210,6 +235,7 @@ namespace GameHeaven.UIUX
                 transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
                 transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
                 StartCoroutine(ArrowClick(transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0), 330));
+                transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
             }
             Invoke("SetEnableClick", 0.1f);
         }

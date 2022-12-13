@@ -121,6 +121,13 @@ public class GameResultManager : MonoBehaviour
         havePiece = Mathf.Min(havePiece, puzzlePieces.Length);
         resultPiece = Mathf.Min(resultPiece, puzzlePieces.Length);
 
+        // Mouse Over Event Text
+        var goals = ScoreManager.Instance.GetRewardGoals(ResultGame);
+        for (int i = 0; i < 3; i++)
+        {
+            puzzlePieces[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = goals[i] + "점 이상";
+        }
+
         // 이미 얻은 퍼즐 조각
         for (var i = 0; i < havePiece; i++)
         {
