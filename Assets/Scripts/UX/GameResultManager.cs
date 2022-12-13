@@ -128,13 +128,6 @@ public class GameResultManager : MonoBehaviour
             color.a = 0.0f;
             puzzleInnerImgs[i].color = color;
         }
-        // 이미 얻은 퍼즐 조각
-        for (var i = 0; i < havePiece; i++)
-        {
-            var color = puzzleInnerImgs[i].color;
-            color.a = 0.8f;
-            puzzleInnerImgs[i].color = color;
-        }
 
         // 새로 얻은 퍼즐 조각
         StartCoroutine(PieceGetSequentially(havePiece, resultPiece));
@@ -149,6 +142,14 @@ public class GameResultManager : MonoBehaviour
             pieceGetSound.Play();
             puzzleRoot.transform.GetChild(i).GetComponent<Animator>().SetTrigger("PieceGet");
             yield return wait;
+        }
+
+        // 이미 얻은 퍼즐 조각
+        for (var i = 0; i < havePiece; i++)
+        {
+            var color = puzzleInnerImgs[i].color;
+            color.a = 0.8f;
+            puzzleInnerImgs[i].color = color;
         }
     }
     
