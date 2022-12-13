@@ -32,6 +32,11 @@ namespace SharedLibs.Score
                 OnHighScoreChanged?.Invoke(type, score);
             }
         }
+
+        public int[] GetRewardGoals(MinigameType type)
+        {
+            return goalObject.GetRewardGoals(type);
+        }
         
         public int SetGameAchievement(MinigameType type, int score)
         {
