@@ -25,7 +25,9 @@ public class GameResultManager : MonoBehaviour
     [SerializeField] private GameObject successImageObj;
     [SerializeField] private GameObject failedImageObj;
     [SerializeField] private GameObject puzzleRoot;
-    [SerializeField] private Image[] puzzleInnerImgs;
+    [SerializeField] private GameObject[] puzzlePieces;
+
+    [SerializeField] private AudioSource pieceGetSound;
 
     [SerializeField] private MinigameSceneData minigameData;
     
@@ -35,6 +37,7 @@ public class GameResultManager : MonoBehaviour
     {
         resultScreen.SetActive(false);
         StartCoroutine(ShowResultScreen(waitShowResultTime));
+        pieceGetSound.volume = SoundManager.Instance.SFXVolume;
     }
 
     private void OnEnable()
@@ -115,26 +118,28 @@ public class GameResultManager : MonoBehaviour
         
         Debug.Log("Achievement : " + havePiece + " -> " + resultPiece);
         
-        havePiece = Mathf.Min(havePiece, puzzleInnerImgs.Length);
-        resultPiece = Mathf.Min(resultPiece, puzzleInnerImgs.Length);
+        havePiece = Mathf.Min(havePiece, puzzlePieces.Length);
+        resultPiece = Mathf.Min(resultPiece, puzzlePieces.Length);
 
-        // 얻지 못한 퍼즐 조각
-        for (var i = resultPiece; i < puzzleInnerImgs.Length; i++)
-        {
-            var color = puzzleInnerImgs[i].color;
-            color.a = 0.0f;
-            puzzleInnerImgs[i].color = color;
-        }
         // 이미 얻은 퍼즐 조각
         for (var i = 0; i < havePiece; i++)
         {
-            var color = puzzleInnerImgs[i].color;
-            color.a = 0.8f;
-            puzzleInnerImgs[i].color = color;
+            puzzlePieces[i].GetComponent<Animator>().SetTrigger("Aquired");
         }
+
+        // 새로 얻은 퍼즐 조각
+        StartCoroutine(PieceGetSequentially(havePiece, resultPiece));
+    }
+
+    IEnumerator PieceGetSequentially(int havePiece, int resultPiece)
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.5f);
         // 새로 얻은 퍼즐 조각
         for (var i = havePiece; i < resultPiece; i++)
         {
+            pieceGetSound.Play();
+            puzzleRoot.transform.GetChild(i).GetComponent<Animator>().SetTrigger("PieceGet");
+            yield return wait;
         }
     }
     

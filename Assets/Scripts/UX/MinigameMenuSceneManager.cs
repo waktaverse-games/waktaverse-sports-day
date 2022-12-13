@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using SharedLibs.Character;
+using SharedLibs.Score;
 
 namespace GameHeaven.UIUX
 {
@@ -18,6 +19,7 @@ namespace GameHeaven.UIUX
         [SerializeField] Sprite[] minigameSprites;
         [SerializeField] string[] charNames, gameNames, engNames;
         [SerializeField] private MinigameType[] types;
+        [SerializeField] private GameObject pieces;
 
         CharacterManager characterManager;
         private Stack<int> prevMenues;
@@ -44,6 +46,14 @@ namespace GameHeaven.UIUX
 
         private void Start()
         {
+            for (int i = 0; i < ScoreManager.Instance.GetGameAchievement(types[curGame]); i++)
+            {
+                pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(84 / 255f, 204 / 255f, 61 / 255f);
+            }
+            for (int i = ScoreManager.Instance.GetGameAchievement(types[curGame]); i < 3; i++)
+            {
+                pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
+            }
             rankingUI.SetRankingUI(types[curGame]);
             UISoundManager.Instance.PlayButtonSFX2();
         }
@@ -144,6 +154,14 @@ namespace GameHeaven.UIUX
                 rankingUI.SetRankingUI(types[curGame + 1]);
                 StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0), -400));
                 curGame++;
+                for (int i = 0; i < ScoreManager.Instance.GetGameAchievement(types[curGame]); i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(84 / 255f, 204 / 255f, 61 / 255f);
+                }
+                for (int i = ScoreManager.Instance.GetGameAchievement(types[curGame]); i < 3; i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
+                }
                 transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
             }
             Invoke("SetEnableClick", 0.1f);
@@ -157,6 +175,14 @@ namespace GameHeaven.UIUX
                 rankingUI.SetRankingUI(types[curGame - 1]);
                 StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0), 400));
                 curGame--;
+                for (int i = 0; i < ScoreManager.Instance.GetGameAchievement(types[curGame]); i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(84 / 255f, 204 / 255f, 61 / 255f);
+                }
+                for (int i = ScoreManager.Instance.GetGameAchievement(types[curGame]); i < 3; i++)
+                {
+                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
+                }
                 transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
             }
             Invoke("SetEnableClick", 0.1f);
