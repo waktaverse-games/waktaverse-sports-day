@@ -25,7 +25,7 @@ public class GameResultManager : MonoBehaviour
     [SerializeField] private GameObject successImageObj;
     [SerializeField] private GameObject failedImageObj;
     [SerializeField] private GameObject puzzleRoot;
-    [SerializeField] private Image[] puzzleInnerImgs;
+    [SerializeField] private GameObject[] puzzlePieces;
 
     [SerializeField] private AudioSource pieceGetSound;
 
@@ -118,15 +118,13 @@ public class GameResultManager : MonoBehaviour
         
         Debug.Log("Achievement : " + havePiece + " -> " + resultPiece);
         
-        havePiece = Mathf.Min(havePiece, puzzleInnerImgs.Length);
-        resultPiece = Mathf.Min(resultPiece, puzzleInnerImgs.Length);
+        havePiece = Mathf.Min(havePiece, puzzlePieces.Length);
+        resultPiece = Mathf.Min(resultPiece, puzzlePieces.Length);
 
-        // 얻지 못한 퍼즐 조각
-        for (var i = resultPiece; i < puzzleInnerImgs.Length; i++)
+        // 이미 얻은 퍼즐 조각
+        for (var i = 0; i < havePiece; i++)
         {
-            var color = puzzleInnerImgs[i].color;
-            color.a = 0.0f;
-            puzzleInnerImgs[i].color = color;
+            puzzlePieces[i].GetComponent<Animator>().SetTrigger("Aquired");
         }
 
         // 새로 얻은 퍼즐 조각
@@ -142,14 +140,6 @@ public class GameResultManager : MonoBehaviour
             pieceGetSound.Play();
             puzzleRoot.transform.GetChild(i).GetComponent<Animator>().SetTrigger("PieceGet");
             yield return wait;
-        }
-
-        // 이미 얻은 퍼즐 조각
-        for (var i = 0; i < havePiece; i++)
-        {
-            var color = puzzleInnerImgs[i].color;
-            color.a = 0.8f;
-            puzzleInnerImgs[i].color = color;
         }
     }
     
