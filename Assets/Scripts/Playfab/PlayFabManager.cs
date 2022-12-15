@@ -82,7 +82,7 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
             if (profile != null)
                 GameDatabase.NickName = profile.DisplayName;
             else
-                PostDisplayName(GameDatabase.NickName);
+                PostDisplayName(GameDatabase.NickName, null, null);
 
             UpdateLeaderBoard();
         }, error => Debug.LogError("Login Failed (" + error.Error.ToString() + "): " + error.ErrorMessage));
@@ -107,13 +107,22 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
             error => Debug.LogError("Update Failed (" + error.Error.ToString() + "): " + error.ErrorMessage));
     }
 
-    public void PostDisplayName(string displayName)
+    public void PostDisplayName(string displayName, Action onSuccess, Action onFailed)
     {
         GameDatabase.NickName = displayName;
 
-        var req = new UpdateUserTitleDisplayNameRequest { DisplayName = displayName };
-        PlayFabClientAPI.UpdateUserTitleDisplayName(req, result => { Debug.Log("UpdateUserTitleDisplayName Success"); },
-            error => { Debug.LogError("UpdateUserTitleDisplayName Error (" + error.Error.ToString() + "): " + error.ErrorMessage); });
+        PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest { DisplayName = displayName },
+            result =>
+            {
+                onSuccess?.Invoke();
+                Debug.Log("UpdateUserTitleDisplayName Success");
+            },
+            error =>
+            {
+                onFailed?.Invoke();
+                Debug.LogError("UpdateUserTitleDisplayName Error (" + error.Error.ToString() + "): " +
+                               error.ErrorMessage);
+            });
     }
 
     public void UpdateLeaderBoard()
