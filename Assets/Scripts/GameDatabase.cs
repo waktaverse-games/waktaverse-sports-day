@@ -100,9 +100,9 @@ public class GameDB
         nickName = GetRandomNickName();
     }
 
-    private string GetRandomNickName()
+    public static string GetRandomNickName()
     {
-        return "팬치_이파리_" + Math.Abs(DateTime.UtcNow.GetHashCode()) % 1000000;
+        return "팬치_이파리_" + (Math.Abs(DateTime.UtcNow.GetHashCode()) % 1000000).ToString().PadLeft(6, '0');
     }
 }
 
