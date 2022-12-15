@@ -70,7 +70,7 @@ namespace GameHeaven.JumpGame
 
         void GameStart()
         {
-            scoreText.text = "점수 : 0";
+            scoreText.text = "0";
             isGameStart = true;
             SoundManager.Instance.PlayBGM();
             ObjectTurnOnOff(true);
@@ -80,7 +80,7 @@ namespace GameHeaven.JumpGame
         public void IncreaseScore(ScoreType type)
         {
             totalScore += ScoreMap(type);
-            scoreText.text = "점수 : " + totalScore.ToString();
+            scoreText.text = totalScore.ToString();
         }
         public void IncreaseJumpSuccessCount()
         {

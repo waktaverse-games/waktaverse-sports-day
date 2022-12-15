@@ -62,12 +62,7 @@ namespace GameHeaven.BingleGame
         public void IncreaseScore(ScoreType type)
         {
             totalScore += ScoreMap(type);
-            scoreText.text = "점수 : " + totalScore.ToString();
-        }
-        public void IncreaseScore(ScoreType type, int combo)
-        {
-            totalScore += ScoreMap(type) + combo;
-            scoreText.text = "점수 : " + totalScore.ToString();
+            scoreText.text = totalScore.ToString();
         }
 
         public void GameOver()
@@ -83,7 +78,7 @@ namespace GameHeaven.BingleGame
         void GameStart()
         {
             isGameStart = true;
-            scoreText.text = "점수 : 0";
+            scoreText.text = "0";
             SoundManager.instance.PlayBGM();
         }
 
