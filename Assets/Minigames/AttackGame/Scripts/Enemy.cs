@@ -30,6 +30,7 @@ namespace GameHeaven.AttackGame
         private bool _isAlive;
         private bool _isMonkeyMove;
         private float _bossMonkeySpeed = -0.4f;
+        private AudioSource _audioSource;
 
         private void OnEnable()
         {
@@ -38,6 +39,12 @@ namespace GameHeaven.AttackGame
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _isMonkeyMove = false;
             damage = 10;
+        }
+
+        private void Start()
+        {
+            _audioSource = GetComponent<AudioSource>();
+            _audioSource.volume = SharedLibs.SoundManager.Instance.SFXVolume;
         }
 
         public void SetState(bool isBoss, int hp, int enemyDamage)
@@ -78,7 +85,7 @@ namespace GameHeaven.AttackGame
             Vector3 scale = transform.localScale;
             _tween = transform.DOScale(new Vector3(scale.x * 3f, scale.y * 3f, scale.z), 0.5f).SetId(tweenId);
             StartCoroutine(BossStart(2f));
-            Debug.Log(isBossMonster);
+            // Debug.Log(isBossMonster);
         }
 
         IEnumerator BossStart(float time)
@@ -98,7 +105,7 @@ namespace GameHeaven.AttackGame
                 currentHp = 0;
                 gameManager.GetEnemyXp(isBossMonster);
                 _isAlive = false;
-                GetComponent<AudioSource>().Play();
+                _audioSource.Play();
                 Invoke("DisableObject", 0.2f);
             }
             hpBar.fillAmount = (float)currentHp / totalHp;

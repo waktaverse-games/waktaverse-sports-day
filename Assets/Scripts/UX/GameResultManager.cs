@@ -54,6 +54,8 @@ public class GameResultManager : MonoBehaviour
     {
         if (IsResultScreen) return;
         
+        LoggerSystem.Log(GameManager.GameMode.ToString(), type.ToString(), score.ToString());
+        
         ResultGame = type;
         ResultScore = score;
         

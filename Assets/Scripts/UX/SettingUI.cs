@@ -29,7 +29,15 @@ namespace GameHeaven.UIUX
         {
             IsSettingScene = false;
         }
-        
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CloseSetting();
+            }
+        }
+
         public static void OpenSetting()
         {
             SceneLoader.AddSceneAsync("SettingScene");

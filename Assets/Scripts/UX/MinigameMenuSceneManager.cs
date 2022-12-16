@@ -20,6 +20,7 @@ namespace GameHeaven.UIUX
         [SerializeField] string[] charNames, gameNames, engNames;
         [SerializeField] private MinigameType[] types;
         [SerializeField] private GameObject pieces;
+        [SerializeField] Sprite[] descriptionSprites;
         [SerializeField] private string[] characterDescription;
 
         CharacterManager characterManager;
@@ -76,6 +77,7 @@ namespace GameHeaven.UIUX
         {
             if (Input.GetKeyDown(KeyCode.Escape) && enableClick)
             {
+                if (SettingUI.IsSettingScene) return;
                 if (prevMenues.Count < 2)
                 {
                     SceneManager.LoadScene("ModeSelectScene");
@@ -129,7 +131,10 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
-            transform.GetChild(5).GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>().text = gameNames[curGame];
+            transform.GetChild(5).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
+            transform.GetChild(5).GetChild(0).GetChild(2).GetComponent<Image>().sprite = descriptionSprites[curGame];
+            transform.GetChild(5).GetChild(0).GetChild(5).GetComponent<TextMeshProUGUI>().text = gameNames[curGame];
+            // 게임 영상
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(5).GetComponent<Animator>().SetTrigger("On");

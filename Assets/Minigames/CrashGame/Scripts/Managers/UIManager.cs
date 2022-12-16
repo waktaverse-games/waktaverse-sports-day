@@ -34,9 +34,10 @@ namespace GameHeaven.CrashGame
 
         public void SetScoreText(int score)
         {
-            gameScore.text = $"점수: {score}";
+            gameScore.text = $"{score}";
         }
 
+        [System.Obsolete]
         public void SetHighScoreText(int score)
         {
             highScore.text = $"최고기록: {score}";
