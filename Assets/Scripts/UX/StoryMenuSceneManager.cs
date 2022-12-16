@@ -52,6 +52,7 @@ namespace GameHeaven.UIUX
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                if (SettingUI.IsSettingScene) return;
                 if (isDescMenuOpen)
                 {
                     UISoundManager.Instance.PlayButtonSFX1();
@@ -78,7 +79,6 @@ namespace GameHeaven.UIUX
             gameNameText.text = gameNames[index];
             gameImage.sprite = minigameSprites[index];
             gameDescImage.sprite = descriptionSprites[index];
-            // 게임 영상
 
             gameDescObj.GetComponent<Animator>().SetTrigger("On");
             isDescMenuOpen = true;

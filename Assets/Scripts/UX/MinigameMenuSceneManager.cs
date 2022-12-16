@@ -77,6 +77,7 @@ namespace GameHeaven.UIUX
         {
             if (Input.GetKeyDown(KeyCode.Escape) && enableClick)
             {
+                if (SettingUI.IsSettingScene) return;
                 if (prevMenues.Count < 2)
                 {
                     SceneManager.LoadScene("ModeSelectScene");

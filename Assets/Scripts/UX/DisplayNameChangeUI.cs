@@ -12,11 +12,6 @@ namespace GameHeaven.UIUX
         private Color normalPlaceholderColor = new Color(0.35f, 0.35f, 0.35f, 1.0f);
         private Color errorPlaceholderColor = new Color(0.8f, 0.0f, 0.0f, 1.0f);
 
-        private void Start()
-        {
-            gameObject.SetActive(false);
-        }
-
         private void OnEnable()
         {
             nameInputField.placeholder.color = new Color(0.35f, 0.35f, 0.35f, 1.0f);
