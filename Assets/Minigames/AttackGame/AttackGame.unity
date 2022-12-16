@@ -1629,10 +1629,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 8300000, guid: 718dd5e2f39a48d44bb7e233509abf02, type: 3}
-  - {fileID: 8300000, guid: 2d88ba980213ea34c819785e58e40ff5, type: 3}
-  - {fileID: 8300000, guid: 2cb17ee577be18b4d84a493b51f63c9e, type: 3}
-  - {fileID: 8300000, guid: 68d8afcb70afcf6458f6da7180c6cc67, type: 3}
+  - {fileID: 8300000, guid: 8b31512d9e2a8e144b6e99710e730879, type: 3}
+  - {fileID: 8300000, guid: 779a8d02e11ec9d4f8665d17b1caa54f, type: 3}
+  - {fileID: 8300000, guid: 3f07eae010cf63140a15094f349da5ef, type: 3}
+  - {fileID: 8300000, guid: 045fa887f0dee6d45a92eb87407e2ccb, type: 3}
   - {fileID: 8300000, guid: c35532713fd678a4f9ec53127d04aa33, type: 3}
   - {fileID: 8300000, guid: c9597a9bc6c82064788177625248e038, type: 3}
 --- !u!82 &433834157
