@@ -14,7 +14,7 @@ namespace GameHeaven.UIUX
 {
     public class StoryMenuSceneManager : MonoBehaviour
     {
-        [SerializeField] private Sprite[] minigameSprites;
+        [SerializeField] private Sprite[] minigameSprites, descriptionSprites;
         [SerializeField] private string[] gameNames, engNames;
         [SerializeField] private CharacterType[] charTypes;
 
@@ -22,8 +22,7 @@ namespace GameHeaven.UIUX
 
         [SerializeField] private GameObject gameDescObj;
         [SerializeField] private TextMeshProUGUI gameNameText;
-        [SerializeField] private Image gameImage;
-        [SerializeField] private TextMeshProUGUI gameDescText;
+        [SerializeField] private Image gameImage, gameDescImage;
 
         [SerializeField] [ReadOnly] private string selectEngName;
 
@@ -78,6 +77,8 @@ namespace GameHeaven.UIUX
             
             gameNameText.text = gameNames[index];
             gameImage.sprite = minigameSprites[index];
+            gameDescImage.sprite = descriptionSprites[index];
+            // 게임 영상
 
             gameDescObj.GetComponent<Animator>().SetTrigger("On");
             isDescMenuOpen = true;

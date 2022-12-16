@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.5, y: 2016375.9}
+  m_AnchoredPosition: {x: -0.5, y: 2297894.2}
   m_SizeDelta: {x: -1255, y: 1100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &16666252
@@ -8998,6 +8998,17 @@ MonoBehaviour:
   - AttackGame
   types: 07000000050000000400000002000000010000000900000006000000030000000800000000000000
   pieces: {fileID: 1619772807}
+  descriptionSprites:
+  - {fileID: 21300000, guid: 3cbc4e82290158a4d84f84415156c63e, type: 3}
+  - {fileID: 21300000, guid: 9a575c612f6d921459f98dd061f596b3, type: 3}
+  - {fileID: 21300000, guid: dd5607fa987d2df438e65c9cfc7d57ff, type: 3}
+  - {fileID: 21300000, guid: 12197b79e7bd69945a85b3508ba121c7, type: 3}
+  - {fileID: 21300000, guid: 456b436661855244485e34d683f7a83f, type: 3}
+  - {fileID: 21300000, guid: c49b1c562b191f8439e282e80fbc0d73, type: 3}
+  - {fileID: 21300000, guid: 1b93a0e3d7d9eaf4683c62845dbd0dff, type: 3}
+  - {fileID: 21300000, guid: 5ca1ce02f922895489e77e0253f2e907, type: 3}
+  - {fileID: 21300000, guid: 897800a0ee801a140960f758ac205bed, type: 3}
+  - {fileID: 21300000, guid: 1be81e891c5aa6a49ae4449e23a03931, type: 3}
   characterDescription:
   - "\uD615\uC740 \uCD5C\uACE0\uC57C.. \uD615\uC740 \uADC0\uC5EC\uC6CC.. \\n \uD615\uC740
     \uB625\uAC9C\uD398\uC774\uCEE4\uC57C.."
@@ -26827,6 +26838,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 750901183}
     m_Modifications:
+    - target: {fileID: 1227485592380874624, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3953608155324519121, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0fdc6fcc537fae6489f4e4edfd997749, type: 3}
     - target: {fileID: 5124969451185755031, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -26956,6 +26975,18 @@ PrefabInstance:
       value: GameDescMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5124969452332150299, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124969453056532961, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -115.1194
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124969453056532961, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.8618164
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124969453074818980, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
