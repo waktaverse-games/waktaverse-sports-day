@@ -56,6 +56,8 @@ namespace GameHeaven.UIUX
                 if (isDescMenuOpen)
                 {
                     UISoundManager.Instance.PlayButtonSFX1();
+                    transform.GetChild(1).gameObject.SetActive(true);
+                    transform.GetChild(2).gameObject.SetActive(true);
                     gameDescObj.GetComponent<Animator>().SetTrigger("Off");
                     isDescMenuOpen = false;
                 }
@@ -80,6 +82,8 @@ namespace GameHeaven.UIUX
             gameImage.sprite = minigameSprites[index];
             gameDescImage.sprite = descriptionSprites[index];
 
+            transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(2).gameObject.SetActive(false);
             gameDescObj.GetComponent<Animator>().SetTrigger("On");
             isDescMenuOpen = true;
             
