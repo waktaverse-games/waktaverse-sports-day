@@ -16,6 +16,8 @@ public class GameDatabase : MonoSingleton<GameDatabase>
     [SerializeField] private GameDB db;
 
     [SerializeField] private bool isFirstTime;
+
+    public int lastSelectedGame, lastSelectedCharacter; // For Minigame Mode
     
     public GameDB DB => db;
 
