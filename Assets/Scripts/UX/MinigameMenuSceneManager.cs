@@ -40,14 +40,15 @@ namespace GameHeaven.UIUX
             
             prevMenues = new Stack<int>();
             prevMenues.Push(1);
-            enableClick = true;
             curGame = curChar = 0;
+            enableClick = true;
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("On");
             characterManager = FindObjectOfType<CharacterManager>();
         }
 
         private void Start()
         {
+            // Character Description
             for (int i = 0; i < 7; i++)
             {
                 characterDescription[i] = characterDescription[i].Replace("\\n", "\n");
@@ -114,7 +115,7 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("On");
-            prevMenues.Push(2);
+            if (prevMenues.Peek() != 2) prevMenues.Push(2);
             Invoke("SetEnableClick", 0.2f);
         }
         public void CheckPuzzleClick()
@@ -124,7 +125,7 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(4).GetComponent<Animator>().SetTrigger("On");
-            prevMenues.Push(4);
+            if (prevMenues.Peek() != 4) prevMenues.Push(4);
             Invoke("SetEnableClick", 0.2f);
         }
         public void ChooseButtonClick()
@@ -138,7 +139,7 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(5).GetComponent<Animator>().SetTrigger("On");
-            prevMenues.Push(5);
+            if (prevMenues.Peek() != 5) prevMenues.Push(5);
             Invoke("SetEnableClick", 0.2f);
         }
         public void RankingButtonClick()
@@ -151,7 +152,7 @@ namespace GameHeaven.UIUX
             var tr = transform.GetChild(6).GetChild(1).GetChild(0).GetChild(0).transform;
             tr.position = new Vector3(tr.position.x, -1000, tr.position.z);
             rankingUI.SetRankingBoard(types[curGame]);
-            prevMenues.Push(6);
+            if (prevMenues.Peek() != 6) prevMenues.Push(6);
             Invoke("SetEnableClick", 0.2f);
         }
         public void StartButtonClick()
@@ -161,7 +162,7 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(5).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(3).GetComponent<Animator>().SetTrigger("On");
-            prevMenues.Push(3);
+            if (prevMenues.Peek() != 3) prevMenues.Push(3);
             Invoke("SetEnableClick", 0.2f);
         }
         public void GameRightClick()
