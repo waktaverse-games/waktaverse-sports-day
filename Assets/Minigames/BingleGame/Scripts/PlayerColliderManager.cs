@@ -12,6 +12,7 @@ namespace GameHeaven.BingleGame
         {
             if (collision.gameObject.tag == "GameOverArea" || collision.gameObject.tag == "Border" || collision.gameObject.tag == "Brick")
             {
+                collision.transform.parent.GetComponent<CheckPointManager>().DisableOtherCollider();
                 GameManager.instance.GameOver();
             }
             else if(collision.gameObject.tag == "Coin")
