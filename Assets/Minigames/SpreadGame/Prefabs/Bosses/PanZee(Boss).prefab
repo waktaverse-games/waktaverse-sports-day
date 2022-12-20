@@ -240,7 +240,7 @@ MonoBehaviour:
   numOfPatterns: 5
   bulletIdx: 0
   curPatternDelay: 0
-  maxPatternDelay: 3.2
+  maxPatternDelay: 3.5
   curStraightFireDelay: 0
   maxStraightFireDelay: 10000
   straightFireSpeed: 8
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 1454105097963677828}
   m_Layer: 0
   m_Name: Ggang (2)
-  m_TagString: Ball
+  m_TagString: CutItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 6285853641159213996}
   m_Layer: 0
   m_Name: Ggangs
-  m_TagString: Untagged
+  m_TagString: CutItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 8605784893624952668}
   m_Layer: 0
   m_Name: Banana
-  m_TagString: Ball
+  m_TagString: CutItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 8510958720225668919}
   m_Layer: 0
   m_Name: Ggang
-  m_TagString: Ball
+  m_TagString: CutItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1131,7 +1131,7 @@ GameObject:
   - component: {fileID: 7636971564895697289}
   m_Layer: 0
   m_Name: Ggang (1)
-  m_TagString: Ball
+  m_TagString: CutItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1586,7 +1586,7 @@ GameObject:
   - component: {fileID: 5814454976734969296}
   m_Layer: 0
   m_Name: Ggang (3)
-  m_TagString: Ball
+  m_TagString: CutItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -30,6 +30,7 @@ namespace GameHeaven.SpreadGame
         Rigidbody2D rigid;
         Animator anim;
         ScoreUpdate score;
+        private bool bombLock = false;
 
         private void Awake()
         {
@@ -52,6 +53,13 @@ namespace GameHeaven.SpreadGame
             bullet.damage = 1; bullet.maxShotDelay = 0.3f;
             */
             curSectorDir = 1;
+            bombLock = true;
+            Invoke("ResetBombLock", 3.0f);
+        }
+
+        void ResetBombLock()
+        {
+            bombLock = false;
         }
 
         private void FixedUpdate()
@@ -87,7 +95,7 @@ namespace GameHeaven.SpreadGame
         }
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.CompareTag("Enemy") || collider.CompareTag("Ball"))
+            if (collider.CompareTag("Enemy") || collider.CompareTag("Ball") || collider.CompareTag("CutItem"))
             {
                 Hit();
             }
@@ -264,7 +272,7 @@ namespace GameHeaven.SpreadGame
         {
             if (isStun) return;
 
-            if (rigid.velocity.sqrMagnitude > speed * speed)
+            if (rigid.velocity.magnitude > speed)
             {
                 rigid.velocity = rigid.velocity.normalized * speed;
             }
@@ -328,9 +336,10 @@ namespace GameHeaven.SpreadGame
 
             bullet.curShotDelay = 0;
         }
-
         void Bomb()
         {
+            if (bombLock) return;
+
             if (!Input.GetKeyDown(KeyCode.Space) || bombCnt <= 0) return;
 
             AudioSource.PlayClipAtPoint(bombSound, Vector3.zero);
@@ -340,12 +349,26 @@ namespace GameHeaven.SpreadGame
                 enemy.HP -= 30;
             }
 
+            BossMove bakZwi = FindObjectOfType<BossMove>();
+
+            if (bakZwi) bakZwi.StartCoroutine(bakZwi.BakZwiBomb());
+
+            GameObject[] bossAttacks = GameObject.FindGameObjectsWithTag("CutItem");
+
+            foreach (GameObject bossAttack in bossAttacks)
+            {
+                Collider2D collider = bossAttack.GetComponent<Collider2D>();
+                collider.enabled = false;
+                StartCoroutine(SetCollider(collider));
+            }
+
             foreach (GameObject enemyBullet in GameObject.FindGameObjectsWithTag("Ball"))
             {
                 enemyBullet.SetActive(false);
                 Instantiate(coinAcquireEffect, enemyBullet.transform.position, coinAcquireEffect.transform.rotation);
 
-                if (enemyBullet.layer == LayerMask.NameToLayer("Ball")) // ��������
+
+                if (enemyBullet.layer == LayerMask.NameToLayer("Ball"))
                 {
                     StartCoroutine(BakZwiSetActive(enemyBullet));
                 }
@@ -357,12 +380,16 @@ namespace GameHeaven.SpreadGame
             bombCnt--;
         }
 
+        IEnumerator SetCollider(Collider2D collider)
+        {
+            yield return new WaitForSeconds(1.5f);
+            collider.enabled = true;
+        }
         IEnumerator BakZwiSetActive(GameObject obj)
         {
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(1.5f);
 
             obj.SetActive(true);
-
         }
 
         void CameraShake()
