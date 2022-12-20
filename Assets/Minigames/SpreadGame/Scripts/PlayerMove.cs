@@ -410,6 +410,7 @@ namespace GameHeaven.SpreadGame
             else
             {
                 anim.SetTrigger("GameOver");
+                FindObjectOfType<SoundManager>().transform.GetChild(0).GetComponent<AudioSource>().enabled = false;
                 isInvincible = true;
                 isDeath = true;
                 FindObjectOfType<GameManager>().gameObject.SetActive(false);
