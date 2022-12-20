@@ -8,7 +8,7 @@ namespace GameHeaven.SpreadGame
 {
     public class BossMove : MonoBehaviour
     {
-        public enum Type { RaNi, DdulGi, DdongGangAji, GyunNyang, JuPokDo }
+        public enum Type { RaNi, DdulGi, DdongGangAji, GyunNyang, JuPokDo, BakZwi }
         public int HP, maxHP;
 
         [SerializeField] Type type;
@@ -126,6 +126,16 @@ namespace GameHeaven.SpreadGame
             }
         }
 
+        private bool bakZwiCircleFireR = false;
+        public IEnumerator BakZwiBomb()
+        {
+            bakZwiCircleFireR = true;
+
+            yield return new WaitForSeconds(1.5f);
+
+            bakZwiCircleFireR = false;
+        }
+
         void Move()
         {
             curPatternDelay += Time.deltaTime;
@@ -151,6 +161,8 @@ namespace GameHeaven.SpreadGame
         }
         void CircleFire()
         {
+            if (type == Type.BakZwi && bakZwiCircleFireR) return;
+
             curCircleFireDelay += Time.deltaTime;
 
             if (curCircleFireDelay < maxCircleFireDelay) return;
