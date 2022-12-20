@@ -55,7 +55,7 @@ namespace GameHeaven.UIUX
 
         private void Start()
         {
-            rankingUI.SetRankingUI(types[curGame + 1]);
+            rankingUI.SetRankingUI(types[curGame]);
             transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0).localPosition -=  new Vector3(400 * curGame, 0, 0);
             transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0).localPosition -= new Vector3(330 * curChar, 0, 0);
             transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
