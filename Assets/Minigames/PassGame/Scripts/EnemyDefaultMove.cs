@@ -14,26 +14,29 @@ namespace GameHeaven.PassGame
 
         private Rigidbody2D _rigidbody;
 
-        private bool _passed = false;
+        public bool _passed = false;
 
         // Start is called before the first frame update
         void OnEnable()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _rigidbody.velocity = new Vector2(-speed, 0);
+            _passed = false;
+            StartCoroutine(CheckScoreEnum());
             // transform.Translate(0,0.3f,0);
         }
 
         private void OnDisable()
         {
             _passed = false;
+            StopAllCoroutines();
         }
 
         // Update is called once per frame
         void Update()
         {
             CheckDisablePosition();
-            CheckScore();
+            // CheckScore();
         }
 
         void CheckDisablePosition()
@@ -44,11 +47,27 @@ namespace GameHeaven.PassGame
             }
         }
 
+        IEnumerator CheckScoreEnum()
+        {
+            yield return new WaitForSeconds(0.06f);
+            if (transform.position.x < player.transform.position.x && !_passed)
+            {
+                Debug.Log(_passed);
+                _passed = true;
+                gameManager.AddScore(10);
+            }
+            else
+            {
+                StartCoroutine(CheckScoreEnum());
+            }
+        }
+
         void CheckScore()
         {
             if (_passed) return;
-            if (transform.position.x < player.transform.position.x)
+            if (transform.position.x < player.transform.position.x && !_passed)
             {
+                Debug.Log(_passed);
                 _passed = true;
                 gameManager.AddScore(10);
             }
