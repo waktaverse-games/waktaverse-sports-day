@@ -2506,6 +2506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_Countdown
       objectReference: {fileID: 0}
+    - target: {fileID: 5480173455962128178, guid: 98284f8566ddb724cb514e47a19b1b11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5480173455962128182, guid: 98284f8566ddb724cb514e47a19b1b11, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4132,7 +4136,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.02657612}
+  m_Offset: {x: 0, y: -0.040028878}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4143,7 +4147,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.09010268}
+  m_Size: {x: 1, y: 0.18470241}
   m_EdgeRadius: 0
 --- !u!212 &2090383075
 SpriteRenderer:
