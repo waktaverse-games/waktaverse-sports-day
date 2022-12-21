@@ -295,6 +295,7 @@ namespace GameHeaven.UIUX
             if (!enableClick) return;
             enableClick = false;
             characterManager.SetCharacter((SharedLibs.CharacterType)curChar);
+            UIBGM.Instance.OffUIBGM();
             LoadingSceneManager.LoadScene(engNames[curGame], minigameSprites[curGame]);
             Invoke("SetEnableClick", 0.2f);
         }

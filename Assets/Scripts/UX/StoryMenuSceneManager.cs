@@ -119,6 +119,7 @@ namespace GameHeaven.UIUX
 
         public void StartGame()
         {
+            UIBGM.Instance.OffUIBGM();
             UISoundManager.Instance.PlayButtonSFX1();
             var curIdx = StoryManager.Instance.SelectStoryIndex;
             
