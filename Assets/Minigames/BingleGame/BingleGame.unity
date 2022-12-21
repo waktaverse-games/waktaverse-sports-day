@@ -1405,7 +1405,7 @@ MonoBehaviour:
   xSpeed: 0
   ySpeed: 0
   slowDownSpeed: 0.9
-  controlCoolDown: 0.5
+  controlCoolDown: 0.4
   ableToMove: 0
 --- !u!114 &453711553
 MonoBehaviour:

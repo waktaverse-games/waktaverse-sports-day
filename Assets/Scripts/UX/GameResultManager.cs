@@ -156,6 +156,7 @@ public class GameResultManager : MonoBehaviour
 
     public void Return()
     {
+        UIBGM.Instance.OnUIBGM();
         SceneLoader.LoadSceneAsync(GameManager.GameMode == GameMode.StoryMode ? "StoryMenuScene" : "MinigameMenuScene");
     }
     public void Replay()

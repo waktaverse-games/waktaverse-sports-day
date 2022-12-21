@@ -38,6 +38,7 @@ namespace GameHeaven.PassGame
         private TextMeshProUGUI _scoreText;
         private TextMeshProUGUI _stageText;
         private List<string>[] _stageStrings = new List<string>[6];
+        private bool _isBat;
 
         // Start is called before the first frame update
         void Start()
@@ -110,18 +111,19 @@ namespace GameHeaven.PassGame
             player.SetActive(false);
             testBack.shouldMove = false;
             Time.timeScale = 1;
+            yield return new WaitForSecondsRealtime(0.3f);
             SfxManager.PlaySfx(3);
             bgm.Stop();
+            yield return new WaitForSecondsRealtime(2.7f);
             // Debug.Log("Game Over");
             ScoreManager.Instance.SetGameHighScore(MinigameType.PassGame, _score);
             // Debug.Log(_score);
             GameResultManager.ShowResult(MinigameType.PassGame, _score);
-            yield return null;
         }
 
         public void AddScore(int addScore)
         {
-            Debug.Log("Add Score: " + addScore);
+            // Debug.Log("Add Score: " + addScore);
             _score += addScore;
             _scoreText.text = _score.ToString();
         }
@@ -149,6 +151,14 @@ namespace GameHeaven.PassGame
         {
             yield return new WaitForSeconds(time);
             int rnd = Random.Range(0, _stageStrings[_stage].Count);
+            if (_stage < 5 && _isBat)
+            {
+                if (_stageStrings[_stage][rnd] == "bidul") rnd += Random.Range(1, 3);
+                else if (_stageStrings[_stage][rnd] == "jupok") rnd -= Random.Range(1, 4);
+                // Debug.Log(rnd);
+            }
+            if (_stageStrings[_stage][rnd] == "bat") _isBat = true;
+            else _isBat = false;
             objectManager.MakeObject(_stageStrings[_stage][rnd], _spawnPos);
             StartCoroutine(StageSpawn(2.25f));
         }

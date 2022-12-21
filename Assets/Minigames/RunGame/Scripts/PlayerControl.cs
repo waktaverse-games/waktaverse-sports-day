@@ -73,7 +73,6 @@ namespace GameHaven.RunGame
                 if (GetItem == true)
                 {
                     ItemTime += Time.deltaTime;
-                    Caracter.GetComponent<CapsuleCollider2D>().enabled = false;
                     Caracter.GetComponent<CapsuleCollider2D>().size = new Vector2(0.34f, 0.44f);
                     Effect.SetActive(true);
 
@@ -88,7 +87,6 @@ namespace GameHaven.RunGame
                     {
                         ItemTime = 0;
                         Caracter.GetComponent<CapsuleCollider2D>().size = new Vector2(0.6f, 0.77f);
-                        Caracter.GetComponent<CapsuleCollider2D>().enabled = true;
                         GetItem = false;
                         Effect.SetActive(false);
                         run.SetBool("Jump", false);
@@ -129,27 +127,33 @@ namespace GameHaven.RunGame
         {
             if (other.gameObject.tag == "Enemy")
             {
-                gameManager.GameOver();
+                if (GetItem == false)
+                {
+                    gameManager.GameOver();
+                }
             }
             else if (other.gameObject.tag == "Coin")
             {
-                audio = other.GetComponent<AudioSource>();
-                coin = other.GetComponent<Animator>();
-                audio.volume = SoundManager.Instance.SFXVolume;
-                audio.Play();
-                coin.SetBool("Get", true);
-
-                Destroy(other.gameObject, 3);
-
-                if (other.gameObject.name.Contains("PungSin"))
+                if (GetItem == false)
                 {
-                    GetItem = true;
-                    gameManager.ItemScore(15);
-                    run.SetBool("Jump", true);
-                }
-                else
-                {
-                    gameManager.ItemScore(5);
+                    audio = other.GetComponent<AudioSource>();
+                    coin = other.GetComponent<Animator>();
+                    audio.volume = SoundManager.Instance.SFXVolume;
+                    audio.Play();
+                    coin.SetBool("Get", true);
+
+                    Destroy(other.gameObject, 3);
+
+                    if (other.gameObject.name.Contains("PungSin"))
+                    {
+                        GetItem = true;
+                        gameManager.ItemScore(15);
+                        run.SetBool("Jump", true);
+                    }
+                    else
+                    {
+                        gameManager.ItemScore(5);
+                    }
                 }
             }
 
