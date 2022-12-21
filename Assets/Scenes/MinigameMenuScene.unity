@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.5, y: 2848316.2}
+  m_AnchoredPosition: {x: -0.5, y: 2983195}
   m_SizeDelta: {x: -1255, y: 1100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &14634051
@@ -10815,6 +10815,17 @@ MonoBehaviour:
     \\n \uB315\uCA54\uC8E0? \uD0B9\uC544!!"
   - "\uAC9C\uC798\uC2A4\uC758 \uB9E4\uC6B4\uB9DB\uC744 \uBCF4\uC5EC\uC8FC\uB9C8!
     \\n \uC791\uC740 \uB9C9\uB0B4 \uBE44\uCC64\uC774 \uAC04\uB2E4!  "
+  descriptionVideos:
+  - {fileID: 32900000, guid: e50c4472351cd484da0dce572a8b847d, type: 3}
+  - {fileID: 32900000, guid: e50c4472351cd484da0dce572a8b847d, type: 3}
+  - {fileID: 32900000, guid: e50c4472351cd484da0dce572a8b847d, type: 3}
+  - {fileID: 32900000, guid: e50c4472351cd484da0dce572a8b847d, type: 3}
+  - {fileID: 32900000, guid: e50c4472351cd484da0dce572a8b847d, type: 3}
+  - {fileID: 32900000, guid: e50c4472351cd484da0dce572a8b847d, type: 3}
+  - {fileID: 32900000, guid: e50c4472351cd484da0dce572a8b847d, type: 3}
+  - {fileID: 32900000, guid: e50c4472351cd484da0dce572a8b847d, type: 3}
+  - {fileID: 32900000, guid: e50c4472351cd484da0dce572a8b847d, type: 3}
+  - {fileID: 32900000, guid: e50c4472351cd484da0dce572a8b847d, type: 3}
   puzzleManager: {fileID: 411338577}
   rankingUI: {fileID: 750901185}
 --- !u!114 &750901185
@@ -24533,6 +24544,41 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!328 &1790495351
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616637049}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: fbcde744f9337ea44befcd7dd7a32c39, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &1798239360
 GameObject:
   m_ObjectHideFlags: 0
@@ -29719,6 +29765,14 @@ PrefabInstance:
     - target: {fileID: 5124969453074818980, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6692384031550323745, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}
+      propertyPath: m_Looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6692384031550323745, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}
+      propertyPath: m_AudioOutputMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81de9d19220f4d44497bf326d89e8fe4, type: 3}

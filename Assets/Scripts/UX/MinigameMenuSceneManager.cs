@@ -6,6 +6,7 @@ using PlayFab.ClientModels;
 using SharedLibs;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using TMPro;
 using SharedLibs.Character;
@@ -22,6 +23,7 @@ namespace GameHeaven.UIUX
         [SerializeField] private GameObject pieces;
         [SerializeField] Sprite[] descriptionSprites;
         [SerializeField] private string[] characterDescription;
+        [SerializeField] private VideoClip[] descriptionVideos;
 
         CharacterManager characterManager;
         private Stack<int> prevMenues;
@@ -150,6 +152,7 @@ namespace GameHeaven.UIUX
             transform.GetChild(5).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
             transform.GetChild(5).GetChild(0).GetChild(2).GetComponent<Image>().sprite = descriptionSprites[curGame];
             transform.GetChild(5).GetChild(0).GetChild(5).GetComponent<TextMeshProUGUI>().text = gameNames[curGame];
+            transform.GetChild(5).GetChild(1).GetComponent<VideoPlayer>().clip = descriptionVideos[curGame];
             // 게임 영상
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
