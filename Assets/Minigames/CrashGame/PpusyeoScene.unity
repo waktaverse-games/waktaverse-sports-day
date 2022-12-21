@@ -2991,6 +2991,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2bee8e30fac9bf247b0a09fd7f8ac3d9, type: 3}
   audioBGMClips:
   - {fileID: 8300000, guid: b4cfe048de2b059409bec580c95d6560, type: 3}
+  - {fileID: 8300000, guid: 8b196caf166e7754fa7dce268cde0a60, type: 3}
 --- !u!114 &1679308196
 MonoBehaviour:
   m_ObjectHideFlags: 0
