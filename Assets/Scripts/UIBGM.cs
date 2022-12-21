@@ -47,6 +47,6 @@ public class UIBGM : MonoBehaviour
     }
     public void SetUIBGMVolume(float volume)
     {
-        bgm.volume = volume;
+        bgm.volume = volume / 2;
     }
 }
