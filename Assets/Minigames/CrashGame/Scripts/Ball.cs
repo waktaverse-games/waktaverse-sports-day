@@ -97,7 +97,7 @@ namespace GameHeaven.CrashGame
                     {
                         // 플랫폼 운동방향에 따라 반사 각도 변화
                         Vector2 platformVelocity = collision.GetComponentInParent<Rigidbody2D>().velocity;
-                        Debug.Log($"Platform Velocity: {platformVelocity.x}, {platformVelocity.y}");
+                        //Debug.Log($"Platform Velocity: {platformVelocity.x}, {platformVelocity.y}");
 
                         float delta = Mathf.Sign(velocity.y) * ((-platformVelocity.x * 2f) + (platformVelocity.y * Mathf.Sign(velocity.x) * 1.3f));
                         velocity = Utils.RotateVector(velocity, delta);
@@ -109,7 +109,7 @@ namespace GameHeaven.CrashGame
                     }
                     // 점프 도중 플랫폼과 공의 충돌 시 공이 아래로 튕기는 것을 방지. 공은 무조건 위로 튕김
                     if (rigidBody.velocity.y < 0) velocity = new Vector2(velocity.x, -velocity.y);
-                    Debug.Log(Vector2.Angle(velocity, Vector2.right));
+                    //Debug.Log(Vector2.Angle(velocity, Vector2.right));
                     isReturning = false;
 
                     // 공에 닿을 시 점프 중단.
@@ -131,7 +131,7 @@ namespace GameHeaven.CrashGame
 
         public void DestroyBall()
         {
-            Debug.Log("DestroyBall called");
+            //Debug.Log("DestroyBall called");
             BallNumber--;
             if (BallNumber <= 0) MiniGameManager.Instance.GameOver();
             Destroy(gameObject);
@@ -153,13 +153,13 @@ namespace GameHeaven.CrashGame
         public void Fire(Vector2 force)
         {
             MiniGameManager.Instance.Sound.PlayEffect("button_01", volume: .5f);
-            isReturning = false;
             rigidBody.AddForce(force);
         }
 
         public void Fire()
         {
             Fire(new Vector2(Random.Range(-10, 10), Random.Range(5, 10)).normalized * InitialForce);
+            isReturning = false;
         }
 
         public void BlockFire()

@@ -210,7 +210,7 @@ namespace GameHeaven.CrashGame
         public void GameStart()
         {
             CurrentGameState = GameState.Start;
-            Sound.PlayBGM("Waktaverse_Minigame");
+            Sound.PlayBGM("왁타버스 미니게임 재즈버전");
         }
 
         public void BallFire()

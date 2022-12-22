@@ -1057,7 +1057,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   VFX: {fileID: 206088309}
-  maxSpeed: 3
+  maxSpeed: 4
   jumpPower: 10
 --- !u!70 &464028283
 CapsuleCollider2D:
@@ -1303,7 +1303,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6772812a24717d64dbef8d5a78fc81cf, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b4cfe048de2b059409bec580c95d6560, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
