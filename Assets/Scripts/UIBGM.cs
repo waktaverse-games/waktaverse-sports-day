@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,14 @@ public class UIBGM : MonoBehaviour
 {
     [SerializeField] AudioSource bgm;
 
+    [SerializeField] private float multiplier = 0.6f;
+
     void Start()
     {
         SetUIBGMVolume(SharedLibs.SoundManager.Instance.BGMVolume);
         bgm.enabled = true;
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnEnable()
@@ -31,6 +36,6 @@ public class UIBGM : MonoBehaviour
     }
     public void SetUIBGMVolume(float volume)
     {
-        bgm.volume = volume / 2;
+        bgm.volume = volume * multiplier;
     }
 }
