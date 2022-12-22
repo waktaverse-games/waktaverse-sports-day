@@ -32,7 +32,7 @@ namespace GameHeaven.JumpGame
             {
                 SoundManager.Instance.PlayItemSound();
                 GameManager.Instance.IncreaseScore(ScoreType.item);
-                GameObject vfx = Instantiate(VFX, transform.position, transform.rotation);
+                GameObject vfx = Instantiate(VFX, collision.transform.position, transform.rotation);
                 Destroy(vfx, 2f);
                 spawner.DeactiavteItem(gameObject);
             }

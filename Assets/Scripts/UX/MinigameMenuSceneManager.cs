@@ -6,6 +6,7 @@ using PlayFab.ClientModels;
 using SharedLibs;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using TMPro;
 using SharedLibs.Character;
@@ -22,6 +23,7 @@ namespace GameHeaven.UIUX
         [SerializeField] private GameObject pieces;
         [SerializeField] Sprite[] descriptionSprites;
         [SerializeField] private string[] characterDescription;
+        [SerializeField] private VideoClip[] descriptionVideos;
 
         CharacterManager characterManager;
         private Stack<int> prevMenues;
@@ -40,14 +42,30 @@ namespace GameHeaven.UIUX
             
             prevMenues = new Stack<int>();
             prevMenues.Push(1);
+            curGame = GameDatabase.Instance.lastSelectedGame;
+            curChar = GameDatabase.Instance.lastSelectedCharacter;
             enableClick = true;
-            curGame = curChar = 0;
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("On");
             characterManager = FindObjectOfType<CharacterManager>();
         }
 
+        private void OnDisable()
+        {
+            GameDatabase.Instance.lastSelectedGame = curGame;
+            GameDatabase.Instance.lastSelectedCharacter = curChar;
+        }
+
         private void Start()
         {
+            rankingUI.SetRankingUI(types[curGame]);
+            transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0).localPosition -=  new Vector3(400 * curGame, 0, 0);
+            transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0).localPosition -= new Vector3(330 * curChar, 0, 0);
+            transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
+            transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
+            transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
+            transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
+
+            // Character Description
             for (int i = 0; i < 7; i++)
             {
                 characterDescription[i] = characterDescription[i].Replace("\\n", "\n");
@@ -114,7 +132,7 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("On");
-            prevMenues.Push(2);
+            if (prevMenues.Peek() != 2) prevMenues.Push(2);
             Invoke("SetEnableClick", 0.2f);
         }
         public void CheckPuzzleClick()
@@ -124,7 +142,7 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(4).GetComponent<Animator>().SetTrigger("On");
-            prevMenues.Push(4);
+            if (prevMenues.Peek() != 4) prevMenues.Push(4);
             Invoke("SetEnableClick", 0.2f);
         }
         public void ChooseButtonClick()
@@ -134,11 +152,12 @@ namespace GameHeaven.UIUX
             transform.GetChild(5).GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
             transform.GetChild(5).GetChild(0).GetChild(2).GetComponent<Image>().sprite = descriptionSprites[curGame];
             transform.GetChild(5).GetChild(0).GetChild(5).GetComponent<TextMeshProUGUI>().text = gameNames[curGame];
+            transform.GetChild(5).GetChild(1).GetComponent<VideoPlayer>().clip = descriptionVideos[curGame];
             // 게임 영상
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(5).GetComponent<Animator>().SetTrigger("On");
-            prevMenues.Push(5);
+            if (prevMenues.Peek() != 5) prevMenues.Push(5);
             Invoke("SetEnableClick", 0.2f);
         }
         public void RankingButtonClick()
@@ -151,7 +170,7 @@ namespace GameHeaven.UIUX
             var tr = transform.GetChild(6).GetChild(1).GetChild(0).GetChild(0).transform;
             tr.position = new Vector3(tr.position.x, -1000, tr.position.z);
             rankingUI.SetRankingBoard(types[curGame]);
-            prevMenues.Push(6);
+            if (prevMenues.Peek() != 6) prevMenues.Push(6);
             Invoke("SetEnableClick", 0.2f);
         }
         public void StartButtonClick()
@@ -161,12 +180,13 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(5).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(3).GetComponent<Animator>().SetTrigger("On");
-            prevMenues.Push(3);
+            if (prevMenues.Peek() != 3) prevMenues.Push(3);
             Invoke("SetEnableClick", 0.2f);
         }
         public void GameRightClick()
         {
             if (!enableClick) return;
+            enableClick = false;
             UISoundManager.Instance.PlayButtonSFX1();
             if (curGame < 9)
             {
@@ -193,6 +213,7 @@ namespace GameHeaven.UIUX
         public void GameLeftClick()
         {
             if (!enableClick) return;
+            enableClick = false;
             UISoundManager.Instance.PlayButtonSFX1();
             if (curGame > 0)
             {
@@ -219,6 +240,7 @@ namespace GameHeaven.UIUX
         public void CharRightClick()
         {
             if (!enableClick) return;
+            enableClick = false;
             UISoundManager.Instance.PlayButtonSFX1();
             if (curChar < 6)
             {
@@ -233,6 +255,7 @@ namespace GameHeaven.UIUX
         public void CharLeftClick()
         {
             if (!enableClick) return;
+            enableClick = false;
             UISoundManager.Instance.PlayButtonSFX1();
             if (curChar > 0)
             {
@@ -247,6 +270,7 @@ namespace GameHeaven.UIUX
         public void PuzzleRightClick()
         {
             if (!enableClick) return;
+            enableClick = false;
             UISoundManager.Instance.PlayButtonSFX1();
             if (curPuzzle < 4)
             {
@@ -259,6 +283,7 @@ namespace GameHeaven.UIUX
         public void PuzzleLeftClick()
         {
             if (!enableClick) return;
+            enableClick = false;
             UISoundManager.Instance.PlayButtonSFX1();
             if (curPuzzle > 0)
             {
@@ -271,7 +296,9 @@ namespace GameHeaven.UIUX
         public void GameStartButtonClick()
         {
             if (!enableClick) return;
+            enableClick = false;
             characterManager.SetCharacter((SharedLibs.CharacterType)curChar);
+            UIBGM.Instance.OffUIBGM();
             LoadingSceneManager.LoadScene(engNames[curGame], minigameSprites[curGame]);
             Invoke("SetEnableClick", 0.2f);
         }

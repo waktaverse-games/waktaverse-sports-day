@@ -42,7 +42,7 @@ namespace GameHeaven.CrossGame
         public void AddScore(int Point)
         {
             score += Point;
-            scoreUI.text = "Score : " + score.ToString();
+            scoreUI.text = score.ToString();
         }
 
         public void GameOver()

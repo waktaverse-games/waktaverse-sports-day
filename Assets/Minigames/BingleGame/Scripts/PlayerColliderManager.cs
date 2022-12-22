@@ -10,11 +10,16 @@ namespace GameHeaven.BingleGame
         bool isFirst = true;
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.tag == "GameOverArea" || collision.gameObject.tag == "Border" || collision.gameObject.tag == "Brick")
+            if (collision.gameObject.tag == "GameOverArea")
+            {
+                collision.transform.parent.GetComponent<CheckPointManager>().DisableOtherCollider();
+                GameManager.instance.GameOver();
+            }
+            else if(collision.gameObject.tag == "Border" || collision.gameObject.tag == "Brick")
             {
                 GameManager.instance.GameOver();
             }
-            else if(collision.gameObject.tag == "Coin")
+            else if (collision.gameObject.tag == "Coin")
             {
                 collision.GetComponent<ItemManager>().OnCollision();
                 GameManager.instance.IncreaseScore(ScoreType.item);

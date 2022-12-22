@@ -40,7 +40,7 @@ public class PuzzleManager : MonoBehaviour
         {
             for (var j = 0; j < _db.completeState[i]; j++)
             {
-                puzzles.transform.GetChild(i).GetChild(1).GetChild(j).GetComponent<Animator>().SetTrigger("Piece");
+                puzzles.transform.GetChild(i).GetChild(1).GetChild(j).GetChild(0).GetComponent<Animator>().SetTrigger("Piece");
                 puzzles.transform.GetChild(i).GetChild(4).GetComponent<TextMeshProUGUI>().text = _db.completeState[i] + " / 6";
             }
         }
@@ -58,7 +58,7 @@ public class PuzzleManager : MonoBehaviour
         
         Transform puzzles = GameObject.Find("Canvas").transform.GetChild(4).GetChild(0).GetChild(0);
 
-        puzzles.GetChild(puzzleIndex).GetChild(1).GetChild(GetPuzzle(puzzleIndex)).GetComponent<Animator>().SetTrigger("Piece");
+        puzzles.GetChild(puzzleIndex).GetChild(1).GetChild(GetPuzzle(puzzleIndex)).GetChild(0).GetComponent<Animator>().SetTrigger("Piece");
 
         var complNum = ++_db.completeState[puzzleIndex];
         var remainPzl = --_db.pieceCount;

@@ -117,7 +117,7 @@ namespace GameHeaven.JumpGame
             textEffectCoroutine = StartCoroutine(FadeText(textEffect, true));
         }
 
-         IEnumerator FadeText(TextMeshProUGUI textUI, bool floatText, float interval = .05f)
+         IEnumerator FadeText(TextMeshProUGUI textUI, bool floatText, float interval = .1f)
         {
             Color textColor = textUI.color;
             textColor.a = 1f;

@@ -37,7 +37,6 @@ namespace GameHeaven.JumpGame
         public void StartRope()
         {
             animator.speed = speed;
-            Invoke("EnableReverse", 1f);
             StartCoroutine(IncreaseSpeed(increasingSpeedTime));
             Invoke("StartVariation", variationStartTime);
         }
@@ -69,13 +68,13 @@ namespace GameHeaven.JumpGame
 
         void StartVariation()
         {
-            Debug.Log("리버스, 변속 모드 시작!");
+            isReversing = false;
             reverseProb = reverseProbability;
             slowModeProb = slowModeProbability;
         }
         void Reverse()
         {
-            if (Random.Range(0, 100) <= reverseProb && !isReversing)
+            if (Random.Range(0, 100) < reverseProb && !isReversing)
             {
                 Debug.Log("방향 전환!");
                 isReversing = true;
@@ -87,14 +86,10 @@ namespace GameHeaven.JumpGame
                 ResetSpeedSetting();
             }
         }
-        void EnableReverse()
-        {
-            isReversing = false;
-        }
 
         public void SlowMode(int _isReverse)
         {
-            if (Random.Range(0, 100) <= slowModeProb && isReverse == System.Convert.ToBoolean(_isReverse))
+            if (Random.Range(0, 100) < slowModeProb && isReverse == System.Convert.ToBoolean(_isReverse))
             {
                 Debug.Log("슬로우 모드 시작!");
                 float slowSpeed = speed / 2;

@@ -2543,7 +2543,7 @@ GameObject:
   - component: {fileID: 5868071845125079868}
   m_Layer: 10
   m_Name: Wave
-  m_TagString: Ball
+  m_TagString: CutItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3011,11 +3011,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 500
   maxHP: 500
-  type: 0
+  type: 5
   numOfPatterns: 4
   bulletIdx: 0
   curPatternDelay: 0
-  maxPatternDelay: 2.5
+  maxPatternDelay: 3
   curStraightFireDelay: 0
   maxStraightFireDelay: 10000
   straightFireSpeed: 7
