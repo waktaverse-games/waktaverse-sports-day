@@ -102,14 +102,16 @@ namespace GameHaven.RunGame
 
                 if (gameManager.gameTime < 30)
                 {
-                    Speed = Mathf.Lerp(Speed, 5f, Time.deltaTime * 0.04f);
+                    Speed = Mathf.Lerp(Speed, 4f, Time.deltaTime * 0.04f);
                 }
                 else if (gameManager.gameTime >= 30 && gameManager.gameTime < 60)
                 {
-                    Speed = Mathf.Lerp(Speed, 8f, Time.deltaTime * 0.07f);
+                    Speed = Mathf.Lerp(Speed, 6f, Time.deltaTime * 0.07f);
                 }
+                else if(gameManager.gameTime >= 60 && gameManager.gameTime < 120)
+                    Speed = Mathf.Lerp(Speed, 7f, Time.deltaTime * 0.005f);
                 else
-                    Speed = Mathf.Lerp(Speed, 8.5f, Time.deltaTime * 0.005f);
+                    Speed = Mathf.Lerp(Speed, 10f, Time.deltaTime * 0.04f);
 
                 Caracter.GetComponent<Rigidbody2D>().velocity = dir * Speed;
 
