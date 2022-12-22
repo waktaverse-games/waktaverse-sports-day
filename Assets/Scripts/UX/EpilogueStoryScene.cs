@@ -8,13 +8,13 @@ namespace GameHeaven.UIUX
     {
         private void Awake()
         {
-            UIBGM.Instance.OffUIBGM();
+            FindObjectOfType<UIBGM>().OffUIBGM();
         }
 
         public void ReturnToModeSelect()
         {
             StoryManager.Instance.ViewEpilogue = true;
-            UIBGM.Instance.OnUIBGM();
+            FindObjectOfType<UIBGM>().OnUIBGM();
             SceneManager.LoadScene("ModeSelectScene");
             SceneLoader.AddSceneAsync("UnlockMessagesScene");
         }

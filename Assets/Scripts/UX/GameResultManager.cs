@@ -18,9 +18,10 @@ public class GameResultManager : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI gameNameText;
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private GameObject returnBtn;
-    [SerializeField] private GameObject retryBtn;
+    [SerializeField] private GameObject returnBtnRed, returnBtnGray;
+    [SerializeField] private GameObject nextBtn;
     [SerializeField] private GameObject epilogueBtn;
+    [SerializeField] private GameObject retryBtn;
     
     [SerializeField] private GameObject successImageObj;
     [SerializeField] private GameObject failedImageObj;
@@ -82,7 +83,8 @@ public class GameResultManager : MonoBehaviour
             ShowStoryResultScreen(ResultScore, targetScore);
             if (StoryManager.Instance.IsAllUnlock && !StoryManager.Instance.ViewEpilogue)
             {
-                returnBtn.SetActive(false);
+                returnBtnRed.SetActive(false);
+                returnBtnGray.SetActive(false);
                 retryBtn.SetActive(false);
                 epilogueBtn.SetActive(true);
             }
@@ -99,8 +101,13 @@ public class GameResultManager : MonoBehaviour
         var success = score >= target;
         successImageObj.SetActive(success);
         failedImageObj.SetActive(!success);
-        
+        returnBtnRed.SetActive(false);
+        returnBtnGray.SetActive(!success);
+        nextBtn.SetActive(success);
+
         puzzleRoot.SetActive(false);
+
+        if (success && GameDatabase.Instance.DB.storyDB.lastViewedChapter < 9) GameDatabase.Instance.DB.storyDB.lastViewedChapter++;
     }
     private void ShowMinigameResultScreen(int score)
     {
@@ -156,7 +163,7 @@ public class GameResultManager : MonoBehaviour
 
     public void Return()
     {
-        UIBGM.Instance.OnUIBGM();
+        FindObjectOfType<UIBGM>().OnUIBGM();
         SceneLoader.LoadSceneAsync(GameManager.GameMode == GameMode.StoryMode ? "StoryMenuScene" : "MinigameMenuScene");
     }
     public void Replay()

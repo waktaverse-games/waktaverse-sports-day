@@ -6,22 +6,6 @@ public class UIBGM : MonoBehaviour
 {
     [SerializeField] AudioSource bgm;
 
-    #region Singleton
-    public static UIBGM Instance = null;
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            if (Instance != this)
-                Destroy(this.gameObject);
-        }
-    }
-    #endregion
-
     void Start()
     {
         SetUIBGMVolume(SharedLibs.SoundManager.Instance.BGMVolume);
