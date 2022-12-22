@@ -1357,7 +1357,7 @@ MonoBehaviour:
     moveTime: 0.6
     moveDelay: 0
     isSmooth: 1
-    endSfx: {fileID: 8300000, guid: 4676cf346391cfe42b9c7737276052f5, type: 3}
+    endSfx: {fileID: 8300000, guid: 140a5288c72ead24e9091bcc93bc39f6, type: 3}
   - pointTransform: {fileID: 704589658}
     moveTime: 3
     moveDelay: 1
@@ -1407,7 +1407,7 @@ MonoBehaviour:
     moveTime: 1
     moveDelay: 1
     isSmooth: 1
-    endSfx: {fileID: 8300000, guid: 4676cf346391cfe42b9c7737276052f5, type: 3}
+    endSfx: {fileID: 0}
   - pointTransform: {fileID: 1370183518}
     moveTime: 3
     moveDelay: 1
