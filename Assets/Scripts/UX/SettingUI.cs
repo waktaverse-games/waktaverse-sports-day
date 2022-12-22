@@ -36,6 +36,20 @@ namespace GameHeaven.UIUX
             {
                 CloseSetting();
             }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                if (Input.GetKey(KeyCode.A))
+                {
+                    if (Input.GetKey(KeyCode.K))
+                    {
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            ResetResolution();
+                        }
+                    }
+                }
+            }
         }
 
         public static void OpenSetting()
@@ -62,6 +76,11 @@ namespace GameHeaven.UIUX
             sfxVolumeSlider.value = volumes.sfxVolume;
 
             SetFullscreen(false);
+        }
+
+        public void ResetResolution()
+        {
+            Screen.SetResolution(1920, 1080, false);
         }
         
         public void SetBGMVolume(float volume)
