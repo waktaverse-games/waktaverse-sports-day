@@ -113,7 +113,11 @@ public class GameResultManager : MonoBehaviour
     {
         successImageObj.SetActive(false);
         failedImageObj.SetActive(false);
-        
+
+        returnBtnRed.SetActive(true);
+        returnBtnGray.SetActive(false);
+        nextBtn.SetActive(false);
+
         puzzleRoot.SetActive(true);
         ShowPuzzlePiece();
         
