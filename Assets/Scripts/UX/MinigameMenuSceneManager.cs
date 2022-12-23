@@ -57,6 +57,11 @@ namespace GameHeaven.UIUX
 
         private void Start()
         {
+            for (int i = 0; i < 7; i++)
+            {
+                characterDescription[i] = characterDescription[i].Replace("\\n", "\n");
+            }
+
             transform.GetChild(2).GetChild(1).GetChild(1).GetChild(1).localPosition -= new Vector3(400 * curGame, 0, 0);
             transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0).localPosition -= new Vector3(330 * curChar, 0, 0);
 
@@ -108,11 +113,6 @@ namespace GameHeaven.UIUX
             transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
             transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
             transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
-
-            for (int i = 0; i < 7; i++)
-            {
-                characterDescription[i] = characterDescription[i].Replace("\\n", "\n");
-            }
         }
 
         private void Update()
