@@ -36,6 +36,17 @@ namespace GameHeaven.UIUX
 
         private void Start()
         {
+            curSeletedStage = GameDatabase.Instance.DB.storyDB.lastViewedChapter;
+
+            // Button On/Off
+            if (curSeletedStage == 0) transform.GetChild(2).gameObject.SetActive(false);
+            else if (curSeletedStage == 9) transform.GetChild(1).gameObject.SetActive(false);
+            else
+            {
+                transform.GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(2).gameObject.SetActive(true);
+            }
+
             UISoundManager.Instance.PlayButtonSFX1();
 
             curSeletedStage = StoryManager.Instance.SelectStoryIndex;
@@ -104,6 +115,15 @@ namespace GameHeaven.UIUX
                 curSeletedStage++;
                 StartCoroutine(MoveX(transform.GetChild(3), x));
             }
+
+            // Button On/Off
+            if (curSeletedStage == 0) transform.GetChild(2).gameObject.SetActive(false);
+            else if (curSeletedStage == 9) transform.GetChild(1).gameObject.SetActive(false);
+            else
+            { 
+                transform.GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(2).gameObject.SetActive(true);
+            }
         }
 
         IEnumerator MoveX(Transform obj, int x)
@@ -119,7 +139,7 @@ namespace GameHeaven.UIUX
 
         public void StartGame()
         {
-            UIBGM.Instance.OffUIBGM();
+            FindObjectOfType<UIBGM>().OffUIBGM();
             UISoundManager.Instance.PlayButtonSFX1();
             var curIdx = StoryManager.Instance.SelectStoryIndex;
             

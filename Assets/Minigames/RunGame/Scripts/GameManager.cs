@@ -115,7 +115,18 @@ namespace GameHaven.RunGame
 
         public void SpawnWall()
         {
-            Instantiate(wall[Random.Range(0, wall.Length)], spawnPoints.position, spawnPoints.rotation);
+            if(gameTime < 25)
+                Instantiate(wall[Random.Range(0, 7)], spawnPoints.position, spawnPoints.rotation);
+            else if (gameTime >= 25 && gameTime < 60)
+                Instantiate(wall[Random.Range(0, 15)], spawnPoints.position, spawnPoints.rotation);
+            else if (gameTime >= 60 && gameTime < 90)
+                Instantiate(wall[Random.Range(8, 15)], spawnPoints.position, spawnPoints.rotation);
+            else if (gameTime >= 90 && gameTime < 140)
+                Instantiate(wall[Random.Range(8, wall.Length)], spawnPoints.position, spawnPoints.rotation);
+            else
+                Instantiate(wall[Random.Range(16, wall.Length)], spawnPoints.position, spawnPoints.rotation);
+
+
         }
 
         public void SpawnCoin()
