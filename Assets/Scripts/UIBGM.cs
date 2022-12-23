@@ -13,7 +13,7 @@ public class UIBGM : MonoBehaviour
     {
         SetUIBGMVolume(SharedLibs.SoundManager.Instance.BGMVolume);
         bgm.enabled = true;
-        
+        bgm.loop = true;
         DontDestroyOnLoad(gameObject);
     }
 
