@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: zhdlxh48@gmail.com
-  DevAccountToken: mi4sguhyfer6kwy6gywoogkhxuy4qwhc33wp55jnhpygsdntbpcyex517984zsusdjyrzxfbogit993u3izrfkaa4oboyczwb8cuqm9zfkdtextx4yqsf1kdn3rwp8bsfs7xrje4tsrdmhhtcs3rgcnp53r9bresoc645ezo37d86z9pbrd6znmh8bnkw73x3gfump4q
+  DevAccountToken: 6usbr3nn5dd5dcxa37n488rf3a1yk9z7hxcnc9ikuqfd1erohin6b1sy9cxxxjhxwoojyrkj36qshkzgwr8mqt75xnb4fmrrhfcia3romcrj46nw5azgqq1d47nwzx1d7ussb3h5trup5rj5tam47c7wnyusffpuphspu78oo5jpkdaxs3qstz5x3wkcujfnhprs6ohj
   AadAuthorization: 
-  SelectedStudio: 
+  SelectedStudio: Waktaverse Games
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 0
-  curSubMenuIdx: 0
+  curMainMenuIdx: 2
+  curSubMenuIdx: 1
