@@ -15,10 +15,12 @@ namespace GameHeaven.PunctureGame
     public class PunctureSFXCollection : SFXCollection<PunctureSFXType>
     {
         [SerializeField] private Transform followTarget;
+
+        [SerializeField] private float multiplier;
         
         private void Start()
         {
-            SetVolume(SoundManager.Instance.SFXVolume);
+            SetPunctureVolume(SoundManager.Instance.SFXVolume);
         }
 
         private void Update()
@@ -28,12 +30,14 @@ namespace GameHeaven.PunctureGame
 
         private void OnEnable()
         {
-            SoundManager.Instance.OnSFXVolumeChanged += SetVolume;
+            SoundManager.Instance.OnSFXVolumeChanged += SetPunctureVolume;
         }
 
         private void OnDisable()
         {
-            SoundManager.Instance.OnSFXVolumeChanged -= SetVolume;
+            SoundManager.Instance.OnSFXVolumeChanged -= SetPunctureVolume;
         }
+
+        private void SetPunctureVolume(float volume) => SetVolume(volume * multiplier);
     }
 }
