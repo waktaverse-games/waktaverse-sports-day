@@ -111,10 +111,10 @@ namespace GameHeaven.PassGame
             player.SetActive(false);
             testBack.shouldMove = false;
             Time.timeScale = 1;
-            yield return new WaitForSecondsRealtime(0.3f);
+            yield return new WaitForSecondsRealtime(0.1f);
             SfxManager.PlaySfx(3);
             bgm.Stop();
-            yield return new WaitForSecondsRealtime(2.7f);
+            yield return new WaitForSecondsRealtime(0.1f);
             // Debug.Log("Game Over");
             ScoreManager.Instance.SetGameHighScore(MinigameType.PassGame, _score);
             // Debug.Log(_score);
@@ -180,9 +180,13 @@ namespace GameHeaven.PassGame
 
         public void ItemActivate()
         {
-            playerScript.jumpItem = true;
-            SfxManager.PlaySfx(2);
-            doubleJumpState.SetActive(true);
+            if (playerScript.jumpItem < 3) 
+            {
+                playerScript.jumpItem += 1;
+                playerScript.ResetJumpText();
+                SfxManager.PlaySfx(2);
+                doubleJumpState.SetActive(true);
+            }
         }
 
         public void ItemDeactivate()

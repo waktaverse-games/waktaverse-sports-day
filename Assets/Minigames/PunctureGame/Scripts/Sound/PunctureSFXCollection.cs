@@ -1,5 +1,6 @@
 ﻿using System;
 using SharedLibs;
+using UnityEngine;
 
 namespace GameHeaven.PunctureGame
 {
@@ -13,9 +14,16 @@ namespace GameHeaven.PunctureGame
 
     public class PunctureSFXCollection : SFXCollection<PunctureSFXType>
     {
+        [SerializeField] private Transform followTarget;
+        
         private void Start()
         {
             SetVolume(SoundManager.Instance.SFXVolume);
+        }
+
+        private void Update()
+        {
+            transform.position = followTarget.position;
         }
 
         private void OnEnable()

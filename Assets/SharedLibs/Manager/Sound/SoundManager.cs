@@ -20,8 +20,8 @@ namespace SharedLibs
         public float SFXVolume => sfxVolume;
         public float BGMVolume => bgmVolume;
 
-        [SerializeField] private float sfxInitVolume = 0.25f;
-        [SerializeField] private float bgmInitVolume = 0.25f;
+        [SerializeField] private float sfxInitVolume = 0.26f;
+        [SerializeField] private float bgmInitVolume = 0.13f;
 
         public override void Init()
         {
@@ -36,8 +36,8 @@ namespace SharedLibs
         
         public (float bgmVolume, float sfxVolume) ResetVolume()
         {
-            sfxVolume = SetSFXVolume(0.5f);
-            bgmVolume = SetBGMVolume(0.5f);
+            sfxVolume = SetSFXVolume(sfxInitVolume);
+            bgmVolume = SetBGMVolume(bgmInitVolume);
             
             PlayerPrefs.Save();
 

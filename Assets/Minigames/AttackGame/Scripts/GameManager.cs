@@ -140,7 +140,7 @@ namespace GameHeaven.AttackGame
             mainCameraScript.isGamePlaying = false;
             _isGameEnd = true;
             objectManager.FailGame();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
             // retryObject.SetActive(true);
             playerObject.GetComponent<Animator>().SetBool("isDead", true);
             yield return new WaitForSeconds(0.04f);
@@ -148,7 +148,7 @@ namespace GameHeaven.AttackGame
             SfxManager.PlaySfx(4);
             backAudio.Stop();
             // playerObject.SetActive(false);
-            yield return new WaitForSecondsRealtime(3);
+            yield return new WaitForSecondsRealtime(0.1f);
             Time.timeScale = 1;
             playerObject.SetActive(false);
             ScoreManager.Instance.SetGameHighScore(MinigameType.AttackGame, _scoreNum);
@@ -239,7 +239,8 @@ namespace GameHeaven.AttackGame
                 int enemyCode = Random.Range(0, enemyType);
                 GameObject temp = objectManager.MakeObject(_enemyTypes[enemyCode],
                     new Vector3(Random.Range(11f, 42f), 2, 0));
-                temp.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
+                temp.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], 
+                    (int)Math.Truncate(_enemyDamage * 1.4f));
             }
         }
 
@@ -267,7 +268,8 @@ namespace GameHeaven.AttackGame
                 tempEnemy.GetComponent<Enemy>().SetState(false, _enemyHps[enemyCode], _enemyDamage);
             }
             GameObject tempBoss = objectManager.MakeObject(_enemyTypes[bossNum], new Vector3(44, 6, 0));
-            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 11, _enemyDamage * 3);
+            tempBoss.GetComponent<Enemy>().SetState(true, _enemyHps[bossNum] * 11, 
+                (int)Math.Truncate(_enemyDamage * 3.5f));
             if (_stageNum == 2)
             {
                 tempBoss.GetComponent<Enemy>().dropItem = true;

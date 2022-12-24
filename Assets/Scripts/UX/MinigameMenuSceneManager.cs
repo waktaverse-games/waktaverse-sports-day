@@ -153,6 +153,7 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
+            PlayFabManager.Instance.UpdateLeaderBoard();
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("On");
@@ -297,7 +298,11 @@ namespace GameHeaven.UIUX
         }
         public void PiecePuzzle(int puzzleIndex)
         {
-            if (!puzzleManager.PiecePuzzle(puzzleIndex))
+            if (puzzleManager.PiecePuzzle(puzzleIndex))
+            {
+                UISoundManager.Instance.PlayPuzzleButtonSFX();
+            }
+            else
             {
                 Debug.Log("퍼즐이 꽉 찼거나 놓을 퍼즐이 없습니다");
             }

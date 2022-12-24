@@ -758,6 +758,7 @@ MonoBehaviour:
   bgmList:
   - type: 0
     clip: {fileID: 8300000, guid: b4cfe048de2b059409bec580c95d6560, type: 3}
+  followTarget: {fileID: 6591200127136309820}
 --- !u!1 &419822728
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,6 +2526,7 @@ MonoBehaviour:
     audios:
     - clip: {fileID: 8300000, guid: c35532713fd678a4f9ec53127d04aa33, type: 3}
     - clip: {fileID: 8300000, guid: 48906374c03a9564ba28ac03b2bc2e44, type: 3}
+  followTarget: {fileID: 6591200127136309820}
 --- !u!1 &1812535447
 GameObject:
   m_ObjectHideFlags: 0
