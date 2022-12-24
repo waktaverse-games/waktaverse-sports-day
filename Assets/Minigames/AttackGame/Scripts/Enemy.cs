@@ -205,7 +205,7 @@ namespace GameHeaven.AttackGame
             
             yield return new WaitForSeconds(distance * 0.5f + 0.2f);
             distance = Random.Range(1.5f, 2.5f);
-            if (isBossMonster) distance = Random.Range(8f, 14f);
+            if (isBossMonster) distance = Random.Range(8f, 13f);
             _spriteRenderer.flipX = false;
             _tween = transform.DOLocalMoveX(transform.position.x - distance, distance * 0.5f).SetId(tweenId);
             StartCoroutine(GoraniToRight(distance));

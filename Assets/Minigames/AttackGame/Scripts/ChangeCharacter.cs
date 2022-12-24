@@ -29,7 +29,6 @@ namespace GameHeaven.AttackGame
                 ChooseCharacter(CharacterType.Woowakgood);
             }
             else ChooseCharacter(CharacterManager.Instance.CurrentCharacter);
-            image.sprite = sprites[(int)currChar];
             var tempColor = image.color;
             tempColor.a = 255f;
             image.color = tempColor;
@@ -38,6 +37,7 @@ namespace GameHeaven.AttackGame
         void ChooseCharacter(CharacterType type)
         {
             anim.runtimeAnimatorController = controllers[(int)type];
+            image.sprite = sprites[(int)type];
         }
     }
 }

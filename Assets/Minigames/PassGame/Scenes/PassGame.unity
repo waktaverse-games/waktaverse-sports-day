@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 25393572}
   - component: {fileID: 25393571}
   m_Layer: 5
-  m_Name: Level
+  m_Name: JumpNumberText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3030,6 +3030,7 @@ MonoBehaviour:
   SfxManager: {fileID: 1962322146}
   jumpItem: 0
   boomEffect: {fileID: 261571434}
+  jumpNumberText: {fileID: 25393571}
 --- !u!114 &1330121994
 MonoBehaviour:
   m_ObjectHideFlags: 0

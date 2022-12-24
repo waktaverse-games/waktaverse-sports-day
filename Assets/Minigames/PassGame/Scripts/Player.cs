@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace GameHeaven.PassGame
@@ -11,8 +12,9 @@ namespace GameHeaven.PassGame
         public bool reachedJump = false;
         public GameManager gameManager;
         public SFXManager SfxManager;
-        public bool jumpItem = false;
+        public int jumpItem = 0;
         public GameObject boomEffect;
+        public TextMeshProUGUI jumpNumberText;
         
         private Rigidbody2D _rigid;
         private bool _isGrounded = false;
@@ -41,14 +43,15 @@ namespace GameHeaven.PassGame
                 _anim.SetBool("isJump", true);
                 _isGrounded = false;
             }
-            else if (Input.GetKeyDown(KeyCode.Space) && jumpItem)
+            else if (Input.GetKeyDown(KeyCode.Space) && jumpItem > 0)
             {
                 _rigid.velocity = Vector2.up * jumpPower;
                 SfxManager.PlaySfx(0);
                 _anim.SetBool("isJump", true);
                 _isGrounded = false;
-                jumpItem = false;
-                gameManager.ItemDeactivate();
+                --jumpItem;
+                ResetJumpText();
+                if (jumpItem == 0) gameManager.ItemDeactivate();
             }
         }
 
@@ -86,6 +89,11 @@ namespace GameHeaven.PassGame
         private void DisableEffect()
         {
             boomEffect.SetActive(false);
+        }
+
+        public void ResetJumpText()
+        {
+            jumpNumberText.text = "더블점프\n" + jumpItem.ToString() + "회 가능";
         }
     }
 }
