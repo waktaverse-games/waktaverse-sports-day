@@ -14,32 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goalDataList:
   - type: 0
-    storyGoal: 100
-    rewardGoals: 64000000c80000002c010000
+    storyGoal: 250
+    rewardGoals: 9001000008070000ac0d0000
   - type: 1
-    storyGoal: 100
-    rewardGoals: 64000000c80000002c010000
+    storyGoal: 200
+    rewardGoals: 2c010000e8030000dc050000
   - type: 2
     storyGoal: 100
-    rewardGoals: 64000000c80000002c010000
+    rewardGoals: c800000084030000a4060000
   - type: 3
-    storyGoal: 100
-    rewardGoals: 64000000c80000002c010000
+    storyGoal: 300
+    rewardGoals: f4010000b80b00007c150000
   - type: 4
-    storyGoal: 100
-    rewardGoals: 64000000c80000002c010000
+    storyGoal: 200
+    rewardGoals: 2c01000058020000e8030000
   - type: 5
     storyGoal: 100
-    rewardGoals: 64000000c80000002c010000
+    rewardGoals: c800000020030000b0040000
   - type: 6
-    storyGoal: 100
-    rewardGoals: 64000000c80000002c010000
+    storyGoal: 200
+    rewardGoals: 2c01000020030000a4060000
   - type: 7
-    storyGoal: 100
-    rewardGoals: 64000000c80000002c010000
+    storyGoal: 500
+    rewardGoals: 20030000dc050000d0070000
   - type: 8
-    storyGoal: 100
-    rewardGoals: 64000000c80000002c010000
+    storyGoal: 1000
+    rewardGoals: e803000088130000983a0000
   - type: 9
-    storyGoal: 100
-    rewardGoals: 64000000c80000002c010000
+    storyGoal: 600
+    rewardGoals: 2003000088130000204e0000

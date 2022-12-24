@@ -5,6 +5,9 @@ using UnityEngine;
 public class UISoundManager : MonoBehaviour
 {
     [SerializeField] AudioSource buttonSFX1, buttonSFX2;
+    [SerializeField] AudioSource puzzleButtonSFX;
+
+    [SerializeField] AudioClip puzzleButtonSFXClip;
 
     #region Singleton
     public static UISoundManager Instance = null;
@@ -38,10 +41,12 @@ public class UISoundManager : MonoBehaviour
 
     public void PlayButtonSFX1() => buttonSFX1.Play();
     public void PlayButtonSFX2() => buttonSFX2.Play();
+    public void PlayPuzzleButtonSFX() => puzzleButtonSFX.PlayOneShot(puzzleButtonSFXClip);
 
     public void SetSFXVolume(float volume)
     {
         buttonSFX1.volume = volume;
         buttonSFX2.volume = volume;
+        puzzleButtonSFX.volume = volume;
     }
 }
