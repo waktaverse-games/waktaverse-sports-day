@@ -180,9 +180,13 @@ namespace GameHeaven.PassGame
 
         public void ItemActivate()
         {
-            playerScript.jumpItem = true;
-            SfxManager.PlaySfx(2);
-            doubleJumpState.SetActive(true);
+            if (playerScript.jumpItem < 3) 
+            {
+                playerScript.jumpItem += 1;
+                playerScript.ResetJumpText();
+                SfxManager.PlaySfx(2);
+                doubleJumpState.SetActive(true);
+            }
         }
 
         public void ItemDeactivate()
