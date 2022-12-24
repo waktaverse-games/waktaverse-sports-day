@@ -57,18 +57,31 @@ namespace GameHeaven.UIUX
 
         private void Start()
         {
-            rankingUI.SetRankingUI(types[curGame]);
-            transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0).localPosition -=  new Vector3(400 * curGame, 0, 0);
-            transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0).localPosition -= new Vector3(330 * curChar, 0, 0);
-            transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
-            transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
-            transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
-            transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
-
-            // Character Description
             for (int i = 0; i < 7; i++)
             {
                 characterDescription[i] = characterDescription[i].Replace("\\n", "\n");
+            }
+
+            transform.GetChild(2).GetChild(1).GetChild(1).GetChild(1).localPosition -= new Vector3(400 * curGame, 0, 0);
+            transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0).localPosition -= new Vector3(330 * curChar, 0, 0);
+
+            GameInfoChange();
+            CharacterInfoChange();
+
+            UISoundManager.Instance.PlayButtonSFX2();
+        }
+
+        private void GameInfoChange() // Change game Info about the curGame
+        {
+            rankingUI.SetRankingUI(types[curGame]);
+            transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
+
+            if (curGame == 0) transform.GetChild(2).GetChild(4).gameObject.SetActive(false);
+            else if (curGame == 9) transform.GetChild(2).GetChild(5).gameObject.SetActive(false);
+            else
+            {
+                transform.GetChild(2).GetChild(4).gameObject.SetActive(true);
+                transform.GetChild(2).GetChild(5).gameObject.SetActive(true);
             }
 
             var goals = ScoreManager.Instance.GetRewardGoals(types[curGame]);
@@ -85,10 +98,21 @@ namespace GameHeaven.UIUX
             {
                 pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
             }
+        }
 
+        private void CharacterInfoChange()
+        {
+            if (curChar == 0) transform.GetChild(3).GetChild(3).gameObject.SetActive(false);
+            else if (curChar == 6) transform.GetChild(3).GetChild(4).gameObject.SetActive(false);
+            else
+            {
+                transform.GetChild(3).GetChild(3).gameObject.SetActive(true);
+                transform.GetChild(3).GetChild(4).gameObject.SetActive(true);
+            }
+
+            transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
+            transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
             transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
-            rankingUI.SetRankingUI(types[curGame]);
-            UISoundManager.Instance.PlayButtonSFX2();
         }
 
         private void Update()
@@ -129,6 +153,7 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
+            PlayFabManager.Instance.UpdateLeaderBoard();
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("On");
@@ -190,26 +215,13 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX1();
             if (curGame < 9)
             {
-                rankingUI.SetRankingUI(types[curGame + 1]);
-                StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0), -400));
+                StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(1), -400));
                 curGame++;
-                for (int i = 0; i < ScoreManager.Instance.GetGameAchievement(types[curGame]); i++)
-                {
-                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(84 / 255f, 204 / 255f, 61 / 255f);
-                }
-                for (int i = ScoreManager.Instance.GetGameAchievement(types[curGame]); i < 3; i++)
-                {
-                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
-                }
-                var goals = ScoreManager.Instance.GetRewardGoals(types[curGame]);
-                for (int i = 0; i < 3; i++)
-                {
-                    pieces.transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = goals[i] + "점 이상";
-                }
-                transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
+                GameInfoChange();
             }
             Invoke("SetEnableClick", 0.1f);
         }
+
         public void GameLeftClick()
         {
             if (!enableClick) return;
@@ -217,23 +229,9 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX1();
             if (curGame > 0)
             {
-                rankingUI.SetRankingUI(types[curGame - 1]);
-                StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(0), 400));
+                StartCoroutine(ArrowClick(transform.GetChild(2).GetChild(1).GetChild(1).GetChild(1), 400));
                 curGame--;
-                for (int i = 0; i < ScoreManager.Instance.GetGameAchievement(types[curGame]); i++)
-                {
-                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(84 / 255f, 204 / 255f, 61 / 255f);
-                }
-                for (int i = ScoreManager.Instance.GetGameAchievement(types[curGame]); i < 3; i++)
-                {
-                    pieces.transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.black;
-                }
-                var goals = ScoreManager.Instance.GetRewardGoals(types[curGame]);
-                for (int i = 0; i < 3; i++)
-                {
-                    pieces.transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = goals[i] + "점 이상";
-                }
-                transform.GetChild(2).GetChild(6).GetChild(0).GetChild(0).GetComponent<Image>().sprite = minigameSprites[curGame];
+                GameInfoChange();
             }
             Invoke("SetEnableClick", 0.1f);
         }
@@ -244,11 +242,9 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX1();
             if (curChar < 6)
             {
-                curChar++;
-                transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
-                transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
                 StartCoroutine(ArrowClick(transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0), -330));
-                transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
+                curChar++;
+                CharacterInfoChange();
             }
             Invoke("SetEnableClick", 0.1f);
         }
@@ -259,11 +255,9 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX1();
             if (curChar > 0)
             {
-                curChar--;
-                transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Animator>().runtimeAnimatorController = charControllers[curChar];
-                transform.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = charNames[curChar];
                 StartCoroutine(ArrowClick(transform.GetChild(3).GetChild(2).GetChild(2).GetChild(0), 330));
-                transform.GetChild(3).GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = characterDescription[curChar];
+                curChar--;
+                CharacterInfoChange();
             }
             Invoke("SetEnableClick", 0.1f);
         }
@@ -298,13 +292,17 @@ namespace GameHeaven.UIUX
             if (!enableClick) return;
             enableClick = false;
             characterManager.SetCharacter((SharedLibs.CharacterType)curChar);
-            UIBGM.Instance.OffUIBGM();
+            FindObjectOfType<UIBGM>().OffUIBGM();
             LoadingSceneManager.LoadScene(engNames[curGame], minigameSprites[curGame]);
             Invoke("SetEnableClick", 0.2f);
         }
         public void PiecePuzzle(int puzzleIndex)
         {
-            if (!puzzleManager.PiecePuzzle(puzzleIndex))
+            if (puzzleManager.PiecePuzzle(puzzleIndex))
+            {
+                UISoundManager.Instance.PlayPuzzleButtonSFX();
+            }
+            else
             {
                 Debug.Log("퍼즐이 꽉 찼거나 놓을 퍼즐이 없습니다");
             }

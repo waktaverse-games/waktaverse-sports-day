@@ -593,7 +593,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: faf494b533012e849855bab1bf94ffd2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7648d5cc6f52dd64ca211f58101c57cd, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1295,7 +1295,7 @@ MonoBehaviour:
     moveTime: 0.6
     moveDelay: 0
     isSmooth: 1
-    endSfx: {fileID: 8300000, guid: 4676cf346391cfe42b9c7737276052f5, type: 3}
+    endSfx: {fileID: 8300000, guid: f67a7efecf487754d998f30a3bae6a8b, type: 3}
   - pointTransform: {fileID: 704589658}
     moveTime: 3
     moveDelay: 1

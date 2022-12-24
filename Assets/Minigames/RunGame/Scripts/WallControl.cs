@@ -50,7 +50,7 @@ namespace GameHaven.RunGame
                     case < 10:
                         gameManager.wallSpeed += 0.02f * Time.deltaTime;
                         break;
-                    case >= 10 when gameManager.wallSpeed < 20:
+                    case >= 10 when gameManager.wallSpeed < 18:
                         gameManager.wallSpeed += 0.008f * Time.deltaTime;
                         break;
                 }

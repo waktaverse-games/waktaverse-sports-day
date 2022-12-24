@@ -20,10 +20,13 @@ namespace SharedLibs
         public float SFXVolume => sfxVolume;
         public float BGMVolume => bgmVolume;
 
+        [SerializeField] private float sfxInitVolume = 0.26f;
+        [SerializeField] private float bgmInitVolume = 0.13f;
+
         public override void Init()
         {
-            sfxVolume = SetSFXVolume(PlayerPrefs.HasKey(SFXVolumeValueKey) ? PlayerPrefs.GetFloat(SFXVolumeValueKey) : 0.5f);
-            bgmVolume = SetBGMVolume(PlayerPrefs.HasKey(BGMVolumeValueKey) ? PlayerPrefs.GetFloat(BGMVolumeValueKey) : 0.5f);
+            sfxVolume = SetSFXVolume(PlayerPrefs.HasKey(SFXVolumeValueKey) ? PlayerPrefs.GetFloat(SFXVolumeValueKey) : sfxInitVolume);
+            bgmVolume = SetBGMVolume(PlayerPrefs.HasKey(BGMVolumeValueKey) ? PlayerPrefs.GetFloat(BGMVolumeValueKey) : bgmInitVolume);
         }
 
         protected override void SingletonDestroy()
@@ -33,8 +36,8 @@ namespace SharedLibs
         
         public (float bgmVolume, float sfxVolume) ResetVolume()
         {
-            sfxVolume = SetSFXVolume(0.5f);
-            bgmVolume = SetBGMVolume(0.5f);
+            sfxVolume = SetSFXVolume(sfxInitVolume);
+            bgmVolume = SetBGMVolume(bgmInitVolume);
             
             PlayerPrefs.Save();
 

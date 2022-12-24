@@ -8,11 +8,11 @@ namespace GameHeaven.UIUX
     {
         private void Awake()
         {
-            UIBGM.Instance.OffUIBGM();
+            FindObjectOfType<UIBGM>().OffUIBGM();
         }
         public void OpenStoryMenu()
         {
-            UIBGM.Instance.OnUIBGM();
+            FindObjectOfType<UIBGM>().OnUIBGM();
             StoryManager.Instance.ViewPrologue = true;
             SceneManager.LoadScene("StoryMenuScene");
         }

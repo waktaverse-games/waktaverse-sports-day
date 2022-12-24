@@ -70,7 +70,7 @@ namespace GameHeaven.PassGame
         IEnumerator Segyun(float time)
         {
             yield return new WaitForSeconds(time);
-            transform.DOJump(transform.parent.position + new Vector3(-3, 0, 0), 1, 1, 1);
+            transform.DOJump(transform.parent.position + new Vector3(-3, -0.2f, 0), 1, 1, 1);
             StartCoroutine(Segyun(1f));
         }
 

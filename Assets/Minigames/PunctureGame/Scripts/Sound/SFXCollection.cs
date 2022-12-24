@@ -10,7 +10,7 @@ namespace GameHeaven.PunctureGame
     [RequireComponent(typeof(AudioSource))]
     public class SFXCollection<T> : MonoBehaviour where T : Enum
     {
-        [SerializeField] private AudioSource audioSource;
+        [SerializeField] protected AudioSource audioSource;
         [SerializeField] private List<SFXData> sfxList;
         private Dictionary<T, AudioData[]> sfxDic;
 

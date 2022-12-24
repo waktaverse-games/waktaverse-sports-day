@@ -36,6 +36,20 @@ namespace GameHeaven.UIUX
             {
                 CloseSetting();
             }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                if (Input.GetKey(KeyCode.A))
+                {
+                    if (Input.GetKey(KeyCode.K))
+                    {
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            ResetResolution();
+                        }
+                    }
+                }
+            }
         }
 
         public static void OpenSetting()
@@ -50,18 +64,23 @@ namespace GameHeaven.UIUX
 
         public void SaveSettings()
         {
-            GameDatabase.Instance.SaveData();
+            // GameDatabase.Instance.SaveData();
         }
         
         public void ResetSettings()
         {
-            GameDatabase.Instance.ResetData();
-            
-            var volumes = SoundManager.Instance.ResetVolume();
-            bgmVolumeSlider.value = volumes.bgmVolume;
-            sfxVolumeSlider.value = volumes.sfxVolume;
+            // GameDatabase.Instance.ResetData();
+            //
+            // var volumes = SoundManager.Instance.ResetVolume();
+            // bgmVolumeSlider.value = volumes.bgmVolume;
+            // sfxVolumeSlider.value = volumes.sfxVolume;
+            //
+            // SetFullscreen(false);
+        }
 
-            SetFullscreen(false);
+        public void ResetResolution()
+        {
+            Screen.SetResolution(1920, 1080, false);
         }
         
         public void SetBGMVolume(float volume)
@@ -86,7 +105,7 @@ namespace GameHeaven.UIUX
 
         public void ResetStoryProgress()
         {
-            StoryManager.Instance.ResetStoryProgress();
+            // StoryManager.Instance.ResetStoryProgress();
         }
     }
 }

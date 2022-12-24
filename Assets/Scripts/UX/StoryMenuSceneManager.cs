@@ -9,6 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 namespace GameHeaven.UIUX
 {
@@ -17,12 +18,14 @@ namespace GameHeaven.UIUX
         [SerializeField] private Sprite[] minigameSprites, descriptionSprites;
         [SerializeField] private string[] gameNames, engNames;
         [SerializeField] private CharacterType[] charTypes;
+        [SerializeField] private VideoClip[] descriptionVideos;
 
         [SerializeField] private GameObject[] lockScreens;
 
         [SerializeField] private GameObject gameDescObj;
         [SerializeField] private TextMeshProUGUI gameNameText;
         [SerializeField] private Image gameImage, gameDescImage;
+        [SerializeField] private VideoPlayer videoPlayer;
 
         [SerializeField] [ReadOnly] private string selectEngName;
 
@@ -36,6 +39,17 @@ namespace GameHeaven.UIUX
 
         private void Start()
         {
+            curSeletedStage = GameDatabase.Instance.DB.storyDB.lastViewedChapter;
+
+            // Button On/Off
+            if (curSeletedStage == 0) transform.GetChild(2).gameObject.SetActive(false);
+            else if (curSeletedStage == 9) transform.GetChild(1).gameObject.SetActive(false);
+            else
+            {
+                transform.GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(2).gameObject.SetActive(true);
+            }
+
             UISoundManager.Instance.PlayButtonSFX1();
 
             curSeletedStage = StoryManager.Instance.SelectStoryIndex;
@@ -81,6 +95,7 @@ namespace GameHeaven.UIUX
             gameNameText.text = gameNames[index];
             gameImage.sprite = minigameSprites[index];
             gameDescImage.sprite = descriptionSprites[index];
+            videoPlayer.clip = descriptionVideos[index];
 
             transform.GetChild(1).gameObject.SetActive(false);
             transform.GetChild(2).gameObject.SetActive(false);
@@ -104,6 +119,15 @@ namespace GameHeaven.UIUX
                 curSeletedStage++;
                 StartCoroutine(MoveX(transform.GetChild(3), x));
             }
+
+            // Button On/Off
+            if (curSeletedStage == 0) transform.GetChild(2).gameObject.SetActive(false);
+            else if (curSeletedStage == 9) transform.GetChild(1).gameObject.SetActive(false);
+            else
+            { 
+                transform.GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(2).gameObject.SetActive(true);
+            }
         }
 
         IEnumerator MoveX(Transform obj, int x)
@@ -119,7 +143,7 @@ namespace GameHeaven.UIUX
 
         public void StartGame()
         {
-            UIBGM.Instance.OffUIBGM();
+            FindObjectOfType<UIBGM>().OffUIBGM();
             UISoundManager.Instance.PlayButtonSFX1();
             var curIdx = StoryManager.Instance.SelectStoryIndex;
             

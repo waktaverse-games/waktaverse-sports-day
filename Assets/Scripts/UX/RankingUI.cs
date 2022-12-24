@@ -11,6 +11,8 @@ namespace GameHeaven.UIUX
         [SerializeField] private TextMeshProUGUI myHighRankingUI;
         [SerializeField] private GameObject rankingList;
 
+        [SerializeField] private int showRankMax;
+
         public async void SetRankingUI(MinigameType type)
         {
             var leaderboard = PlayFabManager.Instance.GetLeaderboardData(type);
@@ -41,14 +43,14 @@ namespace GameHeaven.UIUX
             var leaderboard = PlayFabManager.Instance.GetLeaderboardData(type);
             var player = PlayFabManager.Instance.GetLeaderBoardAroundPlayerData(type);
 
-            var boardSize = Mathf.Min(leaderboard.Count, 10);
+            var boardSize = Mathf.Min(leaderboard.Count, showRankMax);
             for (var i = 0; i < boardSize; i++)
             {
                 var data = leaderboard[i];
                 rankingList.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = data.DisplayName;
                 rankingList.transform.GetChild(i).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = data.StatValue.ToString();
             }
-            for (var i = boardSize; i < 10; i++)
+            for (var i = boardSize; i < showRankMax; i++)
             {
                 rankingList.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "-";
                 rankingList.transform.GetChild(i).GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = "-";
