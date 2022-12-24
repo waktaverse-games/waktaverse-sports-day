@@ -299,11 +299,11 @@ namespace GameHeaven.UIUX
         {
             if (puzzleManager.PiecePuzzle(puzzleIndex))
             {
-                Debug.Log("퍼즐이 꽉 찼거나 놓을 퍼즐이 없습니다");
+                UISoundManager.Instance.PlayPuzzleButtonSFX();
             }
             else
             {
-                UISoundManager.Instance.PlayPuzzleButtonSFX();
+                Debug.Log("퍼즐이 꽉 찼거나 놓을 퍼즐이 없습니다");
             }
         }
     }

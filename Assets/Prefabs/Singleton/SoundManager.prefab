@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxVolume: 0
   bgmVolume: 0
+  sfxInitVolume: 0.26
+  bgmInitVolume: 0.13
