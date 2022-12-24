@@ -38,7 +38,7 @@ MonoBehaviour:
     storyGoal: 500
     rewardGoals: 20030000dc050000d0070000
   - type: 8
-    storyGoal: 1000
+    storyGoal: 600
     rewardGoals: e803000088130000983a0000
   - type: 9
     storyGoal: 600

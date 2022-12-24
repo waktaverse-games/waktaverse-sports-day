@@ -9,6 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 namespace GameHeaven.UIUX
 {
@@ -17,12 +18,14 @@ namespace GameHeaven.UIUX
         [SerializeField] private Sprite[] minigameSprites, descriptionSprites;
         [SerializeField] private string[] gameNames, engNames;
         [SerializeField] private CharacterType[] charTypes;
+        [SerializeField] private VideoClip[] descriptionVideos;
 
         [SerializeField] private GameObject[] lockScreens;
 
         [SerializeField] private GameObject gameDescObj;
         [SerializeField] private TextMeshProUGUI gameNameText;
         [SerializeField] private Image gameImage, gameDescImage;
+        [SerializeField] private VideoPlayer videoPlayer;
 
         [SerializeField] [ReadOnly] private string selectEngName;
 
@@ -92,6 +95,7 @@ namespace GameHeaven.UIUX
             gameNameText.text = gameNames[index];
             gameImage.sprite = minigameSprites[index];
             gameDescImage.sprite = descriptionSprites[index];
+            videoPlayer.clip = descriptionVideos[index];
 
             transform.GetChild(1).gameObject.SetActive(false);
             transform.GetChild(2).gameObject.SetActive(false);

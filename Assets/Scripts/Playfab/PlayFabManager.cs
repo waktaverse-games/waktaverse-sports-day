@@ -34,6 +34,8 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
 {
     [SerializeField] private List<PlayFabLeaderboardElement> leaderboardEntries;
 
+    [SerializeField] private int maxLeaderboardResultCount = 20;
+    
     [SerializeField] [ReadOnly] private string playFabId;
     
     [SerializeField] [ReadOnly] private int lastUpdateMinute;
@@ -139,7 +141,7 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
             {
                 StatisticName = GetStasticName(element.Type),
                 StartPosition = 0,
-                MaxResultsCount = 10
+                MaxResultsCount = maxLeaderboardResultCount
             };
             var playerReq = new GetLeaderboardAroundPlayerRequest
             {

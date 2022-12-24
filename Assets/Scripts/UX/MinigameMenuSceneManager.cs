@@ -153,6 +153,7 @@ namespace GameHeaven.UIUX
         {
             if (!enableClick) return;
             enableClick = false;
+            PlayFabManager.Instance.UpdateLeaderBoard();
             UISoundManager.Instance.PlayButtonSFX2();
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("On");
