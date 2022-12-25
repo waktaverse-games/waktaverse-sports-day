@@ -50,6 +50,7 @@ namespace GameHeaven.SpreadGame
             if (type == Type.SeGyun || type == Type.JuPokDo)
             {
                 rigid.AddForce(new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * 0.01f, ForceMode2D.Impulse);
+                if (rigid.velocity.sqrMagnitude > 4) rigid.velocity = rigid.velocity.normalized * 2;
             }
 
             if ((isElite && transform.position.y < -3) || transform.position.y < -4)
