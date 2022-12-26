@@ -1246,7 +1246,7 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 --- !u!95 &709193177
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1263,7 +1263,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &790679110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,9 +2712,10 @@ MonoBehaviour:
     \uC138\uD6C8\uBC08, \n   \uC2A4\uCEEC\uBE44999, \uC544\uB9AC\uC5D0\uC2A4, \uC6F0\uC2DC\uCF54\uAE30\uCEE4\uC5EC\uC6CC,
     \uC9C01, \uCE74\uBAA8\uB728\uB9B0, \n   \uD0C4\uC790\uB098\uC774\uD2B8, \uD1A0\uB9C8\uD1A0\uAE40\uBC25,
     \uD504\uB9AC\uBBF8\uB4E4, \uD50C\uB85C\uB9AC\uC548\n   GreatHistoryMapper, ryuma12\n  
-    \n   <#E2A9F3><Special Thanks></color>\n   \uD504\uB9AC\uD130, \uB2CC\uB2CC,
-    \uBBF8\uC2A4 \uBC1C\uB80C\uD0C0\uC778, \uC9C4\uD76C, \uBCC4\uB098\uBB34, \uC8FC\uB2DD\uC694,
-    \n   \uC90099, \uD53C\uCE74\uC628, \uB0A8\uAD81\uD601"
+    \n   <#E2A9F3><Special Thanks></color>\n   \uD558\uCFE00089, \uBE44\uC988\uB2C8\uC2A4
+    \uD0B4, \uACFD\uCD98\uC2DD, \uD504\uB9AC\uD130, \uB2CC\uB2CC, \uBBF8\uC2A4 \uBC1C\uB80C\uD0C0\uC778,\n  
+    \uC9C4\uD76C, \uBCC4\uB098\uBB34, \uC8FC\uB2DD\uC694, \uC90099, \uD53C\uCE74\uC628,
+    \uB0A8\uAD81\uD601"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}
   m_sharedMaterial: {fileID: -8314726065972834963, guid: 5ce1a19ec7964724385e807f7e6dc1d6, type: 2}

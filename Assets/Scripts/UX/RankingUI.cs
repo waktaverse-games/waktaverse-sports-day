@@ -35,6 +35,12 @@ namespace GameHeaven.UIUX
                 }
             }
             
+            if (player.Position == 0) myHighRankingUI.color = new Color(255 / 255f, 203 / 255f, 63 / 255f); // Gold
+            else if (player.Position == 1) myHighRankingUI.color = new Color(232 / 255f, 232 / 255f, 232 / 255f); // Silver
+            else if (player.Position == 2) myHighRankingUI.color = new Color(195 / 255f, 155 / 255f, 137 / 255f); // Bronze
+            else if (player.Position <= 19) myHighRankingUI.color = new Color(77 / 255f, 231 / 255f, 78 / 255f); // Green
+            else myHighRankingUI.color = new Color(200 / 255f, 255 / 255f, 200 / 255f); // Light Green
+
             myHighRankingUI.text = player is { StatValue: > 0 } ?  $"{player.Position + 1}위" : "기록 없음";
         }
 
