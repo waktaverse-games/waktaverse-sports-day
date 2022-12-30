@@ -12,6 +12,9 @@ namespace GameHeaven.CrashGame
 
         private static int ballNumber = 0;
 
+        private bool isFired;
+        private int stuckTimeout;
+
         public Rigidbody2D rigidBody;
         [SerializeField]
         private float initialForce = 300;
@@ -45,23 +48,32 @@ namespace GameHeaven.CrashGame
         {
             rigidBody = GetComponent<Rigidbody2D>();
             isReturning = false;
+            isFired = false;
             platform = MiniGameManager.Instance.platform;
         }
 
-        private void Start()
-        {
-        }
 
         private void OnEnable()
         {
+            stuckTimeout = 0;
+            isFired = false;
             isReturning = false;
         }
 
         private void Update()
         {
-            if (rigidBody.velocity.sqrMagnitude < 1f)
+            if (isFired)
             {
-                rigidBody.velocity *= 4;
+                if (rigidBody.velocity.sqrMagnitude < 1f)
+                {
+                    rigidBody.velocity = rigidBody.velocity.normalized * 4;
+                    if (rigidBody.velocity.sqrMagnitude < 1f) stuckTimeout++;
+                }
+                if (stuckTimeout > 60)
+                {
+                    stuckTimeout = 0;
+                    DestroyBall();
+                }
             }
         }
 
@@ -165,6 +177,7 @@ namespace GameHeaven.CrashGame
 
         public void Fire(Vector2 force)
         {
+            isFired = true;
             MiniGameManager.Instance.Sound.PlayEffect("button_01", volume: .5f);
             rigidBody.AddForce(force);
         }
@@ -184,10 +197,7 @@ namespace GameHeaven.CrashGame
 
         private void AddSpeed(float growth)
         {
-            if (rigidBody.velocity.sqrMagnitude < 64f)  // 속도 증가 제한
-            {
-                rigidBody.velocity *= (1 + growth);
-            }
+            rigidBody.velocity *= (1 + growth);
             //Debug.Log($"Ball Speed: {rigidBody.velocity.magnitude}");
         }
     }

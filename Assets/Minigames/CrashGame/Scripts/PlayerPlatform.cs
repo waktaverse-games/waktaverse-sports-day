@@ -133,13 +133,22 @@ namespace GameHeaven.CrashGame
             }
         }
 
-        //private void OnCollisionStay2D(Collision2D collision)
-        //{
-        //    if (collision.collider.CompareTag("Bottom"))
-        //    {
-        //        Land();
-        //    }
-        //}
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (collision.collider.CompareTag("Bottom"))
+            {
+                Land();
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.collider.CompareTag("Bottom"))
+            {
+                isJumping = true;
+                playerAnimator.SetBool("Jump", true);
+            }
+        }
 
         public void OnGameOver()
         {
@@ -181,8 +190,6 @@ namespace GameHeaven.CrashGame
             if (!isJumping)
             {
                 rigidBody.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
-                isJumping = true;
-                playerAnimator.SetBool("Jump", true);
             }
         }
 
