@@ -57,6 +57,14 @@ namespace GameHeaven.CrashGame
             isReturning = false;
         }
 
+        private void Update()
+        {
+            if (rigidBody.velocity.sqrMagnitude < 1f)
+            {
+                rigidBody.velocity *= 4;
+            }
+        }
+
         // Update is called once per frame
         private void FixedUpdate()
         {
@@ -176,7 +184,7 @@ namespace GameHeaven.CrashGame
 
         private void AddSpeed(float growth)
         {
-            if (rigidBody.velocity.magnitude < 8f)  // 속도 증가 제한
+            if (rigidBody.velocity.sqrMagnitude < 64f)  // 속도 증가 제한
             {
                 rigidBody.velocity *= (1 + growth);
             }

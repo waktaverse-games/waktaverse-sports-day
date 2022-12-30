@@ -166,9 +166,8 @@ namespace GameHeaven.CrashGame
                         brickLine.Add(newItemBrick);
                         break;
                     default:
-                        //brickLine.Add(AddBrick(ballBrickPrefab, currentBrickPosition + brickCenterPosition));
-                        //break;
-                        brickLine.Add(AddBrick(basicBrickPrefab, currentBrickPosition + brickCenterPosition));
+                        brickLine.Add(AddBrick(ballBrickPrefab, currentBrickPosition + brickCenterPosition));
+                        //brickLine.Add(AddBrick(basicBrickPrefab, currentBrickPosition + brickCenterPosition));
                         break;
                 }
                 currentBrickPosition.x += BrickWidth;
