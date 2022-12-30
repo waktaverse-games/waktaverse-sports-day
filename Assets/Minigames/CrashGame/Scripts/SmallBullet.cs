@@ -18,7 +18,7 @@ namespace GameHeaven.CrashGame
             rigidBody = GetComponent<Rigidbody2D>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             
         }
@@ -32,7 +32,7 @@ namespace GameHeaven.CrashGame
         private void DestroySelf()
         {
             // 이펙트 발생
-            Destroy(gameObject);
+            MiniGameManager.ObjectPool.ReturnObject("SmallBullet", gameObject);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

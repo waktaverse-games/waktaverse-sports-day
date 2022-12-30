@@ -21,6 +21,11 @@ namespace GameHeaven.CrashGame
             rigidBody = GetComponent<Rigidbody2D>();
         }
 
+        private void OnEnable()
+        {
+            GetComponent<SpriteRenderer>().sprite = MiniGameManager.Instance.Brick.foodSpriteList[Random.Range(0, 3)];
+        }
+
         public void ShowEffect()
         {
             MiniGameManager.Instance.UI.ShowItemEffect($"+{coinValue}p");

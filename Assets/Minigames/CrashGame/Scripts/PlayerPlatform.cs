@@ -122,7 +122,7 @@ namespace GameHeaven.CrashGame
                 CrashGame.MiniGameManager.Instance.Sound.PlayEffect("coin_01");
                 MiniGameManager.Instance.AddScore(collision.collider.GetComponent<Coin>().CoinValue);
                 collision.collider.GetComponent<Coin>().ShowEffect();
-                Destroy(collision.gameObject);
+                MiniGameManager.ObjectPool.ReturnObject("coin", collision.collider.gameObject);
             }
             if (collision.collider.CompareTag("CrashGame_Item"))
             {
@@ -130,6 +130,23 @@ namespace GameHeaven.CrashGame
                 // 아이템 즉발 사용
                 collision.collider.GetComponent<Item>().ActivateItem();
                 collision.collider.GetComponent<Item>().DestroyItem();
+            }
+        }
+
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (collision.collider.CompareTag("Bottom"))
+            {
+                Land();
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.collider.CompareTag("Bottom"))
+            {
+                isJumping = true;
+                playerAnimator.SetBool("Jump", true);
             }
         }
 
@@ -173,12 +190,10 @@ namespace GameHeaven.CrashGame
             if (!isJumping)
             {
                 rigidBody.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
-                isJumping = true;
-                playerAnimator.SetBool("Jump", true);
             }
         }
 
-        private void Land() 
+    private void Land() 
         {
             isJumping = false;
             playerAnimator.SetBool("Jump", false);

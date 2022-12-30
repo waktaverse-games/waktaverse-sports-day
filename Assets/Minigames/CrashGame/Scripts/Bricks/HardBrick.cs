@@ -33,7 +33,7 @@ namespace GameHeaven.CrashGame
                 DestroySelf(scoreAdd);
             }
             else if (spriteIndex < 2) SetHardBrickSprite(++spriteIndex);
-            Debug.Log($"brick health: {brickHealth}");
+            //Debug.Log($"brick health: {brickHealth}");
         }
 
         private void SetHardBrickSprite(int index)

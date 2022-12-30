@@ -26,6 +26,7 @@ namespace GameHeaven.CrashGame
         private BrickManager brickManager;
         private ItemManager itemManager;
         private SoundManager soundManager;
+        private ObjectPoolManager objectPoolManager;
         private GameState currentGameState;
         private CharacterType currentCharacter;
         private int score;
@@ -63,6 +64,7 @@ namespace GameHeaven.CrashGame
         {
             get 
             {
+                if (uiManager == null) uiManager = gameObject.GetComponent<UIManager>();
                 if (uiManager == null) uiManager = gameObject.AddComponent<UIManager>();
                 return uiManager; 
             }
@@ -72,6 +74,7 @@ namespace GameHeaven.CrashGame
         {
             get
             {
+                if (brickManager == null) brickManager = gameObject.GetComponent<BrickManager>();
                 if (brickManager == null) brickManager = gameObject.AddComponent<BrickManager>();
                 return brickManager;
             }
@@ -81,6 +84,7 @@ namespace GameHeaven.CrashGame
         {
             get
             {
+                if (itemManager == null) itemManager = gameObject.GetComponent<ItemManager>();
                 if (itemManager == null) itemManager = gameObject.AddComponent<ItemManager>();
                 return itemManager;
             }
@@ -90,8 +94,19 @@ namespace GameHeaven.CrashGame
         {
             get
             {
+                if (soundManager == null) soundManager = gameObject.GetComponent<SoundManager>();
                 if (soundManager == null) soundManager = gameObject.AddComponent<SoundManager>();
                 return soundManager;
+            }
+        }
+
+        public static ObjectPoolManager ObjectPool
+        {
+            get
+            {
+                if (Instance.objectPoolManager == null) Instance.objectPoolManager = Instance.gameObject.GetComponent<ObjectPoolManager>();
+                if (Instance.objectPoolManager == null) Instance.objectPoolManager = Instance.gameObject.AddComponent<ObjectPoolManager>();
+                return Instance.objectPoolManager;
             }
         }
 

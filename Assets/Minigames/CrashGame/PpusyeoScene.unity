@@ -906,7 +906,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &389607895
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -923,7 +923,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &512285861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,7 +1276,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &646728298
 GameObject:
@@ -1333,7 +1333,7 @@ Transform:
   - {fileID: 1540032847}
   - {fileID: 2090383073}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &646728301
 MonoBehaviour:
@@ -1385,7 +1385,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &696227335
 GameObject:
@@ -1474,7 +1474,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &696227338
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1491,7 +1491,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &714344976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,7 +1888,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &836277210
 GameObject:
@@ -2305,7 +2305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!95 &1281037773
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2322,7 +2322,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1330533929
 GameObject:
   m_ObjectHideFlags: 0
@@ -2355,7 +2355,7 @@ Transform:
   - {fileID: 2062961020}
   - {fileID: 836277211}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1358986423
 GameObject:
@@ -2520,7 +2520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5480173455962128182, guid: 98284f8566ddb724cb514e47a19b1b11, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5480173455962128182, guid: 98284f8566ddb724cb514e47a19b1b11, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2919,6 +2919,7 @@ GameObject:
   - component: {fileID: 1679308196}
   - component: {fileID: 1679308195}
   - component: {fileID: 1679308194}
+  - component: {fileID: 1679308199}
   m_Layer: 0
   m_Name: MiniGameManager
   m_TagString: Untagged
@@ -3023,16 +3024,17 @@ MonoBehaviour:
   hardBrickPrefab: {fileID: 584175413749039415, guid: e4cd92014e5c3ce4aa4ac97e65297055, type: 3}
   ballBrickPrefab: {fileID: 4573843509715205751, guid: 67ba4bbaaf43e9744b82d8dd888c75b1, type: 3}
   itemBrickPrefab: {fileID: 8519621108427718317, guid: 1de47616999b8864caf41f8253df7a51, type: 3}
-  coinPrefabList:
-  - {fileID: 5799771850141280459, guid: 0d03dec987767b8469723026f4ae1a2c, type: 3}
-  - {fileID: 3735418493625381149, guid: 2ff3986802eec024291f3968dd54c460, type: 3}
-  - {fileID: 5198673052903665611, guid: b5c15f306248eba4eb89106bc7382516, type: 3}
+  coinPrefab: {fileID: 5799771850141280459, guid: 0d03dec987767b8469723026f4ae1a2c, type: 3}
   itemPrefabList:
   - {fileID: -7308788374544424442, guid: 5f786013f819ebf4ab808f828c21fbec, type: 3}
   - {fileID: -4419884499778429057, guid: a39981f40e35d2647a3e3584c90239c3, type: 3}
   - {fileID: 2588984476685509855, guid: 5e6e506fb5969564a94b3f916e3eda56, type: 3}
   - {fileID: -2291267947880077103, guid: 10a1ac9a3cdc5924ba0594b0d52816da, type: 3}
   - {fileID: -2291267947880077103, guid: 10a1ac9a3cdc5924ba0594b0d52816da, type: 3}
+  foodSpriteList:
+  - {fileID: 21300000, guid: c9bfd6dfd9d9cfa478c2b91c8c0756e3, type: 3}
+  - {fileID: 21300000, guid: 1baf10ffe2e79074294c2394559524d9, type: 3}
+  - {fileID: 21300000, guid: 2067882384596184eabab6da3208accb, type: 3}
   brickColorArray: []
 --- !u!114 &1679308198
 MonoBehaviour:
@@ -3068,6 +3070,43 @@ MonoBehaviour:
   platform: {fileID: 646728301}
   playerSpawnPosition: {fileID: 683537454}
   background: {fileID: 1330533930}
+--- !u!114 &1679308199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679308192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3f08c724933ba488ce32604b871a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SingleQueueObjects:
+  - num: 10
+    objectName: Ball
+    prefab: {fileID: 1069602127132607230, guid: 6f6b5b82d17d92b438442beae4051006, type: 3}
+  - num: 5
+    objectName: SmallBullet
+    prefab: {fileID: 1698763590439472081, guid: 6133f812db3516f40ac1a6d385525cf7, type: 3}
+  - num: 5
+    objectName: coin
+    prefab: {fileID: 5799771850141280458, guid: 0d03dec987767b8469723026f4ae1a2c, type: 3}
+  - num: 3
+    objectName: BallDivideItem
+    prefab: {fileID: 4717378323275935415, guid: 5f786013f819ebf4ab808f828c21fbec, type: 3}
+  - num: 3
+    objectName: BallSlowItem
+    prefab: {fileID: 4717378323275935415, guid: a39981f40e35d2647a3e3584c90239c3, type: 3}
+  - num: 3
+    objectName: ClaymoreItem
+    prefab: {fileID: 4717378323275935415, guid: 5e6e506fb5969564a94b3f916e3eda56, type: 3}
+  - num: 3
+    objectName: GrowPlateItem
+    prefab: {fileID: 4717378323275935415, guid: 10a1ac9a3cdc5924ba0594b0d52816da, type: 3}
+  - num: 3
+    objectName: SpeedUpItem
+    prefab: {fileID: 4717378323275935415, guid: 15eca6cffec860e4ab15f3dc2fabe132, type: 3}
 --- !u!1 &1719768014
 GameObject:
   m_ObjectHideFlags: 0
@@ -3656,7 +3695,7 @@ Transform:
   - {fileID: 2099671074}
   - {fileID: 1156839219}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &2006224491
 MonoBehaviour:
