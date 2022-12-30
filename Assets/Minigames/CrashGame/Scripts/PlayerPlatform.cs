@@ -122,7 +122,7 @@ namespace GameHeaven.CrashGame
                 CrashGame.MiniGameManager.Instance.Sound.PlayEffect("coin_01");
                 MiniGameManager.Instance.AddScore(collision.collider.GetComponent<Coin>().CoinValue);
                 collision.collider.GetComponent<Coin>().ShowEffect();
-                Destroy(collision.gameObject);
+                MiniGameManager.ObjectPool.ReturnObject("coin", collision.collider.gameObject);
             }
             if (collision.collider.CompareTag("CrashGame_Item"))
             {
@@ -132,6 +132,14 @@ namespace GameHeaven.CrashGame
                 collision.collider.GetComponent<Item>().DestroyItem();
             }
         }
+
+        //private void OnCollisionStay2D(Collision2D collision)
+        //{
+        //    if (collision.collider.CompareTag("Bottom"))
+        //    {
+        //        Land();
+        //    }
+        //}
 
         public void OnGameOver()
         {
@@ -178,7 +186,7 @@ namespace GameHeaven.CrashGame
             }
         }
 
-        private void Land() 
+    private void Land() 
         {
             isJumping = false;
             playerAnimator.SetBool("Jump", false);

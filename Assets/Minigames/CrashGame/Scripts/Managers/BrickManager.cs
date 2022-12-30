@@ -16,8 +16,9 @@ namespace GameHeaven.CrashGame
 
         private Queue<List<Brick>> brickMap;
 
-        public List<Coin> coinPrefabList;
+        public Coin coinPrefab;
         public List<Item> itemPrefabList;
+        public List<Sprite> foodSpriteList;
 
         private Vector2 currentBrickPosition;
         private Vector3 brickTranslateDown;
@@ -56,9 +57,9 @@ namespace GameHeaven.CrashGame
             while (true)
             {
                 yield return new WaitForSeconds(interval / 2);
-                Debug.Log($"{interval / 2} seconds passed!");
+                //Debug.Log($"{interval / 2} seconds passed!");
                 yield return new WaitForSeconds(interval / 2);
-                Debug.Log($"{interval} seconds passed!");
+                //Debug.Log($"{interval} seconds passed!");
                 AddBrickLineInMap();
                 if (interval > finalInterval) interval *= 0.95f;
                 else interval = finalInterval;
@@ -165,6 +166,8 @@ namespace GameHeaven.CrashGame
                         brickLine.Add(newItemBrick);
                         break;
                     default:
+                        //brickLine.Add(AddBrick(ballBrickPrefab, currentBrickPosition + brickCenterPosition));
+                        //break;
                         brickLine.Add(AddBrick(basicBrickPrefab, currentBrickPosition + brickCenterPosition));
                         break;
                 }

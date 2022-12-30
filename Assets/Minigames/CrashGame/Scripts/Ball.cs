@@ -36,7 +36,7 @@ namespace GameHeaven.CrashGame
             set 
             {
                 ballNumber = value;
-                Debug.Log($"ballNumber = {ballNumber}");
+                //Debug.Log($"ballNumber = {ballNumber}");
             }
         }
 
@@ -50,6 +50,11 @@ namespace GameHeaven.CrashGame
 
         private void Start()
         {
+        }
+
+        private void OnEnable()
+        {
+            isReturning = false;
         }
 
         // Update is called once per frame
@@ -72,7 +77,7 @@ namespace GameHeaven.CrashGame
             {
                 DestroyBall();
             }
-            if (Mathf.Abs(rigidBody.velocity.y) < 0.05f)
+            if ((Mathf.Abs(rigidBody.velocity.y) < 0.05f) || Mathf.Abs(rigidBody.velocity.x) < 0.05f)
             {
                 // 튕겨나가는 각도가 너무 작을 때 보정
                 rigidBody.velocity = Utils.RotateVector(rigidBody.velocity, 10f);
@@ -97,7 +102,6 @@ namespace GameHeaven.CrashGame
                     {
                         // 플랫폼 운동방향에 따라 반사 각도 변화
                         Vector2 platformVelocity = collision.GetComponentInParent<Rigidbody2D>().velocity;
-                        //Debug.Log($"Platform Velocity: {platformVelocity.x}, {platformVelocity.y}");
 
                         float delta = Mathf.Sign(velocity.y) * ((-platformVelocity.x * 2f) + (platformVelocity.y * Mathf.Sign(velocity.x) * 1.3f));
                         velocity = Utils.RotateVector(velocity, delta);
@@ -124,7 +128,8 @@ namespace GameHeaven.CrashGame
         public static Ball SpawnBall(Vector2 position)
         {
             BallNumber++;
-            Ball ball = Instantiate(MiniGameManager.Instance.ballPrefab, position, Quaternion.identity);
+            Ball ball = MiniGameManager.ObjectPool.GetObject("Ball").GetComponent<Ball>();
+            ball.transform.position = position;
             ball.transform.SetParent(MiniGameManager.Instance.Item.BallParent, true);
             return ball;
         }
@@ -134,7 +139,7 @@ namespace GameHeaven.CrashGame
             //Debug.Log("DestroyBall called");
             BallNumber--;
             if (BallNumber <= 0) MiniGameManager.Instance.GameOver();
-            Destroy(gameObject);
+            MiniGameManager.ObjectPool.ReturnObject("Ball", gameObject);
         }
 
         public void StopBall()
@@ -171,8 +176,11 @@ namespace GameHeaven.CrashGame
 
         private void AddSpeed(float growth)
         {
-            rigidBody.velocity *= (1 + growth);
-            Debug.Log($"Ball Speed: {rigidBody.velocity.magnitude}");
+            if (rigidBody.velocity.magnitude < 8f)  // 속도 증가 제한
+            {
+                rigidBody.velocity *= (1 + growth);
+            }
+            //Debug.Log($"Ball Speed: {rigidBody.velocity.magnitude}");
         }
     }
 

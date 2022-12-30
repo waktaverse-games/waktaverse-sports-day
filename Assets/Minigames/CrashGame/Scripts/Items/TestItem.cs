@@ -9,6 +9,7 @@ namespace GameHeaven.CrashGame
 {
     public class TestItem : Item
     {
+        public override string GetName() => "TestItem";
         public override void ActivateItem()
         {
             Debug.Log("Item Acquired!");
