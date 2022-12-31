@@ -21,6 +21,7 @@ namespace GameHeaven.AttackGame
         public int tweenId;
         public bool dropItem = false;
         public GameObject hammerItem;
+        public GameObject blackFox;
         
         private int currentHp;
         private string _name;
@@ -106,7 +107,8 @@ namespace GameHeaven.AttackGame
                 gameManager.GetEnemyXp(isBossMonster);
                 _isAlive = false;
                 _audioSource.Play();
-                Invoke("DisableObject", 0.2f);
+                // gameObject.transform.position = new Vector3(-1000, -1000, 0);
+                Invoke("DisableObject", 0.04f);
             }
             hpBar.fillAmount = (float)currentHp / totalHp;
         }
@@ -130,6 +132,13 @@ namespace GameHeaven.AttackGame
                 hammerItem.SetActive(true);
                 dropItem = false;
             }
+
+            gameObject.transform.position = new Vector3(-100, -100, 0);
+            Invoke("ActiveSet", 0.15f);
+        }
+
+        public void ActiveSet()
+        {
             gameObject.SetActive(false);
         }
 
@@ -183,21 +192,30 @@ namespace GameHeaven.AttackGame
         {
             yield return new WaitForSeconds(0.9f);
             _animator.SetBool("isMove", true);
-            StartCoroutine(FoxStop());
             _tween = transform.DOLocalMoveX(transform.position.x - 1.5f, 1.2f).SetId(tweenId);
+            StartCoroutine(FoxStop());
         }
 
         IEnumerator FoxStop()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.2f);
             _animator.SetBool("isMove", false);
             if (isBossMonster)
             {
-                yield return new WaitForSeconds(2.2f);
+                yield return new WaitForSeconds(1f);
                 Vector3 pos = transform.position;
-                transform.position = new Vector3(Random.Range(38.4f, 45.4f), pos.y, pos.z);
+                Vector3 tmpVec = new Vector3(Random.Range(32.4f, 45.4f), pos.y, pos.z);
+                blackFox.transform.position = tmpVec;
+                blackFox.SetActive(true);
+                yield return new WaitForSeconds(1.2f);
+                blackFox.SetActive(false);
+                transform.position = tmpVec;
+                StartCoroutine(FoxMove());
             }
-            StartCoroutine(FoxMove());
+            else
+            {
+                StartCoroutine(FoxMove());
+            }
         }
 
         IEnumerator GoraniToLeft(float distance)
