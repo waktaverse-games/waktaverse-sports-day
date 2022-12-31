@@ -5069,7 +5069,8 @@ MonoBehaviour:
   backAudio: {fileID: 1702272443}
   SfxManager: {fileID: 433834156}
   IsStop: 1
-  _hpNum: 1000
+  shadow: {fileID: 2016977432}
+  _hpNum: 5000
 --- !u!1 &1214094089
 GameObject:
   m_ObjectHideFlags: 0
@@ -7604,7 +7605,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: -1
   m_Sprite: {fileID: 672964942, guid: 5c5672f24353a2d49bba95d61200d0f7, type: 3}
   m_Color: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
   m_FlipX: 0
