@@ -458,7 +458,7 @@ MonoBehaviour:
   maxLeaderboardResultCount: 20
   playFabId: 
   lastUpdateMinute: 0
-  isDebug: 0
+  useBugFixPrefix: 0
 --- !u!1 &570481602
 GameObject:
   m_ObjectHideFlags: 0

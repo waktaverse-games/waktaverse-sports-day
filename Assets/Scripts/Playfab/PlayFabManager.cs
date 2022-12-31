@@ -40,10 +40,7 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
     
     [SerializeField] [ReadOnly] private int lastUpdateMinute;
 
-    // private Coroutine routine;
-
-    [Header("[DEBUG] 활성화 시 테스트 리더보드로 연결")] [SerializeField]
-    private bool isDebug;
+    [SerializeField] private bool useBugFixPrefix = true;
 
     public override void Init()
     {
@@ -100,7 +97,7 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
             {
                 new()
                 {
-                    StatisticName = GetStasticName(type),
+                    StatisticName = GetStatisticName(type),
                     Value = score
                 }
             }
@@ -139,13 +136,13 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
         {
             var leaderboardReq = new GetLeaderboardRequest
             {
-                StatisticName = GetStasticName(element.Type),
+                StatisticName = GetStatisticName(element.Type),
                 StartPosition = 0,
                 MaxResultsCount = maxLeaderboardResultCount
             };
             var playerReq = new GetLeaderboardAroundPlayerRequest
             {
-                StatisticName = GetStasticName(element.Type),
+                StatisticName = GetStatisticName(element.Type),
                 MaxResultsCount = 1
             };
             StartCoroutine(UpdateRequestLeaderBoard(element, leaderboardReq, playerReq));
@@ -199,8 +196,12 @@ public class PlayFabManager : MonoSingleton<PlayFabManager>
         return element.PlayerEntry;
     }
 
-    private string GetStasticName(MinigameType type)
+    private string GetStatisticName(MinigameType type)
     {
-        return (isDebug ? "Test" : "") + type;
+        if (type == MinigameType.CrashGame) {
+            return useBugFixPrefix ? ("BugFix" + type.ToString()) : type.ToString();
+        }
+
+        return type.ToString();
     }
 }
