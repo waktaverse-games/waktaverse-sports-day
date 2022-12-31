@@ -134,6 +134,12 @@ namespace GameHeaven.AttackGame
                 dropItem = false;
             }
 
+            if (_bossMonkeySpeed > 0)
+            {
+                transform.GetComponent<SpriteRenderer>().flipX = false;
+                _bossMonkeySpeed *= -1;
+            }
+
             gameObject.transform.position = new Vector3(45, 100, 0);
             Invoke("ActiveSet", 0.14f);
         }
