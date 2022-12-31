@@ -28,7 +28,7 @@ namespace GameHeaven.Root
         
         public void UnlockNext()
         {
-            _db.unlockProgress++;
+            if (SelectStoryIndex == UnlockProgress) _db.unlockProgress++;
         }
 
         public void ResetStoryProgress()

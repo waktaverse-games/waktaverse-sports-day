@@ -71,6 +71,13 @@ namespace GameHeaven.UIUX
             UISoundManager.Instance.PlayButtonSFX2();
         }
 
+        private IEnumerator DelayedRankingUiUpdate()
+        {
+            rankingUI.SetRankingUI(types[curGame]);
+            yield return new WaitForSeconds(0.2f);
+            rankingUI.SetRankingUI(types[curGame]);
+        }
+
         private void GameInfoChange() // Change game Info about the curGame
         {
             rankingUI.SetRankingUI(types[curGame]);
@@ -155,6 +162,9 @@ namespace GameHeaven.UIUX
             enableClick = false;
             PlayFabManager.Instance.UpdateLeaderBoard();
             UISoundManager.Instance.PlayButtonSFX2();
+
+            StartCoroutine(DelayedRankingUiUpdate());
+
             transform.GetChild(1).GetComponent<Animator>().SetTrigger("Off");
             transform.GetChild(2).GetComponent<Animator>().SetTrigger("On");
             if (prevMenues.Peek() != 2) prevMenues.Push(2);

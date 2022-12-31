@@ -13,6 +13,7 @@ namespace GameHeaven.CrashGame
         [SerializeField]
         private SmallBullet bulletPrefab;
 
+        public override string GetName() => "ClaymoreItem";
         protected override void Awake()
         {
             base.Awake();
@@ -37,7 +38,8 @@ namespace GameHeaven.CrashGame
             bulletFireDirection = Utils.RotateVector(bulletFireDirection, -20);
             for (int i = 0; i < 5; i++) 
             {
-                SmallBullet newBullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
+                SmallBullet newBullet = MiniGameManager.ObjectPool.GetObject("SmallBullet").GetComponent<SmallBullet>();
+                newBullet.transform.position = spawnPosition;
                 newBullet.transform.SetParent(MiniGameManager.Instance.Item.ItemParent);
                 newBullet.FireBullet(bulletFireDirection);
                 bulletFireDirection = Utils.RotateVector(bulletFireDirection, 10);
@@ -46,7 +48,7 @@ namespace GameHeaven.CrashGame
 
         public override void ActivateItem()
         {
-            Debug.Log("Claymore Acquired!");
+            //Debug.Log("Claymore Acquired!");
             SpawnBullet();
             MiniGameManager.Instance.UI.ShowItemEffect("수류탄 폭발!");
         }

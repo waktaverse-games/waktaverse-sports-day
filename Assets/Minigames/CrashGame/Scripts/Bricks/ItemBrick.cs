@@ -46,7 +46,8 @@ namespace GameHeaven.CrashGame
 
         private void DropItem()
         {
-            Item itemObject = Instantiate(itemPrefab, (Vector2)transform.position, Quaternion.identity);
+            Item itemObject = MiniGameManager.ObjectPool.GetObject(ItemPrefab.GetName()).GetComponent<Item>();
+            itemObject.transform.position = transform.position;
             itemObject.transform.SetParent(itemManager.ItemParent, true);
         }
 

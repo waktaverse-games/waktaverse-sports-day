@@ -10,12 +10,21 @@ namespace GameHeaven.CrashGame
 
         private GameObject destroyEffect;
 
+        public abstract string GetName();
         public abstract void ActivateItem();        // æ∆¿Ã≈€ »πµÊ Ω√ ¡Ôπﬂ
 
         protected virtual void Awake()
         {
             destroyEffect = transform.GetChild(0).gameObject;
-            Debug.Log($"{this}.{destroyEffect}");
+            //Debug.Log($"{this}.{destroyEffect}");
+        }
+
+        protected void OnEnable()
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<Rigidbody2D>().gravityScale = 1;
+            GetComponent<BoxCollider2D>().enabled = true;
+            destroyEffect.SetActive(false);
         }
 
         public void DestroyItem()
@@ -29,21 +38,21 @@ namespace GameHeaven.CrashGame
 
         public void DestroyAfterEffect()
         {
-            Destroy(gameObject);
+            MiniGameManager.ObjectPool.ReturnObject(GetName(), gameObject);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.collider.tag == "Bottom")
-            {
-                StartCoroutine(TimeoutDestroy(2));
-            }
+            //if (collision.collider.tag == "Bottom")
+            //{
+            //    StartCoroutine(TimeoutDestroy(2));
+            //}
         }
 
         private IEnumerator TimeoutDestroy(int seconds)
         {
             yield return new WaitForSeconds(seconds);
-            Destroy(gameObject);
+            MiniGameManager.ObjectPool.ReturnObject(GetName(), gameObject);
         }
     }
 
