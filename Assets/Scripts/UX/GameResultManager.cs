@@ -106,8 +106,6 @@ public class GameResultManager : MonoBehaviour
         nextBtn.SetActive(success);
 
         puzzleRoot.SetActive(false);
-
-        if (success && GameDatabase.Instance.DB.storyDB.lastViewedChapter < 9) GameDatabase.Instance.DB.storyDB.lastViewedChapter++;
     }
     private void ShowMinigameResultScreen(int score)
     {
@@ -165,8 +163,9 @@ public class GameResultManager : MonoBehaviour
     
     // Scene Load (Temporary)
 
-    public void Return()
+    public void Return(bool success)
     {
+        if (success && GameDatabase.Instance.DB.storyDB.lastViewedChapter < 9) GameDatabase.Instance.DB.storyDB.lastViewedChapter++;
         FindObjectOfType<UIBGM>().OnUIBGM();
         SceneLoader.LoadSceneAsync(GameManager.GameMode == GameMode.StoryMode ? "StoryMenuScene" : "MinigameMenuScene");
     }

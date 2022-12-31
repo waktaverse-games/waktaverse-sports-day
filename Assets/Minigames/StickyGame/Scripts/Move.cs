@@ -57,6 +57,14 @@ namespace GameHeaven.StickyGame
             moveLock = false;
         }
 
+        private void FixedUpdate()
+        {
+            if (!isAssociated)
+            {
+                transform.position = new Vector2(Mathf.Clamp(transform.position.x + randomDir.x, -3.5f, 3.5f),
+                    Mathf.Clamp(transform.position.y + randomDir.y, -4f, 4f));
+            }
+        }
         private void Update()
         {
             if (moveLock) return;
@@ -74,11 +82,6 @@ namespace GameHeaven.StickyGame
                 }
                 transform.RotateAround(curAxis, dir * Vector3.forward, Time.deltaTime * rotateSpeed);
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else
-            {
-                transform.position = new Vector2(Mathf.Clamp(transform.position.x + randomDir.x, -3.5f, 3.5f), 
-                    Mathf.Clamp(transform.position.y + randomDir.y, -4f, 4f));
             }
 
             if (isPlayer && Input.GetButtonDown("Jump")) // Space Bar �Է½� ���� ��ȯ
