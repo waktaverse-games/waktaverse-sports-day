@@ -72,7 +72,7 @@ namespace GameHeaven.AttackGame
         void Start()
         {
             // _enemyTypes = new string[7] {"monkey", "gorani", "fox", "cat", "pigeon", "bat", "dog"};
-            _enemyTypes = new string[7] {"fox", "gorani", "cat", "fox", "bat", "dog", "pigeon"};
+            _enemyTypes = new string[7] {"monkey", "gorani", "cat", "fox", "bat", "dog", "pigeon"};
             stageStartAnim = stageStart.GetComponent<Animator>();
             stageStartAnim.enabled = false;
             _hammerSpawned = false;
