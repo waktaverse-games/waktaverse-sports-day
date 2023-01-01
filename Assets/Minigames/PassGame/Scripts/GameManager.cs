@@ -39,10 +39,14 @@ namespace GameHeaven.PassGame
         private TextMeshProUGUI _stageText;
         private List<string>[] _stageStrings = new List<string>[6];
         private bool _isBat;
+        private bool _isEasy = false;
+        private int _prevNum;
 
         // Start is called before the first frame update
         void Start()
         {
+            _isEasy = false;
+            _prevNum = 1;
             _spawnPos = spawnPoint.transform.position;
             _coinSpawnPos = coinSpawnPoint.transform.position;
             _coins = 0;
@@ -158,7 +162,22 @@ namespace GameHeaven.PassGame
                 // Debug.Log(rnd);
             }
             if (_stageStrings[_stage][rnd] == "bat") _isBat = true;
-            else _isBat = false;
+            if (rnd == _prevNum && _isEasy)
+            {
+                if (rnd == 0) rnd = 1;
+                else --rnd;
+                _prevNum = rnd;
+                _isEasy = false;
+            }
+            else if (rnd == _prevNum && !_isEasy)
+            {
+                _isEasy = true;
+            }
+            else
+            {
+                _isEasy = false;
+                _prevNum = rnd;
+            }
             objectManager.MakeObject(_stageStrings[_stage][rnd], _spawnPos);
             StartCoroutine(StageSpawn(2.25f));
         }

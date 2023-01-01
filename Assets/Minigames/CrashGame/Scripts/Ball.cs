@@ -11,6 +11,7 @@ namespace GameHeaven.CrashGame
         private static float speedCap;
 
         private static int ballNumber = 0;
+        private const int maxBallNumber = 18;
 
         private bool isFired;
         private int stuckTimeout;
@@ -64,12 +65,12 @@ namespace GameHeaven.CrashGame
         {
             if (isFired)
             {
-                if (rigidBody.velocity.sqrMagnitude < 1f)
+                if (rigidBody.velocity.sqrMagnitude < 0.01f)
                 {
                     rigidBody.velocity = rigidBody.velocity.normalized * 4;
                     if (rigidBody.velocity.sqrMagnitude < 1f) stuckTimeout++;
                 }
-                if (stuckTimeout > 60)
+                if (stuckTimeout > 120)
                 {
                     stuckTimeout = 0;
                     DestroyBall();
@@ -147,11 +148,15 @@ namespace GameHeaven.CrashGame
 
         public static Ball SpawnBall(Vector2 position)
         {
-            BallNumber++;
-            Ball ball = MiniGameManager.ObjectPool.GetObject("Ball").GetComponent<Ball>();
-            ball.transform.position = position;
-            ball.transform.SetParent(MiniGameManager.Instance.Item.BallParent, true);
-            return ball;
+            if (BallNumber < maxBallNumber)
+            {
+                BallNumber++;
+                Ball ball = MiniGameManager.ObjectPool.GetObject("Ball").GetComponent<Ball>();
+                ball.transform.position = position;
+                ball.transform.SetParent(MiniGameManager.Instance.Item.BallParent, true);
+                return ball;
+            }
+            else return null;
         }
 
         public void DestroyBall()
