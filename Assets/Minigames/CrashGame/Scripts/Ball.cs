@@ -65,12 +65,12 @@ namespace GameHeaven.CrashGame
         {
             if (isFired)
             {
-                if (rigidBody.velocity.sqrMagnitude < 1f)
+                if (rigidBody.velocity.sqrMagnitude < 0.01f)
                 {
                     rigidBody.velocity = rigidBody.velocity.normalized * 4;
                     if (rigidBody.velocity.sqrMagnitude < 1f) stuckTimeout++;
                 }
-                if (stuckTimeout > 60)
+                if (stuckTimeout > 120)
                 {
                     stuckTimeout = 0;
                     DestroyBall();
