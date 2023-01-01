@@ -25,6 +25,8 @@ namespace GameHeaven.AttackGame
         public GameObject coin3Prefab;
         public SFXManager sfxManager;
         public GameObject damagePrefab;
+
+        public GameObject foxShadow;
         // public Camera mainCam;
 
         private GameObject[] _monkey;
@@ -136,6 +138,7 @@ namespace GameHeaven.AttackGame
                 _fox[i].GetComponent<Enemy>().objectManager = _objectManager;
                 _fox[i].GetComponent<Enemy>().tweenId = i + 360;
                 _fox[i].GetComponent<Enemy>().sfxManager = sfxManager;
+                _fox[i].GetComponent<Enemy>().blackFox = foxShadow;
                 _fox[i].SetActive(false);
             }
             
@@ -255,6 +258,7 @@ namespace GameHeaven.AttackGame
 
         public void FailGame()
         {
+            foxShadow.SetActive(false);
             for (int i = 0; i < _monkey.Length; i++)
             {
                 _monkey[i].SetActive(false);

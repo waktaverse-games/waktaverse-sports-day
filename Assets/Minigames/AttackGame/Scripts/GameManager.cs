@@ -46,6 +46,7 @@ namespace GameHeaven.AttackGame
         public AudioSource backAudio;
         public SFXManager SfxManager;
         [HideInInspector] public bool IsStop = true;
+        public GameObject shadow;
 
         private int _scoreNum;
         public int _hpNum;
@@ -313,6 +314,7 @@ namespace GameHeaven.AttackGame
             {
                 _isBossStage = false;
                 _isGameEnd = true;
+                shadow.SetActive(false);
                 if (_stageNum == 1)
                 {
                     StartCoroutine(StageOneSelection());

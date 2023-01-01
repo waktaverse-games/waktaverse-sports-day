@@ -21,6 +21,7 @@ namespace GameHeaven.AttackGame
         public int tweenId;
         public bool dropItem = false;
         public GameObject hammerItem;
+        public GameObject blackFox;
         
         private int currentHp;
         private string _name;
@@ -31,6 +32,7 @@ namespace GameHeaven.AttackGame
         private bool _isMonkeyMove;
         private float _bossMonkeySpeed = -0.4f;
         private AudioSource _audioSource;
+        private Vector3 tempVec;
 
         private void OnEnable()
         {
@@ -106,7 +108,8 @@ namespace GameHeaven.AttackGame
                 gameManager.GetEnemyXp(isBossMonster);
                 _isAlive = false;
                 _audioSource.Play();
-                Invoke("DisableObject", 0.2f);
+                // gameObject.transform.position = new Vector3(-1000, -1000, 0);
+                Invoke("DisableObject", 0.07f);
             }
             hpBar.fillAmount = (float)currentHp / totalHp;
         }
@@ -130,6 +133,19 @@ namespace GameHeaven.AttackGame
                 hammerItem.SetActive(true);
                 dropItem = false;
             }
+
+            if (_bossMonkeySpeed > 0)
+            {
+                transform.GetComponent<SpriteRenderer>().flipX = false;
+                _bossMonkeySpeed *= -1;
+            }
+
+            gameObject.transform.position = new Vector3(45, 100, 0);
+            Invoke("ActiveSet", 0.14f);
+        }
+
+        public void ActiveSet()
+        {
             gameObject.SetActive(false);
         }
 
@@ -153,7 +169,7 @@ namespace GameHeaven.AttackGame
                     StartCoroutine(MonkeyMove());
                     return;
                 case "fox(Clone)":
-                    StartCoroutine(FoxMove());
+                    Invoke("FoxMove", 1.2f);
                     break;
                 case "gorani(Clone)":
                     StartCoroutine(GoraniToLeft(2f));
@@ -179,25 +195,56 @@ namespace GameHeaven.AttackGame
             _isMonkeyMove = true;
         }
 
-        IEnumerator FoxMove()
+        void FoxMove()
         {
-            yield return new WaitForSeconds(0.9f);
+            // yield return new WaitForSeconds(1.2f);
+            // if (isBossMonster)
+            // {
+            //     Debug.Log("called");
+            //     Debug.Log(transform.position);
+            // }
             _animator.SetBool("isMove", true);
-            StartCoroutine(FoxStop());
-            _tween = transform.DOLocalMoveX(transform.position.x - 1.5f, 1.2f).SetId(tweenId);
+            if (!isBossMonster) _tween = transform.DOLocalMoveX(transform.position.x - 1.5f, 1.2f).SetId(tweenId);
+            else
+            {
+                float pos = transform.position.x;
+                _tween = transform.DOLocalMoveX(pos - 2.5f, 1.2f).SetId(tweenId);
+            }
+            if (gameObject.activeSelf) StartCoroutine(FoxStop());
         }
 
         IEnumerator FoxStop()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1.2f);
             _animator.SetBool("isMove", false);
             if (isBossMonster)
             {
-                yield return new WaitForSeconds(2.2f);
+                yield return new WaitForSecondsRealtime(1f);
                 Vector3 pos = transform.position;
-                transform.position = new Vector3(Random.Range(38.4f, 45.4f), pos.y, pos.z);
+                tempVec = new Vector3(Random.Range(33.4f, 45.4f), pos.y, pos.z);
+                blackFox.transform.position = tempVec;
+                // Debug.Log("tmpVec");
+                // Debug.Log(tmpVec);
+                // Debug.Log(pos);
+                blackFox.SetActive(true);
+                Invoke("FoxBossStop", 1f);
             }
-            StartCoroutine(FoxMove());
+            else
+            {
+                // Debug.Log("VAR");
+                Invoke("FoxMove", 1.2f);
+            }
+        }
+
+        void FoxBossStop()
+        {
+            blackFox.SetActive(false);
+            Debug.Log(tempVec);
+            transform.position = tempVec;
+            // Debug.Log("new");
+            // Debug.Log(transform.position);
+            // StartFoxMovement();
+            Invoke("FoxMove", 1.2f);
         }
 
         IEnumerator GoraniToLeft(float distance)
