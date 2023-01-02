@@ -68,9 +68,9 @@ namespace GameHeaven.CrashGame
                 if (rigidBody.velocity.sqrMagnitude < 0.01f)
                 {
                     rigidBody.velocity = rigidBody.velocity.normalized * 4;
-                    if (rigidBody.velocity.sqrMagnitude < 1f) stuckTimeout++;
+                    if (rigidBody.velocity.sqrMagnitude < 0.01f) stuckTimeout++;
                 }
-                if (stuckTimeout > 120)
+                if (stuckTimeout > 60)
                 {
                     stuckTimeout = 0;
                     DestroyBall();
