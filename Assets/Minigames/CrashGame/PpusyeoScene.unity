@@ -3027,7 +3027,6 @@ MonoBehaviour:
   coinPrefab: {fileID: 5799771850141280459, guid: 0d03dec987767b8469723026f4ae1a2c, type: 3}
   itemPrefabList:
   - {fileID: -7308788374544424442, guid: 5f786013f819ebf4ab808f828c21fbec, type: 3}
-  - {fileID: -4419884499778429057, guid: a39981f40e35d2647a3e3584c90239c3, type: 3}
   - {fileID: 2588984476685509855, guid: 5e6e506fb5969564a94b3f916e3eda56, type: 3}
   - {fileID: -2291267947880077103, guid: 10a1ac9a3cdc5924ba0594b0d52816da, type: 3}
   - {fileID: -2291267947880077103, guid: 10a1ac9a3cdc5924ba0594b0d52816da, type: 3}
